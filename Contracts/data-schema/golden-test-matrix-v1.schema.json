@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/golden-test-matrix-v1.schema.json",
+  "title": "TMXY P1 golden test matrix v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "matrix_version",
+    "required_categories",
+    "required_domains",
+    "suites"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.testing.golden-matrix" },
+    "schema_version": { "const": 1 },
+    "matrix_version": { "const": "1.0.0" },
+    "required_categories": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/category" }
+    },
+    "required_domains": {
+      "type": "array",
+      "minItems": 9,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/id" }
+    },
+    "suites": {
+      "type": "array",
+      "minItems": 9,
+      "items": { "$ref": "#/$defs/suite" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512,
+      "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\\\u0000]+$"
+    },
+    "category": {
+      "enum": ["normal", "boundary", "corrupt", "unknown"]
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "script",
+        "evidence_report",
+        "expected_result",
+        "completion_required",
+        "automation_required"
+      ],
+      "properties": {
+        "script": { "$ref": "#/$defs/relativePath" },
+        "evidence_report": { "$ref": "#/$defs/relativePath" },
+        "expected_result": {
+          "enum": ["PASS", "PASS_DIAGNOSTIC"]
+        },
+        "completion_required": { "type": "boolean" },
+        "automation_required": { "type": "boolean" }
+      }
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "category", "behavior", "test_source", "source_marker"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "category": { "$ref": "#/$defs/category" },
+        "behavior": { "enum": ["accept", "reject", "preserve"] },
+        "test_source": { "$ref": "#/$defs/relativePath" },
+        "source_marker": {
+          "type": "string",
+          "minLength": 12,
+          "maxLength": 240
+        }
+      }
+    },
+    "suite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "layer", "gates", "cases"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "layer": { "enum": ["format", "contract", "editor-import"] },
+        "gates": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/gate" }
+        },
+        "cases": {
+          "type": "array",
+          "minItems": 4,
+          "items": { "$ref": "#/$defs/case" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/ue-static-mesh-import-report-v1.schema.json",
+  "title": "TMXY UE golden static mesh import report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "report_version",
+    "handler_format_id",
+    "before_asset_count",
+    "after_asset_count",
+    "imported_asset_count",
+    "invalid_hash_rejected",
+    "invalid_hash_asset_created",
+    "reimport_passed",
+    "reimport_package_bytes_unchanged",
+    "static_meshes"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.ue.static-mesh-import-report" },
+    "schema_version": { "const": 1 },
+    "report_version": { "const": "1.0.0" },
+    "handler_format_id": { "const": "khronos.gltf-json" },
+    "before_asset_count": { "type": "integer", "minimum": 0, "maximum": 2 },
+    "after_asset_count": { "const": 2 },
+    "imported_asset_count": { "const": 2 },
+    "invalid_hash_rejected": { "const": true },
+    "invalid_hash_asset_created": { "const": false },
+    "reimport_passed": { "const": true },
+    "reimport_package_bytes_unchanged": { "const": true },
+    "static_meshes": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fixture_id",
+          "manifest_path",
+          "manifest_sha256",
+          "artifact_id",
+          "package_name",
+          "source_vertex_count",
+          "render_vertex_count",
+          "triangle_count",
+          "section_count",
+          "material_slot_count",
+          "uv_channel_count",
+          "light_map_coordinate_index",
+          "coordinate_mapping_verified",
+          "normal_mapping_verified",
+          "winding_preserved",
+          "two_sided_section_count",
+          "first_material_slot",
+          "last_material_slot",
+          "bounds_cm"
+        ],
+        "properties": {
+          "fixture_id": { "enum": ["minimum-real", "multisection-real"] },
+          "manifest_path": { "type": "string", "minLength": 1 },
+          "manifest_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "artifact_id": { "const": "render-gltf" },
+          "package_name": {
+            "type": "string",
+            "pattern": "^/Game/TMXY/Golden/StaticMeshes/SM_Golden_[A-Za-z0-9_]+$"
+          },
+          "source_vertex_count": { "enum": [4, 11847] },
+          "render_vertex_count": { "enum": [4, 11851] },
+          "triangle_count": { "enum": [2, 6511] },
+          "section_count": { "enum": [1, 43] },
+          "material_slot_count": { "enum": [1, 43] },
+          "uv_channel_count": { "enum": [1, 2] },
+          "light_map_coordinate_index": { "enum": [0, 1] },
+          "coordinate_mapping_verified": { "const": true },
+          "normal_mapping_verified": { "const": true },
+          "winding_preserved": { "const": true },
+          "two_sided_section_count": { "enum": [1, 7] },
+          "first_material_slot": { "type": "string", "minLength": 1 },
+          "last_material_slot": { "type": "string", "minLength": 1 },
+          "bounds_cm": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["minimum", "maximum"],
+            "properties": {
+              "minimum": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": { "type": "number" }
+              },
+              "maximum": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

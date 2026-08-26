@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "fixture_id": "multisection-real",
+  "derivation": "locked TMXY.StaticMesh glTF 2.0 export from exact read-only Package/SM pair",
+  "copy_policy": "reference-only-inputs; deterministic-small-derived-fixture",
+  "producer_source_sha256": "8ac37192e7cb1ea1991d8b1e46043464ecc5cd789adcb21f6ac04b7c3713da37",
+  "sources": [
+    {
+      "role": "package-metadata",
+      "path": "天命西游/Packages/StaticMesh/scene09",
+      "bytes": 215837,
+      "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c"
+    },
+    {
+      "role": "legacy-sm-payload",
+      "path": "天命西游/Resource/StaticMesh/scene09/GT_B_S_BangPai05.sm",
+      "bytes": 966853,
+      "sha256": "c72bbcde94f51f8b8f8d8c9fc5800fbd2ca0356bdc6efec441cae6ce9a5260a8"
+    }
+  ]
+}

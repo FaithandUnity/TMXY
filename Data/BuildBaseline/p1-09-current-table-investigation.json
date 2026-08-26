@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:19:09.9056776+00:00",
+  "result": "PASS_DIAGNOSTIC",
+  "task": "P1-09",
+  "task_status": "IN_PROGRESS",
+  "completion_criteria_satisfied": false,
+  "read_only_evidence": {
+    "client_executable": {
+      "path": "QY.exe",
+      "size": 5160960,
+      "sha256": "7087dfa64bedeb8c9a5dfc4518f46261d163136b5bd97f5071f2c5a12cb29a4b"
+    },
+    "representative_tables": [
+      {
+        "path": "CLSVShare/powergame.tbl",
+        "size": 48,
+        "sha256": "8da2fbf8c9f977822ce78343f6824f259fe7aba2f9b5e961c7518ac5f389ca73"
+      },
+      {
+        "path": "Table/Regions/supplytable.tbl",
+        "size": 160,
+        "sha256": "7185f834d247cf070f379a8f480ad26cf7f6a82c2e154c3acc6aca005820787c"
+      },
+      {
+        "path": "CLSVShare/skill_table.tbl",
+        "size": 7253248,
+        "sha256": "40ec68f102f107da38bbde610fcce8fcc433601c802209116c5c7866f87b7327"
+      },
+      {
+        "path": "CLSVShare/item_table.tbl",
+        "size": 7046704,
+        "sha256": "f0ccd185f736802661becb9581896497e2101f6a9dbcb28578d5351f71f820ce"
+      },
+      {
+        "path": "Table/quest_table.tbl",
+        "size": 4586496,
+        "sha256": "e03bf742ee176645d303e81fd4e3f0bdf0baaa116a097ba0fa4bc04f4f12751b"
+      },
+      {
+        "path": "Table/Regions/quest_table.tbl",
+        "size": 4162208,
+        "sha256": "ce41d5f4901bf9f651a9f3dc0994010deaca4012ab461d3af7d48c36cf6ae620"
+      }
+    ],
+    "residual_csv": {
+      "path": "CLSVShare/item_tabletemp.csv",
+      "size": 6551430,
+      "sha256": "2a16d952fe398571a3ae2f926acb7ecd8b3c2a843bc0b62e1cb2be463fcf39dd"
+    }
+  },
+  "ciphertext_population": {
+    "file_count": 338,
+    "total_bytes": 40444128,
+    "total_blocks": 2527758,
+    "global_unique_blocks": 1353326,
+    "global_duplicate_occurrences": 1174432,
+    "files_with_internal_duplicates": 230,
+    "cross_file_repeated_values": 44134,
+    "cross_file_repeated_occurrences": 346037,
+    "distinct_last_blocks": 246,
+    "repeated_last_block_values": 34,
+    "repeated_last_block_occurrences": 126,
+    "most_repetitive_files": [
+      {
+        "path": "CLSVShare/unit_disp_ids.tbl",
+        "bytes": 708512,
+        "blocks": 44282,
+        "unique_blocks": 10988,
+        "duplicate_blocks": 33294,
+        "unique_ratio": 0.248137
+      },
+      {
+        "path": "CLSVShare/skill_table.tbl",
+        "bytes": 7253248,
+        "blocks": 453328,
+        "unique_blocks": 180226,
+        "duplicate_blocks": 273102,
+        "unique_ratio": 0.397562
+      },
+      {
+        "path": "CLSVShare/item_table.tbl",
+        "bytes": 7046704,
+        "blocks": 440419,
+        "unique_blocks": 202594,
+        "duplicate_blocks": 237825,
+        "unique_ratio": 0.460003
+      },
+      {
+        "path": "CLSVShare/guild_technology.tbl",
+        "bytes": 87920,
+        "blocks": 5495,
+        "unique_blocks": 2539,
+        "duplicate_blocks": 2956,
+        "unique_ratio": 0.462056
+      },
+      {
+        "path": "CLSVShare/Profession_lvl.tbl",
+        "bytes": 1604416,
+        "blocks": 100276,
+        "unique_blocks": 46407,
+        "duplicate_blocks": 53869,
+        "unique_ratio": 0.462793
+      },
+      {
+        "path": "Table/quest_direct.tbl",
+        "bytes": 521808,
+        "blocks": 32613,
+        "unique_blocks": 15672,
+        "duplicate_blocks": 16941,
+        "unique_ratio": 0.480545
+      },
+      {
+        "path": "Table/Regions/quest_direct.tbl",
+        "bytes": 521808,
+        "blocks": 32613,
+        "unique_blocks": 15672,
+        "duplicate_blocks": 16941,
+        "unique_ratio": 0.480545
+      },
+      {
+        "path": "CLSVShare/fabao_base_prop.tbl",
+        "bytes": 208112,
+        "blocks": 13007,
+        "unique_blocks": 6496,
+        "duplicate_blocks": 6511,
+        "unique_ratio": 0.499423
+      },
+      {
+        "path": "CLSVShare/spirit_prop.tbl",
+        "bytes": 177472,
+        "blocks": 11092,
+        "unique_blocks": 5842,
+        "duplicate_blocks": 5250,
+        "unique_ratio": 0.526686
+      },
+      {
+        "path": "CLSVShare/Item_Enchant.tbl",
+        "bytes": 81632,
+        "blocks": 5102,
+        "unique_blocks": 2738,
+        "duplicate_blocks": 2364,
+        "unique_ratio": 0.536652
+      }
+    ]
+  },
+  "current_reader_static_evidence": {
+    "ranges": [
+      {
+        "name": "table-load-setkey-a",
+        "file_offset": "0x29b5ce",
+        "length": 25,
+        "sha256": "e8ba3643500d83b10f204c3cd9526fc7fe1e633b5b625ee211caf50256593676"
+      },
+      {
+        "name": "table-load-setkey-b",
+        "file_offset": "0x29c58c",
+        "length": 25,
+        "sha256": "2df5228a728922174daf0742bcd11e5287bcc0d590086ce92ce8c0df6e70d759"
+      },
+      {
+        "name": "key-handler-permute",
+        "file_offset": "0x239880",
+        "length": 145,
+        "sha256": "14ae848381f723dc4257803384f27b6e93db8b8b0f545e3a87491b00bfea22d7"
+      },
+      {
+        "name": "key-handler-overwrite-four",
+        "file_offset": "0x239920",
+        "length": 96,
+        "sha256": "0b859a9bbbd4f03b25f9b52ede580c3fe251c2d970153804285b059fe78a7df1"
+      },
+      {
+        "name": "network-dispatch-bindings",
+        "file_offset": "0xe6e50",
+        "length": 21,
+        "sha256": "8f73640d43d6e7a5b706c875b894c2388b72ae00fec4659a3f9cb77084014e4b"
+      }
+    ],
+    "block_bytes": 16,
+    "cipher": "AES-128",
+    "block_passes": 2,
+    "observed_mode": "ECB-like independent blocks",
+    "iv_or_nonce_observed": false,
+    "base_key_sha256": "c5ab3734151f66dd61ec86290d3b1ac5e180d2f3c4e6d54441ec39e3cfb66524",
+    "base_key_emitted": false,
+    "runtime_mutation_handlers": [
+      "permute-16-key-bytes",
+      "overwrite-4-indexed-key-bytes"
+    ],
+    "runtime_dispatch_slots": [
+      958,
+      289
+    ],
+    "dispatch_slot_interpretation": "static inference from the current executable"
+  },
+  "base_key_decode_results": [
+    {
+      "path": "CLSVShare/powergame.tbl",
+      "ciphertext_bytes": 48,
+      "structurally_valid": false,
+      "classification": "invalid-padding"
+    },
+    {
+      "path": "Table/Regions/supplytable.tbl",
+      "ciphertext_bytes": 160,
+      "structurally_valid": false,
+      "classification": "invalid-padding"
+    },
+    {
+      "path": "CLSVShare/skill_table.tbl",
+      "ciphertext_bytes": 7253248,
+      "structurally_valid": false,
+      "classification": "invalid-padding"
+    },
+    {
+      "path": "CLSVShare/item_table.tbl",
+      "ciphertext_bytes": 7046704,
+      "structurally_valid": false,
+      "classification": "invalid-padding"
+    },
+    {
+      "path": "Table/quest_table.tbl",
+      "ciphertext_bytes": 4586496,
+      "structurally_valid": false,
+      "classification": "invalid-padding"
+    },
+    {
+      "path": "Table/Regions/quest_table.tbl",
+      "ciphertext_bytes": 4162208,
+      "structurally_valid": false,
+      "classification": "invalid-padding"
+    }
+  ],
+  "residual_csv_relation": {
+    "compared_blocks": 409463.0,
+    "repeated_plaintext_occurrences": 220083,
+    "matching_ciphertext_occurrences": 4152,
+    "conflicting_ciphertext_occurrences": 215931,
+    "agreement_ratio": 0.018866,
+    "first_conflict_block": 875,
+    "verified_prefix_repeat_constraints": 196,
+    "verified_prefix_payload_bytes": 13999,
+    "expected_cipher_bytes_for_residual": 6551440,
+    "current_cipher_extra_bytes": 495264,
+    "exact_replacement": false
+  },
+  "confirmed_processing": [
+    "read block-aligned ciphertext",
+    "double AES-128 block decode"
+  ],
+  "unresolved_processing": [
+    "runtime final key bytes",
+    "post-decrypt compression",
+    "post-decrypt text encoding"
+  ],
+  "blocker": {
+    "classification": "missing-authorized-runtime-key-mutation-input",
+    "detail": "The installed executable contains only a base key. Current message handlers can permute all 16 bytes or overwrite four indexed bytes before table use; no authorized local capture of those inputs is present.",
+    "prohibited_shortcuts": [
+      "hard-code guessed key",
+      "contact live service without authorization",
+      "treat residual CSV as an exact replacement"
+    ]
+  },
+  "secret_handling": {
+    "raw_key_written": false,
+    "raw_key_logged": false,
+    "irreversible_sha256_only": true,
+    "in_memory_buffers_cleared": true
+  }
+}

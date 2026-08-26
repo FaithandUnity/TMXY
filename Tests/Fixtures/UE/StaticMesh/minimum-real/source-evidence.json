@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "fixture_id": "minimum-real",
+  "derivation": "locked TMXY.StaticMesh glTF 2.0 export from exact read-only Package/SM pair",
+  "copy_policy": "reference-only-inputs; deterministic-small-derived-fixture",
+  "producer_source_sha256": "8ac37192e7cb1ea1991d8b1e46043464ecc5cd789adcb21f6ac04b7c3713da37",
+  "sources": [
+    {
+      "role": "package-metadata",
+      "path": "天命西游/Packages/particle",
+      "bytes": 3435518,
+      "sha256": "2e74819ee5eb665b5298710c06ea73de5016909535dee0ad388b7c194c6bd3b9"
+    },
+    {
+      "role": "legacy-sm-payload",
+      "path": "天命西游/Resource/StaticMesh/particle/ZFH_O_S_Tianpian100.sm",
+      "bytes": 309,
+      "sha256": "79669d7fbc5d3ebbfa82c6f3075c39b512d7ea021adf2d749b596d6e82dd81e8"
+    }
+  ]
+}

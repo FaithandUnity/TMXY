@@ -1,0 +1,33 @@
+# Cross-cutting tests
+
+这里保存跨模块的契约、集成、Golden 和性能测试。模块内部单元测试继续与模块放在一起。
+
+当前第一项是 `Contract/Test-RepositoryLayout.ps1`，用于阻止旧源码依赖、平台/第三方类型泄漏和
+未锁定的部署镜像进入新工程。
+
+`Contract/Test-BackendBaseline.ps1` 会进一步验证 Compose，并在禁用网络、只读挂载源码的缓存
+Linux 镜像中执行 configure/build/test。当前 GCC 结果仅是诊断证据，Clang 21 仍是发布权威。
+
+`Contract/Test-UEProjectBaseline.ps1 -RunAutomation` 使用锁定的 UE 5.8.2 生成解决方案、编译
+`TMXYEditor Win64 Development`、执行 format，并在 NullRHI 下运行 BuildInfo、黄金 Map 和 Importer Automation。
+
+`Contract/Test-UEGoldenHost.ps1` 锁定唯一黄金 Map、导入前后报告 Schema 和 Headless 宿主；
+`Contract/Test-UEImporterPlugin.ps1` 验证 Win64 Editor-only 插件、Manifest 批量验证、报告输出、格式处理器注册与
+重导入边界；`Contract/Test-UETextureImport.ps1` 验证首个 `microsoft.dds` 生产 Handler、真实/合成 Golden
+Fixture、写入前完整性拒绝、BC1/BC3 解码、sRGB/Alpha/mip 观察、固定纹理资产和受限重导入证据。
+`Contract/Test-UEStaticMeshImport.ps1` 验证 `khronos.gltf-json` 生产 Handler、真实 SM 派生 Golden
+Fixture、glTF/BIN 边界、坐标/法线/绕序、源与渲染顶点、UV/材质段/光照图通道、固定静态网格资产及字节不变重导入。
+
+`Contract/Test-SecretPolicy.ps1` 验证 Secret 文件挂载契约、工作树/可达历史扫描、扫描器阻断自测和不回显规则。`Contract/Test-GoldenSampleBaseline.ps1 -VerifySourceFiles` 则复核只引用黄金样本与只读客户端 SHA-256。
+
+`Contract/Test-FormatCoreBaseline.ps1` 在锁定的 Clang 21 构建器中对 P1 格式基础库执行 format、clang-tidy、编译和 CTest；源码只读挂载、网络禁用，构建输出只进入临时文件系统。
+
+`Contract/Test-PackageV1Baseline.ps1`、`Contract/Test-PackageV2Baseline.ps1` 与 `Contract/Test-PackageV3Baseline.ps1` 分别复核 1.0 单实样、2.0 全部 22 个实样和 3.0 全部 140 个实样的 SHA-256、字段边界、错误定位及解析指纹；原 Package 始终只读且不复制到仓库。
+
+`Contract/Test-PackagePipelineBaseline.ps1` 强制 2.0/3.0 共享目录 codec 的固定向量、四种尾部、偏移映射和 162 个真实目录逐 byte 解码/重编码往返，并确认目录算法不接受 Secret。
+
+`Contract/Test-PackageNormalizedTree.ps1` 验证 Package 1.0/2.0/3.0 的统一 JSON Schema、显式 `unparsed`/`source-span` 边界及三种冻结实样的确定性输出摘要。
+
+`Contract/Test-CurrentTableInvestigation.ps1` 冻结 338 张当前 TBL 的独立块统计、当前 `QY.exe` double-AES-128 读取链与运行时密钥变更处理器，并证明磁盘基础密钥和残留 CSV 都不能充当最终表输入；该测试输出 `PASS_DIAGNOSTIC`，不会把 P1-09 虚假标记完成。
+
+`Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

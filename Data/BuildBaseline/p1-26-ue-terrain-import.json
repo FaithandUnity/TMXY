@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:56:50.2626647+00:00",
+  "result": "PASS",
+  "task": "P1-26",
+  "completion_criteria_satisfied": true,
+  "source_sha256": "c7a3660e1c35655b51466b814d8ef95e6980f0c60f790230557456ed425034d8",
+  "handler": {
+    "format_id": "tmxy.terrain.height-f32le",
+    "mode": "single-fixture-only",
+    "verifies_all_declared_hashes_before_write": true,
+    "production_handler_count": 3,
+    "representation": "deterministic UStaticMesh proof assets; P3-11 runtime route remains open",
+    "content_addressed_reimport_noop": true
+  },
+  "physical_scale": {
+    "zone_size_source_units": 252.0,
+    "terrain_tile_num": 63,
+    "source_units_per_cell": 4.0,
+    "centimeters_per_cell": 400.0,
+    "centimeters_per_tile": 25200.0
+  },
+  "adjacency": {
+    "right_differing_samples": 16,
+    "right_maximum_delta_cm": 12.80364990234375,
+    "bottom_differing_samples": 10,
+    "bottom_maximum_delta_cm": 1.9155502319335938,
+    "source_differences_preserved": true
+  },
+  "fixture_manifest_sha256": "d0b394ac7f55e5705d508e016139a604af0766ac17fbec611ab6d23034ef9643",
+  "content": {
+    "asset_count": 14,
+    "approved_assets": [
+      "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+      "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+      "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+      "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+    ],
+    "imported_assets": [
+      {
+        "path": "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "bytes": 130366,
+        "sha256": "3840137c848f82ca68cd1a2a404d9980df541dd39c672261c8e6a7e364699c39"
+      },
+      {
+        "path": "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "bytes": 136802,
+        "sha256": "b739ecfacd857e9907fcdfb2fd8b972ad77c9e1a5ee215d627669f621bdf13e6"
+      },
+      {
+        "path": "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "bytes": 132762,
+        "sha256": "b809d0c0334b334e648bbc43c896e056f50637a52afa47930114a07c9e490a88"
+      }
+    ]
+  },
+  "automation_evidence": {
+    "required": true,
+    "passed": true,
+    "test": "TMXY.Importer.Terrain",
+    "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-26-terrain-report.json",
+    "generated_report_sha256": "fcec353a7c50f20f665b20c1bc30b027a0e0ef7437dc717ccbd9b78d9305929b",
+    "generated_report_schema_passed": true,
+    "ue_report_sha256": "6c1cbc2407eb89ec9a2fb0c06fe64d622fe12b9e449263ad27bced0b9e5a007a"
+  },
+  "dependency_report_sha256": {
+    "Data/BuildBaseline/p1-17-ter-terrain.json": "3f7938be1f07fd119e9fb83948a6c785d2dde4b5d8030490f556c68fc5c14b9d",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+    "Data/BuildBaseline/p1-25-ue-animation-import.json": "12dfb92ae28899027521fddd2376e9aafabcab7d27aa0f343173169149e77484"
+  },
+  "failure_count": 0,
+  "failures": []
+}

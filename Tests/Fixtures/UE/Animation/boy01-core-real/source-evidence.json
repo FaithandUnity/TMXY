@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "fixture_id": "boy01-core-real",
+  "derivation": "locked TMXY.Animation glTF 2.0 export from exact read-only Package/ANIM pair",
+  "copy_policy": "reference-only-inputs; deterministic-selected-clips-derived-fixture",
+  "producer_source_sha256": "768ef1305124397cc2d9028d5b4a70d7ed50d7386aadccec4a0a9ccf16815420",
+  "sources": [
+    {
+      "role": "package-metadata",
+      "path": "天命西游/Packages/SkelMesh/skchar",
+      "bytes": 281615,
+      "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7"
+    },
+    {
+      "role": "legacy-anim-payload",
+      "path": "天命西游/Resource/SkelMesh/skchar/Boy01.anim",
+      "bytes": 32855816,
+      "sha256": "912c7e13632082fdc457b148ebb8bd7ca4757a619da2bb6ad17b57acbc3afe3e"
+    }
+  ],
+  "skeleton_dependency": {
+    "path": "Tests/Fixtures/UE/SkeletalMesh/boy01-default-real/manifest.json",
+    "bytes": 4874,
+    "sha256": "463c70294e3efd00ec0edc9573823b41943a6fae84e2bb3a891a6b554b906c1a"
+  }
+}

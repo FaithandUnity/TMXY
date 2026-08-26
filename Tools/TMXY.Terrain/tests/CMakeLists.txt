@@ -1,0 +1,10 @@
+add_executable(tmxy_terrain_parser_test terrain_parser_test.cpp)
+target_link_libraries(tmxy_terrain_parser_test PRIVATE tmxy::terrain)
+tmxy_apply_tool_defaults(tmxy_terrain_parser_test)
+add_test(NAME terrain.parser COMMAND tmxy_terrain_parser_test)
+
+add_executable(tmxy_ter_real_samples_test ter_real_samples_test.cpp)
+target_link_libraries(tmxy_ter_real_samples_test PRIVATE tmxy::terrain)
+tmxy_apply_tool_defaults(tmxy_ter_real_samples_test)
+add_test(NAME terrain.real_samples_usage COMMAND tmxy_ter_real_samples_test)
+set_tests_properties(terrain.real_samples_usage PROPERTIES WILL_FAIL TRUE)

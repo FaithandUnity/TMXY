@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:12:58.6281206+00:00",
+  "result": "PASS",
+  "qualification": "UE_5_8_2_MSVC_14_51_TIME_BOUNDED_WAIVER",
+  "waiver": {
+    "status": "active",
+    "effective_local": "2026-08-26T00:00:00+08:00",
+    "expires_local": "2026-10-25T23:59:59+08:00",
+    "issuer": "Codex engineering execution owner",
+    "scope": "TMXY UE 5.8.2 Windows x64 baseline only",
+    "superseded_by": "Qualification with UE preferred MSVC 14.50.35717"
+  },
+  "toolchain": {
+    "unreal_engine": "5.8.2",
+    "unreal_changelist": 56702186,
+    "msvc_toolset": "14.51.36231",
+    "reported_compiler": "14.51.36256",
+    "ue_preferred_compiler": "14.50.35717",
+    "windows_sdk": "10.0.26100.0",
+    "host_binaries_passed": true,
+    "compiler_product_version": "14.51.36256.0",
+    "compiler_sha256": "e6d57100c82ae0310c18b16abfe52bc0df8fbb272ca6c5fb287d485807cfce91",
+    "sdk_resource_compiler_product_version": "10.0.26100.8249",
+    "sdk_resource_compiler_sha256": "65db0d7b4f10ba0f55973fd9356543a556da9ec1c777a0c05f05a0329c8a100a"
+  },
+  "build_cook_run": [
+    {
+      "configuration": "Development",
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 47.434,
+      "editor_target_observed": true,
+      "client_target_observed": true,
+      "compiler_version_observed": true,
+      "sdk_version_observed": false,
+      "compiler_preference_warning_observed": true,
+      "build_success_marker_observed": true,
+      "log_line_count": 815,
+      "log_sha256": "779316327d4887aecc207da043e59ea6057831863cf951ae83fef4b5bc0c738a",
+      "generated_log": "Apps/UEClient/Saved/P0-08QualificationLogs/UAT-Development-20260826-221105000.log"
+    },
+    {
+      "configuration": "Shipping",
+      "exit_code": 0,
+      "passed": true,
+      "duration_seconds": 46.21,
+      "editor_target_observed": true,
+      "client_target_observed": true,
+      "compiler_version_observed": true,
+      "sdk_version_observed": false,
+      "compiler_preference_warning_observed": true,
+      "build_success_marker_observed": true,
+      "log_line_count": 815,
+      "log_sha256": "d705c3ce2d4e296d3a37c4c59eeccea1a6b0aff56fa72fec6fbf45d4836ea38b",
+      "generated_log": "Apps/UEClient/Saved/P0-08QualificationLogs/UAT-Shipping-20260826-221105000.log"
+    }
+  ],
+  "packages": [
+    {
+      "configuration": "Development",
+      "passed": true,
+      "archive": "Apps/UEClient/Saved/P0-08Qualification/20260826-221105000/Development",
+      "file_count": 48,
+      "total_bytes": 962454125,
+      "runtime_executable": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\P0-08Qualification\\20260826-221105000\\Development\\Windows\\TMXY\\Binaries\\Win64\\TMXY.exe",
+      "runtime_bytes": 331844096,
+      "runtime_sha256": "9d8d094c7e9b555de7e0e320191ee6c99dd815a6ab49f990c433940b01a1281d",
+      "bootstrap_present": true,
+      "pak_count": 1,
+      "utoc_count": 2,
+      "ucas_count": 2
+    },
+    {
+      "configuration": "Shipping",
+      "passed": true,
+      "archive": "Apps/UEClient/Saved/P0-08Qualification/20260826-221105000/Shipping",
+      "file_count": 30,
+      "total_bytes": 609888274,
+      "runtime_executable": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\P0-08Qualification\\20260826-221105000\\Shipping\\Windows\\TMXY\\Binaries\\Win64\\TMXY-Win64-Shipping.exe",
+      "runtime_bytes": 165813248,
+      "runtime_sha256": "81128fe8bdc86752c6d65e3de410c563c195b328b5a1ee6debdcb948d72ef061",
+      "bootstrap_present": true,
+      "pak_count": 1,
+      "utoc_count": 2,
+      "ucas_count": 2
+    }
+  ],
+  "smoke": {
+    "development": {
+      "policy": "clean_exit",
+      "passed": true,
+      "exited_within_seconds": 60,
+      "exit_code": 0,
+      "controlled_termination": false,
+      "duration_milliseconds": 2254.0
+    },
+    "shipping": {
+      "policy": "stable_liveness_then_controlled_termination",
+      "passed": true,
+      "liveness_seconds": 15,
+      "exited_early": false,
+      "early_exit_code": null,
+      "controlled_termination": true,
+      "duration_milliseconds": 17061.0
+    }
+  },
+  "boundaries": {
+    "source_binding": {
+      "file_count": 136,
+      "manifest_sha256": "119cb080e514483ea6f0d74f434a8300f0dc15acc058e7a488be15d96fef76e0",
+      "scope": "TMXY.uproject; Config/**; Source/**/*.{cs,cpp,h}; Plugins/**/*.{uplugin,cs,cpp,h}; Content/**/*.{uasset,umap}; Apps/UEClient/Scripts/Create*GoldenFixtures.ps1; Tests/Fixtures/UE/Texture/**/*.{json,dds,png,tga}; Tests/Fixtures/UE/{StaticMesh,SkeletalMesh}/**/*.{json,gltf,bin,obj}; Tests/Fixtures/UE/Animation/**/*.{json,gltf,bin}; Tests/Fixtures/UE/Terrain/**/*.{json,f32le,rgba8,csv}"
+    },
+    "source_content_asset_count": 14,
+    "source_content_assets": [
+      "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+      "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+      "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+      "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+    ],
+    "source_content_policy_passed": true,
+    "security_token_file_count": 0,
+    "generated_outputs_under_rebuild": true,
+    "legacy_input_write_required": false
+  }
+}

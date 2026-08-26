@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-25T22:31:06.1611378+00:00",
+  "registry_host": "registry-1.docker.io",
+  "dns": {
+    "a": [
+      {
+        "name": "registry-1.docker.io",
+        "type": "A",
+        "address": "185.45.7.97",
+        "ttl": 477
+      }
+    ],
+    "aaaa": [
+      {
+        "name": "registry-1.docker.io",
+        "type": "AAAA",
+        "address": "2a03:2880:f11c:8183:face:b00c:0:25de",
+        "ttl": 402
+      }
+    ]
+  },
+  "https": [
+    {
+      "family": "IPv4",
+      "exit_code": 28,
+      "http_status": "000",
+      "remote_address": "",
+      "reachable": false,
+      "output": "curl: (28) Connection timed out after 10001 milliseconds\r\nhttp=000;remote=;error=Connection timed out after 10001 milliseconds"
+    },
+    {
+      "family": "IPv6",
+      "exit_code": 28,
+      "http_status": "000",
+      "remote_address": "",
+      "reachable": false,
+      "output": "curl: (28) Connection timed out after 10002 milliseconds\r\nhttp=000;remote=;error=Connection timed out after 10002 milliseconds"
+    }
+  ],
+  "base_image_inspect": {
+    "image": "debian:bookworm-slim",
+    "exit_code": 1,
+    "manifest_digest": null,
+    "succeeded": false,
+    "output": "ERROR: failed to do request: Head \"https://registry-1.docker.io/v2/library/debian/manifests/bookworm-slim\": dial tcp [2a03:2880:f11c:8183:face:b00c:0:25de]:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."
+  },
+  "registry_reachable": false,
+  "base_image_digest_resolved": false,
+  "remediation_rule": "Fix the controlled DNS/proxy path or import an audited OCI archive. Never disable TLS or substitute an untrusted mirror."
+}

@@ -1,0 +1,151 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "golden.static-mesh.multisection-real",
+  "asset_kind": "static_mesh",
+  "producer": {
+    "name": "tmxy-static-mesh",
+    "version": "0.1.0",
+    "source_sha256": "8ac37192e7cb1ea1991d8b1e46043464ecc5cd789adcb21f6ac04b7c3713da37"
+  },
+  "source_inputs": [
+    {
+      "id": "legacy-source-evidence",
+      "role": "provenance-manifest",
+      "relative_path": "source-evidence.json",
+      "bytes": 795,
+      "sha256": "578a244c22334f4a19f1ce311b81eafed679d7fb16d506ddcd32567875419af5",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "mesh.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "meters",
+      "bytes": 8438,
+      "sha256": "89cd6edd75f5badf60e6c5932eb20f1b9ea62d6ffe63108e2b8adadd4f67e9ab",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "buffer",
+      "semantic_role": "gltf-buffer",
+      "relative_path": "mesh.bin",
+      "format_id": "khronos.gltf-bin",
+      "format_version": "2.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "meters",
+      "bytes": 512946,
+      "sha256": "be0c68f987477458d427d74af4710dd62884e9626e934312059aa7264b68ba2b",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "render-gltf",
+      "semantic_role": "render-geometry",
+      "relative_path": "mesh.gltf",
+      "format_id": "khronos.gltf-json",
+      "format_version": "2.0.0",
+      "media_type": "model/gltf+json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "meters",
+      "bytes": 15424,
+      "sha256": "ded9e99849220200e04437c73b71e7ff1acb573402868a3f33040a194055f1a5",
+      "depends_on": [
+        "buffer",
+        "metadata"
+      ],
+      "required_features": [
+        "mesh-sections",
+        "second-uv-channel"
+      ],
+      "extensions": {}
+    },
+    {
+      "id": "preview",
+      "semantic_role": "visual-review",
+      "relative_path": "mesh.obj",
+      "format_id": "wavefront.obj",
+      "format_version": "1.0.0",
+      "media_type": "model/obj",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "ue-x-forward-y-right-z-up-centimeters",
+      "unit_contract": "centimeters",
+      "bytes": 2236189,
+      "sha256": "e67defa5a8c2c70d0ec3f8af0b4aaf7f6acf1812a12e4eb86107e91a200c02f2",
+      "depends_on": [
+        "render-gltf"
+      ],
+      "required_features": [],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [
+    {
+      "path": "static_mesh.legacy_runtime_auxiliary",
+      "state": "unsupported",
+      "preservation": "namespaced-extension",
+      "extension_key": "org.tmxy.legacy-static-mesh",
+      "reason": "Collision, shadow, octree and emitter semantics remain in authoritative metadata.",
+      "extensions": {}
+    }
+  ],
+  "extensions": {
+    "org.tmxy.legacy-static-mesh": {
+      "metadata_artifact_id": "metadata",
+      "collision_policy": "preserved-in-metadata-not-imported-p1-23"
+    },
+    "org.tmxy.ue-import": {
+      "package_name": "/Game/TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real",
+      "expected_vertex_count": 11847,
+      "expected_triangle_count": 6511,
+      "expected_material_slot_count": 43,
+      "expected_uv_channel_count": 2,
+      "expected_use_light_map": true,
+      "expected_render_bounds_cm": {
+        "minimum": [
+          -3746.04683,
+          -4294.01703,
+          -896.4724540000001
+        ],
+        "maximum": [
+          3746.04683,
+          4294.01779,
+          896.4729309999999
+        ]
+      },
+      "expected_effective_legacy_bounds_cm": {
+        "minimum": [
+          -3746.04688,
+          -4294.01709,
+          -896.472473
+        ],
+        "maximum": [
+          3738.05615,
+          4294.01758,
+          896.4729
+        ]
+      },
+      "coordinate_mapping": "gltf(y,z,x)-to-ue(x,y,z)-centimeters",
+      "preserve_winding": true,
+      "recompute_tangents": true
+    }
+  }
+}

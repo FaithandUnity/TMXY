@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-25T22:30:24.2183118+00:00",
+  "result": "BLOCKED_NETWORK",
+  "registry": "registry-1.docker.io",
+  "endpoint": "https://registry-1.docker.io/v2/",
+  "resolved_addresses": [
+    "2a03:2880:f11c:8183:face:b00c:0:25de",
+    "185.45.7.97"
+  ],
+  "probes": [
+    {
+      "address_family": "IPv4",
+      "passed": false,
+      "exit_code": 28,
+      "response_kind": "timeout",
+      "tls_verification": "enabled"
+    },
+    {
+      "address_family": "IPv6",
+      "passed": false,
+      "exit_code": 28,
+      "response_kind": "timeout",
+      "tls_verification": "enabled"
+    }
+  ],
+  "security": {
+    "tls_verification_disabled": false,
+    "alternate_registry_used": false,
+    "unknown_image_used": false
+  },
+  "impact": "Official Debian manifest digest and Clang 21 builder digest cannot be frozen from this host."
+}

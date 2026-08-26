@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-25T23:29:40.5876595+00:00",
+  "result": "NOT_READY",
+  "p0_completed_items": 17,
+  "p0_total_items": 19,
+  "passed_check_count": 10,
+  "total_check_count": 11,
+  "checks": [
+    {
+      "id": "rights_and_read_only",
+      "passed": true,
+      "evidence": "Docs/Governance/COPYRIGHT-BASELINE.md; README.md",
+      "required_action": ""
+    },
+    {
+      "id": "input_manifests",
+      "passed": true,
+      "evidence": "Data/RawManifests/BASELINE.md",
+      "required_action": ""
+    },
+    {
+      "id": "architecture_and_standard",
+      "passed": true,
+      "evidence": "Docs/Architecture/TARGET-ARCHITECTURE.md; Docs/Standards/ENGINEERING-STANDARD.md",
+      "required_action": ""
+    },
+    {
+      "id": "ue_baseline",
+      "passed": true,
+      "evidence": "Data/BuildBaseline/p0-10a-ue-validation.json",
+      "required_action": ""
+    },
+    {
+      "id": "golden_samples",
+      "passed": true,
+      "evidence": "Data/GoldenSamples/p0-golden-samples.json",
+      "required_action": ""
+    },
+    {
+      "id": "platform_budget",
+      "passed": true,
+      "evidence": "Data/Performance/p0-platform-budget.json",
+      "required_action": ""
+    },
+    {
+      "id": "local_repository",
+      "passed": true,
+      "evidence": ".git; Docs/Governance/VERSION-CONTROL-POLICY.md",
+      "required_action": ""
+    },
+    {
+      "id": "toolchain_release_authority",
+      "passed": true,
+      "evidence": "Data/Toolchain/toolchain.lock.json; Data/Toolchain/backend-toolchain-qualification.json; Data/Security/tmxy-backend-builder.sbom.cdx.json; Data/BuildBaseline/p0-08-ue-packaging-waiver.json",
+      "required_action": ""
+    },
+    {
+      "id": "hosted_ci_authority",
+      "passed": false,
+      "evidence": "Data/Governance/p0-hosted-ci-contract.json; Data/BuildBaseline/p0-12-local-quality-gates.json",
+      "required_action": "Select and authorize a hosted Git/CI platform and remote, then bind the frozen protected checks, vulnerability/license gate, and provenance contract."
+    },
+    {
+      "id": "secret_store_binding",
+      "passed": true,
+      "evidence": "Data/Security/p0-14-secret-scan.json; Deploy/secret-contract/secret-contract.json",
+      "required_action": "Bind the proven contract to the selected hosted CI/production Secret Store."
+    },
+    {
+      "id": "p1_resourcing",
+      "passed": true,
+      "evidence": "Data/Governance/p1-resourcing.json",
+      "required_action": "Approve the frozen P1 execution charter during P0-16 review."
+    }
+  ],
+  "blockers": [
+    "Select and authorize a hosted Git/CI platform and remote, then bind the frozen protected checks, vulnerability/license gate, and provenance contract."
+  ],
+  "review_policy": "P0-16 and G0 cannot pass while any check is false."
+}

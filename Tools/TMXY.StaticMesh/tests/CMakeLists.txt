@@ -1,0 +1,15 @@
+add_executable(tmxy_static_mesh_parser_test static_mesh_parser_test.cpp)
+target_link_libraries(tmxy_static_mesh_parser_test PRIVATE tmxy::static_mesh)
+tmxy_apply_tool_defaults(tmxy_static_mesh_parser_test)
+add_test(NAME static_mesh.parser COMMAND tmxy_static_mesh_parser_test)
+
+add_executable(tmxy_static_mesh_gltf_test static_mesh_gltf_test.cpp)
+target_link_libraries(tmxy_static_mesh_gltf_test PRIVATE tmxy::static_mesh)
+tmxy_apply_tool_defaults(tmxy_static_mesh_gltf_test)
+add_test(NAME static_mesh.gltf COMMAND tmxy_static_mesh_gltf_test)
+
+add_executable(tmxy_sm_real_samples_test sm_real_samples_test.cpp)
+target_link_libraries(tmxy_sm_real_samples_test PRIVATE tmxy::static_mesh)
+tmxy_apply_tool_defaults(tmxy_sm_real_samples_test)
+add_test(NAME static_mesh.real_samples_usage COMMAND tmxy_sm_real_samples_test)
+set_tests_properties(static_mesh.real_samples_usage PROPERTIES WILL_FAIL TRUE)

@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:35.1096697+00:00",
+  "result": "PASS",
+  "task": "P1-17",
+  "completion_criteria_satisfied": true,
+  "source_file_count": 11,
+  "source_sha256": "88c396a8b694cbfe118778375efea7191e8f663537d3d9f3aecfe462b8be5a66",
+  "contract": {
+    "vertex": "height f32 + normal xyz f32 + color rgba f32 + four layer-alpha u8",
+    "grid": "row-major square grid; installed files are 64x64 vertices and 63x63 cells",
+    "tail": "water bool/height + zero-to-four ordered package layer references + optional color",
+    "edge_order": [
+      "top-x-increasing",
+      "right-y-increasing",
+      "bottom-x-increasing",
+      "left-y-increasing"
+    ],
+    "scale": "source units retained; level zone size is required for physical scale",
+    "outputs": [
+      "json-summary",
+      "f32le-height-plane",
+      "rgba8-layer-alpha",
+      "csv-complete-edges"
+    ]
+  },
+  "corpus": {
+    "file_count": 8876,
+    "total_bytes": 1309215704,
+    "size_distribution": [
+      {
+        "bytes": 147485,
+        "count": 29
+      },
+      {
+        "bytes": 147489,
+        "count": 36
+      },
+      {
+        "bytes": 147493,
+        "count": 112
+      },
+      {
+        "bytes": 147497,
+        "count": 345
+      },
+      {
+        "bytes": 147501,
+        "count": 8354
+      }
+    ]
+  },
+  "samples": [
+    {
+      "path": "bqg2/bqg2_000_000.ter",
+      "bytes": 147485,
+      "role": "global-minimum-no-water-color"
+    },
+    {
+      "path": "zyhsz/zyhsz_015_015.ter",
+      "bytes": 147501,
+      "role": "global-maximum-with-water-color"
+    },
+    {
+      "path": "world_001_001.ter",
+      "bytes": 147501,
+      "role": "non-flat-adjacency-base"
+    },
+    {
+      "path": "world_002_001.ter",
+      "bytes": 147501,
+      "role": "right-neighbor"
+    },
+    {
+      "path": "world_001_002.ter",
+      "bytes": 147501,
+      "role": "bottom-neighbor"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "ClientCode\\QRender\\Src\\QTerrain.cpp",
+      "size": 69191,
+      "sha256": "3b9a5de0d6c404d2cb5b94b56dbd6ab8a35b18afccc13deaa345a3371e4af8b4",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QTerrain.h",
+      "size": 8188,
+      "sha256": "1feba47e776ce3734d5dec8f3375907e7a41cce7eef279bf8c4c312176755252",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Utility\\Src\\UtTerrainFactories.cpp",
+      "size": 20630,
+      "sha256": "bdd6118bfab99311f87aae504f041f411d3e03622282ce6e13ee33fc2b00b139",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\EngineMath.h",
+      "size": 18750,
+      "sha256": "1e4fad6e97874c30815820fb8d87521bc1977c0f2a13a241cf92af3b93fa0538",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Terrain\\bqg2\\bqg2_000_000.ter",
+      "size": 147485,
+      "sha256": "178fc8ca10974b55a75ac83c68c60e70414506938a964bd9ba0c38b35d93fd37",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Terrain\\zyhsz\\zyhsz_015_015.ter",
+      "size": 147501,
+      "sha256": "3c4d9e7dc16845e1c21b9aecdb106cf6fef53f92cd11a41719e89d05262cf947",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Terrain\\world_001_001.ter",
+      "size": 147501,
+      "sha256": "233f5be2358d1fdc88ca872373d074eb67b48ca33c3c78708bc74290d0e061e7",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Terrain\\world_002_001.ter",
+      "size": 147501,
+      "sha256": "3f343db7478cdafb1828469acd74680a45a6fb2fab60f6e909ae4a80be8867b4",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Terrain\\world_001_002.ter",
+      "size": 147501,
+      "sha256": "f14874bbb0a4a1ddcc709ae48f4913d6ba3bce8bc5c3bd5b0d06292a84893389",
+      "passed": true
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "evidence_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_output_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-ninja-clang-21-werror",
+    "clang-tidy-21",
+    "ctest-corrupt-boundary-determinism",
+    "five-real-terrain-samples",
+    "non-flat-adjacency-diagnostic",
+    "cli-four-output-signature"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 45,
+    "output_sha256": "d3945138fc095d526bd7403bfdfb90853766a5b72fa093681318ece3f1226f9e"
+  }
+}

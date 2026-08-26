@@ -1,0 +1,26 @@
+{
+  "asset": {"version": "2.0", "generator": "TMXY.StaticMesh 0.1.0"},
+  "scene": 0,
+  "scenes": [{"nodes": [0]}],
+  "nodes": [{"mesh": 0, "name": "particle.ZFH_O_S_Tianpian100"}],
+  "buffers": [{"uri": "mesh.bin", "byteLength": 140}],
+  "bufferViews": [
+    {"buffer": 0, "byteOffset": 0, "byteLength": 48, "target": 34962},
+    {"buffer": 0, "byteOffset": 48, "byteLength": 48, "target": 34962},
+    {"buffer": 0, "byteOffset": 96, "byteLength": 32, "target": 34962},
+    {"buffer": 0, "byteOffset": 128, "byteLength": 12, "target": 34963}
+  ],
+  "accessors": [
+    {"bufferView": 0, "componentType": 5126, "count": 4, "type": "VEC3", "min": [-17.2778435, -4.68960619, -17.5672302], "max": [14.307416, 19.1825714, -14.7323551]},
+    {"bufferView": 1, "componentType": 5126, "count": 4, "type": "VEC3"},
+    {"bufferView": 2, "componentType": 5126, "count": 4, "type": "VEC2"},
+    {"bufferView": 3, "byteOffset": 0, "componentType": 5123, "count": 6, "type": "SCALAR"}
+  ],
+  "materials": [
+    {"name": "particle.ZFH_O_S_Tianpian100_Mat1", "doubleSided": true, "extras": {"tmxyMaterialSlot": 0}}
+  ],
+  "meshes": [{"name": "particle.ZFH_O_S_Tianpian100", "primitives": [
+    {"attributes": {"POSITION": 0, "NORMAL": 1, "TEXCOORD_0": 2}, "indices": 3, "material": 0, "mode": 4}
+  ]}],
+  "extras": {"tmxyCoordinateMapping": "legacy(x,y,z)-to-gltf(y,z,x)", "tmxyWinding": "preserved"}
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "tmxy.texture.synthetic-source-evidence",
+  "schema_version": 1,
+  "purpose": "Bounded complete-mip-chain import test without copying a large legacy texture",
+  "generator": "Apps/UEClient/Scripts/CreateTextureGoldenFixtures.ps1",
+  "format": "dxt1",
+  "width": 8,
+  "height": 8,
+  "mip_count": 4,
+  "payload_bytes": 56,
+  "legacy_runtime_dependency": false
+}

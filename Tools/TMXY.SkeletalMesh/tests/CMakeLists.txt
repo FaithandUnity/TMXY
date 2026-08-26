@@ -1,0 +1,10 @@
+add_executable(tmxy_skeletal_mesh_parser_test skeletal_mesh_parser_test.cpp)
+target_link_libraries(tmxy_skeletal_mesh_parser_test PRIVATE tmxy::skeletal_mesh)
+tmxy_apply_tool_defaults(tmxy_skeletal_mesh_parser_test)
+add_test(NAME skeletal_mesh.parser COMMAND tmxy_skeletal_mesh_parser_test)
+
+add_executable(tmxy_skem_real_samples_test skem_real_samples_test.cpp)
+target_link_libraries(tmxy_skem_real_samples_test PRIVATE tmxy::skeletal_mesh)
+tmxy_apply_tool_defaults(tmxy_skem_real_samples_test)
+add_test(NAME skeletal_mesh.real_samples_usage COMMAND tmxy_skem_real_samples_test)
+set_tests_properties(skeletal_mesh.real_samples_usage PROPERTIES WILL_FAIL TRUE)

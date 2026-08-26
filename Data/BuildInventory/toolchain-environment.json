@@ -1,0 +1,35 @@
+{
+  "captured_utc": "2026-08-25T17:37:41.8288716Z",
+  "computer_name": "PC-20260816MLJG",
+  "os_version": "Microsoft Windows NT 10.0.26200.0",
+  "powershell_version": "7.6.4",
+  "visual_studio": [
+    {
+      "display_name": "Visual Studio Community 2026",
+      "version": "18.9.12112.369",
+      "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community",
+      "msvc_versions": "14.51.36231",
+      "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"
+    }
+  ],
+  "windows_sdk_versions": "10.0.26100.0",
+  "unreal_engine": {
+    "path": "C:\\Program Files\\Epic Games\\UE_5.8",
+    "major": 5,
+    "minor": 8,
+    "patch": 2,
+    "changelist": 56702186,
+    "compatible_changelist": 55116800,
+    "branch": "++UE5+Release-5.8"
+  },
+  "dotnet_version": "10.0.400",
+  "path_commands": {
+    "cl.exe": null,
+    "msbuild.exe": null,
+    "cmake.exe": null,
+    "ninja.exe": null,
+    "git.exe": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd\\git.exe",
+    "dotnet.exe": "C:\\Program Files\\dotnet\\dotnet.exe"
+  },
+  "workspace_root": "E:\\QQXYCodeDev"
+}

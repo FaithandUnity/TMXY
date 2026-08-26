@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/ue-animation-import-report-v1.schema.json",
+  "title": "TMXY UE golden animation import report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "report_version",
+    "handler_format_id",
+    "fixture_id",
+    "manifest_path",
+    "manifest_sha256",
+    "imported_asset_count",
+    "bone_count",
+    "sample_rate_numerator",
+    "sample_rate_denominator",
+    "root_motion_policy",
+    "legacy_loop_policy",
+    "invalid_hash_rejected",
+    "invalid_hash_asset_created",
+    "all_clip_contracts_passed",
+    "reimport_passed",
+    "reimport_bytes_unchanged",
+    "clips"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.ue.animation-import-report" },
+    "schema_version": { "const": 1 },
+    "report_version": { "const": "1.0.0" },
+    "handler_format_id": { "const": "khronos.gltf-json" },
+    "fixture_id": { "const": "boy01-core-real" },
+    "manifest_path": {
+      "const": "Tests/Fixtures/UE/Animation/boy01-core-real/manifest.json"
+    },
+    "manifest_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "imported_asset_count": { "const": 3 },
+    "bone_count": { "const": 80 },
+    "sample_rate_numerator": { "const": 30 },
+    "sample_rate_denominator": { "const": 1 },
+    "root_motion_policy": { "const": "preserved-root-track-not-extracted" },
+    "legacy_loop_policy": { "const": "preserve-metadata-no-forced-loop-flag" },
+    "invalid_hash_rejected": { "const": true },
+    "invalid_hash_asset_created": { "const": false },
+    "all_clip_contracts_passed": { "const": true },
+    "reimport_passed": { "const": true },
+    "reimport_bytes_unchanged": { "const": true },
+    "clips": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": { "$ref": "#/$defs/clip" }
+    }
+  },
+  "$defs": {
+    "clip": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_name",
+        "package_name",
+        "source_index",
+        "frame_count",
+        "track_count",
+        "sampled_duration_seconds",
+        "legacy_loop_period_seconds",
+        "legacy_self_loop",
+        "all_keys_match_interchange",
+        "root_track_preserved",
+        "loop_policy_preserved",
+        "root_translation_distance_meters",
+        "maximum_endpoint_translation_delta_meters",
+        "maximum_endpoint_rotation_delta_degrees"
+      ],
+      "properties": {
+        "source_name": { "enum": ["O_RoamIdle", "O_Run_Forward", "SelectIdle"] },
+        "package_name": {
+          "type": "string",
+          "pattern": "^/Game/TMXY/Golden/Animations/A_Golden_Boy01_[A-Za-z]+$"
+        },
+        "source_index": { "enum": [135, 153, 221] },
+        "frame_count": { "enum": [24, 50, 60] },
+        "track_count": { "const": 80 },
+        "sampled_duration_seconds": { "type": "number", "exclusiveMinimum": 0 },
+        "legacy_loop_period_seconds": { "type": "number", "exclusiveMinimum": 0 },
+        "legacy_self_loop": { "const": false },
+        "all_keys_match_interchange": { "const": true },
+        "root_track_preserved": { "const": true },
+        "loop_policy_preserved": { "const": true },
+        "root_translation_distance_meters": { "type": "number", "minimum": 0 },
+        "maximum_endpoint_translation_delta_meters": { "type": "number", "minimum": 0 },
+        "maximum_endpoint_rotation_delta_degrees": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

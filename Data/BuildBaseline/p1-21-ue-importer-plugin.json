@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:10:39.5877501+00:00",
+  "result": "PASS",
+  "task": "P1-21",
+  "completion_criteria_satisfied": true,
+  "source_sha256": "b010453553f0230049f5d41210639a7e0bfd05c4f28f3733f36761dabb0bb133",
+  "plugin": {
+    "name": "TMXYImporter",
+    "version": "0.1.0",
+    "module_type": "Editor",
+    "loading_phase": "PostEngineInit",
+    "target_platforms": [
+      "Win64"
+    ],
+    "can_contain_content": false,
+    "runtime_target_excluded": true,
+    "descriptor_passed": true
+  },
+  "capabilities": {
+    "manifest_contract": "tmxy.asset.interchange 1.0.0",
+    "batch_mode": "ordered validate-only with per-request result",
+    "report_contract": "tmxy.ue.golden-import-report 1.0.0",
+    "format_handler_registry": true,
+    "duplicate_handler_rejected": true,
+    "reimport_interface": true,
+    "sha256_provider": "Windows CNG bcrypt",
+    "production_format_handler_count": 3,
+    "imported_asset_count": 0
+  },
+  "boundaries": {
+    "safe_relative_paths": true,
+    "golden_root": "/Game/TMXY/Golden",
+    "content_asset_count": 14,
+    "content_assets": [
+      "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+      "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+      "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+      "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+    ],
+    "content_policy_passed": true,
+    "legacy_runtime_dependency": false
+  },
+  "automation_evidence": {
+    "required": true,
+    "passed": true,
+    "test": "TMXY.Importer.ManifestBatch",
+    "ue_report_sha256": "f2b5e0924591aff25ad46d7464f331d34d49182906b98be9582e21d94b3f2309",
+    "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-21-report.json",
+    "generated_report_sha256": "5e635694f10b21c6d24dcacccb0fbf7b5f67ee0e3e2cafeeae7db75a4d1e255e",
+    "generated_report_schema_passed": true
+  },
+  "dependency_report_sha256": {
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+    "Data/BuildBaseline/p1-20-ue-golden-host.json": "b5b355f4530358cae52e3a3164064b52462e535d0b5646e7cf8537eb9014f8fa"
+  },
+  "failure_count": 0,
+  "failures": []
+}

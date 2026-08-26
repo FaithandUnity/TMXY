@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:58.2294095+00:00",
+  "result": "PASS",
+  "task": "P1-24",
+  "completion_criteria_satisfied": true,
+  "source_sha256": "3d3922710231aa480fce9600699f7b1f3c150a69c45d9b0c96f914da14e35607",
+  "handler": {
+    "format_id": "khronos.gltf-json",
+    "gltf_version": "2.0",
+    "asset_kind": "skeletal_mesh",
+    "verifies_all_artifact_hashes_before_write": true,
+    "maximum_active_influences": 4,
+    "rejects_unweighted_vertices": true,
+    "positive_inverse_bind_orientation_required": true,
+    "attachment_policy": "bone-name-candidates-only-no-invented-sockets",
+    "content_addressed_reimport_noop": true,
+    "production_handler_count": 3
+  },
+  "fixture": {
+    "id": "boy01-default-real",
+    "manifest_sha256": "463c70294e3efd00ec0edc9573823b41943a6fae84e2bb3a891a6b554b906c1a",
+    "gltf_sha256": "5ea12a7ae8e09961d983be869bc8758ac14ae557987a8b5d1220cb3fa1a07a15",
+    "bin_sha256": "ba079eea99ab56aa19097796a79efecf5c1db3aebfb89fb07a72d8fd43568743",
+    "bin_bytes": 689132,
+    "source_vertex_count": 10338,
+    "triangle_count": 8757,
+    "material_slot_count": 7,
+    "bone_count": 80
+  },
+  "content": {
+    "asset_count": 14,
+    "approved_assets": [
+      "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+      "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+      "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+      "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+    ],
+    "imported_assets": [
+      {
+        "path": "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "bytes": 2050123,
+        "sha256": "04ca9614c1a6744f7d0ce2e3da95931c29e809f92a69bda88a0f8a496517e6dd",
+        "unreal_package_tag": "0x9e2a83c1"
+      },
+      {
+        "path": "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "bytes": 18778,
+        "sha256": "97c7c3a9268fed96eb094e3d23ee642b348404323244ac42557aa0c8a1a3562b",
+        "unreal_package_tag": "0x9e2a83c1"
+      }
+    ]
+  },
+  "automation_evidence": {
+    "required": true,
+    "passed": true,
+    "test": "TMXY.Importer.SkeletalMesh",
+    "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-24-skeletal-mesh-report.json",
+    "generated_report_sha256": "5925bb0491981de448b69664ab1723738c3bdf954b9aa22c02f3623d71173b5a",
+    "generated_report_schema_passed": true,
+    "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+  },
+  "dependency_report_sha256": {
+    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "fa3b21d6533087e6522033908b34c61d798d5b242b890b68735bd8ce33d1f092",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "456c272548b533fc4ec662ea2fb72f2337f23122b7d89e3f3027e29c84b62a96"
+  },
+  "failure_count": 0,
+  "failures": []
+}

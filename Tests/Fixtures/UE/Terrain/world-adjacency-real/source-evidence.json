@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "fixture_id": "world-adjacency-real",
+  "derivation": "locked TMXY.Terrain typed-plane export plus matching QLevel scale evidence",
+  "copy_policy": "reference-only-inputs; deterministic-small-derived-fixture",
+  "producer_source_sha256": "88c396a8b694cbfe118778375efea7191e8f663537d3d9f3aecfe462b8be5a66",
+  "level_contract": {
+    "package_object": "world.QLEVEL",
+    "terrain_info_object": "world.terrainInfo",
+    "width_zones": 52,
+    "length_zones": 52,
+    "zone_size_source_units": 252.0,
+    "cells_per_zone_axis": 63,
+    "source_units_per_cell": 4.0,
+    "centimeters_per_source_unit": 100.0
+  },
+  "sources": [
+    {
+      "role": "matching-level-package",
+      "path": "天命西游/Level/world",
+      "bytes": 1953444,
+      "sha256": "997627584cf4dfb55016be32b64e7d33763a17b980a05e0b580137193fb352f4"
+    },
+    {
+      "role": "legacy-ter-payload",
+      "path": "天命西游/Resource/Terrain/world_001_001.ter",
+      "bytes": 147501,
+      "sha256": "233f5be2358d1fdc88ca872373d074eb67b48ca33c3c78708bc74290d0e061e7"
+    },
+    {
+      "role": "legacy-ter-payload",
+      "path": "天命西游/Resource/Terrain/world_002_001.ter",
+      "bytes": 147501,
+      "sha256": "3f343db7478cdafb1828469acd74680a45a6fb2fab60f6e909ae4a80be8867b4"
+    },
+    {
+      "role": "legacy-ter-payload",
+      "path": "天命西游/Resource/Terrain/world_001_002.ter",
+      "bytes": 147501,
+      "sha256": "f14874bbb0a4a1ddcc709ae48f4913d6ba3bce8bc5c3bd5b0d06292a84893389"
+    }
+  ]
+}

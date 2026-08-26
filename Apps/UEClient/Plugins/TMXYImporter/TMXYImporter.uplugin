@@ -1,0 +1,19 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "TMXY Importer",
+  "Description": "Editor-only validated import pipeline for TMXY interchange bundles.",
+  "Category": "TMXY",
+  "CreatedBy": "TMXY Rebuild",
+  "CanContainContent": false,
+  "Installed": false,
+  "SupportedTargetPlatforms": ["Win64"],
+  "Modules": [
+    {
+      "Name": "TMXYImporter",
+      "Type": "Editor",
+      "LoadingPhase": "PostEngineInit"
+    }
+  ]
+}

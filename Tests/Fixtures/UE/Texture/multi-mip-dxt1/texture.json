@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "object_name": "synthetic.TMXYMultiMipDXT1",
+  "format": {"value": 3, "name": "dxt1"},
+  "width": 8,
+  "height": 8,
+  "stored_mip_count": 4,
+  "mip_count": 4,
+  "u_clamp": "repeat",
+  "v_clamp": "repeat",
+  "alpha_encoding": "none",
+  "alpha_coverage": "opaque",
+  "payload_size": 56,
+  "unknown_property_count": 0,
+  "mips": [
+    {"level": 0, "width": 8, "height": 8, "offset": 0, "size": 32},
+    {"level": 1, "width": 4, "height": 4, "offset": 32, "size": 8},
+    {"level": 2, "width": 2, "height": 2, "offset": 40, "size": 8},
+    {"level": 3, "width": 1, "height": 1, "offset": 48, "size": 8}
+  ],
+  "outputs": {"dds": "texture.dds", "png": "", "tga": ""}
+}

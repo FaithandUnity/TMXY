@@ -1,0 +1,145 @@
+{
+  "schema": "tmxy.testing.golden-matrix",
+  "schema_version": 1,
+  "matrix_version": "1.0.0",
+  "required_categories": ["normal", "boundary", "corrupt", "unknown"],
+  "required_domains": [
+    "package-container",
+    "legacy-table",
+    "texture",
+    "static-mesh",
+    "skeletal-mesh",
+    "animation",
+    "terrain",
+    "asset-interchange",
+    "ue-importer"
+  ],
+  "suites": [
+    {
+      "id": "package-container",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-PackageV1Baseline.ps1", "evidence_report": "Data/BuildBaseline/p1-02-package-v1.json", "expected_result": "PASS", "completion_required": false, "automation_required": false },
+        { "script": "Tests/Contract/Test-PackageV2Baseline.ps1", "evidence_report": "Data/BuildBaseline/p1-05-package-v2.json", "expected_result": "PASS", "completion_required": false, "automation_required": false },
+        { "script": "Tests/Contract/Test-PackageV3Baseline.ps1", "evidence_report": "Data/BuildBaseline/p1-06-package-v3.json", "expected_result": "PASS", "completion_required": false, "automation_required": false },
+        { "script": "Tests/Contract/Test-PackagePipelineBaseline.ps1", "evidence_report": "Data/BuildBaseline/p1-07-package-pipeline.json", "expected_result": "PASS", "completion_required": false, "automation_required": false },
+        { "script": "Tests/Contract/Test-PackageNormalizedTree.ps1", "evidence_report": "Data/BuildBaseline/p1-08-package-normalized-tree.json", "expected_result": "PASS", "completion_required": false, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "package-valid", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.Package/tests/package_v1_reader_test.cpp", "source_marker": "valid package parses" },
+        { "id": "package-count-limit", "category": "boundary", "behavior": "reject", "test_source": "Tools/TMXY.Package/tests/package_v2_reader_test.cpp", "source_marker": "record count limit enforced" },
+        { "id": "package-truncated", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.Package/tests/package_v3_reader_test.cpp", "source_marker": "truncated object body rejected" },
+        { "id": "package-unknown-body", "category": "unknown", "behavior": "preserve", "test_source": "Tools/TMXY.Package/tests/package_normalized_tree_test.cpp", "source_marker": "unknown body span preserved" }
+      ]
+    },
+    {
+      "id": "legacy-table",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-LegacyTableBaseline.ps1", "evidence_report": "Data/BuildBaseline/p1-03-legacy-table.json", "expected_result": "PASS", "completion_required": false, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "table-fixed-vector", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.Table/tests/legacy_table_reader_test.cpp", "source_marker": "independently generated double-AES fixed vector parses" },
+        { "id": "table-trailing-empty-field", "category": "boundary", "behavior": "preserve", "test_source": "Tools/TMXY.Table/tests/legacy_table_reader_test.cpp", "source_marker": "trailing empty field" },
+        { "id": "table-invalid-padding", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.Table/tests/legacy_table_reader_test.cpp", "source_marker": "invalid padding length rejected" },
+        { "id": "table-unknown-separator", "category": "unknown", "behavior": "reject", "test_source": "Tools/TMXY.Table/tests/legacy_table_reader_test.cpp", "source_marker": "line-ending separator rejected" }
+      ]
+    },
+    {
+      "id": "texture",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-QtxTexture.ps1", "evidence_report": "Data/BuildBaseline/p1-13-qtx-texture.json", "expected_result": "PASS", "completion_required": true, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "texture-valid-descriptor", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.Texture/tests/texture_parser_test.cpp", "source_marker": "valid descriptor parses" },
+        { "id": "texture-zero-mip-canonical", "category": "boundary", "behavior": "accept", "test_source": "Tools/TMXY.Texture/tests/texture_parser_test.cpp", "source_marker": "stored mip zero canonicalizes to one" },
+        { "id": "texture-truncated-descriptor", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.Texture/tests/texture_parser_test.cpp", "source_marker": "truncated descriptor rejected" },
+        { "id": "texture-unknown-property", "category": "unknown", "behavior": "preserve", "test_source": "Tools/TMXY.Texture/tests/texture_parser_test.cpp", "source_marker": "unknown property value retained" }
+      ]
+    },
+    {
+      "id": "static-mesh",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-SmStaticMesh.ps1", "evidence_report": "Data/BuildBaseline/p1-14-sm-static-mesh.json", "expected_result": "PASS", "completion_required": true, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "static-mesh-valid", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.StaticMesh/tests/static_mesh_parser_test.cpp", "source_marker": "valid synthetic mesh parses" },
+        { "id": "static-mesh-43-sections", "category": "boundary", "behavior": "accept", "test_source": "Tools/TMXY.StaticMesh/tests/sm_real_samples_test.cpp", "source_marker": "scene09.GT_B_S_BangPai05 vertices=11847 indices=19533 sections=43" },
+        { "id": "static-mesh-truncated", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.StaticMesh/tests/static_mesh_parser_test.cpp", "source_marker": "truncated tail rejected" },
+        { "id": "static-mesh-unknown-property", "category": "unknown", "behavior": "preserve", "test_source": "Tools/TMXY.StaticMesh/tests/static_mesh_parser_test.cpp", "source_marker": "unknown static-mesh property is preserved byte-for-byte" }
+      ]
+    },
+    {
+      "id": "skeletal-mesh",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-SkemSkeletalMesh.ps1", "evidence_report": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json", "expected_result": "PASS", "completion_required": true, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "skeletal-mesh-valid", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.SkeletalMesh/tests/skeletal_mesh_parser_test.cpp", "source_marker": "valid synthetic skem parses" },
+        { "id": "skeletal-mesh-legacy-sentinel", "category": "boundary", "behavior": "preserve", "test_source": "Tools/TMXY.SkeletalMesh/tests/skeletal_mesh_parser_test.cpp", "source_marker": "exact legacy -1 weight/zero-bone sentinel is preserved" },
+        { "id": "skeletal-mesh-truncated", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.SkeletalMesh/tests/skeletal_mesh_parser_test.cpp", "source_marker": "truncated adjacency rejected" },
+        { "id": "skeletal-mesh-unknown-property", "category": "unknown", "behavior": "preserve", "test_source": "Tools/TMXY.SkeletalMesh/tests/skeletal_mesh_parser_test.cpp", "source_marker": "unknown skeletal-mesh property is preserved byte-for-byte" }
+      ]
+    },
+    {
+      "id": "animation",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-AnimAnimation.ps1", "evidence_report": "Data/BuildBaseline/p1-16-anim-animation.json", "expected_result": "PASS", "completion_required": true, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "animation-valid", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.Animation/tests/animation_parser_test.cpp", "source_marker": "valid dense-prefix animation payload parses" },
+        { "id": "animation-zero-clip", "category": "boundary", "behavior": "accept", "test_source": "Tools/TMXY.Animation/tests/animation_parser_test.cpp", "source_marker": "four-byte zero-animation file is valid" },
+        { "id": "animation-zero-quaternion", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.Animation/tests/animation_parser_test.cpp", "source_marker": "zero quaternion rejected" },
+        { "id": "animation-unknown-property", "category": "unknown", "behavior": "preserve", "test_source": "Tools/TMXY.Animation/tests/animation_parser_test.cpp", "source_marker": "unknown property preserved" }
+      ]
+    },
+    {
+      "id": "terrain",
+      "layer": "format",
+      "gates": [
+        { "script": "Tests/Contract/Test-TerTerrain.ps1", "evidence_report": "Data/BuildBaseline/p1-17-ter-terrain.json", "expected_result": "PASS", "completion_required": true, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "terrain-valid", "category": "normal", "behavior": "accept", "test_source": "Tools/TMXY.Terrain/tests/terrain_parser_test.cpp", "source_marker": "valid terrain parses" },
+        { "id": "terrain-square-boundary", "category": "boundary", "behavior": "reject", "test_source": "Tools/TMXY.Terrain/tests/terrain_parser_test.cpp", "source_marker": "non-square grid rejected before allocation" },
+        { "id": "terrain-truncated", "category": "corrupt", "behavior": "reject", "test_source": "Tools/TMXY.Terrain/tests/terrain_parser_test.cpp", "source_marker": "truncated vertex payload rejected" },
+        { "id": "terrain-unknown-tail", "category": "unknown", "behavior": "reject", "test_source": "Tools/TMXY.Terrain/tests/terrain_parser_test.cpp", "source_marker": "partial optional water color rejected" }
+      ]
+    },
+    {
+      "id": "asset-interchange",
+      "layer": "contract",
+      "gates": [
+        { "script": "Tests/Contract/Test-AssetInterchangeContract.ps1", "evidence_report": "Data/BuildBaseline/p1-19-asset-interchange.json", "expected_result": "PASS", "completion_required": true, "automation_required": false }
+      ],
+      "cases": [
+        { "id": "interchange-positive-example", "category": "normal", "behavior": "accept", "test_source": "Tests/Contract/Test-AssetInterchangeContract.ps1", "source_marker": "P1-19 positive example does not validate against the schema." },
+        { "id": "interchange-path-boundary", "category": "boundary", "behavior": "reject", "test_source": "Tests/Contract/Test-AssetInterchangeContract.ps1", "source_marker": "$negativeCases.absolute_path" },
+        { "id": "interchange-unbacked-unknown", "category": "corrupt", "behavior": "reject", "test_source": "Tests/Contract/Test-AssetInterchangeContract.ps1", "source_marker": "$negativeCases.unknown_without_backing" },
+        { "id": "interchange-unknown-major", "category": "unknown", "behavior": "reject", "test_source": "Tests/Contract/Test-AssetInterchangeContract.ps1", "source_marker": "reject-unknown-major" }
+      ]
+    },
+    {
+      "id": "ue-importer",
+      "layer": "editor-import",
+      "gates": [
+        { "script": "Tests/Contract/Test-UEImporterPlugin.ps1", "evidence_report": "Data/BuildBaseline/p1-21-ue-importer-plugin.json", "expected_result": "PASS", "completion_required": true, "automation_required": true },
+        { "script": "Tests/Contract/Test-UETextureImport.ps1", "evidence_report": "Data/BuildBaseline/p1-22-ue-texture-import.json", "expected_result": "PASS", "completion_required": true, "automation_required": true },
+        { "script": "Tests/Contract/Test-UEStaticMeshImport.ps1", "evidence_report": "Data/BuildBaseline/p1-23-ue-static-mesh-import.json", "expected_result": "PASS", "completion_required": true, "automation_required": true },
+        { "script": "Tests/Contract/Test-UESkeletalMeshImport.ps1", "evidence_report": "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json", "expected_result": "PASS", "completion_required": true, "automation_required": true },
+        { "script": "Tests/Contract/Test-UEAnimationImport.ps1", "evidence_report": "Data/BuildBaseline/p1-25-ue-animation-import.json", "expected_result": "PASS", "completion_required": true, "automation_required": true },
+        { "script": "Tests/Contract/Test-UETerrainImport.ps1", "evidence_report": "Data/BuildBaseline/p1-26-ue-terrain-import.json", "expected_result": "PASS", "completion_required": true, "automation_required": true }
+      ],
+      "cases": [
+        { "id": "ue-import-valid-batch", "category": "normal", "behavior": "accept", "test_source": "Apps/UEClient/Plugins/TMXYImporter/Source/TMXYImporter/Private/Tests/TMXYImporterTest.cpp", "source_marker": "Batch validated count" },
+        { "id": "ue-import-bounded-reimport", "category": "boundary", "behavior": "accept", "test_source": "Apps/UEClient/Plugins/TMXYImporter/Source/TMXYImporter/Private/Tests/TMXYImporterTest.cpp", "source_marker": "Registered handler accepts bounded reimport" },
+        { "id": "ue-import-hash-mismatch", "category": "corrupt", "behavior": "reject", "test_source": "Apps/UEClient/Plugins/TMXYImporter/Source/TMXYImporter/Private/Tests/TMXYTerrainImporterTest.cpp", "source_marker": "Terrain hash mismatch is rejected before write" },
+        { "id": "ue-import-unknown-format", "category": "unknown", "behavior": "reject", "test_source": "Apps/UEClient/Plugins/TMXYImporter/Source/TMXYImporter/Private/Tests/TMXYImporterTest.cpp", "source_marker": "Unknown format without a registered handler is rejected" }
+      ]
+    }
+  ]
+}

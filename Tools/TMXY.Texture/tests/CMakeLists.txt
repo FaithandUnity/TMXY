@@ -1,0 +1,8 @@
+add_executable(tmxy_texture_parser_test texture_parser_test.cpp)
+target_link_libraries(tmxy_texture_parser_test PRIVATE tmxy::texture)
+tmxy_apply_tool_defaults(tmxy_texture_parser_test)
+add_test(NAME texture.parser COMMAND tmxy_texture_parser_test)
+
+add_executable(tmxy_qtx_real_samples_test qtx_real_samples_test.cpp)
+target_link_libraries(tmxy_qtx_real_samples_test PRIVATE tmxy::texture)
+tmxy_apply_tool_defaults(tmxy_qtx_real_samples_test)

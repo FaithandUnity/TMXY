@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:18:37.9640755+00:00",
+  "result": "PASS",
+  "task": "P1-08",
+  "source_file_count": 22,
+  "source_sha256": "069450b215710ba83eee78ac22f51e5573a8bf5c46062a2066bd7f9e6ce3356b",
+  "json_schema": {
+    "path": "Contracts/data-schema/package-tree-v1.schema.json",
+    "sha256": "de461b5a52a7e363caf46136528d3a3a1a11a89dcc3e2918cbc569259c052475",
+    "draft": "https://json-schema.org/draft/2020-12/schema",
+    "passed": true
+  },
+  "dependency_report_sha256": {
+    "p1-02-package-v1.json": "c4a9eacaea3e1c6a2368a5657f852e59a6f8a1fa05ca41da80490990861fd1f8",
+    "p1-05-package-v2.json": "6c4e3a84504a746f138ad7503b587e16bc24280d595fb78f576045f3154c04fa",
+    "p1-06-package-v3.json": "56f686ffe512a0a5963cbb7f22074c56de85627898c3daf99ce1f96e9b1e0f3d",
+    "p1-07-package-pipeline.json": "e00be3314a6f8e7b1964b34a1b8ba7826ae3c92c37f3ce79ace19a92800af635"
+  },
+  "semantic_states": {
+    "names_and_classes": "opaque-bytes-hex",
+    "references": "unparsed",
+    "transform": "unparsed",
+    "materials": "unparsed",
+    "unknown_body": "source-span",
+    "guessed_fields": 0
+  },
+  "frozen_exports": {
+    "sample_result": "PASS",
+    "v1": {
+      "bytes": 1350653,
+      "sha256": "4ab058aafd9ffd44065e442994591b33415dc5c1ff37307a8ceb6a02bd89c13c"
+    },
+    "v2": {
+      "bytes": 5223,
+      "sha256": "9a738c3ab36adb33da85866d252c71e6f48eef92f4000ce5bcc2cdf8a8d370a8"
+    },
+    "v3": {
+      "bytes": 676,
+      "sha256": "f75e249ce19f82be23c6b6d3b039a64cf58771cbb033460e3d43fc7869b4bec3"
+    }
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "legacy_sample_mount": "read-only-directory",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "json-schema-contract",
+    "dependency-baseline-check",
+    "clang-format-21",
+    "cmake-clang-21",
+    "clang-tidy-21",
+    "ctest",
+    "v1-v2-v3-deterministic-export"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 87,
+    "output_sha256": "0fb0bcf5303f7743f67aab5f591ac640769f3fbce0cfba80ccbbf9a250b57840"
+  }
+}

@@ -1,0 +1,4 @@
+add_executable(tmxy_legacy_table_reader_test legacy_table_reader_test.cpp)
+target_link_libraries(tmxy_legacy_table_reader_test PRIVATE tmxy::table)
+tmxy_apply_tool_defaults(tmxy_legacy_table_reader_test)
+add_test(NAME table.legacy_reader COMMAND tmxy_legacy_table_reader_test)

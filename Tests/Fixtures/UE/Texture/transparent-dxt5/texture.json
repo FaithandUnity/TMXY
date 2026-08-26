@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "object_name": "texparticle.FXH_T_toumingtu",
+  "format": {"value": 6, "name": "dxt5"},
+  "width": 16,
+  "height": 16,
+  "stored_mip_count": 1,
+  "mip_count": 1,
+  "u_clamp": "wrap",
+  "v_clamp": "wrap",
+  "alpha_encoding": "interpolated_8bit",
+  "alpha_coverage": "transparent",
+  "payload_size": 256,
+  "unknown_property_count": 0,
+  "mips": [
+    {"level": 0, "width": 16, "height": 16, "offset": 0, "size": 256}
+  ],
+  "outputs": {"dds": "texture.dds", "png": "texture.png", "tga": "texture.tga"}
+}

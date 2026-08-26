@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package tmxy.system.v1;
+
+option cc_enable_arenas = true;
+
+message HealthCheckRequest {}
+
+message ComponentHealth {
+  string component = 1;
+  ServingStatus status = 2;
+}
+
+message HealthCheckResponse {
+  ServingStatus status = 1;
+  string service_version = 2;
+  repeated ComponentHealth components = 3;
+}
+
+enum ServingStatus {
+  SERVING_STATUS_UNSPECIFIED = 0;
+  SERVING_STATUS_SERVING = 1;
+  SERVING_STATUS_DEGRADED = 2;
+  SERVING_STATUS_NOT_SERVING = 3;
+}

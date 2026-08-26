@@ -1,0 +1,3872 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:56:11.7486047+00:00",
+  "result": "PASS_DIAGNOSTIC",
+  "authoritative_release_gate": false,
+  "authority_note": "Local gates and the locked Clang 21 builder are operational; hosted CI and release-authority supply-chain evidence remain pending.",
+  "repository": {
+    "result": "PASS",
+    "checked_source_files": 218,
+    "checked_size_files": 453,
+    "checked_utf8_lf_files": 452,
+    "failure_count": 0,
+    "failures": []
+  },
+  "secret": {
+    "result": "PASS",
+    "repository_files_scanned": 448,
+    "history_mode": "no_commits",
+    "history_blobs_scanned": 0,
+    "scanner_self_test": "PASS",
+    "secret_store_rotation": "PASS",
+    "finding_count": 0,
+    "failure_count": 0,
+    "failures": []
+  },
+  "golden": {
+    "result": "PASS",
+    "sample_count": 42,
+    "required_kind_count": 9,
+    "required_role_count": 13,
+    "manifest_file_verified": true,
+    "source_files_verified": 0,
+    "copy_policy": "reference_only",
+    "failure_count": 0,
+    "failures": []
+  },
+  "platform_budget": {
+    "result": "PASS",
+    "client_target": "1920x1080@60",
+    "platform_concurrent_sessions": 10000,
+    "rpo_minutes": 5,
+    "rto_minutes": 30,
+    "failure_count": 0,
+    "failures": []
+  },
+  "p1_execution_charter": {
+    "result": "PASS",
+    "assigned_task_count": 28,
+    "workstream_count": 4,
+    "duration_weeks": "4-8",
+    "start_condition": "G0_READY_AND_P0_16_APPROVED",
+    "effective_start_mode": "local_time_bounded_waiver",
+    "local_waiver_expires": "2026-09-25T23:59:59+08:00",
+    "failure_count": 0,
+    "failures": []
+  },
+  "format_core": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:47:01.8244398+08:00",
+    "result": "PASS",
+    "task": "P1-01",
+    "source_file_count": 6,
+    "source_sha256": "6f23efacfff720ebb494de6593ecb0eb4cb07711b44f4c592a4c52cf50060677",
+    "error_schema_version": 1,
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 27,
+      "output_sha256": "73ecbd774fd4362dfd142111e2cc467922466eeebe7decae495c82ed153ab310"
+    }
+  },
+  "package_v1": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:47:55.5376897+08:00",
+    "result": "PASS",
+    "task": "P1-02",
+    "source_file_count": 22,
+    "source_sha256": "b873e0dba8f0cf9e28ea091fbf4989faff0ed5cc3bff76081d57fa9e9eb25f94",
+    "error_schema_version": 1,
+    "legacy_format_evidence": [
+      {
+        "path": "Base/Hdr/QArchive.h",
+        "size": 1910,
+        "sha256": "c5363a07e944c34ac4eb395d377aaeef2da80bb5df3805b414d9142b84ab8e84"
+      },
+      {
+        "path": "Base/Hdr/QDict.h",
+        "size": 10894,
+        "sha256": "c3f2e74d3a5bfd454c3ed34433acd3f2aefc70a611336f142ea4ef0c1bb952a9"
+      },
+      {
+        "path": "Base/Hdr/QPackage.h",
+        "size": 3258,
+        "sha256": "b6598586f5dee3cc5af2a139317aeacbbe1b8c1e9a09025e8f4ae1a61e2b630a"
+      },
+      {
+        "path": "Base/Src/QArchive.cpp",
+        "size": 2242,
+        "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8"
+      },
+      {
+        "path": "Base/Src/QMetaclass.cpp",
+        "size": 11979,
+        "sha256": "3a4ba187ea1099706328c0b49084ad555fa3d2f68f16d8b8e7f0a53fa0b8fc57"
+      },
+      {
+        "path": "Base/Src/QPackage.cpp",
+        "size": 7423,
+        "sha256": "b4abf66d3f84f583f80f88b70c44e7c90fcac9fd380c34f08f398cf3e8ccd064"
+      }
+    ],
+    "frozen_sample": {
+      "id": "package-v1-reference",
+      "path": "Packages/Texture/tempfile.tmp",
+      "evidence_level": "L2",
+      "copy_policy": "reference_only",
+      "size": 319813,
+      "sha256": "11804bcbd1c28a4243670f519cee12d6b8fe7f46ebfaf8033e43b0509f9bc0e6",
+      "record_count": 3004,
+      "header_size": 145581,
+      "class_count": 1,
+      "metadata_fnv1a64": "1691fafacd3ab5bd"
+    },
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "legacy_sample_mount": "read-only-single-file",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "legacy-evidence-sha256",
+      "golden-sample-sha256",
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest",
+      "frozen-sample-parse"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 87,
+      "output_sha256": "f9879a732866e12d46669cdf608f5cb2c75a728a94224612e3705dc988deb0ef"
+    }
+  },
+  "package_v2": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:48:50.7450347+08:00",
+    "result": "PASS",
+    "task": "P1-05",
+    "source_file_count": 22,
+    "source_sha256": "dca5673104df210f81fe81b1c3273ae0b6e5252f6a66554264c631ef72193257",
+    "error_schema_version": 1,
+    "transform": "four-byte half-swap plus bitwise-not; remainder bitwise-not",
+    "raw_manifest": {
+      "path": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+      "sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3"
+    },
+    "frozen_sample_set": {
+      "root": "Packages",
+      "copy_policy": "reference_only",
+      "sample_count": 22,
+      "file_bytes": 5783942,
+      "sample_set_sha256": "2371a43ac6a46403e68e0d31e884bb6b27b54ac5babc3db6b3c448695c3179e6",
+      "record_count": 27637,
+      "directory_bytes": 1220531,
+      "metadata_fnv1a64": "2d2d359bc9f5da7f",
+      "samples": [
+        {
+          "path": "Packages/Level/bydfb",
+          "size": 4944,
+          "sha256": "bc2e39be4f51c770dd059d3d45d38626878f80870f761939c18b413f54080e48"
+        },
+        {
+          "path": "Packages/Level/hflfb",
+          "size": 8902,
+          "sha256": "4f024e428653bcbc6b6dae70aae527009c5ca31138f1d0ba36793ce94dc950b9"
+        },
+        {
+          "path": "Packages/Material/tempfile.2.tmp",
+          "size": 131534,
+          "sha256": "d2dc5b088264c6b716a65f83d0aad4bbe9ed184ecfdc020f966d870fa1da1a69"
+        },
+        {
+          "path": "Packages/Material/tempfile.3.tmp",
+          "size": 132588,
+          "sha256": "8af94b7661502f293cd447fe77a4a6341fe9549c9b85dcf0666adc4dbbb9e224"
+        },
+        {
+          "path": "Packages/Material/tempfile.4.tmp",
+          "size": 202691,
+          "sha256": "7129f0753ecb03709722d64451511c546ffbe8fb3266ce220e5d6e41abf00054"
+        },
+        {
+          "path": "Packages/Material/tempfile.5.tmp",
+          "size": 213083,
+          "sha256": "742e2b02f6834837fdd36faaf88506695b0d44ecd9999cfc8a284bb4a76acafe"
+        },
+        {
+          "path": "Packages/Material/tempfile.tmp",
+          "size": 184117,
+          "sha256": "b559a7df8ad8e39c53ad877606d2e7abe26d9c468993dd2373bc3d71c2911e5a"
+        },
+        {
+          "path": "Packages/SkelMesh/tempfile.tmp",
+          "size": 274861,
+          "sha256": "286c3d82515762e2c6eb0fca47a2f1bb0ee920875b11fa4f673843c3a42ab663"
+        },
+        {
+          "path": "Packages/StaticMesh/scene09",
+          "size": 215837,
+          "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c"
+        },
+        {
+          "path": "Packages/StaticMesh/scene16",
+          "size": 42375,
+          "sha256": "f5ec26013ba90d263a2d212201f1974b22aec376e591d1579c09537c57e60744"
+        },
+        {
+          "path": "Packages/StaticMesh/tempfile.tmp",
+          "size": 311527,
+          "sha256": "ab398a0b38204de106f77c5440ffd63edd50dd89d6a4740cbdad0c1df8dbdebf"
+        },
+        {
+          "path": "Packages/tempfile.2.tmp",
+          "size": 117476,
+          "sha256": "0677db226bd233b604d831b90d2c57022c5be3991f3da8db359a36adb854ad5c"
+        },
+        {
+          "path": "Packages/tempfile.3.tmp",
+          "size": 117716,
+          "sha256": "53687d0095eb60f40ef3c98a8a339ed75189e216eaafbd29fbb81e9854194d92"
+        },
+        {
+          "path": "Packages/tempfile.4.tmp",
+          "size": 125236,
+          "sha256": "39e7fa99b7196d827920ae5b1010076b2ec134a23a31f9085c08074f268047fd"
+        },
+        {
+          "path": "Packages/tempfile.5.tmp",
+          "size": 8793,
+          "sha256": "7951fc97288d0a78e95634fbd82ddaba9bcb49b2c0a09c7bca445641d3e20e63"
+        },
+        {
+          "path": "Packages/tempfile.6.tmp",
+          "size": 131476,
+          "sha256": "e90da93f33daaa339ea0b95b1da2f1f4337fa32d4ac4dd93447e791456b99d41"
+        },
+        {
+          "path": "Packages/tempfile.7.tmp",
+          "size": 134516,
+          "sha256": "c4e47b1d62bf730b53b0f1ecca9b979005082078f0339653f5e9ce0cfd23e71c"
+        },
+        {
+          "path": "Packages/tempfile.tmp",
+          "size": 3081249,
+          "sha256": "d3af9fb45328843257f4f76701b7c016367923aa8e391ff9d115cc9d485ab034"
+        },
+        {
+          "path": "Packages/Texture/tempfile.2.tmp",
+          "size": 154405,
+          "sha256": "96af94a5637fc36aac5e7bb2de537101cb3aa373dea5de380bb9b32374cac4fa"
+        },
+        {
+          "path": "Packages/UI/tempfile.2.tmp",
+          "size": 64684,
+          "sha256": "8361d5f87dfede93f1ef62a6dc7cae1c6feeaeea2799cbff749ffefa249cbdc5"
+        },
+        {
+          "path": "Packages/UI/tempfile.3.tmp",
+          "size": 65307,
+          "sha256": "97cf46f217722cb426664be22234cc60d23695c6cd5edf4ce88d15629a09161f"
+        },
+        {
+          "path": "Packages/UI/tempfile.tmp",
+          "size": 60625,
+          "sha256": "b7f843b3c672afde95be6553987d3547c18b3c65ef613946c325b20efea9c973"
+        }
+      ]
+    },
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "legacy_sample_mount": "read-only-directory",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "raw-manifest-sha256",
+      "sample-set-sha256",
+      "sample-file-sha256",
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest",
+      "frozen-sample-set-parse"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 87,
+      "output_sha256": "0e4cfe67004525f77bb20b04b35364d7a30a834454ebdeb349f0ae41a6d42390"
+    }
+  },
+  "package_v3": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:49:45.4662265+08:00",
+    "result": "PASS",
+    "task": "P1-06",
+    "source_file_count": 22,
+    "source_sha256": "12b75110f2cf39fa542c2204c53a55619462b933f7ca981215f554dc5f88692c",
+    "error_schema_version": 1,
+    "transform": {
+      "full_group": "~E2,~E3,E0,~E1",
+      "remainder_1": "E0",
+      "remainder_2": "E0,~E1",
+      "remainder_3": "~E2,E0,~E1"
+    },
+    "container_structure": {
+      "outer_header_bytes": 29,
+      "decoded_prefix_hex": "030076657264000000010000003f",
+      "independent_block_table_observed": false,
+      "embedded_container_checksum_observed": false,
+      "body_layout": "record-declared-contiguous-ranges-to-eof",
+      "integrity_authority": "frozen-manifest-sha256"
+    },
+    "raw_manifest": {
+      "path": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+      "sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3"
+    },
+    "frozen_sample_set": {
+      "root": "Packages",
+      "copy_policy": "reference_only",
+      "sample_count": 140,
+      "file_bytes": 36333329,
+      "sample_set_sha256": "9e6872a12464bcbe7c98de2cd96a9ad3d831156a14a7b50b1a2dd07ec75260dd",
+      "record_count": 91074,
+      "directory_bytes": 4143928,
+      "metadata_fnv1a64": "f8ec20e8fff7b975",
+      "samples": [
+        {
+          "path": "Packages/card",
+          "size": 19885,
+          "sha256": "cf89014c2fdff11a50114dc54256a587ab6a026e430e0bebd9384f4dbba55d78"
+        },
+        {
+          "path": "Packages/editactions",
+          "size": 17690,
+          "sha256": "b7e4bc73b34a1a73e99737dbff81be89a04da77499cbcb987dae03e5f33992d2"
+        },
+        {
+          "path": "Packages/editactions01",
+          "size": 21630,
+          "sha256": "acc73971b626c6970c12f58f3f9a12e7d1f8709095577ea0ff983cfef8483cd9"
+        },
+        {
+          "path": "Packages/editactions02",
+          "size": 13026,
+          "sha256": "6ed33826c628465bbfa12a1abfc526e9b858e7917a0968bd4cb226049498d4f7"
+        },
+        {
+          "path": "Packages/editactions03",
+          "size": 6971,
+          "sha256": "274bcf0341d1010ef0769b06649d9b621ca18f9d644dddb93dff47b0ce940207"
+        },
+        {
+          "path": "Packages/editactions04",
+          "size": 668,
+          "sha256": "5785c72a928eace2f3a96a2845cbcfa643a43be97d0f1b504b2a7f8464e2a665"
+        },
+        {
+          "path": "Packages/editactions05",
+          "size": 2210,
+          "sha256": "e1362251d91904f01c80d6217df23ab526780e776a3c11495024f9c56db021fb"
+        },
+        {
+          "path": "Packages/editactions06",
+          "size": 18947,
+          "sha256": "e5f1a3acedb301230222386ca2ce079ce6c20987b40724379b3b74cd5c0cc23b"
+        },
+        {
+          "path": "Packages/editorui",
+          "size": 222,
+          "sha256": "1f7d7c535a2ff76eb328ddc0ad0b9e9126f32efb1c4f0ad075c51242520567a7"
+        },
+        {
+          "path": "Packages/icon",
+          "size": 525676,
+          "sha256": "3452284f271efa4c43a3914677b054263e48bfa63f7d5b13a85fcfcb8196409a"
+        },
+        {
+          "path": "Packages/interface",
+          "size": 68552,
+          "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f"
+        },
+        {
+          "path": "Packages/Level/bgdfb_001",
+          "size": 20185,
+          "sha256": "e0b2c51848e7d90672be8a6a9ad7bb39ab4e5ca929c3fe44a0380cce02193743"
+        },
+        {
+          "path": "Packages/Level/bkfb_01",
+          "size": 5052,
+          "sha256": "16b7d3bf06f4491da5c41da1593abd5aebf410fa227d7bf47ec6ec1d3e4d8b96"
+        },
+        {
+          "path": "Packages/Level/bpzd",
+          "size": 6843,
+          "sha256": "b48773f6e44d1e5756fb2192f52f2673a71ef99548a59ae826a48d1f10f8ba3a"
+        },
+        {
+          "path": "Packages/Level/bqg2",
+          "size": 5677,
+          "sha256": "65cdce1c7589060929ec873a17150fa79b0c1f0cd12dfa19b8369bcfa6eeac49"
+        },
+        {
+          "path": "Packages/Level/cdrmgfb01",
+          "size": 19720,
+          "sha256": "0a119ef29c823b24ffed42420c98d717b8affeab3b8a187b3cd79003a589934c"
+        },
+        {
+          "path": "Packages/Level/chechiguofuben",
+          "size": 4887,
+          "sha256": "54d3acbbb36244ad80648669d7c8fb7995dfca23fdc049846fdf53e37881d59c"
+        },
+        {
+          "path": "Packages/Level/dffb_001",
+          "size": 21656,
+          "sha256": "108bb4f32ffb12e5be7c30cf28806c826b73d91abc265f64e58ed5d3f682b335"
+        },
+        {
+          "path": "Packages/Level/djdl2019",
+          "size": 109816,
+          "sha256": "532e0cf1819b606642ab678c612e1c685a8a556a87c18a52782a8440160baf7d"
+        },
+        {
+          "path": "Packages/Level/dntg_02",
+          "size": 22620,
+          "sha256": "5d505ea68650e5ec43dbddcd6e6ec07084ca445e1dd6469366557ff953035398"
+        },
+        {
+          "path": "Packages/Level/dttlfb",
+          "size": 14201,
+          "sha256": "9f2a70fc38101aba6faef70655dd92a7ec11ea0608a02772236c7972bc621480"
+        },
+        {
+          "path": "Packages/Level/dzytj",
+          "size": 23420,
+          "sha256": "3c54f258bd611a6811ce4c2b009495052f952ed0fbea7e8e3f63d0b0d03bf5ce"
+        },
+        {
+          "path": "Packages/Level/ftszfb",
+          "size": 8047,
+          "sha256": "1b8e6ef57cdefef3409119a957b77be625c244838963468703b4eaffad84059b"
+        },
+        {
+          "path": "Packages/Level/gxt01fb",
+          "size": 5954,
+          "sha256": "813ceb78574d7bb018426ba6be79c4b85e53fabad414bf69a8d29afec8d92e47"
+        },
+        {
+          "path": "Packages/Level/hgs",
+          "size": 18168,
+          "sha256": "952ec6f9c63de29dc24815f1cf7db134d4419d88e8a32c098ecbab5773e99699"
+        },
+        {
+          "path": "Packages/Level/hgsdzc_001",
+          "size": 126988,
+          "sha256": "8aae59a426758013276b6afda1cd992372ad86f33fb845210f9041cdfd0567f9"
+        },
+        {
+          "path": "Packages/Level/hjzjd_01",
+          "size": 22882,
+          "sha256": "8552bdf939fd162dabe05886137091c2f30f74efdafbc255d772a386c65b2142"
+        },
+        {
+          "path": "Packages/Level/hslsfb_01",
+          "size": 7096,
+          "sha256": "6a5e30f1f7aa6c00c8b2b773ca6646f54d0b47ae8aa89917ad654b312199435f"
+        },
+        {
+          "path": "Packages/Level/huaguoshan",
+          "size": 32208,
+          "sha256": "c0d3e78c18619bd219f80fb2e8a45b69dec3a8a9690d730bebb0064399cf70e6"
+        },
+        {
+          "path": "Packages/Level/jenszhch",
+          "size": 20680,
+          "sha256": "7c5d21279e3159ca7c2e11013db101dec28deae379c93ba191f04e5ebc263711"
+        },
+        {
+          "path": "Packages/Level/jiehunlitang001",
+          "size": 4259,
+          "sha256": "2e4c9a22476c8cf2f6a8307d03cf0c05a31c51f26ba89983c67a919bb3148613"
+        },
+        {
+          "path": "Packages/Level/jlsfb_001",
+          "size": 28150,
+          "sha256": "66d1c73842cc2868f1170343f604e009055e4bdfc26d8d56c8319f3038c48a02"
+        },
+        {
+          "path": "Packages/Level/jltfb",
+          "size": 50667,
+          "sha256": "3af9ddd7aeefdd5ff1a91ff081fe85972472aa3b4e107c8d3ed5b5fddd31c880"
+        },
+        {
+          "path": "Packages/Level/jxfb_01",
+          "size": 11065,
+          "sha256": "9e00dfc93d4881973f5945cd50d51e0e00e40e57593c0f30429f17fd61c0610f"
+        },
+        {
+          "path": "Packages/Level/jxt_01",
+          "size": 7586,
+          "sha256": "a7ad1d13f992cd804bf88e744cc4d5e796275114fcc916eb5db6107e97e82a2b"
+        },
+        {
+          "path": "Packages/Level/jzpsdfb",
+          "size": 7656,
+          "sha256": "bf661d89b8783feb37ea4105fe63f3a966259411f77748a882b4caf07bd8cdc0"
+        },
+        {
+          "path": "Packages/Level/kfjjc01",
+          "size": 28144,
+          "sha256": "8327d14726fea49dbc8dc292ed157d947fd54e3848ed6983abc723c55777e24d"
+        },
+        {
+          "path": "Packages/Level/kkd001",
+          "size": 4433,
+          "sha256": "ce288eaddb1b0d74c6e4acfe66e53118b27319cb3d5c818dc82bff4f97b08e54"
+        },
+        {
+          "path": "Packages/Level/ldlhfb01",
+          "size": 21270,
+          "sha256": "0483016ad1db8c101a2b4fd030b52735b20c6075f3305fabcba0c0535361f373"
+        },
+        {
+          "path": "Packages/Level/lg",
+          "size": 22739,
+          "sha256": "ea6469ec2fbda0495ca76987af2e92063a29435fd398373dc2c92530c7df3b61"
+        },
+        {
+          "path": "Packages/Level/lhd_001",
+          "size": 19305,
+          "sha256": "35e183df756c9b8a89d38c7a34a7b2c15f817abe8cd0ab8d3c510bfc2d42b871"
+        },
+        {
+          "path": "Packages/Level/lmzc001",
+          "size": 20322,
+          "sha256": "7083688c52d3084d8c4b528be0469373c14f3775c4c0f9ffb93879a1792f9a65"
+        },
+        {
+          "path": "Packages/Level/mzlw001",
+          "size": 27776,
+          "sha256": "81a4cc316c0d089a9844e0b3b297a7a00a94559c7f9c712ddb41f427c35a1ed9"
+        },
+        {
+          "path": "Packages/Level/qilinshan01",
+          "size": 39903,
+          "sha256": "bd3da87e49e85f7dfb9c202973ce95af910066561901a698d529f21dac0173ba"
+        },
+        {
+          "path": "Packages/Level/qkyyp01fb",
+          "size": 3828,
+          "sha256": "0eb24ed0c1354ddf014738e37866b12eb6e1eca29ff03c11d159f9bbc1845157"
+        },
+        {
+          "path": "Packages/Level/qqznxyx",
+          "size": 21404,
+          "sha256": "d206975c53bd74c1f43042b282f7484fffadf3e2fafa61d42771cdb9b12a41b5"
+        },
+        {
+          "path": "Packages/Level/qswz_01",
+          "size": 4921,
+          "sha256": "fd23c84376d6ad452be4ee7ce73d6ccc527bf6b1175a54b87ff0197244be1bfd"
+        },
+        {
+          "path": "Packages/Level/qswz_02",
+          "size": 6339,
+          "sha256": "d594f73795449bfe18623037e75597188362d8a4184839d47387b23ab290e098"
+        },
+        {
+          "path": "Packages/Level/rzslfb001",
+          "size": 11397,
+          "sha256": "a3bb24281f9f04588aea26b8925ca6ac16ff16cb4d78fcc7784302edc76479fd"
+        },
+        {
+          "path": "Packages/Level/sanda",
+          "size": 55086,
+          "sha256": "ad38fc88bd03845928cfbd91651f1b184ff8c2865159e2503357fcb7b71ab08d"
+        },
+        {
+          "path": "Packages/Level/sanhuan_001",
+          "size": 4733,
+          "sha256": "d4cdf24b91f8805518b5b0c315404633dc86a5ac3c781fc6af1ff568d82ba2d1"
+        },
+        {
+          "path": "Packages/Level/sanhuan_003",
+          "size": 124007,
+          "sha256": "5250a7d9bae6250e55ebdcd0cfcc4e2a82ab7d63c9de7b8e30ff0fc9417f1c87"
+        },
+        {
+          "path": "Packages/Level/shwg",
+          "size": 22930,
+          "sha256": "db39dcab825e18445adc129c44309cd55d95aa03b45f2a395573a9ad6d977446"
+        },
+        {
+          "path": "Packages/Level/smzc",
+          "size": 4494,
+          "sha256": "b100e85349f2fde94a4cd9ef022b4fef264a85dcd2b3feff864f42839c92279a"
+        },
+        {
+          "path": "Packages/Level/srsxsdfb01",
+          "size": 36439,
+          "sha256": "f1aa954729ab4d4f3917014df53c6b91a3c9989d4cb5f694aa542305b87d5041"
+        },
+        {
+          "path": "Packages/Level/sszfb01",
+          "size": 20042,
+          "sha256": "e82d7ead14a26f1bb5d91c048cf0a98018f267aad7085b3aded2cb8fb504aea5"
+        },
+        {
+          "path": "Packages/Level/stsfb",
+          "size": 12014,
+          "sha256": "e3baa20909c2713a62502d0d48b9afb9c8b270c0231be0bf8338dc7baa8cca18"
+        },
+        {
+          "path": "Packages/Level/twjjcfb",
+          "size": 14424,
+          "sha256": "f8ae9ece28b5ed932be08bb73bde64c6ed4780b53992598d956198e31fbdc617"
+        },
+        {
+          "path": "Packages/Level/tyhj01",
+          "size": 108585,
+          "sha256": "b51964387a11750b6216cf099c9c728f4dc4510d94b1b9a477402d76800f3ab0"
+        },
+        {
+          "path": "Packages/Level/world",
+          "size": 2067098,
+          "sha256": "281bc9f9d51ed435e49587bff25b84489e40ffd9273ec4ae5bb202d443f70d31"
+        },
+        {
+          "path": "Packages/Level/wudidong",
+          "size": 14355,
+          "sha256": "c7d62ad56fa59f211874a362145859d63c210c59975dfd94cf36ef351716ac4b"
+        },
+        {
+          "path": "Packages/Level/wzgfb",
+          "size": 6284,
+          "sha256": "96d1732032c1fbaf198dca84a65174abfe6c8e8a18022e0f743356bb08c5fd0b"
+        },
+        {
+          "path": "Packages/Level/wzgfb_02",
+          "size": 27090,
+          "sha256": "bf6721064c7f7b1e02ddb5cb6257a9dec5064df2c03ab7084e9cdb7827beabbf"
+        },
+        {
+          "path": "Packages/Level/xccgfb_002",
+          "size": 82353,
+          "sha256": "6911eb917cd8b67c7dfdb4b5621c7cc2daaeade4a6e5332ba8c9b45a5a5e1a04"
+        },
+        {
+          "path": "Packages/Level/xhltlfb",
+          "size": 6513,
+          "sha256": "396565d23d14168bb11b01b526dc3e140afd616153c358bff5f12d0dcf7e0229"
+        },
+        {
+          "path": "Packages/Level/xhud001",
+          "size": 12123,
+          "sha256": "8af088de7f9be46a1757e8819976b0123c53c42f3dc3614520e89768b5bfce4f"
+        },
+        {
+          "path": "Packages/Level/xinxuan",
+          "size": 22096,
+          "sha256": "b0a493edd804bbe0c131514987deecf914e685e7c70b5ed09473fb047294e549"
+        },
+        {
+          "path": "Packages/Level/xpl001",
+          "size": 26268,
+          "sha256": "a74eeaaac6e222f6b0f01c912a2d90e9d2d7f0f8672ce51688bf8e728f14f0f8"
+        },
+        {
+          "path": "Packages/Level/xwzgfb_001",
+          "size": 3330,
+          "sha256": "e0cecf884079ad04d7b2339fed1d815a85a012a94aa774f36860dc7bf5c40c29"
+        },
+        {
+          "path": "Packages/Level/xydong01fb",
+          "size": 7822,
+          "sha256": "de8fe17a2d44925691da14c6a077044eac46ecc9c5492833c5430ec71e52b817"
+        },
+        {
+          "path": "Packages/Level/xyxeg01fb",
+          "size": 78827,
+          "sha256": "26f103df010ed8a59d9b7dd418f1be28985c56d28c413ab93028044d9bc9c6c8"
+        },
+        {
+          "path": "Packages/Level/yanmgfb001",
+          "size": 17328,
+          "sha256": "82557ce5dc8a30518530373d8cb37b80d5d75df2544ce8a164926324cd428c68"
+        },
+        {
+          "path": "Packages/Level/ycj001",
+          "size": 7649,
+          "sha256": "fd126132e9337a7c128ac01c1f21efcc44c2e1ef58213504c510831d4cd0f1d7"
+        },
+        {
+          "path": "Packages/Level/ymj001",
+          "size": 34576,
+          "sha256": "b5a1fba0f4e2766d10637a22269de94067fc7da903b4f76cc553f85e0617f0e2"
+        },
+        {
+          "path": "Packages/Level/yunjiandong001",
+          "size": 4882,
+          "sha256": "03e8772f375b1c5878d65b31377a9aa3b1f5a7ac3e7adee74b250ab8782bfa62"
+        },
+        {
+          "path": "Packages/Level/yyp_01",
+          "size": 5248,
+          "sha256": "c913e7975ef4a4698b0958a78c8241fe6541afd0432961f5b38debb4444f6cd0"
+        },
+        {
+          "path": "Packages/Level/yzg",
+          "size": 14676,
+          "sha256": "87494b9207f88de74187ad5563ddb6f092b5c03c8396dd2832d6bcdeb01f2aae"
+        },
+        {
+          "path": "Packages/Level/zhjw",
+          "size": 28809,
+          "sha256": "f498d554a2a1efb086105452b22596809daf0e14714f7d1a2c558f99ba23ceee"
+        },
+        {
+          "path": "Packages/Level/zjhl_001",
+          "size": 11629,
+          "sha256": "2568a377e9dff44630456892641836afccf6dde65e5503828632d782b0a9f0ad"
+        },
+        {
+          "path": "Packages/Level/zyhsz",
+          "size": 22720,
+          "sha256": "06c15b13d18fee589b8d0bac3dec2a065f0a7c4bcc97b95199cd1b80dae5fb1f"
+        },
+        {
+          "path": "Packages/lvlparticle",
+          "size": 14353,
+          "sha256": "a34f2f096fc0c1968c0c78620faa758f8da409569a856412fb53740bda692bae"
+        },
+        {
+          "path": "Packages/map",
+          "size": 10859,
+          "sha256": "b81b616a2b60c0da35ec854c331f37f269a601e587f53eccb3aff9285f7af411"
+        },
+        {
+          "path": "Packages/Material/matchar",
+          "size": 330574,
+          "sha256": "bbe9c875db12d6fa69439a4df23ae85fec88fa7c86d19b35956f611033ad9fe5"
+        },
+        {
+          "path": "Packages/Material/matnpc",
+          "size": 153594,
+          "sha256": "bc897b05783a3671f450079a7d7af562fd85ff47e97aa1352a27d92155ed5186"
+        },
+        {
+          "path": "Packages/Material/matnpc2",
+          "size": 1392,
+          "sha256": "ab0b8e7225abe7262f9af44f74c3425f77b511fd80720092591bb105b0c40dd2"
+        },
+        {
+          "path": "Packages/Material/matnpc3",
+          "size": 9081,
+          "sha256": "5989cb818b5de845bc4a9006558a035c14a62eb25b0855de521ff265bb498e38"
+        },
+        {
+          "path": "Packages/Material/matparticle",
+          "size": 1334,
+          "sha256": "dadc1c690d0210cf0fd6c996ed93a3246584e00d98385a71c2a9272a6dd05d95"
+        },
+        {
+          "path": "Packages/matitem",
+          "size": 10790,
+          "sha256": "7b009a6de5ceaaa0bc56a91500c35f651b38ec6efdc6591ae76431ce1e63bce3"
+        },
+        {
+          "path": "Packages/newscenc",
+          "size": 43554,
+          "sha256": "79bf6e339149b9a37535d6d5c92e5a4c09b5737072be1ac9fe21681630f8d433"
+        },
+        {
+          "path": "Packages/particle",
+          "size": 3435518,
+          "sha256": "2e74819ee5eb665b5298710c06ea73de5016909535dee0ad388b7c194c6bd3b9"
+        },
+        {
+          "path": "Packages/particle01",
+          "size": 5338675,
+          "sha256": "a08c5a0a792e6abca389bf34c0d6458a6c0ee41c58776ab3249ed85981547f30"
+        },
+        {
+          "path": "Packages/particle04",
+          "size": 1837511,
+          "sha256": "fa2103897af8ec05e20ff69f6b74218889c8b205ae10f3c87385c1214b0496a5"
+        },
+        {
+          "path": "Packages/particle05",
+          "size": 49459,
+          "sha256": "8947b3eedd37f2a68ab15551f039532624d578b207ec17e495b344e3359d1d25"
+        },
+        {
+          "path": "Packages/particle06",
+          "size": 574941,
+          "sha256": "c3684928fb21d76f10dd75e334860529ce327172d8109bddaad68de7a7472730"
+        },
+        {
+          "path": "Packages/shopicon",
+          "size": 188157,
+          "sha256": "1b44ecb957b7cee41839ef96c7bc1faedc4ad2471c7d720dfbd46ffd638f1652"
+        },
+        {
+          "path": "Packages/SkelMesh/scene_skel",
+          "size": 227797,
+          "sha256": "d587ab0c921dd28b41f58076d32229b674f4ac64dd92e1d2a96309599c2b8267"
+        },
+        {
+          "path": "Packages/SkelMesh/skchar",
+          "size": 281615,
+          "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7"
+        },
+        {
+          "path": "Packages/SkelMesh/sknpc",
+          "size": 13520637,
+          "sha256": "78e4cfc332369b69ce5f838be0623c310177b876ca95b6674300db7171039d26"
+        },
+        {
+          "path": "Packages/SkelMesh/sknpc2",
+          "size": 229950,
+          "sha256": "c20375f50c0d47185fdc6c04d8a8f97874f2dd79ef48587c3208e4f6647bbdcb"
+        },
+        {
+          "path": "Packages/SkelMesh/sknpc3",
+          "size": 423017,
+          "sha256": "b1a0fe17239974c36cc0ef8cc8f7fcd85b2e0184d44819cf4aecdbe64f08863a"
+        },
+        {
+          "path": "Packages/SkelMesh/skparticle",
+          "size": 16049,
+          "sha256": "8ae954eec0bc6dd5bbec4fe70256b94c75d0dc184bddabb1d73658700f786ebb"
+        },
+        {
+          "path": "Packages/skelsnd",
+          "size": 69949,
+          "sha256": "51a3d412fe8cfd768a75851ac00302a0615aa38c2a0ff27fc18f135cbd9ff7e9"
+        },
+        {
+          "path": "Packages/sound",
+          "size": 18184,
+          "sha256": "615738eb465e36510ca7e067435533f68c711082bc91d5264cd909752a6f0d48"
+        },
+        {
+          "path": "Packages/StaticMesh/npcsmitem",
+          "size": 16894,
+          "sha256": "66f4459cf2d0d98008faac9b852a9607cd49c3c6eb74312e79776ab19137f990"
+        },
+        {
+          "path": "Packages/StaticMesh/scene01",
+          "size": 25414,
+          "sha256": "2a0086fc0596078f532dbeba11ca48371ec1b0077d315e6ec8ca7da839007d88"
+        },
+        {
+          "path": "Packages/StaticMesh/scene02",
+          "size": 86073,
+          "sha256": "077127687b02e6b99bb9aae872512a83163f15201343d4ebfe821671635bdece"
+        },
+        {
+          "path": "Packages/StaticMesh/scene03",
+          "size": 52308,
+          "sha256": "ec229718f4b3574123be9da4c7508dca450071d276d6a9ea24e55b38bf50c620"
+        },
+        {
+          "path": "Packages/StaticMesh/scene04",
+          "size": 202855,
+          "sha256": "1302bba60cd9386da5764cf508d87749e0401fa56a807eac46883a650ab4bb72"
+        },
+        {
+          "path": "Packages/StaticMesh/scene05",
+          "size": 122386,
+          "sha256": "e8e9ec765d040950468d66151252b7a2a85b186895dec88ba97136fd88b18cb9"
+        },
+        {
+          "path": "Packages/StaticMesh/scene06",
+          "size": 650380,
+          "sha256": "d60ee54a51ce870bd5a1538bcb085c3a573f949087491777cba39d7a1b88c3ba"
+        },
+        {
+          "path": "Packages/StaticMesh/scene07",
+          "size": 511700,
+          "sha256": "f4a2051e7028c67af4f2f5dbada8c85461405aecbbe6caf54cd3009cc9445c88"
+        },
+        {
+          "path": "Packages/StaticMesh/scene08",
+          "size": 260763,
+          "sha256": "0cb887b70752929c69686ed9927327e98da1ab007a41a2888c96f3389e13aee3"
+        },
+        {
+          "path": "Packages/StaticMesh/scene10",
+          "size": 8369,
+          "sha256": "276248b7968d9c33d0e404cca68249e8505fbfb4410f39c325e38590d8b3d77f"
+        },
+        {
+          "path": "Packages/StaticMesh/scene11",
+          "size": 188675,
+          "sha256": "766997a74e8d5412694ef0eecc01928c2bff5d109c6acb155e481d01200cf845"
+        },
+        {
+          "path": "Packages/StaticMesh/scene12",
+          "size": 228973,
+          "sha256": "3d33009335a27d337bcaf9c9a9dcef799a315ec0217fcd0797cae3906d59a1f2"
+        },
+        {
+          "path": "Packages/StaticMesh/scene13",
+          "size": 261667,
+          "sha256": "88b59dbb2bdd7c6f8d9c42ad8895a678782e180c614906cc3ac08513cdfceefc"
+        },
+        {
+          "path": "Packages/StaticMesh/scene14",
+          "size": 185077,
+          "sha256": "d700970e7b575c19b5ffdbd2306348ab7dadd2228e461de9c176f680c83a2d49"
+        },
+        {
+          "path": "Packages/StaticMesh/scene15",
+          "size": 155032,
+          "sha256": "6eaa0a14c3a8578ba9d34a4b2a902b49b3904dad745f450c9e41f76e5dd82130"
+        },
+        {
+          "path": "Packages/StaticMesh/scene17",
+          "size": 19425,
+          "sha256": "469c65c7d6596f2f3cf3b2031c1bff863d19ff9d01a45aa91f6e95aa8daf3f78"
+        },
+        {
+          "path": "Packages/StaticMesh/scene18",
+          "size": 81687,
+          "sha256": "cebedf33a054fdbda58efb0b6b3638007bc2be21ddb8cf99493de3a522b66301"
+        },
+        {
+          "path": "Packages/StaticMesh/scene19",
+          "size": 7291,
+          "sha256": "8f34cd9b9eb44e59b63b0915351f81e2118508d3ae4ba8b06da14382d8cdf5c2"
+        },
+        {
+          "path": "Packages/StaticMesh/smitem",
+          "size": 189012,
+          "sha256": "4000258241f1f0d8a686232b4a0b233d5567f9090f10f7c2d73aad111f4639d7"
+        },
+        {
+          "path": "Packages/system",
+          "size": 4542,
+          "sha256": "1c2abc325ac783aadb73a8a4769ced9a8d8869de6a24ac02ee3a68d3559a50b0"
+        },
+        {
+          "path": "Packages/Texture/gcursor",
+          "size": 2319,
+          "sha256": "b93e53f68c69f8cdfe11ff06d25fb927ce917c14f1940d35be22f8751fdf5329"
+        },
+        {
+          "path": "Packages/Texture/tailtexture",
+          "size": 1126,
+          "sha256": "07fd01ad1d52064df57a94ccee7f54cb1a3ed8416bcfe39db102df40bba99a02"
+        },
+        {
+          "path": "Packages/Texture/tex_terr",
+          "size": 7172,
+          "sha256": "d728b9cf8519f10e16552776648e45c4e49521d215694544fb8ff8a883e33a28"
+        },
+        {
+          "path": "Packages/Texture/texchar",
+          "size": 431138,
+          "sha256": "1117d8b9f6c0f2e81295c13b354f5ea7fa76a14f1bcac88cc60c58fc20a4a167"
+        },
+        {
+          "path": "Packages/Texture/texeditor",
+          "size": 155,
+          "sha256": "a03afb1c5d5fa60234ad3fe54d012f8fa14bf1b81d16db3324222289c070647b"
+        },
+        {
+          "path": "Packages/Texture/texfestival",
+          "size": 161,
+          "sha256": "335258929fa9f8a109d5ef1b023440d038af741f3462e2eee161f23e4e6f48af"
+        },
+        {
+          "path": "Packages/Texture/texitem",
+          "size": 54692,
+          "sha256": "f52b204cde2e6fdee44ad2991dbbf216ffce48133c5cd6b38de585e0f0e848a4"
+        },
+        {
+          "path": "Packages/Texture/texnpc",
+          "size": 166972,
+          "sha256": "3c7526f825b713d8cdeb546d1bb1fa594831be0a6d3a23f786a123a13b48f9b3"
+        },
+        {
+          "path": "Packages/Texture/texnpc2",
+          "size": 1508,
+          "sha256": "ba9eae131eff804814fd1efa170aa2c30a72d96cb4ec0d9eb34698785e1fe35f"
+        },
+        {
+          "path": "Packages/Texture/texother",
+          "size": 11997,
+          "sha256": "f435f1a4d03a8fd8034351947d880f5d6dfa00adb26f252b31dc9edad652c190"
+        },
+        {
+          "path": "Packages/Texture/texparticle",
+          "size": 162914,
+          "sha256": "607a4f926ce977a67f5168928f54a111b0f88711c88c997eb5e067bea4da9a58"
+        },
+        {
+          "path": "Packages/Texture/texstone",
+          "size": 695794,
+          "sha256": "350c7d5da525f8ea4490345ad4948da4c2d6d4551ee5136f9aa0ce540d147d23"
+        },
+        {
+          "path": "Packages/Texture/texwood",
+          "size": 120294,
+          "sha256": "1cf89444bda24a7bed46f504a02a4a531e8931b07db22d8395593419722d5670"
+        },
+        {
+          "path": "Packages/UI/.svn/text-base/interface.svn-base",
+          "size": 66606,
+          "sha256": "0f827328070fc52bdf1c8427ee3a4bafa02f65f54dd6bda98893949b08d5c799"
+        },
+        {
+          "path": "Packages/UI/interface",
+          "size": 68552,
+          "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f"
+        },
+        {
+          "path": "Packages/uisound",
+          "size": 2733,
+          "sha256": "ec0c03dd91ae05ea7c677b60fb843d91817c25d1a23592969506eb44acef5814"
+        },
+        {
+          "path": "Packages/unitactions",
+          "size": 56512,
+          "sha256": "b4688e904ec5dd8312b4635f626c8f6ea7401079579c34f564d259e1a6bce3d8"
+        }
+      ]
+    },
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "legacy_sample_mount": "read-only-directory",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "raw-manifest-sha256",
+      "sample-set-sha256",
+      "sample-file-sha256",
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest",
+      "frozen-sample-set-parse"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 87,
+      "output_sha256": "8b07cc6fc853a35202cadabc450b725681d7d15f150f2a28b5f44eb12f518c9e"
+    }
+  },
+  "package_pipeline": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:50:40.1135979+08:00",
+    "result": "PASS",
+    "task": "P1-07",
+    "source_file_count": 22,
+    "source_sha256": "38e4977ae64e1cfb743b5f3533ab7642c11b28cdb7ad8eb819cec6e4856bb484",
+    "input_reports": {
+      "package_v2_sha256": "bdf1bd3ab63569998efed3ce5c638f4b57c967402b0f40085b53f8944a6e8325",
+      "package_v3_sha256": "d5a722342cee23b59c96cbcbdd6743559c678f7b74febc95270977bf86ca8c88"
+    },
+    "pipeline": [
+      "read-and-validate-outer-header",
+      "select-versioned-directory-codec",
+      "decode-reversible-obfuscation",
+      "parse-and-validate-directory-records",
+      "expose-bounded-raw-object-body-spans"
+    ],
+    "classification": {
+      "directory_operation": "fixed-reversible-obfuscation",
+      "directory_compression": "none-observed",
+      "directory_encryption": false,
+      "key_or_secret_required": false,
+      "object_body_transform": "none-at-container-layer",
+      "object_body_semantics": "deferred-to-versioned-object-codecs"
+    },
+    "frozen_roundtrip": {
+      "v2_sample_count": 22,
+      "v3_sample_count": 140,
+      "encoded_roundtrip_exact": true,
+      "record_count": 118711,
+      "directory_bytes": 5364459,
+      "decoded_fnv1a64": "7c86de5289714cc8"
+    },
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "legacy_sample_mount": "read-only-directory",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "dependency-baseline-check",
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest",
+      "all-directory-byte-roundtrip"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 87,
+      "output_sha256": "ca139760c87d4c2e5494564887d20a7d9d805024e6dc2ce1f448f7839f0df230"
+    }
+  },
+  "package_normalized_tree": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:51:34.1101135+08:00",
+    "result": "PASS",
+    "task": "P1-08",
+    "source_file_count": 22,
+    "source_sha256": "069450b215710ba83eee78ac22f51e5573a8bf5c46062a2066bd7f9e6ce3356b",
+    "json_schema": {
+      "path": "Contracts/data-schema/package-tree-v1.schema.json",
+      "sha256": "de461b5a52a7e363caf46136528d3a3a1a11a89dcc3e2918cbc569259c052475",
+      "draft": "https://json-schema.org/draft/2020-12/schema",
+      "passed": true
+    },
+    "dependency_report_sha256": {
+      "p1-02-package-v1.json": "12a90a8c46b3a07ed5de803a71233417eea4e780342ae3ec1b9a0fd72fc208f5",
+      "p1-05-package-v2.json": "bdf1bd3ab63569998efed3ce5c638f4b57c967402b0f40085b53f8944a6e8325",
+      "p1-06-package-v3.json": "d5a722342cee23b59c96cbcbdd6743559c678f7b74febc95270977bf86ca8c88",
+      "p1-07-package-pipeline.json": "5e89511d71f95ef4c97a028c04012225605203d61a5141f5aac553cc57b3f7fc"
+    },
+    "semantic_states": {
+      "names_and_classes": "opaque-bytes-hex",
+      "references": "unparsed",
+      "transform": "unparsed",
+      "materials": "unparsed",
+      "unknown_body": "source-span",
+      "guessed_fields": 0
+    },
+    "frozen_exports": {
+      "sample_result": "PASS",
+      "v1": {
+        "bytes": 1350653,
+        "sha256": "4ab058aafd9ffd44065e442994591b33415dc5c1ff37307a8ceb6a02bd89c13c"
+      },
+      "v2": {
+        "bytes": 5223,
+        "sha256": "9a738c3ab36adb33da85866d252c71e6f48eef92f4000ce5bcc2cdf8a8d370a8"
+      },
+      "v3": {
+        "bytes": 676,
+        "sha256": "f75e249ce19f82be23c6b6d3b039a64cf58771cbb033460e3d43fc7869b4bec3"
+      }
+    },
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "legacy_sample_mount": "read-only-directory",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "json-schema-contract",
+      "dependency-baseline-check",
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest",
+      "v1-v2-v3-deterministic-export"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 87,
+      "output_sha256": "d9d7c78b3442abddb33e196819d16e87ccd2272887baecac03b8391b6501bf63"
+    }
+  },
+  "legacy_table": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:51:58.3747697+08:00",
+    "result": "PASS",
+    "task": "P1-03",
+    "source_file_count": 7,
+    "source_sha256": "6ce0582eef991ec14154695bc5fa63b93a6bf04791205702070741a7b042877a",
+    "error_schema_version": 1,
+    "legacy_format_evidence": [
+      {
+        "path": "Base/Hdr/IEncryption.h",
+        "size": 1976,
+        "sha256": "eefbc0267c5c38fd19ebe8b115c02eb7d6b9189d3dbd5657737007f3ba5a28ab"
+      },
+      {
+        "path": "Base/Hdr/QDataTable.h",
+        "size": 1522,
+        "sha256": "4499c0e6c7cc53644d34d0d6a4ec4975e8c4f9e2826d7d2a2dd04d3926b97a8b"
+      },
+      {
+        "path": "Base/Hdr/QParser.h",
+        "size": 1642,
+        "sha256": "cbe9f9c3ef3f9d2f11bee6db1aa7f2b312d733c204cf3d587577067f77939f8d"
+      },
+      {
+        "path": "Base/Hdr/Rijndael_Imp.h",
+        "size": 1571,
+        "sha256": "6cfe1f9dc4aa59146c4b3517b23de9ca728fa85447205902cec3d30f8387cd89"
+      },
+      {
+        "path": "Base/Src/QDataTable.cpp",
+        "size": 7068,
+        "sha256": "3df15f58bf45de80aa7a8040a1f522f135e7b09487990b40b04805c78937b869"
+      },
+      {
+        "path": "Base/Src/QParser.cpp",
+        "size": 5865,
+        "sha256": "bab39ccce47907e06dbac0913c2edf2b43350a7efae867cb8b9c61fb56880314"
+      },
+      {
+        "path": "Base/Src/Rijndael_Imp.cpp",
+        "size": 16356,
+        "sha256": "a7b24ab28dbb08aced67fbea1c239866aa4cdd7e47bc67f8371b7909252087bf"
+      }
+    ],
+    "frozen_sample_pair": {
+      "files": [
+        {
+          "role": "ciphertext",
+          "path": "游戏资料/CLSVShare/Suit_table.tbl",
+          "size": 4688,
+          "sha256": "1185964f3e0d47aadb82c9c6aae35157cf581a98335babe1b13f685f3fef13b3"
+        },
+        {
+          "role": "expected_plaintext",
+          "path": "游戏资料/CLSVShare/Suit_table.csv",
+          "size": 4686,
+          "sha256": "4d43925eb834bea6d9710fa0112d599b8c96fbe29314612b461b5cdf44a169f2"
+        }
+      ],
+      "cipher_bytes": 4688,
+      "payload_bytes": 4686,
+      "padding_bytes": 1,
+      "column_count": 10,
+      "row_count": 57,
+      "metadata_fnv1a64": "c60c5d8848a6a32a",
+      "payload_matches_expected_sha256": true
+    },
+    "key_handling": {
+      "embedded_in_rebuild": false,
+      "input": "read-only legacy evidence initializer",
+      "initializer_copy_count": 2,
+      "key_bytes": 16,
+      "transport": "ephemeral tmpfs file inside networkless container",
+      "cleanup": "overwrite-with-zero-then-unlink-and-container-rm",
+      "emitted_to_output": false
+    },
+    "cipher_properties": {
+      "block_bytes": 16,
+      "aes_rounds_per_block": 2,
+      "authentication": "none-legacy-format-requires-external-sha256"
+    },
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "legacy_mounts": "three-read-only-single-files",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_secret_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "legacy-evidence-sha256",
+      "fixed-nonsecret-vectors",
+      "clang-format-21",
+      "cmake-clang-21",
+      "clang-tidy-21",
+      "ctest",
+      "legacy-pair-exact-match"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 44,
+      "output_sha256": "ce4382fa053dfcd04a7999017d1283df8af612454c98a6a7506ddd48f4c0f813"
+    }
+  },
+  "current_table_investigation": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:52:07.0451619+08:00",
+    "result": "PASS_DIAGNOSTIC",
+    "task": "P1-09",
+    "task_status": "IN_PROGRESS",
+    "completion_criteria_satisfied": false,
+    "read_only_evidence": {
+      "client_executable": {
+        "path": "QY.exe",
+        "size": 5160960,
+        "sha256": "7087dfa64bedeb8c9a5dfc4518f46261d163136b5bd97f5071f2c5a12cb29a4b"
+      },
+      "representative_tables": [
+        {
+          "path": "CLSVShare/powergame.tbl",
+          "size": 48,
+          "sha256": "8da2fbf8c9f977822ce78343f6824f259fe7aba2f9b5e961c7518ac5f389ca73"
+        },
+        {
+          "path": "Table/Regions/supplytable.tbl",
+          "size": 160,
+          "sha256": "7185f834d247cf070f379a8f480ad26cf7f6a82c2e154c3acc6aca005820787c"
+        },
+        {
+          "path": "CLSVShare/skill_table.tbl",
+          "size": 7253248,
+          "sha256": "40ec68f102f107da38bbde610fcce8fcc433601c802209116c5c7866f87b7327"
+        },
+        {
+          "path": "CLSVShare/item_table.tbl",
+          "size": 7046704,
+          "sha256": "f0ccd185f736802661becb9581896497e2101f6a9dbcb28578d5351f71f820ce"
+        },
+        {
+          "path": "Table/quest_table.tbl",
+          "size": 4586496,
+          "sha256": "e03bf742ee176645d303e81fd4e3f0bdf0baaa116a097ba0fa4bc04f4f12751b"
+        },
+        {
+          "path": "Table/Regions/quest_table.tbl",
+          "size": 4162208,
+          "sha256": "ce41d5f4901bf9f651a9f3dc0994010deaca4012ab461d3af7d48c36cf6ae620"
+        }
+      ],
+      "residual_csv": {
+        "path": "CLSVShare/item_tabletemp.csv",
+        "size": 6551430,
+        "sha256": "2a16d952fe398571a3ae2f926acb7ecd8b3c2a843bc0b62e1cb2be463fcf39dd"
+      }
+    },
+    "ciphertext_population": {
+      "file_count": 338,
+      "total_bytes": 40444128,
+      "total_blocks": 2527758,
+      "global_unique_blocks": 1353326,
+      "global_duplicate_occurrences": 1174432,
+      "files_with_internal_duplicates": 230,
+      "cross_file_repeated_values": 44134,
+      "cross_file_repeated_occurrences": 346037,
+      "distinct_last_blocks": 246,
+      "repeated_last_block_values": 34,
+      "repeated_last_block_occurrences": 126,
+      "most_repetitive_files": [
+        {
+          "path": "CLSVShare/unit_disp_ids.tbl",
+          "bytes": 708512,
+          "blocks": 44282,
+          "unique_blocks": 10988,
+          "duplicate_blocks": 33294,
+          "unique_ratio": 0.248137
+        },
+        {
+          "path": "CLSVShare/skill_table.tbl",
+          "bytes": 7253248,
+          "blocks": 453328,
+          "unique_blocks": 180226,
+          "duplicate_blocks": 273102,
+          "unique_ratio": 0.397562
+        },
+        {
+          "path": "CLSVShare/item_table.tbl",
+          "bytes": 7046704,
+          "blocks": 440419,
+          "unique_blocks": 202594,
+          "duplicate_blocks": 237825,
+          "unique_ratio": 0.460003
+        },
+        {
+          "path": "CLSVShare/guild_technology.tbl",
+          "bytes": 87920,
+          "blocks": 5495,
+          "unique_blocks": 2539,
+          "duplicate_blocks": 2956,
+          "unique_ratio": 0.462056
+        },
+        {
+          "path": "CLSVShare/Profession_lvl.tbl",
+          "bytes": 1604416,
+          "blocks": 100276,
+          "unique_blocks": 46407,
+          "duplicate_blocks": 53869,
+          "unique_ratio": 0.462793
+        },
+        {
+          "path": "Table/quest_direct.tbl",
+          "bytes": 521808,
+          "blocks": 32613,
+          "unique_blocks": 15672,
+          "duplicate_blocks": 16941,
+          "unique_ratio": 0.480545
+        },
+        {
+          "path": "Table/Regions/quest_direct.tbl",
+          "bytes": 521808,
+          "blocks": 32613,
+          "unique_blocks": 15672,
+          "duplicate_blocks": 16941,
+          "unique_ratio": 0.480545
+        },
+        {
+          "path": "CLSVShare/fabao_base_prop.tbl",
+          "bytes": 208112,
+          "blocks": 13007,
+          "unique_blocks": 6496,
+          "duplicate_blocks": 6511,
+          "unique_ratio": 0.499423
+        },
+        {
+          "path": "CLSVShare/spirit_prop.tbl",
+          "bytes": 177472,
+          "blocks": 11092,
+          "unique_blocks": 5842,
+          "duplicate_blocks": 5250,
+          "unique_ratio": 0.526686
+        },
+        {
+          "path": "CLSVShare/Item_Enchant.tbl",
+          "bytes": 81632,
+          "blocks": 5102,
+          "unique_blocks": 2738,
+          "duplicate_blocks": 2364,
+          "unique_ratio": 0.536652
+        }
+      ]
+    },
+    "current_reader_static_evidence": {
+      "ranges": [
+        {
+          "name": "table-load-setkey-a",
+          "file_offset": "0x29b5ce",
+          "length": 25,
+          "sha256": "e8ba3643500d83b10f204c3cd9526fc7fe1e633b5b625ee211caf50256593676"
+        },
+        {
+          "name": "table-load-setkey-b",
+          "file_offset": "0x29c58c",
+          "length": 25,
+          "sha256": "2df5228a728922174daf0742bcd11e5287bcc0d590086ce92ce8c0df6e70d759"
+        },
+        {
+          "name": "key-handler-permute",
+          "file_offset": "0x239880",
+          "length": 145,
+          "sha256": "14ae848381f723dc4257803384f27b6e93db8b8b0f545e3a87491b00bfea22d7"
+        },
+        {
+          "name": "key-handler-overwrite-four",
+          "file_offset": "0x239920",
+          "length": 96,
+          "sha256": "0b859a9bbbd4f03b25f9b52ede580c3fe251c2d970153804285b059fe78a7df1"
+        },
+        {
+          "name": "network-dispatch-bindings",
+          "file_offset": "0xe6e50",
+          "length": 21,
+          "sha256": "8f73640d43d6e7a5b706c875b894c2388b72ae00fec4659a3f9cb77084014e4b"
+        }
+      ],
+      "block_bytes": 16,
+      "cipher": "AES-128",
+      "block_passes": 2,
+      "observed_mode": "ECB-like independent blocks",
+      "iv_or_nonce_observed": false,
+      "base_key_sha256": "c5ab3734151f66dd61ec86290d3b1ac5e180d2f3c4e6d54441ec39e3cfb66524",
+      "base_key_emitted": false,
+      "runtime_mutation_handlers": [
+        "permute-16-key-bytes",
+        "overwrite-4-indexed-key-bytes"
+      ],
+      "runtime_dispatch_slots": [
+        958,
+        289
+      ],
+      "dispatch_slot_interpretation": "static inference from the current executable"
+    },
+    "base_key_decode_results": [
+      {
+        "path": "CLSVShare/powergame.tbl",
+        "ciphertext_bytes": 48,
+        "structurally_valid": false,
+        "classification": "invalid-padding"
+      },
+      {
+        "path": "Table/Regions/supplytable.tbl",
+        "ciphertext_bytes": 160,
+        "structurally_valid": false,
+        "classification": "invalid-padding"
+      },
+      {
+        "path": "CLSVShare/skill_table.tbl",
+        "ciphertext_bytes": 7253248,
+        "structurally_valid": false,
+        "classification": "invalid-padding"
+      },
+      {
+        "path": "CLSVShare/item_table.tbl",
+        "ciphertext_bytes": 7046704,
+        "structurally_valid": false,
+        "classification": "invalid-padding"
+      },
+      {
+        "path": "Table/quest_table.tbl",
+        "ciphertext_bytes": 4586496,
+        "structurally_valid": false,
+        "classification": "invalid-padding"
+      },
+      {
+        "path": "Table/Regions/quest_table.tbl",
+        "ciphertext_bytes": 4162208,
+        "structurally_valid": false,
+        "classification": "invalid-padding"
+      }
+    ],
+    "residual_csv_relation": {
+      "compared_blocks": 409463.0,
+      "repeated_plaintext_occurrences": 220083,
+      "matching_ciphertext_occurrences": 4152,
+      "conflicting_ciphertext_occurrences": 215931,
+      "agreement_ratio": 0.018866,
+      "first_conflict_block": 875,
+      "verified_prefix_repeat_constraints": 196,
+      "verified_prefix_payload_bytes": 13999,
+      "expected_cipher_bytes_for_residual": 6551440,
+      "current_cipher_extra_bytes": 495264,
+      "exact_replacement": false
+    },
+    "confirmed_processing": [
+      "read block-aligned ciphertext",
+      "double AES-128 block decode"
+    ],
+    "unresolved_processing": [
+      "runtime final key bytes",
+      "post-decrypt compression",
+      "post-decrypt text encoding"
+    ],
+    "blocker": {
+      "classification": "missing-authorized-runtime-key-mutation-input",
+      "detail": "The installed executable contains only a base key. Current message handlers can permute all 16 bytes or overwrite four indexed bytes before table use; no authorized local capture of those inputs is present.",
+      "prohibited_shortcuts": [
+        "hard-code guessed key",
+        "contact live service without authorization",
+        "treat residual CSV as an exact replacement"
+      ]
+    },
+    "secret_handling": {
+      "raw_key_written": false,
+      "raw_key_logged": false,
+      "irreversible_sha256_only": true,
+      "in_memory_buffers_cleared": true
+    }
+  },
+  "legacy_to_ue_transform": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:52:13.5017615+08:00",
+    "result": "PASS",
+    "task": "P1-12",
+    "completion_criteria_satisfied": true,
+    "source_file_count": 7,
+    "source_sha256": "0936758cfc5002df2042a86404257634537e9684a765e0d7240b4c02e564a4d7",
+    "convention": {
+      "axes": "identity_x_forward_y_right_z_up",
+      "centimeters_per_legacy_unit": 100,
+      "legacy_angle_units_per_turn": 65536,
+      "rotator_signs": {
+        "pitch": -1,
+        "yaw": 1,
+        "roll": -1
+      },
+      "matrix": "row_vector_affine_translation_row_3",
+      "uv": "identity_serialized_legacy_to_ue",
+      "triangle_winding": "preserve_unless_negative_basis_is_baked"
+    },
+    "evidence": [
+      {
+        "path": "ClientCode\\Base\\Hdr\\QMath.h",
+        "sha256": "62b5f6f18aa1885b70587ca79cd2bad08e7cce62d572808b66288611708d13ac",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QRotator.h",
+        "sha256": "661c662041667513d2deaa4c6d4bd6a1244a8fa7b09e533b4ed8a4df1ed51a3f",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QMatrix.h",
+        "sha256": "99defaa9fa607285bb2c553d257d948fbc1028d58e53cdaf6d38dfb25a4ecc58",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Src\\QPawnPhy.cpp",
+        "sha256": "d82ab57cd8dafc7f1f5a7d811e0c94bc49c3246e2438deded597d3552641028b",
+        "passed": true
+      },
+      {
+        "path": "ToolCode\\XwMaxExp\\XwMaxExp.h",
+        "sha256": "674549952ee6b3eacb0068efb4aa1d50c41ddbb40a819e2cc809715f45071c1d",
+        "passed": true
+      },
+      {
+        "path": "ToolCode\\XwMaxExp\\XwMaxMesh.cpp",
+        "sha256": "8133ea9e6326da55e1d542bfcfb44731a4a48cabf5984bedcbba7dfb97bdcaea",
+        "passed": true
+      },
+      {
+        "path": "DevDoc\\游戏资料\\CLSVShare\\unit_disp_ids.csv",
+        "sha256": "05a6a64e66654784eada747f5ff35310c2b48fea881f6a8ff12c356053b54fc0",
+        "passed": true
+      },
+      {
+        "path": "UE_5.8/Engine/Source/Runtime/Core/Public/Math/RotationTranslationMatrix.h",
+        "sha256": "8dd14f716b4c8a26b5a1aa270a7da73aa76e09d2d83b6ddba55a289e2e1124c4",
+        "passed": true
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-ninja-clang-21",
+      "clang-tidy-21",
+      "ctest-golden-boundary"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 27,
+      "output_sha256": "59bac81b5f21699bc6cfb80a6073b54e160969c52aac83a59b4e5a6cbe0dd60d"
+    }
+  },
+  "qtx_texture": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:52:50.8876958+08:00",
+    "result": "PASS",
+    "task": "P1-13",
+    "completion_criteria_satisfied": true,
+    "source_file_count": 21,
+    "source_sha256": "31d19b6ccc64abe55574f90e7bc62c586d155cd34152d43014f5e578caeccb67",
+    "contract": {
+      "descriptor_source": "Package QTexture QObject property body",
+      "qtx_payload": "headerless contiguous mip bytes",
+      "formats": [
+        "rgba8",
+        "rgba16f",
+        "r32f",
+        "dxt1",
+        "dxt1a",
+        "dxt3",
+        "dxt5"
+      ],
+      "outputs": [
+        "dds-lossless-all-mips",
+        "png-rgba8-mip0",
+        "tga-bgra8-mip0",
+        "json-metadata"
+      ],
+      "alpha_fields": [
+        "encoding",
+        "decoded_coverage"
+      ]
+    },
+    "samples": [
+      {
+        "object": "texstone.WHZ_S_Dimian20_D",
+        "format": "dxt1",
+        "width": 8,
+        "height": 8,
+        "mips": 1,
+        "alpha": "opaque",
+        "payload_size": 32
+      },
+      {
+        "object": "newscenc.dy_bx_xlys_01_D",
+        "format": "dxt5",
+        "width": 4096,
+        "height": 4096,
+        "mips": 13,
+        "alpha": "opaque",
+        "payload_size": 22369648
+      },
+      {
+        "object": "texparticle.FXH_T_toumingtu",
+        "format": "dxt5",
+        "width": 16,
+        "height": 16,
+        "mips": 1,
+        "alpha": "transparent",
+        "payload_size": 256
+      },
+      {
+        "object": "editorui.ToolBoxHighLight",
+        "format": "rgba8",
+        "width": 512,
+        "height": 512,
+        "mips": 1,
+        "alpha": "translucent",
+        "payload_size": 1048576
+      }
+    ],
+    "evidence": [
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QTexture.h",
+        "size": 1719,
+        "sha256": "bd381809fcd2cfff93227482ef52b53551de9c5fd69123153b324fe53be52bb9",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Src\\QTexture.cpp",
+        "size": 799,
+        "sha256": "299ef9ff707a912d06d0b8010e3ffcd502de2eba8e31effbd5af59bf1a88738f",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Src\\QRenderTypes.cpp",
+        "size": 16776,
+        "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\D3D9RDev\\Src\\D3DRendInterface.cpp",
+        "size": 42954,
+        "sha256": "134444b822c3bd271bcb91db4a0ac59a2b540bacbe460e35c54077f78589be87",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Src\\QObject.cpp",
+        "size": 28782,
+        "sha256": "1f10ae3b06062564ac283a9396b1d232c261c669bcd6c22271b414aa6d6323e5",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\Texture\\texstone",
+        "size": 695794,
+        "sha256": "350c7d5da525f8ea4490345ad4948da4c2d6d4551ee5136f9aa0ce540d147d23",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\newscenc",
+        "size": 43554,
+        "sha256": "79bf6e339149b9a37535d6d5c92e5a4c09b5737072be1ac9fe21681630f8d433",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\Texture\\texparticle",
+        "size": 162914,
+        "sha256": "607a4f926ce977a67f5168928f54a111b0f88711c88c997eb5e067bea4da9a58",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\editorui",
+        "size": 222,
+        "sha256": "1f7d7c535a2ff76eb328ddc0ad0b9e9126f32efb1c4f0ad075c51242520567a7",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Texture\\texstone\\WHZ_S_Dimian20_D.qtx",
+        "size": 32,
+        "sha256": "686418d443a9d067f90ec640d9d92a8ad7efd1ce6b1c1f05587a256027c003f2",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Texture\\newscenc\\dy_bx_xlys_01_D.qtx",
+        "size": 22369648,
+        "sha256": "bfdc514d8ece8424bd0b9b193a651b7656cc37520e89502a03c28dd68160a69a",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Texture\\texparticle\\FXH_T_toumingtu.qtx",
+        "size": 256,
+        "sha256": "44126814ab834eb714baffb42461fd53083118232afed00ad0efc5a6603d0804",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Texture\\editorui\\ToolBoxHighLight.qtx",
+        "size": 1048576,
+        "sha256": "173259db23fcd44d2a522c1066dc0e851b7690ee384d9880719fab76f2f8368b",
+        "passed": true
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "evidence_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_output_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-ninja-clang-21-werror",
+      "clang-tidy-21",
+      "ctest-corrupt-boundary-determinism",
+      "four-real-package-qtx-pairs",
+      "cli-dds-png-tga-json-signature"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 75,
+      "output_sha256": "dc0ad279cadaef0e0b0b909e37d25c06ce9aba67e9ee338aa0e565e9370f8d84"
+    }
+  },
+  "sm_static_mesh": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:53:32.871482+08:00",
+    "result": "PASS",
+    "task": "P1-14",
+    "completion_criteria_satisfied": true,
+    "source_file_count": 16,
+    "source_sha256": "8ac37192e7cb1ea1991d8b1e46043464ecc5cd789adcb21f6ac04b7c3713da37",
+    "contract": {
+      "descriptor_source": "Package QStaticMesh QObject property body",
+      "sm_payload": "headerless ordered runtime arrays",
+      "coordinate_source": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "outputs": [
+        "obj-ue-centimeter-preview",
+        "json-metadata",
+        "gltf-2.0-json-authoritative",
+        "gltf-2.0-external-bin-authoritative"
+      ],
+      "bounds_relations": [
+        "absent",
+        "exact",
+        "contains",
+        "mismatch"
+      ],
+      "octree_rule": "face ranges are authoritative for leaf nodes only"
+    },
+    "samples": [
+      {
+        "object": "particle.ZFH_O_S_Tianpian100",
+        "vertices": 4,
+        "indices": 6,
+        "sections": 1,
+        "role": "minimum"
+      },
+      {
+        "object": "newscenc.dy_bx_stl_005",
+        "vertices": 157638,
+        "indices": 157638,
+        "sections": 1,
+        "role": "largest-file-and-uv1"
+      },
+      {
+        "object": "newscenc.dy_bx_bqg_006",
+        "vertices": 47964,
+        "indices": 250614,
+        "sections": 1,
+        "role": "shadow-and-stale-bounds"
+      },
+      {
+        "object": "scene09.GT_B_S_BangPai05",
+        "vertices": 11847,
+        "indices": 19533,
+        "sections": 43,
+        "role": "multisection-and-collision"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "ClientCode\\QRender\\Src\\QStaticMesh.cpp",
+        "size": 51870,
+        "sha256": "5462960f3c022539d00738f0a8c24bc43dcd955e2bf45018e0bba5a8a23648f4",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QGeom.h",
+        "size": 6649,
+        "sha256": "91500167970a758df9c22e242477c5db62c4feb99a538dbe1599e49de718b965",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QVector.h",
+        "size": 9985,
+        "sha256": "66658ec9df40c3bef90e509001dfb100b413c5e9b7d332f6a7f56f0872bf7925",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Hdr\\QArray.h",
+        "size": 12657,
+        "sha256": "831485b5d3392f57c6cb9a832362eb4566111e03b3b9de8225e6f0a09788617a",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Src\\QArchive.cpp",
+        "size": 2242,
+        "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Src\\QRenderTypes.cpp",
+        "size": 16776,
+        "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Utility\\Src\\UtStaticMeshFactories.cpp",
+        "size": 46138,
+        "sha256": "c3d2ef7d2749c3f2b2a97d3eaab11aa9cf890709855428651c217e25d1e06cdb",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\particle",
+        "size": 3435518,
+        "sha256": "2e74819ee5eb665b5298710c06ea73de5016909535dee0ad388b7c194c6bd3b9",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\newscenc",
+        "size": 43554,
+        "sha256": "79bf6e339149b9a37535d6d5c92e5a4c09b5737072be1ac9fe21681630f8d433",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\StaticMesh\\scene09",
+        "size": 215837,
+        "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\StaticMesh\\particle\\ZFH_O_S_Tianpian100.sm",
+        "size": 309,
+        "sha256": "79669d7fbc5d3ebbfa82c6f3075c39b512d7ea021adf2d749b596d6e82dd81e8",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\StaticMesh\\newscenc\\dy_bx_stl_005.sm",
+        "size": 13165223,
+        "sha256": "b0d788088736c00697c3e1b36d0b49044506cf14844a957cbd225f7c4886e242",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\StaticMesh\\newscenc\\dy_bx_bqg_006.sm",
+        "size": 12185471,
+        "sha256": "b5189a2daf0daa16fae12ad0fa6c308981ec28d7ba0094cf24dc032a066870c1",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\StaticMesh\\scene09\\GT_B_S_BangPai05.sm",
+        "size": 966853,
+        "sha256": "c72bbcde94f51f8b8f8d8c9fc5800fbd2ca0356bdc6efec441cae6ce9a5260a8",
+        "passed": true
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "evidence_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_output_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-ninja-clang-21-werror",
+      "clang-tidy-21",
+      "ctest-corrupt-boundary-determinism",
+      "four-real-package-sm-pairs",
+      "cli-obj-json-gltf-bin-signature"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 71,
+      "output_sha256": "7aca925111cc5cdafbf9efcdb381dcde08dc98c86d8bcb6982aee22cef107503"
+    }
+  },
+  "skem_skeletal_mesh": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:54:26.9375495+08:00",
+    "result": "PASS",
+    "task": "P1-15",
+    "completion_criteria_satisfied": true,
+    "source_file_count": 18,
+    "source_sha256": "aecde99ef9694ecb854f8bf3945c025d954ef9d96e3be71e310c69ac21196fa6",
+    "contract": {
+      "descriptor_source": "Package QSkelMesh QObject property body",
+      "skem_payload": "headerless grouped selectable submesh arrays",
+      "bone_index_encoding": "integral float32; zero means unused; positive values are one-based",
+      "bind_pose": "validated local quaternion and translation per bone",
+      "attachment_points": "validated bone-name candidates; no distinct legacy socket record",
+      "outputs": [
+        "gltf-2.0-json-external-bin-default-selection-authority",
+        "obj-default-selection-ue-centimeter-preview",
+        "json-skeleton-weight-metadata"
+      ],
+      "legacy_weight_exception": "exact all-minus-one weights plus all-zero bone indices only"
+    },
+    "samples": [
+      {
+        "object": "particle.FXH_O_S_shizuo",
+        "groups": 1,
+        "submeshes": 1,
+        "vertices": 4,
+        "indices": 6,
+        "role": "global-minimum-payload-only"
+      },
+      {
+        "object": "skchar.Boy01",
+        "groups": 12,
+        "submeshes": 1620,
+        "vertices": 842929,
+        "indices": 2944338,
+        "bones": 80,
+        "sentinel_vertices": 0,
+        "role": "canonical-player"
+      },
+      {
+        "object": "skchar.Girl01",
+        "groups": 12,
+        "submeshes": 1806,
+        "vertices": 1014104,
+        "indices": 3668820,
+        "bones": 80,
+        "sentinel_vertices": 2,
+        "role": "global-maximum-and-sentinel-boundary"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "ClientCode\\QRender\\Src\\QSkelMesh.cpp",
+        "size": 80302,
+        "sha256": "d4d00eb79f7c30123df02e9105f7335fac4533c146957a429ba9ad84c108e5f7",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QSkelMesh.h",
+        "size": 18771,
+        "sha256": "d7b44a3e7160f37a297f7c428d483300d9900f0cb0f0c8140d97aa3af3a8c7ae",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QGeom.h",
+        "size": 6649,
+        "sha256": "91500167970a758df9c22e242477c5db62c4feb99a538dbe1599e49de718b965",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QVector.h",
+        "size": 9985,
+        "sha256": "66658ec9df40c3bef90e509001dfb100b413c5e9b7d332f6a7f56f0872bf7925",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Hdr\\QArray.h",
+        "size": 12657,
+        "sha256": "831485b5d3392f57c6cb9a832362eb4566111e03b3b9de8225e6f0a09788617a",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Hdr\\QPString.h",
+        "size": 1837,
+        "sha256": "6374e1a01b82af150d5f94e9974f5d6f8d169cf309c683f980a101776d678b8d",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Src\\QArchive.cpp",
+        "size": 2242,
+        "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Src\\QProperty.cpp",
+        "size": 17859,
+        "sha256": "b92a93ba136e1de845b5c5f6d385fad3904db202b7396f213a3749a2e4584a57",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Utility\\Src\\UtSkinMeshFactories.cpp",
+        "size": 44007,
+        "sha256": "5fc2cdb7a481366a8fac04bbbc1a2d56b306ccfc86198c2004124c469165a741",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\SkelMesh\\skchar",
+        "size": 281615,
+        "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\SkelMesh\\particle\\FXH_O_S_shizuo.skem",
+        "size": 477,
+        "sha256": "a755d7c0a706895725b53d9ea0289fe42600841dd8ba725fae86f8c5034912d5",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\SkelMesh\\skchar\\Boy01.skem",
+        "size": 95700140,
+        "sha256": "409fedf015ae3949222241cd8d7cc1aea22bb6ef689b2cc0190a796fe7cf93b6",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\SkelMesh\\skchar\\Girl01.skem",
+        "size": 115909244,
+        "sha256": "6ada6140d6a615ba1e18b2e236548ed67972d81ab948d4884e20af77913606d9",
+        "passed": true
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "evidence_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_output_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-ninja-clang-21-werror",
+      "clang-tidy-21",
+      "ctest-corrupt-boundary-determinism",
+      "minimum-plus-two-real-package-skem-pairs",
+      "cli-default-obj-json-signature"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 70,
+      "output_sha256": "995b0d67ac6cfd29ae50d68c0f7ad11493237e00a02cfadd196e6731965c7e19"
+    }
+  },
+  "anim_animation": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:12.9151321+08:00",
+    "result": "PASS",
+    "task": "P1-16",
+    "completion_criteria_satisfied": true,
+    "source_file_count": 18,
+    "source_sha256": "768ef1305124397cc2d9028d5b4a70d7ed50d7386aadccec4a0a9ccf16815420",
+    "contract": {
+      "descriptor_source": "ordered Package QSkelMesh references and QSkelAnim property bodies",
+      "payload": "headerless bone-major then frame-major QAnim key stream",
+      "track_identity": "dense zero-based skeleton prefix; partial tails are valid",
+      "key_encoding": "float32 quaternion xyzw plus local translation xyz",
+      "duration": "sampled=(frames-1)*delta; legacy loop period honors selfLoop duplicate terminal key",
+      "root_motion": "measured root track; no extraction or mutation",
+      "outputs": [
+        "json-animation-summary",
+        "csv-complete-root-track"
+      ]
+    },
+    "samples": [
+      {
+        "path": "particle/ZFH_B_S_XALGF001.anim",
+        "bytes": 4,
+        "clips": 0,
+        "role": "global-minimum"
+      },
+      {
+        "object": "skchar.Boy01",
+        "clips": 272,
+        "tracks": 21702,
+        "keys": 1173344,
+        "moving": 261,
+        "role": "partial-track-prefix"
+      },
+      {
+        "object": "skchar.Girl01",
+        "clips": 270,
+        "tracks": 21600,
+        "keys": 1188320,
+        "moving": 254,
+        "role": "canonical-full-track"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "ClientCode\\QRender\\Src\\QSkelMesh.cpp",
+        "size": 80302,
+        "sha256": "d4d00eb79f7c30123df02e9105f7335fac4533c146957a429ba9ad84c108e5f7",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QSkelMesh.h",
+        "size": 18771,
+        "sha256": "d7b44a3e7160f37a297f7c428d483300d9900f0cb0f0c8140d97aa3af3a8c7ae",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Src\\QAnimNotify.cpp",
+        "size": 863,
+        "sha256": "ee1f2f1f0b4ca8f2b1f15df235d7d5eabbeeb0d1d8dd0cde44fc4d562222f5e4",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QAnimNotify.h",
+        "size": 961,
+        "sha256": "c2a9d24f3394b9dc21e014e6365268ad4f5c65db15b8b08b2c10f6ae7411c4ca",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Src\\QArchive.cpp",
+        "size": 2242,
+        "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Base\\Src\\QProperty.cpp",
+        "size": 17859,
+        "sha256": "b92a93ba136e1de845b5c5f6d385fad3904db202b7396f213a3749a2e4584a57",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Utility\\Src\\UtSkinMeshFactories.cpp",
+        "size": 44007,
+        "sha256": "5fc2cdb7a481366a8fac04bbbc1a2d56b306ccfc86198c2004124c469165a741",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Packages\\SkelMesh\\skchar",
+        "size": 281615,
+        "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\SkelMesh\\particle\\ZFH_B_S_XALGF001.anim",
+        "size": 4,
+        "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\SkelMesh\\skchar\\Boy01.anim",
+        "size": 32855816,
+        "sha256": "912c7e13632082fdc457b148ebb8bd7ca4757a619da2bb6ad17b57acbc3afe3e",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\SkelMesh\\skchar\\Girl01.anim",
+        "size": 33275128,
+        "sha256": "524f612bff80de06ce92ebb558ecf4d783cdb84e097dd708aed64f7f8524c257",
+        "passed": true
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "evidence_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_output_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-ninja-clang-21-werror",
+      "clang-tidy-21",
+      "ctest-corrupt-boundary-determinism",
+      "minimum-plus-two-real-package-anim-pairs",
+      "cli-json-root-csv-signature"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 75,
+      "output_sha256": "5690ddfd1c0015220919d0070c0759393c3b8b18746c50759ed630f45ed928ef"
+    }
+  },
+  "ter_terrain": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:35.1096697+08:00",
+    "result": "PASS",
+    "task": "P1-17",
+    "completion_criteria_satisfied": true,
+    "source_file_count": 11,
+    "source_sha256": "88c396a8b694cbfe118778375efea7191e8f663537d3d9f3aecfe462b8be5a66",
+    "contract": {
+      "vertex": "height f32 + normal xyz f32 + color rgba f32 + four layer-alpha u8",
+      "grid": "row-major square grid; installed files are 64x64 vertices and 63x63 cells",
+      "tail": "water bool/height + zero-to-four ordered package layer references + optional color",
+      "edge_order": [
+        "top-x-increasing",
+        "right-y-increasing",
+        "bottom-x-increasing",
+        "left-y-increasing"
+      ],
+      "scale": "source units retained; level zone size is required for physical scale",
+      "outputs": [
+        "json-summary",
+        "f32le-height-plane",
+        "rgba8-layer-alpha",
+        "csv-complete-edges"
+      ]
+    },
+    "corpus": {
+      "file_count": 8876,
+      "total_bytes": 1309215704,
+      "size_distribution": [
+        {
+          "bytes": 147485,
+          "count": 29
+        },
+        {
+          "bytes": 147489,
+          "count": 36
+        },
+        {
+          "bytes": 147493,
+          "count": 112
+        },
+        {
+          "bytes": 147497,
+          "count": 345
+        },
+        {
+          "bytes": 147501,
+          "count": 8354
+        }
+      ]
+    },
+    "samples": [
+      {
+        "path": "bqg2/bqg2_000_000.ter",
+        "bytes": 147485,
+        "role": "global-minimum-no-water-color"
+      },
+      {
+        "path": "zyhsz/zyhsz_015_015.ter",
+        "bytes": 147501,
+        "role": "global-maximum-with-water-color"
+      },
+      {
+        "path": "world_001_001.ter",
+        "bytes": 147501,
+        "role": "non-flat-adjacency-base"
+      },
+      {
+        "path": "world_002_001.ter",
+        "bytes": 147501,
+        "role": "right-neighbor"
+      },
+      {
+        "path": "world_001_002.ter",
+        "bytes": 147501,
+        "role": "bottom-neighbor"
+      }
+    ],
+    "evidence": [
+      {
+        "path": "ClientCode\\QRender\\Src\\QTerrain.cpp",
+        "size": 69191,
+        "sha256": "3b9a5de0d6c404d2cb5b94b56dbd6ab8a35b18afccc13deaa345a3371e4af8b4",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QTerrain.h",
+        "size": 8188,
+        "sha256": "1feba47e776ce3734d5dec8f3375907e7a41cce7eef279bf8c4c312176755252",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\Utility\\Src\\UtTerrainFactories.cpp",
+        "size": 20630,
+        "sha256": "bdd6118bfab99311f87aae504f041f411d3e03622282ce6e13ee33fc2b00b139",
+        "passed": true
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\EngineMath.h",
+        "size": 18750,
+        "sha256": "1e4fad6e97874c30815820fb8d87521bc1977c0f2a13a241cf92af3b93fa0538",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Terrain\\bqg2\\bqg2_000_000.ter",
+        "size": 147485,
+        "sha256": "178fc8ca10974b55a75ac83c68c60e70414506938a964bd9ba0c38b35d93fd37",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Terrain\\zyhsz\\zyhsz_015_015.ter",
+        "size": 147501,
+        "sha256": "3c4d9e7dc16845e1c21b9aecdb106cf6fef53f92cd11a41719e89d05262cf947",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Terrain\\world_001_001.ter",
+        "size": 147501,
+        "sha256": "233f5be2358d1fdc88ca872373d074eb67b48ca33c3c78708bc74290d0e061e7",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Terrain\\world_002_001.ter",
+        "size": 147501,
+        "sha256": "3f343db7478cdafb1828469acd74680a45a6fb2fab60f6e909ae4a80be8867b4",
+        "passed": true
+      },
+      {
+        "path": "天命西游\\Resource\\Terrain\\world_001_002.ter",
+        "size": 147501,
+        "sha256": "f14874bbb0a4a1ddcc709ae48f4913d6ba3bce8bc5c3bd5b0d06292a84893389",
+        "passed": true
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "evidence_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_output_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "clang-format-21",
+      "cmake-ninja-clang-21-werror",
+      "clang-tidy-21",
+      "ctest-corrupt-boundary-determinism",
+      "five-real-terrain-samples",
+      "non-flat-adjacency-diagnostic",
+      "cli-four-output-signature"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 45,
+      "output_sha256": "d3945138fc095d526bd7403bfdfb90853766a5b72fa093681318ece3f1226f9e"
+    }
+  },
+  "auxiliary_assets": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:39.3426261+08:00",
+    "result": "PASS",
+    "task": "P1-18",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
+    "dependencies": {
+      "p1-08-package-normalized-tree.json": "7e725c0fc78dcff077b7148a9da660abed13898aa9492b46334cf0088b66390a",
+      "p1-13-qtx-texture.json": "b599edffba49b441cb3677fd4441ee229eb685255082e8ba8f93b34a27f5cf46"
+    },
+    "classification": {
+      "zif": "BOM-less UTF-8 XML zone-navigation records",
+      "wav": "RIFF/WAVE PCM effects",
+      "mp3": "MPEG audio music streams",
+      "ui": "Package QTexture metadata plus QTX payload; no standalone layout corpus",
+      "shader": "Package material semantics; no loose shader source",
+      "fonts": "TTF evidence gated by ownership and redistribution review"
+    },
+    "priority": [
+      "1:UI textures and material semantics",
+      "2:PCM effects and MPEG music",
+      "3:ZIF navigation graph",
+      "4:UI behavior and licensed fonts"
+    ],
+    "routes": {
+      "zif": "bounded XML plus companion path binding to a versioned navigation graph",
+      "audio": "validated WAV import and reviewed offline MP3 decode to lossless intermediate",
+      "ui": "reuse Package/QTX; reconstruct native UE layout and behavior from evidence",
+      "shader": "decode QPhongShader semantics into reviewed UE material masters and instances"
+    },
+    "zif": {
+      "file_count": 841,
+      "total_bytes": 4565902,
+      "utf8_bom_count": 0,
+      "parse_failure_count": 0,
+      "directories": {
+        "pathInfo": 806,
+        "zoneInfo": 35
+      },
+      "records": {
+        "path_indices": 47988,
+        "directions": 3364,
+        "polygons": 6712,
+        "polygon_ids": 77582,
+        "routes": 1287
+      }
+    },
+    "audio": {
+      "wav": {
+        "file_count": 450,
+        "total_bytes": 54949730,
+        "data_bytes": 54920176,
+        "format_key": "codec|channels|sample_rate|bits_per_sample",
+        "formats": {
+          "1|1|22050|16": 32,
+          "1|1|44100|16": 406,
+          "1|2|22050|16": 6,
+          "1|2|44100|16": 6
+        },
+        "chunk_presence": {
+          "bext": 6,
+          "cue ": 11,
+          "data": 450,
+          "elm1": 6,
+          "fmt ": 450,
+          "JUNK": 4,
+          "LIST": 13,
+          "minf": 6,
+          "regn": 6,
+          "umid": 6
+        }
+      },
+      "mp3": {
+        "file_count": 64,
+        "total_bytes": 124002521,
+        "headers": {
+          "ID3v2": 39,
+          "MPEG-frame": 25,
+          "other": 0
+        },
+        "decoded_or_transcoded": false
+      }
+    },
+    "package_inventory": {
+      "material": {
+        "classes": {
+          "QPhongShader": 14390
+        },
+        "file_count": 10,
+        "files": [
+          {
+            "classes": {
+              "QPhongShader": 3490
+            },
+            "format_version": "QRENDER PACKAGE VER 3.0",
+            "name": "matchar",
+            "objects": 3490,
+            "sha256": "bbe9c875db12d6fa69439a4df23ae85fec88fa7c86d19b35956f611033ad9fe5"
+          },
+          {
+            "classes": {
+              "QPhongShader": 1611
+            },
+            "format_version": "QRENDER PACKAGE VER 3.0",
+            "name": "matnpc",
+            "objects": 1611,
+            "sha256": "bc897b05783a3671f450079a7d7af562fd85ff47e97aa1352a27d92155ed5186"
+          },
+          {
+            "classes": {
+              "QPhongShader": 15
+            },
+            "format_version": "QRENDER PACKAGE VER 3.0",
+            "name": "matnpc2",
+            "objects": 15,
+            "sha256": "ab0b8e7225abe7262f9af44f74c3425f77b511fd80720092591bb105b0c40dd2"
+          },
+          {
+            "classes": {
+              "QPhongShader": 98
+            },
+            "format_version": "QRENDER PACKAGE VER 3.0",
+            "name": "matnpc3",
+            "objects": 98,
+            "sha256": "5989cb818b5de845bc4a9006558a035c14a62eb25b0855de521ff265bb498e38"
+          },
+          {
+            "classes": {
+              "QPhongShader": 13
+            },
+            "format_version": "QRENDER PACKAGE VER 3.0",
+            "name": "matparticle",
+            "objects": 13,
+            "sha256": "dadc1c690d0210cf0fd6c996ed93a3246584e00d98385a71c2a9272a6dd05d95"
+          },
+          {
+            "classes": {
+              "QPhongShader": 1378
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.2.tmp",
+            "objects": 1378,
+            "sha256": "d2dc5b088264c6b716a65f83d0aad4bbe9ed184ecfdc020f966d870fa1da1a69"
+          },
+          {
+            "classes": {
+              "QPhongShader": 1389
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.3.tmp",
+            "objects": 1389,
+            "sha256": "8af94b7661502f293cd447fe77a4a6341fe9549c9b85dcf0666adc4dbbb9e224"
+          },
+          {
+            "classes": {
+              "QPhongShader": 2162
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.4.tmp",
+            "objects": 2162,
+            "sha256": "7129f0753ecb03709722d64451511c546ffbe8fb3266ce220e5d6e41abf00054"
+          },
+          {
+            "classes": {
+              "QPhongShader": 2274
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.5.tmp",
+            "objects": 2274,
+            "sha256": "742e2b02f6834837fdd36faaf88506695b0d44ecd9999cfc8a284bb4a76acafe"
+          },
+          {
+            "classes": {
+              "QPhongShader": 1960
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.tmp",
+            "objects": 1960,
+            "sha256": "b559a7df8ad8e39c53ad877606d2e7abe26d9c468993dd2373bc3d71c2911e5a"
+          }
+        ],
+        "object_count": 14390
+      },
+      "ui": {
+        "classes": {
+          "QTexture": 2890
+        },
+        "file_count": 4,
+        "files": [
+          {
+            "classes": {
+              "QTexture": 764
+            },
+            "format_version": "QRENDER PACKAGE VER 3.0",
+            "name": "interface",
+            "objects": 764,
+            "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f"
+          },
+          {
+            "classes": {
+              "QTexture": 721
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.2.tmp",
+            "objects": 721,
+            "sha256": "8361d5f87dfede93f1ef62a6dc7cae1c6feeaeea2799cbff749ffefa249cbdc5"
+          },
+          {
+            "classes": {
+              "QTexture": 728
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.3.tmp",
+            "objects": 728,
+            "sha256": "97cf46f217722cb426664be22234cc60d23695c6cd5edf4ce88d15629a09161f"
+          },
+          {
+            "classes": {
+              "QTexture": 677
+            },
+            "format_version": "QRENDER PACKAGE VER 2.0",
+            "name": "tempfile.tmp",
+            "objects": 677,
+            "sha256": "b7f843b3c672afde95be6553987d3547c18b3c65ef613946c325b20efea9c973"
+          }
+        ],
+        "object_count": 2890
+      }
+    },
+    "loose_shader_source_count": 0,
+    "standalone_ui_definition_count": 0,
+    "fonts": {
+      "file_count": 3,
+      "total_bytes": 23475828,
+      "imported": false,
+      "rights_review_required": true
+    },
+    "evidence": [
+      {
+        "path": "ClientCode\\Game\\Src\\QAutoPath.cpp",
+        "size": 53819,
+        "sha256": "1ff4091fd69894efe6b8a360ac7267974ed491a4f1420945cb7c2627add01858"
+      },
+      {
+        "path": "ClientCode\\Game\\Hdr\\QAutoPath.h",
+        "size": 7358,
+        "sha256": "548f51d64dd0682a1ba147a8004b0071bb848ffb53a6e9c64287aefb2e492e6b"
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QAudioDev.h",
+        "size": 2217,
+        "sha256": "1397e9c0f23407353ee47d5cf5b33e6aae1cf6c7525da3c1942dc4c53f740f04"
+      },
+      {
+        "path": "ClientCode\\MSSDev\\MSSDev.cpp",
+        "size": 16391,
+        "sha256": "173d63331f1998fad70cc416dfdbfd6e74f3bd262af2c0b75c8ef8dbb8fbf44c"
+      },
+      {
+        "path": "ClientCode\\QRender\\Hdr\\QMaterial.h",
+        "size": 2798,
+        "sha256": "dce356d0e5cdf683fe8751d90d541373d292c9d027cf4218280c79d0bf6d33ca"
+      },
+      {
+        "path": "ClientCode\\QRender\\Src\\QRenderTypes.cpp",
+        "size": 16776,
+        "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50"
+      },
+      {
+        "path": "ClientCode\\Game\\Hdr\\QGUIFrame.h",
+        "size": 34916,
+        "sha256": "7a6e9b6a9a13962d7daafdc70d920d26d0e04ecf4c84bf7ad7a5b12ba2f921cf"
+      },
+      {
+        "path": "ClientCode\\Game\\Src\\QGUIFrame.cpp",
+        "size": 254650,
+        "sha256": "484e1b0c703c28753773f7d31ee211a5380e8f0cb9aed99fb68c91aebc6fbbeb"
+      },
+      {
+        "path": "天命西游\\Table\\pathInfo.path",
+        "size": 2576658,
+        "sha256": "7887724d0d888c1dd9a9da1c402fb515fb32926951889a5e7e9a80f00e30106c"
+      },
+      {
+        "path": "天命西游\\Table\\pathInfo\\zone2174.zif",
+        "size": 394,
+        "sha256": "0a8690bc9ac7e98ff0a9e6cd72533cf1de33e1be45e0fb38c919400d10daa58c"
+      },
+      {
+        "path": "天命西游\\Table\\pathInfo\\zone1308.zif",
+        "size": 36854,
+        "sha256": "369e013babfbaeae112d63b5fab712091f0cf197d3b9f3033e032d755f4227a5"
+      },
+      {
+        "path": "天命西游\\Resource\\Sound\\uisound\\MouseOverTarget.wav",
+        "size": 5612,
+        "sha256": "e290ce84627d15b84b90ac54f1864a8332c33b39b6f542dd80aeeda4261cc988"
+      },
+      {
+        "path": "天命西游\\Resource\\Sound\\sound\\Baigujing_Death.wav",
+        "size": 970244,
+        "sha256": "9616377d59d856c6543ce571bd98e5338aeb7577ef0401e5f7e3acb40ea223a6"
+      },
+      {
+        "path": "天命西游\\music\\10.mp3",
+        "size": 701405,
+        "sha256": "73ff33f886d70f084ccd4921473141cb773473e2622b02f316655e519bf91a1b"
+      },
+      {
+        "path": "天命西游\\music\\1005.mp3",
+        "size": 3661079,
+        "sha256": "77d0e071a031c37ba560647d76f0000e6017387273bb7dd5df668842a6be1668"
+      }
+    ],
+    "builder": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "user": "tmxy"
+    },
+    "isolation": {
+      "source_mount": "read-only",
+      "installed_packages_mount": "read-only",
+      "network": "none",
+      "root_filesystem": "read-only",
+      "capabilities": "none",
+      "no_new_privileges": true,
+      "build_and_output_storage": "ephemeral_tmpfs"
+    },
+    "stages": [
+      "document-route-contract",
+      "legacy-evidence-hash",
+      "full-zif-xml-validation",
+      "full-wav-riff-validation",
+      "full-mp3-prefix-classification",
+      "loose-ui-shader-font-inventory",
+      "isolated-ui-material-package-classification"
+    ],
+    "execution": {
+      "exit_code": 0,
+      "output_line_count": 18,
+      "output_sha256": "173ae44079987fe56510107bf5879e6f7a389ffa42c87fbd97c87e42eed19584"
+    }
+  },
+  "asset_interchange": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:39.437534+08:00",
+    "result": "PASS",
+    "task": "P1-19",
+    "completion_criteria_satisfied": true,
+    "interchange_version": "1.0.0",
+    "source_sha256": "894784e708e9f66d652789d001d0f3493f75177bccfb5ac899a014fae9dcfb22",
+    "schema": {
+      "path": "Contracts/data-schema/asset-interchange-v1.schema.json",
+      "sha256": "e2d5e2deb79459aec718cd8e69c066cc8e14cdf4ad642f4846f1337d005e696d",
+      "draft": "https://json-schema.org/draft/2020-12/schema",
+      "positive_example_passed": true,
+      "negative_case_count": 4,
+      "negative_cases": {
+        "absolute_path": true,
+        "unscoped_root_property": true,
+        "unknown_without_backing": true,
+        "unscoped_extension": true
+      }
+    },
+    "registry": {
+      "path": "Contracts/interchange/format-registry-v1.json",
+      "sha256": "520934a700fc2021a999a095e0960efd782925ca64f6f43de02d11034589d3eb",
+      "format_count": 13,
+      "authoritative_format_count": 9,
+      "review_only_format_count": 4,
+      "format_ids": [
+        "tmxy.package.tree-json",
+        "tmxy.asset.metadata-json",
+        "microsoft.dds",
+        "khronos.gltf-json",
+        "khronos.gltf-bin",
+        "tmxy.terrain.height-f32le",
+        "tmxy.terrain.layers-rgba8",
+        "riff.wave.pcm",
+        "tmxy.navigation.graph-json",
+        "wavefront.obj",
+        "w3c.png",
+        "truevision.tga",
+        "rfc4180.csv"
+      ]
+    },
+    "boundary": {
+      "container": "versioned manifest plus separately hashed standard payloads",
+      "texture_authority": "DDS complete validated mip chain",
+      "mesh_skeleton_animation_authority": "glTF 2.0 JSON plus external BIN and metadata JSON",
+      "terrain_authority": "f32le height plus rgba8 layer planes and metadata JSON",
+      "review_only": [
+        "OBJ",
+        "PNG",
+        "TGA",
+        "CSV"
+      ],
+      "unknown_preservation": [
+        "source-span",
+        "opaque-sidecar",
+        "namespaced-extension"
+      ],
+      "path_policy": "relative forward-slash paths only; absolute and parent paths rejected",
+      "timestamps": "forbidden from deterministic manifest"
+    },
+    "version_policy": {
+      "major": "reject-unknown-major",
+      "minor": "accept-only-when-all-required-features-are-supported",
+      "patch": "compatible-clarification-or-bug-fix",
+      "published_registry_entries_are_immutable": true,
+      "new_format_or_semantics_requires_new_version": true,
+      "unknown_extensions_must_survive_read_write": true
+    },
+    "dependency_report_sha256": {
+      "p1-08-package-normalized-tree.json": "7e725c0fc78dcff077b7148a9da660abed13898aa9492b46334cf0088b66390a",
+      "p1-13-qtx-texture.json": "b599edffba49b441cb3677fd4441ee229eb685255082e8ba8f93b34a27f5cf46",
+      "p1-14-sm-static-mesh.json": "dd2386fe3418039df8f1f77336955314e8646b60d4dc36de0f9ebf745db3ca9b",
+      "p1-15-skem-skeletal-mesh.json": "fa3b21d6533087e6522033908b34c61d798d5b242b890b68735bd8ce33d1f092",
+      "p1-16-anim-animation.json": "da29969f7bd9ba2bbed12e9fd6d55084baea354b86c60973a2ff343e1e3593cb",
+      "p1-17-ter-terrain.json": "3f7938be1f07fd119e9fb83948a6c785d2dde4b5d8030490f556c68fc5c14b9d",
+      "p1-18-auxiliary-assets.json": "08cfedbada0fa6c839f55f15bcbc1bb1de71ccfb28ab82acfaf89816f9553a93"
+    },
+    "exporter_source_sha256": {
+      "Tools/TMXY.Package/src/package_normalized_tree.cpp": "1d9cf6cc0ea515a9ffe635d9d4a342e98f4003ead521ccdd390961a42f5c4eab",
+      "Tools/TMXY.Texture/src/texture_export.cpp": "4333f38f4d01523832711c4878dffd47f7315f769b90f9b201f4bccf2b1fa499",
+      "Tools/TMXY.StaticMesh/src/static_mesh_export.cpp": "1862065c308d3c7d88f3a759f9cff3d67cc36af374179e43f58b7105315461ee",
+      "Tools/TMXY.SkeletalMesh/src/skeletal_mesh_export.cpp": "efd9241e6ea1cd8a82cd16d77ac670607e1aa6c2ca5ab92c0f434c9debd00b8d",
+      "Tools/TMXY.Animation/src/animation_export.cpp": "cf93873cc98e5c4b06ba3ffc62c92156717939428d4c1b5d7bdbbba474a2e31c",
+      "Tools/TMXY.Terrain/src/terrain_export.cpp": "61c8585e67ae6b12a5b95c8481a4b285d54b1f0f6507682226513736cdfd5582"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_golden_host": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.0506479+08:00",
+    "result": "PASS",
+    "task": "P1-20",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "08cbf4852d8388e4a1c4b17fe1dae43fb28aaf0b4f90df697e86981cb19a58fb",
+    "module": {
+      "name": "TMXYGoldenTests",
+      "type": "Editor",
+      "loading_phase": "PostEngineInit",
+      "runtime_target_excluded": true,
+      "policy_passed": true
+    },
+    "host": {
+      "golden_root": "/Game/TMXY/Golden",
+      "map_package": "/Game/TMXY/Golden/Maps/TMXYGoldenTestMap",
+      "map_relative_path": "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "map_bytes": 6443,
+      "map_sha256": "fcacd47465359c168203cda8344f070549d46885637ea9479354406f05dce269",
+      "unreal_package_tag": "0x9e2a83c1",
+      "content_asset_count": 14,
+      "content_policy_passed": true,
+      "automation_entry": "TMXY.Golden.Host"
+    },
+    "import_report": {
+      "schema": "tmxy.ue.golden-import-report",
+      "report_version": "1.0.0",
+      "positive_example_passed": true,
+      "negative_cases": {
+        "absolute_manifest": true,
+        "package_outside_golden_root": true,
+        "reversed_phase": true,
+        "unknown_root_property": true
+      },
+      "before_after_unchanged": true,
+      "imported_asset_count": 0,
+      "status": "not-run"
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "report_path": "E:\\QQXYCodeDev\\Rebuild\\Data\\BuildBaseline\\p0-10a-ue-validation.json",
+      "report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+    },
+    "dependency_report_sha256": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_importer": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.0869067+08:00",
+    "result": "PASS",
+    "task": "P1-21",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "f40100fbd88958bea677fe41aa54b91980d66618ad9a4559f837c2bfe1a0bbcf",
+    "plugin": {
+      "name": "TMXYImporter",
+      "version": "0.1.0",
+      "module_type": "Editor",
+      "loading_phase": "PostEngineInit",
+      "target_platforms": [
+        "Win64"
+      ],
+      "can_contain_content": false,
+      "runtime_target_excluded": true,
+      "descriptor_passed": true
+    },
+    "capabilities": {
+      "manifest_contract": "tmxy.asset.interchange 1.0.0",
+      "batch_mode": "ordered validate-only with per-request result",
+      "report_contract": "tmxy.ue.golden-import-report 1.0.0",
+      "format_handler_registry": true,
+      "duplicate_handler_rejected": true,
+      "reimport_interface": true,
+      "sha256_provider": "Windows CNG bcrypt",
+      "production_format_handler_count": 3,
+      "imported_asset_count": 0
+    },
+    "boundaries": {
+      "safe_relative_paths": true,
+      "golden_root": "/Game/TMXY/Golden",
+      "content_asset_count": 14,
+      "content_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "content_policy_passed": true,
+      "legacy_runtime_dependency": false
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "test": "TMXY.Importer.ManifestBatch",
+      "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53",
+      "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-21-report.json",
+      "generated_report_sha256": "5e635694f10b21c6d24dcacccb0fbf7b5f67ee0e3e2cafeeae7db75a4d1e255e",
+      "generated_report_schema_passed": true
+    },
+    "dependency_report_sha256": {
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "b5b355f4530358cae52e3a3164064b52462e535d0b5646e7cf8537eb9014f8fa"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_texture_import": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.1347823+08:00",
+    "result": "PASS",
+    "task": "P1-22",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "620c47d98f21c8852d30f869cd1f6cd876fdc8cf9dc53f1c0259251c18974dc1",
+    "handler": {
+      "format_id": "microsoft.dds",
+      "supported_dds_formats": [
+        "dxt1",
+        "dxt5"
+      ],
+      "decoded_source_format": "TSF_BGRA8",
+      "mode": "single-fixture-only",
+      "verifies_all_artifact_hashes_before_write": true,
+      "content_addressed_reimport_noop": true,
+      "production_handler_count": 3
+    },
+    "fixtures": {
+      "opaque-dxt1": {
+        "manifest_sha256": "c4ed0297cb78612eaf0953c5994584bc7a42b5740dfb465c6934613507111b35",
+        "dds_sha256": "c5ed646cf1eb46278c5a6c12ddbe4d3c6848dfb3a9007d07512e32cd6118adfe",
+        "dds_bytes": 160
+      },
+      "transparent-dxt5": {
+        "manifest_sha256": "d9a4b141cd1fdba3e48b8b9e95c905bc41e72d94e5384eb2969554691bedf843",
+        "dds_sha256": "2384d82d2745165ac1eb20eef371dd68278aede3cd3984900f6a09c856715917",
+        "dds_bytes": 384
+      },
+      "multi-mip-dxt1": {
+        "manifest_sha256": "96b83165a3968ac9141d24bbded0248f9f0c3171c6c73f0595a29fe84e37d666",
+        "dds_sha256": "ac176eecb333820a896fb788f58fe6e6da8f772e8acc0d6cd5498434c9ebc003",
+        "dds_bytes": 184
+      }
+    },
+    "content": {
+      "asset_count": 14,
+      "approved_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "texture_assets": [
+        {
+          "path": "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+          "bytes": 3948,
+          "sha256": "b8a849acae5cc62f1faf0c6d4bc9e5ca962a9fed6490fd6cb1e0c5c56efaf832"
+        },
+        {
+          "path": "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+          "bytes": 4135,
+          "sha256": "22fccd5dc85123815201611414424aeabf94db48939f18c05c86b7371d22e279"
+        },
+        {
+          "path": "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset",
+          "bytes": 3904,
+          "sha256": "773e8dcf9669adcc25d13a4ad0becfd2003adf5d0b16c4b6dcced42dc05d97fe"
+        }
+      ]
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "test": "TMXY.Importer.Texture",
+      "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-22-texture-report.json",
+      "generated_report_sha256": "18d779b54963f9bbd3ac7f605808a9150d1a6b3c5a4a148138864a22d2698825",
+      "generated_report_schema_passed": true,
+      "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+    },
+    "dependency_report_sha256": {
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "b599edffba49b441cb3677fd4441ee229eb685255082e8ba8f93b34a27f5cf46",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "b5b355f4530358cae52e3a3164064b52462e535d0b5646e7cf8537eb9014f8fa",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_static_mesh_import": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.1829407+08:00",
+    "result": "PASS",
+    "task": "P1-23",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "4830671fb0b4c61d11691cf5701a77025af22d514aef58d7ac60b30c084f9479",
+    "handler": {
+      "format_id": "khronos.gltf-json",
+      "gltf_version": "2.0",
+      "mode": "single-fixture-only",
+      "verifies_all_artifact_hashes_before_write": true,
+      "preserves_source_topology": true,
+      "content_addressed_reimport_noop": true,
+      "production_handler_count": 3
+    },
+    "fixtures": {
+      "minimum-real": {
+        "manifest_sha256": "0534882132102b98349cefe05c59b6508af64d1056f1da4f56d04f791e93cf25",
+        "gltf_sha256": "6a3243da4eaacbeae1ba1224524b18439f7f427fd7d2db98dfab67c2aad863b8",
+        "bin_sha256": "42472c32fea822d8b360db11dbd279033cbd39d1b91660f5d7832f3852d7c5bc",
+        "bin_bytes": 140
+      },
+      "multisection-real": {
+        "manifest_sha256": "9f48f47fbe44ce28a4ec61633f6bcac488a426b9886c7910dc20f73f1bdbcc12",
+        "gltf_sha256": "ded9e99849220200e04437c73b71e7ff1acb573402868a3f33040a194055f1a5",
+        "bin_sha256": "be0c68f987477458d427d74af4710dd62884e9626e934312059aa7264b68ba2b",
+        "bin_bytes": 512946
+      }
+    },
+    "content": {
+      "asset_count": 14,
+      "approved_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "imported_assets": [
+        {
+          "path": "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+          "bytes": 11689,
+          "sha256": "91798092b3208a36f676d3b0d04360f8fafa665393b112573e7bc404561b9a1d"
+        },
+        {
+          "path": "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+          "bytes": 279558,
+          "sha256": "f8e9be27184e1cddcf136864d9b2a2eaf6036af1cc98288ad67bbe0e9ba8c19c"
+        }
+      ]
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "test": "TMXY.Importer.StaticMesh",
+      "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-23-static-mesh-report.json",
+      "generated_report_sha256": "a7ddfce428543ffd1504203c2f279100bbebbc48f950996cfd6bbd68c322bedf",
+      "generated_report_schema_passed": true,
+      "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+    },
+    "dependency_report_sha256": {
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "dd2386fe3418039df8f1f77336955314e8646b60d4dc36de0f9ebf745db3ca9b",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "b5b355f4530358cae52e3a3164064b52462e535d0b5646e7cf8537eb9014f8fa",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "40ac4a0f223aabb44b91a6a830832b52d7ab4697e1f2fb45ada0b7cf801451a6"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_skeletal_mesh_import": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.2294095+08:00",
+    "result": "PASS",
+    "task": "P1-24",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "3d3922710231aa480fce9600699f7b1f3c150a69c45d9b0c96f914da14e35607",
+    "handler": {
+      "format_id": "khronos.gltf-json",
+      "gltf_version": "2.0",
+      "asset_kind": "skeletal_mesh",
+      "verifies_all_artifact_hashes_before_write": true,
+      "maximum_active_influences": 4,
+      "rejects_unweighted_vertices": true,
+      "positive_inverse_bind_orientation_required": true,
+      "attachment_policy": "bone-name-candidates-only-no-invented-sockets",
+      "content_addressed_reimport_noop": true,
+      "production_handler_count": 3
+    },
+    "fixture": {
+      "id": "boy01-default-real",
+      "manifest_sha256": "463c70294e3efd00ec0edc9573823b41943a6fae84e2bb3a891a6b554b906c1a",
+      "gltf_sha256": "5ea12a7ae8e09961d983be869bc8758ac14ae557987a8b5d1220cb3fa1a07a15",
+      "bin_sha256": "ba079eea99ab56aa19097796a79efecf5c1db3aebfb89fb07a72d8fd43568743",
+      "bin_bytes": 689132,
+      "source_vertex_count": 10338,
+      "triangle_count": 8757,
+      "material_slot_count": 7,
+      "bone_count": 80
+    },
+    "content": {
+      "asset_count": 14,
+      "approved_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "imported_assets": [
+        {
+          "path": "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+          "bytes": 2050123,
+          "sha256": "04ca9614c1a6744f7d0ce2e3da95931c29e809f92a69bda88a0f8a496517e6dd",
+          "unreal_package_tag": "0x9e2a83c1"
+        },
+        {
+          "path": "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+          "bytes": 18778,
+          "sha256": "97c7c3a9268fed96eb094e3d23ee642b348404323244ac42557aa0c8a1a3562b",
+          "unreal_package_tag": "0x9e2a83c1"
+        }
+      ]
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "test": "TMXY.Importer.SkeletalMesh",
+      "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-24-skeletal-mesh-report.json",
+      "generated_report_sha256": "5925bb0491981de448b69664ab1723738c3bdf954b9aa22c02f3623d71173b5a",
+      "generated_report_schema_passed": true,
+      "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+    },
+    "dependency_report_sha256": {
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "fa3b21d6533087e6522033908b34c61d798d5b242b890b68735bd8ce33d1f092",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "456c272548b533fc4ec662ea2fb72f2337f23122b7d89e3f3027e29c84b62a96"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_animation_import": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.2862715+08:00",
+    "result": "PASS",
+    "task": "P1-25",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "3aa5f0be8567767b07e13b568c859a8ca68fbbefba5fd12d54b53adcb371f9d0",
+    "handler": {
+      "format_id": "khronos.gltf-json",
+      "gltf_version": "2.0",
+      "asset_kind": "animation_set",
+      "verifies_all_artifact_hashes_before_write": true,
+      "all_keys_verified": true,
+      "root_motion_policy": "preserved-root-track-not-extracted",
+      "legacy_loop_policy": "preserve-metadata-no-forced-loop-flag",
+      "content_addressed_reimport_noop": true,
+      "production_handler_count": 3
+    },
+    "fixture": {
+      "id": "boy01-core-real",
+      "manifest_sha256": "71840eef83ea14811a880938252bcb03283b9b089c17cbf92ce4cf04a533148c",
+      "gltf_sha256": "798710c2187528ed22d0ba86dd0b254f9e0d35d604ceb1ee4dd30254cf2d3152",
+      "bin_sha256": "52a5aef9129204a05a412e3335a3282cea96f8cbd9abacf22b7233d7ab8a7bce",
+      "bin_bytes": 300696,
+      "selected_clip_count": 3,
+      "bone_count": 80,
+      "total_frame_count": 134,
+      "sample_rate_hz": 30
+    },
+    "content": {
+      "asset_count": 14,
+      "approved_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "imported_assets": [
+        {
+          "path": "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+          "bytes": 304940,
+          "sha256": "adfd74ee1ec6ed815f21f58000024197010346cd7e02d5f6a5c055286aafb4b6",
+          "unreal_package_tag": "0x9e2a83c1"
+        },
+        {
+          "path": "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+          "bytes": 225271,
+          "sha256": "2c07fb0fc551c45dd0087303d898def0962ae24a7b036698f3645a3398e9bcb7",
+          "unreal_package_tag": "0x9e2a83c1"
+        },
+        {
+          "path": "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+          "bytes": 280948,
+          "sha256": "b0569ad61ca399d232f952480227e2b91d6568fcc69f268ccf07c913d200e61f",
+          "unreal_package_tag": "0x9e2a83c1"
+        }
+      ]
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "test": "TMXY.Importer.Animation",
+      "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-25-animation-report.json",
+      "generated_report_sha256": "af21d7e9917669cbf956b4cd7397cc18c4faf98205f7650c8789ac7cc1bcf39f",
+      "generated_report_schema_passed": true,
+      "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+    },
+    "dependency_report_sha256": {
+      "Data/BuildBaseline/p1-16-anim-animation.json": "da29969f7bd9ba2bbed12e9fd6d55084baea354b86c60973a2ff343e1e3593cb",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "2d25c127b99110f354ed40e50f7b73a2103864d0cbab54dd2b3ecb04e7f0319c"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_terrain_import": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.3786547+08:00",
+    "result": "PASS",
+    "task": "P1-26",
+    "completion_criteria_satisfied": true,
+    "source_sha256": "c7a3660e1c35655b51466b814d8ef95e6980f0c60f790230557456ed425034d8",
+    "handler": {
+      "format_id": "tmxy.terrain.height-f32le",
+      "mode": "single-fixture-only",
+      "verifies_all_declared_hashes_before_write": true,
+      "production_handler_count": 3,
+      "representation": "deterministic UStaticMesh proof assets; P3-11 runtime route remains open",
+      "content_addressed_reimport_noop": true
+    },
+    "physical_scale": {
+      "zone_size_source_units": 252.0,
+      "terrain_tile_num": 63,
+      "source_units_per_cell": 4.0,
+      "centimeters_per_cell": 400.0,
+      "centimeters_per_tile": 25200.0
+    },
+    "adjacency": {
+      "right_differing_samples": 16,
+      "right_maximum_delta_cm": 12.80364990234375,
+      "bottom_differing_samples": 10,
+      "bottom_maximum_delta_cm": 1.9155502319335938,
+      "source_differences_preserved": true
+    },
+    "fixture_manifest_sha256": "d0b394ac7f55e5705d508e016139a604af0766ac17fbec611ab6d23034ef9643",
+    "content": {
+      "asset_count": 14,
+      "approved_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "imported_assets": [
+        {
+          "path": "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+          "bytes": 130366,
+          "sha256": "3840137c848f82ca68cd1a2a404d9980df541dd39c672261c8e6a7e364699c39"
+        },
+        {
+          "path": "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+          "bytes": 136802,
+          "sha256": "b739ecfacd857e9907fcdfb2fd8b972ad77c9e1a5ee215d627669f621bdf13e6"
+        },
+        {
+          "path": "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+          "bytes": 132762,
+          "sha256": "b809d0c0334b334e648bbc43c896e056f50637a52afa47930114a07c9e490a88"
+        }
+      ]
+    },
+    "automation_evidence": {
+      "required": true,
+      "passed": true,
+      "test": "TMXY.Importer.Terrain",
+      "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-26-terrain-report.json",
+      "generated_report_sha256": "fcec353a7c50f20f665b20c1bc30b027a0e0ef7437dc717ccbd9b78d9305929b",
+      "generated_report_schema_passed": true,
+      "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+    },
+    "dependency_report_sha256": {
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "3f7938be1f07fd119e9fb83948a6c785d2dde4b5d8030490f556c68fc5c14b9d",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "12dfb92ae28899027521fddd2376e9aafabcab7d27aa0f343173169149e77484"
+    },
+    "failure_count": 0,
+    "failures": []
+  },
+  "reference_formats": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.3921844+08:00",
+    "result": "PASS",
+    "task": "P1-04",
+    "document_version": "0.1",
+    "covered_formats": [
+      "Package 1.0",
+      "legacy QDataTable TBL"
+    ],
+    "evidence_levels": [
+      "L1",
+      "L2",
+      "L3",
+      "L4"
+    ],
+    "unknown_item_count": 8,
+    "document_sha256": {
+      "reference": "8f50c0ca3523f332f5c8794f60aad4175bbf25f824dbf019702937a4910c68e7",
+      "package": "3258dabcc8b90d4210966e8e50378a90907b085288dd9f02008078edda1570b9",
+      "table": "67bd122bc59d2fcfd4ab0cee279944a97f1950d146253f063b0feb3f785320e9"
+    },
+    "input_report_sha256": {
+      "package": "12a90a8c46b3a07ed5de803a71233417eea4e780342ae3ec1b9a0fd72fc208f5",
+      "table": "5f52b0a4e0b6d892500dec1103ea77cbd91dc096bd2fdc50a490e53b72aac27b"
+    },
+    "secret_material_embedded": false,
+    "failure_count": 0,
+    "failures": []
+  },
+  "ci_authority_contract": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.4095376+08:00",
+    "result": "PASS",
+    "state": "prepared_pending_authorization",
+    "required_check_count": 8,
+    "provider_selected": false,
+    "failure_count": 0,
+    "failures": []
+  },
+  "ue_packaging_waiver": {
+    "result": "PASS",
+    "waiver_status": "active_time_bounded",
+    "expires_local": "2026-10-25T23:59:59+08:00",
+    "source_file_count": 136,
+    "failure_count": 0,
+    "failures": []
+  },
+  "backend_toolchain": {
+    "result": "PASS",
+    "required_failure_count": 0,
+    "pending_freeze_count": 0,
+    "postgres_smoke_version": null,
+    "lock_sha256": "4b60db396b4f9d21cc9b517d1e1dbe78cc731694e2c355c00ea2d5b1654591b8",
+    "environment_sha256": "9e34c14d0d9936c7d876bd4fd5a96e3949351a60ea53a88c2c2ccd861131d969",
+    "checks": [
+      {
+        "name": "lock schema",
+        "kind": "required",
+        "passed": true,
+        "detail": "schema_version=1"
+      },
+      {
+        "name": "environment schema",
+        "kind": "required",
+        "passed": true,
+        "detail": "schema_version=1"
+      },
+      {
+        "name": "Linux Docker engine",
+        "kind": "required",
+        "passed": true,
+        "detail": "linux/amd64, Docker 29.7.2"
+      },
+      {
+        "name": "UE and Visual Studio",
+        "kind": "required",
+        "passed": true,
+        "detail": "UE 5.8.2, Visual Studio Community 2026"
+      },
+      {
+        "name": "UE lock match",
+        "kind": "required",
+        "passed": true,
+        "detail": "actual=5.8.2 expected=5.8.2"
+      },
+      {
+        "name": "UE changelist lock match",
+        "kind": "required",
+        "passed": true,
+        "detail": "actual=56702186 expected=56702186"
+      },
+      {
+        "name": "PostgreSQL image present",
+        "kind": "required",
+        "passed": true,
+        "detail": "reference=postgres:18.6-alpine"
+      },
+      {
+        "name": "PostgreSQL image digest",
+        "kind": "required",
+        "passed": true,
+        "detail": "actual=postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2 expected=postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2"
+      },
+      {
+        "name": "P0 toolchain lock state",
+        "kind": "required",
+        "passed": true,
+        "detail": "lock_state=locked"
+      },
+      {
+        "name": "backend builder immutable digest",
+        "kind": "pending",
+        "passed": true,
+        "detail": "Base manifest and built image digests must both be populated before P0-08 can close."
+      },
+      {
+        "name": "exact Clang package revision",
+        "kind": "pending",
+        "passed": true,
+        "detail": "Resolved inside the final builder image."
+      },
+      {
+        "name": "backend builder qualification evidence",
+        "kind": "required",
+        "passed": true,
+        "detail": "report=E:\\QQXYCodeDev\\Rebuild\\Data\\Toolchain\\backend-toolchain-qualification.json hash=2dd2b0490fc200fa3382c33f1d0307cae88b2c0f39cd6b42514fc533c545b722 result=PASS"
+      },
+      {
+        "name": "backend builder Dockerfile binding",
+        "kind": "required",
+        "passed": true,
+        "detail": "actual=bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d expected=bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d"
+      },
+      {
+        "name": "backend builder SBOM binding",
+        "kind": "required",
+        "passed": true,
+        "detail": "actual=c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6 expected=c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6"
+      },
+      {
+        "name": "qualified backend builder image present",
+        "kind": "required",
+        "passed": true,
+        "detail": "actual=sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559 expected=sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559"
+      },
+      {
+        "name": "UE MSVC qualification",
+        "kind": "pending",
+        "passed": true,
+        "detail": "status=waiver_active_time_bounded installed=14.51.36256 preferred=14.50.35717 waiver_expires=2026-10-25T23:59:59.0000000+08:00 report_hash_match=True"
+      }
+    ]
+  },
+  "backend_static_analysis": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:56:04.0578391+08:00",
+    "result": "PASS_DIAGNOSTIC",
+    "authoritative_release_analysis": false,
+    "authority_note": "Host clang-tidy proves rule cleanliness; the locked Linux Clang 21 builder remains authoritative.",
+    "clang_tidy_version": "LLVM (http://llvm.org/): LLVM version 22.1.3 Optimized build.",
+    "format": {
+      "passed": true,
+      "checked_files": 7,
+      "evidence": {
+        "line_count": 1,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "tidy": {
+      "passed": true,
+      "checked_translation_units": 5,
+      "evidence": {
+        "line_count": 12,
+        "sha256": "969f6c7ee8ed93f72048c736c12fd048629735d7c8381d5bc4f67ff09277f965"
+      }
+    }
+  },
+  "supply_chain": {
+    "schema_version": 2,
+    "captured_utc": "2026-08-27T05:56:04.7584138+08:00",
+    "result": "PASS_WITH_PENDING_AUTHORITY",
+    "release_authority": false,
+    "image": {
+      "reference": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "expected_id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "actual_id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "locally_verified": true
+    },
+    "sbom": {
+      "file": "Data/Security/postgres-18.6.sbom.cdx.json",
+      "sha256": "880bb2df9d3036addef531e49f6ce2e4ae8e92dcfbe13d1a4097980294893b37",
+      "format": "CycloneDX",
+      "spec_version": "1.5",
+      "component_count": 77,
+      "components_with_license_evidence": 70,
+      "locally_verified": true
+    },
+    "backend_builder": {
+      "image": {
+        "reference": "tmxy-backend-builder:p0-08",
+        "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+        "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+        "locally_verified": true
+      },
+      "sbom": {
+        "file": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
+        "sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+        "format": "CycloneDX",
+        "spec_version": "1.5",
+        "component_count": 316,
+        "components_with_license_evidence": 267,
+        "locally_verified": true
+      }
+    },
+    "scanner": {
+      "docker_scout_version": "v1.24.0",
+      "vulnerability_status": "pending_authenticated_database_access",
+      "note": "Docker Scout CVE analysis requested authentication; no login or credential mutation was performed."
+    },
+    "pending": [
+      "Authenticated or approved offline vulnerability scan for the locked PostgreSQL and backend builder images",
+      "Hosted release-authority license policy evaluation of both locked image SBOMs",
+      "Signed release provenance and OCI attestations"
+    ],
+    "deferred_to_p4": [
+      "Create application Conan profile lockfiles when the first external C++ dependency is introduced"
+    ]
+  },
+  "postgres_migration": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:56:06.9921292+08:00",
+    "result": "PASS",
+    "image": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "database_version": "18.6",
+    "source_mount": "read-only",
+    "network": "none",
+    "data_storage": "tmpfs",
+    "authentication": "ephemeral_trust_inside_networkless_container",
+    "migration": {
+      "file": "Backend/adapters/persistence_postgres/migrations/V0001__runtime_contract.sql",
+      "sha256": "9621a0147f0d6fd83af68d32534a31cdc97ffb0b29cb2335827688fbd6d0f347",
+      "runtime_contract": "foundation:1",
+      "schema_owner": "postgres"
+    }
+  },
+  "backend_build": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:56:11.7451555+08:00",
+    "result": "PASS_DIAGNOSTIC",
+    "authoritative_release_build": false,
+    "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
+    "repository_layout": {
+      "result": "PASS",
+      "checked_source_files": 218,
+      "checked_size_files": 453,
+      "checked_utf8_lf_files": 452,
+      "failure_count": 0,
+      "failures": []
+    },
+    "compose": {
+      "passed": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    "builder": {
+      "reference": "mmorpg-source-builder:local",
+      "id": "sha256:a075a9492afd87a416267fc70689d898cdad7048ca6e55fdf73258e7d30fd68d",
+      "repo_digests": [
+        "mmorpg-source-builder@sha256:a075a9492afd87a416267fc70689d898cdad7048ca6e55fdf73258e7d30fd68d"
+      ],
+      "os": "linux",
+      "architecture": "amd64",
+      "source_mount": "read-only",
+      "network": "none"
+    },
+    "build": {
+      "passed": true,
+      "exit_code": 0,
+      "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/9] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[6/9] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[7/9] Linking CXX executable apps/gateway/tmxy-gateway\n[8/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[9/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/2 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/2 Test #2: foundation.redaction .............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
+      "stderr": ""
+    }
+  },
+  "ue": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-27T05:55:58.0089732+08:00",
+    "result": "PASS",
+    "project": {
+      "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
+      "engine_association": "5.8",
+      "modules": [
+        "TMXYCore",
+        "TMXYClient",
+        "TMXYGoldenTests"
+      ],
+      "descriptor_passed": true,
+      "golden_module_editor_only": true,
+      "importer_plugin_editor_only": true,
+      "android_file_server_disabled": true,
+      "solution_generated": true,
+      "cooked_asset_count": 14,
+      "content_asset_count": 14,
+      "content_assets": [
+        "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+        "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+        "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+        "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+        "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+        "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+        "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+      ],
+      "content_policy_passed": true
+    },
+    "engine": {
+      "version": "5.8.2",
+      "changelist": 56702186,
+      "compatible_changelist": 55116800,
+      "passed": true
+    },
+    "project_generation": {
+      "passed": true,
+      "exit_code": 0,
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.50 seconds",
+      "output_sha256": "92670eecdfe363bd5cc75fb12f67ba38f868b98e0f696a09667b1cc52383a501",
+      "error": ""
+    },
+    "editor_build": {
+      "target": "TMXYEditor Win64 Development",
+      "passed": true,
+      "exit_code": 0,
+      "compiler_not_preferred_warning": true,
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.80 seconds",
+      "output_sha256": "2ec1aa137966c953bf2169bcc1edf34fa18a709898eeadb4c7a462955651d62d",
+      "error": ""
+    },
+    "format": {
+      "passed": true,
+      "checked_files": 48,
+      "error": ""
+    },
+    "automation": {
+      "requested": true,
+      "passed": true,
+      "test_count": 8,
+      "build_info_passed": true,
+      "golden_host_passed": true,
+      "importer_manifest_batch_passed": true,
+      "importer_texture_passed": true,
+      "importer_static_mesh_passed": true,
+      "importer_skeletal_mesh_passed": true,
+      "importer_animation_passed": true,
+      "importer_terrain_passed": true,
+      "module_loaded": true,
+      "golden_module_loaded": true,
+      "importer_module_loaded": true,
+      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260826-215544397.log",
+      "process_exit_code": 0
+    },
+    "missing_paths": []
+  }
+}

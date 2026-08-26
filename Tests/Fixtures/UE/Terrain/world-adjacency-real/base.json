@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "source_contract": "little-endian QArchive TerrainVertex array plus water and active-layer tail",
+  "source_name": "world_001_001.ter",
+  "tile_identity": {"map_name": "world", "x": 1, "y": 1},
+  "vertex_count": 4096,
+  "edge_vertex_count": 64,
+  "tile_count_per_axis": 63,
+  "height_source_units": {"minimum": -15.955535888671875, "maximum": 26.688465118408203, "mean": 6.5972044230414362},
+  "water": {"enabled": false, "height_source_units": 0, "color": [0.064999997615814209, 0.18000000715255737, 0.15999999642372131, 0.89999997615814209]},
+  "active_layers": [0, 3, 29, 15],
+  "layout": {
+    "vertex_order": "row-major, x changes fastest",
+    "height_payload": "float32 little-endian source units",
+    "layer_payload": "four uint8 source alpha channels per vertex",
+    "edge_order": ["top", "right", "bottom", "left"]
+  },
+  "scale_policy": "source samples preserved; physical zone scale requires level metadata and is not inferred"
+}

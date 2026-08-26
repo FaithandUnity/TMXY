@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:58.3921844+00:00",
+  "result": "PASS",
+  "task": "P1-04",
+  "document_version": "0.1",
+  "covered_formats": [
+    "Package 1.0",
+    "legacy QDataTable TBL"
+  ],
+  "evidence_levels": [
+    "L1",
+    "L2",
+    "L3",
+    "L4"
+  ],
+  "unknown_item_count": 8,
+  "document_sha256": {
+    "reference": "8f50c0ca3523f332f5c8794f60aad4175bbf25f824dbf019702937a4910c68e7",
+    "package": "3258dabcc8b90d4210966e8e50378a90907b085288dd9f02008078edda1570b9",
+    "table": "67bd122bc59d2fcfd4ab0cee279944a97f1950d146253f063b0feb3f785320e9"
+  },
+  "input_report_sha256": {
+    "package": "12a90a8c46b3a07ed5de803a71233417eea4e780342ae3ec1b9a0fd72fc208f5",
+    "table": "5f52b0a4e0b6d892500dec1103ea77cbd91dc096bd2fdc50a490e53b72aac27b"
+  },
+  "secret_material_embedded": false,
+  "failure_count": 0,
+  "failures": []
+}

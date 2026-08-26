@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "captured_utc": "2026-08-26T21:56:04.7584138+00:00",
+  "result": "PASS_WITH_PENDING_AUTHORITY",
+  "release_authority": false,
+  "image": {
+    "reference": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "expected_id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "actual_id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "locally_verified": true
+  },
+  "sbom": {
+    "file": "Data/Security/postgres-18.6.sbom.cdx.json",
+    "sha256": "880bb2df9d3036addef531e49f6ce2e4ae8e92dcfbe13d1a4097980294893b37",
+    "format": "CycloneDX",
+    "spec_version": "1.5",
+    "component_count": 77,
+    "components_with_license_evidence": 70,
+    "locally_verified": true
+  },
+  "backend_builder": {
+    "image": {
+      "reference": "tmxy-backend-builder:p0-08",
+      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "locally_verified": true
+    },
+    "sbom": {
+      "file": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
+      "sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+      "format": "CycloneDX",
+      "spec_version": "1.5",
+      "component_count": 316,
+      "components_with_license_evidence": 267,
+      "locally_verified": true
+    }
+  },
+  "scanner": {
+    "docker_scout_version": "v1.24.0",
+    "vulnerability_status": "pending_authenticated_database_access",
+    "note": "Docker Scout CVE analysis requested authentication; no login or credential mutation was performed."
+  },
+  "pending": [
+    "Authenticated or approved offline vulnerability scan for the locked PostgreSQL and backend builder images",
+    "Hosted release-authority license policy evaluation of both locked image SBOMs",
+    "Signed release provenance and OCI attestations"
+  ],
+  "deferred_to_p4": [
+    "Create application Conan profile lockfiles when the first external C++ dependency is introduced"
+  ]
+}

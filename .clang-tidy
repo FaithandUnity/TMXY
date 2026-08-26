@@ -1,0 +1,18 @@
+Checks: >
+  -*,
+  bugprone-*,
+  clang-analyzer-*,
+  concurrency-*,
+  modernize-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -portability-avoid-pragma-once,
+  -modernize-use-trailing-return-type,
+  -readability-identifier-length,
+  -readability-magic-numbers
+WarningsAsErrors: '*'
+HeaderFilterRegex: '(^|[/\\])((Backend[/\\])?(apps|modules|adapters)|Tools[/\\]TMXY[.](FormatCore|Package|Table|Transform|Texture|StaticMesh|SkeletalMesh|Animation|Terrain))([/\\]|$)'
+FormatStyle: file
+ExtraArgs:
+  - '-std=c++20'

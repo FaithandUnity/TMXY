@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-25T23:09:55.4662045+00:00",
+  "result": "PASS",
+  "mode": "QualifyExisting",
+  "target": "linux/amd64",
+  "official_base": {
+    "index_digest": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "platform_manifest_digest": "sha256:5ae3c39ebd15e229dcedd5cee596b2497182493d41ff162e824ba13fc1b2b867",
+    "acquisition_report_sha256": "cb4a345dd2d811d464204aa3c4f37051b9123075c398834953803ae824820154",
+    "tls_verified": true,
+    "clean_builder_input": "verified local OCI layout"
+  },
+  "inputs": {
+    "dockerfile_sha256": "bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d",
+    "conan_requirements_sha256": "4cb1b0eaa7057fd65e95a65b3609865bc658226642ddd665be9181500d67b14b",
+    "backend_source": {
+      "file_count": 17,
+      "sha256": "b052c2075364bbc8ea2882af6f88be08aca6582a3d1b52281659ec9bc7357f14"
+    }
+  },
+  "primary_image": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "image_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "repo_digests": [
+      "tmxy-backend-builder@sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559"
+    ],
+    "created_utc": "2026-08-25T23:06:07.013112686Z",
+    "os": "linux",
+    "architecture": "amd64",
+    "size_bytes": 370501967,
+    "user": "tmxy",
+    "base_digest_label": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "rootfs_layers": [
+      "sha256:1d69a5fd31932841d7825ef4780c06f008eea65aaa9f3110fe09d5832ed5c7d8",
+      "sha256:ab8365029c8edde184fc803c0bf7f9a9adac4b42f4401ca93c55eaba038ed8b9",
+      "sha256:1a11dbf5ecf8d93af0a24600507b81cc6688de12d0f4d7b76489a2617322e761",
+      "sha256:0be1cb6278b5fc1ee73a238e67779e653dcb1ce4c48d68f1e277350451343633",
+      "sha256:c9a4a13fe389661be3e55912432fafe0f20df48aea7a28eab3befccf41496b42",
+      "sha256:e61e9661e51251f00a7e2bb7338680dab57da1049de9499f9a9199d97e19b134",
+      "sha256:1ec14dfc9d6397c5653f558269b9fce9cad8978c66076c39b7a81eab19974966",
+      "sha256:ed2d2b82186a74138623272406f686cc62e89743f68842b4440e50e2f7631b3f"
+    ],
+    "tool_versions": "Debian clang version 21.1.8 (++20251221032947+2078da43e25a-1~exp1~20251221153113.67)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/lib/llvm-21/bin\nDebian LLVM version 21.1.8\n  Optimized build.\nDebian clang-format version 21.1.8 (++20251221032947+2078da43e25a-1~exp1~20251221153113.67)\nDebian LLD 21.1.8 (compatible with GNU linkers)\ncmake version 4.4.2\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n1.11.1\nConan version 2.31.2",
+    "tool_versions_sha256": "56122399fe3d0cc7c376584b77adfe2c642301b9b1035a9948e5bc6dae76a943",
+    "installed_package_count": 218,
+    "installed_packages_sha256": "f3552ead774572ae9006636c991b6d1ca81bdbbe40ef738941dfe725d1af449b",
+    "llvm_packages": [
+      "clang-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "clang-format-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "clang-tidy-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "lld-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67"
+    ],
+    "llvm_revision_locked": true,
+    "python_packages_sha256": "94adb0c10c32eeb6416bb43cb7b4ca59c0d245f25eb520fd7a5f016f8856dbaf"
+  },
+  "clean_image": {
+    "reference": "tmxy-backend-builder:p0-08-clean",
+    "image_id": "sha256:93ac78453922461417497c725eab2a4efedd1e198e242c242c6c226599ea8783",
+    "repo_digests": [
+      "tmxy-backend-builder@sha256:93ac78453922461417497c725eab2a4efedd1e198e242c242c6c226599ea8783"
+    ],
+    "created_utc": "2026-08-25T23:03:06.921213031Z",
+    "os": "linux",
+    "architecture": "amd64",
+    "size_bytes": 370502388,
+    "user": "tmxy",
+    "base_digest_label": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "rootfs_layers": [
+      "sha256:1d69a5fd31932841d7825ef4780c06f008eea65aaa9f3110fe09d5832ed5c7d8",
+      "sha256:9196267fb03a0f59a010ea4ac45e54556d8a8d275ea0c1bb70e16e5c698107fc",
+      "sha256:f50e515dc579be7c08c3e0ad92e7834d00fbf07327341952b6e4fd3615bb77ca",
+      "sha256:e7b2dd384a81011785b1a48f49b94dd9ddda154abae5acef80ace5c5210fe476",
+      "sha256:827f682175988e5d8793049531cde3c3b248d5e8517fbc714afbd66d80edb895",
+      "sha256:0edf96e88b6f585aae3dfb1beeabab7884fa0887d8d540024d6d567547b63937",
+      "sha256:b732255f911f9f4174ab1fc57c1f9cbb7db7554c93d589609b16ed73990e576e",
+      "sha256:d4bfda52725dbd0601593adc50e96e4dc4949d0b0acc457017043509727a7e44"
+    ],
+    "tool_versions": "Debian clang version 21.1.8 (++20251221032947+2078da43e25a-1~exp1~20251221153113.67)\nTarget: x86_64-pc-linux-gnu\nThread model: posix\nInstalledDir: /usr/lib/llvm-21/bin\nDebian LLVM version 21.1.8\n  Optimized build.\nDebian clang-format version 21.1.8 (++20251221032947+2078da43e25a-1~exp1~20251221153113.67)\nDebian LLD 21.1.8 (compatible with GNU linkers)\ncmake version 4.4.2\n\nCMake suite maintained and supported by Kitware (kitware.com/cmake).\n1.11.1\nConan version 2.31.2",
+    "tool_versions_sha256": "56122399fe3d0cc7c376584b77adfe2c642301b9b1035a9948e5bc6dae76a943",
+    "installed_package_count": 218,
+    "installed_packages_sha256": "f3552ead774572ae9006636c991b6d1ca81bdbbe40ef738941dfe725d1af449b",
+    "llvm_packages": [
+      "clang-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "clang-format-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "clang-tidy-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "lld-21=1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67"
+    ],
+    "llvm_revision_locked": true,
+    "python_packages_sha256": "94adb0c10c32eeb6416bb43cb7b4ca59c0d245f25eb520fd7a5f016f8856dbaf"
+  },
+  "primary_qualification": {
+    "passed": true,
+    "network": "none",
+    "source_mount": "read-only",
+    "configure_preset": "ci-linux-clang",
+    "ctest_count": 2,
+    "build_log_sha256": "6bccc4178e2d64a64619c45a4628f7a89997c922ce63e8d185ef74bf21216e91",
+    "artifact_manifest_sha256": "b4df57277351028a3bac6815c1c75c9953d152c1c66f360afc5414bde4f74fcd",
+    "artifacts": [
+      "5c2f2dbc2a83adc2bf9331cdddc4d19401238c350b83506ec0a7df3c520ce63d  out/build/ci-linux-clang/apps/gateway/tmxy-gateway",
+      "8c7a16f91b5ff145668129cc38b0bf3271c26cb58185aa9f958837fc1ec0f5d3  out/build/ci-linux-clang/modules/foundation/libtmxy_foundation.a",
+      "b363d6cd42819dc3cab5dd19bdb9fc4f6f512f224c205b2cdf125d181f627154  out/build/ci-linux-clang/modules/foundation/tests/tmxy_foundation_redaction_test",
+      "f853d01e9834e7dce6f35bca9214f5db35d4ad81e0e8989fe7ac5f902243d0e5  out/build/ci-linux-clang/modules/foundation/tests/tmxy_foundation_build_info_test"
+    ]
+  },
+  "clean_qualification": {
+    "passed": true,
+    "network": "none",
+    "source_mount": "read-only",
+    "configure_preset": "ci-linux-clang",
+    "ctest_count": 2,
+    "build_log_sha256": "6bccc4178e2d64a64619c45a4628f7a89997c922ce63e8d185ef74bf21216e91",
+    "artifact_manifest_sha256": "b4df57277351028a3bac6815c1c75c9953d152c1c66f360afc5414bde4f74fcd",
+    "artifacts": [
+      "5c2f2dbc2a83adc2bf9331cdddc4d19401238c350b83506ec0a7df3c520ce63d  out/build/ci-linux-clang/apps/gateway/tmxy-gateway",
+      "8c7a16f91b5ff145668129cc38b0bf3271c26cb58185aa9f958837fc1ec0f5d3  out/build/ci-linux-clang/modules/foundation/libtmxy_foundation.a",
+      "b363d6cd42819dc3cab5dd19bdb9fc4f6f512f224c205b2cdf125d181f627154  out/build/ci-linux-clang/modules/foundation/tests/tmxy_foundation_redaction_test",
+      "f853d01e9834e7dce6f35bca9214f5db35d4ad81e0e8989fe7ac5f902243d0e5  out/build/ci-linux-clang/modules/foundation/tests/tmxy_foundation_build_info_test"
+    ]
+  },
+  "clean_builder": {
+    "name": "tmxy-p0-08-clean",
+    "driver": "docker-container",
+    "no_cache_policy": true,
+    "base_context_cached_only": true,
+    "completed_steps": 13,
+    "total_steps": 13,
+    "history_ref": "tmxy-p0-08-clean/tmxy-p0-08-clean0/r9njrrztnj6nkjma18iba59xa",
+    "status": "Completed",
+    "ephemeral": false
+  },
+  "comparison": {
+    "base_layer_equal": true,
+    "tool_versions_equal": true,
+    "installed_packages_equal": true,
+    "python_packages_equal": true,
+    "backend_artifacts_equal": true,
+    "note": "Image manifests may differ because build metadata timestamps are not release inputs; locked inventories, tools, source-bound artifacts, and the official base layer must match."
+  },
+  "sbom": {
+    "path": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
+    "format": "CycloneDX",
+    "spec_version": "1.5",
+    "component_count": 316,
+    "sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6"
+  }
+}

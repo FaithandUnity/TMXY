@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:19:01.0195080+00:00",
+  "result": "PASS",
+  "task": "P1-03",
+  "source_file_count": 7,
+  "source_sha256": "6ce0582eef991ec14154695bc5fa63b93a6bf04791205702070741a7b042877a",
+  "error_schema_version": 1,
+  "legacy_format_evidence": [
+    {
+      "path": "Base/Hdr/IEncryption.h",
+      "size": 1976,
+      "sha256": "eefbc0267c5c38fd19ebe8b115c02eb7d6b9189d3dbd5657737007f3ba5a28ab"
+    },
+    {
+      "path": "Base/Hdr/QDataTable.h",
+      "size": 1522,
+      "sha256": "4499c0e6c7cc53644d34d0d6a4ec4975e8c4f9e2826d7d2a2dd04d3926b97a8b"
+    },
+    {
+      "path": "Base/Hdr/QParser.h",
+      "size": 1642,
+      "sha256": "cbe9f9c3ef3f9d2f11bee6db1aa7f2b312d733c204cf3d587577067f77939f8d"
+    },
+    {
+      "path": "Base/Hdr/Rijndael_Imp.h",
+      "size": 1571,
+      "sha256": "6cfe1f9dc4aa59146c4b3517b23de9ca728fa85447205902cec3d30f8387cd89"
+    },
+    {
+      "path": "Base/Src/QDataTable.cpp",
+      "size": 7068,
+      "sha256": "3df15f58bf45de80aa7a8040a1f522f135e7b09487990b40b04805c78937b869"
+    },
+    {
+      "path": "Base/Src/QParser.cpp",
+      "size": 5865,
+      "sha256": "bab39ccce47907e06dbac0913c2edf2b43350a7efae867cb8b9c61fb56880314"
+    },
+    {
+      "path": "Base/Src/Rijndael_Imp.cpp",
+      "size": 16356,
+      "sha256": "a7b24ab28dbb08aced67fbea1c239866aa4cdd7e47bc67f8371b7909252087bf"
+    }
+  ],
+  "frozen_sample_pair": {
+    "files": [
+      {
+        "role": "ciphertext",
+        "path": "游戏资料/CLSVShare/Suit_table.tbl",
+        "size": 4688,
+        "sha256": "1185964f3e0d47aadb82c9c6aae35157cf581a98335babe1b13f685f3fef13b3"
+      },
+      {
+        "role": "expected_plaintext",
+        "path": "游戏资料/CLSVShare/Suit_table.csv",
+        "size": 4686,
+        "sha256": "4d43925eb834bea6d9710fa0112d599b8c96fbe29314612b461b5cdf44a169f2"
+      }
+    ],
+    "cipher_bytes": 4688,
+    "payload_bytes": 4686,
+    "padding_bytes": 1,
+    "column_count": 10,
+    "row_count": 57,
+    "metadata_fnv1a64": "c60c5d8848a6a32a",
+    "payload_matches_expected_sha256": true
+  },
+  "key_handling": {
+    "embedded_in_rebuild": false,
+    "input": "read-only legacy evidence initializer",
+    "initializer_copy_count": 2,
+    "key_bytes": 16,
+    "transport": "ephemeral tmpfs file inside networkless container",
+    "cleanup": "overwrite-with-zero-then-unlink-and-container-rm",
+    "emitted_to_output": false
+  },
+  "cipher_properties": {
+    "block_bytes": 16,
+    "aes_rounds_per_block": 2,
+    "authentication": "none-legacy-format-requires-external-sha256"
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "legacy_mounts": "three-read-only-single-files",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_secret_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "legacy-evidence-sha256",
+    "fixed-nonsecret-vectors",
+    "clang-format-21",
+    "cmake-clang-21",
+    "clang-tidy-21",
+    "ctest",
+    "legacy-pair-exact-match"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 44,
+    "output_sha256": "30d3b09bfe3eeb42c1e2216befb044ac06551055a86c0fcc2ab4cd7b88da94f1"
+  }
+}

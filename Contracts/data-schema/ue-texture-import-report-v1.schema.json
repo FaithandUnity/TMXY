@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/ue-texture-import-report-v1.schema.json",
+  "title": "TMXY UE golden texture import report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "report_version",
+    "handler_format_id",
+    "before_asset_count",
+    "after_asset_count",
+    "imported_asset_count",
+    "invalid_hash_rejected",
+    "invalid_hash_asset_created",
+    "reimport_passed",
+    "reimport_package_bytes_unchanged",
+    "textures"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.ue.texture-import-report" },
+    "schema_version": { "const": 1 },
+    "report_version": { "const": "1.0.0" },
+    "handler_format_id": { "const": "microsoft.dds" },
+    "before_asset_count": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "after_asset_count": { "const": 3 },
+    "imported_asset_count": { "const": 3 },
+    "invalid_hash_rejected": { "const": true },
+    "invalid_hash_asset_created": { "const": false },
+    "reimport_passed": { "const": true },
+    "reimport_package_bytes_unchanged": { "const": true },
+    "textures": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fixture_id",
+          "manifest_path",
+          "manifest_sha256",
+          "artifact_id",
+          "package_name",
+          "legacy_format",
+          "alpha_coverage",
+          "width",
+          "height",
+          "source_mip_count",
+          "srgb",
+          "compression_no_alpha",
+          "source_format",
+          "expected_cooked_format"
+        ],
+        "properties": {
+          "fixture_id": { "enum": ["opaque-dxt1", "transparent-dxt5", "multi-mip-dxt1"] },
+          "manifest_path": { "type": "string", "minLength": 1 },
+          "manifest_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "artifact_id": { "const": "texture-payload" },
+          "package_name": {
+            "type": "string",
+            "pattern": "^/Game/TMXY/Golden/Textures/T_Golden_[A-Za-z0-9_]+$"
+          },
+          "legacy_format": { "enum": ["dxt1", "dxt5"] },
+          "alpha_coverage": { "enum": ["opaque", "transparent"] },
+          "width": { "type": "integer", "minimum": 1 },
+          "height": { "type": "integer", "minimum": 1 },
+          "source_mip_count": { "enum": [1, 4] },
+          "srgb": { "const": true },
+          "compression_no_alpha": { "type": "boolean" },
+          "source_format": { "const": "TSF_BGRA8" },
+          "expected_cooked_format": { "enum": ["PF_DXT1", "PF_DXT5"] }
+        }
+      }
+    }
+  }
+}

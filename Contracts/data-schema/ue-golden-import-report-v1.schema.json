@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.tmxy.local/ue-golden-import-report-v1.schema.json",
+  "title": "TMXY UE golden import report v1",
+  "type": "object",
+  "required": [
+    "schema",
+    "schema_version",
+    "report_version",
+    "run_id",
+    "golden_root",
+    "golden_map",
+    "interchange_manifest",
+    "import_mode",
+    "before_import",
+    "after_import",
+    "outcome"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.ue.golden-import-report" },
+    "schema_version": { "const": 1 },
+    "report_version": { "const": "1.0.0" },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "golden_root": { "const": "/Game/TMXY/Golden" },
+    "golden_map": { "const": "/Game/TMXY/Golden/Maps/TMXYGoldenTestMap" },
+    "interchange_manifest": { "$ref": "#/$defs/relativePath" },
+    "import_mode": {
+      "enum": ["validate-only", "single-fixture", "batch"]
+    },
+    "before_import": {
+      "allOf": [
+        { "$ref": "#/$defs/snapshot" },
+        {
+          "properties": { "phase": { "const": "before-import" } }
+        }
+      ]
+    },
+    "after_import": {
+      "allOf": [
+        { "$ref": "#/$defs/snapshot" },
+        {
+          "properties": { "phase": { "const": "after-import" } }
+        }
+      ]
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "imported_asset_count", "warnings", "errors"],
+      "properties": {
+        "status": { "enum": ["not-run", "passed", "failed"] },
+        "imported_asset_count": { "type": "integer", "minimum": 0 },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "errors": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "not-run" } } },
+          "then": { "properties": { "imported_asset_count": { "const": 0 } } }
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*(^|/)\\.\\.(/|$))[^:]+$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "package": {
+      "type": "object",
+      "required": ["package_name", "class_name", "content_sha256"],
+      "properties": {
+        "package_name": {
+          "type": "string",
+          "pattern": "^/Game/TMXY/Golden(?:/[A-Za-z0-9_]+)+$"
+        },
+        "class_name": { "type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_]*$" },
+        "content_sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "snapshot": {
+      "type": "object",
+      "required": ["phase", "packages", "map_count", "imported_asset_count"],
+      "properties": {
+        "phase": { "enum": ["before-import", "after-import"] },
+        "packages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/package" }
+        },
+        "map_count": { "type": "integer", "minimum": 1 },
+        "imported_asset_count": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

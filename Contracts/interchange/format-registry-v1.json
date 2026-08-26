@@ -1,0 +1,198 @@
+{
+  "schema": "tmxy.asset.interchange.registry",
+  "schema_version": 1,
+  "registry_version": "1.0.0",
+  "manifest_schema": "Contracts/data-schema/asset-interchange-v1.schema.json",
+  "bundle_rules": {
+    "manifest_name": "manifest.json",
+    "path_separator": "/",
+    "paths_are_relative": true,
+    "absolute_paths_forbidden": true,
+    "parent_segments_forbidden": true,
+    "content_hash": "sha256-lowercase-hex",
+    "timestamps_in_manifest": false,
+    "text_encoding": "utf-8-without-bom",
+    "text_line_endings": "lf",
+    "unknown_field_preservation": [
+      "source-span",
+      "opaque-sidecar",
+      "namespaced-extension"
+    ]
+  },
+  "version_policy": {
+    "major": "reject-unknown-major",
+    "minor": "accept-only-when-all-required-features-are-supported",
+    "patch": "compatible-clarification-or-bug-fix",
+    "published_registry_entries_are_immutable": true,
+    "new_format_or_semantics_requires_new_version": true,
+    "unknown_extensions_must_survive_read_write": true
+  },
+  "formats": [
+    {
+      "format_id": "tmxy.package.tree-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "extensions": [".json"],
+      "asset_kinds": ["package_tree"],
+      "roles": ["container-tree"],
+      "import_authority": true,
+      "byte_order": "not-applicable",
+      "specification": "Contracts/data-schema/package-tree-v1.schema.json",
+      "note": "Preserves unparsed object bodies as source spans."
+    },
+    {
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "extensions": [".json"],
+      "asset_kinds": [
+        "texture",
+        "static_mesh",
+        "skeletal_mesh",
+        "animation_set",
+        "terrain_tile",
+        "audio",
+        "navigation_graph",
+        "ui_texture",
+        "material"
+      ],
+      "roles": ["legacy-metadata", "material-binding", "provenance"],
+      "import_authority": true,
+      "byte_order": "not-applicable",
+      "specification": "Docs/Formats/ASSET-INTERCHANGE-V1.md",
+      "note": "Asset-specific semantics live beside standard payloads and retain unknowns."
+    },
+    {
+      "format_id": "microsoft.dds",
+      "format_version": "1.0.0",
+      "media_type": "image/vnd-ms.dds",
+      "extensions": [".dds"],
+      "asset_kinds": ["texture", "ui_texture"],
+      "roles": ["texture-payload"],
+      "import_authority": true,
+      "byte_order": "little-endian",
+      "specification": "https://learn.microsoft.com/windows/win32/direct3ddds/dx-graphics-dds-pguide",
+      "note": "Preserves the validated format and complete mip chain."
+    },
+    {
+      "format_id": "khronos.gltf-json",
+      "format_version": "2.0.0",
+      "media_type": "model/gltf+json",
+      "extensions": [".gltf"],
+      "asset_kinds": ["static_mesh", "skeletal_mesh", "animation_set"],
+      "roles": ["render-geometry", "skeleton", "skin", "animation"],
+      "import_authority": true,
+      "byte_order": "not-applicable",
+      "specification": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+      "note": "Uses glTF standard coordinates; legacy-only semantics remain in metadata JSON."
+    },
+    {
+      "format_id": "khronos.gltf-bin",
+      "format_version": "2.0.0",
+      "media_type": "application/octet-stream",
+      "extensions": [".bin"],
+      "asset_kinds": ["static_mesh", "skeletal_mesh", "animation_set"],
+      "roles": ["gltf-buffer"],
+      "import_authority": true,
+      "byte_order": "little-endian",
+      "specification": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+      "note": "External binary buffers are preferred over GLB for deterministic independent hashing."
+    },
+    {
+      "format_id": "tmxy.terrain.height-f32le",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "extensions": [".height.f32le"],
+      "asset_kinds": ["terrain_tile"],
+      "roles": ["height-plane"],
+      "import_authority": true,
+      "byte_order": "little-endian",
+      "specification": "Docs/Formats/TER-FORMAT.md",
+      "note": "Row-major float32 source height samples; scale remains metadata-driven."
+    },
+    {
+      "format_id": "tmxy.terrain.layers-rgba8",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "extensions": [".layers.rgba8"],
+      "asset_kinds": ["terrain_tile"],
+      "roles": ["layer-alpha-plane"],
+      "import_authority": true,
+      "byte_order": "not-applicable",
+      "specification": "Docs/Formats/TER-FORMAT.md",
+      "note": "Four ordered source alpha bytes per row-major vertex."
+    },
+    {
+      "format_id": "riff.wave.pcm",
+      "format_version": "1.0.0",
+      "media_type": "audio/wav",
+      "extensions": [".wav"],
+      "asset_kinds": ["audio"],
+      "roles": ["effect-pcm", "music-lossless-intermediate"],
+      "import_authority": true,
+      "byte_order": "little-endian",
+      "specification": "Docs/Formats/AUXILIARY-ASSET-INVESTIGATION.md",
+      "note": "Import remains conditional on content rights and loop/attenuation review."
+    },
+    {
+      "format_id": "tmxy.navigation.graph-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "extensions": [".navigation.json"],
+      "asset_kinds": ["navigation_graph"],
+      "roles": ["zone-navigation-graph"],
+      "import_authority": true,
+      "byte_order": "not-applicable",
+      "specification": "Docs/Formats/AUXILIARY-ASSET-INVESTIGATION.md",
+      "note": "Reserved P1 contract; a producer must still validate companion path references."
+    },
+    {
+      "format_id": "wavefront.obj",
+      "format_version": "1.0.0",
+      "media_type": "model/obj",
+      "extensions": [".obj"],
+      "asset_kinds": ["static_mesh", "skeletal_mesh"],
+      "roles": ["visual-review"],
+      "import_authority": false,
+      "byte_order": "not-applicable",
+      "specification": "Docs/Formats/ASSET-INTERCHANGE-V1.md",
+      "note": "Cannot carry all collision, skinning, animation, or legacy metadata."
+    },
+    {
+      "format_id": "w3c.png",
+      "format_version": "1.0.0",
+      "media_type": "image/png",
+      "extensions": [".png"],
+      "asset_kinds": ["texture", "ui_texture"],
+      "roles": ["mip-zero-review"],
+      "import_authority": false,
+      "byte_order": "not-applicable",
+      "specification": "https://www.w3.org/TR/png-3/",
+      "note": "Normalized RGBA8 preview; not authoritative for float/compressed textures or mips."
+    },
+    {
+      "format_id": "truevision.tga",
+      "format_version": "1.0.0",
+      "media_type": "image/x-tga",
+      "extensions": [".tga"],
+      "asset_kinds": ["texture", "ui_texture"],
+      "roles": ["mip-zero-review"],
+      "import_authority": false,
+      "byte_order": "little-endian",
+      "specification": "Docs/Formats/QTX-FORMAT.md",
+      "note": "Uncompressed RGBA8 review image only."
+    },
+    {
+      "format_id": "rfc4180.csv",
+      "format_version": "1.0.0",
+      "media_type": "text/csv",
+      "extensions": [".csv"],
+      "asset_kinds": ["animation_set", "terrain_tile"],
+      "roles": ["root-track-review", "terrain-edge-review"],
+      "import_authority": false,
+      "byte_order": "not-applicable",
+      "specification": "https://www.rfc-editor.org/rfc/rfc4180",
+      "note": "Human and diff review only; authoritative values remain in typed payloads."
+    }
+  ]
+}

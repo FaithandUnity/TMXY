@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:17:45.1933901+00:00",
+  "result": "PASS",
+  "task": "P1-07",
+  "source_file_count": 22,
+  "source_sha256": "38e4977ae64e1cfb743b5f3533ab7642c11b28cdb7ad8eb819cec6e4856bb484",
+  "input_reports": {
+    "package_v2_sha256": "6c4e3a84504a746f138ad7503b587e16bc24280d595fb78f576045f3154c04fa",
+    "package_v3_sha256": "56f686ffe512a0a5963cbb7f22074c56de85627898c3daf99ce1f96e9b1e0f3d"
+  },
+  "pipeline": [
+    "read-and-validate-outer-header",
+    "select-versioned-directory-codec",
+    "decode-reversible-obfuscation",
+    "parse-and-validate-directory-records",
+    "expose-bounded-raw-object-body-spans"
+  ],
+  "classification": {
+    "directory_operation": "fixed-reversible-obfuscation",
+    "directory_compression": "none-observed",
+    "directory_encryption": false,
+    "key_or_secret_required": false,
+    "object_body_transform": "none-at-container-layer",
+    "object_body_semantics": "deferred-to-versioned-object-codecs"
+  },
+  "frozen_roundtrip": {
+    "v2_sample_count": 22,
+    "v3_sample_count": 140,
+    "encoded_roundtrip_exact": true,
+    "record_count": 118711,
+    "directory_bytes": 5364459,
+    "decoded_fnv1a64": "7c86de5289714cc8"
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "legacy_sample_mount": "read-only-directory",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "dependency-baseline-check",
+    "clang-format-21",
+    "cmake-clang-21",
+    "clang-tidy-21",
+    "ctest",
+    "all-directory-byte-roundtrip"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 87,
+    "output_sha256": "8f1fbd3d1fa23ba8e50f74961e610aff5f2fd0e57761c115844e4a61338e7478"
+  }
+}

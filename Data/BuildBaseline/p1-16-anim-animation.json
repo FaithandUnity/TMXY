@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:12.9151321+00:00",
+  "result": "PASS",
+  "task": "P1-16",
+  "completion_criteria_satisfied": true,
+  "source_file_count": 18,
+  "source_sha256": "768ef1305124397cc2d9028d5b4a70d7ed50d7386aadccec4a0a9ccf16815420",
+  "contract": {
+    "descriptor_source": "ordered Package QSkelMesh references and QSkelAnim property bodies",
+    "payload": "headerless bone-major then frame-major QAnim key stream",
+    "track_identity": "dense zero-based skeleton prefix; partial tails are valid",
+    "key_encoding": "float32 quaternion xyzw plus local translation xyz",
+    "duration": "sampled=(frames-1)*delta; legacy loop period honors selfLoop duplicate terminal key",
+    "root_motion": "measured root track; no extraction or mutation",
+    "outputs": [
+      "json-animation-summary",
+      "csv-complete-root-track"
+    ]
+  },
+  "samples": [
+    {
+      "path": "particle/ZFH_B_S_XALGF001.anim",
+      "bytes": 4,
+      "clips": 0,
+      "role": "global-minimum"
+    },
+    {
+      "object": "skchar.Boy01",
+      "clips": 272,
+      "tracks": 21702,
+      "keys": 1173344,
+      "moving": 261,
+      "role": "partial-track-prefix"
+    },
+    {
+      "object": "skchar.Girl01",
+      "clips": 270,
+      "tracks": 21600,
+      "keys": 1188320,
+      "moving": 254,
+      "role": "canonical-full-track"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "ClientCode\\QRender\\Src\\QSkelMesh.cpp",
+      "size": 80302,
+      "sha256": "d4d00eb79f7c30123df02e9105f7335fac4533c146957a429ba9ad84c108e5f7",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QSkelMesh.h",
+      "size": 18771,
+      "sha256": "d7b44a3e7160f37a297f7c428d483300d9900f0cb0f0c8140d97aa3af3a8c7ae",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Src\\QAnimNotify.cpp",
+      "size": 863,
+      "sha256": "ee1f2f1f0b4ca8f2b1f15df235d7d5eabbeeb0d1d8dd0cde44fc4d562222f5e4",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QAnimNotify.h",
+      "size": 961,
+      "sha256": "c2a9d24f3394b9dc21e014e6365268ad4f5c65db15b8b08b2c10f6ae7411c4ca",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Src\\QArchive.cpp",
+      "size": 2242,
+      "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Src\\QProperty.cpp",
+      "size": 17859,
+      "sha256": "b92a93ba136e1de845b5c5f6d385fad3904db202b7396f213a3749a2e4584a57",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Utility\\Src\\UtSkinMeshFactories.cpp",
+      "size": 44007,
+      "sha256": "5fc2cdb7a481366a8fac04bbbc1a2d56b306ccfc86198c2004124c469165a741",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\SkelMesh\\skchar",
+      "size": 281615,
+      "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\SkelMesh\\particle\\ZFH_B_S_XALGF001.anim",
+      "size": 4,
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\SkelMesh\\skchar\\Boy01.anim",
+      "size": 32855816,
+      "sha256": "912c7e13632082fdc457b148ebb8bd7ca4757a619da2bb6ad17b57acbc3afe3e",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\SkelMesh\\skchar\\Girl01.anim",
+      "size": 33275128,
+      "sha256": "524f612bff80de06ce92ebb558ecf4d783cdb84e097dd708aed64f7f8524c257",
+      "passed": true
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "evidence_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_output_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-ninja-clang-21-werror",
+    "clang-tidy-21",
+    "ctest-corrupt-boundary-determinism",
+    "minimum-plus-two-real-package-anim-pairs",
+    "cli-json-root-csv-signature"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 75,
+    "output_sha256": "5690ddfd1c0015220919d0070c0759393c3b8b18746c50759ed630f45ed928ef"
+  }
+}

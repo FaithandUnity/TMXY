@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:19:54.1056110+00:00",
+  "result": "PASS",
+  "task": "P1-13",
+  "completion_criteria_satisfied": true,
+  "source_file_count": 21,
+  "source_sha256": "31d19b6ccc64abe55574f90e7bc62c586d155cd34152d43014f5e578caeccb67",
+  "contract": {
+    "descriptor_source": "Package QTexture QObject property body",
+    "qtx_payload": "headerless contiguous mip bytes",
+    "formats": [
+      "rgba8",
+      "rgba16f",
+      "r32f",
+      "dxt1",
+      "dxt1a",
+      "dxt3",
+      "dxt5"
+    ],
+    "outputs": [
+      "dds-lossless-all-mips",
+      "png-rgba8-mip0",
+      "tga-bgra8-mip0",
+      "json-metadata"
+    ],
+    "alpha_fields": [
+      "encoding",
+      "decoded_coverage"
+    ]
+  },
+  "samples": [
+    {
+      "object": "texstone.WHZ_S_Dimian20_D",
+      "format": "dxt1",
+      "width": 8,
+      "height": 8,
+      "mips": 1,
+      "alpha": "opaque",
+      "payload_size": 32
+    },
+    {
+      "object": "newscenc.dy_bx_xlys_01_D",
+      "format": "dxt5",
+      "width": 4096,
+      "height": 4096,
+      "mips": 13,
+      "alpha": "opaque",
+      "payload_size": 22369648
+    },
+    {
+      "object": "texparticle.FXH_T_toumingtu",
+      "format": "dxt5",
+      "width": 16,
+      "height": 16,
+      "mips": 1,
+      "alpha": "transparent",
+      "payload_size": 256
+    },
+    {
+      "object": "editorui.ToolBoxHighLight",
+      "format": "rgba8",
+      "width": 512,
+      "height": 512,
+      "mips": 1,
+      "alpha": "translucent",
+      "payload_size": 1048576
+    }
+  ],
+  "evidence": [
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QTexture.h",
+      "size": 1719,
+      "sha256": "bd381809fcd2cfff93227482ef52b53551de9c5fd69123153b324fe53be52bb9",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Src\\QTexture.cpp",
+      "size": 799,
+      "sha256": "299ef9ff707a912d06d0b8010e3ffcd502de2eba8e31effbd5af59bf1a88738f",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Src\\QRenderTypes.cpp",
+      "size": 16776,
+      "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\D3D9RDev\\Src\\D3DRendInterface.cpp",
+      "size": 42954,
+      "sha256": "134444b822c3bd271bcb91db4a0ac59a2b540bacbe460e35c54077f78589be87",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Src\\QObject.cpp",
+      "size": 28782,
+      "sha256": "1f10ae3b06062564ac283a9396b1d232c261c669bcd6c22271b414aa6d6323e5",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\Texture\\texstone",
+      "size": 695794,
+      "sha256": "350c7d5da525f8ea4490345ad4948da4c2d6d4551ee5136f9aa0ce540d147d23",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\newscenc",
+      "size": 43554,
+      "sha256": "79bf6e339149b9a37535d6d5c92e5a4c09b5737072be1ac9fe21681630f8d433",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\Texture\\texparticle",
+      "size": 162914,
+      "sha256": "607a4f926ce977a67f5168928f54a111b0f88711c88c997eb5e067bea4da9a58",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\editorui",
+      "size": 222,
+      "sha256": "1f7d7c535a2ff76eb328ddc0ad0b9e9126f32efb1c4f0ad075c51242520567a7",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Texture\\texstone\\WHZ_S_Dimian20_D.qtx",
+      "size": 32,
+      "sha256": "686418d443a9d067f90ec640d9d92a8ad7efd1ce6b1c1f05587a256027c003f2",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Texture\\newscenc\\dy_bx_xlys_01_D.qtx",
+      "size": 22369648,
+      "sha256": "bfdc514d8ece8424bd0b9b193a651b7656cc37520e89502a03c28dd68160a69a",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Texture\\texparticle\\FXH_T_toumingtu.qtx",
+      "size": 256,
+      "sha256": "44126814ab834eb714baffb42461fd53083118232afed00ad0efc5a6603d0804",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\Texture\\editorui\\ToolBoxHighLight.qtx",
+      "size": 1048576,
+      "sha256": "173259db23fcd44d2a522c1066dc0e851b7690ee384d9880719fab76f2f8368b",
+      "passed": true
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "evidence_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_output_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-ninja-clang-21-werror",
+    "clang-tidy-21",
+    "ctest-corrupt-boundary-determinism",
+    "four-real-package-qtx-pairs",
+    "cli-dds-png-tga-json-signature"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 75,
+    "output_sha256": "cd9bb867d5e1c7940aaa15fc143dc54eb046d8cd2ccec2ebb735507d45b79d69"
+  }
+}

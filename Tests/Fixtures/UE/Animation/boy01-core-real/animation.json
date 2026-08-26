@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "asset_kind": "animation_set",
+  "skeleton_root_name": "Bip01",
+  "skeleton_bone_count": 80,
+  "source_animation_count": 272,
+  "selected_clip_count": 3,
+  "sample_rate_hz": 30,
+  "root_motion_policy": "preserved-root-track-not-extracted",
+  "quaternion_policy": "normalized-adjacent-hemisphere-continuity",
+  "clips": [
+    {"source_index": 135, "name": "O_RoamIdle", "frame_count": 50, "track_count": 80, "sampled_duration_seconds": 1.6333334185183048, "legacy_loop_period_seconds": 1.666666753590107, "self_loop": false, "root_classified_moving": true, "root_translation_distance_meters": 0.00051273710703615878, "maximum_endpoint_translation_delta_meters": 0.00051273710703615878, "maximum_endpoint_rotation_delta_degrees": 4.0998321839233629},
+    {"source_index": 153, "name": "O_Run_Forward", "frame_count": 24, "track_count": 80, "sampled_duration_seconds": 0.7666667066514492, "legacy_loop_period_seconds": 0.80000004172325134, "self_loop": false, "root_classified_moving": true, "root_translation_distance_meters": 0.015272078433068775, "maximum_endpoint_translation_delta_meters": 0.02275902217955959, "maximum_endpoint_rotation_delta_degrees": 19.244346665243135},
+    {"source_index": 221, "name": "SelectIdle", "frame_count": 60, "track_count": 80, "sampled_duration_seconds": 1.9666667692363262, "legacy_loop_period_seconds": 2.0000001043081284, "self_loop": false, "root_classified_moving": false, "root_translation_distance_meters": 0, "maximum_endpoint_translation_delta_meters": 0.00014649166241456063, "maximum_endpoint_rotation_delta_degrees": 1.0434959280128322}
+  ]
+}

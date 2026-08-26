@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-25T22:43:20.3965894+00:00",
+  "result": "PASS",
+  "acquisition": {
+    "source": "official Docker Registry",
+    "trusted_dns": "Google DNS-over-HTTPS",
+    "dynamic_address_selection": true,
+    "selected_address_persisted": false,
+    "tls_verification_disabled": false,
+    "system_dns_modified": false,
+    "hosts_file_modified": false,
+    "alternate_registry_used": false,
+    "bearer_token_persisted": false
+  },
+  "official_index": {
+    "digest": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "size": 5651,
+    "media_type": "application/vnd.oci.image.index.v1+json"
+  },
+  "platform_manifest": {
+    "digest": "sha256:5ae3c39ebd15e229dcedd5cee596b2497182493d41ff162e824ba13fc1b2b867",
+    "size": 1021,
+    "media_type": "application/vnd.oci.image.manifest.v1+json",
+    "os": "linux",
+    "architecture": "amd64"
+  },
+  "config": {
+    "digest": "sha256:160466e67bb85a4099d9d9c2356b4a6a64747b281a22c142efbd4539db1b8525",
+    "size": 453,
+    "media_type": "application/vnd.oci.image.config.v1+json"
+  },
+  "layers": [
+    {
+      "digest": "sha256:a8ac7f6c67abc236e4c745052c404112b8fab6fe8ac3a329d1ef3b867ad67c71",
+      "size": 28232655,
+      "media_type": "application/vnd.oci.image.layer.v1.tar+gzip"
+    }
+  ],
+  "tls": {
+    "verified": true,
+    "certificate_sha256": "aaabbb8bdfd56b6ee192aefdd989dd35d11c9a337c7822ae00dd3fd068fadf48",
+    "same_certificate_for_manifest": true
+  },
+  "archive": {
+    "cache_path": "Data/Toolchain/OciCache/debian-bookworm-slim-20260825-224308928/debian-bookworm-slim.oci.tar",
+    "bytes": 28262400,
+    "sha256": "sha256:dd84b434cdb6126dd3137b83faacf0b493e5ef7500a1fcf80ca76dd04ae4f5ea"
+  },
+  "imported_image": {
+    "tag": "debian:bookworm-slim",
+    "image_id": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "expected_image_id": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+    "os": "linux",
+    "architecture": "amd64",
+    "repo_digests": [
+      "debian@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171"
+    ]
+  },
+  "docker_load_output_sha256": "sha256:73d5e037056641374f3c4526b425baee6a0936e48db76ef2de5b558a5c3f0003"
+}

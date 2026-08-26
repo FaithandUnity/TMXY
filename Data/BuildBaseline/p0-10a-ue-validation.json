@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:10:32.2014316+00:00",
+  "result": "PASS",
+  "project": {
+    "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
+    "engine_association": "5.8",
+    "modules": [
+      "TMXYCore",
+      "TMXYClient",
+      "TMXYGoldenTests"
+    ],
+    "descriptor_passed": true,
+    "golden_module_editor_only": true,
+    "importer_plugin_editor_only": true,
+    "android_file_server_disabled": true,
+    "solution_generated": true,
+    "cooked_asset_count": 14,
+    "content_asset_count": 14,
+    "content_assets": [
+      "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+      "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+      "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+      "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+    ],
+    "content_policy_passed": true
+  },
+  "engine": {
+    "version": "5.8.2",
+    "changelist": 56702186,
+    "compatible_changelist": 55116800,
+    "passed": true
+  },
+  "project_generation": {
+    "passed": true,
+    "exit_code": 0,
+    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.43 seconds",
+    "output_sha256": "344fb44ff3d43aedbecc5d26da50f3817e863ff6b3f6763b99067b93c2fdbdff",
+    "error": ""
+  },
+  "editor_build": {
+    "target": "TMXYEditor Win64 Development",
+    "passed": true,
+    "exit_code": 0,
+    "compiler_not_preferred_warning": true,
+    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 4.15 seconds",
+    "output_sha256": "b8a75f46705cc026e38ca487f68e2073eaf41cc23bea65f7944e3f111fc8a614",
+    "error": ""
+  },
+  "format": {
+    "passed": true,
+    "checked_files": 48,
+    "error": ""
+  },
+  "automation": {
+    "requested": true,
+    "passed": true,
+    "test_count": 8,
+    "build_info_passed": true,
+    "golden_host_passed": true,
+    "importer_manifest_batch_passed": true,
+    "importer_texture_passed": true,
+    "importer_static_mesh_passed": true,
+    "importer_skeletal_mesh_passed": true,
+    "importer_animation_passed": true,
+    "importer_terrain_passed": true,
+    "module_loaded": true,
+    "golden_module_loaded": true,
+    "importer_module_loaded": true,
+    "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260826-221018082.log",
+    "process_exit_code": 0
+  },
+  "missing_paths": []
+}

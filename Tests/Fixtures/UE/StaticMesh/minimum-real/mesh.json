@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "object_name": "particle.ZFH_O_S_Tianpian100",
+  "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+  "ue_preview_contract": "x-forward-y-right-z-up-centimeters",
+  "vertex_count": 4,
+  "index_count": 6,
+  "triangle_count": 2,
+  "section_count": 1,
+  "uv_channel_count": 1,
+  "shadow_vertex_count": 0,
+  "shadow_index_count": 0,
+  "collision_vertex_count": 0,
+  "collision_index_count": 0,
+  "octree_node_count": 0,
+  "octree_index_count": 0,
+  "emitter_point_count": 0,
+  "legacy_bounds": {"minimum": [-17.5672302, -17.2778435, -4.68960619], "maximum": [-14.7323551, 14.307416, 19.1825714]},
+  "ue_centimeter_bounds": {"minimum": [-1756.72302, -1727.7843, -468.960632], "maximum": [-1473.23547, 1430.74158, 1918.25708]},
+  "declared_bounds_relation": "contains",
+  "use_light_map": false,
+  "unknown_property_count": 4,
+  "sections": [
+    {"slot": 0, "material": "particle.ZFH_O_S_Tianpian100_Mat1", "first_index": 0, "triangle_count": 2, "minimum_vertex": 0, "maximum_vertex": 3, "two_sided": true}
+  ]
+}

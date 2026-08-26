@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "frozen_execution_charter",
+  "phase": "P1_format_proof",
+  "execution_owner": "Codex",
+  "acceptance_owner": "project_lead",
+  "duration_weeks": {
+    "minimum": 4,
+    "maximum": 8
+  },
+  "review_cadence": {
+    "weekly_evidence_review": true,
+    "gate_review": "P1-28",
+    "status_update_day": "weekly"
+  },
+  "workstreams": [
+    {
+      "id": "binary-foundation",
+      "tasks": ["P1-01", "P1-02", "P1-03", "P1-04"],
+      "target_weeks": "1-2",
+      "exit_evidence": "bounded_reader_tests_and_reference_vectors"
+    },
+    {
+      "id": "package-and-table-proof",
+      "tasks": ["P1-05", "P1-06", "P1-07", "P1-08", "P1-09", "P1-10", "P1-11"],
+      "target_weeks": "2-4",
+      "exit_evidence": "versioned_record_tree_and_table_schema_evidence"
+    },
+    {
+      "id": "resource-proof",
+      "tasks": ["P1-12", "P1-13", "P1-14", "P1-15", "P1-16", "P1-17", "P1-18"],
+      "target_weeks": "3-6",
+      "exit_evidence": "five_resource_parsers_with_boundary_tests"
+    },
+    {
+      "id": "ue-golden-host",
+      "tasks": ["P1-19", "P1-20", "P1-21", "P1-22", "P1-23", "P1-24", "P1-25", "P1-26", "P1-27", "P1-28"],
+      "target_weeks": "5-8",
+      "exit_evidence": "G1_review_with_automated_golden_results"
+    }
+  ],
+  "experiment_limits": {
+    "legacy_directories_read_only": true,
+    "outputs_only_under_rebuild": true,
+    "no_bulk_asset_import_before_G1": true,
+    "no_legacy_runtime_dependency": true,
+    "no_secret_in_source_log_or_report": true,
+    "unknown_fields_preserved": true,
+    "evidence_levels_required": true
+  },
+  "stop_conditions": [
+    "source_integrity_mismatch",
+    "secret_or_rights_boundary_violation",
+    "parser_accepts_out_of_bounds_input",
+    "sample_result_cannot_be_reproduced",
+    "attempt_to_start_bulk_import_before_G1"
+  ],
+  "start_condition": "G0_READY_AND_P0_16_APPROVED",
+  "local_start_waiver": {
+    "id": "WVR-0001",
+    "contract": "Data/Governance/p1-local-start-waiver.json",
+    "document": "Docs/Waivers/WVR-0001-p1-local-start-before-g0.md",
+    "scope": "P1-01_through_P1-27_local_evidence"
+  }
+}

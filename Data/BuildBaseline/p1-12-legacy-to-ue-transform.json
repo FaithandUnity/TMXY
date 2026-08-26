@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:19:16.4378554+00:00",
+  "result": "PASS",
+  "task": "P1-12",
+  "completion_criteria_satisfied": true,
+  "source_file_count": 7,
+  "source_sha256": "0936758cfc5002df2042a86404257634537e9684a765e0d7240b4c02e564a4d7",
+  "convention": {
+    "axes": "identity_x_forward_y_right_z_up",
+    "centimeters_per_legacy_unit": 100,
+    "legacy_angle_units_per_turn": 65536,
+    "rotator_signs": {
+      "pitch": -1,
+      "yaw": 1,
+      "roll": -1
+    },
+    "matrix": "row_vector_affine_translation_row_3",
+    "uv": "identity_serialized_legacy_to_ue",
+    "triangle_winding": "preserve_unless_negative_basis_is_baked"
+  },
+  "evidence": [
+    {
+      "path": "ClientCode\\Base\\Hdr\\QMath.h",
+      "sha256": "62b5f6f18aa1885b70587ca79cd2bad08e7cce62d572808b66288611708d13ac",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QRotator.h",
+      "sha256": "661c662041667513d2deaa4c6d4bd6a1244a8fa7b09e533b4ed8a4df1ed51a3f",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QMatrix.h",
+      "sha256": "99defaa9fa607285bb2c553d257d948fbc1028d58e53cdaf6d38dfb25a4ecc58",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Src\\QPawnPhy.cpp",
+      "sha256": "d82ab57cd8dafc7f1f5a7d811e0c94bc49c3246e2438deded597d3552641028b",
+      "passed": true
+    },
+    {
+      "path": "ToolCode\\XwMaxExp\\XwMaxExp.h",
+      "sha256": "674549952ee6b3eacb0068efb4aa1d50c41ddbb40a819e2cc809715f45071c1d",
+      "passed": true
+    },
+    {
+      "path": "ToolCode\\XwMaxExp\\XwMaxMesh.cpp",
+      "sha256": "8133ea9e6326da55e1d542bfcfb44731a4a48cabf5984bedcbba7dfb97bdcaea",
+      "passed": true
+    },
+    {
+      "path": "DevDoc\\游戏资料\\CLSVShare\\unit_disp_ids.csv",
+      "sha256": "05a6a64e66654784eada747f5ff35310c2b48fea881f6a8ff12c356053b54fc0",
+      "passed": true
+    },
+    {
+      "path": "UE_5.8/Engine/Source/Runtime/Core/Public/Math/RotationTranslationMatrix.h",
+      "sha256": "8dd14f716b4c8a26b5a1aa270a7da73aa76e09d2d83b6ddba55a289e2e1124c4",
+      "passed": true
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-ninja-clang-21",
+    "clang-tidy-21",
+    "ctest-golden-boundary"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 27,
+    "output_sha256": "70c183bafa46ee4e14003d1f59964d9470a4613da8b3e2d1fbbb36860fb1d91f"
+  }
+}

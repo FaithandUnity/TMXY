@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:14:14.1345898+00:00",
+  "result": "PASS",
+  "task": "P1-01",
+  "source_file_count": 6,
+  "source_sha256": "6f23efacfff720ebb494de6593ecb0eb4cb07711b44f4c592a4c52cf50060677",
+  "error_schema_version": 1,
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-clang-21",
+    "clang-tidy-21",
+    "ctest"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 27,
+    "output_sha256": "73ecbd774fd4362dfd142111e2cc467922466eeebe7decae495c82ed153ab310"
+  }
+}

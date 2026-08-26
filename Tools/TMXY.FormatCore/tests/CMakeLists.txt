@@ -1,0 +1,5 @@
+add_executable(tmxy_format_core_binary_reader_test binary_reader_test.cpp)
+target_link_libraries(tmxy_format_core_binary_reader_test PRIVATE tmxy::format_core)
+tmxy_apply_tool_defaults(tmxy_format_core_binary_reader_test)
+
+add_test(NAME format_core.binary_reader COMMAND tmxy_format_core_binary_reader_test)

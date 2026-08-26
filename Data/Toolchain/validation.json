@@ -1,0 +1,106 @@
+{
+  "result": "PASS",
+  "required_failure_count": 0,
+  "pending_freeze_count": 0,
+  "postgres_smoke_version": null,
+  "lock_sha256": "32819e1a804edf31d85a7fbc68e01d8f8d357a5f8f30f24d8f1c07c03e5f67a9",
+  "environment_sha256": "9e34c14d0d9936c7d876bd4fd5a96e3949351a60ea53a88c2c2ccd861131d969",
+  "checks": [
+    {
+      "name": "lock schema",
+      "kind": "required",
+      "passed": true,
+      "detail": "schema_version=1"
+    },
+    {
+      "name": "environment schema",
+      "kind": "required",
+      "passed": true,
+      "detail": "schema_version=1"
+    },
+    {
+      "name": "Linux Docker engine",
+      "kind": "required",
+      "passed": true,
+      "detail": "linux/amd64, Docker 29.7.2"
+    },
+    {
+      "name": "UE and Visual Studio",
+      "kind": "required",
+      "passed": true,
+      "detail": "UE 5.8.2, Visual Studio Community 2026"
+    },
+    {
+      "name": "UE lock match",
+      "kind": "required",
+      "passed": true,
+      "detail": "actual=5.8.2 expected=5.8.2"
+    },
+    {
+      "name": "UE changelist lock match",
+      "kind": "required",
+      "passed": true,
+      "detail": "actual=56702186 expected=56702186"
+    },
+    {
+      "name": "PostgreSQL image present",
+      "kind": "required",
+      "passed": true,
+      "detail": "reference=postgres:18.6-alpine"
+    },
+    {
+      "name": "PostgreSQL image digest",
+      "kind": "required",
+      "passed": true,
+      "detail": "actual=postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2 expected=postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2"
+    },
+    {
+      "name": "P0 toolchain lock state",
+      "kind": "required",
+      "passed": true,
+      "detail": "lock_state=locked"
+    },
+    {
+      "name": "backend builder immutable digest",
+      "kind": "pending",
+      "passed": true,
+      "detail": "Base manifest and built image digests must both be populated before P0-08 can close."
+    },
+    {
+      "name": "exact Clang package revision",
+      "kind": "pending",
+      "passed": true,
+      "detail": "Resolved inside the final builder image."
+    },
+    {
+      "name": "backend builder qualification evidence",
+      "kind": "required",
+      "passed": true,
+      "detail": "report=E:\\QQXYCodeDev\\Rebuild\\Data\\Toolchain\\backend-toolchain-qualification.json hash=2dd2b0490fc200fa3382c33f1d0307cae88b2c0f39cd6b42514fc533c545b722 result=PASS"
+    },
+    {
+      "name": "backend builder Dockerfile binding",
+      "kind": "required",
+      "passed": true,
+      "detail": "actual=bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d expected=bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d"
+    },
+    {
+      "name": "backend builder SBOM binding",
+      "kind": "required",
+      "passed": true,
+      "detail": "actual=c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6 expected=c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6"
+    },
+    {
+      "name": "qualified backend builder image present",
+      "kind": "required",
+      "passed": true,
+      "detail": "actual=sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559 expected=sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559"
+    },
+    {
+      "name": "UE MSVC qualification",
+      "kind": "pending",
+      "passed": true,
+      "detail": "status=waiver_active_time_bounded installed=14.51.36256 preferred=14.50.35717 waiver_expires=2026-10-25T23:59:59.0000000+08:00 report_hash_match=True"
+    }
+  ]
+}

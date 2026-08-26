@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-25T20:05:28.0886272+00:00",
+  "workspace_root": "E:\\QQXYCodeDev",
+  "host": {
+    "computer_name": "PC-20260816MLJG",
+    "os_version": "Microsoft Windows NT 10.0.26200.0",
+    "powershell_version": "7.6.4",
+    "hypervisor_present": true,
+    "windows_optional_features": {
+      "microsoft_windows_subsystem_linux": "Enabled",
+      "virtual_machine_platform": "Enabled"
+    }
+  },
+  "wsl": {
+    "executable": "C:\\Windows\\system32\\wsl.exe",
+    "version": "2.7.12.0",
+    "installed": true,
+    "independent_linux_distribution_required": false
+  },
+  "docker": {
+    "executable": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
+    "available": true,
+    "context": "desktop-linux",
+    "client_version": "29.7.2",
+    "server_version": "29.7.2",
+    "desktop_platform": "Docker Desktop 4.87.0 (236836)",
+    "server_os": "linux",
+    "server_architecture": "amd64",
+    "kernel": "6.18.33.2-microsoft-standard-WSL2",
+    "compose_version": "5.4.0",
+    "buildx_version": "0.36.1-desktop.1",
+    "cpus": 32,
+    "memory_bytes": 99951992832,
+    "proxy_configured": true,
+    "error": null
+  },
+  "client_toolchain": {
+    "captured_utc": "2026-08-25T17:37:41.8288716Z",
+    "computer_name": "PC-20260816MLJG",
+    "os_version": "Microsoft Windows NT 10.0.26200.0",
+    "powershell_version": "7.6.4",
+    "visual_studio": [
+      {
+        "display_name": "Visual Studio Community 2026",
+        "version": "18.9.12112.369",
+        "path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community",
+        "msvc_versions": "14.51.36231",
+        "msbuild_path": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\MSBuild.exe"
+      }
+    ],
+    "windows_sdk_versions": "10.0.26100.0",
+    "unreal_engine": {
+      "path": "C:\\Program Files\\Epic Games\\UE_5.8",
+      "major": 5,
+      "minor": 8,
+      "patch": 2,
+      "changelist": 56702186,
+      "compatible_changelist": 55116800,
+      "branch": "++UE5+Release-5.8"
+    },
+    "dotnet_version": "10.0.400",
+    "path_commands": {
+      "cl.exe": null,
+      "msbuild.exe": null,
+      "cmake.exe": null,
+      "ninja.exe": null,
+      "git.exe": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd\\git.exe",
+      "dotnet.exe": "C:\\Program Files\\dotnet\\dotnet.exe"
+    },
+    "workspace_root": "E:\\QQXYCodeDev"
+  },
+  "database_image": {
+    "reference": "postgres:18.6-alpine",
+    "id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "repo_digests": [
+      "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2"
+    ],
+    "os": "linux",
+    "architecture": "amd64",
+    "created_utc": "2026-08-13T19:17:31.951845817Z"
+  },
+  "commands": {
+    "docker": "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
+    "cmake": null,
+    "ninja": null,
+    "clang": null,
+    "conan": null,
+    "protoc": null,
+    "psql": "C:\\Program Files\\PostgreSQL\\17\\bin\\psql.exe"
+  },
+  "readiness": {
+    "client_toolchain": true,
+    "linux_container_engine": true,
+    "postgresql_18_6_image_present": true,
+    "backend_builder_image_frozen": false,
+    "p0_08_complete": false
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "tmxy.texture.golden-source-evidence",
+  "schema_version": 1,
+  "object": "texparticle.FXH_T_toumingtu",
+  "package": {
+    "relative_path": "天命西游/Packages/Texture/texparticle",
+    "bytes": 162914,
+    "sha256": "607a4f926ce977a67f5168928f54a111b0f88711c88c997eb5e067bea4da9a58"
+  },
+  "qtx": {
+    "relative_path": "天命西游/Resource/Texture/texparticle/FXH_T_toumingtu.qtx",
+    "bytes": 256,
+    "sha256": "44126814ab834eb714baffb42461fd53083118232afed00ad0efc5a6603d0804"
+  },
+  "copy_policy": "reference-only"
+}

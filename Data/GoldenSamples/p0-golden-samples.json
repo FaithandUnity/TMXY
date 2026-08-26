@@ -1,0 +1,761 @@
+{
+  "schema_version": 1,
+  "source_set": "client-3.0.0.413",
+  "client_version": "3.0.0.413",
+  "copy_policy": "reference_only",
+  "generated_utc": "2026-08-25T21:06:58.4375617Z",
+  "selection": {
+    "file": "Data/GoldenSamples/p0-golden-selection.json",
+    "sha256": "49f743e332afb0de71eec01a800f4f87b68eb0f3c46bf75928918a89003c7d8d"
+  },
+  "manifest": {
+    "file": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+    "sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3"
+  },
+  "source_verification": {
+    "mode": "sha256_and_size",
+    "verified_file_count": 42
+  },
+  "summary": {
+    "sample_count": 42,
+    "selected_bytes": 380960210,
+    "kind_counts": {
+      "animation": 3,
+      "audio": 4,
+      "navigation": 2,
+      "package": 13,
+      "skeletal_mesh": 3,
+      "static_mesh": 3,
+      "table": 6,
+      "terrain": 4,
+      "texture": 4
+    },
+    "evidence_level_counts": {
+      "L2": 29,
+      "L4": 13
+    },
+    "distinct_roles": [
+      "adjacent_terrain_tiles",
+      "animation",
+      "asset_global_maximum",
+      "asset_global_minimum",
+      "audio",
+      "boundary_structure",
+      "character_candidate",
+      "client_table",
+      "core_gameplay",
+      "damaged_input",
+      "damaged_input_candidate",
+      "format_reference",
+      "material_candidate",
+      "mp3",
+      "multi_bone_candidate",
+      "multi_material_candidate",
+      "navigation",
+      "package_version_1",
+      "package_version_2",
+      "package_version_3",
+      "package_version_maximum",
+      "package_version_minimum",
+      "paired_skeleton",
+      "particle_candidate",
+      "player_character",
+      "scene_candidate",
+      "shared_table",
+      "skeletal_mesh",
+      "static_mesh",
+      "table_complex",
+      "table_directory_minimum",
+      "table_global_maximum",
+      "table_global_minimum",
+      "table_simple",
+      "terrain",
+      "texture",
+      "transparent_candidate",
+      "ui_candidate",
+      "version_variant",
+      "wav",
+      "world_package",
+      "zero_length_boundary"
+    ],
+    "package_inventory": {
+      "scanned_file_count": 167,
+      "version_counts": {
+        "1.0": 1,
+        "2.0": 22,
+        "3.0": 140,
+        "empty": 1,
+        "unknown": 3
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "package-v1-reference",
+      "kind": "package",
+      "path": "Packages/Texture/tempfile.tmp",
+      "roles": [
+        "package_version_1",
+        "format_reference"
+      ],
+      "evidence_level": "L2",
+      "rationale": "The only observed Package 1.0 file in the frozen client.",
+      "size": 319813,
+      "sha256": "11804bcbd1c28a4243670f519cee12d6b8fe7f46ebfaf8033e43b0509f9bc0e6",
+      "source_verified": true,
+      "package_version": "1.0"
+    },
+    {
+      "id": "package-v2-minimum",
+      "kind": "package",
+      "path": "Packages/Level/bydfb",
+      "roles": [
+        "package_version_2",
+        "package_version_minimum",
+        "scene_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed Package 2.0 file and a level-boundary sample.",
+      "size": 4944,
+      "sha256": "bc2e39be4f51c770dd059d3d45d38626878f80870f761939c18b413f54080e48",
+      "source_verified": true,
+      "package_version": "2.0"
+    },
+    {
+      "id": "package-v2-maximum",
+      "kind": "package",
+      "path": "Packages/tempfile.tmp",
+      "roles": [
+        "package_version_2",
+        "package_version_maximum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest observed Package 2.0 file.",
+      "size": 3081249,
+      "sha256": "d3af9fb45328843257f4f76701b7c016367923aa8e391ff9d115cc9d485ab034",
+      "source_verified": true,
+      "package_version": "2.0"
+    },
+    {
+      "id": "package-v2-material",
+      "kind": "package",
+      "path": "Packages/Material/tempfile.5.tmp",
+      "roles": [
+        "package_version_2",
+        "material_candidate",
+        "transparent_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Material namespace candidate; blend and alpha semantics require P1 confirmation.",
+      "size": 213083,
+      "sha256": "742e2b02f6834837fdd36faaf88506695b0d44ecd9999cfc8a284bb4a76acafe",
+      "source_verified": true,
+      "package_version": "2.0"
+    },
+    {
+      "id": "package-v2-skeletal",
+      "kind": "package",
+      "path": "Packages/SkelMesh/tempfile.tmp",
+      "roles": [
+        "package_version_2",
+        "multi_bone_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Skeletal package candidate; bone counts require P1 confirmation.",
+      "size": 274861,
+      "sha256": "286c3d82515762e2c6eb0fca47a2f1bb0ee920875b11fa4f673843c3a42ab663",
+      "source_verified": true,
+      "package_version": "2.0"
+    },
+    {
+      "id": "package-v2-static-scene",
+      "kind": "package",
+      "path": "Packages/StaticMesh/scene09",
+      "roles": [
+        "package_version_2",
+        "multi_material_candidate",
+        "scene_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Static scene package candidate; material-slot counts require P1 confirmation.",
+      "size": 215837,
+      "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c",
+      "source_verified": true,
+      "package_version": "2.0"
+    },
+    {
+      "id": "package-v3-minimum",
+      "kind": "package",
+      "path": "Packages/Texture/texeditor",
+      "roles": [
+        "package_version_3",
+        "package_version_minimum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed Package 3.0 file.",
+      "size": 155,
+      "sha256": "a03afb1c5d5fa60234ad3fe54d012f8fa14bf1b81d16db3324222289c070647b",
+      "source_verified": true,
+      "package_version": "3.0"
+    },
+    {
+      "id": "package-v3-maximum",
+      "kind": "package",
+      "path": "Packages/SkelMesh/sknpc",
+      "roles": [
+        "package_version_3",
+        "package_version_maximum",
+        "multi_bone_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Largest observed Package 3.0 file and broad NPC skeletal candidate.",
+      "size": 13520637,
+      "sha256": "78e4cfc332369b69ce5f838be0623c310177b876ca95b6674300db7171039d26",
+      "source_verified": true,
+      "package_version": "3.0"
+    },
+    {
+      "id": "package-v3-world",
+      "kind": "package",
+      "path": "Packages/Level/world",
+      "roles": [
+        "package_version_3",
+        "scene_candidate",
+        "world_package"
+      ],
+      "evidence_level": "L2",
+      "rationale": "World-level package selected for scene and reference-graph coverage.",
+      "size": 2067098,
+      "sha256": "281bc9f9d51ed435e49587bff25b84489e40ffd9273ec4ae5bb202d443f70d31",
+      "source_verified": true,
+      "package_version": "3.0"
+    },
+    {
+      "id": "package-v3-particle",
+      "kind": "package",
+      "path": "Packages/particle01",
+      "roles": [
+        "package_version_3",
+        "particle_candidate",
+        "transparent_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Largest particle package; blend semantics require P1 confirmation.",
+      "size": 5338675,
+      "sha256": "a08c5a0a792e6abca389bf34c0d6458a6c0ee41c58776ab3249ed85981547f30",
+      "source_verified": true,
+      "package_version": "3.0"
+    },
+    {
+      "id": "package-v3-material-character",
+      "kind": "package",
+      "path": "Packages/Material/matchar",
+      "roles": [
+        "package_version_3",
+        "material_candidate",
+        "multi_material_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Character-material package candidate; slot diversity requires P1 confirmation.",
+      "size": 330574,
+      "sha256": "bbe9c875db12d6fa69439a4df23ae85fec88fa7c86d19b35956f611033ad9fe5",
+      "source_verified": true,
+      "package_version": "3.0"
+    },
+    {
+      "id": "package-v3-ui",
+      "kind": "package",
+      "path": "Packages/UI/interface",
+      "roles": [
+        "package_version_3",
+        "ui_candidate",
+        "transparent_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Interface package candidate for UI transparency and layout references.",
+      "size": 68552,
+      "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f",
+      "source_verified": true,
+      "package_version": "3.0"
+    },
+    {
+      "id": "package-empty-boundary",
+      "kind": "package",
+      "path": "Packages/edtiactions06",
+      "roles": [
+        "zero_length_boundary",
+        "damaged_input"
+      ],
+      "evidence_level": "L2",
+      "rationale": "The only zero-byte file under Packages; parsers must reject it safely.",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source_verified": true,
+      "package_version": "empty"
+    },
+    {
+      "id": "table-clsv-minimum",
+      "kind": "table",
+      "path": "CLSVShare/powergame.tbl",
+      "roles": [
+        "table_simple",
+        "table_global_minimum",
+        "shared_table"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically first 48-byte minimum TBL in CLSVShare.",
+      "size": 48,
+      "sha256": "8da2fbf8c9f977822ce78343f6824f259fe7aba2f9b5e961c7518ac5f389ca73",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "table-table-minimum",
+      "kind": "table",
+      "path": "Table/Regions/supplytable.tbl",
+      "roles": [
+        "table_simple",
+        "table_directory_minimum",
+        "client_table"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically first minimum-size TBL under Table.",
+      "size": 160,
+      "sha256": "7185f834d247cf070f379a8f480ad26cf7f6a82c2e154c3acc6aca005820787c",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "table-clsv-skill-maximum",
+      "kind": "table",
+      "path": "CLSVShare/skill_table.tbl",
+      "roles": [
+        "table_complex",
+        "table_global_maximum",
+        "shared_table"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest observed TBL and a core shared gameplay table.",
+      "size": 7253248,
+      "sha256": "40ec68f102f107da38bbde610fcce8fcc433601c802209116c5c7866f87b7327",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "table-clsv-item-complex",
+      "kind": "table",
+      "path": "CLSVShare/item_table.tbl",
+      "roles": [
+        "table_complex",
+        "shared_table",
+        "core_gameplay"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Large core item table selected for schema and ID coverage.",
+      "size": 7046704,
+      "sha256": "f0ccd185f736802661becb9581896497e2101f6a9dbcb28578d5351f71f820ce",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "table-quest-complex",
+      "kind": "table",
+      "path": "Table/quest_table.tbl",
+      "roles": [
+        "table_complex",
+        "client_table",
+        "core_gameplay"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest TBL under Table and a core quest sample.",
+      "size": 4586496,
+      "sha256": "e03bf742ee176645d303e81fd4e3f0bdf0baaa116a097ba0fa4bc04f4f12751b",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "table-region-quest-variant",
+      "kind": "table",
+      "path": "Table/Regions/quest_table.tbl",
+      "roles": [
+        "table_complex",
+        "version_variant",
+        "client_table"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Region variant selected for same-version schema and content comparison.",
+      "size": 4162208,
+      "sha256": "ce41d5f4901bf9f651a9f3dc0994010deaca4012ab461d3af7d48c36cf6ae620",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "texture-minimum-boundary",
+      "kind": "texture",
+      "path": "Resource/Texture/texstone/WHZ_S_Dimian20_D.qtx",
+      "roles": [
+        "texture",
+        "asset_global_minimum",
+        "damaged_input_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically first minimum-size qtx; structural validity requires P1 confirmation.",
+      "size": 32,
+      "sha256": "686418d443a9d067f90ec640d9d92a8ad7efd1ce6b1c1f05587a256027c003f2",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "texture-maximum",
+      "kind": "texture",
+      "path": "Resource/Texture/newscenc/dy_bx_xlys_01_D.qtx",
+      "roles": [
+        "texture",
+        "asset_global_maximum",
+        "scene_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically first maximum-size qtx and a scene texture candidate.",
+      "size": 22369648,
+      "sha256": "bfdc514d8ece8424bd0b9b193a651b7656cc37520e89502a03c28dd68160a69a",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "texture-transparent-candidate",
+      "kind": "texture",
+      "path": "Resource/Texture/texparticle/FXH_T_toumingtu.qtx",
+      "roles": [
+        "texture",
+        "transparent_candidate",
+        "particle_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Name and particle namespace indicate transparency; format/alpha require P1 confirmation.",
+      "size": 256,
+      "sha256": "44126814ab834eb714baffb42461fd53083118232afed00ad0efc5a6603d0804",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "texture-ui-candidate",
+      "kind": "texture",
+      "path": "Resource/Texture/editorui/ToolBoxHighLight.qtx",
+      "roles": [
+        "texture",
+        "ui_candidate",
+        "transparent_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Editor UI highlight texture candidate; alpha semantics require P1 confirmation.",
+      "size": 1048576,
+      "sha256": "173259db23fcd44d2a522c1066dc0e851b7690ee384d9880719fab76f2f8368b",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "static-mesh-minimum",
+      "kind": "static_mesh",
+      "path": "Resource/StaticMesh/particle/ZFH_O_S_Tianpian100.sm",
+      "roles": [
+        "static_mesh",
+        "asset_global_minimum",
+        "particle_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically first minimum-size static mesh.",
+      "size": 309,
+      "sha256": "79669d7fbc5d3ebbfa82c6f3075c39b512d7ea021adf2d749b596d6e82dd81e8",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "static-mesh-maximum",
+      "kind": "static_mesh",
+      "path": "Resource/StaticMesh/newscenc/dy_bx_stl_005.sm",
+      "roles": [
+        "static_mesh",
+        "asset_global_maximum",
+        "multi_material_candidate",
+        "scene_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Largest static mesh; material-slot count requires P1 confirmation.",
+      "size": 13165223,
+      "sha256": "b0d788088736c00697c3e1b36d0b49044506cf14844a957cbd225f7c4886e242",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "static-mesh-scene",
+      "kind": "static_mesh",
+      "path": "Resource/StaticMesh/newscenc/dy_bx_bqg_006.sm",
+      "roles": [
+        "static_mesh",
+        "scene_candidate",
+        "multi_material_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Large scene mesh selected for submesh and material-slot coverage.",
+      "size": 12185471,
+      "sha256": "b5189a2daf0daa16fae12ad0fa6c308981ec28d7ba0094cf24dc032a066870c1",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "skeletal-mesh-minimum",
+      "kind": "skeletal_mesh",
+      "path": "Resource/SkelMesh/particle/FXH_O_S_shizuo.skem",
+      "roles": [
+        "skeletal_mesh",
+        "asset_global_minimum",
+        "boundary_structure"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed skeletal mesh.",
+      "size": 477,
+      "sha256": "a755d7c0a706895725b53d9ea0289fe42600841dd8ba725fae86f8c5034912d5",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "skeletal-mesh-boy",
+      "kind": "skeletal_mesh",
+      "path": "Resource/SkelMesh/skchar/Boy01.skem",
+      "roles": [
+        "skeletal_mesh",
+        "player_character",
+        "multi_bone_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Canonical player candidate paired with Boy01.anim; bone topology requires P1 confirmation.",
+      "size": 95700140,
+      "sha256": "409fedf015ae3949222241cd8d7cc1aea22bb6ef689b2cc0190a796fe7cf93b6",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "skeletal-mesh-maximum-girl",
+      "kind": "skeletal_mesh",
+      "path": "Resource/SkelMesh/skchar/Girl01.skem",
+      "roles": [
+        "skeletal_mesh",
+        "asset_global_maximum",
+        "player_character",
+        "multi_bone_candidate"
+      ],
+      "evidence_level": "L4",
+      "rationale": "Largest skeletal mesh and canonical player candidate.",
+      "size": 115909244,
+      "sha256": "6ada6140d6a615ba1e18b2e236548ed67972d81ab948d4884e20af77913606d9",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "animation-minimum-boundary",
+      "kind": "animation",
+      "path": "Resource/SkelMesh/particle/ZFH_B_S_XALGF001.anim",
+      "roles": [
+        "animation",
+        "asset_global_minimum",
+        "damaged_input_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically first four-byte minimum animation; parser must classify it safely.",
+      "size": 4,
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "animation-boy",
+      "kind": "animation",
+      "path": "Resource/SkelMesh/skchar/Boy01.anim",
+      "roles": [
+        "animation",
+        "player_character",
+        "paired_skeleton"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Canonical player animation paired with Boy01.skem.",
+      "size": 32855816,
+      "sha256": "912c7e13632082fdc457b148ebb8bd7ca4757a619da2bb6ad17b57acbc3afe3e",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "animation-maximum-girl",
+      "kind": "animation",
+      "path": "Resource/SkelMesh/skchar/Girl01.anim",
+      "roles": [
+        "animation",
+        "asset_global_maximum",
+        "player_character",
+        "paired_skeleton"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest observed animation paired with Girl01.skem.",
+      "size": 33275128,
+      "sha256": "524f612bff80de06ce92ebb558ecf4d783cdb84e097dd708aed64f7f8524c257",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "terrain-adjacent-000-000",
+      "kind": "terrain",
+      "path": "Resource/Terrain/bqg2/bqg2_000_000.ter",
+      "roles": [
+        "terrain",
+        "asset_global_minimum",
+        "adjacent_terrain_tiles"
+      ],
+      "evidence_level": "L2",
+      "rationale": "First tile in a four-tile adjacency set and a minimum-size terrain sample.",
+      "size": 147485,
+      "sha256": "178fc8ca10974b55a75ac83c68c60e70414506938a964bd9ba0c38b35d93fd37",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "terrain-adjacent-000-001",
+      "kind": "terrain",
+      "path": "Resource/Terrain/bqg2/bqg2_000_001.ter",
+      "roles": [
+        "terrain",
+        "adjacent_terrain_tiles"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Adjacent terrain tile for edge-continuity tests.",
+      "size": 147485,
+      "sha256": "178fc8ca10974b55a75ac83c68c60e70414506938a964bd9ba0c38b35d93fd37",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "terrain-adjacent-000-002",
+      "kind": "terrain",
+      "path": "Resource/Terrain/bqg2/bqg2_000_002.ter",
+      "roles": [
+        "terrain",
+        "adjacent_terrain_tiles"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Adjacent terrain tile for edge-continuity tests.",
+      "size": 147485,
+      "sha256": "178fc8ca10974b55a75ac83c68c60e70414506938a964bd9ba0c38b35d93fd37",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "terrain-maximum",
+      "kind": "terrain",
+      "path": "Resource/Terrain/zyhsz/zyhsz_015_015.ter",
+      "roles": [
+        "terrain",
+        "asset_global_maximum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Lexically last maximum-size terrain sample.",
+      "size": 147501,
+      "sha256": "3c4d9e7dc16845e1c21b9aecdb106cf6fef53f92cd11a41719e89d05262cf947",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "navigation-minimum",
+      "kind": "navigation",
+      "path": "Table/pathInfo/zone2174.zif",
+      "roles": [
+        "navigation",
+        "asset_global_minimum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed navigation sample.",
+      "size": 394,
+      "sha256": "0a8690bc9ac7e98ff0a9e6cd72533cf1de33e1be45e0fb38c919400d10daa58c",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "navigation-maximum",
+      "kind": "navigation",
+      "path": "Table/pathInfo/zone1308.zif",
+      "roles": [
+        "navigation",
+        "asset_global_maximum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest observed navigation sample.",
+      "size": 36854,
+      "sha256": "369e013babfbaeae112d63b5fab712091f0cf197d3b9f3033e032d755f4227a5",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "audio-wav-minimum",
+      "kind": "audio",
+      "path": "Resource/Sound/uisound/MouseOverTarget.wav",
+      "roles": [
+        "audio",
+        "wav",
+        "asset_global_minimum",
+        "ui_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed wav and a UI sound.",
+      "size": 5612,
+      "sha256": "e290ce84627d15b84b90ac54f1864a8332c33b39b6f542dd80aeeda4261cc988",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "audio-wav-maximum",
+      "kind": "audio",
+      "path": "Resource/Sound/sound/Baigujing_Death.wav",
+      "roles": [
+        "audio",
+        "wav",
+        "asset_global_maximum",
+        "character_candidate"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest observed wav.",
+      "size": 970244,
+      "sha256": "9616377d59d856c6543ce571bd98e5338aeb7577ef0401e5f7e3acb40ea223a6",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "audio-mp3-minimum",
+      "kind": "audio",
+      "path": "music/10.mp3",
+      "roles": [
+        "audio",
+        "mp3",
+        "asset_global_minimum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed mp3.",
+      "size": 701405,
+      "sha256": "73ff33f886d70f084ccd4921473141cb773473e2622b02f316655e519bf91a1b",
+      "source_verified": true,
+      "package_version": null
+    },
+    {
+      "id": "audio-mp3-maximum",
+      "kind": "audio",
+      "path": "music/1005.mp3",
+      "roles": [
+        "audio",
+        "mp3",
+        "asset_global_maximum"
+      ],
+      "evidence_level": "L2",
+      "rationale": "Largest observed mp3.",
+      "size": 3661079,
+      "sha256": "77d0e071a031c37ba560647d76f0000e6017387273bb7dd5df668842a6be1668",
+      "source_verified": true,
+      "package_version": null
+    }
+  ]
+}

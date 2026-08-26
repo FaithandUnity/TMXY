@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "source_set": "client-3.0.0.413",
+  "client_version": "3.0.0.413",
+  "manifest_file": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+  "manifest_sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3",
+  "copy_policy": "reference_only",
+  "samples": [
+    {
+      "id": "package-v1-reference",
+      "kind": "package",
+      "path": "Packages/Texture/tempfile.tmp",
+      "roles": ["package_version_1", "format_reference"],
+      "expected_package_version": "1.0",
+      "evidence_level": "L2",
+      "rationale": "The only observed Package 1.0 file in the frozen client."
+    },
+    {
+      "id": "package-v2-minimum",
+      "kind": "package",
+      "path": "Packages/Level/bydfb",
+      "roles": ["package_version_2", "package_version_minimum", "scene_candidate"],
+      "expected_package_version": "2.0",
+      "evidence_level": "L2",
+      "rationale": "Smallest observed Package 2.0 file and a level-boundary sample."
+    },
+    {
+      "id": "package-v2-maximum",
+      "kind": "package",
+      "path": "Packages/tempfile.tmp",
+      "roles": ["package_version_2", "package_version_maximum"],
+      "expected_package_version": "2.0",
+      "evidence_level": "L2",
+      "rationale": "Largest observed Package 2.0 file."
+    },
+    {
+      "id": "package-v2-material",
+      "kind": "package",
+      "path": "Packages/Material/tempfile.5.tmp",
+      "roles": ["package_version_2", "material_candidate", "transparent_candidate"],
+      "expected_package_version": "2.0",
+      "evidence_level": "L4",
+      "rationale": "Material namespace candidate; blend and alpha semantics require P1 confirmation."
+    },
+    {
+      "id": "package-v2-skeletal",
+      "kind": "package",
+      "path": "Packages/SkelMesh/tempfile.tmp",
+      "roles": ["package_version_2", "multi_bone_candidate"],
+      "expected_package_version": "2.0",
+      "evidence_level": "L4",
+      "rationale": "Skeletal package candidate; bone counts require P1 confirmation."
+    },
+    {
+      "id": "package-v2-static-scene",
+      "kind": "package",
+      "path": "Packages/StaticMesh/scene09",
+      "roles": ["package_version_2", "multi_material_candidate", "scene_candidate"],
+      "expected_package_version": "2.0",
+      "evidence_level": "L4",
+      "rationale": "Static scene package candidate; material-slot counts require P1 confirmation."
+    },
+    {
+      "id": "package-v3-minimum",
+      "kind": "package",
+      "path": "Packages/Texture/texeditor",
+      "roles": ["package_version_3", "package_version_minimum"],
+      "expected_package_version": "3.0",
+      "evidence_level": "L2",
+      "rationale": "Smallest observed Package 3.0 file."
+    },
+    {
+      "id": "package-v3-maximum",
+      "kind": "package",
+      "path": "Packages/SkelMesh/sknpc",
+      "roles": ["package_version_3", "package_version_maximum", "multi_bone_candidate"],
+      "expected_package_version": "3.0",
+      "evidence_level": "L4",
+      "rationale": "Largest observed Package 3.0 file and broad NPC skeletal candidate."
+    },
+    {
+      "id": "package-v3-world",
+      "kind": "package",
+      "path": "Packages/Level/world",
+      "roles": ["package_version_3", "scene_candidate", "world_package"],
+      "expected_package_version": "3.0",
+      "evidence_level": "L2",
+      "rationale": "World-level package selected for scene and reference-graph coverage."
+    },
+    {
+      "id": "package-v3-particle",
+      "kind": "package",
+      "path": "Packages/particle01",
+      "roles": ["package_version_3", "particle_candidate", "transparent_candidate"],
+      "expected_package_version": "3.0",
+      "evidence_level": "L4",
+      "rationale": "Largest particle package; blend semantics require P1 confirmation."
+    },
+    {
+      "id": "package-v3-material-character",
+      "kind": "package",
+      "path": "Packages/Material/matchar",
+      "roles": ["package_version_3", "material_candidate", "multi_material_candidate"],
+      "expected_package_version": "3.0",
+      "evidence_level": "L4",
+      "rationale": "Character-material package candidate; slot diversity requires P1 confirmation."
+    },
+    {
+      "id": "package-v3-ui",
+      "kind": "package",
+      "path": "Packages/UI/interface",
+      "roles": ["package_version_3", "ui_candidate", "transparent_candidate"],
+      "expected_package_version": "3.0",
+      "evidence_level": "L4",
+      "rationale": "Interface package candidate for UI transparency and layout references."
+    },
+    {
+      "id": "package-empty-boundary",
+      "kind": "package",
+      "path": "Packages/edtiactions06",
+      "roles": ["zero_length_boundary", "damaged_input"],
+      "expected_package_version": "empty",
+      "evidence_level": "L2",
+      "rationale": "The only zero-byte file under Packages; parsers must reject it safely."
+    },
+    {
+      "id": "table-clsv-minimum",
+      "kind": "table",
+      "path": "CLSVShare/powergame.tbl",
+      "roles": ["table_simple", "table_global_minimum", "shared_table"],
+      "evidence_level": "L2",
+      "rationale": "Lexically first 48-byte minimum TBL in CLSVShare."
+    },
+    {
+      "id": "table-table-minimum",
+      "kind": "table",
+      "path": "Table/Regions/supplytable.tbl",
+      "roles": ["table_simple", "table_directory_minimum", "client_table"],
+      "evidence_level": "L2",
+      "rationale": "Lexically first minimum-size TBL under Table."
+    },
+    {
+      "id": "table-clsv-skill-maximum",
+      "kind": "table",
+      "path": "CLSVShare/skill_table.tbl",
+      "roles": ["table_complex", "table_global_maximum", "shared_table"],
+      "evidence_level": "L2",
+      "rationale": "Largest observed TBL and a core shared gameplay table."
+    },
+    {
+      "id": "table-clsv-item-complex",
+      "kind": "table",
+      "path": "CLSVShare/item_table.tbl",
+      "roles": ["table_complex", "shared_table", "core_gameplay"],
+      "evidence_level": "L2",
+      "rationale": "Large core item table selected for schema and ID coverage."
+    },
+    {
+      "id": "table-quest-complex",
+      "kind": "table",
+      "path": "Table/quest_table.tbl",
+      "roles": ["table_complex", "client_table", "core_gameplay"],
+      "evidence_level": "L2",
+      "rationale": "Largest TBL under Table and a core quest sample."
+    },
+    {
+      "id": "table-region-quest-variant",
+      "kind": "table",
+      "path": "Table/Regions/quest_table.tbl",
+      "roles": ["table_complex", "version_variant", "client_table"],
+      "evidence_level": "L2",
+      "rationale": "Region variant selected for same-version schema and content comparison."
+    },
+    {
+      "id": "texture-minimum-boundary",
+      "kind": "texture",
+      "path": "Resource/Texture/texstone/WHZ_S_Dimian20_D.qtx",
+      "roles": ["texture", "asset_global_minimum", "damaged_input_candidate"],
+      "evidence_level": "L2",
+      "rationale": "Lexically first minimum-size qtx; structural validity requires P1 confirmation."
+    },
+    {
+      "id": "texture-maximum",
+      "kind": "texture",
+      "path": "Resource/Texture/newscenc/dy_bx_xlys_01_D.qtx",
+      "roles": ["texture", "asset_global_maximum", "scene_candidate"],
+      "evidence_level": "L2",
+      "rationale": "Lexically first maximum-size qtx and a scene texture candidate."
+    },
+    {
+      "id": "texture-transparent-candidate",
+      "kind": "texture",
+      "path": "Resource/Texture/texparticle/FXH_T_toumingtu.qtx",
+      "roles": ["texture", "transparent_candidate", "particle_candidate"],
+      "evidence_level": "L4",
+      "rationale": "Name and particle namespace indicate transparency; format/alpha require P1 confirmation."
+    },
+    {
+      "id": "texture-ui-candidate",
+      "kind": "texture",
+      "path": "Resource/Texture/editorui/ToolBoxHighLight.qtx",
+      "roles": ["texture", "ui_candidate", "transparent_candidate"],
+      "evidence_level": "L4",
+      "rationale": "Editor UI highlight texture candidate; alpha semantics require P1 confirmation."
+    },
+    {
+      "id": "static-mesh-minimum",
+      "kind": "static_mesh",
+      "path": "Resource/StaticMesh/particle/ZFH_O_S_Tianpian100.sm",
+      "roles": ["static_mesh", "asset_global_minimum", "particle_candidate"],
+      "evidence_level": "L2",
+      "rationale": "Lexically first minimum-size static mesh."
+    },
+    {
+      "id": "static-mesh-maximum",
+      "kind": "static_mesh",
+      "path": "Resource/StaticMesh/newscenc/dy_bx_stl_005.sm",
+      "roles": ["static_mesh", "asset_global_maximum", "multi_material_candidate", "scene_candidate"],
+      "evidence_level": "L4",
+      "rationale": "Largest static mesh; material-slot count requires P1 confirmation."
+    },
+    {
+      "id": "static-mesh-scene",
+      "kind": "static_mesh",
+      "path": "Resource/StaticMesh/newscenc/dy_bx_bqg_006.sm",
+      "roles": ["static_mesh", "scene_candidate", "multi_material_candidate"],
+      "evidence_level": "L4",
+      "rationale": "Large scene mesh selected for submesh and material-slot coverage."
+    },
+    {
+      "id": "skeletal-mesh-minimum",
+      "kind": "skeletal_mesh",
+      "path": "Resource/SkelMesh/particle/FXH_O_S_shizuo.skem",
+      "roles": ["skeletal_mesh", "asset_global_minimum", "boundary_structure"],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed skeletal mesh."
+    },
+    {
+      "id": "skeletal-mesh-boy",
+      "kind": "skeletal_mesh",
+      "path": "Resource/SkelMesh/skchar/Boy01.skem",
+      "roles": ["skeletal_mesh", "player_character", "multi_bone_candidate"],
+      "evidence_level": "L4",
+      "rationale": "Canonical player candidate paired with Boy01.anim; bone topology requires P1 confirmation."
+    },
+    {
+      "id": "skeletal-mesh-maximum-girl",
+      "kind": "skeletal_mesh",
+      "path": "Resource/SkelMesh/skchar/Girl01.skem",
+      "roles": ["skeletal_mesh", "asset_global_maximum", "player_character", "multi_bone_candidate"],
+      "evidence_level": "L4",
+      "rationale": "Largest skeletal mesh and canonical player candidate."
+    },
+    {
+      "id": "animation-minimum-boundary",
+      "kind": "animation",
+      "path": "Resource/SkelMesh/particle/ZFH_B_S_XALGF001.anim",
+      "roles": ["animation", "asset_global_minimum", "damaged_input_candidate"],
+      "evidence_level": "L2",
+      "rationale": "Lexically first four-byte minimum animation; parser must classify it safely."
+    },
+    {
+      "id": "animation-boy",
+      "kind": "animation",
+      "path": "Resource/SkelMesh/skchar/Boy01.anim",
+      "roles": ["animation", "player_character", "paired_skeleton"],
+      "evidence_level": "L2",
+      "rationale": "Canonical player animation paired with Boy01.skem."
+    },
+    {
+      "id": "animation-maximum-girl",
+      "kind": "animation",
+      "path": "Resource/SkelMesh/skchar/Girl01.anim",
+      "roles": ["animation", "asset_global_maximum", "player_character", "paired_skeleton"],
+      "evidence_level": "L2",
+      "rationale": "Largest observed animation paired with Girl01.skem."
+    },
+    {
+      "id": "terrain-adjacent-000-000",
+      "kind": "terrain",
+      "path": "Resource/Terrain/bqg2/bqg2_000_000.ter",
+      "roles": ["terrain", "asset_global_minimum", "adjacent_terrain_tiles"],
+      "evidence_level": "L2",
+      "rationale": "First tile in a four-tile adjacency set and a minimum-size terrain sample."
+    },
+    {
+      "id": "terrain-adjacent-000-001",
+      "kind": "terrain",
+      "path": "Resource/Terrain/bqg2/bqg2_000_001.ter",
+      "roles": ["terrain", "adjacent_terrain_tiles"],
+      "evidence_level": "L2",
+      "rationale": "Adjacent terrain tile for edge-continuity tests."
+    },
+    {
+      "id": "terrain-adjacent-000-002",
+      "kind": "terrain",
+      "path": "Resource/Terrain/bqg2/bqg2_000_002.ter",
+      "roles": ["terrain", "adjacent_terrain_tiles"],
+      "evidence_level": "L2",
+      "rationale": "Adjacent terrain tile for edge-continuity tests."
+    },
+    {
+      "id": "terrain-maximum",
+      "kind": "terrain",
+      "path": "Resource/Terrain/zyhsz/zyhsz_015_015.ter",
+      "roles": ["terrain", "asset_global_maximum"],
+      "evidence_level": "L2",
+      "rationale": "Lexically last maximum-size terrain sample."
+    },
+    {
+      "id": "navigation-minimum",
+      "kind": "navigation",
+      "path": "Table/pathInfo/zone2174.zif",
+      "roles": ["navigation", "asset_global_minimum"],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed navigation sample."
+    },
+    {
+      "id": "navigation-maximum",
+      "kind": "navigation",
+      "path": "Table/pathInfo/zone1308.zif",
+      "roles": ["navigation", "asset_global_maximum"],
+      "evidence_level": "L2",
+      "rationale": "Largest observed navigation sample."
+    },
+    {
+      "id": "audio-wav-minimum",
+      "kind": "audio",
+      "path": "Resource/Sound/uisound/MouseOverTarget.wav",
+      "roles": ["audio", "wav", "asset_global_minimum", "ui_candidate"],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed wav and a UI sound."
+    },
+    {
+      "id": "audio-wav-maximum",
+      "kind": "audio",
+      "path": "Resource/Sound/sound/Baigujing_Death.wav",
+      "roles": ["audio", "wav", "asset_global_maximum", "character_candidate"],
+      "evidence_level": "L2",
+      "rationale": "Largest observed wav."
+    },
+    {
+      "id": "audio-mp3-minimum",
+      "kind": "audio",
+      "path": "music/10.mp3",
+      "roles": ["audio", "mp3", "asset_global_minimum"],
+      "evidence_level": "L2",
+      "rationale": "Smallest observed mp3."
+    },
+    {
+      "id": "audio-mp3-maximum",
+      "kind": "audio",
+      "path": "music/1005.mp3",
+      "roles": ["audio", "mp3", "asset_global_maximum"],
+      "evidence_level": "L2",
+      "rationale": "Largest observed mp3."
+    }
+  ]
+}

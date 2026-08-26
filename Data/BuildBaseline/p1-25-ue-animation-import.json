@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:58.2862715+00:00",
+  "result": "PASS",
+  "task": "P1-25",
+  "completion_criteria_satisfied": true,
+  "source_sha256": "3aa5f0be8567767b07e13b568c859a8ca68fbbefba5fd12d54b53adcb371f9d0",
+  "handler": {
+    "format_id": "khronos.gltf-json",
+    "gltf_version": "2.0",
+    "asset_kind": "animation_set",
+    "verifies_all_artifact_hashes_before_write": true,
+    "all_keys_verified": true,
+    "root_motion_policy": "preserved-root-track-not-extracted",
+    "legacy_loop_policy": "preserve-metadata-no-forced-loop-flag",
+    "content_addressed_reimport_noop": true,
+    "production_handler_count": 3
+  },
+  "fixture": {
+    "id": "boy01-core-real",
+    "manifest_sha256": "71840eef83ea14811a880938252bcb03283b9b089c17cbf92ce4cf04a533148c",
+    "gltf_sha256": "798710c2187528ed22d0ba86dd0b254f9e0d35d604ceb1ee4dd30254cf2d3152",
+    "bin_sha256": "52a5aef9129204a05a412e3335a3282cea96f8cbd9abacf22b7233d7ab8a7bce",
+    "bin_bytes": 300696,
+    "selected_clip_count": 3,
+    "bone_count": 80,
+    "total_frame_count": 134,
+    "sample_rate_hz": 30
+  },
+  "content": {
+    "asset_count": 14,
+    "approved_assets": [
+      "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+      "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+      "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+      "TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default.uasset",
+      "TMXY/Golden/Skeletons/SKEL_Golden_Boy01.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_Minimum_Real.uasset",
+      "TMXY/Golden/StaticMeshes/SM_Golden_MultiSection_Real.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_001.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_001_002.uasset",
+      "TMXY/Golden/Terrain/SMT_Golden_World_002_001.uasset",
+      "TMXY/Golden/Textures/T_Golden_MultiMip_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Opaque_DXT1.uasset",
+      "TMXY/Golden/Textures/T_Golden_Transparent_DXT5.uasset"
+    ],
+    "imported_assets": [
+      {
+        "path": "TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle.uasset",
+        "bytes": 304940,
+        "sha256": "adfd74ee1ec6ed815f21f58000024197010346cd7e02d5f6a5c055286aafb4b6",
+        "unreal_package_tag": "0x9e2a83c1"
+      },
+      {
+        "path": "TMXY/Golden/Animations/A_Golden_Boy01_RunForward.uasset",
+        "bytes": 225271,
+        "sha256": "2c07fb0fc551c45dd0087303d898def0962ae24a7b036698f3645a3398e9bcb7",
+        "unreal_package_tag": "0x9e2a83c1"
+      },
+      {
+        "path": "TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle.uasset",
+        "bytes": 280948,
+        "sha256": "b0569ad61ca399d232f952480227e2b91d6568fcc69f268ccf07c913d200e61f",
+        "unreal_package_tag": "0x9e2a83c1"
+      }
+    ]
+  },
+  "automation_evidence": {
+    "required": true,
+    "passed": true,
+    "test": "TMXY.Importer.Animation",
+    "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-25-animation-report.json",
+    "generated_report_sha256": "af21d7e9917669cbf956b4cd7397cc18c4faf98205f7650c8789ac7cc1bcf39f",
+    "generated_report_schema_passed": true,
+    "ue_report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+  },
+  "dependency_report_sha256": {
+    "Data/BuildBaseline/p1-16-anim-animation.json": "da29969f7bd9ba2bbed12e9fd6d55084baea354b86c60973a2ff343e1e3593cb",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "a7da4a90c3f6dca1268eed3f71c65b5f67da2a30a236aedbff6aa3b7e428ba02",
+    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "2d25c127b99110f354ed40e50f7b73a2103864d0cbab54dd2b3ecb04e7f0319c"
+  },
+  "failure_count": 0,
+  "failures": []
+}

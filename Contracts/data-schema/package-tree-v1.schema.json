@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/package-tree-v1.schema.json",
+  "title": "TMXY normalized Package tree v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "schema_version", "source", "package", "objects"],
+  "properties": {
+    "schema": { "const": "tmxy.package.tree" },
+    "schema_version": { "const": 1 },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "file_size"],
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "file_size": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format_version", "header_size", "directory"],
+      "properties": {
+        "format_version": {
+          "enum": [
+            "QRENDER PACKAGE VER 1.0",
+            "QRENDER PACKAGE VER 2.0",
+            "QRENDER PACKAGE VER 3.0"
+          ]
+        },
+        "header_size": { "type": "integer", "minimum": 0 },
+        "directory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["offset", "size"],
+          "properties": {
+            "offset": { "type": "integer", "minimum": 0 },
+            "size": { "type": "integer", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "objects": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/object" }
+    }
+  },
+  "$defs": {
+    "opaqueBytes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["encoding", "hex"],
+      "properties": {
+        "encoding": { "const": "opaque-bytes" },
+        "hex": { "type": "string", "pattern": "^[0-9a-f]*$" }
+      }
+    },
+    "unparsedArray": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state"],
+      "properties": {
+        "state": { "const": "unparsed" },
+        "items": { "type": "array", "maxItems": 0 },
+        "slots": { "type": "array", "maxItems": 0 }
+      }
+    },
+    "object": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "index",
+        "name",
+        "class_name",
+        "body",
+        "references",
+        "transform",
+        "materials",
+        "unknown_fields"
+      ],
+      "properties": {
+        "index": { "type": "integer", "minimum": 0 },
+        "name": { "$ref": "#/$defs/opaqueBytes" },
+        "class_name": { "$ref": "#/$defs/opaqueBytes" },
+        "body": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["offset", "size"],
+          "properties": {
+            "offset": { "type": "integer", "minimum": 0 },
+            "size": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "references": { "$ref": "#/$defs/unparsedArray" },
+        "transform": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["state", "matrix"],
+          "properties": {
+            "state": { "const": "unparsed" },
+            "matrix": { "type": "null" }
+          }
+        },
+        "materials": { "$ref": "#/$defs/unparsedArray" },
+        "unknown_fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "offset", "size", "preservation"],
+            "properties": {
+              "kind": { "const": "object-body" },
+              "offset": { "type": "integer", "minimum": 0 },
+              "size": { "type": "integer", "minimum": 0 },
+              "preservation": { "const": "source-span" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

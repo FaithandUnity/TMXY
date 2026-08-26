@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:15:59.3417610+00:00",
+  "result": "PASS",
+  "task": "P1-05",
+  "source_file_count": 22,
+  "source_sha256": "dca5673104df210f81fe81b1c3273ae0b6e5252f6a66554264c631ef72193257",
+  "error_schema_version": 1,
+  "transform": "four-byte half-swap plus bitwise-not; remainder bitwise-not",
+  "raw_manifest": {
+    "path": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+    "sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3"
+  },
+  "frozen_sample_set": {
+    "root": "Packages",
+    "copy_policy": "reference_only",
+    "sample_count": 22,
+    "file_bytes": 5783942,
+    "sample_set_sha256": "2371a43ac6a46403e68e0d31e884bb6b27b54ac5babc3db6b3c448695c3179e6",
+    "record_count": 27637,
+    "directory_bytes": 1220531,
+    "metadata_fnv1a64": "2d2d359bc9f5da7f",
+    "samples": [
+      {
+        "path": "Packages/Level/bydfb",
+        "size": 4944,
+        "sha256": "bc2e39be4f51c770dd059d3d45d38626878f80870f761939c18b413f54080e48"
+      },
+      {
+        "path": "Packages/Level/hflfb",
+        "size": 8902,
+        "sha256": "4f024e428653bcbc6b6dae70aae527009c5ca31138f1d0ba36793ce94dc950b9"
+      },
+      {
+        "path": "Packages/Material/tempfile.2.tmp",
+        "size": 131534,
+        "sha256": "d2dc5b088264c6b716a65f83d0aad4bbe9ed184ecfdc020f966d870fa1da1a69"
+      },
+      {
+        "path": "Packages/Material/tempfile.3.tmp",
+        "size": 132588,
+        "sha256": "8af94b7661502f293cd447fe77a4a6341fe9549c9b85dcf0666adc4dbbb9e224"
+      },
+      {
+        "path": "Packages/Material/tempfile.4.tmp",
+        "size": 202691,
+        "sha256": "7129f0753ecb03709722d64451511c546ffbe8fb3266ce220e5d6e41abf00054"
+      },
+      {
+        "path": "Packages/Material/tempfile.5.tmp",
+        "size": 213083,
+        "sha256": "742e2b02f6834837fdd36faaf88506695b0d44ecd9999cfc8a284bb4a76acafe"
+      },
+      {
+        "path": "Packages/Material/tempfile.tmp",
+        "size": 184117,
+        "sha256": "b559a7df8ad8e39c53ad877606d2e7abe26d9c468993dd2373bc3d71c2911e5a"
+      },
+      {
+        "path": "Packages/SkelMesh/tempfile.tmp",
+        "size": 274861,
+        "sha256": "286c3d82515762e2c6eb0fca47a2f1bb0ee920875b11fa4f673843c3a42ab663"
+      },
+      {
+        "path": "Packages/StaticMesh/scene09",
+        "size": 215837,
+        "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c"
+      },
+      {
+        "path": "Packages/StaticMesh/scene16",
+        "size": 42375,
+        "sha256": "f5ec26013ba90d263a2d212201f1974b22aec376e591d1579c09537c57e60744"
+      },
+      {
+        "path": "Packages/StaticMesh/tempfile.tmp",
+        "size": 311527,
+        "sha256": "ab398a0b38204de106f77c5440ffd63edd50dd89d6a4740cbdad0c1df8dbdebf"
+      },
+      {
+        "path": "Packages/tempfile.2.tmp",
+        "size": 117476,
+        "sha256": "0677db226bd233b604d831b90d2c57022c5be3991f3da8db359a36adb854ad5c"
+      },
+      {
+        "path": "Packages/tempfile.3.tmp",
+        "size": 117716,
+        "sha256": "53687d0095eb60f40ef3c98a8a339ed75189e216eaafbd29fbb81e9854194d92"
+      },
+      {
+        "path": "Packages/tempfile.4.tmp",
+        "size": 125236,
+        "sha256": "39e7fa99b7196d827920ae5b1010076b2ec134a23a31f9085c08074f268047fd"
+      },
+      {
+        "path": "Packages/tempfile.5.tmp",
+        "size": 8793,
+        "sha256": "7951fc97288d0a78e95634fbd82ddaba9bcb49b2c0a09c7bca445641d3e20e63"
+      },
+      {
+        "path": "Packages/tempfile.6.tmp",
+        "size": 131476,
+        "sha256": "e90da93f33daaa339ea0b95b1da2f1f4337fa32d4ac4dd93447e791456b99d41"
+      },
+      {
+        "path": "Packages/tempfile.7.tmp",
+        "size": 134516,
+        "sha256": "c4e47b1d62bf730b53b0f1ecca9b979005082078f0339653f5e9ce0cfd23e71c"
+      },
+      {
+        "path": "Packages/tempfile.tmp",
+        "size": 3081249,
+        "sha256": "d3af9fb45328843257f4f76701b7c016367923aa8e391ff9d115cc9d485ab034"
+      },
+      {
+        "path": "Packages/Texture/tempfile.2.tmp",
+        "size": 154405,
+        "sha256": "96af94a5637fc36aac5e7bb2de537101cb3aa373dea5de380bb9b32374cac4fa"
+      },
+      {
+        "path": "Packages/UI/tempfile.2.tmp",
+        "size": 64684,
+        "sha256": "8361d5f87dfede93f1ef62a6dc7cae1c6feeaeea2799cbff749ffefa249cbdc5"
+      },
+      {
+        "path": "Packages/UI/tempfile.3.tmp",
+        "size": 65307,
+        "sha256": "97cf46f217722cb426664be22234cc60d23695c6cd5edf4ce88d15629a09161f"
+      },
+      {
+        "path": "Packages/UI/tempfile.tmp",
+        "size": 60625,
+        "sha256": "b7f843b3c672afde95be6553987d3547c18b3c65ef613946c325b20efea9c973"
+      }
+    ]
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "legacy_sample_mount": "read-only-directory",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "raw-manifest-sha256",
+    "sample-set-sha256",
+    "sample-file-sha256",
+    "clang-format-21",
+    "cmake-clang-21",
+    "clang-tidy-21",
+    "ctest",
+    "frozen-sample-set-parse"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 87,
+    "output_sha256": "ae487831ffc2a01e343393fc0fd24d55926db60347937fccff325e39b7a4da14"
+  }
+}

@@ -1,0 +1,92 @@
+# TMXY Rebuild repository exclusions.
+# Keep source, contracts, migrations, governance documents, and approved small
+# golden samples in Git. Large evidence and reproducible bulk outputs stay out.
+
+# Local secrets and machine-only configuration. Templates remain trackable.
+.env
+.env.*
+!.env.example
+!.env.template
+*.secret
+*.secrets.json
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+local.settings.json
+
+# IDE and operating-system state.
+.vs/
+.vscode/
+.idea/
+*.sln
+*.slnx
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+.DS_Store
+Thumbs.db
+
+# Unreal Engine generated products and local caches.
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Apps/UEClient/Config/DefaultInput.ini
+
+# CMake, Ninja, CTest, and local dependency outputs.
+build/
+build-*/
+cmake-build-*/
+out/
+CMakeFiles/
+CMakeCache.txt
+CTestTestfile.cmake
+cmake_install.cmake
+install_manifest.txt
+build.ninja
+rules.ninja
+.ninja_deps
+.ninja_log
+Testing/
+_deps/
+CMakeUserPresets.json
+compile_commands.json
+conan_toolchain.cmake
+conanbuild*.sh
+conanbuild*.bat
+conanrun*.sh
+conanrun*.bat
+
+# Local package-manager, script, and tool caches.
+.cache/
+.conan2/
+.venv/
+__pycache__/
+*.py[cod]
+
+# Raw manifests containing local absolute paths are reproducible evidence, not
+# portable repository content. BASELINE.md and reviewed summaries remain tracked.
+Data/RawManifests/*.files.jsonl
+Data/RawManifests/*.summary.json
+Data/RawManifests/*.tmp
+
+# Large read-only evidence, original packages, bulk exports, generated assets,
+# object-store mirrors, and DDC must never be redirected into Git LFS.
+Data/Extracted/
+Data/Exports/
+Data/Generated/
+Data/RawPackages/
+Data/DerivedDataCache/
+Data/ObjectStore/
+Data/Local/
+Data/Backups/
+Data/Toolchain/OciCache/
+
+# Transient reports and editor logs.
+*.log
+*.tmp
+*.bak
+*.swp

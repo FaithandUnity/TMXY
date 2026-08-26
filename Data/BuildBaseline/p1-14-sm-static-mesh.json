@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:09:10.7543537+00:00",
+  "result": "PASS",
+  "task": "P1-14",
+  "completion_criteria_satisfied": true,
+  "source_file_count": 16,
+  "source_sha256": "4b81de661b327e21a71edcaf16528ecfd668c362cd738bd7028a1c69fc6694dc",
+  "contract": {
+    "descriptor_source": "Package QStaticMesh QObject property body",
+    "sm_payload": "headerless ordered runtime arrays",
+    "coordinate_source": "legacy-runtime-x-forward-y-right-z-up-meters",
+    "outputs": [
+      "obj-ue-centimeter-preview",
+      "json-metadata",
+      "gltf-2.0-json-authoritative",
+      "gltf-2.0-external-bin-authoritative"
+    ],
+    "bounds_relations": [
+      "absent",
+      "exact",
+      "contains",
+      "mismatch"
+    ],
+    "octree_rule": "face ranges are authoritative for leaf nodes only"
+  },
+  "samples": [
+    {
+      "object": "particle.ZFH_O_S_Tianpian100",
+      "vertices": 4,
+      "indices": 6,
+      "sections": 1,
+      "role": "minimum"
+    },
+    {
+      "object": "newscenc.dy_bx_stl_005",
+      "vertices": 157638,
+      "indices": 157638,
+      "sections": 1,
+      "role": "largest-file-and-uv1"
+    },
+    {
+      "object": "newscenc.dy_bx_bqg_006",
+      "vertices": 47964,
+      "indices": 250614,
+      "sections": 1,
+      "role": "shadow-and-stale-bounds"
+    },
+    {
+      "object": "scene09.GT_B_S_BangPai05",
+      "vertices": 11847,
+      "indices": 19533,
+      "sections": 43,
+      "role": "multisection-and-collision"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "ClientCode\\QRender\\Src\\QStaticMesh.cpp",
+      "size": 51870,
+      "sha256": "5462960f3c022539d00738f0a8c24bc43dcd955e2bf45018e0bba5a8a23648f4",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QGeom.h",
+      "size": 6649,
+      "sha256": "91500167970a758df9c22e242477c5db62c4feb99a538dbe1599e49de718b965",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QVector.h",
+      "size": 9985,
+      "sha256": "66658ec9df40c3bef90e509001dfb100b413c5e9b7d332f6a7f56f0872bf7925",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Hdr\\QArray.h",
+      "size": 12657,
+      "sha256": "831485b5d3392f57c6cb9a832362eb4566111e03b3b9de8225e6f0a09788617a",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Src\\QArchive.cpp",
+      "size": 2242,
+      "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Src\\QRenderTypes.cpp",
+      "size": 16776,
+      "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Utility\\Src\\UtStaticMeshFactories.cpp",
+      "size": 46138,
+      "sha256": "c3d2ef7d2749c3f2b2a97d3eaab11aa9cf890709855428651c217e25d1e06cdb",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\particle",
+      "size": 3435518,
+      "sha256": "2e74819ee5eb665b5298710c06ea73de5016909535dee0ad388b7c194c6bd3b9",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\newscenc",
+      "size": 43554,
+      "sha256": "79bf6e339149b9a37535d6d5c92e5a4c09b5737072be1ac9fe21681630f8d433",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\StaticMesh\\scene09",
+      "size": 215837,
+      "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\StaticMesh\\particle\\ZFH_O_S_Tianpian100.sm",
+      "size": 309,
+      "sha256": "79669d7fbc5d3ebbfa82c6f3075c39b512d7ea021adf2d749b596d6e82dd81e8",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\StaticMesh\\newscenc\\dy_bx_stl_005.sm",
+      "size": 13165223,
+      "sha256": "b0d788088736c00697c3e1b36d0b49044506cf14844a957cbd225f7c4886e242",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\StaticMesh\\newscenc\\dy_bx_bqg_006.sm",
+      "size": 12185471,
+      "sha256": "b5189a2daf0daa16fae12ad0fa6c308981ec28d7ba0094cf24dc032a066870c1",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\StaticMesh\\scene09\\GT_B_S_BangPai05.sm",
+      "size": 966853,
+      "sha256": "c72bbcde94f51f8b8f8d8c9fc5800fbd2ca0356bdc6efec441cae6ce9a5260a8",
+      "passed": true
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "evidence_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_output_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-ninja-clang-21-werror",
+    "clang-tidy-21",
+    "ctest-corrupt-boundary-determinism",
+    "four-real-package-sm-pairs",
+    "cli-obj-json-gltf-bin-signature"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 71,
+    "output_sha256": "51c8a118312a6b17fd2c0f2656fc301e05a51fdf8d7b9e8289b4b47e0969327a"
+  }
+}

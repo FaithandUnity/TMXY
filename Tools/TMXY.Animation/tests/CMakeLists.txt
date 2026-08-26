@@ -1,0 +1,10 @@
+add_executable(tmxy_animation_parser_test animation_parser_test.cpp)
+target_link_libraries(tmxy_animation_parser_test PRIVATE tmxy::animation)
+tmxy_apply_tool_defaults(tmxy_animation_parser_test)
+add_test(NAME animation.parser COMMAND tmxy_animation_parser_test)
+
+add_executable(tmxy_anim_real_samples_test anim_real_samples_test.cpp)
+target_link_libraries(tmxy_anim_real_samples_test PRIVATE tmxy::animation)
+tmxy_apply_tool_defaults(tmxy_anim_real_samples_test)
+add_test(NAME animation.real_samples_usage COMMAND tmxy_anim_real_samples_test)
+set_tests_properties(animation.real_samples_usage PROPERTIES WILL_FAIL TRUE)

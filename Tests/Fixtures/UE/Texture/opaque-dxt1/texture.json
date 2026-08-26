@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "object_name": "texstone.WHZ_S_Dimian20_D",
+  "format": {"value": 3, "name": "dxt1"},
+  "width": 8,
+  "height": 8,
+  "stored_mip_count": 1,
+  "mip_count": 1,
+  "u_clamp": "wrap",
+  "v_clamp": "wrap",
+  "alpha_encoding": "none",
+  "alpha_coverage": "opaque",
+  "payload_size": 32,
+  "unknown_property_count": 0,
+  "mips": [
+    {"level": 0, "width": 8, "height": 8, "offset": 0, "size": 32}
+  ],
+  "outputs": {"dds": "texture.dds", "png": "texture.png", "tga": "texture.tga"}
+}

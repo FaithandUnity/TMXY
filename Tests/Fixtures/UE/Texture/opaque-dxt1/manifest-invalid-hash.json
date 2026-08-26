@@ -1,0 +1,53 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "golden.texture.invalid-hash",
+  "asset_kind": "texture",
+  "producer": {
+    "name": "tmxy-qtx-export",
+    "version": "0.1.0",
+    "source_sha256": "31d19b6ccc64abe55574f90e7bc62c586d155cd34152d43014f5e578caeccb67"
+  },
+  "source_inputs": [
+    {
+      "id": "legacy-source-evidence",
+      "role": "provenance-manifest",
+      "relative_path": "source-evidence.json",
+      "bytes": 536,
+      "sha256": "4a68eb968d25728a5d443d8685fafe5c4426dc1b0255af77b415f73829b8e36a",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "texture-payload",
+      "semantic_role": "texture-payload",
+      "relative_path": "texture.dds",
+      "format_id": "microsoft.dds",
+      "format_version": "1.0.0",
+      "media_type": "image/vnd-ms.dds",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "not-spatial",
+      "unit_contract": "not-applicable",
+      "bytes": 160,
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "depends_on": [],
+      "required_features": ["complete-mip-chain"],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [],
+  "extensions": {
+    "org.tmxy.ue-import": {
+      "package_name": "/Game/TMXY/Golden/Textures/T_Golden_Invalid_Hash",
+      "srgb": true,
+      "expected_format": "dxt1",
+      "expected_width": 8,
+      "expected_height": 8,
+      "expected_mips": 1,
+      "expected_alpha_coverage": "opaque"
+    }
+  }
+}

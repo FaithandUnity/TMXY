@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/ue-skeletal-mesh-import-report-v1.schema.json",
+  "title": "TMXY UE golden skeletal mesh import report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "report_version",
+    "handler_format_id",
+    "fixture_id",
+    "manifest_path",
+    "manifest_sha256",
+    "skeletal_mesh_package",
+    "skeleton_package",
+    "imported_asset_count",
+    "source_vertex_count",
+    "render_vertex_count",
+    "triangle_count",
+    "section_count",
+    "material_slot_count",
+    "bone_count",
+    "skeleton_bone_count",
+    "root_bone_name",
+    "weighted_vertex_count",
+    "maximum_active_influences",
+    "maximum_weight_sum_error",
+    "weights_verified",
+    "bind_pose_verified",
+    "maximum_component_translation_cm",
+    "inverse_bind_orientation_preserved",
+    "attachment_policy_verified",
+    "invalid_hash_rejected",
+    "invalid_hash_asset_created",
+    "reimport_passed",
+    "reimport_mesh_bytes_unchanged",
+    "reimport_skeleton_bytes_unchanged",
+    "bounds_cm"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.ue.skeletal-mesh-import-report" },
+    "schema_version": { "const": 1 },
+    "report_version": { "const": "1.0.0" },
+    "handler_format_id": { "const": "khronos.gltf-json" },
+    "fixture_id": { "const": "boy01-default-real" },
+    "manifest_path": {
+      "const": "Tests/Fixtures/UE/SkeletalMesh/boy01-default-real/manifest.json"
+    },
+    "manifest_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "skeletal_mesh_package": {
+      "const": "/Game/TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default"
+    },
+    "skeleton_package": {
+      "const": "/Game/TMXY/Golden/Skeletons/SKEL_Golden_Boy01"
+    },
+    "imported_asset_count": { "const": 2 },
+    "source_vertex_count": { "const": 10338 },
+    "render_vertex_count": { "const": 10299 },
+    "triangle_count": { "const": 8757 },
+    "section_count": { "const": 7 },
+    "material_slot_count": { "const": 7 },
+    "bone_count": { "const": 80 },
+    "skeleton_bone_count": { "const": 80 },
+    "root_bone_name": { "const": "Bip01" },
+    "weighted_vertex_count": { "const": 10338 },
+    "maximum_active_influences": { "const": 4 },
+    "maximum_weight_sum_error": { "type": "number", "minimum": 0, "maximum": 0.0001 },
+    "weights_verified": { "const": true },
+    "bind_pose_verified": { "const": true },
+    "maximum_component_translation_cm": { "type": "number", "minimum": 0, "maximum": 100000 },
+    "inverse_bind_orientation_preserved": { "const": true },
+    "attachment_policy_verified": { "const": true },
+    "invalid_hash_rejected": { "const": true },
+    "invalid_hash_asset_created": { "const": false },
+    "reimport_passed": { "const": true },
+    "reimport_mesh_bytes_unchanged": { "const": true },
+    "reimport_skeleton_bytes_unchanged": { "const": true },
+    "bounds_cm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum", "maximum"],
+      "properties": {
+        "minimum": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "type": "number" }
+        },
+        "maximum": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": { "type": "number" }
+        }
+      }
+    }
+  }
+}

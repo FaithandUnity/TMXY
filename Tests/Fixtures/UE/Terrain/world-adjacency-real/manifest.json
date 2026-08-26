@@ -1,0 +1,349 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "golden.terrain.world-adjacency-real",
+  "asset_kind": "terrain_tile",
+  "producer": {
+    "name": "tmxy-terrain",
+    "version": "0.1.0",
+    "source_sha256": "88c396a8b694cbfe118778375efea7191e8f663537d3d9f3aecfe462b8be5a66"
+  },
+  "source_inputs": [
+    {
+      "id": "legacy-source-evidence",
+      "role": "provenance-manifest",
+      "relative_path": "source-evidence.json",
+      "bytes": 1519,
+      "sha256": "ea9a8eeba7cdc338244d20f2ae43c740ef323d8068eb1e2e908ba708ef377d36",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "base-metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "base.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 971,
+      "sha256": "7d40de8b6f81743485c1acc128efeef6a901b2e4073ee64132d53155f85000c0",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "base-height",
+      "semantic_role": "height-plane",
+      "relative_path": "base.height.f32le",
+      "format_id": "tmxy.terrain.height-f32le",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 16384,
+      "sha256": "09865eed7a53b86ca790e042ba25f719971ba16e5b6a634021ac1337fb1aed0f",
+      "depends_on": [
+        "base-metadata"
+      ],
+      "required_features": [
+        "physical-scale-from-level-metadata"
+      ],
+      "extensions": {}
+    },
+    {
+      "id": "base-layers",
+      "semantic_role": "layer-alpha-plane",
+      "relative_path": "base.layers.rgba8",
+      "format_id": "tmxy.terrain.layers-rgba8",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "not-applicable",
+      "bytes": 16384,
+      "sha256": "f602abfed459cc875c8ebe507fe4c0ca0f730a9b3565a95208315e3e49b8fd07",
+      "depends_on": [
+        "base-metadata"
+      ],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "base-edges",
+      "semantic_role": "terrain-edge-review",
+      "relative_path": "base.edges.csv",
+      "format_id": "text.csv-rfc4180",
+      "format_version": "1.0.0",
+      "media_type": "text/csv",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 21662,
+      "sha256": "8598809c2cb860f98a1243805f471b8731328e81d481be6aeb74acb4045e9be6",
+      "depends_on": [
+        "base-height"
+      ],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "right-metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "right.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 969,
+      "sha256": "bfe2f63f78506f85bae5447a8a6b89d0681ada0463e4cc87662771374c21c7a7",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "right-height",
+      "semantic_role": "height-plane",
+      "relative_path": "right.height.f32le",
+      "format_id": "tmxy.terrain.height-f32le",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 16384,
+      "sha256": "b9eac588a7ef3e9f3ceaf9fd4c70fb06549f8fc4c9bfa9b64ef77fd8da260648",
+      "depends_on": [
+        "right-metadata"
+      ],
+      "required_features": [
+        "physical-scale-from-level-metadata"
+      ],
+      "extensions": {}
+    },
+    {
+      "id": "right-layers",
+      "semantic_role": "layer-alpha-plane",
+      "relative_path": "right.layers.rgba8",
+      "format_id": "tmxy.terrain.layers-rgba8",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "not-applicable",
+      "bytes": 16384,
+      "sha256": "f1b9cdc7a0a86ad32528a07e9391cde6fa698720ff84b136100de191f750ca03",
+      "depends_on": [
+        "right-metadata"
+      ],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "right-edges",
+      "semantic_role": "terrain-edge-review",
+      "relative_path": "right.edges.csv",
+      "format_id": "text.csv-rfc4180",
+      "format_version": "1.0.0",
+      "media_type": "text/csv",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 24900,
+      "sha256": "4f702518c8405110ee0af2c1cd6424701e0cd12e3ee16a8ebe2700f5d21cca64",
+      "depends_on": [
+        "right-height"
+      ],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "bottom-metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "bottom.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 972,
+      "sha256": "b1d4bd445bbbccbbf23eea9f8d817139a018400479026a6cd1f8fa25155f8875",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "bottom-height",
+      "semantic_role": "height-plane",
+      "relative_path": "bottom.height.f32le",
+      "format_id": "tmxy.terrain.height-f32le",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 16384,
+      "sha256": "ffb8951744ee9298ffb7d2cc559474245a6295f7c109accf6829dbccbc311a8b",
+      "depends_on": [
+        "bottom-metadata"
+      ],
+      "required_features": [
+        "physical-scale-from-level-metadata"
+      ],
+      "extensions": {}
+    },
+    {
+      "id": "bottom-layers",
+      "semantic_role": "layer-alpha-plane",
+      "relative_path": "bottom.layers.rgba8",
+      "format_id": "tmxy.terrain.layers-rgba8",
+      "format_version": "1.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "not-applicable",
+      "bytes": 16384,
+      "sha256": "e0db1c33141b0c4799c9ae2b7a3f7dfa40ab487b9e7ecc7af5768ffb8c6a6ee2",
+      "depends_on": [
+        "bottom-metadata"
+      ],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "bottom-edges",
+      "semantic_role": "terrain-edge-review",
+      "relative_path": "bottom.edges.csv",
+      "format_id": "text.csv-rfc4180",
+      "format_version": "1.0.0",
+      "media_type": "text/csv",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "source-units",
+      "bytes": 25153,
+      "sha256": "de85e6176ccaac92e634f3e50363ed1ada3b6d220994724e91f8387ba4063a0c",
+      "depends_on": [
+        "bottom-height"
+      ],
+      "required_features": [],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [
+    {
+      "path": "terrain.runtime-rendering-policy",
+      "state": "unsupported",
+      "preservation": "namespaced-extension",
+      "extension_key": "org.tmxy.legacy-terrain",
+      "reason": "P1-26 proves interchange and UE geometry; Landscape versus custom runtime rendering remains P3-11.",
+      "extensions": {}
+    }
+  ],
+  "extensions": {
+    "org.tmxy.legacy-terrain": {
+      "level_package_source": "天命西游/Level/world",
+      "level_package_sha256": "997627584cf4dfb55016be32b64e7d33763a17b980a05e0b580137193fb352f4",
+      "qlevel_property_count": 1163,
+      "qlevel_body_offset": 1617462,
+      "terrain_info_body_offset": 593124,
+      "width_zones": 52,
+      "length_zones": 52,
+      "zone_size_source_units": 252.0,
+      "terrain_tile_num": 63,
+      "existing_edge_differences_preserved": true
+    },
+    "org.tmxy.ue-import": {
+      "coordinate_mapping": "legacy-x-forward-y-right-z-up-to-ue-x-forward-y-right-z-up",
+      "edge_vertex_count": 64,
+      "cells_per_axis": 63,
+      "source_units_per_cell": 4.0,
+      "centimeters_per_source_unit": 100.0,
+      "cell_spacing_cm": 400.0,
+      "zone_size_cm": 25200.0,
+      "preserve_existing_edge_differences": true,
+      "tile_meshes": [
+        {
+          "fixture_id": "base",
+          "package_name": "/Game/TMXY/Golden/Terrain/SMT_Golden_World_001_001",
+          "tile_x": 1,
+          "tile_y": 1,
+          "metadata_artifact_id": "base-metadata",
+          "height_artifact_id": "base-height",
+          "layer_artifact_id": "base-layers",
+          "expected_vertex_count": 4096,
+          "expected_triangle_count": 7938,
+          "expected_min_height_source_units": -15.955535888671875,
+          "expected_max_height_source_units": 26.688465118408203
+        },
+        {
+          "fixture_id": "right",
+          "package_name": "/Game/TMXY/Golden/Terrain/SMT_Golden_World_002_001",
+          "tile_x": 2,
+          "tile_y": 1,
+          "metadata_artifact_id": "right-metadata",
+          "height_artifact_id": "right-height",
+          "layer_artifact_id": "right-layers",
+          "expected_vertex_count": 4096,
+          "expected_triangle_count": 7938,
+          "expected_min_height_source_units": -16.77197265625,
+          "expected_max_height_source_units": 24.117961883544922
+        },
+        {
+          "fixture_id": "bottom",
+          "package_name": "/Game/TMXY/Golden/Terrain/SMT_Golden_World_001_002",
+          "tile_x": 1,
+          "tile_y": 2,
+          "metadata_artifact_id": "bottom-metadata",
+          "height_artifact_id": "bottom-height",
+          "layer_artifact_id": "bottom-layers",
+          "expected_vertex_count": 4096,
+          "expected_triangle_count": 7938,
+          "expected_min_height_source_units": -21.336816787719727,
+          "expected_max_height_source_units": 28.26822280883789
+        }
+      ],
+      "adjacency": [
+        {
+          "first": "base",
+          "first_edge": "right",
+          "second": "right",
+          "second_edge": "left",
+          "sample_count": 64,
+          "differing_sample_count": 16,
+          "maximum_absolute_delta_source_units": 0.032009124755859375,
+          "maximum_absolute_delta_cm": 12.80364990234375
+        },
+        {
+          "first": "base",
+          "first_edge": "bottom",
+          "second": "bottom",
+          "second_edge": "top",
+          "sample_count": 64,
+          "differing_sample_count": 10,
+          "maximum_absolute_delta_source_units": 0.004788875579833984,
+          "maximum_absolute_delta_cm": 1.9155502319335938
+        }
+      ]
+    }
+  }
+}

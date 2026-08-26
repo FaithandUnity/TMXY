@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:10:03.0348495+00:00",
+  "result": "PASS",
+  "task": "P1-15",
+  "completion_criteria_satisfied": true,
+  "source_file_count": 18,
+  "source_sha256": "c357fb9d15ad6f20d0437ef061486852f2f3fe0d1f0a5e27de01143bb2511311",
+  "contract": {
+    "descriptor_source": "Package QSkelMesh QObject property body",
+    "skem_payload": "headerless grouped selectable submesh arrays",
+    "bone_index_encoding": "integral float32; zero means unused; positive values are one-based",
+    "bind_pose": "validated local quaternion and translation per bone",
+    "attachment_points": "validated bone-name candidates; no distinct legacy socket record",
+    "outputs": [
+      "gltf-2.0-json-external-bin-default-selection-authority",
+      "obj-default-selection-ue-centimeter-preview",
+      "json-skeleton-weight-metadata"
+    ],
+    "legacy_weight_exception": "exact all-minus-one weights plus all-zero bone indices only"
+  },
+  "samples": [
+    {
+      "object": "particle.FXH_O_S_shizuo",
+      "groups": 1,
+      "submeshes": 1,
+      "vertices": 4,
+      "indices": 6,
+      "role": "global-minimum-payload-only"
+    },
+    {
+      "object": "skchar.Boy01",
+      "groups": 12,
+      "submeshes": 1620,
+      "vertices": 842929,
+      "indices": 2944338,
+      "bones": 80,
+      "sentinel_vertices": 0,
+      "role": "canonical-player"
+    },
+    {
+      "object": "skchar.Girl01",
+      "groups": 12,
+      "submeshes": 1806,
+      "vertices": 1014104,
+      "indices": 3668820,
+      "bones": 80,
+      "sentinel_vertices": 2,
+      "role": "global-maximum-and-sentinel-boundary"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "ClientCode\\QRender\\Src\\QSkelMesh.cpp",
+      "size": 80302,
+      "sha256": "d4d00eb79f7c30123df02e9105f7335fac4533c146957a429ba9ad84c108e5f7",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QSkelMesh.h",
+      "size": 18771,
+      "sha256": "d7b44a3e7160f37a297f7c428d483300d9900f0cb0f0c8140d97aa3af3a8c7ae",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QGeom.h",
+      "size": 6649,
+      "sha256": "91500167970a758df9c22e242477c5db62c4feb99a538dbe1599e49de718b965",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QVector.h",
+      "size": 9985,
+      "sha256": "66658ec9df40c3bef90e509001dfb100b413c5e9b7d332f6a7f56f0872bf7925",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Hdr\\QArray.h",
+      "size": 12657,
+      "sha256": "831485b5d3392f57c6cb9a832362eb4566111e03b3b9de8225e6f0a09788617a",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Hdr\\QPString.h",
+      "size": 1837,
+      "sha256": "6374e1a01b82af150d5f94e9974f5d6f8d169cf309c683f980a101776d678b8d",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Src\\QArchive.cpp",
+      "size": 2242,
+      "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Base\\Src\\QProperty.cpp",
+      "size": 17859,
+      "sha256": "b92a93ba136e1de845b5c5f6d385fad3904db202b7396f213a3749a2e4584a57",
+      "passed": true
+    },
+    {
+      "path": "ClientCode\\Utility\\Src\\UtSkinMeshFactories.cpp",
+      "size": 44007,
+      "sha256": "5fc2cdb7a481366a8fac04bbbc1a2d56b306ccfc86198c2004124c469165a741",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Packages\\SkelMesh\\skchar",
+      "size": 281615,
+      "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\SkelMesh\\particle\\FXH_O_S_shizuo.skem",
+      "size": 477,
+      "sha256": "a755d7c0a706895725b53d9ea0289fe42600841dd8ba725fae86f8c5034912d5",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\SkelMesh\\skchar\\Boy01.skem",
+      "size": 95700140,
+      "sha256": "409fedf015ae3949222241cd8d7cc1aea22bb6ef689b2cc0190a796fe7cf93b6",
+      "passed": true
+    },
+    {
+      "path": "天命西游\\Resource\\SkelMesh\\skchar\\Girl01.skem",
+      "size": 115909244,
+      "sha256": "6ada6140d6a615ba1e18b2e236548ed67972d81ab948d4884e20af77913606d9",
+      "passed": true
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "evidence_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_output_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "clang-format-21",
+    "cmake-ninja-clang-21-werror",
+    "clang-tidy-21",
+    "ctest-corrupt-boundary-determinism",
+    "minimum-plus-two-real-package-skem-pairs",
+    "cli-default-obj-json-signature"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 70,
+    "output_sha256": "5ab447e6fc23b7892f4fc0d01f6517e2bd9efe3c1ee379c82729a511790f0071"
+  }
+}

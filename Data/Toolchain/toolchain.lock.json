@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-08-25T23:10:00Z",
+  "project": "TMXY Rebuild",
+  "lock_state": "locked",
+  "lock_state_reason": "The P0 client, Linux backend builder and PostgreSQL toolchains are immutable and locally qualified. MSVC 14.51 remains covered by a source-bound waiver through 2026-10-25; application dependency revisions are intentionally deferred until P4 introduces Conan recipes.",
+  "authority": {
+    "client_editor_and_windows_dev": "Windows 11 + Visual Studio + Unreal Engine",
+    "backend_release_build": "linux/amd64 container only",
+    "backend_runtime": "linux/amd64 container or Linux host using the same locked artifacts",
+    "database_runtime": "PostgreSQL container for development and CI; managed or Linux-hosted PostgreSQL for production",
+    "independent_ubuntu_wsl_required": false
+  },
+  "host": {
+    "operating_system": "Windows 11 x64",
+    "wsl_minimum_major": 2,
+    "docker_engine_os": "linux",
+    "docker_engine_architecture": "amd64",
+    "qualified_on": {
+      "wsl": "2.7.12.0",
+      "docker_desktop": "4.87.0",
+      "docker_engine": "29.7.2",
+      "docker_compose": "5.4.0",
+      "docker_buildx": "0.36.1-desktop.1"
+    }
+  },
+  "client_toolchain": {
+    "unreal_engine": {
+      "version": "5.8.2",
+      "changelist": 56702186,
+      "compatible_changelist": 55116800,
+      "branch": "++UE5+Release-5.8"
+    },
+    "visual_studio": {
+      "product": "Visual Studio Community 2026",
+      "version": "18.9.12112.369"
+    },
+    "msvc": "14.51.36231",
+    "msvc_qualification": {
+      "reported_toolchain_version": "14.51.36256",
+      "ue_5_8_latest_preferred_version": "14.50.35717",
+      "status": "waiver_active_time_bounded",
+      "action": "Requalify with preferred MSVC 14.50.35717, or rerun and explicitly review the complete packaging qualification before expiry.",
+      "waiver": {
+        "effective_local": "2026-08-26T00:00:00+08:00",
+        "expires_local": "2026-10-25T23:59:59+08:00",
+        "issuer": "Codex engineering execution owner",
+        "policy": "Docs/Build/MSVC-14.51-WAIVER.md",
+        "report": "Data/BuildBaseline/p0-08-ue-packaging-waiver.json",
+        "report_sha256": "fd6b68efa3ca078ebfee2b0935bf7efef4c6e3cf9e5404e936a2ceecaafee657",
+        "source_manifest_sha256": "119cb080e514483ea6f0d74f434a8300f0dc15acc058e7a488be15d96fef76e0"
+      }
+    },
+    "windows_sdk": "10.0.26100.0",
+    "dotnet_sdk": "10.0.400",
+    "powershell": "7.6.4"
+  },
+  "backend_toolchain": {
+    "target": "linux/amd64",
+    "language_standard": "C++20",
+    "standard_library": "libstdc++",
+    "base_image": {
+      "reference": "debian:bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+      "manifest_digest": "sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171",
+      "linux_amd64_manifest_digest": "sha256:5ae3c39ebd15e229dcedd5cee596b2497182493d41ff162e824ba13fc1b2b867",
+      "acquisition_report": "Data/Toolchain/debian-bookworm-slim-import.json",
+      "acquisition_report_sha256": "cb4a345dd2d811d464204aa3c4f37051b9123075c398834953803ae824820154",
+      "verified_oci_archive_sha256": "sha256:dd84b434cdb6126dd3137b83faacf0b493e5ef7500a1fcf80ca76dd04ae4f5ea",
+      "status": "locked_and_locally_verified",
+      "rule": "The builder Dockerfile must use reference@sha256:digest. A floating tag is never accepted by CI."
+    },
+    "compiler": {
+      "name": "Clang",
+      "major": 21,
+      "exact_package_revision": "1:21.1.8~++20251221032947+2078da43e25a-1~exp1~20251221153113.67",
+      "status": "locked_and_qualified"
+    },
+    "cmake": {
+      "version": "4.4.2",
+      "linux_x86_64_archive_sha256": "3ada9a3f5d8a85413579bdd0ea6aa8e8da86efdd6d15c91a1afa517f2021956c",
+      "status": "locked"
+    },
+    "ninja": {
+      "version": "1.11.1",
+      "debian_package_revision": "1.11.1-2~deb12u1",
+      "status": "locked"
+    },
+    "conan": {
+      "version": "2.31.2",
+      "python_wheel_sha256": "87a8ae0b492c4fd4291d4146bf80522a00d6157637bed7ec055787e1a51f75d6",
+      "hashed_requirements_sha256": "4cb1b0eaa7057fd65e95a65b3609865bc658226642ddd665be9181500d67b14b",
+      "status": "locked"
+    },
+    "application_dependency_policy": "Conan 2 lockfiles per build profile; no unbounded version ranges; release and CI consume the committed lockfile.",
+    "container_image_reference": "tmxy-backend-builder:p0-08",
+    "container_image_digest": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "container_image_digest_scope": "local OCI manifest digest; publish the same manifest under an authorized registry without rebuilding",
+    "container_image_status": "locked_and_locally_qualified",
+    "qualification": {
+      "report": "Data/Toolchain/backend-toolchain-qualification.json",
+      "report_sha256": "2dd2b0490fc200fa3382c33f1d0307cae88b2c0f39cd6b42514fc533c545b722",
+      "dockerfile_sha256": "bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d",
+      "backend_source_sha256": "b052c2075364bbc8ea2882af6f88be08aca6582a3d1b52281659ec9bc7357f14",
+      "clean_builder_image_digest": "sha256:93ac78453922461417497c725eab2a4efedd1e198e242c242c6c226599ea8783",
+      "sbom": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
+      "sbom_sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+      "sbom_component_count": 316,
+      "result": "PASS"
+    }
+  },
+  "protocol_and_runtime_dependencies": {
+    "protobuf": {
+      "version": "35.1",
+      "source_archive_sha256": "f0b6838e7522a8da96126d487068c959bc624926368f3024ac8fd03abd0a1ac4",
+      "protoc_linux_x86_64_sha256": "6930ebf62bd4ea607b98fff052596c6ee564b9835b4ce172c75a3f53ae9d91b7",
+      "status": "version_locked_conan_package_revision_pending"
+    },
+    "asio": {
+      "version": "1.38.2",
+      "status": "version_locked_conan_package_revision_pending"
+    },
+    "libpq": {
+      "postgresql_major": 18,
+      "exact_package_revision": null,
+      "status": "major_locked_conan_package_revision_pending"
+    }
+  },
+  "database": {
+    "engine": "PostgreSQL",
+    "major": 18,
+    "qualified_minor": "18.6",
+    "development_image": {
+      "reference": "postgres:18.6-alpine",
+      "digest_reference": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "image_id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+      "os": "linux",
+      "architecture": "amd64",
+      "status": "locked_and_locally_verified"
+    },
+    "migration_tool": {
+      "name": "Flyway",
+      "version": null,
+      "status": "deferred_to_P4_database_skeleton"
+    }
+  },
+  "pending_freeze_items": [
+    "Generate Conan host/build profiles and lockfiles when the P4 backend skeleton introduces real dependency recipes.",
+    "Record the exact libpq, Protobuf and Asio Conan package revisions from those lockfiles."
+  ],
+  "source_policy": {
+    "legacy_inputs": "read-only",
+    "generated_outputs_root": "E:\\QQXYCodeDev\\Rebuild",
+    "secrets_in_files": false
+  }
+}

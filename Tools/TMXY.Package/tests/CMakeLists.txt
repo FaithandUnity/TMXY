@@ -1,0 +1,25 @@
+add_executable(tmxy_package_v1_reader_test package_v1_reader_test.cpp)
+target_link_libraries(tmxy_package_v1_reader_test PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_v1_reader_test)
+
+add_test(NAME package.v1_reader COMMAND tmxy_package_v1_reader_test)
+
+add_executable(tmxy_package_v2_reader_test package_v2_reader_test.cpp)
+target_link_libraries(tmxy_package_v2_reader_test PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_v2_reader_test)
+add_test(NAME package.v2_reader COMMAND tmxy_package_v2_reader_test)
+
+add_executable(tmxy_package_v3_reader_test package_v3_reader_test.cpp)
+target_link_libraries(tmxy_package_v3_reader_test PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_v3_reader_test)
+add_test(NAME package.v3_reader COMMAND tmxy_package_v3_reader_test)
+
+add_executable(tmxy_package_directory_codec_test package_directory_codec_test.cpp)
+target_link_libraries(tmxy_package_directory_codec_test PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_directory_codec_test)
+add_test(NAME package.directory_codec COMMAND tmxy_package_directory_codec_test)
+
+add_executable(tmxy_package_normalized_tree_test package_normalized_tree_test.cpp)
+target_link_libraries(tmxy_package_normalized_tree_test PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_normalized_tree_test)
+add_test(NAME package.normalized_tree COMMAND tmxy_package_normalized_tree_test)

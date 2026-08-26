@@ -1,0 +1,345 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:39.3426261+00:00",
+  "result": "PASS",
+  "task": "P1-18",
+  "completion_criteria_satisfied": true,
+  "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
+  "dependencies": {
+    "p1-08-package-normalized-tree.json": "7e725c0fc78dcff077b7148a9da660abed13898aa9492b46334cf0088b66390a",
+    "p1-13-qtx-texture.json": "b599edffba49b441cb3677fd4441ee229eb685255082e8ba8f93b34a27f5cf46"
+  },
+  "classification": {
+    "zif": "BOM-less UTF-8 XML zone-navigation records",
+    "wav": "RIFF/WAVE PCM effects",
+    "mp3": "MPEG audio music streams",
+    "ui": "Package QTexture metadata plus QTX payload; no standalone layout corpus",
+    "shader": "Package material semantics; no loose shader source",
+    "fonts": "TTF evidence gated by ownership and redistribution review"
+  },
+  "priority": [
+    "1:UI textures and material semantics",
+    "2:PCM effects and MPEG music",
+    "3:ZIF navigation graph",
+    "4:UI behavior and licensed fonts"
+  ],
+  "routes": {
+    "zif": "bounded XML plus companion path binding to a versioned navigation graph",
+    "audio": "validated WAV import and reviewed offline MP3 decode to lossless intermediate",
+    "ui": "reuse Package/QTX; reconstruct native UE layout and behavior from evidence",
+    "shader": "decode QPhongShader semantics into reviewed UE material masters and instances"
+  },
+  "zif": {
+    "file_count": 841,
+    "total_bytes": 4565902,
+    "utf8_bom_count": 0,
+    "parse_failure_count": 0,
+    "directories": {
+      "pathInfo": 806,
+      "zoneInfo": 35
+    },
+    "records": {
+      "path_indices": 47988,
+      "directions": 3364,
+      "polygons": 6712,
+      "polygon_ids": 77582,
+      "routes": 1287
+    }
+  },
+  "audio": {
+    "wav": {
+      "file_count": 450,
+      "total_bytes": 54949730,
+      "data_bytes": 54920176,
+      "format_key": "codec|channels|sample_rate|bits_per_sample",
+      "formats": {
+        "1|1|22050|16": 32,
+        "1|1|44100|16": 406,
+        "1|2|22050|16": 6,
+        "1|2|44100|16": 6
+      },
+      "chunk_presence": {
+        "bext": 6,
+        "cue ": 11,
+        "data": 450,
+        "elm1": 6,
+        "fmt ": 450,
+        "JUNK": 4,
+        "LIST": 13,
+        "minf": 6,
+        "regn": 6,
+        "umid": 6
+      }
+    },
+    "mp3": {
+      "file_count": 64,
+      "total_bytes": 124002521,
+      "headers": {
+        "ID3v2": 39,
+        "MPEG-frame": 25,
+        "other": 0
+      },
+      "decoded_or_transcoded": false
+    }
+  },
+  "package_inventory": {
+    "material": {
+      "classes": {
+        "QPhongShader": 14390
+      },
+      "file_count": 10,
+      "files": [
+        {
+          "classes": {
+            "QPhongShader": 3490
+          },
+          "format_version": "QRENDER PACKAGE VER 3.0",
+          "name": "matchar",
+          "objects": 3490,
+          "sha256": "bbe9c875db12d6fa69439a4df23ae85fec88fa7c86d19b35956f611033ad9fe5"
+        },
+        {
+          "classes": {
+            "QPhongShader": 1611
+          },
+          "format_version": "QRENDER PACKAGE VER 3.0",
+          "name": "matnpc",
+          "objects": 1611,
+          "sha256": "bc897b05783a3671f450079a7d7af562fd85ff47e97aa1352a27d92155ed5186"
+        },
+        {
+          "classes": {
+            "QPhongShader": 15
+          },
+          "format_version": "QRENDER PACKAGE VER 3.0",
+          "name": "matnpc2",
+          "objects": 15,
+          "sha256": "ab0b8e7225abe7262f9af44f74c3425f77b511fd80720092591bb105b0c40dd2"
+        },
+        {
+          "classes": {
+            "QPhongShader": 98
+          },
+          "format_version": "QRENDER PACKAGE VER 3.0",
+          "name": "matnpc3",
+          "objects": 98,
+          "sha256": "5989cb818b5de845bc4a9006558a035c14a62eb25b0855de521ff265bb498e38"
+        },
+        {
+          "classes": {
+            "QPhongShader": 13
+          },
+          "format_version": "QRENDER PACKAGE VER 3.0",
+          "name": "matparticle",
+          "objects": 13,
+          "sha256": "dadc1c690d0210cf0fd6c996ed93a3246584e00d98385a71c2a9272a6dd05d95"
+        },
+        {
+          "classes": {
+            "QPhongShader": 1378
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.2.tmp",
+          "objects": 1378,
+          "sha256": "d2dc5b088264c6b716a65f83d0aad4bbe9ed184ecfdc020f966d870fa1da1a69"
+        },
+        {
+          "classes": {
+            "QPhongShader": 1389
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.3.tmp",
+          "objects": 1389,
+          "sha256": "8af94b7661502f293cd447fe77a4a6341fe9549c9b85dcf0666adc4dbbb9e224"
+        },
+        {
+          "classes": {
+            "QPhongShader": 2162
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.4.tmp",
+          "objects": 2162,
+          "sha256": "7129f0753ecb03709722d64451511c546ffbe8fb3266ce220e5d6e41abf00054"
+        },
+        {
+          "classes": {
+            "QPhongShader": 2274
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.5.tmp",
+          "objects": 2274,
+          "sha256": "742e2b02f6834837fdd36faaf88506695b0d44ecd9999cfc8a284bb4a76acafe"
+        },
+        {
+          "classes": {
+            "QPhongShader": 1960
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.tmp",
+          "objects": 1960,
+          "sha256": "b559a7df8ad8e39c53ad877606d2e7abe26d9c468993dd2373bc3d71c2911e5a"
+        }
+      ],
+      "object_count": 14390
+    },
+    "ui": {
+      "classes": {
+        "QTexture": 2890
+      },
+      "file_count": 4,
+      "files": [
+        {
+          "classes": {
+            "QTexture": 764
+          },
+          "format_version": "QRENDER PACKAGE VER 3.0",
+          "name": "interface",
+          "objects": 764,
+          "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f"
+        },
+        {
+          "classes": {
+            "QTexture": 721
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.2.tmp",
+          "objects": 721,
+          "sha256": "8361d5f87dfede93f1ef62a6dc7cae1c6feeaeea2799cbff749ffefa249cbdc5"
+        },
+        {
+          "classes": {
+            "QTexture": 728
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.3.tmp",
+          "objects": 728,
+          "sha256": "97cf46f217722cb426664be22234cc60d23695c6cd5edf4ce88d15629a09161f"
+        },
+        {
+          "classes": {
+            "QTexture": 677
+          },
+          "format_version": "QRENDER PACKAGE VER 2.0",
+          "name": "tempfile.tmp",
+          "objects": 677,
+          "sha256": "b7f843b3c672afde95be6553987d3547c18b3c65ef613946c325b20efea9c973"
+        }
+      ],
+      "object_count": 2890
+    }
+  },
+  "loose_shader_source_count": 0,
+  "standalone_ui_definition_count": 0,
+  "fonts": {
+    "file_count": 3,
+    "total_bytes": 23475828,
+    "imported": false,
+    "rights_review_required": true
+  },
+  "evidence": [
+    {
+      "path": "ClientCode\\Game\\Src\\QAutoPath.cpp",
+      "size": 53819,
+      "sha256": "1ff4091fd69894efe6b8a360ac7267974ed491a4f1420945cb7c2627add01858"
+    },
+    {
+      "path": "ClientCode\\Game\\Hdr\\QAutoPath.h",
+      "size": 7358,
+      "sha256": "548f51d64dd0682a1ba147a8004b0071bb848ffb53a6e9c64287aefb2e492e6b"
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QAudioDev.h",
+      "size": 2217,
+      "sha256": "1397e9c0f23407353ee47d5cf5b33e6aae1cf6c7525da3c1942dc4c53f740f04"
+    },
+    {
+      "path": "ClientCode\\MSSDev\\MSSDev.cpp",
+      "size": 16391,
+      "sha256": "173d63331f1998fad70cc416dfdbfd6e74f3bd262af2c0b75c8ef8dbb8fbf44c"
+    },
+    {
+      "path": "ClientCode\\QRender\\Hdr\\QMaterial.h",
+      "size": 2798,
+      "sha256": "dce356d0e5cdf683fe8751d90d541373d292c9d027cf4218280c79d0bf6d33ca"
+    },
+    {
+      "path": "ClientCode\\QRender\\Src\\QRenderTypes.cpp",
+      "size": 16776,
+      "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50"
+    },
+    {
+      "path": "ClientCode\\Game\\Hdr\\QGUIFrame.h",
+      "size": 34916,
+      "sha256": "7a6e9b6a9a13962d7daafdc70d920d26d0e04ecf4c84bf7ad7a5b12ba2f921cf"
+    },
+    {
+      "path": "ClientCode\\Game\\Src\\QGUIFrame.cpp",
+      "size": 254650,
+      "sha256": "484e1b0c703c28753773f7d31ee211a5380e8f0cb9aed99fb68c91aebc6fbbeb"
+    },
+    {
+      "path": "天命西游\\Table\\pathInfo.path",
+      "size": 2576658,
+      "sha256": "7887724d0d888c1dd9a9da1c402fb515fb32926951889a5e7e9a80f00e30106c"
+    },
+    {
+      "path": "天命西游\\Table\\pathInfo\\zone2174.zif",
+      "size": 394,
+      "sha256": "0a8690bc9ac7e98ff0a9e6cd72533cf1de33e1be45e0fb38c919400d10daa58c"
+    },
+    {
+      "path": "天命西游\\Table\\pathInfo\\zone1308.zif",
+      "size": 36854,
+      "sha256": "369e013babfbaeae112d63b5fab712091f0cf197d3b9f3033e032d755f4227a5"
+    },
+    {
+      "path": "天命西游\\Resource\\Sound\\uisound\\MouseOverTarget.wav",
+      "size": 5612,
+      "sha256": "e290ce84627d15b84b90ac54f1864a8332c33b39b6f542dd80aeeda4261cc988"
+    },
+    {
+      "path": "天命西游\\Resource\\Sound\\sound\\Baigujing_Death.wav",
+      "size": 970244,
+      "sha256": "9616377d59d856c6543ce571bd98e5338aeb7577ef0401e5f7e3acb40ea223a6"
+    },
+    {
+      "path": "天命西游\\music\\10.mp3",
+      "size": 701405,
+      "sha256": "73ff33f886d70f084ccd4921473141cb773473e2622b02f316655e519bf91a1b"
+    },
+    {
+      "path": "天命西游\\music\\1005.mp3",
+      "size": 3661079,
+      "sha256": "77d0e071a031c37ba560647d76f0000e6017387273bb7dd5df668842a6be1668"
+    }
+  ],
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "installed_packages_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_and_output_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "document-route-contract",
+    "legacy-evidence-hash",
+    "full-zif-xml-validation",
+    "full-wav-riff-validation",
+    "full-mp3-prefix-classification",
+    "loose-ui-shader-font-inventory",
+    "isolated-ui-material-package-classification"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 18,
+    "output_sha256": "173ae44079987fe56510107bf5879e6f7a389ffa42c87fbd97c87e42eed19584"
+  }
+}

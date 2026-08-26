@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:55:58.0506479+00:00",
+  "result": "PASS",
+  "task": "P1-20",
+  "completion_criteria_satisfied": true,
+  "source_sha256": "08cbf4852d8388e4a1c4b17fe1dae43fb28aaf0b4f90df697e86981cb19a58fb",
+  "module": {
+    "name": "TMXYGoldenTests",
+    "type": "Editor",
+    "loading_phase": "PostEngineInit",
+    "runtime_target_excluded": true,
+    "policy_passed": true
+  },
+  "host": {
+    "golden_root": "/Game/TMXY/Golden",
+    "map_package": "/Game/TMXY/Golden/Maps/TMXYGoldenTestMap",
+    "map_relative_path": "TMXY/Golden/Maps/TMXYGoldenTestMap.umap",
+    "map_bytes": 6443,
+    "map_sha256": "fcacd47465359c168203cda8344f070549d46885637ea9479354406f05dce269",
+    "unreal_package_tag": "0x9e2a83c1",
+    "content_asset_count": 14,
+    "content_policy_passed": true,
+    "automation_entry": "TMXY.Golden.Host"
+  },
+  "import_report": {
+    "schema": "tmxy.ue.golden-import-report",
+    "report_version": "1.0.0",
+    "positive_example_passed": true,
+    "negative_cases": {
+      "absolute_manifest": true,
+      "package_outside_golden_root": true,
+      "reversed_phase": true,
+      "unknown_root_property": true
+    },
+    "before_after_unchanged": true,
+    "imported_asset_count": 0,
+    "status": "not-run"
+  },
+  "automation_evidence": {
+    "required": true,
+    "passed": true,
+    "report_path": "E:\\QQXYCodeDev\\Rebuild\\Data\\BuildBaseline\\p0-10a-ue-validation.json",
+    "report_sha256": "b5d02951dfee233e0b32437a0531e33bc0028dc3e1dcdc6a96b8a75aff89ce53"
+  },
+  "dependency_report_sha256": "edff413a97214a7451b4bf55bad532e1712f9b0c7c5bf33144c75a2867dd8bfd",
+  "failure_count": 0,
+  "failures": []
+}

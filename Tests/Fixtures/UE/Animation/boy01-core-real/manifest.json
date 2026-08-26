@@ -1,0 +1,158 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "golden.animation.boy01-core-real",
+  "asset_kind": "animation_set",
+  "producer": {
+    "name": "tmxy-animation",
+    "version": "0.2.0",
+    "source_sha256": "768ef1305124397cc2d9028d5b4a70d7ed50d7386aadccec4a0a9ccf16815420"
+  },
+  "source_inputs": [
+    {
+      "id": "legacy-source-evidence",
+      "role": "provenance-manifest",
+      "relative_path": "source-evidence.json",
+      "bytes": 1003,
+      "sha256": "d1ff5aa36d6a8f170d2a00356d06ab09430e6bb03f48b7ea041d743967266919",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "animation.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "seconds",
+      "bytes": 1618,
+      "sha256": "c864a3d727dcb2e5a18db72b5aa4b40eb33aa786ad3417c1ee87324d696179c2",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "buffer",
+      "semantic_role": "gltf-buffer",
+      "relative_path": "animation.bin",
+      "format_id": "khronos.gltf-bin",
+      "format_version": "2.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "seconds",
+      "bytes": 300696,
+      "sha256": "52a5aef9129204a05a412e3335a3282cea96f8cbd9abacf22b7233d7ab8a7bce",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "animation-gltf",
+      "semantic_role": "animation",
+      "relative_path": "animation.gltf",
+      "format_id": "khronos.gltf-json",
+      "format_version": "2.0.0",
+      "media_type": "model/gltf+json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "seconds",
+      "bytes": 145068,
+      "sha256": "798710c2187528ed22d0ba86dd0b254f9e0d35d604ceb1ee4dd30254cf2d3152",
+      "depends_on": [
+        "buffer",
+        "metadata"
+      ],
+      "required_features": [
+        "skeletal-animation",
+        "linear-sampling",
+        "root-track-preserved",
+        "quaternion-hemisphere-continuity"
+      ],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [
+    {
+      "path": "animation_set.unselected_clips_and_notify_execution",
+      "state": "unmapped",
+      "preservation": "namespaced-extension",
+      "extension_key": "org.tmxy.legacy-animation",
+      "reason": "Golden import selects three behavior-boundary clips; remaining clips and notify execution remain read-only evidence.",
+      "extensions": {}
+    }
+  ],
+  "extensions": {
+    "org.tmxy.legacy-animation": {
+      "metadata_artifact_id": "metadata",
+      "source_animation_count": 272,
+      "selected_clip_count": 3,
+      "root_motion_policy": "preserved-root-track-not-extracted",
+      "legacy_loop_policy": "preserve-metadata-no-forced-loop-flag"
+    },
+    "org.tmxy.ue-import": {
+      "skeleton_package_name": "/Game/TMXY/Golden/Skeletons/SKEL_Golden_Boy01",
+      "skeletal_mesh_package_name": "/Game/TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default",
+      "skeleton_manifest_path": "Tests/Fixtures/UE/SkeletalMesh/boy01-default-real/manifest.json",
+      "skeleton_manifest_sha256": "463c70294e3efd00ec0edc9573823b41943a6fae84e2bb3a891a6b554b906c1a",
+      "expected_bone_count": 80,
+      "sample_rate_numerator": 30,
+      "sample_rate_denominator": 1,
+      "coordinate_mapping": "gltf(y,z,x)-to-ue(x,y,z)-centimeters",
+      "quaternion_policy": "normalized-adjacent-hemisphere-continuity",
+      "root_motion_policy": "preserved-root-track-not-extracted",
+      "clips": [
+        {
+          "source_name": "O_RoamIdle",
+          "package_name": "/Game/TMXY/Golden/Animations/A_Golden_Boy01_RoamIdle",
+          "source_index": 135,
+          "expected_frame_count": 50,
+          "expected_track_count": 80,
+          "expected_sampled_duration_seconds": 1.6333334185183048,
+          "expected_legacy_loop_period_seconds": 1.666666753590107,
+          "legacy_self_loop": false,
+          "expected_root_classified_moving": true,
+          "expected_root_translation_distance_meters": 0.0005127371070361588,
+          "expected_maximum_endpoint_translation_delta_meters": 0.0005127371070361588,
+          "expected_maximum_endpoint_rotation_delta_degrees": 4.099832183923363
+        },
+        {
+          "source_name": "O_Run_Forward",
+          "package_name": "/Game/TMXY/Golden/Animations/A_Golden_Boy01_RunForward",
+          "source_index": 153,
+          "expected_frame_count": 24,
+          "expected_track_count": 80,
+          "expected_sampled_duration_seconds": 0.7666667066514492,
+          "expected_legacy_loop_period_seconds": 0.8000000417232513,
+          "legacy_self_loop": false,
+          "expected_root_classified_moving": true,
+          "expected_root_translation_distance_meters": 0.015272078433068775,
+          "expected_maximum_endpoint_translation_delta_meters": 0.02275902217955959,
+          "expected_maximum_endpoint_rotation_delta_degrees": 19.244346665243135
+        },
+        {
+          "source_name": "SelectIdle",
+          "package_name": "/Game/TMXY/Golden/Animations/A_Golden_Boy01_SelectIdle",
+          "source_index": 221,
+          "expected_frame_count": 60,
+          "expected_track_count": 80,
+          "expected_sampled_duration_seconds": 1.9666667692363262,
+          "expected_legacy_loop_period_seconds": 2.0000001043081284,
+          "legacy_self_loop": false,
+          "expected_root_classified_moving": false,
+          "expected_root_translation_distance_meters": 0.0,
+          "expected_maximum_endpoint_translation_delta_meters": 0.00014649166241456063,
+          "expected_maximum_endpoint_rotation_delta_degrees": 1.0434959280128322
+        }
+      ]
+    }
+  }
+}

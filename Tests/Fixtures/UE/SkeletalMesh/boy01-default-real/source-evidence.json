@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "fixture_id": "boy01-default-real",
+  "derivation": "locked TMXY.SkeletalMesh glTF 2.0 export from exact read-only Package/SKEM pair",
+  "copy_policy": "reference-only-inputs; deterministic-default-selection-derived-fixture",
+  "producer_source_sha256": "900b69e654f3a027e9704d6116fd727c7a2716fbd0677e2a7218c5dfaa81f237",
+  "sources": [
+    {
+      "role": "package-metadata",
+      "path": "天命西游/Packages/SkelMesh/skchar",
+      "bytes": 281615,
+      "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7"
+    },
+    {
+      "role": "legacy-skem-payload",
+      "path": "天命西游/Resource/SkelMesh/skchar/Boy01.skem",
+      "bytes": 95700140,
+      "sha256": "409fedf015ae3949222241cd8d7cc1aea22bb6ef689b2cc0190a796fe7cf93b6"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "golden.texture.opaque-dxt1",
+  "asset_kind": "texture",
+  "producer": {
+    "name": "tmxy-qtx-export",
+    "version": "0.1.0",
+    "source_sha256": "31d19b6ccc64abe55574f90e7bc62c586d155cd34152d43014f5e578caeccb67"
+  },
+  "source_inputs": [
+    {
+      "id": "legacy-source-evidence",
+      "role": "provenance-manifest",
+      "relative_path": "source-evidence.json",
+      "bytes": 536,
+      "sha256": "4a68eb968d25728a5d443d8685fafe5c4426dc1b0255af77b415f73829b8e36a",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "texture.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "not-spatial",
+      "unit_contract": "not-applicable",
+      "bytes": 504,
+      "sha256": "45a7f54edf6552248ace375f5f656f42731bebd4bfa38d55c35f80456ff0f540",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "texture-payload",
+      "semantic_role": "texture-payload",
+      "relative_path": "texture.dds",
+      "format_id": "microsoft.dds",
+      "format_version": "1.0.0",
+      "media_type": "image/vnd-ms.dds",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "not-spatial",
+      "unit_contract": "not-applicable",
+      "bytes": 160,
+      "sha256": "c5ed646cf1eb46278c5a6c12ddbe4d3c6848dfb3a9007d07512e32cd6118adfe",
+      "depends_on": ["metadata"],
+      "required_features": ["complete-mip-chain"],
+      "extensions": {}
+    },
+    {
+      "id": "mip-zero-png",
+      "semantic_role": "mip-zero-review",
+      "relative_path": "texture.png",
+      "format_id": "w3c.png",
+      "format_version": "1.0.0",
+      "media_type": "image/png",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "not-spatial",
+      "unit_contract": "not-applicable",
+      "bytes": 332,
+      "sha256": "517cdf7d24a75636b6082355e0356a387b54ce415b90122414bdddcd9563f56e",
+      "depends_on": ["texture-payload"],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "mip-zero-tga",
+      "semantic_role": "mip-zero-review",
+      "relative_path": "texture.tga",
+      "format_id": "truevision.tga",
+      "format_version": "1.0.0",
+      "media_type": "image/x-tga",
+      "authority": "review",
+      "byte_order": "little-endian",
+      "coordinate_contract": "not-spatial",
+      "unit_contract": "not-applicable",
+      "bytes": 274,
+      "sha256": "acb1505d521f65a38e2472b2f5a285a20b60c458dac90d578e140a76c65ed267",
+      "depends_on": ["texture-payload"],
+      "required_features": [],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [],
+  "extensions": {
+    "org.tmxy.ue-import": {
+      "package_name": "/Game/TMXY/Golden/Textures/T_Golden_Opaque_DXT1",
+      "srgb": true,
+      "expected_format": "dxt1",
+      "expected_width": 8,
+      "expected_height": 8,
+      "expected_mips": 1,
+      "expected_alpha_coverage": "opaque"
+    }
+  }
+}

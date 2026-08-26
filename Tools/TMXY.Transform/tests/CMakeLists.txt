@@ -1,0 +1,4 @@
+add_executable(tmxy_legacy_to_ue_transform_test legacy_to_ue_transform_test.cpp)
+target_link_libraries(tmxy_legacy_to_ue_transform_test PRIVATE tmxy::transform)
+tmxy_apply_tool_defaults(tmxy_legacy_to_ue_transform_test)
+add_test(NAME transform.legacy_to_ue COMMAND tmxy_legacy_to_ue_transform_test)

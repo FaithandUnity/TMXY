@@ -1,0 +1,148 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "golden.skeletal-mesh.boy01-default-real",
+  "asset_kind": "skeletal_mesh",
+  "producer": {
+    "name": "tmxy-skeletal-mesh",
+    "version": "0.2.0",
+    "source_sha256": "900b69e654f3a027e9704d6116fd727c7a2716fbd0677e2a7218c5dfaa81f237"
+  },
+  "source_inputs": [
+    {
+      "id": "legacy-source-evidence",
+      "role": "provenance-manifest",
+      "relative_path": "source-evidence.json",
+      "bytes": 801,
+      "sha256": "8e12ea06e0bfdb98da492786b548c9a78f7047b3a87b8477e7e50a54ffe94b47",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "mesh.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "meters",
+      "bytes": 27538,
+      "sha256": "97d172b7d7e70a36059102119d7528b1d73991226d4cf452f29ed95e5a817135",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "buffer",
+      "semantic_role": "gltf-buffer",
+      "relative_path": "mesh.bin",
+      "format_id": "khronos.gltf-bin",
+      "format_version": "2.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "meters",
+      "bytes": 689132,
+      "sha256": "ba079eea99ab56aa19097796a79efecf5c1db3aebfb89fb07a72d8fd43568743",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "render-gltf",
+      "semantic_role": "render-skinning",
+      "relative_path": "mesh.gltf",
+      "format_id": "khronos.gltf-json",
+      "format_version": "2.0.0",
+      "media_type": "model/gltf+json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "meters",
+      "bytes": 17789,
+      "sha256": "5ea12a7ae8e09961d983be869bc8758ac14ae557987a8b5d1220cb3fa1a07a15",
+      "depends_on": [
+        "buffer",
+        "metadata"
+      ],
+      "required_features": [
+        "mesh-sections",
+        "skin",
+        "joints-0",
+        "weights-0",
+        "inverse-bind-matrices"
+      ],
+      "extensions": {}
+    },
+    {
+      "id": "preview",
+      "semantic_role": "visual-review",
+      "relative_path": "mesh.obj",
+      "format_id": "wavefront.obj",
+      "format_version": "1.0.0",
+      "media_type": "model/obj",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "ue-x-forward-y-right-z-up-centimeters",
+      "unit_contract": "centimeters",
+      "bytes": 2120604,
+      "sha256": "53e07b5e6fcdd0b8917b7ab5c8c6a7a0acc502550a702abf51fd66877658d9f4",
+      "depends_on": [
+        "render-gltf"
+      ],
+      "required_features": [],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [
+    {
+      "path": "skeletal_mesh.non_default_variants_and_legacy_auxiliary",
+      "state": "unmapped",
+      "preservation": "namespaced-extension",
+      "extension_key": "org.tmxy.legacy-skeletal-mesh",
+      "reason": "Golden import intentionally selects the Package default avatar parts; full variants remain read-only evidence.",
+      "extensions": {}
+    }
+  ],
+  "extensions": {
+    "org.tmxy.legacy-skeletal-mesh": {
+      "metadata_artifact_id": "metadata",
+      "attachment_policy": "bone-name-candidates-only-no-invented-sockets",
+      "unweighted_sentinel_policy": "reject-authoritative-skinning-fixture"
+    },
+    "org.tmxy.ue-import": {
+      "skeletal_mesh_package_name": "/Game/TMXY/Golden/SkeletalMeshes/SK_Golden_Boy01_Default",
+      "skeleton_package_name": "/Game/TMXY/Golden/Skeletons/SKEL_Golden_Boy01",
+      "expected_source_vertex_count": 10338,
+      "expected_triangle_count": 8757,
+      "expected_material_slot_count": 7,
+      "expected_bone_count": 80,
+      "expected_root_bone_count": 1,
+      "expected_root_bone_name": "Bip01",
+      "expected_max_active_influences": 4,
+      "expected_unweighted_sentinel_vertex_count": 0,
+      "expected_render_bounds_cm": {
+        "minimum": [
+          -45.9351987,
+          -26.2591004,
+          -0.0232999999
+        ],
+        "maximum": [
+          45.9351987,
+          20.1850995,
+          183.74949700000002
+        ]
+      },
+      "coordinate_mapping": "gltf(y,z,x)-to-ue(x,y,z)-centimeters",
+      "bone_index_mapping": "legacy-one-based-to-gltf-zero-based",
+      "preserve_winding": true,
+      "recompute_tangents": true
+    }
+  }
+}

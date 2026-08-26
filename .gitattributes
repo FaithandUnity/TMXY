@@ -1,0 +1,28 @@
+# Normalize repository text to UTF-8-compatible content with LF line endings.
+# Encoding is validated by review/CI; Git performs newline normalization here.
+* text=auto eol=lf
+
+# Canonical Unreal source assets are the only default large-binary allowlist.
+# Raw legacy packages, bulk exports, cooked output, and DDC are intentionally
+# absent and must use read-only evidence storage or an approved object store.
+*.uasset filter=lfs diff=lfs merge=lfs -text
+*.umap filter=lfs diff=lfs merge=lfs -text
+*.ubulk filter=lfs diff=lfs merge=lfs -text
+*.uexp filter=lfs diff=lfs merge=lfs -text
+*.uptnl filter=lfs diff=lfs merge=lfs -text
+
+# Other binary formats must not be modified by text filters.
+*.bmp binary
+*.gif binary
+*.ico binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.tga binary
+*.dds binary
+*.bin binary
+*.pdf binary
+*.7z binary
+*.gz binary
+*.tar binary
+*.zip binary

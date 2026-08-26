@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T21:56:06.9921292+00:00",
+  "result": "PASS",
+  "image": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+  "database_version": "18.6",
+  "source_mount": "read-only",
+  "network": "none",
+  "data_storage": "tmpfs",
+  "authentication": "ephemeral_trust_inside_networkless_container",
+  "migration": {
+    "file": "Backend/adapters/persistence_postgres/migrations/V0001__runtime_contract.sql",
+    "sha256": "9621a0147f0d6fd83af68d32534a31cdc97ffb0b29cb2335827688fbd6d0f347",
+    "runtime_contract": "foundation:1",
+    "schema_owner": "postgres"
+  }
+}

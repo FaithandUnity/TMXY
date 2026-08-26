@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "state": "prepared_pending_authorization",
+  "provider_binding": {
+    "selected": false,
+    "provider": null,
+    "repository": null,
+    "remote_name": "origin"
+  },
+  "protected_branch": {
+    "name": "main",
+    "allow_direct_push": false,
+    "allow_force_push": false,
+    "allow_deletion": false,
+    "required_approvals": 1,
+    "sensitive_change_required_approvals": 2,
+    "dismiss_stale_approvals": true,
+    "require_code_owner_review": true,
+    "allow_administrator_bypass": false
+  },
+  "required_checks": [
+    "policy/repository",
+    "security/secrets",
+    "backend/clang21",
+    "backend/static-analysis",
+    "backend/postgres-migration",
+    "client/ue58-build-automation",
+    "supply-chain/policy",
+    "release/provenance"
+  ],
+  "trust_boundary": {
+    "untrusted_change_receives_secrets": false,
+    "untrusted_change_writes_shared_cache": false,
+    "untrusted_change_publishes_release_artifacts": false,
+    "release_job_requires_protected_branch": true,
+    "release_job_requires_immutable_source_revision": true
+  },
+  "cache_contract": {
+    "key_includes_toolchain_lock_sha256": true,
+    "key_includes_dependency_lock_sha256_when_present": true,
+    "key_includes_source_revision": true,
+    "cache_hit_bypasses_verification": false,
+    "secret_material_allowed": false
+  },
+  "build_authority": {
+    "backend_target": "linux/amd64",
+    "backend_builder_digest": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "client_engine": "5.8.2",
+    "client_platform": "Win64"
+  },
+  "supply_chain": {
+    "backend_builder_sbom_sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+    "postgres_sbom_sha256": "880bb2df9d3036addef531e49f6ce2e4ae8e92dcfbe13d1a4097980294893b37",
+    "authenticated_or_approved_offline_vulnerability_policy_required": true,
+    "license_policy_required": true,
+    "signed_provenance_required": true,
+    "oci_attestation_required": true
+  },
+  "authority_evidence": {
+    "required_fields": [
+      "provider",
+      "repository",
+      "source_revision",
+      "protected_branch_rule",
+      "run_identity",
+      "required_check_results",
+      "artifact_digests",
+      "vulnerability_database_identity",
+      "license_policy_identity",
+      "provenance_identity"
+    ],
+    "minimum_retention_days": 365,
+    "local_diagnostic_report_is_authority": false
+  }
+}

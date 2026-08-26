@@ -1,0 +1,16 @@
+{
+  "schema": "tmxy.texture.golden-source-evidence",
+  "schema_version": 1,
+  "object": "texstone.WHZ_S_Dimian20_D",
+  "package": {
+    "relative_path": "天命西游/Packages/Texture/texstone",
+    "bytes": 695794,
+    "sha256": "350c7d5da525f8ea4490345ad4948da4c2d6d4551ee5136f9aa0ce540d147d23"
+  },
+  "qtx": {
+    "relative_path": "天命西游/Resource/Texture/texstone/WHZ_S_Dimian20_D.qtx",
+    "bytes": 32,
+    "sha256": "686418d443a9d067f90ec640d9d92a8ad7efd1ce6b1c1f05587a256027c003f2"
+  },
+  "copy_policy": "reference-only"
+}

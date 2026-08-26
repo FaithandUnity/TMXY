@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T22:15:05.9409881+00:00",
+  "result": "PASS",
+  "task": "P1-02",
+  "source_file_count": 22,
+  "source_sha256": "b873e0dba8f0cf9e28ea091fbf4989faff0ed5cc3bff76081d57fa9e9eb25f94",
+  "error_schema_version": 1,
+  "legacy_format_evidence": [
+    {
+      "path": "Base/Hdr/QArchive.h",
+      "size": 1910,
+      "sha256": "c5363a07e944c34ac4eb395d377aaeef2da80bb5df3805b414d9142b84ab8e84"
+    },
+    {
+      "path": "Base/Hdr/QDict.h",
+      "size": 10894,
+      "sha256": "c3f2e74d3a5bfd454c3ed34433acd3f2aefc70a611336f142ea4ef0c1bb952a9"
+    },
+    {
+      "path": "Base/Hdr/QPackage.h",
+      "size": 3258,
+      "sha256": "b6598586f5dee3cc5af2a139317aeacbbe1b8c1e9a09025e8f4ae1a61e2b630a"
+    },
+    {
+      "path": "Base/Src/QArchive.cpp",
+      "size": 2242,
+      "sha256": "8fe0cccd38d4876dbf261c30277e8b954ebe9a85ff69f217581397987ad498e8"
+    },
+    {
+      "path": "Base/Src/QMetaclass.cpp",
+      "size": 11979,
+      "sha256": "3a4ba187ea1099706328c0b49084ad555fa3d2f68f16d8b8e7f0a53fa0b8fc57"
+    },
+    {
+      "path": "Base/Src/QPackage.cpp",
+      "size": 7423,
+      "sha256": "b4abf66d3f84f583f80f88b70c44e7c90fcac9fd380c34f08f398cf3e8ccd064"
+    }
+  ],
+  "frozen_sample": {
+    "id": "package-v1-reference",
+    "path": "Packages/Texture/tempfile.tmp",
+    "evidence_level": "L2",
+    "copy_policy": "reference_only",
+    "size": 319813,
+    "sha256": "11804bcbd1c28a4243670f519cee12d6b8fe7f46ebfaf8033e43b0509f9bc0e6",
+    "record_count": 3004,
+    "header_size": 145581,
+    "class_count": 1,
+    "metadata_fnv1a64": "1691fafacd3ab5bd"
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "legacy_sample_mount": "read-only-single-file",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "stages": [
+    "legacy-evidence-sha256",
+    "golden-sample-sha256",
+    "clang-format-21",
+    "cmake-clang-21",
+    "clang-tidy-21",
+    "ctest",
+    "frozen-sample-parse"
+  ],
+  "execution": {
+    "exit_code": 0,
+    "output_line_count": 87,
+    "output_sha256": "1c8f73268cb35f901f2b7a0f2ce4c5743f094253844510e25d1125dbfa467a2f"
+  }
+}

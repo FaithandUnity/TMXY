@@ -1,0 +1,128 @@
+{
+  "schema": "tmxy.asset.interchange",
+  "schema_version": 1,
+  "format_version": "1.0.0",
+  "bundle_id": "example.static-mesh",
+  "asset_kind": "static_mesh",
+  "producer": {
+    "name": "tmxy-static-mesh",
+    "version": "0.1.0",
+    "source_sha256": "1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "source_inputs": [
+    {
+      "id": "package",
+      "role": "package-metadata",
+      "relative_path": "Packages/StaticMesh/example",
+      "bytes": 128,
+      "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "copy_policy": "reference-only"
+    },
+    {
+      "id": "payload",
+      "role": "legacy-sm-payload",
+      "relative_path": "Resource/StaticMesh/example.sm",
+      "bytes": 256,
+      "sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "copy_policy": "reference-only"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "metadata",
+      "semantic_role": "legacy-metadata",
+      "relative_path": "asset.metadata.json",
+      "format_id": "tmxy.asset.metadata-json",
+      "format_version": "1.0.0",
+      "media_type": "application/json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "legacy-runtime-x-forward-y-right-z-up-meters",
+      "unit_contract": "meters",
+      "bytes": 64,
+      "sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "depends_on": [],
+      "required_features": ["legacy-material-binding"],
+      "extensions": {}
+    },
+    {
+      "id": "buffer",
+      "semantic_role": "gltf-buffer",
+      "relative_path": "asset.bin",
+      "format_id": "khronos.gltf-bin",
+      "format_version": "2.0.0",
+      "media_type": "application/octet-stream",
+      "authority": "authoritative-interchange",
+      "byte_order": "little-endian",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "meters",
+      "bytes": 96,
+      "sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+      "depends_on": [],
+      "required_features": [],
+      "extensions": {}
+    },
+    {
+      "id": "render-gltf",
+      "semantic_role": "render-geometry",
+      "relative_path": "asset.gltf",
+      "format_id": "khronos.gltf-json",
+      "format_version": "2.0.0",
+      "media_type": "model/gltf+json",
+      "authority": "authoritative-interchange",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "gltf-2.0-standard",
+      "unit_contract": "meters",
+      "bytes": 192,
+      "sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+      "depends_on": ["buffer", "metadata"],
+      "required_features": ["mesh-sections"],
+      "extensions": {}
+    },
+    {
+      "id": "preview",
+      "semantic_role": "visual-review",
+      "relative_path": "asset.preview.obj",
+      "format_id": "wavefront.obj",
+      "format_version": "1.0.0",
+      "media_type": "model/obj",
+      "authority": "review",
+      "byte_order": "not-applicable",
+      "coordinate_contract": "ue-x-forward-y-right-z-up-centimeters",
+      "unit_contract": "centimeters",
+      "bytes": 48,
+      "sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+      "depends_on": ["render-gltf"],
+      "required_features": [],
+      "extensions": {}
+    }
+  ],
+  "unknown_fields": [
+    {
+      "path": "package.objects[0].body.trailing",
+      "state": "unparsed",
+      "preservation": "source-span",
+      "source_span": {
+        "source_input_id": "package",
+        "offset": 32,
+        "size": 16
+      },
+      "reason": "Example of exact source provenance without guessed semantics.",
+      "extensions": {}
+    },
+    {
+      "path": "static_mesh.legacy_octree",
+      "state": "unsupported",
+      "preservation": "namespaced-extension",
+      "extension_key": "org.tmxy.legacy-octree",
+      "reason": "glTF does not define the legacy runtime octree semantics.",
+      "extensions": {}
+    }
+  ],
+  "extensions": {
+    "org.tmxy.legacy-octree": {
+      "state": "preserved-in-metadata",
+      "artifact_id": "metadata"
+    }
+  }
+}

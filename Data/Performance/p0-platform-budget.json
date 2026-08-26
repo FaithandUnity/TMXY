@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "status": "frozen_engineering_baseline",
+  "effective_date": "2026-08-26",
+  "change_control": "reviewed_ADR_and_regression_required",
+  "client": {
+    "platform": "Windows 11 x64",
+    "graphics_api": "DirectX 12",
+    "shader_model": "SM6",
+    "minimum_profile": {
+      "logical_cpu_threads": 6,
+      "system_memory_gib": 16,
+      "dedicated_vram_gib": 6,
+      "storage": "SSD",
+      "resolution": "1280x720",
+      "target_fps": 30
+    },
+    "recommended_profile": {
+      "logical_cpu_threads": 8,
+      "system_memory_gib": 32,
+      "dedicated_vram_gib": 8,
+      "storage": "NVMe SSD",
+      "resolution": "1920x1080",
+      "target_fps": 60,
+      "one_percent_low_fps": 45
+    },
+    "frame_budget_ms_at_1080p": {
+      "frame": 16.67,
+      "game_thread": 6.0,
+      "render_thread": 6.0,
+      "gpu": 14.0
+    },
+    "runtime_budgets": {
+      "process_working_set_gib": 8.0,
+      "vram_resident_gib": 7.0,
+      "cold_start_to_login_seconds": 20,
+      "world_entry_seconds": 15,
+      "relevant_network_entities": 200,
+      "fully_animated_characters": 80
+    }
+  },
+  "backend": {
+    "platform": "Linux x64 OCI",
+    "qualification_node": {
+      "vcpu": 8,
+      "memory_gib": 16,
+      "storage": "NVMe SSD"
+    },
+    "capacity": {
+      "platform_concurrent_sessions": 10000,
+      "gateway_connections_per_instance": 10000,
+      "world_sessions_per_instance": 2000,
+      "simulation_tick_hz": 20,
+      "headroom_percent": 30
+    },
+    "latency_slo_ms_p95": {
+      "gateway_message_processing": 50,
+      "database_transaction": 50,
+      "login": 2000,
+      "character_list": 1000,
+      "chat_delivery": 250,
+      "world_entry": 8000
+    },
+    "availability": {
+      "monthly_service_slo_percent": 99.9,
+      "rpo_minutes": 5,
+      "rto_minutes": 30
+    }
+  },
+  "network": {
+    "supported_client_round_trip_ms_p95": 150,
+    "disconnect_detection_seconds": 15,
+    "per_client_sustained_downstream_kib_per_second_p95": 64,
+    "per_client_sustained_upstream_kib_per_second_p95": 16
+  },
+  "validation_policy": {
+    "representative_scene_required": true,
+    "production_like_database_required": true,
+    "minimum_test_duration_minutes": 60,
+    "pass_requires_all_budgets": true,
+    "unvalidated_values_are_release_blocking": true
+  }
+}

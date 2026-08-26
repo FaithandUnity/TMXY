@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/ue-terrain-import-report-v1.schema.json",
+  "title": "TMXY UE golden terrain import report v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "schema_version",
+    "report_version",
+    "handler_format_id",
+    "manifest_sha256",
+    "before_asset_count",
+    "after_asset_count",
+    "imported_asset_count",
+    "invalid_hash_rejected",
+    "invalid_hash_asset_created",
+    "direction_verified",
+    "physical_scale_verified",
+    "adjacency_verified",
+    "existing_edge_differences_preserved",
+    "reimport_passed",
+    "reimport_package_bytes_unchanged",
+    "terrain_tiles",
+    "adjacencies"
+  ],
+  "properties": {
+    "schema": { "const": "tmxy.ue.terrain-import-report" },
+    "schema_version": { "const": 1 },
+    "report_version": { "const": "1.0.0" },
+    "handler_format_id": { "const": "tmxy.terrain.height-f32le" },
+    "manifest_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "before_asset_count": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "after_asset_count": { "const": 3 },
+    "imported_asset_count": { "const": 3 },
+    "invalid_hash_rejected": { "const": true },
+    "invalid_hash_asset_created": { "const": false },
+    "direction_verified": { "const": true },
+    "physical_scale_verified": { "const": true },
+    "adjacency_verified": { "const": true },
+    "existing_edge_differences_preserved": { "const": true },
+    "reimport_passed": { "const": true },
+    "reimport_package_bytes_unchanged": { "const": true },
+    "terrain_tiles": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "fixture_id",
+          "package_name",
+          "tile_x",
+          "tile_y",
+          "source_vertex_count",
+          "render_vertex_count",
+          "triangle_count",
+          "minimum_height_source_units",
+          "maximum_height_source_units",
+          "all_height_samples_match",
+          "all_layer_weights_match",
+          "winding_faces_up"
+        ],
+        "properties": {
+          "fixture_id": { "enum": ["base", "right", "bottom"] },
+          "package_name": {
+            "type": "string",
+            "pattern": "^/Game/TMXY/Golden/Terrain/SMT_Golden_World_[0-9]{3}_[0-9]{3}$"
+          },
+          "tile_x": { "type": "integer", "minimum": 1, "maximum": 2 },
+          "tile_y": { "type": "integer", "minimum": 1, "maximum": 2 },
+          "source_vertex_count": { "const": 4096 },
+          "render_vertex_count": { "const": 4096 },
+          "triangle_count": { "const": 7938 },
+          "minimum_height_source_units": { "type": "number" },
+          "maximum_height_source_units": { "type": "number" },
+          "all_height_samples_match": { "const": true },
+          "all_layer_weights_match": { "const": true },
+          "winding_faces_up": { "const": true }
+        }
+      }
+    },
+    "adjacencies": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "first",
+          "first_edge",
+          "second",
+          "second_edge",
+          "sample_count",
+          "differing_sample_count",
+          "maximum_absolute_delta_cm",
+          "world_xy_alignment_verified"
+        ],
+        "properties": {
+          "first": { "const": "base" },
+          "first_edge": { "enum": ["right", "bottom"] },
+          "second": { "enum": ["right", "bottom"] },
+          "second_edge": { "enum": ["left", "top"] },
+          "sample_count": { "const": 64 },
+          "differing_sample_count": { "enum": [10, 16] },
+          "maximum_absolute_delta_cm": { "type": "number", "minimum": 0 },
+          "world_xy_alignment_verified": { "const": true }
+        }
+      }
+    }
+  }
+}

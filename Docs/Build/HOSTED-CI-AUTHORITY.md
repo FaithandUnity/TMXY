@@ -45,11 +45,12 @@ condition below is missing.
 ## Trust and cache behavior
 
 Pull requests receive no configured repository Secret and no release write
-permissions. Checkout credentials are not persisted. Backend caches use a key
-containing OS, architecture, preset, toolchain lock hash, dependency lock hash
-when present, and source revision. Pull requests may restore a trusted cache,
-but only an API-confirmed protected `main` push may save it. Every hit still
-reconfigures, builds, analyzes, scans, and tests.
+permissions. The merge workflow grants only read access to source, pull-request
+metadata, and the locked GHCR package; checkout credentials are not persisted.
+Backend caches use a key containing OS, architecture, preset, toolchain lock
+hash, dependency lock hash when present, and source revision. Pull requests may
+restore a trusted cache, but only an API-confirmed protected `main` push may save
+it. Every hit still reconfigures, builds, analyzes, scans, and tests.
 
 The UE job requires the labels
 `self-hosted/Windows/X64/tmxy-ue58/tmxy-ephemeral`; this deliberately prevents an

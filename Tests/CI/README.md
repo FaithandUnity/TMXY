@@ -10,12 +10,15 @@ pwsh -NoProfile -File .\Tests\CI\Invoke-LocalQualityGates.ps1 `
   -RunUEAutomation
 ```
 
-A hosted merge/release job must execute the digest-locked Clang 21 build (the
-local aggregate already verifies its qualification evidence), publish immutable
-logs, enforce the locked-image vulnerability/license policy, and issue signed
-provenance. A `PASS_DIAGNOSTIC` report is never release authority.
+A GitHub merge workflow now maps the eight frozen check names. It uses a
+digest-addressed GHCR builder reference, protected-main-only cache writes,
+networkless/read-only builder execution, a real PostgreSQL 18 migration,
+fail-closed SBOM vulnerability/license policy, and an ephemeral UE 5.8.2 runner
+label. The separate protected release workflow issues GitHub signed provenance
+and an OCI registry attestation only after the external authority prerequisites
+exist. A `PASS_DIAGNOSTIC` report is never release authority.
 
-`Data/Governance/p0-hosted-ci-contract.json` freezes provider-neutral check
+`Data/Governance/p0-hosted-ci-contract.json` freezes the GitHub binding, check
 names, protected-branch rules, trust/cache boundaries, locked digests, and final
-evidence fields. It remains unbound until the project owner authorizes a hosted
-provider and repository.
+evidence fields. `Data/Governance/p0-github-hosting-status.json` records the
+current external blockers without storing credentials.

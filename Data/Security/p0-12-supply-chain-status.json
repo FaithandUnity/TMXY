@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "captured_utc": "2026-08-26T22:23:08.9871563+00:00",
+  "schema_version": 3,
+  "captured_utc": "2026-08-26T23:32:48.4439185+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -40,10 +40,21 @@
     "vulnerability_status": "pending_authenticated_database_access",
     "note": "Docker Scout CVE analysis requested authentication; no login or credential mutation was performed."
   },
+  "hosted_ci": {
+    "provider": "github",
+    "repository": "FaithandUnity/TMXY",
+    "workflow_source_prepared": true,
+    "protected_branch": false,
+    "release_authority": false,
+    "blocker_count": 10,
+    "evidence": "Data/Governance/p0-github-hosting-status.json"
+  },
   "pending": [
-    "Authenticated or approved offline vulnerability scan for the locked PostgreSQL and backend builder images",
-    "Hosted release-authority license policy evaluation of both locked image SBOMs",
-    "Signed release provenance and OCI attestations"
+    "Protected GitHub main and provider-generated results for all eight stable checks",
+    "Authenticated or approved hosted vulnerability database evidence for both locked SBOMs",
+    "Component-complete license evidence or approved component-specific waivers",
+    "Exact locked builder manifest verified in GHCR",
+    "Signed release provenance, OCI attestation, and 365-day immutable retention"
   ],
   "deferred_to_p4": [
     "Create application Conan profile lockfiles when the first external C++ dependency is introduced"

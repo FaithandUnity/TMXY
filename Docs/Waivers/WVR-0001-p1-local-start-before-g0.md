@@ -33,3 +33,12 @@ outside its scope.
 The machine contract is `Data/Governance/p1-local-start-waiver.json` and is
 validated by `Tests/Contract/Test-P1ExecutionCharter.ps1`. Expiry or any listed
 invalidation condition stops the local-start authorization automatically.
+
+## 2026-08-27 clarification
+
+The project lead subsequently authorized the existing GitHub repository,
+configured identity, safe fetch, a P0-12 feature branch, workflow commits, push,
+and pull-request evidence for `FaithandUnity/TMXY`. That later authorization
+supersedes this waiver's remote/login prohibition only for P0-12 GitHub CI
+onboarding. It does not extend the P1 scope, disclose a Secret, authorize branch
+protection/plan/publicity/runner/signing changes, or approve G0/G1.

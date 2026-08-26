@@ -14,15 +14,22 @@ Automation checks are passing. Local success is not hosted release authority.
 
 ## Open decisions and external actions
 
-1. P0-12: authorize a hosted Git/CI platform and remote; enforce protected
-   checks, authenticated/offline-approved vulnerability data, locked-image
-   license policy, cache controls, and signed provenance. Both PostgreSQL and
-   final-builder SBOMs are already locally frozen and verified.
+1. P0-12: GitHub and `FaithandUnity/TMXY` are now authorized and the eight
+   required workflow names, CODEOWNERS, cache trust boundary, locked builder,
+   PostgreSQL, SBOM scan, UE runner labels, and provenance workflow exist in
+   source. The remaining external actions are to enable protected `main`, add
+   enough independent reviewers, register an ephemeral UE 5.8.2 runner,
+   publish the unchanged builder manifest to GHCR, approve vulnerability and
+   license evidence, issue signed provenance/OCI attestation, and retain
+   immutable evidence for 365 days.
 2. P0-16/G0: after that authority check passes, record the final review
    decision against the already frozen P1 execution charter.
 
-No remote was created, no push or login was attempted, no Git identity was
-invented, TLS was not disabled, and no unknown mirror or image was substituted.
+The real `origin` and developer identity were verified and a conforming P0-12
+feature branch is in use. No branch protection, plan/publicity, collaborator,
+runner, Secret, registry publication, or signing setting was changed. TLS was
+not disabled and no unknown mirror or image was substituted. The sanitized
+read-only API evidence is `Data/Governance/p0-github-hosting-status.json`.
 
 ## Evidence already accepted by the generator
 
@@ -35,6 +42,8 @@ invented, TLS was not disabled, and no unknown mirror or image was substituted.
 - 42 reference-only golden samples;
 - frozen client/backend performance and recovery budget;
 - Git root constrained to `Rebuild`;
+- GitHub provider/remote binding and source-side mapping of all eight stable
+  checks, while current hosted authority accurately remains false;
 - PostgreSQL 18.6 empty-database V0001 migration test;
 - operating-system-keychain Secret Store rotation/revocation drill;
 - local Secret scan, format/tidy, diagnostic Linux build, CTest, SBOM, and UE

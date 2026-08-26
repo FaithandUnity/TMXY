@@ -109,6 +109,9 @@ $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Tes
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$hostedWorkflowContract = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-HostedWorkflowContract.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $uePackagingWaiver = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-UEPackagingWaiver.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $toolchain = Invoke-JsonTest -Script (Join-Path $root 'Tools\TMXY.Toolchain\Test-ToolchainLock.ps1') `
@@ -173,6 +176,7 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$goldenTestMatrix.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
+    [string]$hostedWorkflowContract.result -eq 'PASS' -and
     [string]$uePackagingWaiver.result -eq 'PASS' -and
     [string]$toolchain.result -eq 'PASS' -and
     [string]$staticAnalysis.result -eq 'PASS_DIAGNOSTIC' -and
@@ -217,6 +221,7 @@ $report = [pscustomobject][ordered]@{
     golden_test_matrix = $goldenTestMatrix
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
+    hosted_workflow_contract = $hostedWorkflowContract
     ue_packaging_waiver = $uePackagingWaiver
     backend_toolchain = $toolchain
     backend_static_analysis = $staticAnalysis

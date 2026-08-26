@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-26T23:08:11.9387648+00:00",
+  "result": "BLOCKED_EXTERNAL_AUTHORITY",
+  "completion_criteria_satisfied": false,
+  "release_authority": false,
+  "provider": {
+    "name": "github",
+    "repository": "FaithandUnity/TMXY",
+    "visibility": "private",
+    "default_branch": "main",
+    "viewer_permission": "admin",
+    "remote_name": "origin",
+    "remote_url": "https://github.com/FaithandUnity/TMXY.git"
+  },
+  "source": {
+    "revision": "75cce4f1f712f38b6fa595b0e50dd48b4c7d1e92",
+    "branch": "build/p0-12-github-actions"
+  },
+  "branch_authority": {
+    "protected": false,
+    "protection_api_status": 403,
+    "protection_api_message": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+    "rulesets_api_status": 403,
+    "rulesets_api_message": "Upgrade to GitHub Pro or make this repository public to enable this feature.",
+    "required_checks_enforced": false
+  },
+  "review_authority": {
+    "direct_collaborator_count": 1,
+    "one_non_author_approval_possible": false,
+    "two_non_author_approvals_possible": false,
+    "code_owner_file_present": true
+  },
+  "actions": {
+    "enabled": true,
+    "allowed_actions": "all",
+    "default_workflow_permissions": "read",
+    "workflow_count_on_default_branch": 0,
+    "repository_secret_count": 0,
+    "repository_variable_count": 0,
+    "artifact_count": 0
+  },
+  "runners": {
+    "self_hosted_count": 0,
+    "matching_ephemeral_ue58_count": 0
+  },
+  "local_workflow_binding": {
+    "required_checks_workflow_present": true,
+    "release_provenance_workflow_present": true,
+    "diagnostic_artifact_retention_days": 90,
+    "minimum_required_retention_days": 365
+  },
+  "blocker_count": 10,
+  "blockers": [
+    "main_unprotected",
+    "branch_protection_api_unavailable",
+    "independent_reviewer_unavailable",
+    "two_sensitive_reviewers_unavailable",
+    "ue58_ephemeral_runner_unavailable",
+    "hosted_workflows_not_on_default_branch",
+    "locked_builder_not_verified_in_ghcr",
+    "hosted_vulnerability_and_license_authority_missing",
+    "signed_provenance_and_oci_attestation_missing",
+    "minimum_365_day_immutable_retention_missing"
+  ]
+}

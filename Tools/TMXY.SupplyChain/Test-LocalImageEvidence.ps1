@@ -10,6 +10,7 @@ $root = [System.IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
 $lockPath = Join-Path $root 'Data\Toolchain\toolchain.lock.json'
 $postgresSbomPath = Join-Path $root 'Data\Security\postgres-18.6.sbom.cdx.json'
 $builderSbomPath = Join-Path $root 'Data\Security\tmxy-backend-builder.sbom.cdx.json'
+$hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -44,12 +45,13 @@ $builderSbomVerified = [string]$builderSbom.bomFormat -eq 'CycloneDX' -and
     [string]$builderSbom.specVersion -eq '1.5' -and
     $builderSbomSha -eq [string]$lock.backend_toolchain.qualification.sbom_sha256 -and
     $builderComponentCount -eq [int]$lock.backend_toolchain.qualification.sbom_component_count
+$hostingStatus = Get-Content -LiteralPath $hostingStatusPath -Raw | ConvertFrom-Json
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
 $passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and $builderSbomVerified
 $report = [pscustomobject][ordered]@{
-    schema_version = 2
+    schema_version = 3
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -90,10 +92,21 @@ $report = [pscustomobject][ordered]@{
         vulnerability_status = 'pending_authenticated_database_access'
         note = 'Docker Scout CVE analysis requested authentication; no login or credential mutation was performed.'
     }
+    hosted_ci = [pscustomobject][ordered]@{
+        provider = [string]$hostingStatus.provider.name
+        repository = [string]$hostingStatus.provider.repository
+        workflow_source_prepared = [bool]$hostingStatus.local_workflow_binding.required_checks_workflow_present
+        protected_branch = [bool]$hostingStatus.branch_authority.protected
+        release_authority = [bool]$hostingStatus.release_authority
+        blocker_count = [int]$hostingStatus.blocker_count
+        evidence = 'Data/Governance/p0-github-hosting-status.json'
+    }
     pending = @(
-        'Authenticated or approved offline vulnerability scan for the locked PostgreSQL and backend builder images',
-        'Hosted release-authority license policy evaluation of both locked image SBOMs',
-        'Signed release provenance and OCI attestations'
+        'Protected GitHub main and provider-generated results for all eight stable checks',
+        'Authenticated or approved hosted vulnerability database evidence for both locked SBOMs',
+        'Component-complete license evidence or approved component-specific waivers',
+        'Exact locked builder manifest verified in GHCR',
+        'Signed release provenance, OCI attestation, and 365-day immutable retention'
     )
     deferred_to_p4 = @(
         'Create application Conan profile lockfiles when the first external C++ dependency is introduced'

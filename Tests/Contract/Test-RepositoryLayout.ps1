@@ -16,6 +16,10 @@ function Add-Failure {
 $requiredFiles = @(
     '.gitignore',
     '.gitattributes',
+    '.github/CODEOWNERS',
+    '.github/actionlint.yaml',
+    '.github/workflows/p0-required-checks.yml',
+    '.github/workflows/p0-release-provenance.yml',
     'Apps/UEClient/TMXY.uproject',
     'Apps/UEClient/Source/TMXY.Target.cs',
     'Apps/UEClient/Source/TMXYEditor.Target.cs',
@@ -95,6 +99,7 @@ $requiredFiles = @(
     'Data/GoldenSamples/p0-golden-selection.json',
     'Data/GoldenSamples/p0-golden-samples.json',
     'Data/Governance/p0-hosted-ci-contract.json',
+    'Data/Governance/p0-github-hosting-status.json',
     'Data/Governance/p1-resourcing.json',
     'Data/BuildBaseline/p0-readiness.json',
     'Data/BuildBaseline/p0-08-ue-packaging-waiver.json',
@@ -190,6 +195,9 @@ $requiredFiles = @(
     'Tests/Contract/Test-UETerrainImport.ps1',
     'Tests/Contract/Test-GoldenTestMatrix.ps1',
     'Tests/CI/Invoke-LocalQualityGates.ps1',
+    'Tests/CI/Test-HostedPullRequestPolicy.ps1',
+    'Tests/CI/Test-HostedSupplyChainPolicy.ps1',
+    'Tests/CI/Test-HostedWorkflowContract.ps1',
     'Tests/Quality/Test-BackendStaticAnalysis.ps1',
     'Tests/Review/New-P0ReadinessReport.ps1',
     'Tests/Integration/Test-PostgresMigration.ps1',
@@ -297,6 +305,8 @@ $requiredFiles = @(
     'Tools/TMXY.Security/Test-RepositorySecrets.ps1',
     'Tools/TMXY.Security/Test-SecretStoreRotation.ps1',
     'Tools/TMXY.SupplyChain/Test-LocalImageEvidence.ps1',
+    'Tools/TMXY.GitHub/Get-GitHubHostedCIStatus.ps1',
+    'Tools/TMXY.GitHub/README.md',
     'Tools/TMXY.Toolchain/Test-RegistryPreflight.ps1'
 )
 
@@ -327,8 +337,16 @@ elseif (Test-Path -LiteralPath $repositoryMetadata) {
         Add-Failure -Message "Git root must resolve exactly to $root."
     }
     $branch = (& $gitCommand.Source -C $root branch --show-current 2>$null).Trim()
-    if ($LASTEXITCODE -ne 0 -or $branch -ne 'main') {
-        Add-Failure -Message 'The integration branch must be named main.'
+    if ([string]::IsNullOrWhiteSpace($branch) -and $env:GITHUB_ACTIONS -eq 'true') {
+        $branch = if (-not [string]::IsNullOrWhiteSpace($env:GITHUB_HEAD_REF)) {
+            $env:GITHUB_HEAD_REF
+        }
+        else { $env:GITHUB_REF_NAME }
+    }
+    $validBranch = $branch -eq 'main' -or
+        $branch -match '^(?:feature|fix|docs|build|chore|hotfix)/[a-z0-9][a-z0-9-]*$'
+    if ($LASTEXITCODE -ne 0 -or -not $validBranch) {
+        Add-Failure -Message "Current branch does not follow the protected integration/development naming policy: $branch"
     }
 }
 

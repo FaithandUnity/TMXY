@@ -34,6 +34,8 @@ $secret = Get-Content -LiteralPath (Join-Path $root 'Data\Security\p0-14-secret-
     ConvertFrom-Json
 $golden = Get-Content -LiteralPath (Join-Path $root 'Data\GoldenSamples\p0-golden-samples.json') -Raw |
     ConvertFrom-Json
+$hostingStatus = Get-Content -LiteralPath (
+    Join-Path $root 'Data\Governance\p0-github-hosting-status.json') -Raw | ConvertFrom-Json
 
 Add-Check -Id 'rights_and_read_only' -Passed (
     (Test-Path -LiteralPath (Join-Path $root 'Docs\Governance\COPYRIGHT-BASELINE.md')) -and
@@ -63,8 +65,9 @@ Add-Check -Id 'toolchain_release_authority' -Passed ([string]$lock.lock_state -e
     -Evidence 'Data/Toolchain/toolchain.lock.json; Data/Toolchain/backend-toolchain-qualification.json; Data/Security/tmxy-backend-builder.sbom.cdx.json; Data/BuildBaseline/p0-08-ue-packaging-waiver.json' `
     -RequiredAction ''
 Add-Check -Id 'hosted_ci_authority' -Passed ([bool]$quality.authoritative_release_gate) `
-    -Evidence 'Data/Governance/p0-hosted-ci-contract.json; Data/BuildBaseline/p0-12-local-quality-gates.json' `
-    -RequiredAction 'Select and authorize a hosted Git/CI platform and remote, then bind the frozen protected checks, vulnerability/license gate, and provenance contract.'
+    -Evidence 'Data/Governance/p0-hosted-ci-contract.json; Data/Governance/p0-github-hosting-status.json; Data/BuildBaseline/p0-12-local-quality-gates.json' `
+    -RequiredAction ('GitHub is bound but release authority is blocked: ' +
+        (@($hostingStatus.blockers) -join ', ') + '.')
 $secretProviderPath = Join-Path $root 'Data\Security\secret-provider-binding.json'
 $secretProviderPassed = $false
 if (Test-Path -LiteralPath $secretProviderPath -PathType Leaf) {

@@ -18,6 +18,7 @@
 
 ```text
 Rebuild/
+├─ .github/                     CODEOWNERS、8 个稳定检查与受保护 provenance 工作流
 ├─ Apps/UEClient/                UE 5.8.2 C++ 客户端工程
 ├─ Backend/                      Linux/C++20 后端模块和应用
 │  └─ adapters/persistence_postgres/ PostgreSQL Migration 与后续 libpq 唯一边界
@@ -30,6 +31,7 @@ Rebuild/
 ├─ Tools/TMXY.GoldenSamples/     黄金样本引用基线生成与源文件校验
 ├─ Tools/TMXY.Security/          Secret 工作树/历史扫描与泄漏门禁
 ├─ Tools/TMXY.SupplyChain/       本地镜像 SBOM 与供应链证据校验
+├─ Tools/TMXY.GitHub/            GitHub 托管 CI 状态只读采集与脱敏证据
 ├─ Tools/TMXY.FormatCore/        P1 有界二进制读取与稳定错误契约
 ├─ Tools/TMXY.Package/           Package 头解析、边界验证与格式指纹
 ├─ Tools/TMXY.Table/             老 TBL 显式密钥解码、分隔表验证及当前 TBL 读取链诊断

@@ -1,11 +1,26 @@
 {
-  "schema_version": 1,
-  "state": "prepared_pending_authorization",
+  "schema_version": 2,
+  "state": "github_workflows_prepared_pending_external_authority",
   "provider_binding": {
-    "selected": false,
-    "provider": null,
-    "repository": null,
-    "remote_name": "origin"
+    "selected": true,
+    "provider": "github",
+    "repository": "FaithandUnity/TMXY",
+    "remote_name": "origin",
+    "remote_url": "https://github.com/FaithandUnity/TMXY.git"
+  },
+  "workflow_binding": {
+    "required_checks_workflow": ".github/workflows/p0-required-checks.yml",
+    "release_provenance_workflow": ".github/workflows/p0-release-provenance.yml",
+    "code_owners": ".github/CODEOWNERS",
+    "untrusted_workflow_has_release_permissions": false,
+    "shared_cache_write_requires_protected_main": true,
+    "ue_runner_labels": [
+      "self-hosted",
+      "Windows",
+      "X64",
+      "tmxy-ue58",
+      "tmxy-ephemeral"
+    ]
   },
   "protected_branch": {
     "name": "main",
@@ -71,5 +86,10 @@
     ],
     "minimum_retention_days": 365,
     "local_diagnostic_report_is_authority": false
+  },
+  "current_observation": {
+    "evidence": "Data/Governance/p0-github-hosting-status.json",
+    "completion_criteria_satisfied": false,
+    "release_authority": false
   }
 }

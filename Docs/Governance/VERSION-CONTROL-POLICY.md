@@ -10,7 +10,7 @@
 - 唯一仓库根目录是 `E:\QQXYCodeDev\Rebuild`。禁止在 `E:\QQXYCodeDev` 或其五个只读证据目录初始化仓库。
 - `ClientCode`、`ServerCode`、`ToolCode`、`DevDoc`、`天命西游` 只作为证据源，禁止复制到 Git 或 Git LFS。
 - 仓库只保存新源码、契约、Migration、部署清单、治理文档、可移植报告和经批准的小型黄金样本。
-- 远程仓库的创建、配置和推送需要项目负责人另行授权。未获授权时，本地仓库不得添加 remote。
+- GitHub 私有仓库 `FaithandUnity/TMXY` 和远端 `origin` 已获项目负责人授权并完成绑定；其他 remote、镜像仓库、权限或公开性变化仍需另行授权。
 
 ## 2. 分支模型与 `main` 保护
 
@@ -27,7 +27,7 @@
 | 维护 | `chore/<任务ID>-<简述>` | 无产品行为变化的维护 |
 | 紧急修复 | `hotfix/<事件ID>-<简述>` | 从当前发布标签或 `main` 创建的紧急修复 |
 
-获得远程仓库授权后，管理员必须为 `main` 配置以下保护，不得以口头约定替代：
+管理员必须为 `main` 配置以下保护，不得以口头约定替代。2026-08-27 的只读 API 证据确认当前私有仓库尚未保护，且 GitHub 要求升级到 Pro 或改为 public 才开放保护/ruleset；在项目负责人决定前不得静默改公开性或订阅：
 
 1. 禁止直接 push、force push 和删除分支，只允许 PR 合并。
 2. 合并前要求分支与 `main` 同步，全部必需 CI 检查成功。
@@ -36,7 +36,7 @@
 5. 管理员同样受保护规则约束；紧急绕过必须关联事件记录，并在下一个工作日补 PR、测试与复盘。
 6. 默认使用 squash merge 保持一个 PR 对应一个可回滚提交；发布或审计确需保留提交时可使用非快进合并，并在 PR 说明原因。
 
-最低必需检查包括：仓库布局、文件/函数规模、格式、Linux Clang 构建、Windows 开发构建、静态分析、单元/契约/架构测试、PostgreSQL 集成、UE Build/Automation、Secret/依赖/许可证/镜像扫描和 SBOM。本地门禁与锁定构建器证据已经实现；托管平台上的受保护检查、认证漏洞/许可证策略和签名溯源由 P0-12 在获得远程与平台授权后绑定，绑定前不能宣称已形成发布权威。
+最低必需检查固定为 `policy/repository`、`security/secrets`、`backend/clang21`、`backend/static-analysis`、`backend/postgres-migration`、`client/ue58-build-automation`、`supply-chain/policy` 和 `release/provenance`。GitHub Actions 源码和 CODEOWNERS 已建立，但只有保护规则、真实 Runner、供应链策略和签名证据全部生效后才能宣称发布权威。
 
 ## 3. Commit 规则
 

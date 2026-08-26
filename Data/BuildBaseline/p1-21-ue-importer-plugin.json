@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:23:01.7821221+00:00",
+  "captured_utc": "2026-08-26T23:32:41.8099424+00:00",
   "result": "PASS",
   "task": "P1-21",
   "completion_criteria_satisfied": true,
@@ -55,14 +55,14 @@
     "required": true,
     "passed": true,
     "test": "TMXY.Importer.ManifestBatch",
-    "ue_report_sha256": "e8df5e457efbdca7f434ee425085442a9281a19d056b796f6a17e22041b4af15",
+    "ue_report_sha256": "ad4ac9c47a7fd80fd660813a8b99f1a92ce556260256af73b2c6dbe2f020d4e8",
     "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-21-report.json",
     "generated_report_sha256": "5e635694f10b21c6d24dcacccb0fbf7b5f67ee0e3e2cafeeae7db75a4d1e255e",
     "generated_report_schema_passed": true
   },
   "dependency_report_sha256": {
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "5e839d982c0cf1e9f3f96ae3978314c62c45b10b52847363cfd186992725a0d1",
-    "Data/BuildBaseline/p1-20-ue-golden-host.json": "bd4bb76b47734e1398a628de41f1f7e7cdb281e94e97fa75b4d5381ec8263dd9"
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "fb4b9f1d51a38c65a6b08d2a13ec9c362b02e144ae4d89a87973e2ba6eca2141",
+    "Data/BuildBaseline/p1-20-ue-golden-host.json": "3339df41481997e54db353092e957a06ebdfb47ca9e6fdaeb8934b8c23449039"
   },
   "failure_count": 0,
   "failures": []

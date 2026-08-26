@@ -69,6 +69,8 @@ Assert-HostedContract ($merge -notmatch '(?m)^\s*pull_request_target:\s*$') `
     'Untrusted changes must not run through pull_request_target.'
 Assert-HostedContract ($merge -match '(?m)^permissions:\s*\n\s{2}contents:\s*read\s*$') `
     'Merge workflow must default to read-only contents permission.'
+Assert-HostedContract ($merge -match '(?m)^\s{2}packages:\s*read\s*$') `
+    'Merge workflow requires read-only access to verify the locked GHCR manifest.'
 Assert-HostedContract ($merge -notmatch '(?m)^\s+(?:id-token|attestations|packages):\s*write\s*$') `
     'Merge workflow must not receive release write permissions.'
 Assert-HostedContract ($merge -notmatch '\$\{\{\s*secrets\.') `

@@ -348,6 +348,21 @@ elseif (Test-Path -LiteralPath $repositoryMetadata) {
     if ($LASTEXITCODE -ne 0 -or -not $validBranch) {
         Add-Failure -Message "Current branch does not follow the protected integration/development naming policy: $branch"
     }
+    $trackedFiles = [System.Collections.Generic.HashSet[string]]::new(
+        [System.StringComparer]::Ordinal)
+    foreach ($trackedPath in @(& $gitCommand.Source -C $root ls-files 2>$null)) {
+        $null = $trackedFiles.Add(([string]$trackedPath).Replace('\', '/'))
+    }
+    if ($LASTEXITCODE -ne 0) {
+        Add-Failure -Message 'Git could not enumerate tracked repository files.'
+    }
+    else {
+        foreach ($relativePath in $requiredFiles) {
+            if (-not $trackedFiles.Contains($relativePath)) {
+                Add-Failure -Message "Required project file is not tracked by Git: $relativePath"
+            }
+        }
+    }
 }
 
 $gitIgnorePath = Join-Path $root '.gitignore'

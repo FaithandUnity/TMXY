@@ -60,6 +60,12 @@ conanbuild*.bat
 conanrun*.sh
 conanrun*.bat
 
+# Product documentation uses names that overlap generated build/test folders.
+!Docs/Build/
+!Docs/Build/**
+!Docs/Testing/
+!Docs/Testing/**
+
 # Local package-manager, script, and tool caches.
 .cache/
 .conan2/

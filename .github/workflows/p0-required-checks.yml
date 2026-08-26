@@ -261,7 +261,7 @@ jobs:
       - name: Install pinned Trivy without shared cache
         uses: aquasecurity/setup-trivy@e6c2c5e321ed9123bda567646e2f96565e34abe1
         with:
-          version: v0.65.0
+          version: v0.74.0
           cache: false
       - name: Scan both locked SBOMs with a current vulnerability database
         shell: bash

@@ -332,11 +332,11 @@ if ($null -eq $gitCommand) {
     Add-Failure -Message 'Git is required to validate the repository boundary.'
 }
 elseif (Test-Path -LiteralPath $repositoryMetadata) {
-    $gitRoot = (& $gitCommand.Source -C $root rev-parse --show-toplevel 2>$null).Trim()
+    $gitRoot = (@(& $gitCommand.Source -C $root rev-parse --show-toplevel 2>$null) -join '').Trim()
     if ($LASTEXITCODE -ne 0 -or [System.IO.Path]::GetFullPath($gitRoot) -ne $root) {
         Add-Failure -Message "Git root must resolve exactly to $root."
     }
-    $branch = (& $gitCommand.Source -C $root branch --show-current 2>$null).Trim()
+    $branch = (@(& $gitCommand.Source -C $root branch --show-current 2>$null) -join '').Trim()
     if ([string]::IsNullOrWhiteSpace($branch) -and $env:GITHUB_ACTIONS -eq 'true') {
         $branch = if (-not [string]::IsNullOrWhiteSpace($env:GITHUB_HEAD_REF)) {
             $env:GITHUB_HEAD_REF

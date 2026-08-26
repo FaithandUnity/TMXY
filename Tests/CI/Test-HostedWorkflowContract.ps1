@@ -87,6 +87,9 @@ Assert-HostedContract ($merge -match 'tmxy-ue58' -and $merge -match 'tmxy-epheme
     'UE authority must require an ephemeral UE 5.8 self-hosted runner.'
 Assert-HostedContract ($merge -match 'retention-days:\s*90') `
     'Current hosted diagnostic retention must remain explicit until 365-day authority storage is available.'
+Assert-HostedContract ($merge -match 'aquasecurity/setup-trivy@e6c2c5e321ed9123bda567646e2f96565e34abe1' -and
+    $merge -match 'version:\s*v0\.74\.0') `
+    'Hosted vulnerability scanning must use the reviewed setup action and available Trivy release.'
 
 $builderDigest = if ($null -ne $contract) {
     [string]$contract.build_authority.backend_builder_digest

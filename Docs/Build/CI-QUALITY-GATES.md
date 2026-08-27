@@ -63,6 +63,11 @@ The digest-locked PostgreSQL 18.6 development image now has a local CycloneDX
 1.5 SBOM with 77 components: 70 carry embedded license data and the remaining
 7 are bound to exact APK or version-pinned upstream evidence. Hosted Trivy
 evidence currently blocks the PostgreSQL image on 22 HIGH/CRITICAL findings.
+The exact Docker Hub tag refresh preflight is byte-stable when the normalized
+upstream observation and its bound inputs are unchanged. This prevents a
+timestamp-only rewrite from invalidating the downstream official-candidate,
+reachability, and waiver hashes; changed upstream semantics still produce new
+evidence and require full qualification.
 The locked `gosu` binary now also has a source- and binary-bound reachability
 review. Official `govulncheck v1.7.0` binary-mode SARIF maps all 22 blockers:
 zero symbol-reachable, one package-only, and 21 module-only results. The one

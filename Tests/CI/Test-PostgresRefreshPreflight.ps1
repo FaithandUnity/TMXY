@@ -80,6 +80,15 @@ try {
         -not [bool]$current.decision.lock_update_performed -and
         -not [bool]$current.decision.automatic_lock_update_allowed) `
         'Preflight must never grant authority or update the lock.'
+    $currentOutputSha = (Get-FileHash -LiteralPath $currentOutput -Algorithm SHA256).Hash
+    $currentCapturedUtc = [string]$current.captured_utc
+    $currentRepeat = (& $toolPath -RebuildRoot $root `
+            -ObservationPath (Join-Path $testRoot 'current.json') `
+            -OutputPath $currentOutput) | ConvertFrom-Json
+    $currentRepeatSha = (Get-FileHash -LiteralPath $currentOutput -Algorithm SHA256).Hash
+    Assert-PreflightTest ($currentOutputSha -ceq $currentRepeatSha -and
+        $currentCapturedUtc -ceq [string]$currentRepeat.captured_utc) `
+        'An unchanged upstream observation must preserve byte-identical bound evidence.'
 
     $candidateOutput = Join-Path $testRoot 'candidate-output.json'
     $candidate = (& $toolPath -RebuildRoot $root `
@@ -126,7 +135,7 @@ $report = [pscustomobject][ordered]@{
     schema_version = 1
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($failures.Count -eq 0) { 'PASS' } else { 'FAIL' }
-    fixture_count = 3
+    fixture_count = 4
     source_mutation_performed = $false
     failure_count = $failures.Count
     failures = @($failures)

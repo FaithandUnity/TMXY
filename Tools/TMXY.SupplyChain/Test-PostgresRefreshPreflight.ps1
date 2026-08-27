@@ -230,9 +230,45 @@ $report = [pscustomobject][ordered]@{
     failure_count = $failures.Count
     failures = @($failures)
 }
-$json = ($report | ConvertTo-Json -Depth 7).Replace("`r`n", "`n").Replace("`r", "`n")
+$resolvedOutput = ''
 if (-not [string]::IsNullOrWhiteSpace($OutputPath)) {
     $resolvedOutput = [System.IO.Path]::GetFullPath($OutputPath)
+}
+if ($failures.Count -eq 0 -and
+    -not [string]::IsNullOrWhiteSpace($resolvedOutput) -and
+    (Test-Path -LiteralPath $resolvedOutput -PathType Leaf)) {
+    try {
+        $previousText = Get-Content -LiteralPath $resolvedOutput -Raw -Encoding UTF8
+        $previous = $previousText | ConvertFrom-Json
+        $currentComparable = $report | ConvertTo-Json -Depth 7 | ConvertFrom-Json
+        $capturedMatch = [regex]::Match(
+            $previousText,
+            '(?m)^\s*"captured_utc"\s*:\s*"(?<value>[^"]+)"\s*,?\s*$')
+        $previousCapturedUtc = if ($capturedMatch.Success) {
+            $capturedMatch.Groups['value'].Value
+        }
+        else { '' }
+        $parsedCapturedUtc = [DateTimeOffset]::MinValue
+        $capturedUtcValid = [DateTimeOffset]::TryParse(
+            $previousCapturedUtc,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::AssumeUniversal,
+            [ref]$parsedCapturedUtc)
+        $previous.captured_utc = ''
+        $currentComparable.captured_utc = ''
+        $previousComparableJson = ($previous | ConvertTo-Json -Depth 7).Replace("`r`n", "`n")
+        $currentComparableJson = ($currentComparable | ConvertTo-Json -Depth 7).Replace("`r`n", "`n")
+        if ($capturedUtcValid -and $previousComparableJson -ceq $currentComparableJson) {
+            $report.captured_utc = $previousCapturedUtc
+        }
+    }
+    catch {
+        # A malformed or obsolete prior report is replaced by the current
+        # fail-closed, fully validated observation below.
+    }
+}
+$json = ($report | ConvertTo-Json -Depth 7).Replace("`r`n", "`n").Replace("`r", "`n")
+if (-not [string]::IsNullOrWhiteSpace($resolvedOutput)) {
     $outputDirectory = Split-Path -Parent $resolvedOutput
     if (-not (Test-Path -LiteralPath $outputDirectory -PathType Container)) {
         New-Item -ItemType Directory -Path $outputDirectory | Out-Null

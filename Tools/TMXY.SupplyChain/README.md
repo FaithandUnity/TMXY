@@ -24,7 +24,9 @@ and compares its index digest with the disposition, toolchain lock, and compose
 binding. It never pulls, changes a lock, or grants release authority. A changed
 tag is reported only as a candidate that still requires SBOM, hosted
 vulnerability, migration, and review qualification. The offline regression
-test covers unchanged, changed, and malformed upstream responses.
+test covers unchanged, byte-identical repeat, changed, and malformed upstream
+responses. A byte-identical repeat preserves the existing report bytes so a
+time-only rewrite cannot invalidate downstream candidate and waiver bindings.
 
 `Test-PostgresOfficialCandidate.ps1` qualifies a separately tagged official
 PostgreSQL candidate far enough to reject obvious non-remediations without

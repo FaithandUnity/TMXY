@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T19:01:31.9513147+00:00",
+  "captured_utc": "2026-08-27T19:47:10.2621661+00:00",
   "result": "PASS",
   "task": "P1-19",
   "completion_criteria_satisfied": true,
@@ -69,13 +69,13 @@
     "unknown_extensions_must_survive_read_write": true
   },
   "dependency_report_sha256": {
-    "p1-08-package-normalized-tree.json": "544538520cfe8f85fe9e4b142c6264b7fdae95e77de10f95a5ab0b9aa7c510e7",
-    "p1-13-qtx-texture.json": "eac5f9e94c591e44687ae320ccd04c9ad57097f0ee92c250f9e00da5e682a17b",
-    "p1-14-sm-static-mesh.json": "088bac1eea047ae2427188fa5664ebd3a36f0118c01f8b15263c05197a7594d8",
-    "p1-15-skem-skeletal-mesh.json": "b6bd60afe1d6484d1e3cd7940f939bbc68cbdea49978ed8b8ec80f2d75040457",
-    "p1-16-anim-animation.json": "fc0816507314262cee1617070e4efee1de16cc6e4ba60df8dd128845146a8197",
-    "p1-17-ter-terrain.json": "1377bea3a3034517d9e8ef29657c18b4811bc616357b52ceaed184f4a9928c7b",
-    "p1-18-auxiliary-assets.json": "565611b8eabc7bfe611bf5e2f1b71064abf053459e79d102c368066cb6d9caf7"
+    "p1-08-package-normalized-tree.json": "78508bdb6c66187fca4daa61037d01a92cb84aa1e04e1219eb7bb37d67193b50",
+    "p1-13-qtx-texture.json": "792c42142b0851c0f339361fa3c04dd52be25abf5afb43edd46a4108f5567ee1",
+    "p1-14-sm-static-mesh.json": "89033b30f4be47388b4865b0ba1ffde98316a469a259bbfbb13ae0a23f2cad8e",
+    "p1-15-skem-skeletal-mesh.json": "6461d04dd7998bce3ce5d92d6ae0057bbb8438273c05bd9eb6168fb898bc4ca1",
+    "p1-16-anim-animation.json": "53ebd8f87ed5ec5f36d45e320a066c84e0d4743bc4736754b499a19a73cabd63",
+    "p1-17-ter-terrain.json": "a4e36352b08bc8a7b200e2c5406e7c33780e91849f9cd64f5a42debe6bac9acb",
+    "p1-18-auxiliary-assets.json": "862819b6fdbe452afb44876fef89bef114b01541fb570899bbe0380d289f6ccd"
   },
   "exporter_source_sha256": {
     "Tools/TMXY.Package/src/package_normalized_tree.cpp": "1d9cf6cc0ea515a9ffe635d9d4a342e98f4003ead521ccdd390961a42f5c4eab",

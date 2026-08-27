@@ -336,7 +336,7 @@ $report = [pscustomobject][ordered]@{
         evidence = 'Data/Governance/p0-github-hosting-status.json'
     }
     pending = @(
-        'Protected GitHub main and provider-generated results for all eight stable checks',
+        'Provider-generated passing results for all eight stable checks; GitHub main protection is active',
         'Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or explicitly approve WVR-0002 with current-HEAD reviews and a maximum-30-day interval; the checked-in draft is not effective',
         'The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image',
         'Exact locked builder manifest verified in GHCR',

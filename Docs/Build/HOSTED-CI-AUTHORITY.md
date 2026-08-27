@@ -3,8 +3,8 @@
 ## Current state
 
 GitHub is now the selected provider and `FaithandUnity/TMXY` is the authorized
-private repository. The local `origin`, configured identity, `main`, and remote
-head are real and synchronized. The provider-neutral contract has therefore
+public repository. The local `origin`, configured identity, `main`, and remote
+head are real. The provider-neutral contract has therefore
 advanced to `github_workflows_prepared_pending_external_authority` in
 `Data/Governance/p0-hosted-ci-contract.json`.
 
@@ -25,11 +25,13 @@ This is real source-side onboarding, not hosted release authority. The current
 GitHub observation is `BLOCKED_EXTERNAL_AUTHORITY` and must remain so while any
 condition below is missing.
 
-## Verified external blockers on 2026-08-27
+## Verified hosted state on 2026-08-28
 
-- `main` is not protected and required checks are not enforced.
-- GitHub returns HTTP 403 with “Upgrade to GitHub Pro or make this repository
-  public to enable this feature” for both branch protection and rulesets.
+- `main` is protected and the protection API returns HTTP 200. Strict status
+  checks contain exactly the eight frozen contexts.
+- Pull requests, CODEOWNERS, stale-review dismissal, last-push approval, one
+  approval, administrator enforcement, linear history, and conversation
+  resolution are enabled. Force pushes and deletion are disabled.
 - The repository has one direct collaborator, so neither one non-author approval
   nor two sensitive-change approvals can currently be satisfied.
 - No self-hosted runner exists; the required ephemeral Windows x64 UE 5.8.2
@@ -38,9 +40,9 @@ condition below is missing.
   GHCR, so hosted backend jobs fail closed instead of rebuilding another image.
 - Hosted vulnerability/license authority, signed provenance, OCI attestation,
   and immutable 365-day evidence retention do not yet exist.
-- The default branch has no workflows until this feature branch is reviewed and
-  merged; local YAML or a feature-branch run cannot replace protected-main
-  evidence.
+- The default branch exposes the required workflow, but the current protected
+  checks cannot all pass until the remaining infrastructure and policy blockers
+  are resolved.
 
 ## Trust and cache behavior
 
@@ -59,21 +61,24 @@ a shared DDC. No compatible runner currently exists.
 
 ## Authorized completion sequence
 
-The following operations change online governance or release authority and
-require project-owner confirmation before execution:
+Repository visibility and the exact `main` protection contract were explicitly
+authorized and applied on 2026-08-28. The following remaining operations change
+online governance or release authority and require separate project-owner
+confirmation before execution:
 
-1. upgrade the GitHub plan or approve making the repository public;
-2. add enough independent reviewers and configure `main` protection/rulesets
-   with the frozen eight checks, Code Owner review, stale-approval dismissal,
-   no administrator bypass, and no force push/deletion;
-3. register an ephemeral UE 5.8.2 Windows x64 runner;
-4. publish the already-qualified builder manifest to GHCR without rebuilding,
+1. add enough independent reviewers to satisfy ordinary and sensitive-change
+   review policy;
+2. register an ephemeral UE 5.8.2 Windows x64 runner;
+3. publish the already-qualified builder manifest to GHCR without rebuilding,
    and verify the exact digest;
-5. approve the vulnerability database and component-specific license policy;
-6. protect the `p0-release` environment, run signed provenance/OCI attestation,
+4. approve the vulnerability database and component-specific license policy;
+5. protect the `p0-release` environment, run signed provenance/OCI attestation,
    and provide immutable evidence storage for at least 365 days;
-7. record provider-generated rule, run, artifact, database, policy, and
+6. record provider-generated run, artifact, database, policy, and
    provenance identities, rerun local gates, and regenerate P0 readiness.
+
+Because the repository is public, no self-hosted runner may be registered until
+its ephemeral isolation and fork-pull-request threat controls are reviewed.
 
 No Secret value, registry credential, signing material, or TBL key may enter a
 command line, workflow source, report, cache, artifact name, or Git history.

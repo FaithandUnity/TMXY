@@ -10,7 +10,7 @@
 - 唯一仓库根目录是 `E:\QQXYCodeDev\Rebuild`。禁止在 `E:\QQXYCodeDev` 或其五个只读证据目录初始化仓库。
 - `ClientCode`、`ServerCode`、`ToolCode`、`DevDoc`、`天命西游` 只作为证据源，禁止复制到 Git 或 Git LFS。
 - 仓库只保存新源码、契约、Migration、部署清单、治理文档、可移植报告和经批准的小型黄金样本。
-- GitHub 私有仓库 `FaithandUnity/TMXY` 和远端 `origin` 已获项目负责人授权并完成绑定；其他 remote、镜像仓库、权限或公开性变化仍需另行授权。
+- GitHub public 仓库 `FaithandUnity/TMXY`、远端 `origin` 和 2026-08-28 生效的 `main` 保护规则已获项目负责人授权并完成绑定；其他 remote、镜像仓库、协作者、Runner、Secret、签名或公开性变化仍需另行授权。
 
 ## 2. 分支模型与 `main` 保护
 
@@ -27,7 +27,7 @@
 | 维护 | `chore/<任务ID>-<简述>` | 无产品行为变化的维护 |
 | 紧急修复 | `hotfix/<事件ID>-<简述>` | 从当前发布标签或 `main` 创建的紧急修复 |
 
-管理员必须为 `main` 配置以下保护，不得以口头约定替代。2026-08-27 的只读 API 证据确认当前私有仓库尚未保护，且 GitHub 要求升级到 Pro 或改为 public 才开放保护/ruleset；在项目负责人决定前不得静默改公开性或订阅：
+管理员必须为 `main` 配置以下保护，不得以口头约定替代。2026-08-28 的只读 API 证据已确认当前 public 仓库保护接口为 HTTP 200，以下规则和 8 个严格检查全部生效；任何削弱仍须项目负责人另行明确授权：
 
 1. 禁止直接 push、force push 和删除分支，只允许 PR 合并。
 2. 合并前要求分支与 `main` 同步，全部必需 CI 检查成功。

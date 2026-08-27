@@ -110,15 +110,43 @@ Assert-Contract (-not [bool]$contract.authority_evidence.local_diagnostic_report
     'Local diagnostic evidence must never be release authority.'
 Assert-Contract ([int]$contract.authority_evidence.minimum_retention_days -eq 365) `
     'Hosted authority evidence retention must remain 365 days.'
-Assert-Contract ([int]$hostingStatus.schema_version -eq 1 -and
-    [string]$hostingStatus.provider.repository -eq 'FaithandUnity/TMXY') `
+Assert-Contract ([int]$hostingStatus.schema_version -eq 2 -and
+    [string]$hostingStatus.provider.repository -eq 'FaithandUnity/TMXY' -and
+    [string]$hostingStatus.provider.visibility -eq 'public') `
     'GitHub hosting observation must identify the bound repository.'
 Assert-Contract (-not [bool]$hostingStatus.completion_criteria_satisfied -and
     -not [bool]$hostingStatus.release_authority) `
     'Current hosting observation must not claim release authority.'
-Assert-Contract (-not [bool]$hostingStatus.branch_authority.protected -and
-    -not [bool]$hostingStatus.branch_authority.required_checks_enforced) `
-    'Current evidence must accurately retain the unprotected main blocker.'
+Assert-Contract ([bool]$hostingStatus.branch_authority.protected -and
+    [bool]$hostingStatus.branch_authority.contract_satisfied -and
+    [bool]$hostingStatus.branch_authority.required_checks_enforced -and
+    [bool]$hostingStatus.branch_authority.required_status_checks_strict) `
+    'Current evidence must prove the protected main required-check contract.'
+Assert-Contract ([bool]$hostingStatus.branch_authority.pull_request_protection_enforced -and
+    [bool]$hostingStatus.branch_authority.administrator_bypass_forbidden -and
+    [int]$hostingStatus.branch_authority.required_approvals -eq 1 -and
+    [bool]$hostingStatus.branch_authority.dismiss_stale_approvals -and
+    [bool]$hostingStatus.branch_authority.require_code_owner_review -and
+    [bool]$hostingStatus.branch_authority.require_last_push_approval) `
+    'Current evidence must prove the authorized pull-request review contract.'
+Assert-Contract ([bool]$hostingStatus.branch_authority.mutation_protection_enforced -and
+    [bool]$hostingStatus.branch_authority.force_push_forbidden -and
+    [bool]$hostingStatus.branch_authority.deletion_forbidden -and
+    [bool]$hostingStatus.branch_authority.linear_history_required -and
+    [bool]$hostingStatus.branch_authority.conversation_resolution_required) `
+    'Current evidence must prove the authorized branch mutation restrictions.'
+$observedRequiredChecks = @($hostingStatus.branch_authority.required_check_contexts)
+Assert-Contract ($observedRequiredChecks.Count -eq $requiredChecks.Count) `
+    'Observed protected-branch check count changed.'
+foreach ($check in $requiredChecks) {
+    Assert-Contract ($observedRequiredChecks -contains $check) `
+        "Observed protected-branch check is missing: $check"
+}
+$hostingBlockers = @($hostingStatus.blockers)
+Assert-Contract ($hostingBlockers -notcontains 'main_unprotected' -and
+    $hostingBlockers -notcontains 'branch_protection_api_unavailable' -and
+    $hostingBlockers -notcontains 'branch_protection_contract_mismatch') `
+    'Protected-main blockers must be absent after verified branch protection.'
 Assert-Contract ([int]$hostingStatus.runners.matching_ephemeral_ue58_count -eq 0) `
     'Current evidence must retain the missing UE 5.8 ephemeral runner blocker.'
 

@@ -17,8 +17,9 @@ Automation checks are passing. Local success is not hosted release authority.
 1. P0-12: GitHub and `FaithandUnity/TMXY` are now authorized and the eight
    required workflow names, CODEOWNERS, cache trust boundary, locked builder,
    PostgreSQL, SBOM scan, UE runner labels, and provenance workflow exist in
-   source. The remaining external actions are to enable protected `main`, add
-   enough independent reviewers, register an ephemeral UE 5.8.2 runner,
+   source. Public visibility and the exact protected-`main` contract are now
+   API-verified. The remaining external actions are to add enough independent
+   reviewers, register an ephemeral UE 5.8.2 runner,
    publish the unchanged builder manifest to GHCR, approve vulnerability and
    license evidence, issue signed provenance/OCI attestation, and retain
    immutable evidence for 365 days.
@@ -26,10 +27,12 @@ Automation checks are passing. Local success is not hosted release authority.
    decision against the already frozen P1 execution charter.
 
 The real `origin` and developer identity were verified and a conforming P0-12
-feature branch is in use. No branch protection, plan/publicity, collaborator,
-runner, Secret, registry publication, or signing setting was changed. TLS was
-not disabled and no unknown mirror or image was substituted. The sanitized
-read-only API evidence is `Data/Governance/p0-github-hosting-status.json`.
+feature branch is in use. The project owner changed the repository to public
+and explicitly authorized the exact branch protection contract; the applied
+rule was then verified read-only. No collaborator, runner, Secret, registry
+publication, or signing setting was changed. TLS was not disabled and no unknown
+mirror or image was substituted. The sanitized API evidence is
+`Data/Governance/p0-github-hosting-status.json`.
 
 ## Evidence already accepted by the generator
 

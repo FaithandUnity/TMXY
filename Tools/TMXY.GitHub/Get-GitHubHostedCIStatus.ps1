@@ -96,6 +96,38 @@ $remoteUrl = (& git -C $root remote get-url $RemoteName 2>$null).Trim()
 $head = (& git -C $root rev-parse HEAD 2>$null).Trim()
 $branchName = (& git -C $root branch --show-current 2>$null).Trim()
 $branchProtected = $results.branch.status -eq 200 -and [bool]$results.branch.body.protected
+$expectedRequiredChecks = @(
+    'policy/repository',
+    'security/secrets',
+    'backend/clang21',
+    'backend/static-analysis',
+    'backend/postgres-migration',
+    'client/ue58-build-automation',
+    'supply-chain/policy',
+    'release/provenance'
+)
+$protection = if ($results.protection.status -eq 200) { $results.protection.body } else { $null }
+$requiredCheckContexts = if ($null -ne $protection) {
+    @($protection.required_status_checks.contexts | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+}
+else { @() }
+$requiredChecksEnforced = $null -ne $protection -and
+    [bool]$protection.required_status_checks.strict -and
+    $requiredCheckContexts.Count -eq $expectedRequiredChecks.Count -and
+    @($expectedRequiredChecks | Where-Object { $requiredCheckContexts -notcontains $_ }).Count -eq 0
+$pullRequestProtectionEnforced = $null -ne $protection -and
+    [bool]$protection.enforce_admins.enabled -and
+    [int]$protection.required_pull_request_reviews.required_approving_review_count -eq 1 -and
+    [bool]$protection.required_pull_request_reviews.dismiss_stale_reviews -and
+    [bool]$protection.required_pull_request_reviews.require_code_owner_reviews -and
+    [bool]$protection.required_pull_request_reviews.require_last_push_approval
+$mutationProtectionEnforced = $null -ne $protection -and
+    -not [bool]$protection.allow_force_pushes.enabled -and
+    -not [bool]$protection.allow_deletions.enabled -and
+    [bool]$protection.required_linear_history.enabled -and
+    [bool]$protection.required_conversation_resolution.enabled
+$branchProtectionContractSatisfied = $branchProtected -and $requiredChecksEnforced -and
+    $pullRequestProtectionEnforced -and $mutationProtectionEnforced
 $runnerRecords = if ($results.runners.status -eq 200) { @($results.runners.body.runners) } else { @() }
 $matchingUeRunners = @($runnerRecords | Where-Object {
     $labels = @($_.labels.name)
@@ -113,6 +145,9 @@ else { 0 }
 $blockers = [System.Collections.Generic.List[string]]::new()
 if (-not $branchProtected) { $blockers.Add('main_unprotected') }
 if ($results.protection.status -ne 200) { $blockers.Add('branch_protection_api_unavailable') }
+if ($results.protection.status -eq 200 -and -not $branchProtectionContractSatisfied) {
+    $blockers.Add('branch_protection_contract_mismatch')
+}
 if ($collaboratorCount -lt 2) { $blockers.Add('independent_reviewer_unavailable') }
 if ($collaboratorCount -lt 3) { $blockers.Add('two_sensitive_reviewers_unavailable') }
 if ($matchingUeRunners.Count -eq 0) { $blockers.Add('ue58_ephemeral_runner_unavailable') }
@@ -123,7 +158,7 @@ $blockers.Add('signed_provenance_and_oci_attestation_missing')
 $blockers.Add('minimum_365_day_immutable_retention_missing')
 
 $report = [pscustomobject][ordered]@{
-    schema_version = 1
+    schema_version = 2
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = 'BLOCKED_EXTERNAL_AUTHORITY'
     completion_criteria_satisfied = $false
@@ -147,7 +182,52 @@ $report = [pscustomobject][ordered]@{
         protection_api_message = $results.protection.message
         rulesets_api_status = $results.rulesets.status
         rulesets_api_message = $results.rulesets.message
-        required_checks_enforced = $false
+        contract_satisfied = $branchProtectionContractSatisfied
+        required_checks_enforced = $requiredChecksEnforced
+        required_status_checks_strict = if ($null -ne $protection) {
+            [bool]$protection.required_status_checks.strict
+        }
+        else { $false }
+        required_check_contexts = @($requiredCheckContexts)
+        expected_required_check_contexts = @($expectedRequiredChecks)
+        pull_request_protection_enforced = $pullRequestProtectionEnforced
+        administrator_bypass_forbidden = if ($null -ne $protection) {
+            [bool]$protection.enforce_admins.enabled
+        }
+        else { $false }
+        required_approvals = if ($null -ne $protection) {
+            [int]$protection.required_pull_request_reviews.required_approving_review_count
+        }
+        else { 0 }
+        dismiss_stale_approvals = if ($null -ne $protection) {
+            [bool]$protection.required_pull_request_reviews.dismiss_stale_reviews
+        }
+        else { $false }
+        require_code_owner_review = if ($null -ne $protection) {
+            [bool]$protection.required_pull_request_reviews.require_code_owner_reviews
+        }
+        else { $false }
+        require_last_push_approval = if ($null -ne $protection) {
+            [bool]$protection.required_pull_request_reviews.require_last_push_approval
+        }
+        else { $false }
+        mutation_protection_enforced = $mutationProtectionEnforced
+        force_push_forbidden = if ($null -ne $protection) {
+            -not [bool]$protection.allow_force_pushes.enabled
+        }
+        else { $false }
+        deletion_forbidden = if ($null -ne $protection) {
+            -not [bool]$protection.allow_deletions.enabled
+        }
+        else { $false }
+        linear_history_required = if ($null -ne $protection) {
+            [bool]$protection.required_linear_history.enabled
+        }
+        else { $false }
+        conversation_resolution_required = if ($null -ne $protection) {
+            [bool]$protection.required_conversation_resolution.enabled
+        }
+        else { $false }
     }
     review_authority = [pscustomobject][ordered]@{
         direct_collaborator_count = $collaboratorCount

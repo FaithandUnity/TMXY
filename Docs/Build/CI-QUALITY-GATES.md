@@ -37,18 +37,19 @@ must never bypass configure, dependency verification, tests, or scanning.
 
 ## Pending authority
 
-GitHub provider selection and workflow source are no longer pending. Protected
-branch enforcement, sufficient independent reviewers, an ephemeral UE 5.8.2
-runner, publication of the exact locked builder manifest, approved vulnerability
-results, signed provenance/OCI attestation, and 365-day immutable
-retention remain blocking P0-12 items. PostgreSQL
+GitHub provider selection, workflow source, public visibility, and the exact
+protected-`main` contract are no longer pending. Sufficient independent
+reviewers, an ephemeral UE 5.8.2 runner, publication of the exact locked builder
+manifest, approved vulnerability results, signed provenance/OCI attestation,
+and 365-day immutable retention remain blocking P0-12 items. PostgreSQL
 Migration is integrated and the source-bound MSVC 14.51 waiver is checked on
 every local aggregate run. Local GCC, host clang-tidy, and UE evidence are
 valuable diagnostics but cannot close release-authority requirements.
 
-The current private repository plan does not expose branch protection/rulesets;
-the read-only API returns HTTP 403 and requires GitHub Pro or a public repository.
-The repository also has only one collaborator and zero self-hosted runners.
+The repository is public and the read-only API now proves HTTP 200 branch
+protection with all eight strict checks, PR/CODEOWNERS review, stale-review
+dismissal, last-push approval, administrator enforcement, and force-push/delete
+prohibition. It still has only one collaborator and zero self-hosted runners.
 These facts are captured without credentials in
 `Data/Governance/p0-github-hosting-status.json`.
 
@@ -87,7 +88,7 @@ and signed provenance still require the selected CI authority. Application Conan
 profile lockfiles begin in P4 with the first real external C++ dependency; an
 empty placeholder lock is prohibited.
 
-Private pull-request runs retain the fixed Trivy JSON and database-identity
+Pull-request runs retain the fixed Trivy JSON and database-identity
 files for seven days even when vulnerability or license policy fails. This
 short-lived diagnostic artifact contains no configured Secret and is evidence
 for remediation only; it is not the required 365-day immutable release record.

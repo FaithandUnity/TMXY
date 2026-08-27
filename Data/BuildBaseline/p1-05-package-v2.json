@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T11:18:12.3873779+00:00",
+  "captured_utc": "2026-08-27T12:01:34.8117397+00:00",
   "result": "PASS",
   "task": "P1-05",
   "source_file_count": 22,
@@ -135,8 +135,8 @@
   },
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
-    "actual_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -161,6 +161,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 87,
-    "output_sha256": "fa73838870fc8662d94cf386c3dbd18a817d73a79c5e24c490ae990714934142"
+    "output_sha256": "37aff2fb1f27d17a55832d11432588a7c71a9fb1c7f91aadf709a1a1b148d79e"
   }
 }

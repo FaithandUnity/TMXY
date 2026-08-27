@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_utc": "2026-08-27T02:56:32Z",
+  "generated_utc": "2026-08-27T11:45:13Z",
   "project": "TMXY Rebuild",
   "lock_state": "locked",
   "lock_state_reason": "The P0 client, Linux backend builder and PostgreSQL toolchains are immutable and locally qualified. MSVC 14.51 remains covered by a source-bound waiver through 2026-10-25; application dependency revisions are intentionally deferred until P4 introduces Conan recipes.",
@@ -93,18 +93,18 @@
     },
     "application_dependency_policy": "Conan 2 lockfiles per build profile; no unbounded version ranges; release and CI consume the committed lockfile.",
     "container_image_reference": "tmxy-backend-builder:p0-08",
-    "container_image_digest": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
+    "container_image_digest": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "container_image_digest_scope": "local OCI manifest digest; publish the same manifest under an authorized registry without rebuilding",
     "container_image_status": "locked_and_locally_qualified",
     "qualification": {
       "report": "Data/Toolchain/backend-toolchain-qualification.json",
-      "report_sha256": "599e0bd75c07b9a08748790d1bc3d9fbb9e17556e4c25114643f757e31674011",
-      "dockerfile_sha256": "bbfea298154ba738d2212dcf281e5f4f1d69d1e41cc3b2ef01b8c8bd0487ea3d",
+      "report_sha256": "345eec589ac979ebb347e3a49ab6fcbf3a87bf1711dd05f8bc367933ef83c19f",
+      "dockerfile_sha256": "715e6c7918ab05de03077919572e33a5ea950771b02b4798141130a33e2fde62",
       "backend_source_sha256": "b052c2075364bbc8ea2882af6f88be08aca6582a3d1b52281659ec9bc7357f14",
-      "clean_builder_image_digest": "sha256:35fe0baa07bb1c47baa181d63f0dd4c55caa6f7eb47f8634ed905cf3b427408d",
+      "clean_builder_image_digest": "sha256:ad4e38c2a9e5f1a37ccbd100fae832f1ae9f65168dc4abb627ba3e1babf06c00",
       "sbom": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
-      "sbom_sha256": "996f1b19c5468a2345ca81034c3d3064d00367ecd1e3805b2542ba7fb2c43e26",
-      "sbom_component_count": 343,
+      "sbom_sha256": "1cf309b59aeafe35092207dac718128cae133d3d10ec785072032efd81857b91",
+      "sbom_component_count": 314,
       "result": "PASS"
     }
   },

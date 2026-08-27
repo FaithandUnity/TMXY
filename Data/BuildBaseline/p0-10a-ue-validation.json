@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T11:25:16.7274093+00:00",
+  "captured_utc": "2026-08-27T12:08:29.9468718+00:00",
   "result": "PASS",
   "project": {
     "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
@@ -44,8 +44,8 @@
   "project_generation": {
     "passed": true,
     "exit_code": 0,
-    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 4.39 seconds",
-    "output_sha256": "be083ff62306e62555c9b3cbba5aad0534220e289ddfac78bb2d76907b143ecf",
+    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.52 seconds",
+    "output_sha256": "6109547aeb666330b362912202b34a64f56346daab43d7dd0f255037a4db7335",
     "error": ""
   },
   "editor_build": {
@@ -53,8 +53,8 @@
     "passed": true,
     "exit_code": 0,
     "compiler_not_preferred_warning": true,
-    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.79 seconds",
-    "output_sha256": "aafb781b5c7302396bc16fd106b5f5f912c0eb00c4bd6b3cc867ba292a339053",
+    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.80 seconds",
+    "output_sha256": "abea8712b23eeeed29e1ea8ab05b21a91d9a6118237f710f3db31a68c1ee3569",
     "error": ""
   },
   "format": {
@@ -77,7 +77,7 @@
     "module_loaded": true,
     "golden_module_loaded": true,
     "importer_module_loaded": true,
-    "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260827-112448577.log",
+    "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260827-120813269.log",
     "process_exit_code": 0
   },
   "missing_paths": []

@@ -54,11 +54,12 @@ These facts are captured without credentials in
 
 The digest-locked PostgreSQL 18.6 development image now has a local CycloneDX
 1.5 SBOM with 77 components: 70 carry embedded license data and the remaining
-7 are bound to exact APK or version-pinned upstream evidence. Docker Scout CVE
-analysis requires an authenticated database session on this host, so no login
-was performed and vulnerability status remains pending. The final builder image
-has a local CycloneDX 1.5 SBOM with 343 components: 275 carry embedded license
-data and all 51 scanner gaps are bound to hashed copyright/METADATA sources.
+7 are bound to exact APK or version-pinned upstream evidence. Hosted Trivy
+evidence currently blocks the PostgreSQL image on 22 HIGH/CRITICAL findings.
+The final builder image has a local CycloneDX 1.5 SBOM with 314 components: 266
+carry embedded license data and all 48 scanner gaps are bound to hashed
+copyright/METADATA sources. pip and setuptools are build-only bootstrap tools
+and are removed after Conan installation so their vendored packages do not ship.
 `p0-12-license-evidence.json` is therefore component-complete but remains
 non-authoritative until the hosted check succeeds. Hosted vulnerability policy
 and signed provenance still require the selected CI authority. Application Conan
@@ -71,4 +72,5 @@ short-lived diagnostic artifact contains no configured Secret and is evidence
 for remediation only; it is not the required 365-day immutable release record.
 The identity is generated from the exact cache used by both scans and must
 carry Trivy 0.74.0 plus a vulnerability-database `UpdatedAt` no older than 48
-hours. A tool-only version string is rejected as incomplete evidence.
+hours, plus the corresponding `DownloadedAt`. A tool-only version string is
+rejected as incomplete evidence.

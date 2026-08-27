@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T03:49:33.7285485+00:00",
+  "captured_utc": "2026-08-27T11:45:13.2935086+00:00",
   "result": "PASS",
   "release_authority": false,
   "policy": "Every SBOM component carries embedded license data or exact supplemental source evidence.",
@@ -95,12 +95,12 @@
     },
     {
       "role": "backend-builder",
-      "image_digest": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
+      "image_digest": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
       "sbom_path": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
-      "sbom_sha256": "996f1b19c5468a2345ca81034c3d3064d00367ecd1e3805b2542ba7fb2c43e26",
-      "component_count": 343,
-      "embedded_license_count": 275,
-      "supplemental_evidence_count": 68,
+      "sbom_sha256": "1cf309b59aeafe35092207dac718128cae133d3d10ec785072032efd81857b91",
+      "component_count": 314,
+      "embedded_license_count": 266,
+      "supplemental_evidence_count": 48,
       "evidence_entries": [
         {
           "bom_ref": "package-pkg-deb-debian-base-files-12.4-2Bdeb12u15-os-distro-bookworm-os-name-debian-os-version-12",
@@ -229,7 +229,7 @@
           "name": "libctf0",
           "version": "2.40-2",
           "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/usr/share/doc/binutils-common/copyright",
+          "evidence_source": "/usr/share/doc/libctf0/copyright",
           "evidence_sha256": "a81bdd422c2c015deca84bf6ad249bf0d7d19885fc01d1894463291b0b7313e1",
           "declared_license": "SEE-INSTALLED-COPYRIGHT",
           "review_state": "verified-source-evidence"
@@ -306,7 +306,7 @@
           "name": "libsemanage",
           "version": "3.4-1",
           "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/usr/share/doc/libsemanage-common/copyright",
+          "evidence_source": "/usr/share/doc/libsemanage2/copyright",
           "evidence_sha256": "e00e6a86c598f9e24ced0180a70a5f2f2e45e133d93adf2b17ce8a06ce4b1b51",
           "declared_license": "SEE-INSTALLED-COPYRIGHT",
           "review_state": "verified-source-evidence"
@@ -449,8 +449,8 @@
           "name": "python3-stdlib-extensions",
           "version": "3.11.2-3",
           "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/usr/share/doc/python3.11/copyright",
-          "evidence_sha256": "f1cbf908e1daa8789b389fdcf17811ed36b675d736b39a103591399861350382",
+          "evidence_source": "/usr/share/doc/python3-distutils/copyright",
+          "evidence_sha256": "183860dfd4168e0608fb99fe53cef26088ba7275ce38a41e3c737d4217c0ccc1",
           "declared_license": "SEE-INSTALLED-COPYRIGHT",
           "review_state": "verified-source-evidence"
         },
@@ -587,50 +587,6 @@
           "review_state": "verified-source-evidence"
         },
         {
-          "bom_ref": "package-pkg-pypi-autocommand-2.2.2",
-          "purl": "pkg:pypi/autocommand@2.2.2",
-          "name": "autocommand",
-          "version": "2.2.2",
-          "evidence_kind": "installed-package-metadata",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/setuptools/_vendor/autocommand-2.2.2.dist-info/METADATA",
-          "evidence_sha256": "3800d9b91dceea2065a6ed6279383362e97ac38b8e56b9343f404ee531860099",
-          "declared_license": "LGPL-3.0-only",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-backports-tarfile-1.2.0",
-          "purl": "pkg:pypi/backports-tarfile@1.2.0",
-          "name": "backports-tarfile",
-          "version": "1.2.0",
-          "evidence_kind": "installed-package-metadata",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/setuptools/_vendor/backports.tarfile-1.2.0.dist-info/METADATA",
-          "evidence_sha256": "8215c54ead77d9dc5a108a25c6bdc72b5999aa6f62c9499a440359412afa5a51",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-cachecontrol-0.14.4",
-          "purl": "pkg:pypi/cachecontrol@0.14.4",
-          "name": "cachecontrol",
-          "version": "0.14.4",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/cachecontrol/LICENSE.txt",
-          "evidence_sha256": "86eeee87be2a43f3ff1f56496f451f69243926f025fedbb033666c304c4c161b",
-          "declared_license": "Apache-2.0",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-certifi-2026.6.17",
-          "purl": "pkg:pypi/certifi@2026.6.17",
-          "name": "certifi",
-          "version": "2026.6.17",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/certifi/LICENSE",
-          "evidence_sha256": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7",
-          "declared_license": "MPL-2.0",
-          "review_state": "verified-source-evidence"
-        },
-        {
           "bom_ref": "package-pkg-pypi-colorama-0.4.6",
           "purl": "pkg:pypi/colorama@0.4.6",
           "name": "colorama",
@@ -639,17 +595,6 @@
           "evidence_source": "/opt/conan/lib/python3.11/site-packages/colorama-0.4.6.dist-info/METADATA",
           "evidence_sha256": "7baed29eb50c3b29bdb33ff84e3177bf1bc05784f7685ecdcaa4471c7dd810cc",
           "declared_license": "BSD-3-Clause",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-distlib-0.4.2",
-          "purl": "pkg:pypi/distlib@0.4.2",
-          "name": "distlib",
-          "version": "0.4.2",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/distlib/LICENSE.txt",
-          "evidence_sha256": "808e10c8a6ab8deb149ff9b3fb19f447a808094606d712a9ca57fead3552599d",
-          "declared_license": "Python-2.0",
           "review_state": "verified-source-evidence"
         },
         {
@@ -664,28 +609,6 @@
           "review_state": "verified-source-evidence"
         },
         {
-          "bom_ref": "package-pkg-pypi-idna-3.18",
-          "purl": "pkg:pypi/idna@3.18",
-          "name": "idna",
-          "version": "3.18",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/idna/LICENSE.md",
-          "evidence_sha256": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04",
-          "declared_license": "BSD-3-Clause",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-jaraco-text-4.0.0",
-          "purl": "pkg:pypi/jaraco-text@4.0.0",
-          "name": "jaraco-text",
-          "version": "4.0.0",
-          "evidence_kind": "installed-package-metadata",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-4.0.0.dist-info/METADATA",
-          "evidence_sha256": "5c2fd09012c954f139b10624978d5335a654c34014cd06f6f466ca683dbc9c56",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
           "bom_ref": "package-pkg-pypi-jinja2-3.1.6",
           "purl": "pkg:pypi/jinja2@3.1.6",
           "name": "jinja2",
@@ -697,61 +620,6 @@
           "review_state": "verified-source-evidence"
         },
         {
-          "bom_ref": "package-pkg-pypi-msgpack-1.1.2",
-          "purl": "pkg:pypi/msgpack@1.1.2",
-          "name": "msgpack",
-          "version": "1.1.2",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/msgpack/COPYING",
-          "evidence_sha256": "492dedba85da5872f78e6091bcd1fea474d660d35acb4dee964b8aab3f007427",
-          "declared_license": "Apache-2.0",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-packaging-26.2",
-          "purl": "pkg:pypi/packaging@26.2",
-          "name": "packaging",
-          "version": "26.2",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/packaging/LICENSE",
-          "evidence_sha256": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
-          "declared_license": "Apache-2.0 OR BSD-2-Clause",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-platformdirs-4.10.0",
-          "purl": "pkg:pypi/platformdirs@4.10.0",
-          "name": "platformdirs",
-          "version": "4.10.0",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/platformdirs/LICENSE",
-          "evidence_sha256": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-pygments-2.20.0",
-          "purl": "pkg:pypi/pygments@2.20.0",
-          "name": "pygments",
-          "version": "2.20.0",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/pygments/LICENSE",
-          "evidence_sha256": "a9d66f1d526df02e29dce73436d34e56e8632f46c275bbdffc70569e882f9f17",
-          "declared_license": "BSD-2-Clause",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-pyproject-hooks-1.2.0",
-          "purl": "pkg:pypi/pyproject-hooks@1.2.0",
-          "name": "pyproject-hooks",
-          "version": "1.2.0",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/pyproject_hooks/LICENSE",
-          "evidence_sha256": "1b22b049b5267d6dfc23a67bf4a84d8ec04b9fdfb1a51d360e42b4342c8b4154",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
           "bom_ref": "package-pkg-pypi-python-dateutil-2.9.0.post0",
           "purl": "pkg:pypi/python-dateutil@2.9.0.post0",
           "name": "python-dateutil",
@@ -760,94 +628,6 @@
           "evidence_source": "/opt/conan/lib/python3.11/site-packages/python_dateutil-2.9.0.post0.dist-info/METADATA",
           "evidence_sha256": "a9d436da322be808332f98d88325998e87cb693a678a9969feb4cfad729a6e93",
           "declared_license": "Apache-2.0 OR BSD-3-Clause",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-requests-2.34.2",
-          "purl": "pkg:pypi/requests@2.34.2",
-          "name": "requests",
-          "version": "2.34.2",
-          "evidence_kind": "installed-package-metadata",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/requests-2.34.2.dist-info/METADATA",
-          "evidence_sha256": "8c384ba3e979480faae2859d3c5e6c1276dd2c3616e322e124d52c8cfc556f27",
-          "declared_license": "SEE-INSTALLED-COPYRIGHT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-resolvelib-1.2.1",
-          "purl": "pkg:pypi/resolvelib@1.2.1",
-          "name": "resolvelib",
-          "version": "1.2.1",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/resolvelib/LICENSE",
-          "evidence_sha256": "f388fd38cad13112c1dc0f669bbe80e7f84541edbafb72f3030d2ca7642c3c9d",
-          "declared_license": "ISC",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-rich-14.2.0",
-          "purl": "pkg:pypi/rich@14.2.0",
-          "name": "rich",
-          "version": "14.2.0",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/rich/LICENSE",
-          "evidence_sha256": "deed7c17a4318158190a3ea239cc879a5a50271cebb98ae7025f48fbe58dca15",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-setuptools-70.3.0",
-          "purl": "pkg:pypi/setuptools@70.3.0",
-          "name": "setuptools",
-          "version": "70.3.0",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/pkg_resources/LICENSE",
-          "evidence_sha256": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-tomli-w-1.2.0",
-          "purl": "pkg:pypi/tomli-w@1.2.0",
-          "name": "tomli-w",
-          "version": "1.2.0",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/tomli_w/LICENSE",
-          "evidence_sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-tomli-2.4.1",
-          "purl": "pkg:pypi/tomli@2.4.1",
-          "name": "tomli",
-          "version": "2.4.1",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/tomli/LICENSE",
-          "evidence_sha256": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-truststore-0.10.4",
-          "purl": "pkg:pypi/truststore@0.10.4",
-          "name": "truststore",
-          "version": "0.10.4",
-          "evidence_kind": "installed-copyright-file",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/pip/_vendor/truststore/LICENSE",
-          "evidence_sha256": "33be7b7e8fa4fd19b1760e1a8ed8a668bdab852c91b692dd41424bcb725a9fca",
-          "declared_license": "MIT",
-          "review_state": "verified-source-evidence"
-        },
-        {
-          "bom_ref": "package-pkg-pypi-urllib3-2.7.0",
-          "purl": "pkg:pypi/urllib3@2.7.0",
-          "name": "urllib3",
-          "version": "2.7.0",
-          "evidence_kind": "installed-package-metadata",
-          "evidence_source": "/opt/conan/lib/python3.11/site-packages/urllib3-2.7.0.dist-info/METADATA",
-          "evidence_sha256": "66147856d30bbb6bed01c6ce3326d0f48d84ed5f286ac177633a1486b82eace5",
-          "declared_license": "SEE-INSTALLED-COPYRIGHT",
           "review_state": "verified-source-evidence"
         }
       ]

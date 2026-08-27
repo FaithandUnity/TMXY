@@ -1,6 +1,6 @@
 {
   "schema_version": 5,
-  "captured_utc": "2026-08-27T11:26:41.4195963+00:00",
+  "captured_utc": "2026-08-27T12:08:37.1031094+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -22,24 +22,24 @@
   "backend_builder": {
     "image": {
       "reference": "tmxy-backend-builder:p0-08",
-      "expected_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
-      "actual_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
+      "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+      "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
       "locally_verified": true
     },
     "sbom": {
       "file": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
-      "sha256": "996f1b19c5468a2345ca81034c3d3064d00367ecd1e3805b2542ba7fb2c43e26",
+      "sha256": "1cf309b59aeafe35092207dac718128cae133d3d10ec785072032efd81857b91",
       "format": "CycloneDX",
       "spec_version": "1.5",
-      "component_count": 343,
-      "components_with_embedded_license_evidence": 275,
-      "components_with_license_evidence": 343,
+      "component_count": 314,
+      "components_with_embedded_license_evidence": 266,
+      "components_with_license_evidence": 314,
       "locally_verified": true
     }
   },
   "license_evidence": {
     "file": "Data/Security/p0-12-license-evidence.json",
-    "sha256": "1ca29258daa8ebf67ebafe4dcc7007005cdbdd199315ceb471941fe6a67bdd47",
+    "sha256": "5ab7aa095388f74845bc5c6f3f6ab4a60e59b6fa051fe2cd8a5167a3f05bab20",
     "result": "PASS_DIAGNOSTIC",
     "component_complete": true,
     "release_authority": false

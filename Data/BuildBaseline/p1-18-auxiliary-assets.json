@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T11:24:42.4323857+00:00",
+  "captured_utc": "2026-08-27T12:08:08.2226578+00:00",
   "result": "PASS",
   "task": "P1-18",
   "completion_criteria_satisfied": true,
   "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
   "dependencies": {
-    "p1-08-package-normalized-tree.json": "a903d06941eec725e973314ed5706bbd7c6c5e4e33c37e0881408cbd72c03c20",
-    "p1-13-qtx-texture.json": "b0ed1b2067494612834e555fea5582e98403019adb59cf131912f481f39488b1"
+    "p1-08-package-normalized-tree.json": "0e1ec5e8d0dc74bbc5a7b9da32b70e19bde0c6ea324dda40b7bff5e0d4993764",
+    "p1-13-qtx-texture.json": "3ccfd35a444d7bd25788c0dd67c527106a7683b9b3cfccc3abc7b3a5203e955e"
   },
   "classification": {
     "zif": "BOM-less UTF-8 XML zone-navigation records",
@@ -315,8 +315,8 @@
   ],
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
-    "actual_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {

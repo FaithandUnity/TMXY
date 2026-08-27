@@ -37,7 +37,7 @@
 | Docker Buildx | 0.36.1-desktop.1 | 多阶段和可复现镜像构建 |
 | PostgreSQL | 18.6 Alpine，`postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2` | 开发/CI 数据库 |
 | Debian builder base | `bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171` | 官方多平台 index；linux/amd64 manifest 为 `sha256:5ae3c39e...b867` |
-| Backend builder | `tmxy-backend-builder@sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d` | 本地 OCI manifest；发布时只能原样推送，禁止重建 |
+| Backend builder | `tmxy-backend-builder@sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9` | 本地 OCI manifest；发布时只能原样推送，禁止重建 |
 
 ### 2.2 后端构建器锁定内容
 

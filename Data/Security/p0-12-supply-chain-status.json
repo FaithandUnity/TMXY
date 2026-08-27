@@ -1,6 +1,6 @@
 {
-  "schema_version": 7,
-  "captured_utc": "2026-08-27T15:40:38.7721720+00:00",
+  "schema_version": 8,
+  "captured_utc": "2026-08-27T16:36:05.1926989+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -57,7 +57,7 @@
   },
   "postgres_refresh_preflight": {
     "file": "Data/Security/p0-12-postgres-refresh-preflight.json",
-    "sha256": "1923572d0077b1e489c30fa3b5cbfb900dfef47c44d773c3fdea30ba994ab2fb",
+    "sha256": "a471849069f624ad109c546a3b0b44b43e23a6f25e2da1ab2507a81d87be5e68",
     "result": "PASS_DIAGNOSTIC",
     "status": "NO_REFRESH_AVAILABLE",
     "tag_manifest_changed": false,
@@ -68,7 +68,7 @@
   },
   "postgres_official_candidate": {
     "file": "Data/Security/p0-12-postgres-official-candidate-evaluation.json",
-    "sha256": "04b472b8230b62ff081c5c4bc8a9b6c410a898ff76074ee1e68b424deee16c80",
+    "sha256": "1aa9c38d04f938982a6f009e3e4115a8d6d165834100f5af158ffe8d817cc9f5",
     "result": "PASS_DIAGNOSTIC",
     "tag": "18.6-alpine3.23",
     "candidate_index_digest": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
@@ -77,6 +77,24 @@
     "inherited_high_or_critical": 22,
     "candidate_scan_claimed": false,
     "lock_update_performed": false,
+    "release_authority": false,
+    "bindings_verified": true
+  },
+  "postgres_gosu_reachability": {
+    "file": "Data/Security/p0-12-postgres-gosu-reachability-review.json",
+    "sha256": "fe54a53336a5acdcb7595127c7b1f2169d1f45a68a71de93556a6a28c71c5408",
+    "result": "PASS_DIAGNOSTIC",
+    "status": "REVIEW_COMPLETE_NO_SYMBOL_REACHABILITY_STILL_BLOCKING",
+    "risk_assessment": "reduced_reachability_not_zero_risk",
+    "mapped_blocking_findings": 22,
+    "symbol_reachable": 0,
+    "package_only": 1,
+    "module_only": 21,
+    "sarif_sha256": "eae6dd97284a30e394d59eb21c0d7f076e9458ed440d3386e6555285413a9352",
+    "official_osv_sha256": "7cd0f040d0f20a62a8535191c5078a0602fe21eeb8348ca61a3115aed239bea9",
+    "policy_blocking": true,
+    "waiver_state": "none",
+    "owner_approval": false,
     "release_authority": false,
     "bindings_verified": true
   },
@@ -91,7 +109,7 @@
   },
   "pending": [
     "Protected GitHub main and provider-generated results for all eight stable checks",
-    "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain an explicit component-specific time-bounded waiver after review",
+    "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain explicit owner approval for a component-specific time-bounded waiver; reachability review alone grants no exception",
     "The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image",
     "Exact locked builder manifest verified in GHCR",
     "Provision the labeled ephemeral UE 5.8 hosted runner",

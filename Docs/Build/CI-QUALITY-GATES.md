@@ -56,6 +56,15 @@ The digest-locked PostgreSQL 18.6 development image now has a local CycloneDX
 1.5 SBOM with 77 components: 70 carry embedded license data and the remaining
 7 are bound to exact APK or version-pinned upstream evidence. Hosted Trivy
 evidence currently blocks the PostgreSQL image on 22 HIGH/CRITICAL findings.
+The locked `gosu` binary now also has a source- and binary-bound reachability
+review. Official `govulncheck v1.7.0` binary-mode SARIF maps all 22 blockers:
+zero symbol-reachable, one package-only, and 21 module-only results. The one
+package-only result is `GO-2026-4970` in `os`; its official OSV symbol set, the
+root-only PostgreSQL entrypoint invocation, and the tagged `gosu` source are
+bound by SHA-256. This lowers the assessed reachability but does not prove
+absence, waive the hosted severity policy, update the image lock, or grant merge
+or release authority. A component waiver still requires explicit owner approval
+and a time bound after this review.
 The final builder image has a local CycloneDX 1.5 SBOM with 314 components: 266
 carry embedded license data and all 48 scanner gaps are bound to hashed
 copyright/METADATA sources. pip and setuptools are build-only bootstrap tools

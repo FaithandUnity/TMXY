@@ -35,6 +35,16 @@ blocker without being misrepresented as a new vulnerability scan. Changed bytes
 still require SBOM, hosted scanning, migration tests, full gates, and review.
 Its offline regression covers identical, changed, and malformed probe evidence.
 
+`New-PostgresGosuReachabilityReview.ps1` binds the exact locked `gosu` bytes and
+Go build metadata to an official `govulncheck v1.7.0` binary-mode SARIF scan,
+the official `GO-2026-4970` OSV package/symbol record, the PostgreSQL entrypoint,
+and the tagged `gosu` source. The current review maps all 22 hosted blockers:
+0 symbol-reachable, 1 package-only, and 21 module-only. This reduces the assessed
+reachability but deliberately keeps the hosted policy blocking; it cannot create
+a waiver, owner approval, lock update, merge authority, or release authority.
+Its offline regression also proves that a reachable symbol stays blocking and a
+missing mapped result fails closed.
+
 Hosted Trivy evidence is the vulnerability-policy input. The recorded
 PostgreSQL result remains blocked on 22 HIGH/CRITICAL findings; a new hosted run
 must verify the 314-component builder after build-only pip/setuptools removal.

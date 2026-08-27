@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T15:41:47.1484148+00:00",
+  "captured_utc": "2026-08-27T16:37:16.8297632+00:00",
   "result": "PASS_DIAGNOSTIC",
   "authoritative_release_gate": false,
   "authority_note": "Local gates and the locked Clang 21 builder are operational; hosted CI and release-authority supply-chain evidence remain pending.",
   "repository": {
     "result": "PASS",
     "checked_source_files": 218,
-    "checked_size_files": 467,
-    "checked_utf8_lf_files": 488,
+    "checked_size_files": 469,
+    "checked_utf8_lf_files": 493,
     "failure_count": 0,
     "failures": []
   },
   "secret": {
     "result": "PASS",
-    "repository_files_scanned": 484,
+    "repository_files_scanned": 489,
     "history_mode": "all_reachable_blobs",
-    "history_blobs_scanned": 743,
+    "history_blobs_scanned": 781,
     "scanner_self_test": "PASS",
     "secret_store_rotation": "PASS",
     "finding_count": 0,
@@ -56,7 +56,7 @@
   },
   "format_core": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:30:37.7362792+08:00",
+    "captured_utc": "2026-08-28T00:26:16.2096683+08:00",
     "result": "PASS",
     "task": "P1-01",
     "source_file_count": 6,
@@ -90,7 +90,7 @@
   },
   "package_v1": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:31:38.9323245+08:00",
+    "captured_utc": "2026-08-28T00:27:12.8632518+08:00",
     "result": "PASS",
     "task": "P1-02",
     "source_file_count": 22,
@@ -167,12 +167,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 87,
-      "output_sha256": "0a64627f9dc2e99da327b68ec917a6bd87cd626193ceaa989debdeb2d05ee070"
+      "output_sha256": "8e35c2b198258f74c9e9b281bdb73070bb946290dbf24d5e9a2088c3a13bc04c"
     }
   },
   "package_v2": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:32:40.2240877+08:00",
+    "captured_utc": "2026-08-28T00:28:12.8679616+08:00",
     "result": "PASS",
     "task": "P1-05",
     "source_file_count": 22,
@@ -333,12 +333,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 87,
-      "output_sha256": "79ac710a3c77dee7f4bf65af93501833e433a7e240b9e1f7fedd81907c520db1"
+      "output_sha256": "c657b1226e71096aa220fd4f6c13924ee5958e8fa2a542d910338c6fb93c1346"
     }
   },
   "package_v3": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:33:38.592316+08:00",
+    "captured_utc": "2026-08-28T00:29:14.1611841+08:00",
     "result": "PASS",
     "task": "P1-06",
     "source_file_count": 22,
@@ -1102,19 +1102,19 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 87,
-      "output_sha256": "0a294bcfe7c62914522293faf2fc125816eb66066271b67758acb493bdb96364"
+      "output_sha256": "734935c7940b33ef2f3bac0121f620d8ea54d6547b00953db5f29a7f4ef6cc6c"
     }
   },
   "package_pipeline": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:34:36.889965+08:00",
+    "captured_utc": "2026-08-28T00:30:14.7530235+08:00",
     "result": "PASS",
     "task": "P1-07",
     "source_file_count": 22,
     "source_sha256": "38e4977ae64e1cfb743b5f3533ab7642c11b28cdb7ad8eb819cec6e4856bb484",
     "input_reports": {
-      "package_v2_sha256": "66d78c417934adf0a136391277fddea8d2bcad9c871802ed8085cfcdd36d4a18",
-      "package_v3_sha256": "2f9ec08888f28007dff3d1f22fe71a8a9edecbeb84d6e90c37ac3addadbebc4f"
+      "package_v2_sha256": "3bb79000854549ca93c8d5dd82cf4aa823c1e62a964cf46c53ad362d0f426fe9",
+      "package_v3_sha256": "a1ec7220338c58607107fcfe9d4efc1809af1920b8f298b24495f95e7ab6e2fe"
     },
     "pipeline": [
       "read-and-validate-outer-header",
@@ -1165,12 +1165,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 87,
-      "output_sha256": "54fd100fd2c50e4b502deff2d51fbc66719186f9046ce871b7c123c0a3dcfb11"
+      "output_sha256": "9d9aa309bdc0ed85b38f301a792c29ee3b2069f8ac8983b367fb545912cc466c"
     }
   },
   "package_normalized_tree": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:35:35.15527+08:00",
+    "captured_utc": "2026-08-28T00:31:13.1386869+08:00",
     "result": "PASS",
     "task": "P1-08",
     "source_file_count": 22,
@@ -1182,10 +1182,10 @@
       "passed": true
     },
     "dependency_report_sha256": {
-      "p1-02-package-v1.json": "14d2a4f0c95bca9ad5cf333a77f64e4dedab7c515f2f48a642d5d45aca5ebcec",
-      "p1-05-package-v2.json": "66d78c417934adf0a136391277fddea8d2bcad9c871802ed8085cfcdd36d4a18",
-      "p1-06-package-v3.json": "2f9ec08888f28007dff3d1f22fe71a8a9edecbeb84d6e90c37ac3addadbebc4f",
-      "p1-07-package-pipeline.json": "223ea9fa29d0e03a656002e468c209de0fe9abf749af5ad84a7f7492f2f46a8f"
+      "p1-02-package-v1.json": "3a2e3a20bdbeb4e5fe6c6259f9c04dfddea3027ce7b9dac4185b4126973d64c2",
+      "p1-05-package-v2.json": "3bb79000854549ca93c8d5dd82cf4aa823c1e62a964cf46c53ad362d0f426fe9",
+      "p1-06-package-v3.json": "a1ec7220338c58607107fcfe9d4efc1809af1920b8f298b24495f95e7ab6e2fe",
+      "p1-07-package-pipeline.json": "7eb4577f3fbdc6fd3b44ec36296399781847a01bb9e2bdea32ca9057a288a488"
     },
     "semantic_states": {
       "names_and_classes": "opaque-bytes-hex",
@@ -1237,12 +1237,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 87,
-      "output_sha256": "aec1cc2ab6c78b053aa4521bb3df8c64cddebe207f17c080cb1159c5ab8d3b88"
+      "output_sha256": "86a00db3a6b27ec04660b198e1067b5cda846b7c7948339de050a70f0c75b7c6"
     }
   },
   "legacy_table": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:36:01.1731012+08:00",
+    "captured_utc": "2026-08-28T00:31:38.4544191+08:00",
     "result": "PASS",
     "task": "P1-03",
     "source_file_count": 7,
@@ -1349,12 +1349,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 44,
-      "output_sha256": "ce4382fa053dfcd04a7999017d1283df8af612454c98a6a7506ddd48f4c0f813"
+      "output_sha256": "c5e4ead732d995cb65d2d96a87d03d1292c43056a0a3e9fb887d16948d9cc8b3"
     }
   },
   "current_table_investigation": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:36:10.9566668+08:00",
+    "captured_utc": "2026-08-28T00:31:47.739406+08:00",
     "result": "PASS_DIAGNOSTIC",
     "task": "P1-09",
     "task_status": "IN_PROGRESS",
@@ -1626,7 +1626,7 @@
   },
   "legacy_to_ue_transform": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:36:17.8717628+08:00",
+    "captured_utc": "2026-08-28T00:31:54.8851498+08:00",
     "result": "PASS",
     "task": "P1-12",
     "completion_criteria_satisfied": true,
@@ -1715,7 +1715,7 @@
   },
   "qtx_texture": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:36:59.006935+08:00",
+    "captured_utc": "2026-08-28T00:32:36.1036876+08:00",
     "result": "PASS",
     "task": "P1-13",
     "completion_criteria_satisfied": true,
@@ -1888,12 +1888,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 75,
-      "output_sha256": "044b5bc12bc3dfdc6253dd0b24c879281d1d51aa57a3ab7026c6980dd38c82c1"
+      "output_sha256": "0b5c68a23569130d803aebae94dfbf211d05cbfc5fe8c6509e47156bb56f974a"
     }
   },
   "sm_static_mesh": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:37:45.3387306+08:00",
+    "captured_utc": "2026-08-28T00:33:21.0896751+08:00",
     "result": "PASS",
     "task": "P1-14",
     "completion_criteria_satisfied": true,
@@ -2059,12 +2059,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 71,
-      "output_sha256": "44eca373b894633562e67fb45608b43aebecc8411fbaec41f1208320dd69dca8"
+      "output_sha256": "99028de8e4e78563eeaafccf07800e8a80ab5ad4a5f5d6d2f60c61feb257c1aa"
     }
   },
   "skem_skeletal_mesh": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:38:45.8863173+08:00",
+    "captured_utc": "2026-08-28T00:34:20.0317847+08:00",
     "result": "PASS",
     "task": "P1-15",
     "completion_criteria_satisfied": true,
@@ -2219,12 +2219,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 70,
-      "output_sha256": "76b886b758dbce6f45dac008397a6e6cdf420a9d639bada354c8d3a7d2cbf8f9"
+      "output_sha256": "7ce119633ab5e2d0ec0588e056e27d663e8adfcacf5258d185de0a6d6aaaf1ad"
     }
   },
   "anim_animation": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:39:36.5048032+08:00",
+    "captured_utc": "2026-08-28T00:35:06.9945176+08:00",
     "result": "PASS",
     "task": "P1-16",
     "completion_criteria_satisfied": true,
@@ -2360,12 +2360,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 75,
-      "output_sha256": "f4382cb89ea2c9bfda064cf51c4d11de553757855597dffcbe02b8472cbfb030"
+      "output_sha256": "40acab5a9b363fc8067bdbed7fd72ef3fd5089eac7a1f96a186ac487ecfb9d6b"
     }
   },
   "ter_terrain": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:01.5719237+08:00",
+    "captured_utc": "2026-08-28T00:35:30.0389947+08:00",
     "result": "PASS",
     "task": "P1-17",
     "completion_criteria_satisfied": true,
@@ -2525,19 +2525,19 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 45,
-      "output_sha256": "31b0819d1c1936639aa2b6d03f564b8140a69610a949e5a7251d293966dbb97e"
+      "output_sha256": "0daafa93752b8ce7892a816818d99876726dc95ed0d941214d6eaba339aea34f"
     }
   },
   "auxiliary_assets": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:06.7966643+08:00",
+    "captured_utc": "2026-08-28T00:35:34.5061946+08:00",
     "result": "PASS",
     "task": "P1-18",
     "completion_criteria_satisfied": true,
     "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
     "dependencies": {
-      "p1-08-package-normalized-tree.json": "201b6cc3fbd5447839fd17ed41363ad25192fa2880962e397fad10f5d4e8b8d1",
-      "p1-13-qtx-texture.json": "bbb399d5d234f7419425bd7cd1081917f57ea63dbf936e97b78b73099c603a5e"
+      "p1-08-package-normalized-tree.json": "e52547ee43085327f36eff1b08f73ef48747379b73a3959bb31a63ebcba8801b",
+      "p1-13-qtx-texture.json": "def674d88aaf514dc92b268748b27a4166a2c21bc5ad3ab70adc78b7eef16554"
     },
     "classification": {
       "zif": "BOM-less UTF-8 XML zone-navigation records",
@@ -2875,7 +2875,7 @@
   },
   "asset_interchange": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:06.932035+08:00",
+    "captured_utc": "2026-08-28T00:35:34.619608+08:00",
     "result": "PASS",
     "task": "P1-19",
     "completion_criteria_satisfied": true,
@@ -2944,13 +2944,13 @@
       "unknown_extensions_must_survive_read_write": true
     },
     "dependency_report_sha256": {
-      "p1-08-package-normalized-tree.json": "201b6cc3fbd5447839fd17ed41363ad25192fa2880962e397fad10f5d4e8b8d1",
-      "p1-13-qtx-texture.json": "bbb399d5d234f7419425bd7cd1081917f57ea63dbf936e97b78b73099c603a5e",
-      "p1-14-sm-static-mesh.json": "639768740025c924617037eccb22fad4afcc21494c4a8d7a82b86e6f94516e7c",
-      "p1-15-skem-skeletal-mesh.json": "07b398a36c026f92a49d2904dd19cab856840dec37aa191ae7d032aa5f4cc9d6",
-      "p1-16-anim-animation.json": "325f82266427548a55ce654ee95effb4249819b5aba36cb0f8d59ba28d20de86",
-      "p1-17-ter-terrain.json": "cd4a874c86df2bcfbde47539a21416ead8aef2caecf88c16af9327436f0a4592",
-      "p1-18-auxiliary-assets.json": "1242ec5f38747945d281dfa66918cf997559ee9d6599faaa6c3e841eba2b24e7"
+      "p1-08-package-normalized-tree.json": "e52547ee43085327f36eff1b08f73ef48747379b73a3959bb31a63ebcba8801b",
+      "p1-13-qtx-texture.json": "def674d88aaf514dc92b268748b27a4166a2c21bc5ad3ab70adc78b7eef16554",
+      "p1-14-sm-static-mesh.json": "6aa2dc70b2995b0fd06ae28f937c1c15dde82c80d15ee227017e3def34125e57",
+      "p1-15-skem-skeletal-mesh.json": "44a74d144ecab56cfc67c21353dc2febea3f32590468e761c16b03d16aee3949",
+      "p1-16-anim-animation.json": "d173fd47a6a6e1524a47811b7cf8f435b38799d1e5a81e7693b205bdcaf30d17",
+      "p1-17-ter-terrain.json": "ccd5671aed35a6bf64718ed9bfb4672f2b0769367e9332767a6998a52cb0154d",
+      "p1-18-auxiliary-assets.json": "5959f3819382dd27cba83489eda8e910d380b13f1c64c37f8e5ca3e87affe3c5"
     },
     "exporter_source_sha256": {
       "Tools/TMXY.Package/src/package_normalized_tree.cpp": "1d9cf6cc0ea515a9ffe635d9d4a342e98f4003ead521ccdd390961a42f5c4eab",
@@ -2965,7 +2965,7 @@
   },
   "ue_golden_host": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.529994+08:00",
+    "captured_utc": "2026-08-28T00:35:57.2095563+08:00",
     "result": "PASS",
     "task": "P1-20",
     "completion_criteria_satisfied": true,
@@ -3006,15 +3006,15 @@
       "required": true,
       "passed": true,
       "report_path": "E:\\QQXYCodeDev\\Rebuild\\Data\\BuildBaseline\\p0-10a-ue-validation.json",
-      "report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
+      "report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20"
     },
-    "dependency_report_sha256": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
+    "dependency_report_sha256": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
     "failure_count": 0,
     "failures": []
   },
   "ue_importer": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.5519015+08:00",
+    "captured_utc": "2026-08-28T00:35:57.2309021+08:00",
     "result": "PASS",
     "task": "P1-21",
     "completion_criteria_satisfied": true,
@@ -3069,21 +3069,21 @@
       "required": true,
       "passed": true,
       "test": "TMXY.Importer.ManifestBatch",
-      "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e",
+      "ue_report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20",
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-21-report.json",
       "generated_report_sha256": "5e635694f10b21c6d24dcacccb0fbf7b5f67ee0e3e2cafeeae7db75a4d1e255e",
       "generated_report_schema_passed": true
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "33f181a8f034f9d2993fcd2b27a91b1141bd82495ba20103959392f93558413f"
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "3bde8064133465c50a6ad50c4083f0d753208de7ced63299ef5b6407f182bc7c"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_texture_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.65669+08:00",
+    "captured_utc": "2026-08-28T00:35:57.3116318+08:00",
     "result": "PASS",
     "task": "P1-22",
     "completion_criteria_satisfied": true,
@@ -3160,20 +3160,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-22-texture-report.json",
       "generated_report_sha256": "18d779b54963f9bbd3ac7f605808a9150d1a6b3c5a4a148138864a22d2698825",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
+      "ue_report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-13-qtx-texture.json": "bbb399d5d234f7419425bd7cd1081917f57ea63dbf936e97b78b73099c603a5e",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "33f181a8f034f9d2993fcd2b27a91b1141bd82495ba20103959392f93558413f",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0"
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "def674d88aaf514dc92b268748b27a4166a2c21bc5ad3ab70adc78b7eef16554",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "3bde8064133465c50a6ad50c4083f0d753208de7ced63299ef5b6407f182bc7c",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "79fa690937ac29ae0c4ba13f0658bf53e0052bcfda449e57f0b474a4f2a3d407"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_static_mesh_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.7102133+08:00",
+    "captured_utc": "2026-08-28T00:35:57.3616656+08:00",
     "result": "PASS",
     "task": "P1-23",
     "completion_criteria_satisfied": true,
@@ -3239,21 +3239,21 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-23-static-mesh-report.json",
       "generated_report_sha256": "a7ddfce428543ffd1504203c2f279100bbebbc48f950996cfd6bbd68c322bedf",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
+      "ue_report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "639768740025c924617037eccb22fad4afcc21494c4a8d7a82b86e6f94516e7c",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "33f181a8f034f9d2993fcd2b27a91b1141bd82495ba20103959392f93558413f",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0",
-      "Data/BuildBaseline/p1-22-ue-texture-import.json": "a899f7a65ccba2f08c3b5d2607ce85b3604c37f676b07b460195f6a625c6f46f"
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "6aa2dc70b2995b0fd06ae28f937c1c15dde82c80d15ee227017e3def34125e57",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "3bde8064133465c50a6ad50c4083f0d753208de7ced63299ef5b6407f182bc7c",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "79fa690937ac29ae0c4ba13f0658bf53e0052bcfda449e57f0b474a4f2a3d407",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "4bcfa14fc95b6bccc2d7bacac4c70925e70523be426242f5bad069269f4da353"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_skeletal_mesh_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.7636983+08:00",
+    "captured_utc": "2026-08-28T00:35:57.4096172+08:00",
     "result": "PASS",
     "task": "P1-24",
     "completion_criteria_satisfied": true,
@@ -3321,20 +3321,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-24-skeletal-mesh-report.json",
       "generated_report_sha256": "5925bb0491981de448b69664ab1723738c3bdf954b9aa22c02f3623d71173b5a",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
+      "ue_report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "07b398a36c026f92a49d2904dd19cab856840dec37aa191ae7d032aa5f4cc9d6",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0",
-      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "1a1cec2275f29956cdd0478f3a9ffa3f92447d061dd008887d601a6854256d58"
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "44a74d144ecab56cfc67c21353dc2febea3f32590468e761c16b03d16aee3949",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "79fa690937ac29ae0c4ba13f0658bf53e0052bcfda449e57f0b474a4f2a3d407",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "6de1a1bf14e21e498fdb29971ba664c587b0f7e8ab1c6d39547f0f2ca614f822"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_animation_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.8354545+08:00",
+    "captured_utc": "2026-08-28T00:35:57.4679634+08:00",
     "result": "PASS",
     "task": "P1-25",
     "completion_criteria_satisfied": true,
@@ -3407,20 +3407,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-25-animation-report.json",
       "generated_report_sha256": "af21d7e9917669cbf956b4cd7397cc18c4faf98205f7650c8789ac7cc1bcf39f",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
+      "ue_report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-16-anim-animation.json": "325f82266427548a55ce654ee95effb4249819b5aba36cb0f8d59ba28d20de86",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0",
-      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "306f9d6b359fdf83095a5d2b9d6d8b6c063daa0f34505bc3cc04b5e2d2567944"
+      "Data/BuildBaseline/p1-16-anim-animation.json": "d173fd47a6a6e1524a47811b7cf8f435b38799d1e5a81e7693b205bdcaf30d17",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "79fa690937ac29ae0c4ba13f0658bf53e0052bcfda449e57f0b474a4f2a3d407",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "9c2c6d887a77df046d7556a801f7d478aa37e83efe2a27ce83753dd4f29e813d"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_terrain_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.9491218+08:00",
+    "captured_utc": "2026-08-28T00:35:57.5673783+08:00",
     "result": "PASS",
     "task": "P1-26",
     "completion_criteria_satisfied": true,
@@ -3491,20 +3491,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-26-terrain-report.json",
       "generated_report_sha256": "fcec353a7c50f20f665b20c1bc30b027a0e0ef7437dc717ccbd9b78d9305929b",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
+      "ue_report_sha256": "d6de4610777fddd3282b4583388a9b2086867ba12e66198f4a44503bb7a60f20"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-17-ter-terrain.json": "cd4a874c86df2bcfbde47539a21416ead8aef2caecf88c16af9327436f0a4592",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0",
-      "Data/BuildBaseline/p1-25-ue-animation-import.json": "f3c82da4d0822618a7953715eb5a091c6371606e8f5982fb02d658bdf4fba3d2"
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "ccd5671aed35a6bf64718ed9bfb4672f2b0769367e9332767a6998a52cb0154d",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "79fa690937ac29ae0c4ba13f0658bf53e0052bcfda449e57f0b474a4f2a3d407",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "f913603407e529a07d9fbc1fa49a6119fce346f71c5051ad3e36ced949e4c7a1"
     },
     "failure_count": 0,
     "failures": []
   },
   "golden_test_matrix": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:31.0103105+08:00",
+    "captured_utc": "2026-08-28T00:35:57.6201701+08:00",
     "result": "PASS",
     "task": "P1-27",
     "completion_criteria_satisfied": true,
@@ -3542,7 +3542,7 @@
     },
     "ci": {
       "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
-      "aggregate_sha256": "2b140fe162c898692626e8359f2b27b7b8ecbaed310e46c5cf989e17d95f7df9",
+      "aggregate_sha256": "6cfb1d5be4ba5b166cdadc6f6c9d78c83ac1c35ea831ed9ad88c6350370be4da",
       "all_declared_gates_bound": true
     },
     "source_binding": {
@@ -3586,24 +3586,24 @@
       "Tests/Contract/Test-UETerrainImport.ps1": "c19b54d1eea4e17ce78cc03bfb6e61579deab42d39ea107152975e69410782ea"
     },
     "evidence_report_sha256": {
-      "Data/BuildBaseline/p1-02-package-v1.json": "14d2a4f0c95bca9ad5cf333a77f64e4dedab7c515f2f48a642d5d45aca5ebcec",
-      "Data/BuildBaseline/p1-05-package-v2.json": "66d78c417934adf0a136391277fddea8d2bcad9c871802ed8085cfcdd36d4a18",
-      "Data/BuildBaseline/p1-06-package-v3.json": "2f9ec08888f28007dff3d1f22fe71a8a9edecbeb84d6e90c37ac3addadbebc4f",
-      "Data/BuildBaseline/p1-07-package-pipeline.json": "223ea9fa29d0e03a656002e468c209de0fe9abf749af5ad84a7f7492f2f46a8f",
-      "Data/BuildBaseline/p1-08-package-normalized-tree.json": "201b6cc3fbd5447839fd17ed41363ad25192fa2880962e397fad10f5d4e8b8d1",
-      "Data/BuildBaseline/p1-03-legacy-table.json": "78546efb2589f5012f27721ca64443cb44c78380df4ce9d612757f2b985b28ef",
-      "Data/BuildBaseline/p1-13-qtx-texture.json": "bbb399d5d234f7419425bd7cd1081917f57ea63dbf936e97b78b73099c603a5e",
-      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "639768740025c924617037eccb22fad4afcc21494c4a8d7a82b86e6f94516e7c",
-      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "07b398a36c026f92a49d2904dd19cab856840dec37aa191ae7d032aa5f4cc9d6",
-      "Data/BuildBaseline/p1-16-anim-animation.json": "325f82266427548a55ce654ee95effb4249819b5aba36cb0f8d59ba28d20de86",
-      "Data/BuildBaseline/p1-17-ter-terrain.json": "cd4a874c86df2bcfbde47539a21416ead8aef2caecf88c16af9327436f0a4592",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0",
-      "Data/BuildBaseline/p1-22-ue-texture-import.json": "a899f7a65ccba2f08c3b5d2607ce85b3604c37f676b07b460195f6a625c6f46f",
-      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "1a1cec2275f29956cdd0478f3a9ffa3f92447d061dd008887d601a6854256d58",
-      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "306f9d6b359fdf83095a5d2b9d6d8b6c063daa0f34505bc3cc04b5e2d2567944",
-      "Data/BuildBaseline/p1-25-ue-animation-import.json": "f3c82da4d0822618a7953715eb5a091c6371606e8f5982fb02d658bdf4fba3d2",
-      "Data/BuildBaseline/p1-26-ue-terrain-import.json": "65ff0bab744a9fae09561cdeadf12539c6ce650624913c7c5c01f8668f33e3a4"
+      "Data/BuildBaseline/p1-02-package-v1.json": "3a2e3a20bdbeb4e5fe6c6259f9c04dfddea3027ce7b9dac4185b4126973d64c2",
+      "Data/BuildBaseline/p1-05-package-v2.json": "3bb79000854549ca93c8d5dd82cf4aa823c1e62a964cf46c53ad362d0f426fe9",
+      "Data/BuildBaseline/p1-06-package-v3.json": "a1ec7220338c58607107fcfe9d4efc1809af1920b8f298b24495f95e7ab6e2fe",
+      "Data/BuildBaseline/p1-07-package-pipeline.json": "7eb4577f3fbdc6fd3b44ec36296399781847a01bb9e2bdea32ca9057a288a488",
+      "Data/BuildBaseline/p1-08-package-normalized-tree.json": "e52547ee43085327f36eff1b08f73ef48747379b73a3959bb31a63ebcba8801b",
+      "Data/BuildBaseline/p1-03-legacy-table.json": "0b19613125fa5a550869bbe57c58ac8917b552f6e4026fb73a32ec1f3c66a98c",
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "def674d88aaf514dc92b268748b27a4166a2c21bc5ad3ab70adc78b7eef16554",
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "6aa2dc70b2995b0fd06ae28f937c1c15dde82c80d15ee227017e3def34125e57",
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "44a74d144ecab56cfc67c21353dc2febea3f32590468e761c16b03d16aee3949",
+      "Data/BuildBaseline/p1-16-anim-animation.json": "d173fd47a6a6e1524a47811b7cf8f435b38799d1e5a81e7693b205bdcaf30d17",
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "ccd5671aed35a6bf64718ed9bfb4672f2b0769367e9332767a6998a52cb0154d",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "5da818c53c140aa25195214f5ae042849068632ab2ff69ef7577f9497435a439",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "79fa690937ac29ae0c4ba13f0658bf53e0052bcfda449e57f0b474a4f2a3d407",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "4bcfa14fc95b6bccc2d7bacac4c70925e70523be426242f5bad069269f4da353",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "6de1a1bf14e21e498fdb29971ba664c587b0f7e8ab1c6d39547f0f2ca614f822",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "9c2c6d887a77df046d7556a801f7d478aa37e83efe2a27ce83753dd4f29e813d",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "f913603407e529a07d9fbc1fa49a6119fce346f71c5051ad3e36ced949e4c7a1",
+      "Data/BuildBaseline/p1-26-ue-terrain-import.json": "53357a249b8b435f117ad5e77ae3f6190dee88a3669fd3f36b2ce57293b4910b"
     },
     "suites": [
       {
@@ -3726,7 +3726,7 @@
   },
   "reference_formats": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:31.0278261+08:00",
+    "captured_utc": "2026-08-28T00:35:57.6360893+08:00",
     "result": "PASS",
     "task": "P1-04",
     "document_version": "0.1",
@@ -3747,8 +3747,8 @@
       "table": "67bd122bc59d2fcfd4ab0cee279944a97f1950d146253f063b0feb3f785320e9"
     },
     "input_report_sha256": {
-      "package": "14d2a4f0c95bca9ad5cf333a77f64e4dedab7c515f2f48a642d5d45aca5ebcec",
-      "table": "78546efb2589f5012f27721ca64443cb44c78380df4ce9d612757f2b985b28ef"
+      "package": "3a2e3a20bdbeb4e5fe6c6259f9c04dfddea3027ce7b9dac4185b4126973d64c2",
+      "table": "0b19613125fa5a550869bbe57c58ac8917b552f6e4026fb73a32ec1f3c66a98c"
     },
     "secret_material_embedded": false,
     "failure_count": 0,
@@ -3756,7 +3756,7 @@
   },
   "ci_authority_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:31.2049543+08:00",
+    "captured_utc": "2026-08-28T00:35:57.8036499+08:00",
     "result": "PASS",
     "state": "github_workflows_prepared_pending_external_authority",
     "required_check_count": 8,
@@ -3770,7 +3770,7 @@
   },
   "hosted_workflow_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:31.290377+08:00",
+    "captured_utc": "2026-08-28T00:35:57.9113253+08:00",
     "result": "PASS",
     "required_check_count": 8,
     "merge_workflow": ".github/workflows/p0-required-checks.yml",
@@ -3785,7 +3785,7 @@
   },
   "postgres_refresh_preflight": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:31.3682844+08:00",
+    "captured_utc": "2026-08-28T00:35:57.9833295+08:00",
     "result": "PASS",
     "fixture_count": 3,
     "source_mutation_performed": false,
@@ -3794,7 +3794,16 @@
   },
   "postgres_official_candidate": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:31.436877+08:00",
+    "captured_utc": "2026-08-28T00:35:58.0587344+08:00",
+    "result": "PASS",
+    "fixture_count": 3,
+    "source_mutation_performed": false,
+    "failure_count": 0,
+    "failures": []
+  },
+  "postgres_gosu_reachability": {
+    "schema_version": 1,
+    "captured_utc": "2026-08-28T00:35:58.2030535+08:00",
     "result": "PASS",
     "fixture_count": 3,
     "source_mutation_performed": false,
@@ -3917,7 +3926,7 @@
   },
   "backend_static_analysis": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:37.9147572+08:00",
+    "captured_utc": "2026-08-28T00:36:04.3553966+08:00",
     "result": "PASS_DIAGNOSTIC",
     "authoritative_release_analysis": false,
     "authority_note": "Host clang-tidy proves rule cleanliness; the locked Linux Clang 21 builder remains authoritative.",
@@ -3940,8 +3949,8 @@
     }
   },
   "supply_chain": {
-    "schema_version": 7,
-    "captured_utc": "2026-08-27T23:40:38.772172+08:00",
+    "schema_version": 8,
+    "captured_utc": "2026-08-28T00:36:05.1926989+08:00",
     "result": "PASS_WITH_PENDING_AUTHORITY",
     "release_authority": false,
     "image": {
@@ -3998,7 +4007,7 @@
     },
     "postgres_refresh_preflight": {
       "file": "Data/Security/p0-12-postgres-refresh-preflight.json",
-      "sha256": "1923572d0077b1e489c30fa3b5cbfb900dfef47c44d773c3fdea30ba994ab2fb",
+      "sha256": "a471849069f624ad109c546a3b0b44b43e23a6f25e2da1ab2507a81d87be5e68",
       "result": "PASS_DIAGNOSTIC",
       "status": "NO_REFRESH_AVAILABLE",
       "tag_manifest_changed": false,
@@ -4009,7 +4018,7 @@
     },
     "postgres_official_candidate": {
       "file": "Data/Security/p0-12-postgres-official-candidate-evaluation.json",
-      "sha256": "04b472b8230b62ff081c5c4bc8a9b6c410a898ff76074ee1e68b424deee16c80",
+      "sha256": "1aa9c38d04f938982a6f009e3e4115a8d6d165834100f5af158ffe8d817cc9f5",
       "result": "PASS_DIAGNOSTIC",
       "tag": "18.6-alpine3.23",
       "candidate_index_digest": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
@@ -4018,6 +4027,24 @@
       "inherited_high_or_critical": 22,
       "candidate_scan_claimed": false,
       "lock_update_performed": false,
+      "release_authority": false,
+      "bindings_verified": true
+    },
+    "postgres_gosu_reachability": {
+      "file": "Data/Security/p0-12-postgres-gosu-reachability-review.json",
+      "sha256": "fe54a53336a5acdcb7595127c7b1f2169d1f45a68a71de93556a6a28c71c5408",
+      "result": "PASS_DIAGNOSTIC",
+      "status": "REVIEW_COMPLETE_NO_SYMBOL_REACHABILITY_STILL_BLOCKING",
+      "risk_assessment": "reduced_reachability_not_zero_risk",
+      "mapped_blocking_findings": 22,
+      "symbol_reachable": 0,
+      "package_only": 1,
+      "module_only": 21,
+      "sarif_sha256": "eae6dd97284a30e394d59eb21c0d7f076e9458ed440d3386e6555285413a9352",
+      "official_osv_sha256": "7cd0f040d0f20a62a8535191c5078a0602fe21eeb8348ca61a3115aed239bea9",
+      "policy_blocking": true,
+      "waiver_state": "none",
+      "owner_approval": false,
       "release_authority": false,
       "bindings_verified": true
     },
@@ -4032,7 +4059,7 @@
     },
     "pending": [
       "Protected GitHub main and provider-generated results for all eight stable checks",
-      "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain an explicit component-specific time-bounded waiver after review",
+      "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain explicit owner approval for a component-specific time-bounded waiver; reachability review alone grants no exception",
       "The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image",
       "Exact locked builder manifest verified in GHCR",
       "Provision the labeled ephemeral UE 5.8 hosted runner",
@@ -4044,7 +4071,7 @@
   },
   "postgres_migration": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:41.7697907+08:00",
+    "captured_utc": "2026-08-28T00:36:08.2436654+08:00",
     "result": "PASS",
     "image": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
     "database_version": "18.6",
@@ -4061,15 +4088,15 @@
   },
   "backend_build": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:41:47.1446772+08:00",
+    "captured_utc": "2026-08-28T00:37:16.8250625+08:00",
     "result": "PASS_DIAGNOSTIC",
     "authoritative_release_build": false,
     "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
     "repository_layout": {
       "result": "PASS",
       "checked_source_files": 218,
-      "checked_size_files": 467,
-      "checked_utf8_lf_files": 488,
+      "checked_size_files": 469,
+      "checked_utf8_lf_files": 493,
       "failure_count": 0,
       "failures": []
     },
@@ -4092,13 +4119,13 @@
     "build": {
       "passed": true,
       "exit_code": 0,
-      "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/9] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[6/9] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[7/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[8/9] Linking CXX executable apps/gateway/tmxy-gateway\n[9/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/2 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/2 Test #2: foundation.redaction .............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
+      "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/9] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[6/9] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[7/9] Linking CXX executable apps/gateway/tmxy-gateway\n[8/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[9/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/2 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/2 Test #2: foundation.redaction .............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
       "stderr": ""
     }
   },
   "ue": {
     "schema_version": 1,
-    "captured_utc": "2026-08-27T23:40:30.4867426+08:00",
+    "captured_utc": "2026-08-28T00:35:57.1620579+08:00",
     "result": "PASS",
     "project": {
       "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
@@ -4142,8 +4169,8 @@
     "project_generation": {
       "passed": true,
       "exit_code": 0,
-      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 4.52 seconds",
-      "output_sha256": "b37f3ea3477163c84863c74bf8a01ac59a90c2db8141c417365bbc6bbfaee61c",
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.75 seconds",
+      "output_sha256": "40a7ee40b8260dcdd0128971c24889408a0b4ad5a950b930df10703315f6c5ae",
       "error": ""
     },
     "editor_build": {
@@ -4151,8 +4178,8 @@
       "passed": true,
       "exit_code": 0,
       "compiler_not_preferred_warning": true,
-      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.92 seconds",
-      "output_sha256": "3d2c161994c1f9db868385134188ef284fcc50e07fbfa550ae958b26d8d478fe",
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.86 seconds",
+      "output_sha256": "9552e3ee49830a0dd034297da414c720e5735a781d33980170e88a72bd33966e",
       "error": ""
     },
     "format": {
@@ -4175,7 +4202,7 @@
       "module_loaded": true,
       "golden_module_loaded": true,
       "importer_module_loaded": true,
-      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260827-154013224.log",
+      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260827-163539946.log",
       "process_exit_code": 0
     },
     "missing_paths": []

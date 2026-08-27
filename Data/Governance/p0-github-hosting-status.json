@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "captured_utc": "2026-08-27T19:20:48.0321429+00:00",
+  "captured_utc": "2026-08-27T19:55:38.7509285+00:00",
   "result": "BLOCKED_EXTERNAL_AUTHORITY",
   "completion_criteria_satisfied": false,
   "release_authority": false,
@@ -14,7 +14,7 @@
     "remote_url": "https://github.com/FaithandUnity/TMXY.git"
   },
   "source": {
-    "revision": "00c76ac845b263bb8114d70a68be22b9f784a7d1",
+    "revision": "a08a3d89767655d5c38d6cd94444ad4549f0e0e7",
     "branch": "build/p0-12-github-actions"
   },
   "branch_authority": {

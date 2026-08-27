@@ -26,6 +26,15 @@ tag is reported only as a candidate that still requires SBOM, hosted
 vulnerability, migration, and review qualification. The offline regression
 test covers unchanged, changed, and malformed upstream responses.
 
+`Test-PostgresOfficialCandidate.ps1` qualifies a separately tagged official
+PostgreSQL candidate far enough to reject obvious non-remediations without
+changing the lock. It binds the Docker Hub index and linux/amd64 manifest,
+runs isolated probes of both immutable local images, and compares the affected
+`gosu` binary by SHA-256. Byte-identical candidates inherit the recorded hosted
+blocker without being misrepresented as a new vulnerability scan. Changed bytes
+still require SBOM, hosted scanning, migration tests, full gates, and review.
+Its offline regression covers identical, changed, and malformed probe evidence.
+
 Hosted Trivy evidence is the vulnerability-policy input. The recorded
 PostgreSQL result remains blocked on 22 HIGH/CRITICAL findings; a new hosted run
 must verify the 314-component builder after build-only pip/setuptools removal.

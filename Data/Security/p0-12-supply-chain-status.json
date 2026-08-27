@@ -1,6 +1,6 @@
 {
-  "schema_version": 6,
-  "captured_utc": "2026-08-27T14:15:00.7496425+00:00",
+  "schema_version": 7,
+  "captured_utc": "2026-08-27T15:40:38.7721720+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -66,6 +66,20 @@
     "release_authority": false,
     "bindings_verified": true
   },
+  "postgres_official_candidate": {
+    "file": "Data/Security/p0-12-postgres-official-candidate-evaluation.json",
+    "sha256": "04b472b8230b62ff081c5c4bc8a9b6c410a898ff76074ee1e68b424deee16c80",
+    "result": "PASS_DIAGNOSTIC",
+    "tag": "18.6-alpine3.23",
+    "candidate_index_digest": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
+    "decision": "REJECTED_IDENTICAL_BLOCKING_COMPONENT",
+    "same_gosu_binary_sha256": true,
+    "inherited_high_or_critical": 22,
+    "candidate_scan_claimed": false,
+    "lock_update_performed": false,
+    "release_authority": false,
+    "bindings_verified": true
+  },
   "hosted_ci": {
     "provider": "github",
     "repository": "FaithandUnity/TMXY",
@@ -78,6 +92,7 @@
   "pending": [
     "Protected GitHub main and provider-generated results for all eight stable checks",
     "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain an explicit component-specific time-bounded waiver after review",
+    "The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image",
     "Exact locked builder manifest verified in GHCR",
     "Provision the labeled ephemeral UE 5.8 hosted runner",
     "Signed release provenance, OCI attestation, and 365-day immutable retention"

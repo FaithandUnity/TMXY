@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T14:14:53.6672382+00:00",
+  "captured_utc": "2026-08-27T15:40:30.7102133+00:00",
   "result": "PASS",
   "task": "P1-23",
   "completion_criteria_satisfied": true,
@@ -66,14 +66,14 @@
     "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-23-static-mesh-report.json",
     "generated_report_sha256": "a7ddfce428543ffd1504203c2f279100bbebbc48f950996cfd6bbd68c322bedf",
     "generated_report_schema_passed": true,
-    "ue_report_sha256": "476f818aac01517543a49dbcf9f7343183751c152154eea4d473c9b8ae8bb92a"
+    "ue_report_sha256": "12f3b7ef8ea1adbf46af0224ab07d4228aac00378827e3bd3669ee33b9b5875e"
   },
   "dependency_report_sha256": {
-    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "4a5cecb66671d0b8a51ab1df292af22b0d606086d3fce89e95b54d64cb4492fa",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "9f2781b14f8ff396759a0c3b59eac1b50cea7e0f2acd27451898ac9a082fda52",
-    "Data/BuildBaseline/p1-20-ue-golden-host.json": "5933b0d27360bb6a44157b0e48f762818728d20a9216984b5e97aa01d8ae4c3c",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8047cb4a95d6591698b4c54c8831e2319830bf60dcb80c6aeff7ec183eccc795",
-    "Data/BuildBaseline/p1-22-ue-texture-import.json": "978b09c2e2b92244cf2286e0687345752727250ee7204c6b948922c790240956"
+    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "639768740025c924617037eccb22fad4afcc21494c4a8d7a82b86e6f94516e7c",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "12302d6e5ccf673830a974ac3040443f6daceda90eff67e968d5f008cfa91f8a",
+    "Data/BuildBaseline/p1-20-ue-golden-host.json": "33f181a8f034f9d2993fcd2b27a91b1141bd82495ba20103959392f93558413f",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "8efe10f2a939def801c891f8fc5aab3b0cc25635f6f50cd9354e570739a948f0",
+    "Data/BuildBaseline/p1-22-ue-texture-import.json": "a899f7a65ccba2f08c3b5d2607ce85b3604c37f676b07b460195f6a625c6f46f"
   },
   "failure_count": 0,
   "failures": []

@@ -14,6 +14,7 @@ $hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.j
 $licenseEvidencePath = Join-Path $root 'Data\Security\p0-12-license-evidence.json'
 $postgresDispositionPath = Join-Path $root 'Data\Security\p0-12-postgres-vulnerability-disposition.json'
 $postgresRefreshPath = Join-Path $root 'Data\Security\p0-12-postgres-refresh-preflight.json'
+$postgresCandidatePath = Join-Path $root 'Data\Security\p0-12-postgres-official-candidate-evaluation.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -81,14 +82,33 @@ $postgresRefreshBound = [string]$postgresRefresh.result -eq 'PASS_DIAGNOSTIC' -a
     ($refreshStatus -eq 'CANDIDATE_AVAILABLE_REQUIRES_FULL_QUALIFICATION' -and
         $refreshDigestChanged -and
         [string]$postgresRefresh.observation.observed_index_digest -match '^sha256:[a-f0-9]{64}$'))
+$postgresCandidate = Get-Content -LiteralPath $postgresCandidatePath -Raw | ConvertFrom-Json
+$postgresCandidateSha = (Get-FileHash -LiteralPath $postgresCandidatePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$postgresCandidateBound = [string]$postgresCandidate.result -eq 'PASS_DIAGNOSTIC' -and
+    -not [bool]$postgresCandidate.release_authority -and
+    -not [bool]$postgresCandidate.candidate_pull_performed -and
+    -not [bool]$postgresCandidate.source_mutation_performed -and
+    [string]$postgresCandidate.decision.status -eq 'REJECTED_IDENTICAL_BLOCKING_COMPONENT' -and
+    -not [bool]$postgresCandidate.decision.lock_update_performed -and
+    -not [bool]$postgresCandidate.decision.automatic_lock_update_allowed -and
+    [bool]$postgresCandidate.comparison.same_gosu_binary_sha256 -and
+    [bool]$postgresCandidate.security_inference.candidate_inherits_recorded_blocker -and
+    -not [bool]$postgresCandidate.security_inference.candidate_scan_claimed -and
+    [int]$postgresCandidate.security_inference.inherited_high_or_critical -eq
+        [int]$postgresDisposition.blocking_findings.total -and
+    [string]$postgresCandidate.locked_probe.image_id -eq $expectedImageId -and
+    [string]$postgresCandidate.bindings.vulnerability_disposition_sha256 -eq $dispositionSha -and
+    [string]$postgresCandidate.bindings.toolchain_lock_sha256 -eq $lockSha -and
+    [string]$postgresCandidate.bindings.compose_sha256 -eq $composeSha -and
+    [string]$postgresCandidate.bindings.refresh_preflight_sha256 -eq $postgresRefreshSha
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
 $passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and
     $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC' -and
-    $postgresDispositionBound -and $postgresRefreshBound
+    $postgresDispositionBound -and $postgresRefreshBound -and $postgresCandidateBound
 $report = [pscustomobject][ordered]@{
-    schema_version = 6
+    schema_version = 7
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -157,6 +177,20 @@ $report = [pscustomobject][ordered]@{
         release_authority = [bool]$postgresRefresh.release_authority
         bindings_verified = $postgresRefreshBound
     }
+    postgres_official_candidate = [pscustomobject][ordered]@{
+        file = 'Data/Security/p0-12-postgres-official-candidate-evaluation.json'
+        sha256 = $postgresCandidateSha
+        result = [string]$postgresCandidate.result
+        tag = [string]$postgresCandidate.official_candidate.tag
+        candidate_index_digest = [string]$postgresCandidate.official_candidate.observed_index_digest
+        decision = [string]$postgresCandidate.decision.status
+        same_gosu_binary_sha256 = [bool]$postgresCandidate.comparison.same_gosu_binary_sha256
+        inherited_high_or_critical = [int]$postgresCandidate.security_inference.inherited_high_or_critical
+        candidate_scan_claimed = [bool]$postgresCandidate.security_inference.candidate_scan_claimed
+        lock_update_performed = [bool]$postgresCandidate.decision.lock_update_performed
+        release_authority = [bool]$postgresCandidate.release_authority
+        bindings_verified = $postgresCandidateBound
+    }
     hosted_ci = [pscustomobject][ordered]@{
         provider = [string]$hostingStatus.provider.name
         repository = [string]$hostingStatus.provider.repository
@@ -169,6 +203,7 @@ $report = [pscustomobject][ordered]@{
     pending = @(
         'Protected GitHub main and provider-generated results for all eight stable checks',
         'Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain an explicit component-specific time-bounded waiver after review',
+        'The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image',
         'Exact locked builder manifest verified in GHCR',
         'Provision the labeled ephemeral UE 5.8 hosted runner',
         'Signed release provenance, OCI attestation, and 365-day immutable retention'

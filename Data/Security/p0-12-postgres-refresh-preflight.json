@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-27T14:01:25.9840031+00:00",
+  "result": "PASS_DIAGNOSTIC",
+  "release_authority": false,
+  "network_mode": "read_only_https",
+  "component": {
+    "role": "postgres-runtime",
+    "tag": "18.6-alpine",
+    "locked_reference": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "locked_index_digest": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2"
+  },
+  "observation": {
+    "source": "https://hub.docker.com/v2/repositories/library/postgres/tags/18.6-alpine",
+    "observed_tag": "18.6-alpine",
+    "observed_index_digest": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "linux_amd64_manifest_digest": "sha256:63bdc97d67b5133bf0e5ebd500bec6d046fa851dc81340d838f0347e616107e8",
+    "tag_last_pushed_utc": "2026-08-15T22:08:36.1916180+00:00",
+    "tag_manifest_changed": false
+  },
+  "decision": {
+    "status": "NO_REFRESH_AVAILABLE",
+    "lock_update_performed": false,
+    "automatic_lock_update_allowed": false,
+    "next_step": "Keep the current digest locked and repeat this read-only observation when upstream publishes a new manifest."
+  },
+  "bindings": {
+    "vulnerability_disposition": "Data/Security/p0-12-postgres-vulnerability-disposition.json",
+    "vulnerability_disposition_sha256": "ceb3e2ff467d5e40b86a454118bb3d45b1fa25224b60cbd2df1e5652f45bfd79",
+    "toolchain_lock": "Data/Toolchain/toolchain.lock.json",
+    "toolchain_lock_sha256": "e1ce126e43cb9625836f4ca37287e41a9c647897744b02a90dc298d6cf6fa496",
+    "compose": "Deploy/compose/compose.yaml",
+    "compose_sha256": "0bd6f2d8f1865b3fc8d6b11e674fc613db13f055f701d89eab5d52b30f4612c6"
+  },
+  "failure_count": 0,
+  "failures": []
+}

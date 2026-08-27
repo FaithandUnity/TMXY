@@ -13,6 +13,7 @@ $builderSbomPath = Join-Path $root 'Data\Security\tmxy-backend-builder.sbom.cdx.
 $hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.json'
 $licenseEvidencePath = Join-Path $root 'Data\Security\p0-12-license-evidence.json'
 $postgresDispositionPath = Join-Path $root 'Data\Security\p0-12-postgres-vulnerability-disposition.json'
+$postgresRefreshPath = Join-Path $root 'Data\Security\p0-12-postgres-refresh-preflight.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -59,14 +60,35 @@ $postgresDispositionBound = [string]$postgresDisposition.result -eq 'BLOCKED' -a
     [int]$postgresDisposition.blocking_findings.total -gt 0 -and
     [string]$postgresDisposition.review.waiver_state -eq 'none'
 $hostedDatabaseUpdatedUtc = ([DateTimeOffset]$postgresDisposition.hosted_scan.database_updated_utc).ToUniversalTime().ToString('o')
+$postgresRefresh = Get-Content -LiteralPath $postgresRefreshPath -Raw | ConvertFrom-Json
+$postgresRefreshSha = (Get-FileHash -LiteralPath $postgresRefreshPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$dispositionSha = (Get-FileHash -LiteralPath $postgresDispositionPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$lockSha = (Get-FileHash -LiteralPath $lockPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$composePath = Join-Path $root 'Deploy\compose\compose.yaml'
+$composeSha = (Get-FileHash -LiteralPath $composePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$refreshStatus = [string]$postgresRefresh.decision.status
+$refreshDigestChanged = [bool]$postgresRefresh.observation.tag_manifest_changed
+$postgresRefreshBound = [string]$postgresRefresh.result -eq 'PASS_DIAGNOSTIC' -and
+    -not [bool]$postgresRefresh.release_authority -and
+    -not [bool]$postgresRefresh.decision.lock_update_performed -and
+    -not [bool]$postgresRefresh.decision.automatic_lock_update_allowed -and
+    [string]$postgresRefresh.component.locked_index_digest -eq $expectedImageId -and
+    [string]$postgresRefresh.bindings.vulnerability_disposition_sha256 -eq $dispositionSha -and
+    [string]$postgresRefresh.bindings.toolchain_lock_sha256 -eq $lockSha -and
+    [string]$postgresRefresh.bindings.compose_sha256 -eq $composeSha -and
+    (($refreshStatus -eq 'NO_REFRESH_AVAILABLE' -and -not $refreshDigestChanged -and
+        [string]$postgresRefresh.observation.observed_index_digest -eq $expectedImageId) -or
+    ($refreshStatus -eq 'CANDIDATE_AVAILABLE_REQUIRES_FULL_QUALIFICATION' -and
+        $refreshDigestChanged -and
+        [string]$postgresRefresh.observation.observed_index_digest -match '^sha256:[a-f0-9]{64}$'))
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
 $passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and
     $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC' -and
-    $postgresDispositionBound
+    $postgresDispositionBound -and $postgresRefreshBound
 $report = [pscustomobject][ordered]@{
-    schema_version = 5
+    schema_version = 6
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -123,6 +145,17 @@ $report = [pscustomobject][ordered]@{
         disposition = 'Data/Security/p0-12-postgres-vulnerability-disposition.json'
         disposition_bound = $postgresDispositionBound
         note = 'Hosted Trivy evidence is authoritative for the recorded PostgreSQL blocker; unauthenticated local Docker Scout remains supplementary only.'
+    }
+    postgres_refresh_preflight = [pscustomobject][ordered]@{
+        file = 'Data/Security/p0-12-postgres-refresh-preflight.json'
+        sha256 = $postgresRefreshSha
+        result = [string]$postgresRefresh.result
+        status = $refreshStatus
+        tag_manifest_changed = $refreshDigestChanged
+        observed_index_digest = [string]$postgresRefresh.observation.observed_index_digest
+        lock_update_performed = [bool]$postgresRefresh.decision.lock_update_performed
+        release_authority = [bool]$postgresRefresh.release_authority
+        bindings_verified = $postgresRefreshBound
     }
     hosted_ci = [pscustomobject][ordered]@{
         provider = [string]$hostingStatus.provider.name

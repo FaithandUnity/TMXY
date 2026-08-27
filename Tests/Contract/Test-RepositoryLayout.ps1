@@ -200,6 +200,7 @@ $requiredFiles = @(
     'Tests/CI/Test-HostedPullRequestPolicy.ps1',
     'Tests/CI/Test-HostedSupplyChainPolicy.ps1',
     'Tests/CI/Test-HostedWorkflowContract.ps1',
+    'Tests/CI/Test-PostgresRefreshPreflight.ps1',
     'Tests/Quality/Test-BackendStaticAnalysis.ps1',
     'Tests/Review/New-P0ReadinessReport.ps1',
     'Tests/Integration/Test-PostgresMigration.ps1',
@@ -309,6 +310,8 @@ $requiredFiles = @(
     'Tools/TMXY.SupplyChain/New-HostedVulnerabilitySummary.ps1',
     'Tools/TMXY.SupplyChain/New-LicenseEvidence.ps1',
     'Tools/TMXY.SupplyChain/Test-LocalImageEvidence.ps1',
+    'Tools/TMXY.SupplyChain/Test-PostgresRefreshPreflight.ps1',
+    'Data/Security/p0-12-postgres-refresh-preflight.json',
     'Tools/TMXY.GitHub/Get-GitHubHostedCIStatus.ps1',
     'Tools/TMXY.GitHub/README.md',
     'Tools/TMXY.Toolchain/Test-RegistryPreflight.ps1'

@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T12:03:20.2246815+00:00",
+  "captured_utc": "2026-08-27T14:09:39.2802937+00:00",
   "result": "PASS",
   "task": "P1-07",
   "source_file_count": 22,
   "source_sha256": "38e4977ae64e1cfb743b5f3533ab7642c11b28cdb7ad8eb819cec6e4856bb484",
   "input_reports": {
-    "package_v2_sha256": "09c611be5714ba524378f61ba0263fb7ebeb4ecd5c6897d7b48f4c1983e71282",
-    "package_v3_sha256": "1f51bc5c0f10f732031056a621f841ff20b289479e5f515a2ef1c90dcdf15364"
+    "package_v2_sha256": "f14a43578f894bc6d6e15f49fa9a408cacf607fd080b018bc7f7ae09bfb1bbbb",
+    "package_v3_sha256": "a6a6bf855b53a6152af1a7e82393b6cdd3a2301d53d61480ce37e8cd6efe75ab"
   },
   "pipeline": [
     "read-and-validate-outer-header",
@@ -58,6 +58,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 87,
-    "output_sha256": "cdea64d2349e5c553bffbd0256fca10d020d9e27f26b66c2525b6f343a97d0b7"
+    "output_sha256": "b871321d50a12a2a01c04fcdb27a6e6528754297a629f80d7813e84b1a0c954b"
   }
 }

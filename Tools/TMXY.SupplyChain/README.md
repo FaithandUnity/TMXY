@@ -18,6 +18,14 @@ reports, the exact source revision and GitHub run, and the database identity.
 It fails closed unless the identity includes scanner/database versions plus
 `UpdatedAt` and `DownloadedAt`; the raw reports remain short-lived artifacts.
 
+`Test-PostgresRefreshPreflight.ps1` performs one read-only HTTPS observation of
+the exact official `postgres:18.6-alpine` Docker Hub tag, validates the response,
+and compares its index digest with the disposition, toolchain lock, and compose
+binding. It never pulls, changes a lock, or grants release authority. A changed
+tag is reported only as a candidate that still requires SBOM, hosted
+vulnerability, migration, and review qualification. The offline regression
+test covers unchanged, changed, and malformed upstream responses.
+
 Hosted Trivy evidence is the vulnerability-policy input. The recorded
 PostgreSQL result remains blocked on 22 HIGH/CRITICAL findings; a new hosted run
 must verify the 314-component builder after build-only pip/setuptools removal.

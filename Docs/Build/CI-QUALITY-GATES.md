@@ -60,3 +60,8 @@ has a local CycloneDX 1.5 SBOM with 316 components; hosted vulnerability policy
 and signed provenance still require the selected CI authority. Application Conan
 profile lockfiles begin in P4 with the first real external C++ dependency; an
 empty placeholder lock is prohibited.
+
+Private pull-request runs retain the fixed Trivy JSON and database-identity
+files for seven days even when vulnerability or license policy fails. This
+short-lived diagnostic artifact contains no configured Secret and is evidence
+for remediation only; it is not the required 365-day immutable release record.

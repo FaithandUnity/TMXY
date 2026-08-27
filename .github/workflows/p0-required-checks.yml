@@ -292,6 +292,17 @@ jobs:
             -PostgresVulnerabilityReport "$env:RUNNER_TEMP/postgres-vulnerabilities.json" `
             -BuilderVulnerabilityReport "$env:RUNNER_TEMP/builder-vulnerabilities.json" `
             -VulnerabilityDatabaseIdentity "$env:RUNNER_TEMP/vulnerability-database-identity.txt"
+      - name: Retain pull-request diagnostic scan evidence
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: p0-12-pr-supply-chain-${{ github.event.pull_request.number }}-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/postgres-vulnerabilities.json
+            ${{ runner.temp }}/builder-vulnerabilities.json
+            ${{ runner.temp }}/vulnerability-database-identity.txt
+          if-no-files-found: warn
+          retention-days: 7
       - name: Retain diagnostic scan evidence within the current plan limit
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

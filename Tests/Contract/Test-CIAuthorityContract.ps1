@@ -10,6 +10,7 @@ $contractPath = Join-Path $root 'Data\Governance\p0-hosted-ci-contract.json'
 $hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.json'
 $lockPath = Join-Path $root 'Data\Toolchain\toolchain.lock.json'
 $postgresSbomPath = Join-Path $root 'Data\Security\postgres-18.6.sbom.cdx.json'
+$licenseEvidencePath = Join-Path $root 'Data\Security\p0-12-license-evidence.json'
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Assert-Contract {
@@ -24,6 +25,7 @@ $contract = Get-Content -LiteralPath $contractPath -Raw -Encoding UTF8 | Convert
 $hostingStatus = Get-Content -LiteralPath $hostingStatusPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $postgresSbomSha = (Get-FileHash -LiteralPath $postgresSbomPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$licenseEvidenceSha = (Get-FileHash -LiteralPath $licenseEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 Assert-Contract ([int]$contract.schema_version -eq 2) 'CI authority contract schema must be 2.'
 Assert-Contract ([string]$contract.state -eq 'github_workflows_prepared_pending_external_authority') `
@@ -93,6 +95,11 @@ Assert-Contract (
 Assert-Contract (
     [string]$contract.supply_chain.postgres_sbom_sha256 -eq $postgresSbomSha) `
     'PostgreSQL SBOM hash does not match the local evidence.'
+Assert-Contract (
+    [string]$contract.supply_chain.license_evidence_path -eq
+        'Data/Security/p0-12-license-evidence.json' -and
+    [string]$contract.supply_chain.license_evidence_sha256 -eq $licenseEvidenceSha) `
+    'Supplemental license evidence does not match the hosted contract.'
 Assert-Contract ([bool]$contract.supply_chain.authenticated_or_approved_offline_vulnerability_policy_required) `
     'Hosted vulnerability policy must be required.'
 Assert-Contract ([bool]$contract.supply_chain.license_policy_required) `

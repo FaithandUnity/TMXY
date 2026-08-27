@@ -20,7 +20,7 @@ concurrency:
 
 env:
   TMXY_BACKEND_BUILDER_NAME: ghcr.io/faithandunity/tmxy-backend-builder
-  TMXY_BACKEND_BUILDER_DIGEST: sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559
+  TMXY_BACKEND_BUILDER_DIGEST: sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1
 
 jobs:
   release_provenance:
@@ -79,4 +79,3 @@ jobs:
           subject-name: ${{ env.TMXY_BACKEND_BUILDER_NAME }}
           subject-digest: ${{ env.TMXY_BACKEND_BUILDER_DIGEST }}
           push-to-registry: true
-

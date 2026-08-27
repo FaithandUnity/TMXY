@@ -24,8 +24,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TMXY_BACKEND_BUILDER_IMAGE: ghcr.io/faithandunity/tmxy-backend-builder@sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559
-  TMXY_BACKEND_BUILDER_DIGEST: sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559
+  TMXY_BACKEND_BUILDER_IMAGE: ghcr.io/faithandunity/tmxy-backend-builder@sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1
+  TMXY_BACKEND_BUILDER_DIGEST: sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1
 
 jobs:
   policy_repository:
@@ -277,7 +277,21 @@ jobs:
             --format json --exit-code 0 \
             --output "${RUNNER_TEMP}/builder-vulnerabilities.json" \
             Data/Security/tmxy-backend-builder.sbom.cdx.json
-          trivy --version > "${RUNNER_TEMP}/vulnerability-database-identity.txt"
+          trivy --version --cache-dir "${cache_dir}" \
+            > "${RUNNER_TEMP}/vulnerability-database-identity.txt"
+      - name: Create sanitized vulnerability summary
+        shell: pwsh
+        run: |
+          & "$env:GITHUB_WORKSPACE/Tools/TMXY.SupplyChain/New-HostedVulnerabilitySummary.ps1" `
+            -PostgresVulnerabilityReport "$env:RUNNER_TEMP/postgres-vulnerabilities.json" `
+            -BuilderVulnerabilityReport "$env:RUNNER_TEMP/builder-vulnerabilities.json" `
+            -VulnerabilityDatabaseIdentity "$env:RUNNER_TEMP/vulnerability-database-identity.txt" `
+            -OutputPath "$env:RUNNER_TEMP/hosted-vulnerability-summary.json" `
+            -Repository '${{ github.repository }}' `
+            -RunId '${{ github.run_id }}' `
+            -RunAttempt '${{ github.run_attempt }}' `
+            -SourceRevision '${{ github.sha }}' `
+            -EventName '${{ github.event_name }}'
       - name: Enforce vulnerability and complete-license policy
         shell: pwsh
         run: |
@@ -301,6 +315,7 @@ jobs:
             ${{ runner.temp }}/postgres-vulnerabilities.json
             ${{ runner.temp }}/builder-vulnerabilities.json
             ${{ runner.temp }}/vulnerability-database-identity.txt
+            ${{ runner.temp }}/hosted-vulnerability-summary.json
           if-no-files-found: warn
           retention-days: 7
       - name: Retain diagnostic scan evidence within the current plan limit
@@ -312,6 +327,7 @@ jobs:
             ${{ runner.temp }}/postgres-vulnerabilities.json
             ${{ runner.temp }}/builder-vulnerabilities.json
             ${{ runner.temp }}/vulnerability-database-identity.txt
+            ${{ runner.temp }}/hosted-vulnerability-summary.json
           if-no-files-found: error
           retention-days: 90
 

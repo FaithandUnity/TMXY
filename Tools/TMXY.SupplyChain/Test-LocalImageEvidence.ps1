@@ -11,6 +11,7 @@ $lockPath = Join-Path $root 'Data\Toolchain\toolchain.lock.json'
 $postgresSbomPath = Join-Path $root 'Data\Security\postgres-18.6.sbom.cdx.json'
 $builderSbomPath = Join-Path $root 'Data\Security\tmxy-backend-builder.sbom.cdx.json'
 $hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.json'
+$licenseEvidencePath = Join-Path $root 'Data\Security\p0-12-license-evidence.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -46,12 +47,16 @@ $builderSbomVerified = [string]$builderSbom.bomFormat -eq 'CycloneDX' -and
     $builderSbomSha -eq [string]$lock.backend_toolchain.qualification.sbom_sha256 -and
     $builderComponentCount -eq [int]$lock.backend_toolchain.qualification.sbom_component_count
 $hostingStatus = Get-Content -LiteralPath $hostingStatusPath -Raw | ConvertFrom-Json
+$licensePolicy = (& (Join-Path $root 'Tests\CI\Test-HostedSupplyChainPolicy.ps1') `
+        -RebuildRoot $root -Mode ContractOnly) | ConvertFrom-Json
+$licenseEvidenceSha = (Get-FileHash -LiteralPath $licenseEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
-$passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and $builderSbomVerified
+$passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and
+    $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC'
 $report = [pscustomobject][ordered]@{
-    schema_version = 3
+    schema_version = 4
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -67,7 +72,8 @@ $report = [pscustomobject][ordered]@{
         format = [string]$postgresSbom.bomFormat
         spec_version = [string]$postgresSbom.specVersion
         component_count = $postgresComponentCount
-        components_with_license_evidence = $postgresLicensedComponentCount
+        components_with_embedded_license_evidence = $postgresLicensedComponentCount
+        components_with_license_evidence = [int]$licensePolicy.sbom.postgres_components_with_license_evidence
         locally_verified = $postgresSbomVerified
     }
     backend_builder = [pscustomobject][ordered]@{
@@ -83,9 +89,19 @@ $report = [pscustomobject][ordered]@{
             format = [string]$builderSbom.bomFormat
             spec_version = [string]$builderSbom.specVersion
             component_count = $builderComponentCount
-            components_with_license_evidence = $builderLicensedComponentCount
+            components_with_embedded_license_evidence = $builderLicensedComponentCount
+            components_with_license_evidence = [int]$licensePolicy.sbom.builder_components_with_license_evidence
             locally_verified = $builderSbomVerified
         }
+    }
+    license_evidence = [pscustomobject][ordered]@{
+        file = 'Data/Security/p0-12-license-evidence.json'
+        sha256 = $licenseEvidenceSha
+        result = [string]$licensePolicy.result
+        component_complete = (
+            [int]$licensePolicy.sbom.postgres_components_with_license_evidence -eq $postgresComponentCount -and
+            [int]$licensePolicy.sbom.builder_components_with_license_evidence -eq $builderComponentCount)
+        release_authority = $false
     }
     scanner = [pscustomobject][ordered]@{
         docker_scout_version = $scoutVersion
@@ -104,7 +120,6 @@ $report = [pscustomobject][ordered]@{
     pending = @(
         'Protected GitHub main and provider-generated results for all eight stable checks',
         'Authenticated or approved hosted vulnerability database evidence for both locked SBOMs',
-        'Component-complete license evidence or approved component-specific waivers',
         'Exact locked builder manifest verified in GHCR',
         'Signed release provenance, OCI attestation, and 365-day immutable retention'
     )

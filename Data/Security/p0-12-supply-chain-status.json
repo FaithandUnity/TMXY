@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "captured_utc": "2026-08-26T23:32:48.4439185+00:00",
+  "schema_version": 4,
+  "captured_utc": "2026-08-27T03:30:44.7209964+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -15,25 +15,34 @@
     "format": "CycloneDX",
     "spec_version": "1.5",
     "component_count": 77,
-    "components_with_license_evidence": 70,
+    "components_with_embedded_license_evidence": 70,
+    "components_with_license_evidence": 77,
     "locally_verified": true
   },
   "backend_builder": {
     "image": {
       "reference": "tmxy-backend-builder:p0-08",
-      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "expected_id": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
+      "actual_id": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
       "locally_verified": true
     },
     "sbom": {
       "file": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
-      "sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+      "sha256": "26d60ca665ae51927a8b32529e2b12c89f099fa19e7e99d5753c0e556e333d2d",
       "format": "CycloneDX",
       "spec_version": "1.5",
-      "component_count": 316,
-      "components_with_license_evidence": 267,
+      "component_count": 328,
+      "components_with_embedded_license_evidence": 277,
+      "components_with_license_evidence": 328,
       "locally_verified": true
     }
+  },
+  "license_evidence": {
+    "file": "Data/Security/p0-12-license-evidence.json",
+    "sha256": "f12faa3701fff5261659721a3e24b25cd317cdf0686eabc835c3c1a2ef423fd3",
+    "result": "PASS_DIAGNOSTIC",
+    "component_complete": true,
+    "release_authority": false
   },
   "scanner": {
     "docker_scout_version": "v1.24.0",
@@ -52,7 +61,6 @@
   "pending": [
     "Protected GitHub main and provider-generated results for all eight stable checks",
     "Authenticated or approved hosted vulnerability database evidence for both locked SBOMs",
-    "Component-complete license evidence or approved component-specific waivers",
     "Exact locked builder manifest verified in GHCR",
     "Signed release provenance, OCI attestation, and 365-day immutable retention"
   ],

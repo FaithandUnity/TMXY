@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T23:28:24.9722493+00:00",
+  "captured_utc": "2026-08-27T03:25:38.2204588+00:00",
   "result": "PASS",
   "task": "P1-08",
   "source_file_count": 22,
@@ -12,10 +12,10 @@
     "passed": true
   },
   "dependency_report_sha256": {
-    "p1-02-package-v1.json": "f5ff75a7c23aeaf89d329b1cd82a4f6eef5b64beb26ee3fa1270ee64f4e774c4",
-    "p1-05-package-v2.json": "06d9ca706739c5b143be342c3416ef114f85223a04cf18a2e91412eb98624156",
-    "p1-06-package-v3.json": "63e7680e8cd1f62171c12d300629fb63b28f87b18ca01cf5230558e2c03d6d88",
-    "p1-07-package-pipeline.json": "1d6c62e6b89b34f05789207c30ec14621366e790edf254d276bda15937cfedd9"
+    "p1-02-package-v1.json": "a5b9d20cd07b55d4490bb799cd7bd712da93e5726191290350b9b6a74181c23d",
+    "p1-05-package-v2.json": "761f66f9b323a9c728029fc59d2053145e29340fbda47682c3144fab28caf8dd",
+    "p1-06-package-v3.json": "780870f3072b4d0d1f09b74dbe24890804a53eb7bb22a6ee8c39f7655d8fe707",
+    "p1-07-package-pipeline.json": "0233e136003b82f321c2c197f42f674068c8f36040c523a4ebd34ce82957c0a4"
   },
   "semantic_states": {
     "names_and_classes": "opaque-bytes-hex",
@@ -42,8 +42,8 @@
   },
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
+    "actual_id": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
     "user": "tmxy"
   },
   "isolation": {
@@ -67,6 +67,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 87,
-    "output_sha256": "92e177854135c212c2a1962cb948da7cb4b7820c04827da65b84bdf5c23db9d3"
+    "output_sha256": "1d0cee05a7b092a558368022a9d46d0ce612e909ea15b0b333fc042331c7c493"
   }
 }

@@ -95,6 +95,11 @@ Assert-HostedContract ($merge -match "github\.event_name == 'pull_request' && al
 Assert-HostedContract ($merge -match 'aquasecurity/setup-trivy@e6c2c5e321ed9123bda567646e2f96565e34abe1' -and
     $merge -match 'version:\s*v0\.74\.0') `
     'Hosted vulnerability scanning must use the reviewed setup action and available Trivy release.'
+Assert-HostedContract ($merge -match 'trivy --version --cache-dir "\$\{cache_dir\}"') `
+    'Hosted vulnerability identity must bind the database cache used by both scans.'
+Assert-HostedContract ($merge -match 'New-HostedVulnerabilitySummary\.ps1' -and
+    ([regex]::Matches($merge, 'hosted-vulnerability-summary\.json').Count -ge 3)) `
+    'Hosted scans must create and retain a sanitized run-bound vulnerability summary.'
 
 $builderDigest = if ($null -ne $contract) {
     [string]$contract.build_authority.backend_builder_digest
@@ -102,6 +107,10 @@ $builderDigest = if ($null -ne $contract) {
 else { '' }
 Assert-HostedContract ($builderDigest -match '^sha256:[a-f0-9]{64}$') `
     'Hosted contract must carry a valid locked backend builder digest.'
+Assert-HostedContract ([string]$contract.supply_chain.vulnerability_scanner -eq 'trivy' -and
+    [string]$contract.supply_chain.vulnerability_scanner_version -eq '0.74.0' -and
+    [int]$contract.supply_chain.vulnerability_database_max_age_hours -eq 48) `
+    'Hosted contract must bind the scanner version and maximum vulnerability database age.'
 Assert-HostedContract ($merge.Contains($builderDigest) -and $release.Contains($builderDigest)) `
     'Both hosted workflows must bind the exact backend builder digest.'
 

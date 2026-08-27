@@ -59,13 +59,18 @@
   },
   "build_authority": {
     "backend_target": "linux/amd64",
-    "backend_builder_digest": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "backend_builder_digest": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
     "client_engine": "5.8.2",
     "client_platform": "Win64"
   },
   "supply_chain": {
-    "backend_builder_sbom_sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+    "backend_builder_sbom_sha256": "26d60ca665ae51927a8b32529e2b12c89f099fa19e7e99d5753c0e556e333d2d",
     "postgres_sbom_sha256": "880bb2df9d3036addef531e49f6ce2e4ae8e92dcfbe13d1a4097980294893b37",
+    "vulnerability_scanner": "trivy",
+    "vulnerability_scanner_version": "0.74.0",
+    "vulnerability_database_max_age_hours": 48,
+    "license_evidence_path": "Data/Security/p0-12-license-evidence.json",
+    "license_evidence_sha256": "f12faa3701fff5261659721a3e24b25cd317cdf0686eabc835c3c1a2ef423fd3",
     "authenticated_or_approved_offline_vulnerability_policy_required": true,
     "license_policy_required": true,
     "signed_provenance_required": true,

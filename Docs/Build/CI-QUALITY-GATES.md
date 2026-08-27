@@ -40,7 +40,7 @@ must never bypass configure, dependency verification, tests, or scanning.
 GitHub provider selection and workflow source are no longer pending. Protected
 branch enforcement, sufficient independent reviewers, an ephemeral UE 5.8.2
 runner, publication of the exact locked builder manifest, approved vulnerability
-and license-policy data, signed provenance/OCI attestation, and 365-day immutable
+results, signed provenance/OCI attestation, and 365-day immutable
 retention remain blocking P0-12 items. PostgreSQL
 Migration is integrated and the source-bound MSVC 14.51 waiver is checked on
 every local aggregate run. Local GCC, host clang-tidy, and UE evidence are
@@ -53,10 +53,14 @@ These facts are captured without credentials in
 `Data/Governance/p0-github-hosting-status.json`.
 
 The digest-locked PostgreSQL 18.6 development image now has a local CycloneDX
-1.5 SBOM with 77 components, 70 carrying license evidence. Docker Scout CVE
+1.5 SBOM with 77 components: 70 carry embedded license data and the remaining
+7 are bound to exact APK or version-pinned upstream evidence. Docker Scout CVE
 analysis requires an authenticated database session on this host, so no login
 was performed and vulnerability status remains pending. The final builder image
-has a local CycloneDX 1.5 SBOM with 316 components; hosted vulnerability policy
+has a local CycloneDX 1.5 SBOM with 328 components: 277 carry embedded license
+data and all 51 scanner gaps are bound to hashed copyright/METADATA sources.
+`p0-12-license-evidence.json` is therefore component-complete but remains
+non-authoritative until the hosted check succeeds. Hosted vulnerability policy
 and signed provenance still require the selected CI authority. Application Conan
 profile lockfiles begin in P4 with the first real external C++ dependency; an
 empty placeholder lock is prohibited.
@@ -65,3 +69,6 @@ Private pull-request runs retain the fixed Trivy JSON and database-identity
 files for seven days even when vulnerability or license policy fails. This
 short-lived diagnostic artifact contains no configured Secret and is evidence
 for remediation only; it is not the required 365-day immutable release record.
+The identity is generated from the exact cache used by both scans and must
+carry Trivy 0.74.0 plus a vulnerability-database `UpdatedAt` no older than 48
+hours. A tool-only version string is rejected as incomplete evidence.

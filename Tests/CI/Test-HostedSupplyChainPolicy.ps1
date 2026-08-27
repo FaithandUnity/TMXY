@@ -98,7 +98,12 @@ function Get-BlockingVulnerabilityCount {
         return 0
     }
     $report = Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json
-    return @($report.Results | ForEach-Object { @($_.Vulnerabilities) } | Where-Object {
+    return @($report.Results | ForEach-Object {
+        if ($_.PSObject.Properties.Name -contains 'Vulnerabilities' -and
+            $null -ne $_.Vulnerabilities) {
+            @($_.Vulnerabilities)
+        }
+    } | Where-Object {
         [string]$_.Severity -in @('HIGH', 'CRITICAL')
     }).Count
 }

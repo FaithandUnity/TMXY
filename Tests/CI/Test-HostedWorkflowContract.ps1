@@ -12,6 +12,7 @@ $codeOwnersPath = Join-Path $root '.github/CODEOWNERS'
 $actionlintPath = Join-Path $root '.github/actionlint.yaml'
 $contractPath = Join-Path $root 'Data/Governance/p0-hosted-ci-contract.json'
 $summaryGeneratorPath = Join-Path $root 'Tools/TMXY.SupplyChain/New-HostedVulnerabilitySummary.ps1'
+$supplyChainPolicyPath = Join-Path $root 'Tests/CI/Test-HostedSupplyChainPolicy.ps1'
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Assert-HostedContract {
@@ -28,7 +29,8 @@ foreach ($path in @(
         $codeOwnersPath,
         $actionlintPath,
         $contractPath,
-        $summaryGeneratorPath)) {
+        $summaryGeneratorPath,
+        $supplyChainPolicyPath)) {
     Assert-HostedContract (Test-Path -LiteralPath $path -PathType Leaf) "Required hosted CI file is missing: $path"
 }
 
@@ -120,7 +122,11 @@ if (Test-Path -LiteralPath $summaryGeneratorPath -PathType Leaf) {
             ArtifactName = 'synthetic-test-sbom'
             ArtifactType = 'cyclonedx'
             CreatedAt = '2026-08-27T03:33:39Z'
-            Results = @()
+            Results = @([pscustomobject][ordered]@{
+                Target = 'Python'
+                Class = 'lang-pkgs'
+                Type = 'python-pkg'
+            })
         }
         $reportJson = ($syntheticReport | ConvertTo-Json -Depth 4) + "`n"
         $postgresTestPath = Join-Path $summaryTestRoot 'postgres.json'
@@ -157,6 +163,31 @@ Vulnerability DB:
         Assert-HostedContract ([string]$summaryTest.provider.source_revision -eq ('a' * 40) -and
             [string]$summaryTest.provider.workflow_revision -eq ('b' * 40)) `
             'Hosted vulnerability summary must preserve distinct source and workflow revisions.'
+        Assert-HostedContract (@($summaryTest.reports).Count -eq 2 -and
+            @($summaryTest.reports | Where-Object { [int]$_.finding_count -ne 0 }).Count -eq 0 -and
+            [int]$summaryTest.total_high_or_critical -eq 0) `
+            'Hosted vulnerability summary must accept Trivy result entries that omit Vulnerabilities when no findings exist.'
+        $currentGoTimestamp = [DateTimeOffset]::UtcNow.ToString(
+            'yyyy-MM-dd HH:mm:ss.fffffff',
+            [Globalization.CultureInfo]::InvariantCulture) + '00 +0000 UTC'
+        [IO.File]::WriteAllText($identityTestPath, @"
+Version: 0.74.0
+Vulnerability DB:
+  Version: 2
+  UpdatedAt: $currentGoTimestamp
+  NextUpdate: $currentGoTimestamp
+  DownloadedAt: $currentGoTimestamp
+"@, [Text.UTF8Encoding]::new($false))
+        $policyTest = & $supplyChainPolicyPath `
+            -RebuildRoot $root `
+            -Mode MergeGate `
+            -PostgresVulnerabilityReport $postgresTestPath `
+            -BuilderVulnerabilityReport $builderTestPath `
+            -VulnerabilityDatabaseIdentity $identityTestPath | ConvertFrom-Json
+        Assert-HostedContract ([string]$policyTest.result -eq 'PASS' -and
+            [int]$policyTest.blocking_vulnerabilities.postgres_high_or_critical -eq 0 -and
+            [int]$policyTest.blocking_vulnerabilities.builder_high_or_critical -eq 0) `
+            'Hosted supply-chain policy must accept Trivy result entries that omit Vulnerabilities when no findings exist.'
     }
     catch {
         $failures.Add("Hosted vulnerability summary regression test failed: $($_.Exception.Message)")

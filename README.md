@@ -54,6 +54,7 @@ Rebuild/
 ├─ Docs/Standards/               强制工程与代码规范
 ├─ Docs/Formats/                 格式证据、样本边界与重构记录
 ├─ Docs/Security/                Secret 注入、脱敏、轮换与事件规则
+├─ Docs/Waivers/                 有时限、可审计且默认不生效的风险例外请求
 ├─ Docs/Performance/             客户端/后端容量、延迟和恢复目标
 ├─ Docs/Database/                PostgreSQL Migration、所有权和验证规则
 └─ Docs/ADR/                     已接受和待评审的架构决策
@@ -66,6 +67,11 @@ Rebuild/
 P1 资产交换统一使用 `manifest.json` + 独立哈希载荷；Schema、格式注册表、示例、版本与
 未知字段保留规则见 `Docs/Formats/ASSET-INTERCHANGE-V1.md`。OBJ/PNG/TGA/CSV 只作审查，
 不得被导入器当作权威输入。
+
+PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
+二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
+非作者审批（含 `FaithandUnity`）和只读认证 API 复核同时成立时，才允许组件级临时例外。
+离线夹具永远不能激活例外，且该例外本身不授予合并、G0/G1 或发布权。
 
 最终目录和依赖边界见 `Docs/Architecture/TARGET-ARCHITECTURE.md`。后续目录按首个真实文件逐步建立，不提前生成无内容的工程。
 

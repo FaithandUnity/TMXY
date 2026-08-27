@@ -13,6 +13,7 @@ $actionlintPath = Join-Path $root '.github/actionlint.yaml'
 $contractPath = Join-Path $root 'Data/Governance/p0-hosted-ci-contract.json'
 $summaryGeneratorPath = Join-Path $root 'Tools/TMXY.SupplyChain/New-HostedVulnerabilitySummary.ps1'
 $supplyChainPolicyPath = Join-Path $root 'Tests/CI/Test-HostedSupplyChainPolicy.ps1'
+$waiverEvaluatorPath = Join-Path $root 'Tools/TMXY.SupplyChain/Test-PostgresGosuWaiverDecision.ps1'
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Assert-HostedContract {
@@ -30,7 +31,8 @@ foreach ($path in @(
         $actionlintPath,
         $contractPath,
         $summaryGeneratorPath,
-        $supplyChainPolicyPath)) {
+        $supplyChainPolicyPath,
+        $waiverEvaluatorPath)) {
     Assert-HostedContract (Test-Path -LiteralPath $path -PathType Leaf) "Required hosted CI file is missing: $path"
 }
 
@@ -112,6 +114,13 @@ Assert-HostedContract ($merge -match 'New-HostedVulnerabilitySummary\.ps1' -and
 Assert-HostedContract ($merge -match "-SourceRevision '\$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}'" -and
     $merge -match "-WorkflowRevision '\$\{\{ github\.sha \}\}'") `
     'Hosted vulnerability summaries must distinguish the reviewed source revision from the workflow merge revision.'
+Assert-HostedContract ($merge -match 'Test-PostgresGosuWaiverDecision\.ps1' -and
+    $merge -match 'GITHUB_TOKEN:\s*\$\{\{ github\.token \}\}' -and
+    $merge -match '-PostgresWaiverDecision\s+"\$env:RUNNER_TEMP/postgres-gosu-waiver-decision\.json"') `
+    'Hosted policy must evaluate the exact waiver through read-only GitHub API evidence before enforcement.'
+Assert-HostedContract ($merge -match '(?m)^\s+pull-requests:\s*read\s*$' -and
+    $merge -notmatch '(?m)^\s+pull-requests:\s*write\s*$') `
+    'Waiver approval verification must keep pull-request permission read-only.'
 
 if (Test-Path -LiteralPath $summaryGeneratorPath -PathType Leaf) {
     $summaryTestRoot = Join-Path ([IO.Path]::GetTempPath()) ("tmxy-hosted-summary-" + [Guid]::NewGuid().ToString('N'))
@@ -188,6 +197,49 @@ Vulnerability DB:
             [int]$policyTest.blocking_vulnerabilities.postgres_high_or_critical -eq 0 -and
             [int]$policyTest.blocking_vulnerabilities.builder_high_or_critical -eq 0) `
             'Hosted supply-chain policy must accept Trivy result entries that omit Vulnerabilities when no findings exist.'
+
+        $waiverRequestPath = Join-Path $root 'Data/Security/p0-12-postgres-gosu-waiver-request.json'
+        $waiverDecisionPath = Join-Path $root 'Data/Security/p0-12-postgres-gosu-waiver-decision.json'
+        $waiverRequest = Get-Content -LiteralPath $waiverRequestPath -Raw -Encoding UTF8 |
+            ConvertFrom-Json
+        $waiverDecision = Get-Content -LiteralPath $waiverDecisionPath -Raw -Encoding UTF8 |
+            ConvertFrom-Json
+        $syntheticReport.Results[0] | Add-Member -NotePropertyName Vulnerabilities `
+            -NotePropertyValue @($waiverRequest.finding_scope.vulnerability_ids | ForEach-Object {
+                    [pscustomobject][ordered]@{
+                        VulnerabilityID = [string]$_
+                        Severity = 'HIGH'
+                    }
+                })
+        $reportJson = ($syntheticReport | ConvertTo-Json -Depth 6) + "`n"
+        [IO.File]::WriteAllText($postgresTestPath, $reportJson, [Text.UTF8Encoding]::new($false))
+        $waiverDecision.result = 'PASS'
+        $waiverDecision.decision = 'ACTIVE_TIME_BOUNDED_VERIFIED'
+        $waiverDecision.evaluation_mode = 'authenticated_github_api'
+        $waiverDecision.waiver_effective = $true
+        $waiverDecision.policy_blocking = $false
+        $waiverDecision.component_policy_exception = $true
+        $waiverDecision.bindings.request_sha256 = (Get-FileHash -LiteralPath $waiverRequestPath `
+                -Algorithm SHA256).Hash.ToLowerInvariant()
+        $activeDecisionPath = Join-Path $summaryTestRoot 'active-waiver-decision.json'
+        [IO.File]::WriteAllText(
+            $activeDecisionPath,
+            (($waiverDecision | ConvertTo-Json -Depth 10) + "`n"),
+            [Text.UTF8Encoding]::new($false))
+        $waivedPolicyTest = & $supplyChainPolicyPath `
+            -RebuildRoot $root `
+            -Mode MergeGate `
+            -PostgresVulnerabilityReport $postgresTestPath `
+            -BuilderVulnerabilityReport $builderTestPath `
+            -VulnerabilityDatabaseIdentity $identityTestPath `
+            -PostgresWaiverDecision $activeDecisionPath | ConvertFrom-Json
+        Assert-HostedContract ([string]$waivedPolicyTest.result -eq 'PASS' -and
+            [int]$waivedPolicyTest.blocking_vulnerabilities.postgres_high_or_critical -eq 22 -and
+            [bool]$waivedPolicyTest.postgres_waiver.effective -and
+            [string]$waivedPolicyTest.postgres_waiver.decision -eq
+                'ACTIVE_TIME_BOUNDED_VERIFIED' -and
+            -not [bool]$waivedPolicyTest.postgres_waiver.release_authority) `
+            'Hosted policy must accept only an authenticated exact-scope PostgreSQL component exception without granting release authority.'
     }
     catch {
         $failures.Add("Hosted vulnerability summary regression test failed: $($_.Exception.Message)")

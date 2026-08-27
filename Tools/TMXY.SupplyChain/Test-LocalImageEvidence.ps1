@@ -18,6 +18,8 @@ $postgresCandidatePath = Join-Path $root 'Data\Security\p0-12-postgres-official-
 $postgresReachabilityPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-reachability-review.json'
 $postgresReachabilitySarifPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-govulncheck.sarif.json'
 $postgresReachabilityOsvPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-GO-2026-4970.osv.json'
+$postgresWaiverRequestPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-waiver-request.json'
+$postgresWaiverDecisionPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-waiver-decision.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -152,15 +154,59 @@ $postgresReachabilityBound = [string]$postgresReachability.result -eq 'PASS_DIAG
     [string]$postgresReachability.bindings.official_candidate_sha256 -eq $postgresCandidateSha -and
     [string]$postgresReachability.bindings.toolchain_lock_sha256 -eq $lockSha -and
     [string]$postgresReachability.bindings.compose_sha256 -eq $composeSha
+$postgresWaiverRequest = Get-Content -LiteralPath $postgresWaiverRequestPath -Raw | ConvertFrom-Json
+$postgresWaiverRequestSha = (Get-FileHash -LiteralPath $postgresWaiverRequestPath `
+        -Algorithm SHA256).Hash.ToLowerInvariant()
+$postgresWaiverDecision = Get-Content -LiteralPath $postgresWaiverDecisionPath -Raw | ConvertFrom-Json
+$postgresWaiverDecisionSha = (Get-FileHash -LiteralPath $postgresWaiverDecisionPath `
+        -Algorithm SHA256).Hash.ToLowerInvariant()
+$postgresWaiverBound = [string]$postgresWaiverRequest.waiver_id -eq 'WVR-0002' -and
+    [string]$postgresWaiverRequest.status -eq 'draft_not_approved' -and
+    [string]$postgresWaiverRequest.policy_effect -eq 'none_still_blocking' -and
+    -not [bool]$postgresWaiverRequest.approval.owner_approval -and
+    [int]$postgresWaiverRequest.approval.pull_request_number -eq 0 -and
+    @($postgresWaiverRequest.approval.approved_review_ids).Count -eq 0 -and
+    [int]$postgresWaiverRequest.duration.maximum_days -eq 30 -and
+    $null -eq $postgresWaiverRequest.duration.effective_utc -and
+    $null -eq $postgresWaiverRequest.duration.expires_utc -and
+    -not [bool]$postgresWaiverRequest.activation.requested -and
+    -not [bool]$postgresWaiverRequest.activation.effective -and
+    -not [bool]$postgresWaiverRequest.activation.automatic_activation_allowed -and
+    -not [bool]$postgresWaiverRequest.activation.offline_fixture_can_activate -and
+    -not [bool]$postgresWaiverRequest.activation.release_authority -and
+    [string]$postgresWaiverRequest.component.image_digest -eq $expectedImageId -and
+    [string]$postgresWaiverRequest.component.binary_sha256 -eq
+        [string]$postgresCandidate.locked_probe.gosu_sha256 -and
+    [int]$postgresWaiverRequest.finding_scope.count -eq
+        [int]$postgresDisposition.blocking_findings.total -and
+    [string]$postgresWaiverDecision.result -eq 'PASS_DIAGNOSTIC' -and
+    [string]$postgresWaiverDecision.decision -eq
+        'DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE' -and
+    [string]$postgresWaiverDecision.evaluation_mode -eq 'local_draft' -and
+    [string]$postgresWaiverDecision.request_status -eq 'draft_not_approved' -and
+    [string]$postgresWaiverDecision.request_sha256 -eq $postgresWaiverRequestSha -and
+    -not [bool]$postgresWaiverDecision.waiver_effective -and
+    [bool]$postgresWaiverDecision.policy_blocking -and
+    -not [bool]$postgresWaiverDecision.component_policy_exception -and
+    -not [bool]$postgresWaiverDecision.automatic_activation -and
+    -not [bool]$postgresWaiverDecision.release_authority -and
+    [int]$postgresWaiverDecision.approval.verified_approval_count -eq 0 -and
+    [string]$postgresWaiverDecision.bindings.vulnerability_disposition_sha256 -eq $dispositionSha -and
+    [string]$postgresWaiverDecision.bindings.reachability_review_sha256 -eq
+        $postgresReachabilitySha -and
+    [string]$postgresWaiverDecision.bindings.official_candidate_sha256 -eq
+        $postgresCandidateSha -and
+    [string]$postgresWaiverDecision.bindings.toolchain_lock_sha256 -eq $lockSha -and
+    [string]$postgresWaiverDecision.bindings.compose_sha256 -eq $composeSha
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
 $passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and
     $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC' -and
     $postgresDispositionBound -and $postgresRefreshBound -and $postgresCandidateBound -and
-    $postgresReachabilityBound
+    $postgresReachabilityBound -and $postgresWaiverBound
 $report = [pscustomobject][ordered]@{
-    schema_version = 8
+    schema_version = 9
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -261,6 +307,21 @@ $report = [pscustomobject][ordered]@{
         release_authority = [bool]$postgresReachability.release_authority
         bindings_verified = $postgresReachabilityBound
     }
+    postgres_gosu_waiver_decision = [pscustomobject][ordered]@{
+        request_file = 'Data/Security/p0-12-postgres-gosu-waiver-request.json'
+        request_sha256 = $postgresWaiverRequestSha
+        decision_file = 'Data/Security/p0-12-postgres-gosu-waiver-decision.json'
+        decision_sha256 = $postgresWaiverDecisionSha
+        waiver_id = [string]$postgresWaiverDecision.waiver_id
+        request_status = [string]$postgresWaiverDecision.request_status
+        decision = [string]$postgresWaiverDecision.decision
+        waiver_effective = [bool]$postgresWaiverDecision.waiver_effective
+        policy_blocking = [bool]$postgresWaiverDecision.policy_blocking
+        verified_approval_count = [int]$postgresWaiverDecision.approval.verified_approval_count
+        maximum_days = [int]$postgresWaiverDecision.duration.maximum_days
+        release_authority = [bool]$postgresWaiverDecision.release_authority
+        bindings_verified = $postgresWaiverBound
+    }
     hosted_ci = [pscustomobject][ordered]@{
         provider = [string]$hostingStatus.provider.name
         repository = [string]$hostingStatus.provider.repository
@@ -272,7 +333,7 @@ $report = [pscustomobject][ordered]@{
     }
     pending = @(
         'Protected GitHub main and provider-generated results for all eight stable checks',
-        'Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain explicit owner approval for a component-specific time-bounded waiver; reachability review alone grants no exception',
+        'Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or explicitly approve WVR-0002 with current-HEAD reviews and a maximum-30-day interval; the checked-in draft is not effective',
         'The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image',
         'Exact locked builder manifest verified in GHCR',
         'Provision the labeled ephemeral UE 5.8 hosted runner',

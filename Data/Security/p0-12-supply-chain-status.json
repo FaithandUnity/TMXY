@@ -1,6 +1,6 @@
 {
-  "schema_version": 8,
-  "captured_utc": "2026-08-27T16:36:05.1926989+00:00",
+  "schema_version": 9,
+  "captured_utc": "2026-08-27T17:15:43.8052602+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -98,6 +98,21 @@
     "release_authority": false,
     "bindings_verified": true
   },
+  "postgres_gosu_waiver_decision": {
+    "request_file": "Data/Security/p0-12-postgres-gosu-waiver-request.json",
+    "request_sha256": "6586f298a20ead563e1c68f7eab448999e4c01e80a3adc2dbc7c312328fa93a6",
+    "decision_file": "Data/Security/p0-12-postgres-gosu-waiver-decision.json",
+    "decision_sha256": "64a2d6ed2de0b3987fe4364ac43b2601aad2692febf6c66b59e5299cd0ddaba4",
+    "waiver_id": "WVR-0002",
+    "request_status": "draft_not_approved",
+    "decision": "DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE",
+    "waiver_effective": false,
+    "policy_blocking": true,
+    "verified_approval_count": 0,
+    "maximum_days": 30,
+    "release_authority": false,
+    "bindings_verified": true
+  },
   "hosted_ci": {
     "provider": "github",
     "repository": "FaithandUnity/TMXY",
@@ -109,7 +124,7 @@
   },
   "pending": [
     "Protected GitHub main and provider-generated results for all eight stable checks",
-    "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain explicit owner approval for a component-specific time-bounded waiver; reachability review alone grants no exception",
+    "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or explicitly approve WVR-0002 with current-HEAD reviews and a maximum-30-day interval; the checked-in draft is not effective",
     "The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image",
     "Exact locked builder manifest verified in GHCR",
     "Provision the labeled ephemeral UE 5.8 hosted runner",

@@ -65,6 +65,16 @@ bound by SHA-256. This lowers the assessed reachability but does not prove
 absence, waive the hosted severity policy, update the image lock, or grant merge
 or release authority. A component waiver still requires explicit owner approval
 and a time bound after this review.
+
+`WVR-0002` packages that possible component-only decision without approving it.
+`Test-PostgresGosuWaiverDecision.ps1` binds the exact request bytes to the locked
+image, `gosu` binary, all 22 hosted findings, reachability evidence, candidate
+evaluation, toolchain lock, and Compose file. The checked-in request remains a
+non-effective draft. Activation requires a current interval of at most 30 days
+and an authenticated GitHub read of the exact PR HEAD with at least two unique
+non-author approvals, including `FaithandUnity`; stale approvals fail closed.
+Offline fixtures can validate structure but can never activate the exception,
+and no waiver result grants merge, gate, or release authority.
 The final builder image has a local CycloneDX 1.5 SBOM with 314 components: 266
 carry embedded license data and all 48 scanner gaps are bound to hashed
 copyright/METADATA sources. pip and setuptools are build-only bootstrap tools

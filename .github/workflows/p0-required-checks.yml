@@ -293,6 +293,14 @@ jobs:
             -SourceRevision '${{ github.event.pull_request.head.sha || github.sha }}' `
             -WorkflowRevision '${{ github.sha }}' `
             -EventName '${{ github.event_name }}'
+      - name: Evaluate exact component waiver without automatic activation
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          & "$env:GITHUB_WORKSPACE/Tools/TMXY.SupplyChain/Test-PostgresGosuWaiverDecision.ps1" `
+            -RebuildRoot $env:GITHUB_WORKSPACE `
+            -OutputPath "$env:RUNNER_TEMP/postgres-gosu-waiver-decision.json"
       - name: Enforce vulnerability and complete-license policy
         shell: pwsh
         run: |
@@ -306,7 +314,8 @@ jobs:
             -Mode $mode `
             -PostgresVulnerabilityReport "$env:RUNNER_TEMP/postgres-vulnerabilities.json" `
             -BuilderVulnerabilityReport "$env:RUNNER_TEMP/builder-vulnerabilities.json" `
-            -VulnerabilityDatabaseIdentity "$env:RUNNER_TEMP/vulnerability-database-identity.txt"
+            -VulnerabilityDatabaseIdentity "$env:RUNNER_TEMP/vulnerability-database-identity.txt" `
+            -PostgresWaiverDecision "$env:RUNNER_TEMP/postgres-gosu-waiver-decision.json"
       - name: Retain pull-request diagnostic scan evidence
         if: github.event_name == 'pull_request' && always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
@@ -317,6 +326,7 @@ jobs:
             ${{ runner.temp }}/builder-vulnerabilities.json
             ${{ runner.temp }}/vulnerability-database-identity.txt
             ${{ runner.temp }}/hosted-vulnerability-summary.json
+            ${{ runner.temp }}/postgres-gosu-waiver-decision.json
           if-no-files-found: warn
           retention-days: 7
       - name: Retain diagnostic scan evidence within the current plan limit
@@ -328,6 +338,7 @@ jobs:
             ${{ runner.temp }}/postgres-vulnerabilities.json
             ${{ runner.temp }}/builder-vulnerabilities.json
             ${{ runner.temp }}/vulnerability-database-identity.txt
+            ${{ runner.temp }}/postgres-gosu-waiver-decision.json
             ${{ runner.temp }}/hosted-vulnerability-summary.json
           if-no-files-found: error
           retention-days: 90

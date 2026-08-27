@@ -121,6 +121,9 @@ $postgresOfficialCandidate = Invoke-JsonTest `
 $postgresGosuReachability = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\CI\Test-PostgresGosuReachabilityReview.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$postgresGosuWaiver = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresGosuWaiverDecision.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $uePackagingWaiver = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-UEPackagingWaiver.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $toolchain = Invoke-JsonTest -Script (Join-Path $root 'Tools\TMXY.Toolchain\Test-ToolchainLock.ps1') `
@@ -189,6 +192,7 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [string]$postgresRefreshPreflight.result -eq 'PASS' -and
     [string]$postgresOfficialCandidate.result -eq 'PASS' -and
     [string]$postgresGosuReachability.result -eq 'PASS' -and
+    [string]$postgresGosuWaiver.result -eq 'PASS' -and
     [string]$uePackagingWaiver.result -eq 'PASS' -and
     [string]$toolchain.result -eq 'PASS' -and
     [string]$staticAnalysis.result -eq 'PASS_DIAGNOSTIC' -and
@@ -237,6 +241,7 @@ $report = [pscustomobject][ordered]@{
     postgres_refresh_preflight = $postgresRefreshPreflight
     postgres_official_candidate = $postgresOfficialCandidate
     postgres_gosu_reachability = $postgresGosuReachability
+    postgres_gosu_waiver = $postgresGosuWaiver
     ue_packaging_waiver = $uePackagingWaiver
     backend_toolchain = $toolchain
     backend_static_analysis = $staticAnalysis

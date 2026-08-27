@@ -4,7 +4,8 @@ param(
     [ValidateSet('ContractOnly', 'MergeGate', 'HostedAuthority')][string]$Mode = 'ContractOnly',
     [string]$PostgresVulnerabilityReport = '',
     [string]$BuilderVulnerabilityReport = '',
-    [string]$VulnerabilityDatabaseIdentity = ''
+    [string]$VulnerabilityDatabaseIdentity = '',
+    [string]$PostgresWaiverDecision = ''
 )
 
 Set-StrictMode -Version Latest
@@ -201,6 +202,9 @@ $databaseIdentitySha = ''
 $databaseUpdatedAt = ''
 $databaseDownloadedAt = ''
 $databaseAgeHours = $null
+$postgresWaiverEffective = $false
+$postgresWaiverDecisionName = ''
+$postgresWaiverSha = ''
 
 if ($Mode -ne 'ContractOnly') {
     $postgresBlocking = Get-BlockingVulnerabilityCount -Path $PostgresVulnerabilityReport
@@ -241,7 +245,50 @@ if ($Mode -ne 'ContractOnly') {
         }
     }
     if ($postgresBlocking -gt 0 -or $builderBlocking -gt 0) {
-        Add-SupplyFailure 'HIGH or CRITICAL vulnerabilities require remediation or an approved time-bounded waiver.'
+        if (-not [string]::IsNullOrWhiteSpace($PostgresWaiverDecision)) {
+            if (-not (Test-Path -LiteralPath $PostgresWaiverDecision -PathType Leaf)) {
+                Add-SupplyFailure 'PostgreSQL waiver decision report is missing.'
+            }
+            else {
+                $waiver = Get-Content -LiteralPath $PostgresWaiverDecision -Raw -Encoding UTF8 |
+                    ConvertFrom-Json
+                $postgresWaiverSha = (Get-FileHash -LiteralPath $PostgresWaiverDecision `
+                        -Algorithm SHA256).Hash.ToLowerInvariant()
+                $requestPath = Join-Path $root 'Data/Security/p0-12-postgres-gosu-waiver-request.json'
+                $requestSha = if (Test-Path -LiteralPath $requestPath -PathType Leaf) {
+                    (Get-FileHash -LiteralPath $requestPath -Algorithm SHA256).Hash.ToLowerInvariant()
+                }
+                else { '' }
+                $report = Get-Content -LiteralPath $PostgresVulnerabilityReport -Raw -Encoding UTF8 |
+                    ConvertFrom-Json
+                $currentPostgresIds = @($report.Results | ForEach-Object {
+                        if ($_.PSObject.Properties.Name -contains 'Vulnerabilities' -and
+                            $null -ne $_.Vulnerabilities) { @($_.Vulnerabilities) }
+                    } | Where-Object { [string]$_.Severity -in @('HIGH', 'CRITICAL') } |
+                    ForEach-Object { [string]$_.VulnerabilityID } | Sort-Object -Unique)
+                $waivedIds = @($waiver.finding_scope.vulnerability_ids |
+                    ForEach-Object { [string]$_ } | Sort-Object -Unique)
+                $postgresWaiverEffective = [string]$waiver.result -eq 'PASS' -and
+                    [string]$waiver.decision -eq 'ACTIVE_TIME_BOUNDED_VERIFIED' -and
+                    [string]$waiver.evaluation_mode -eq 'authenticated_github_api' -and
+                    [bool]$waiver.waiver_effective -and -not [bool]$waiver.policy_blocking -and
+                    [bool]$waiver.component_policy_exception -and
+                    -not [bool]$waiver.automatic_activation -and
+                    -not [bool]$waiver.release_authority -and
+                    [string]$waiver.bindings.request_sha256 -eq $requestSha -and
+                    [string]$waiver.component.image_digest -eq
+                        [string]$lock.database.development_image.image_id -and
+                    [int]$waiver.finding_scope.count -eq $postgresBlocking -and
+                    ($waivedIds -join ',') -eq ($currentPostgresIds -join ',')
+                $postgresWaiverDecisionName = [string]$waiver.decision
+                if (-not $postgresWaiverEffective -and $postgresBlocking -gt 0) {
+                    Add-SupplyFailure 'PostgreSQL waiver decision is not an authenticated, exact-scope, active exception.'
+                }
+            }
+        }
+        if ($builderBlocking -gt 0 -or ($postgresBlocking -gt 0 -and -not $postgresWaiverEffective)) {
+            Add-SupplyFailure 'HIGH or CRITICAL vulnerabilities require remediation or an approved time-bounded waiver.'
+        }
     }
     if ($postgresLicensed -ne $postgresComponents -or $builderLicensed -ne $builderComponents) {
         Add-SupplyFailure 'Every component requires license evidence or an approved component-specific waiver.'
@@ -266,6 +313,12 @@ $report = [pscustomobject][ordered]@{
     blocking_vulnerabilities = [pscustomobject][ordered]@{
         postgres_high_or_critical = $postgresBlocking
         builder_high_or_critical = $builderBlocking
+    }
+    postgres_waiver = [pscustomobject][ordered]@{
+        decision = $postgresWaiverDecisionName
+        decision_sha256 = $postgresWaiverSha
+        effective = $postgresWaiverEffective
+        release_authority = $false
     }
     vulnerability_database_identity_sha256 = $databaseIdentitySha
     vulnerability_database_updated_utc = $databaseUpdatedAt

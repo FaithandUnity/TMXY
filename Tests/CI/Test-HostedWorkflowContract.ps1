@@ -11,6 +11,7 @@ $releasePath = Join-Path $root '.github/workflows/p0-release-provenance.yml'
 $codeOwnersPath = Join-Path $root '.github/CODEOWNERS'
 $actionlintPath = Join-Path $root '.github/actionlint.yaml'
 $contractPath = Join-Path $root 'Data/Governance/p0-hosted-ci-contract.json'
+$summaryGeneratorPath = Join-Path $root 'Tools/TMXY.SupplyChain/New-HostedVulnerabilitySummary.ps1'
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Assert-HostedContract {
@@ -21,7 +22,13 @@ function Assert-HostedContract {
     if (-not $Condition) { $failures.Add($Message) }
 }
 
-foreach ($path in @($mergePath, $releasePath, $codeOwnersPath, $actionlintPath, $contractPath)) {
+foreach ($path in @(
+        $mergePath,
+        $releasePath,
+        $codeOwnersPath,
+        $actionlintPath,
+        $contractPath,
+        $summaryGeneratorPath)) {
     Assert-HostedContract (Test-Path -LiteralPath $path -PathType Leaf) "Required hosted CI file is missing: $path"
 }
 
@@ -100,6 +107,66 @@ Assert-HostedContract ($merge -match 'trivy --version --cache-dir "\$\{cache_dir
 Assert-HostedContract ($merge -match 'New-HostedVulnerabilitySummary\.ps1' -and
     ([regex]::Matches($merge, 'hosted-vulnerability-summary\.json').Count -ge 3)) `
     'Hosted scans must create and retain a sanitized run-bound vulnerability summary.'
+Assert-HostedContract ($merge -match "-SourceRevision '\$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}'" -and
+    $merge -match "-WorkflowRevision '\$\{\{ github\.sha \}\}'") `
+    'Hosted vulnerability summaries must distinguish the reviewed source revision from the workflow merge revision.'
+
+if (Test-Path -LiteralPath $summaryGeneratorPath -PathType Leaf) {
+    $summaryTestRoot = Join-Path ([IO.Path]::GetTempPath()) ("tmxy-hosted-summary-" + [Guid]::NewGuid().ToString('N'))
+    try {
+        New-Item -ItemType Directory -Path $summaryTestRoot | Out-Null
+        $syntheticReport = [pscustomobject][ordered]@{
+            SchemaVersion = 2
+            ArtifactName = 'synthetic-test-sbom'
+            ArtifactType = 'cyclonedx'
+            CreatedAt = '2026-08-27T03:33:39Z'
+            Results = @()
+        }
+        $reportJson = ($syntheticReport | ConvertTo-Json -Depth 4) + "`n"
+        $postgresTestPath = Join-Path $summaryTestRoot 'postgres.json'
+        $builderTestPath = Join-Path $summaryTestRoot 'builder.json'
+        $identityTestPath = Join-Path $summaryTestRoot 'identity.txt'
+        $summaryTestPath = Join-Path $summaryTestRoot 'summary.json'
+        [IO.File]::WriteAllText($postgresTestPath, $reportJson, [Text.UTF8Encoding]::new($false))
+        [IO.File]::WriteAllText($builderTestPath, $reportJson, [Text.UTF8Encoding]::new($false))
+        [IO.File]::WriteAllText($identityTestPath, @'
+Version: 0.74.0
+Vulnerability DB:
+  Version: 2
+  UpdatedAt: 2026-08-27 02:16:59.49157034 +0000 UTC
+  NextUpdate: 2026-08-28 02:16:59.491570069 +0000 UTC
+  DownloadedAt: 2026-08-27 03:33:39.075679278 +0000 UTC
+'@, [Text.UTF8Encoding]::new($false))
+        & $summaryGeneratorPath `
+            -PostgresVulnerabilityReport $postgresTestPath `
+            -BuilderVulnerabilityReport $builderTestPath `
+            -VulnerabilityDatabaseIdentity $identityTestPath `
+            -OutputPath $summaryTestPath `
+            -Repository 'FaithandUnity/TMXY' `
+            -RunId '1' `
+            -RunAttempt '1' `
+            -SourceRevision ('a' * 40) `
+            -WorkflowRevision ('b' * 40) `
+            -EventName 'pull_request' | Out-Null
+        $summaryTest = Get-Content -LiteralPath $summaryTestPath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $updatedTestUtc = ([DateTimeOffset]$summaryTest.vulnerability_database.updated_utc).ToUniversalTime().ToString('o')
+        $downloadedTestUtc = ([DateTimeOffset]$summaryTest.vulnerability_database.downloaded_utc).ToUniversalTime().ToString('o')
+        Assert-HostedContract ($updatedTestUtc -eq '2026-08-27T02:16:59.4915703+00:00' -and
+            $downloadedTestUtc -eq '2026-08-27T03:33:39.0756792+00:00') `
+            'Hosted vulnerability summary must parse Trivy Go timestamps without losing UTC identity.'
+        Assert-HostedContract ([string]$summaryTest.provider.source_revision -eq ('a' * 40) -and
+            [string]$summaryTest.provider.workflow_revision -eq ('b' * 40)) `
+            'Hosted vulnerability summary must preserve distinct source and workflow revisions.'
+    }
+    catch {
+        $failures.Add("Hosted vulnerability summary regression test failed: $($_.Exception.Message)")
+    }
+    finally {
+        if (Test-Path -LiteralPath $summaryTestRoot -PathType Container) {
+            Remove-Item -LiteralPath $summaryTestRoot -Recurse -Force
+        }
+    }
+}
 
 $builderDigest = if ($null -ne $contract) {
     [string]$contract.build_authority.backend_builder_digest

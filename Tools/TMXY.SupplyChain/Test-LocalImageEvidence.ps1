@@ -12,6 +12,7 @@ $postgresSbomPath = Join-Path $root 'Data\Security\postgres-18.6.sbom.cdx.json'
 $builderSbomPath = Join-Path $root 'Data\Security\tmxy-backend-builder.sbom.cdx.json'
 $hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.json'
 $licenseEvidencePath = Join-Path $root 'Data\Security\p0-12-license-evidence.json'
+$postgresDispositionPath = Join-Path $root 'Data\Security\p0-12-postgres-vulnerability-disposition.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -50,13 +51,22 @@ $hostingStatus = Get-Content -LiteralPath $hostingStatusPath -Raw | ConvertFrom-
 $licensePolicy = (& (Join-Path $root 'Tests\CI\Test-HostedSupplyChainPolicy.ps1') `
         -RebuildRoot $root -Mode ContractOnly) | ConvertFrom-Json
 $licenseEvidenceSha = (Get-FileHash -LiteralPath $licenseEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
+$postgresDisposition = Get-Content -LiteralPath $postgresDispositionPath -Raw | ConvertFrom-Json
+$postgresDispositionBound = [string]$postgresDisposition.result -eq 'BLOCKED' -and
+    -not [bool]$postgresDisposition.release_authority -and
+    [string]$postgresDisposition.policy_effect -eq 'blocking' -and
+    [string]$postgresDisposition.component.locked_index_digest -eq $expectedImageId -and
+    [int]$postgresDisposition.blocking_findings.total -gt 0 -and
+    [string]$postgresDisposition.review.waiver_state -eq 'none'
+$hostedDatabaseUpdatedUtc = ([DateTimeOffset]$postgresDisposition.hosted_scan.database_updated_utc).ToUniversalTime().ToString('o')
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
 $passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and
-    $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC'
+    $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC' -and
+    $postgresDispositionBound
 $report = [pscustomobject][ordered]@{
-    schema_version = 4
+    schema_version = 5
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -105,8 +115,14 @@ $report = [pscustomobject][ordered]@{
     }
     scanner = [pscustomobject][ordered]@{
         docker_scout_version = $scoutVersion
-        vulnerability_status = 'pending_authenticated_database_access'
-        note = 'Docker Scout CVE analysis requested authentication; no login or credential mutation was performed.'
+        vulnerability_status = 'hosted_postgres_blocked_pending_remediation_or_approved_waiver'
+        hosted_scanner = [string]$postgresDisposition.hosted_scan.scanner
+        hosted_scanner_version = [string]$postgresDisposition.hosted_scan.scanner_version
+        hosted_database_updated_utc = $hostedDatabaseUpdatedUtc
+        postgres_high_or_critical = [int]$postgresDisposition.blocking_findings.total
+        disposition = 'Data/Security/p0-12-postgres-vulnerability-disposition.json'
+        disposition_bound = $postgresDispositionBound
+        note = 'Hosted Trivy evidence is authoritative for the recorded PostgreSQL blocker; unauthenticated local Docker Scout remains supplementary only.'
     }
     hosted_ci = [pscustomobject][ordered]@{
         provider = [string]$hostingStatus.provider.name
@@ -119,8 +135,9 @@ $report = [pscustomobject][ordered]@{
     }
     pending = @(
         'Protected GitHub main and provider-generated results for all eight stable checks',
-        'Authenticated or approved hosted vulnerability database evidence for both locked SBOMs',
+        'Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain an explicit component-specific time-bounded waiver after review',
         'Exact locked builder manifest verified in GHCR',
+        'Provision the labeled ephemeral UE 5.8 hosted runner',
         'Signed release provenance, OCI attestation, and 365-day immutable retention'
     )
     deferred_to_p4 = @(

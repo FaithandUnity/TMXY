@@ -38,7 +38,7 @@ read-only API evidence is `Data/Governance/p0-github-hosting-status.json`.
 - UE 5.8.2 build/module/Automation baseline;
 - source-bound UE 5.8.2 MSVC 14.51 Development/Shipping packaging waiver;
 - official Debian digest, exact Clang 21 revision, immutable backend builder,
-  clean-builder reproduction, 2/2 CTest and 328-component SBOM;
+  clean-builder reproduction, 2/2 CTest and 343-component SBOM;
 - 42 reference-only golden samples;
 - frozen client/backend performance and recovery budget;
 - Git root constrained to `Rebuild`;

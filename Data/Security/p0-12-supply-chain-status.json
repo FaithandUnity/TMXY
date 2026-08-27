@@ -1,6 +1,6 @@
 {
-  "schema_version": 4,
-  "captured_utc": "2026-08-27T03:30:44.7209964+00:00",
+  "schema_version": 5,
+  "captured_utc": "2026-08-27T11:26:41.4195963+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -22,32 +22,38 @@
   "backend_builder": {
     "image": {
       "reference": "tmxy-backend-builder:p0-08",
-      "expected_id": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
-      "actual_id": "sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1",
+      "expected_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
+      "actual_id": "sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d",
       "locally_verified": true
     },
     "sbom": {
       "file": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
-      "sha256": "26d60ca665ae51927a8b32529e2b12c89f099fa19e7e99d5753c0e556e333d2d",
+      "sha256": "996f1b19c5468a2345ca81034c3d3064d00367ecd1e3805b2542ba7fb2c43e26",
       "format": "CycloneDX",
       "spec_version": "1.5",
-      "component_count": 328,
-      "components_with_embedded_license_evidence": 277,
-      "components_with_license_evidence": 328,
+      "component_count": 343,
+      "components_with_embedded_license_evidence": 275,
+      "components_with_license_evidence": 343,
       "locally_verified": true
     }
   },
   "license_evidence": {
     "file": "Data/Security/p0-12-license-evidence.json",
-    "sha256": "f12faa3701fff5261659721a3e24b25cd317cdf0686eabc835c3c1a2ef423fd3",
+    "sha256": "1ca29258daa8ebf67ebafe4dcc7007005cdbdd199315ceb471941fe6a67bdd47",
     "result": "PASS_DIAGNOSTIC",
     "component_complete": true,
     "release_authority": false
   },
   "scanner": {
     "docker_scout_version": "v1.24.0",
-    "vulnerability_status": "pending_authenticated_database_access",
-    "note": "Docker Scout CVE analysis requested authentication; no login or credential mutation was performed."
+    "vulnerability_status": "hosted_postgres_blocked_pending_remediation_or_approved_waiver",
+    "hosted_scanner": "trivy",
+    "hosted_scanner_version": "0.74.0",
+    "hosted_database_updated_utc": "2026-08-27T02:16:59.4915703+00:00",
+    "postgres_high_or_critical": 22,
+    "disposition": "Data/Security/p0-12-postgres-vulnerability-disposition.json",
+    "disposition_bound": true,
+    "note": "Hosted Trivy evidence is authoritative for the recorded PostgreSQL blocker; unauthenticated local Docker Scout remains supplementary only."
   },
   "hosted_ci": {
     "provider": "github",
@@ -60,8 +66,9 @@
   },
   "pending": [
     "Protected GitHub main and provider-generated results for all eight stable checks",
-    "Authenticated or approved hosted vulnerability database evidence for both locked SBOMs",
+    "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or obtain an explicit component-specific time-bounded waiver after review",
     "Exact locked builder manifest verified in GHCR",
+    "Provision the labeled ephemeral UE 5.8 hosted runner",
     "Signed release provenance, OCI attestation, and 365-day immutable retention"
   ],
   "deferred_to_p4": [

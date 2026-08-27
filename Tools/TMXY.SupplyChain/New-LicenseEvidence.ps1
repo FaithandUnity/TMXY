@@ -61,11 +61,11 @@ function Get-ImageFileHashes {
         throw "Unable to hash license evidence in ${Image}: $($output -join "`n")"
     }
     $hashes = @{}
-    foreach ($line in @($output)) {
-        $match = [regex]::Match([string]$line, '^(?<sha>[a-f0-9]{64})\s+(?<path>/\S+)$')
-        if ($match.Success) {
-            $hashes[$match.Groups['path'].Value] = $match.Groups['sha'].Value
-        }
+    $outputText = (@($output) | ForEach-Object { $_.ToString() }) -join "`n"
+    foreach ($match in [regex]::Matches(
+            $outputText,
+            '(?m)(?<sha>[a-f0-9]{64})\s+(?<path>/[A-Za-z0-9._/+:-]+)')) {
+        $hashes[$match.Groups['path'].Value] = $match.Groups['sha'].Value
     }
     foreach ($path in $uniquePaths) {
         if (-not $hashes.ContainsKey($path)) {
@@ -92,11 +92,17 @@ $builderFallbackPaths = @{
     'bash' = '/usr/share/doc/bash/copyright'
     'curl' = '/usr/share/doc/curl/copyright'
     'gzip' = '/usr/share/doc/gzip/copyright'
+    'jansson' = '/usr/share/doc/libjansson4/copyright'
     'libgc' = '/usr/share/doc/libgc1/copyright'
     'libsemanage' = '/usr/share/doc/libsemanage2/copyright'
     'libssh2' = '/usr/share/doc/libssh2-1/copyright'
+    'libxcrypt' = '/usr/share/doc/libcrypt1/copyright'
+    'libyaml' = '/usr/share/doc/libyaml-0-2/copyright'
     'openssl' = '/usr/share/doc/openssl/copyright'
     'python' = '/usr/share/doc/python3.11/copyright'
+    'python3-defaults' = '/usr/share/doc/python3/copyright'
+    'python3-stdlib-extensions' = '/usr/share/doc/python3.11/copyright'
+    'pyyaml' = '/usr/share/doc/python3-yaml/copyright'
     'util-linux' = '/usr/share/doc/util-linux/copyright'
     'xz' = '/usr/share/doc/xz-utils/copyright'
 }
@@ -109,17 +115,87 @@ $pythonLicenses = @{
     'jinja2' = 'BSD-3-Clause'
     'python-dateutil' = 'Apache-2.0 OR BSD-3-Clause'
 }
+$pipVendoredLicenseEvidence = @{
+    'pkg:pypi/cachecontrol@0.14.4' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/cachecontrol/LICENSE.txt'
+        license = 'Apache-2.0'
+    }
+    'pkg:pypi/certifi@2026.6.17' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/certifi/LICENSE'
+        license = 'MPL-2.0'
+    }
+    'pkg:pypi/distlib@0.4.2' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/distlib/LICENSE.txt'
+        license = 'Python-2.0'
+    }
+    'pkg:pypi/idna@3.18' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/idna/LICENSE.md'
+        license = 'BSD-3-Clause'
+    }
+    'pkg:pypi/msgpack@1.1.2' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/msgpack/COPYING'
+        license = 'Apache-2.0'
+    }
+    'pkg:pypi/packaging@26.2' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/packaging/LICENSE'
+        license = 'Apache-2.0 OR BSD-2-Clause'
+    }
+    'pkg:pypi/platformdirs@4.10.0' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/platformdirs/LICENSE'
+        license = 'MIT'
+    }
+    'pkg:pypi/pygments@2.20.0' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/pygments/LICENSE'
+        license = 'BSD-2-Clause'
+    }
+    'pkg:pypi/pyproject-hooks@1.2.0' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/pyproject_hooks/LICENSE'
+        license = 'MIT'
+    }
+    'pkg:pypi/resolvelib@1.2.1' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/resolvelib/LICENSE'
+        license = 'ISC'
+    }
+    'pkg:pypi/rich@14.2.0' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/rich/LICENSE'
+        license = 'MIT'
+    }
+    'pkg:pypi/setuptools@70.3.0' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/pkg_resources/LICENSE'
+        license = 'MIT'
+    }
+    'pkg:pypi/tomli@2.4.1' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/tomli/LICENSE'
+        license = 'MIT'
+    }
+    'pkg:pypi/tomli-w@1.2.0' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/tomli_w/LICENSE'
+        license = 'MIT'
+    }
+    'pkg:pypi/truststore@0.10.4' = [pscustomobject]@{
+        path = '/opt/conan/lib/python3.11/site-packages/pip/_vendor/truststore/LICENSE'
+        license = 'MIT'
+    }
+}
 $builderMissing = Get-MissingLicenseComponents -Sbom $builderSbom
 $builderPaths = [System.Collections.Generic.List[string]]::new()
 $builderDraft = foreach ($component in $builderMissing) {
     $name = [string]$component.name
+    $purl = [string]$component.purl
     $nestedPath = @(if ($component.PSObject.Properties.Name -contains 'components') {
         $component.components | Where-Object {
             [string]$_.name -match '(?i)(copyright|license|metadata)'
         } | Select-Object -First 1 -ExpandProperty name
     }
     else { @() })
-    $path = if ($nestedPath.Count -gt 0) {
+    $vendored = if ($pipVendoredLicenseEvidence.ContainsKey($purl)) {
+        $pipVendoredLicenseEvidence[$purl]
+    }
+    else { $null }
+    $path = if ($null -ne $vendored) {
+        [string]$vendored.path
+    }
+    elseif ($nestedPath.Count -gt 0) {
         [string]$nestedPath[0]
     }
     elseif ($builderFallbackPaths.ContainsKey($name)) {
@@ -132,7 +208,24 @@ $builderDraft = foreach ($component in $builderMissing) {
         throw "No builder license evidence path is mapped for $($component.purl)."
     }
     $builderPaths.Add($path)
-    [pscustomobject]@{ component = $component; path = $path }
+    [pscustomobject]@{
+        component = $component
+        path = $path
+        evidence_kind = if ($null -ne $vendored) {
+            'installed-copyright-file'
+        }
+        elseif ($purl -like 'pkg:pypi/*') {
+            'installed-package-metadata'
+        }
+        else { 'installed-copyright-file' }
+        declared_license = if ($null -ne $vendored) {
+            [string]$vendored.license
+        }
+        elseif ($pythonLicenses.ContainsKey($name)) {
+            [string]$pythonLicenses[$name]
+        }
+        else { 'SEE-INSTALLED-COPYRIGHT' }
+    }
 }
 $builderHashes = Get-ImageFileHashes -Image $BuilderImage -Paths $builderPaths.ToArray()
 $builderEntries = @($builderDraft | ForEach-Object {
@@ -142,14 +235,10 @@ $builderEntries = @($builderDraft | ForEach-Object {
         purl = [string]$component.purl
         name = [string]$component.name
         version = [string]$component.version
-        evidence_kind = if ([string]$component.purl -like 'pkg:pypi/*') {
-            'installed-package-metadata'
-        } else { 'installed-copyright-file' }
+        evidence_kind = [string]$_.evidence_kind
         evidence_source = [string]$_.path
         evidence_sha256 = [string]$builderHashes[[string]$_.path]
-        declared_license = if ($pythonLicenses.ContainsKey([string]$component.name)) {
-            [string]$pythonLicenses[[string]$component.name]
-        } else { 'SEE-INSTALLED-COPYRIGHT' }
+        declared_license = [string]$_.declared_license
         review_state = 'verified-source-evidence'
     }
 })

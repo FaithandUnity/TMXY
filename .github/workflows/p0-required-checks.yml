@@ -24,8 +24,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  TMXY_BACKEND_BUILDER_IMAGE: ghcr.io/faithandunity/tmxy-backend-builder@sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1
-  TMXY_BACKEND_BUILDER_DIGEST: sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1
+  TMXY_BACKEND_BUILDER_IMAGE: ghcr.io/faithandunity/tmxy-backend-builder@sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d
+  TMXY_BACKEND_BUILDER_DIGEST: sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d
 
 jobs:
   policy_repository:
@@ -290,7 +290,8 @@ jobs:
             -Repository '${{ github.repository }}' `
             -RunId '${{ github.run_id }}' `
             -RunAttempt '${{ github.run_attempt }}' `
-            -SourceRevision '${{ github.sha }}' `
+            -SourceRevision '${{ github.event.pull_request.head.sha || github.sha }}' `
+            -WorkflowRevision '${{ github.sha }}' `
             -EventName '${{ github.event_name }}'
       - name: Enforce vulnerability and complete-license policy
         shell: pwsh

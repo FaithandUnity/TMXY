@@ -37,7 +37,7 @@
 | Docker Buildx | 0.36.1-desktop.1 | 多阶段和可复现镜像构建 |
 | PostgreSQL | 18.6 Alpine，`postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2` | 开发/CI 数据库 |
 | Debian builder base | `bookworm-slim@sha256:88200866dfff7ea7f5cbcb6ec7c8a701889efe6fe859fe64d6990e4b07ea4171` | 官方多平台 index；linux/amd64 manifest 为 `sha256:5ae3c39e...b867` |
-| Backend builder | `tmxy-backend-builder@sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1` | 本地 OCI manifest；发布时只能原样推送，禁止重建 |
+| Backend builder | `tmxy-backend-builder@sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d` | 本地 OCI manifest；发布时只能原样推送，禁止重建 |
 
 ### 2.2 后端构建器锁定内容
 
@@ -132,7 +132,7 @@ docker buildx version
 
 官方基础镜像由 `Import-OfficialDebianBase.ps1` 获取：Google DoH 只用于动态选择 Registry 地址，请求仍以 `registry-1.docker.io` 作为 SNI/证书主机名并使用系统信任链；每个 manifest、config 与 layer 均校验官方 descriptor 的 size/SHA-256。Bearer token 仅存在于临时容器内，未进入参数、环境、文件或报告。独立 clean builder 从该已验证 OCI layout 读取同一官方摘要，因此不依赖污染的系统 DNS。
 
-最终资格报告 `Data/Toolchain/backend-toolchain-qualification.json` 为 `PASS`：两个独立镜像均为 linux/amd64、非 root 用户，218 个 Debian 包清单、Conan 环境、工具版本、官方基础层和 4 个后端构建产物 SHA-256 全部一致；两个镜像均在 `--network none`、Backend 只读挂载下完成 CMake configure/build 和 2/2 CTest。CycloneDX 1.5 SBOM 位于 `Data/Security/tmxy-backend-builder.sbom.cdx.json`，包含 328 个组件；Conan 环境显式锁定 `setuptools==83.0.0`，消除 66.1.1 的已修复 HIGH 漏洞。
+最终资格报告 `Data/Toolchain/backend-toolchain-qualification.json` 为 `PASS`：两个独立镜像均为 linux/amd64、非 root 用户，218 个 Debian 包清单、Conan 环境、工具版本、官方基础层和 4 个后端构建产物 SHA-256 全部一致；两个镜像均在 `--network none`、Backend 只读挂载下完成 CMake configure/build 和 2/2 CTest。CycloneDX 1.5 SBOM 位于 `Data/Security/tmxy-backend-builder.sbom.cdx.json`，包含 343 个组件；Conan 环境显式锁定 `setuptools==83.0.0` 与 `pip==26.2`，消除旧版本的全部已知 Trivy 漏洞。
 
 检查基础镜像信息的命令：
 

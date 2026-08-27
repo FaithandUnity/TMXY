@@ -57,7 +57,7 @@ The digest-locked PostgreSQL 18.6 development image now has a local CycloneDX
 7 are bound to exact APK or version-pinned upstream evidence. Docker Scout CVE
 analysis requires an authenticated database session on this host, so no login
 was performed and vulnerability status remains pending. The final builder image
-has a local CycloneDX 1.5 SBOM with 328 components: 277 carry embedded license
+has a local CycloneDX 1.5 SBOM with 343 components: 275 carry embedded license
 data and all 51 scanner gaps are bound to hashed copyright/METADATA sources.
 `p0-12-license-evidence.json` is therefore component-complete but remains
 non-authoritative until the hosted check succeeds. Hosted vulnerability policy

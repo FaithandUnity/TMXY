@@ -2,13 +2,13 @@
 
 `Test-LocalImageEvidence.ps1` validates the locally locked PostgreSQL and Linux
 backend-builder images plus both CycloneDX SBOMs without mutating registries or
-credentials. The current SBOMs contain 77 and 328 components respectively; the
+credentials. The current SBOMs contain 77 and 343 components respectively; the
 builder SBOM hash and component count are bound to `toolchain.lock.json`.
 
 `New-LicenseEvidence.ps1` verifies both locked local image IDs, hashes the
 installed Debian/APK copyright or Python metadata for scanner gaps, verifies
 version-pinned upstream license files, and writes the component-complete
-`p0-12-license-evidence.json`. The manifest covers 77/77 PostgreSQL and 328/328
+`p0-12-license-evidence.json`. The manifest covers 77/77 PostgreSQL and 343/343
 builder components, is bound by the hosted contract, and explicitly does not
 claim release authority.
 

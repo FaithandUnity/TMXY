@@ -3,7 +3,7 @@
   "required_failure_count": 0,
   "pending_freeze_count": 0,
   "postgres_smoke_version": null,
-  "lock_sha256": "1eec622ef6724ed43e42afa79e0f711ac4595d857607e0a5e680c0652faf8a43",
+  "lock_sha256": "3dfdda97323b7aa6a308c8a6f8766e86562ab40fb61536a85ccdccb4e6f5748e",
   "environment_sha256": "9e34c14d0d9936c7d876bd4fd5a96e3949351a60ea53a88c2c2ccd861131d969",
   "checks": [
     {
@@ -76,7 +76,7 @@
       "name": "backend builder qualification evidence",
       "kind": "required",
       "passed": true,
-      "detail": "report=E:\\QQXYCodeDev\\Rebuild\\Data\\Toolchain\\backend-toolchain-qualification.json hash=1394febf62c86f339c51eb2f020f363638f1f53e95d5ddb94aa5cc297c6bf877 result=PASS"
+      "detail": "report=E:\\QQXYCodeDev\\Rebuild\\Data\\Toolchain\\backend-toolchain-qualification.json hash=599e0bd75c07b9a08748790d1bc3d9fbb9e17556e4c25114643f757e31674011 result=PASS"
     },
     {
       "name": "backend builder Dockerfile binding",
@@ -88,13 +88,13 @@
       "name": "backend builder SBOM binding",
       "kind": "required",
       "passed": true,
-      "detail": "actual=26d60ca665ae51927a8b32529e2b12c89f099fa19e7e99d5753c0e556e333d2d expected=26d60ca665ae51927a8b32529e2b12c89f099fa19e7e99d5753c0e556e333d2d"
+      "detail": "actual=996f1b19c5468a2345ca81034c3d3064d00367ecd1e3805b2542ba7fb2c43e26 expected=996f1b19c5468a2345ca81034c3d3064d00367ecd1e3805b2542ba7fb2c43e26"
     },
     {
       "name": "qualified backend builder image present",
       "kind": "required",
       "passed": true,
-      "detail": "actual=sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1 expected=sha256:99167572b423ccb9bab47e2f8b7a3576060ad612b80fb83a6201336664b4b6c1"
+      "detail": "actual=sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d expected=sha256:d3bcb5acf5e7eda4a2138bb6da58ce93d928423a7ee50071d5df71feec8d975d"
     },
     {
       "name": "UE MSVC qualification",

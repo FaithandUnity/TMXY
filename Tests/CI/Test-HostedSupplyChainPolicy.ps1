@@ -103,6 +103,49 @@ function Get-BlockingVulnerabilityCount {
     }).Count
 }
 
+function ConvertFrom-TrivyTimestamp {
+    param([Parameter(Mandatory = $true)][string]$Value)
+    $candidate = $Value.Trim()
+    $parsed = [DateTimeOffset]::MinValue
+    if ([DateTimeOffset]::TryParse(
+            $candidate,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::AssumeUniversal,
+            [ref]$parsed)) {
+        return $parsed.ToUniversalTime()
+    }
+
+    $match = [regex]::Match(
+        $candidate,
+        '^(?<date>\d{4}-\d{2}-\d{2}) (?<time>\d{2}:\d{2}:\d{2})(?<fraction>\.\d+)? (?<sign>[+-])(?<hours>\d{2})(?<minutes>\d{2})(?: UTC)?$')
+    if (-not $match.Success) { return $null }
+    $fraction = $match.Groups['fraction'].Value
+    if ($fraction.Length -gt 8) { $fraction = $fraction.Substring(0, 8) }
+    $normalized = '{0} {1}{2} {3}{4}:{5}' -f @(
+        $match.Groups['date'].Value,
+        $match.Groups['time'].Value,
+        $fraction,
+        $match.Groups['sign'].Value,
+        $match.Groups['hours'].Value,
+        $match.Groups['minutes'].Value
+    )
+    $formats = if ([string]::IsNullOrEmpty($fraction)) {
+        @('yyyy-MM-dd HH:mm:ss zzz')
+    }
+    else {
+        @('yyyy-MM-dd HH:mm:ss.FFFFFFF zzz')
+    }
+    if (-not [DateTimeOffset]::TryParseExact(
+            $normalized,
+            $formats,
+            [Globalization.CultureInfo]::InvariantCulture,
+            [Globalization.DateTimeStyles]::None,
+            [ref]$parsed)) {
+        return $null
+    }
+    return $parsed.ToUniversalTime()
+}
+
 $contract = Get-Content -LiteralPath $contractPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $postgresSbom = Get-Content -LiteralPath $postgresSbomPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -151,6 +194,7 @@ $postgresBlocking = 0
 $builderBlocking = 0
 $databaseIdentitySha = ''
 $databaseUpdatedAt = ''
+$databaseDownloadedAt = ''
 $databaseAgeHours = $null
 
 if ($Mode -ne 'ContractOnly') {
@@ -168,21 +212,21 @@ if ($Mode -ne 'ContractOnly') {
         if ($identity -notmatch "(?m)^Version:\s*${expectedScannerVersion}\s*$") {
             Add-SupplyFailure 'Vulnerability scanner identity does not match the hosted contract.'
         }
-        $updatedMatch = [regex]::Match($identity, '(?m)^\s*UpdatedAt:\s*(?<value>\S+)\s*$')
-        if ($identity -notmatch '(?m)^Vulnerability DB:\s*$' -or -not $updatedMatch.Success) {
-            Add-SupplyFailure 'Vulnerability database version and UpdatedAt identity are missing.'
+        $updatedMatch = [regex]::Match($identity, '(?m)^\s*UpdatedAt:\s*(?<value>.+?)\s*$')
+        $downloadedMatch = [regex]::Match($identity, '(?m)^\s*DownloadedAt:\s*(?<value>.+?)\s*$')
+        if ($identity -notmatch '(?m)^Vulnerability DB:\s*$' -or
+            -not $updatedMatch.Success -or -not $downloadedMatch.Success) {
+            Add-SupplyFailure 'Vulnerability database version, UpdatedAt, or DownloadedAt identity is missing.'
         }
         else {
-            $updated = [DateTimeOffset]::MinValue
-            if (-not [DateTimeOffset]::TryParse(
-                    $updatedMatch.Groups['value'].Value,
-                    [Globalization.CultureInfo]::InvariantCulture,
-                    [Globalization.DateTimeStyles]::AssumeUniversal,
-                    [ref]$updated)) {
-                Add-SupplyFailure 'Vulnerability database UpdatedAt identity is invalid.'
+            $updated = ConvertFrom-TrivyTimestamp -Value $updatedMatch.Groups['value'].Value
+            $downloaded = ConvertFrom-TrivyTimestamp -Value $downloadedMatch.Groups['value'].Value
+            if ($null -eq $updated -or $null -eq $downloaded) {
+                Add-SupplyFailure 'Vulnerability database UpdatedAt or DownloadedAt identity is invalid.'
             }
             else {
-                $databaseUpdatedAt = $updated.ToUniversalTime().ToString('o')
+                $databaseUpdatedAt = $updated.ToString('o')
+                $databaseDownloadedAt = $downloaded.ToString('o')
                 $databaseAgeHours = ([DateTimeOffset]::UtcNow - $updated).TotalHours
                 $maxAgeHours = [int]$contract.supply_chain.vulnerability_database_max_age_hours
                 if ($databaseAgeHours -lt -1 -or $databaseAgeHours -gt $maxAgeHours) {
@@ -220,6 +264,7 @@ $report = [pscustomobject][ordered]@{
     }
     vulnerability_database_identity_sha256 = $databaseIdentitySha
     vulnerability_database_updated_utc = $databaseUpdatedAt
+    vulnerability_database_downloaded_utc = $databaseDownloadedAt
     vulnerability_database_age_hours = $databaseAgeHours
     license_evidence_sha256 = $licenseEvidenceSha
     failure_count = $failures.Count

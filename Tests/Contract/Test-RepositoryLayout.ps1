@@ -136,6 +136,7 @@ $requiredFiles = @(
     'Data/Performance/p0-platform-budget.json',
     'Data/Security/postgres-18.6.sbom.cdx.json',
     'Data/Security/p0-12-license-evidence.json',
+    'Data/Security/p0-12-postgres-vulnerability-disposition.json',
     'Data/Security/secret-provider-binding.json',
     'Data/Toolchain/registry-preflight.json',
     'Deploy/compose/compose.yaml',

@@ -2,10 +2,10 @@
 
 `Invoke-LocalQualityGates.ps1` is the platform-neutral rehearsal entry point.
 It executes repository, Secret, golden-metadata, backend format/tidy, diagnostic
-Linux build/CTest, the offline PostgreSQL refresh-preflight regression, and
-optional UE Automation checks, then emits one JSON report. The refresh fixtures
-prove unchanged, changed, and malformed Docker Hub observations never modify the
-locked image.
+Linux build/CTest, the offline PostgreSQL refresh-preflight regression, the
+derived PostgreSQL source/evidence contract, and optional UE Automation checks,
+then emits one JSON report. The refresh fixtures prove unchanged, changed, and
+malformed Docker Hub observations never modify the locked image.
 
 ```powershell
 pwsh -NoProfile -File .\Tests\CI\Invoke-LocalQualityGates.ps1 `

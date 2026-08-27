@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param(
     [string]$RebuildRoot = 'E:\QQXYCodeDev\Rebuild',
+    [string]$ImageReference = '',
     [string]$OutputPath = 'E:\QQXYCodeDev\Rebuild\Data\BuildBaseline\p0-12-postgres-migration.json'
 )
 
@@ -9,7 +10,10 @@ $ErrorActionPreference = 'Stop'
 $root = [System.IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
 $lock = Get-Content -LiteralPath (Join-Path $root 'Data/Toolchain/toolchain.lock.json') -Raw |
     ConvertFrom-Json
-$image = [string]$lock.database.development_image.digest_reference
+$image = if ([string]::IsNullOrWhiteSpace($ImageReference)) {
+    [string]$lock.database.development_image.digest_reference
+}
+else { $ImageReference }
 $expectedVersion = [string]$lock.database.qualified_minor
 $migrationRoot = Join-Path $root 'Backend/adapters/persistence_postgres/migrations'
 $migrationFile = Join-Path $migrationRoot 'V0001__runtime_contract.sql'

@@ -122,7 +122,7 @@ Assert-Contract (-not [bool]$contract.authority_evidence.local_diagnostic_report
     'Local diagnostic evidence must never be release authority.'
 Assert-Contract ([int]$contract.authority_evidence.minimum_retention_days -eq 365) `
     'Hosted authority evidence retention must remain 365 days.'
-Assert-Contract ([int]$hostingStatus.schema_version -eq 3 -and
+Assert-Contract ([int]$hostingStatus.schema_version -eq 4 -and
     [string]$hostingStatus.provider.repository -eq 'FaithandUnity/TMXY' -and
     [string]$hostingStatus.provider.visibility -eq 'public') `
     'GitHub hosting observation must identify the bound repository.'
@@ -171,6 +171,21 @@ Assert-Contract (($forkApprovalPolicySatisfied -and
     'The public fork approval blocker must match the observed GitHub policy.'
 Assert-Contract ([int]$hostingStatus.runners.matching_ephemeral_ue58_count -eq 0) `
     'Current evidence must retain the missing UE 5.8 ephemeral runner blocker.'
+Assert-Contract ([bool]$hostingStatus.release_environment.present -and
+    [bool]$hostingStatus.release_environment.protected_branch_deployments_only -and
+    $hostingBlockers -notcontains 'p0_release_environment_missing_or_unprotected') `
+    'The p0-release environment must accept deployments only from protected branches.'
+$retentionSatisfied = [bool]$hostingStatus.artifact_retention.requirement_satisfied
+Assert-Contract ([int]$hostingStatus.artifact_retention.api_status -eq 200 -and
+    [int]$hostingStatus.artifact_retention.minimum_required_days -eq 365 -and
+    (($retentionSatisfied -and
+            [int]$hostingStatus.artifact_retention.configured_days -ge 365 -and
+            [int]$hostingStatus.artifact_retention.maximum_allowed_days -ge 365 -and
+            $hostingBlockers -notcontains 'minimum_365_day_immutable_retention_missing') -or
+        (-not $retentionSatisfied -and
+            [int]$hostingStatus.artifact_retention.configured_days -lt 365 -and
+            $hostingBlockers -contains 'minimum_365_day_immutable_retention_missing'))) `
+    'The retention blocker must match the observed GitHub artifact-retention authority.'
 
 $workflowContract = (& (Join-Path $root 'Tests\CI\Test-HostedWorkflowContract.ps1') `
         -RebuildRoot $root) | ConvertFrom-Json

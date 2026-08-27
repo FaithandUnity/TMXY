@@ -118,6 +118,9 @@ $postgresRefreshPreflight = Invoke-JsonTest `
 $postgresOfficialCandidate = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\CI\Test-PostgresOfficialCandidate.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$postgresDerivedImageContract = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresDerivedImageContract.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $postgresGosuReachability = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\CI\Test-PostgresGosuReachabilityReview.ps1') `
     -Arguments @{ RebuildRoot = $root }
@@ -170,6 +173,7 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$auxiliaryAssets.completion_criteria_satisfied -and
     [string]$assetInterchange.result -eq 'PASS' -and
     [bool]$assetInterchange.completion_criteria_satisfied -and
+    [string]$postgresDerivedImageContract.result -eq 'PASS' -and
     [string]$ueGoldenHost.result -eq 'PASS' -and
     [bool]$ueGoldenHost.completion_criteria_satisfied -and
     [string]$ueImporter.result -eq 'PASS' -and
@@ -240,6 +244,7 @@ $report = [pscustomobject][ordered]@{
     hosted_workflow_contract = $hostedWorkflowContract
     postgres_refresh_preflight = $postgresRefreshPreflight
     postgres_official_candidate = $postgresOfficialCandidate
+    postgres_derived_image_contract = $postgresDerivedImageContract
     postgres_gosu_reachability = $postgresGosuReachability
     postgres_gosu_waiver = $postgresGosuWaiver
     ue_packaging_waiver = $uePackagingWaiver

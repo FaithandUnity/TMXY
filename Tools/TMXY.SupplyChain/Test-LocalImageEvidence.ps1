@@ -20,6 +20,14 @@ $postgresReachabilitySarifPath = Join-Path $root 'Data\Security\p0-12-postgres-g
 $postgresReachabilityOsvPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-GO-2026-4970.osv.json'
 $postgresWaiverRequestPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-waiver-request.json'
 $postgresWaiverDecisionPath = Join-Path $root 'Data\Security\p0-12-postgres-gosu-waiver-decision.json'
+$postgresDerivedQualificationPath = Join-Path $root 'Data\Security\p0-12-postgres-derived-image-qualification.json'
+$postgresDerivedDockerfilePath = Join-Path $root 'Deploy\postgres\Dockerfile'
+$postgresDerivedSbomPath = Join-Path $root 'Data\Security\tmxy-postgres-18.6-gosu-go1.26.7.sbom.cdx.json'
+$postgresDerivedImageScanPath = Join-Path $root 'Data\Security\p0-12-postgres-derived-image-vulnerabilities.json'
+$postgresDerivedSbomScanPath = Join-Path $root 'Data\Security\p0-12-postgres-derived-vulnerabilities.json'
+$postgresDerivedDatabasePath = Join-Path $root 'Data\Security\p0-12-postgres-derived-vulnerability-database-identity.txt'
+$postgresDerivedGovulncheckPath = Join-Path $root 'Data\Security\p0-12-postgres-derived-gosu-govulncheck.sarif.json'
+$postgresDerivedMigrationPath = Join-Path $root 'Data\BuildBaseline\p0-12-postgres-derived-migration.json'
 $lock = Get-Content -LiteralPath $lockPath -Raw | ConvertFrom-Json
 $expectedReference = [string]$lock.database.development_image.digest_reference
 
@@ -202,15 +210,57 @@ $postgresWaiverBound = [string]$postgresWaiverRequest.waiver_id -eq 'WVR-0002' -
         $postgresCandidateSha -and
     [string]$postgresWaiverDecision.bindings.toolchain_lock_sha256 -eq $lockSha -and
     [string]$postgresWaiverDecision.bindings.compose_sha256 -eq $composeSha
+$postgresDerivedQualification = Get-Content -LiteralPath $postgresDerivedQualificationPath -Raw |
+    ConvertFrom-Json
+$postgresDerivedQualificationSha = (Get-FileHash -LiteralPath $postgresDerivedQualificationPath `
+        -Algorithm SHA256).Hash.ToLowerInvariant()
+$postgresDerivedQualified = [string]$postgresDerivedQualification.result -eq 'PASS_DIAGNOSTIC' -and
+    -not [bool]$postgresDerivedQualification.completion_criteria_satisfied -and
+    -not [bool]$postgresDerivedQualification.release_authority -and
+    -not [bool]$postgresDerivedQualification.lock_update_performed -and
+    [string]$postgresDerivedQualification.candidate.image_id -eq
+        'sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b' -and
+    [string]$postgresDerivedQualification.candidate.base_image_id -eq $expectedImageId -and
+    [string]$postgresDerivedQualification.candidate.gosu_sha256 -eq
+        'dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb' -and
+    -not [bool]$postgresDerivedQualification.candidate.registry_published -and
+    -not [bool]$postgresDerivedQualification.candidate.signed_provenance_attached -and
+    -not [bool]$postgresDerivedQualification.candidate.oci_attestation_attached -and
+    [bool]$postgresDerivedQualification.reproducibility.binary_reproducible -and
+    -not [bool]$postgresDerivedQualification.reproducibility.oci_manifest_reproducible -and
+    [int]$postgresDerivedQualification.vulnerability.previous_high_or_critical -eq 22 -and
+    [int]$postgresDerivedQualification.vulnerability.direct_image.high_or_critical -eq 0 -and
+    [int]$postgresDerivedQualification.vulnerability.final_filesystem_sbom.high_or_critical -eq 0 -and
+    [int]$postgresDerivedQualification.vulnerability.govulncheck_result_count -eq 0 -and
+    [bool]$postgresDerivedQualification.sbom.image_id_bound -and
+    [string]$postgresDerivedQualification.migration.result -eq 'PASS' -and
+    [string]$postgresDerivedQualification.decision.status -eq
+        'QUALIFIED_LOCAL_CANDIDATE_REQUIRES_REGISTRY_AUTHORITY' -and
+    [string]$postgresDerivedQualification.bindings.dockerfile_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedDockerfilePath -Algorithm SHA256).Hash.ToLowerInvariant() -and
+    [string]$postgresDerivedQualification.bindings.toolchain_lock_sha256 -eq $lockSha -and
+    [string]$postgresDerivedQualification.bindings.vulnerability_disposition_sha256 -eq $dispositionSha -and
+    [string]$postgresDerivedQualification.bindings.sbom_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedSbomPath -Algorithm SHA256).Hash.ToLowerInvariant() -and
+    [string]$postgresDerivedQualification.bindings.direct_image_scan_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedImageScanPath -Algorithm SHA256).Hash.ToLowerInvariant() -and
+    [string]$postgresDerivedQualification.bindings.sbom_scan_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedSbomScanPath -Algorithm SHA256).Hash.ToLowerInvariant() -and
+    [string]$postgresDerivedQualification.bindings.vulnerability_database_identity_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedDatabasePath -Algorithm SHA256).Hash.ToLowerInvariant() -and
+    [string]$postgresDerivedQualification.bindings.govulncheck_sarif_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedGovulncheckPath -Algorithm SHA256).Hash.ToLowerInvariant() -and
+    [string]$postgresDerivedQualification.bindings.migration_sha256 -eq
+        (Get-FileHash -LiteralPath $postgresDerivedMigrationPath -Algorithm SHA256).Hash.ToLowerInvariant()
 
 $scoutVersionOutput = (docker scout version 2>$null) -join "`n"
 $scoutVersion = if ($scoutVersionOutput -match 'version:\s*([^\s]+)') { $Matches[1] } else { 'unknown' }
 $passed = $imageVerified -and $postgresSbomVerified -and $builderImageVerified -and
     $builderSbomVerified -and [string]$licensePolicy.result -eq 'PASS_DIAGNOSTIC' -and
     $postgresDispositionBound -and $postgresRefreshBound -and $postgresCandidateBound -and
-    $postgresReachabilityBound -and $postgresWaiverBound
+    $postgresReachabilityBound -and $postgresWaiverBound -and $postgresDerivedQualified
 $report = [pscustomobject][ordered]@{
-    schema_version = 9
+    schema_version = 10
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($passed) { 'PASS_WITH_PENDING_AUTHORITY' } else { 'FAIL' }
     release_authority = $false
@@ -259,7 +309,7 @@ $report = [pscustomobject][ordered]@{
     }
     scanner = [pscustomobject][ordered]@{
         docker_scout_version = $scoutVersion
-        vulnerability_status = 'hosted_postgres_blocked_pending_remediation_or_approved_waiver'
+        vulnerability_status = 'derived_candidate_locally_qualified_pending_registry_authority'
         hosted_scanner = [string]$postgresDisposition.hosted_scan.scanner
         hosted_scanner_version = [string]$postgresDisposition.hosted_scan.scanner_version
         hosted_database_updated_utc = $hostedDatabaseUpdatedUtc
@@ -267,6 +317,22 @@ $report = [pscustomobject][ordered]@{
         disposition = 'Data/Security/p0-12-postgres-vulnerability-disposition.json'
         disposition_bound = $postgresDispositionBound
         note = 'Hosted Trivy evidence is authoritative for the recorded PostgreSQL blocker; unauthenticated local Docker Scout remains supplementary only.'
+    }
+    postgres_derived_candidate = [pscustomobject][ordered]@{
+        file = 'Data/Security/p0-12-postgres-derived-image-qualification.json'
+        sha256 = $postgresDerivedQualificationSha
+        result = [string]$postgresDerivedQualification.result
+        image_id = [string]$postgresDerivedQualification.candidate.image_id
+        gosu_sha256 = [string]$postgresDerivedQualification.candidate.gosu_sha256
+        previous_high_or_critical = [int]$postgresDerivedQualification.vulnerability.previous_high_or_critical
+        direct_image_high_or_critical = [int]$postgresDerivedQualification.vulnerability.direct_image.high_or_critical
+        sbom_high_or_critical = [int]$postgresDerivedQualification.vulnerability.final_filesystem_sbom.high_or_critical
+        govulncheck_result_count = [int]$postgresDerivedQualification.vulnerability.govulncheck_result_count
+        migration_result = [string]$postgresDerivedQualification.migration.result
+        binary_reproducible = [bool]$postgresDerivedQualification.reproducibility.binary_reproducible
+        registry_published = [bool]$postgresDerivedQualification.candidate.registry_published
+        release_authority = [bool]$postgresDerivedQualification.release_authority
+        bindings_verified = $postgresDerivedQualified
     }
     postgres_refresh_preflight = [pscustomobject][ordered]@{
         file = 'Data/Security/p0-12-postgres-refresh-preflight.json'
@@ -337,8 +403,8 @@ $report = [pscustomobject][ordered]@{
     }
     pending = @(
         'Provider-generated passing results for all eight stable checks; GitHub main protection is active',
-        'Set public fork workflow approval to all_external_contributors and prove disposable UE runner isolation before registration',
-        'Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or explicitly approve WVR-0002 with current-HEAD reviews and a maximum-30-day interval; the checked-in draft is not effective',
+        'Public fork workflow approval is all_external_contributors; prove disposable UE runner isolation before registration',
+        'Publish the locally qualified PostgreSQL candidate at sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b with packages:write authority, rerun hosted scans, and attach signed provenance before changing the lock',
         'The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image',
         'Exact locked builder manifest verified in GHCR',
         'Provision the labeled ephemeral UE 5.8 hosted runner',

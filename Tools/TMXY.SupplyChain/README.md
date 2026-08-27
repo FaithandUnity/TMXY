@@ -37,6 +37,22 @@ blocker without being misrepresented as a new vulnerability scan. Changed bytes
 still require SBOM, hosted scanning, migration tests, full gates, and review.
 Its offline regression covers identical, changed, and malformed probe evidence.
 
+`Deploy/postgres/Dockerfile` is the explicitly authorized derived-image path.
+It retains the exact PostgreSQL 18.6 base digest, rebuilds reviewed `gosu` 1.19
+source at commit `6456aaa0f3c854d199d0f037f068eb97515b7513` with the digest-locked Go
+1.26.7 toolchain, and applies only the exact Alpine OpenSSL 3.5.8-r0 fixes.
+The source archive SHA-256, build identity, static linux/amd64 target, and
+normalized timestamps are contract-tested. `New-PostgresDerivedImageQualification.ps1`
+binds the resulting local OCI ID, final-filesystem CycloneDX 1.7 SBOM, direct
+image and SBOM Trivy scans, current database identity, `govulncheck` SARIF,
+networkless privilege switch, and real PostgreSQL migration. The qualified
+candidate is `sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b`:
+both Trivy paths contain zero HIGH/CRITICAL findings and `govulncheck` reports
+zero results. Independent no-cache builds reproduced the exact `gosu` bytes;
+their BuildKit manifest IDs differed, so OCI-manifest reproducibility is not
+claimed. The report remains diagnostic until that exact manifest is published,
+hosted-scanned, signed, and attested.
+
 `New-PostgresGosuReachabilityReview.ps1` binds the exact locked `gosu` bytes and
 Go build metadata to an official `govulncheck v1.7.0` binary-mode SARIF scan,
 the official `GO-2026-4970` OSV package/symbol record, the PostgreSQL entrypoint,
@@ -47,9 +63,12 @@ a waiver, owner approval, lock update, merge authority, or release authority.
 Its offline regression also proves that a reachable symbol stays blocking and a
 missing mapped result fails closed.
 
-Hosted Trivy evidence is the vulnerability-policy input. The recorded
-PostgreSQL result remains blocked on 22 HIGH/CRITICAL findings; a new hosted run
-must verify the 314-component builder after build-only pip/setuptools removal.
+Hosted Trivy evidence is the vulnerability-policy input. The recorded locked
+PostgreSQL image remains blocked on 22 HIGH/CRITICAL findings, while the newly
+qualified local derived candidate removes them. The lock is deliberately not
+changed until the exact candidate is published and verified by a hosted run.
+A new hosted run must also verify the 314-component builder after build-only
+pip/setuptools removal.
 Local Docker Scout still requires authentication, so the tools never perform
 `docker login` or upgrade local diagnostics to release authority. Application
 Conan profile lockfiles are created in P4 when a real external C++ dependency

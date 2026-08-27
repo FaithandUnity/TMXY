@@ -1,6 +1,6 @@
 {
-  "schema_version": 9,
-  "captured_utc": "2026-08-27T19:55:39.8082648+00:00",
+  "schema_version": 10,
+  "captured_utc": "2026-08-27T23:31:12.1081990+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -46,7 +46,7 @@
   },
   "scanner": {
     "docker_scout_version": "v1.24.0",
-    "vulnerability_status": "hosted_postgres_blocked_pending_remediation_or_approved_waiver",
+    "vulnerability_status": "derived_candidate_locally_qualified_pending_registry_authority",
     "hosted_scanner": "trivy",
     "hosted_scanner_version": "0.74.0",
     "hosted_database_updated_utc": "2026-08-27T09:58:17.2447905+00:00",
@@ -54,6 +54,22 @@
     "disposition": "Data/Security/p0-12-postgres-vulnerability-disposition.json",
     "disposition_bound": true,
     "note": "Hosted Trivy evidence is authoritative for the recorded PostgreSQL blocker; unauthenticated local Docker Scout remains supplementary only."
+  },
+  "postgres_derived_candidate": {
+    "file": "Data/Security/p0-12-postgres-derived-image-qualification.json",
+    "sha256": "65ca7a33d1146d8c95cc0f448513e81118d877a8eed20d37eb6f798938dc3e68",
+    "result": "PASS_DIAGNOSTIC",
+    "image_id": "sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b",
+    "gosu_sha256": "dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb",
+    "previous_high_or_critical": 22,
+    "direct_image_high_or_critical": 0,
+    "sbom_high_or_critical": 0,
+    "govulncheck_result_count": 0,
+    "migration_result": "PASS",
+    "binary_reproducible": true,
+    "registry_published": false,
+    "release_authority": false,
+    "bindings_verified": true
   },
   "postgres_refresh_preflight": {
     "file": "Data/Security/p0-12-postgres-refresh-preflight.json",
@@ -119,13 +135,13 @@
     "workflow_source_prepared": true,
     "protected_branch": true,
     "release_authority": false,
-    "blocker_count": 8,
+    "blocker_count": 7,
     "evidence": "Data/Governance/p0-github-hosting-status.json"
   },
   "pending": [
     "Provider-generated passing results for all eight stable checks; GitHub main protection is active",
-    "Set public fork workflow approval to all_external_contributors and prove disposable UE runner isolation before registration",
-    "Remediate the 22 hosted PostgreSQL HIGH/CRITICAL findings or explicitly approve WVR-0002 with current-HEAD reviews and a maximum-30-day interval; the checked-in draft is not effective",
+    "Public fork workflow approval is all_external_contributors; prove disposable UE runner isolation before registration",
+    "Publish the locally qualified PostgreSQL candidate at sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b with packages:write authority, rerun hosted scans, and attach signed provenance before changing the lock",
     "The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image",
     "Exact locked builder manifest verified in GHCR",
     "Provision the labeled ephemeral UE 5.8 hosted runner",

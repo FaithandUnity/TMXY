@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T19:55:39.8749957+00:00",
+  "captured_utc": "2026-08-27T23:32:50.4181735+00:00",
   "result": "NOT_READY",
   "p0_completed_items": 17,
   "p0_total_items": 19,
@@ -59,7 +59,7 @@
       "id": "hosted_ci_authority",
       "passed": false,
       "evidence": "Data/Governance/p0-hosted-ci-contract.json; Data/Governance/p0-github-hosting-status.json; Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "required_action": "GitHub is bound but release authority is blocked: independent_reviewer_unavailable, two_sensitive_reviewers_unavailable, ue58_ephemeral_runner_unavailable, public_fork_workflow_approval_not_all_external_contributors, locked_builder_not_verified_in_ghcr, hosted_vulnerability_and_license_authority_missing, signed_provenance_and_oci_attestation_missing, minimum_365_day_immutable_retention_missing."
+      "required_action": "GitHub is bound but release authority is blocked: independent_reviewer_unavailable, two_sensitive_reviewers_unavailable, ue58_ephemeral_runner_unavailable, locked_builder_not_verified_in_ghcr, hosted_vulnerability_and_license_authority_missing, signed_provenance_and_oci_attestation_missing, minimum_365_day_immutable_retention_missing."
     },
     {
       "id": "secret_store_binding",
@@ -75,7 +75,7 @@
     }
   ],
   "blockers": [
-    "GitHub is bound but release authority is blocked: independent_reviewer_unavailable, two_sensitive_reviewers_unavailable, ue58_ephemeral_runner_unavailable, public_fork_workflow_approval_not_all_external_contributors, locked_builder_not_verified_in_ghcr, hosted_vulnerability_and_license_authority_missing, signed_provenance_and_oci_attestation_missing, minimum_365_day_immutable_retention_missing."
+    "GitHub is bound but release authority is blocked: independent_reviewer_unavailable, two_sensitive_reviewers_unavailable, ue58_ephemeral_runner_unavailable, locked_builder_not_verified_in_ghcr, hosted_vulnerability_and_license_authority_missing, signed_provenance_and_oci_attestation_missing, minimum_365_day_immutable_retention_missing."
   ],
   "review_policy": "P0-16 and G0 cannot pass while any check is false."
 }

@@ -36,13 +36,22 @@ condition below is missing.
   nor two sensitive-change approvals can currently be satisfied.
 - No self-hosted runner exists; the required ephemeral Windows x64 UE 5.8.2
   runner is unavailable.
-- Public fork workflow approval is currently `first_time_contributors`, below
-  the required `all_external_contributors` policy for any future isolated
-  runner path.
+- Public fork workflow approval is `all_external_contributors`, satisfying the
+  source-side policy required before any future isolated runner path.
 - The locked Clang 21 builder has not been verified at the frozen digest in
   GHCR, so hosted backend jobs fail closed instead of rebuilding another image.
-- Hosted vulnerability/license authority, signed provenance, OCI attestation,
-  and immutable 365-day evidence retention do not yet exist.
+- A source-built PostgreSQL 18.6 candidate with gosu 1.19/Go 1.26.7 is locally
+  qualified at image ID
+  `sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b`:
+  direct-image and final-filesystem SBOM scans each report zero
+  HIGH/CRITICAL findings, `govulncheck` reports zero reachable findings, and
+  the real migration passes. It is not release authority until the exact
+  manifest is published and verified in the protected registry path.
+- The `p0-release` environment is protected so only protected branches may
+  deploy. GitHub Actions retention is configured at the provider/account
+  maximum of 90 days; GitHub rejected 365 days with HTTP 409, so hosted
+  vulnerability/license authority, signed provenance, OCI attestation, and an
+  external immutable evidence store covering at least 365 days remain missing.
 - The default branch exposes the required workflow, but the current protected
   checks cannot all pass until the remaining infrastructure and policy blockers
   are resolved.
@@ -68,21 +77,24 @@ The mandatory isolation contract is
 
 ## Authorized completion sequence
 
-Repository visibility and the exact `main` protection contract were explicitly
-authorized and applied on 2026-08-28. The following remaining operations change
-online governance or release authority and require separate project-owner
-confirmation before execution:
+Repository visibility, the exact `main` protection contract, strict fork
+approval, protected release environment, registry publication/signing work,
+and 365-day evidence retention were explicitly authorized on 2026-08-28. Fork
+approval and the release environment were applied. The remaining work now
+depends on identities, infrastructure, credential scope, or provider features
+that authorization alone cannot create:
 
 1. add enough independent reviewers to satisfy ordinary and sensitive-change
    review policy;
-2. set fork workflow approval to `all_external_contributors`, then provision a
-   disposable-per-job UE 5.8.2 Windows x64 execution boundary that satisfies the
-   public-runner security contract;
-3. publish the already-qualified builder manifest to GHCR without rebuilding,
-   and verify the exact digest;
+2. provision a disposable-per-job UE 5.8.2 Windows x64 execution boundary that
+   satisfies the public-runner security contract;
+3. provide a credential with `write:packages`, publish the already-qualified
+   builder and PostgreSQL manifests to GHCR without rebuilding, and verify their
+   exact digests;
 4. approve the vulnerability database and component-specific license policy;
-5. protect the `p0-release` environment, run signed provenance/OCI attestation,
-   and provide immutable evidence storage for at least 365 days;
+5. run signed provenance/OCI attestation through the protected `p0-release`
+   environment and provide external immutable evidence storage for at least
+   365 days;
 6. record provider-generated run, artifact, database, policy, and
    provenance identities, rerun local gates, and regenerate P0 readiness.
 

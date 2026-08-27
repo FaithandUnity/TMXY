@@ -40,8 +40,9 @@ must never bypass configure, dependency verification, tests, or scanning.
 GitHub provider selection, workflow source, public visibility, and the exact
 protected-`main` contract are no longer pending. Sufficient independent
 reviewers, an ephemeral UE 5.8.2 runner, publication of the exact locked builder
-manifest, approved vulnerability results, signed provenance/OCI attestation,
-and 365-day immutable retention remain blocking P0-12 items. PostgreSQL
+and locally qualified PostgreSQL manifests, hosted approval of their
+vulnerability results, signed provenance/OCI attestation, and external
+365-day immutable retention remain blocking P0-12 items. PostgreSQL
 Migration is integrated and the source-bound MSVC 14.51 waiver is checked on
 every local aggregate run. Local GCC, host clang-tidy, and UE evidence are
 valuable diagnostics but cannot close release-authority requirements.
@@ -50,9 +51,8 @@ The repository is public and the read-only API now proves HTTP 200 branch
 protection with all eight strict checks, PR/CODEOWNERS review, stale-review
 dismissal, last-push approval, administrator enforcement, and force-push/delete
 prohibition. It still has only one collaborator and zero self-hosted runners.
-Fork workflow approval remains `first_time_contributors`; it must reach
-`all_external_contributors` and the disposable isolation contract must be proven
-before runner registration can be authorized. The base workflow prevents fork
+Fork workflow approval is now `all_external_contributors`. The disposable
+isolation contract must still be proven before runner registration. The base workflow prevents fork
 PRs from scheduling UE execution and makes the stable hosted check fail closed,
 but that guard is not sufficient registration authority because PR workflow
 source is attacker-controlled.
@@ -68,6 +68,15 @@ upstream observation and its bound inputs are unchanged. This prevents a
 timestamp-only rewrite from invalidating the downstream official-candidate,
 reachability, and waiver hashes; changed upstream semantics still produce new
 evidence and require full qualification.
+The explicitly authorized derived image retains that exact base, rebuilds gosu
+1.19 from a SHA-256-bound source archive using Go 1.26.7, and pins Alpine
+`libcrypto3`/`libssl3` to 3.5.8-r0. Its local OCI ID is
+`sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b`.
+Direct-image and final-filesystem-SBOM Trivy 0.74.0 scans both report zero
+HIGH/CRITICAL findings, `govulncheck` reports zero results, and PostgreSQL 18.6
+migration validation passes. This is a locally qualified candidate, not release
+authority: the exact manifest must still be published and hosted-qualified
+before the lock or Compose reference changes.
 The locked `gosu` binary now also has a source- and binary-bound reachability
 review. Official `govulncheck v1.7.0` binary-mode SARIF maps all 22 blockers:
 zero symbol-reachable, one package-only, and 21 module-only results. The one
@@ -107,3 +116,8 @@ The identity is generated from the exact cache used by both scans and must
 carry Trivy 0.74.0 plus a vulnerability-database `UpdatedAt` no older than 48
 hours, plus the corresponding `DownloadedAt`. A tool-only version string is
 rejected as incomplete evidence.
+The repository retention API reports 90 configured days and a 90-day account
+maximum; GitHub rejected the authorized 365-day request with HTTP 409. The
+protected `p0-release` environment now exists and accepts deployments only from
+protected branches, but 365-day authority evidence therefore requires a
+separate immutable evidence store or an account capability change.

@@ -1,6 +1,6 @@
 {
-  "schema_version": 3,
-  "captured_utc": "2026-08-27T19:55:38.7509285+00:00",
+  "schema_version": 4,
+  "captured_utc": "2026-08-27T21:25:39.0881238+00:00",
   "result": "BLOCKED_EXTERNAL_AUTHORITY",
   "completion_criteria_satisfied": false,
   "release_authority": false,
@@ -14,7 +14,7 @@
     "remote_url": "https://github.com/FaithandUnity/TMXY.git"
   },
   "source": {
-    "revision": "a08a3d89767655d5c38d6cd94444ad4549f0e0e7",
+    "revision": "66095a7274e80c0f6bd2ed1f44cfd38df1ce4c6c",
     "branch": "build/p0-12-github-actions"
   },
   "branch_authority": {
@@ -69,8 +69,8 @@
     "allowed_actions": "all",
     "default_workflow_permissions": "read",
     "fork_pr_contributor_approval_api_status": 200,
-    "fork_pr_contributor_approval_policy": "first_time_contributors",
-    "fork_pr_contributor_approval_policy_satisfied": false,
+    "fork_pr_contributor_approval_policy": "all_external_contributors",
+    "fork_pr_contributor_approval_policy_satisfied": true,
     "public_repository_runner_registration_authorized": false,
     "workflow_count_on_default_branch": 1,
     "repository_secret_count": 0,
@@ -81,18 +81,31 @@
     "self_hosted_count": 0,
     "matching_ephemeral_ue58_count": 0
   },
+  "release_environment": {
+    "name": "p0-release",
+    "api_status": 200,
+    "present": true,
+    "protected_branch_deployments_only": true,
+    "required_reviewer_count": 0
+  },
+  "artifact_retention": {
+    "api_status": 200,
+    "configured_days": 90,
+    "maximum_allowed_days": 90,
+    "minimum_required_days": 365,
+    "requirement_satisfied": false
+  },
   "local_workflow_binding": {
     "required_checks_workflow_present": true,
     "release_provenance_workflow_present": true,
     "diagnostic_artifact_retention_days": 90,
     "minimum_required_retention_days": 365
   },
-  "blocker_count": 8,
+  "blocker_count": 7,
   "blockers": [
     "independent_reviewer_unavailable",
     "two_sensitive_reviewers_unavailable",
     "ue58_ephemeral_runner_unavailable",
-    "public_fork_workflow_approval_not_all_external_contributors",
     "locked_builder_not_verified_in_ghcr",
     "hosted_vulnerability_and_license_authority_missing",
     "signed_provenance_and_oci_attestation_missing",

@@ -80,8 +80,10 @@ $requests = @(
     @('runners', "$base/actions/runners?per_page=100"),
     @('actions_permissions', "$base/actions/permissions"),
     @('workflow_permissions', "$base/actions/permissions/workflow"),
+    @('artifact_retention', "$base/actions/permissions/artifact-and-log-retention"),
     @('fork_pr_contributor_approval', "$base/actions/permissions/fork-pr-contributor-approval"),
     @('environments', "$base/environments?per_page=100"),
+    @('p0_release_environment', "$base/environments/p0-release"),
     @('collaborators', "$base/collaborators?affiliation=direct&per_page=100"),
     @('secrets', "$base/actions/secrets?per_page=100"),
     @('variables', "$base/actions/variables?per_page=100"),
@@ -150,6 +152,26 @@ $workflowCount = if ($results.workflows.status -eq 200) {
     @($results.workflows.body.workflows).Count
 }
 else { 0 }
+$p0ReleaseEnvironment = if ($results.p0_release_environment.status -eq 200) {
+    $results.p0_release_environment.body
+}
+else { $null }
+$p0ReleaseEnvironmentProtected = $null -ne $p0ReleaseEnvironment -and
+    [bool]$p0ReleaseEnvironment.deployment_branch_policy.protected_branches -and
+    -not [bool]$p0ReleaseEnvironment.deployment_branch_policy.custom_branch_policies -and
+    @($p0ReleaseEnvironment.protection_rules | Where-Object {
+            [string]$_.type -eq 'branch_policy'
+        }).Count -eq 1
+$artifactRetentionDays = if ($results.artifact_retention.status -eq 200) {
+    [int]$results.artifact_retention.body.days
+}
+else { 0 }
+$maximumArtifactRetentionDays = if ($results.artifact_retention.status -eq 200) {
+    [int]$results.artifact_retention.body.maximum_allowed_days
+}
+else { 0 }
+$minimumRetentionSatisfied = $artifactRetentionDays -ge 365 -and
+    $maximumArtifactRetentionDays -ge 365
 $blockers = [System.Collections.Generic.List[string]]::new()
 if (-not $branchProtected) { $blockers.Add('main_unprotected') }
 if ($results.protection.status -ne 200) { $blockers.Add('branch_protection_api_unavailable') }
@@ -163,13 +185,18 @@ if ($workflowCount -eq 0) { $blockers.Add('hosted_workflows_not_on_default_branc
 if ($repositoryPublic -and -not $forkApprovalPolicySatisfied) {
     $blockers.Add('public_fork_workflow_approval_not_all_external_contributors')
 }
+if (-not $p0ReleaseEnvironmentProtected) {
+    $blockers.Add('p0_release_environment_missing_or_unprotected')
+}
 $blockers.Add('locked_builder_not_verified_in_ghcr')
 $blockers.Add('hosted_vulnerability_and_license_authority_missing')
 $blockers.Add('signed_provenance_and_oci_attestation_missing')
-$blockers.Add('minimum_365_day_immutable_retention_missing')
+if (-not $minimumRetentionSatisfied) {
+    $blockers.Add('minimum_365_day_immutable_retention_missing')
+}
 
 $report = [pscustomobject][ordered]@{
-    schema_version = 3
+    schema_version = 4
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = 'BLOCKED_EXTERNAL_AUTHORITY'
     completion_criteria_satisfied = $false
@@ -280,6 +307,25 @@ $report = [pscustomobject][ordered]@{
     runners = [pscustomobject][ordered]@{
         self_hosted_count = @($runnerRecords).Count
         matching_ephemeral_ue58_count = @($matchingUeRunners).Count
+    }
+    release_environment = [pscustomobject][ordered]@{
+        name = 'p0-release'
+        api_status = $results.p0_release_environment.status
+        present = $null -ne $p0ReleaseEnvironment
+        protected_branch_deployments_only = $p0ReleaseEnvironmentProtected
+        required_reviewer_count = if ($null -ne $p0ReleaseEnvironment) {
+            @($p0ReleaseEnvironment.protection_rules |
+                Where-Object { [string]$_.type -eq 'required_reviewers' } |
+                ForEach-Object { @($_.reviewers) }).Count
+        }
+        else { 0 }
+    }
+    artifact_retention = [pscustomobject][ordered]@{
+        api_status = $results.artifact_retention.status
+        configured_days = $artifactRetentionDays
+        maximum_allowed_days = $maximumArtifactRetentionDays
+        minimum_required_days = 365
+        requirement_satisfied = $minimumRetentionSatisfied
     }
     local_workflow_binding = [pscustomobject][ordered]@{
         required_checks_workflow_present = Test-Path -LiteralPath (

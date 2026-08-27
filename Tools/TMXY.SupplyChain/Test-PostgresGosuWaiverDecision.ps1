@@ -94,6 +94,11 @@ function Test-ApprovalObservation {
         [Parameter(Mandatory = $true)][object]$Request,
         [Parameter(Mandatory = $true)][string]$RequestSha256
     )
+    $emptyResult = [pscustomobject][ordered]@{
+        approvals = @()
+        owner_authorization_verified = $false
+        owner_authorization_mode = 'unverified'
+    }
     if ([string]$Observation.repository -ne 'FaithandUnity/TMXY' -or
         [int]$Observation.pull_request_number -ne [int]$Request.approval.pull_request_number -or
         [bool]$Observation.pull_request_draft -or
@@ -103,7 +108,7 @@ function Test-ApprovalObservation {
         [string]$Observation.request_sha256_at_head -ne $RequestSha256 -or
         [string]$Observation.local_request_sha256 -ne $RequestSha256) {
         Add-Failure 'Approval PR does not bind the exact request at a reviewable current HEAD.'
-        return @()
+        return $emptyResult
     }
     $latestReviews = @($Observation.reviews | Group-Object { ([string]$_.user).ToLowerInvariant() } |
         ForEach-Object { @($_.Group | Sort-Object { [DateTimeOffset]$_.submitted_at } -Descending)[0] })
@@ -118,11 +123,27 @@ function Test-ApprovalObservation {
     $uniqueApprovers = @($approvals | ForEach-Object { ([string]$_.user).ToLowerInvariant() } |
         Sort-Object -Unique)
     $ownerLogin = ([string]$Request.approval.owner_login).ToLowerInvariant()
-    if ($uniqueApprovers.Count -lt [int]$Request.approval.required_unique_non_author_approvals -or
-        $uniqueApprovers -notcontains $ownerLogin) {
-        Add-Failure 'Approval PR lacks the required current-HEAD non-author reviews and owner approval.'
+    $ownerIsPrAuthor = [string]::Equals(
+        $ownerLogin,
+        ([string]$Observation.pull_request_author).ToLowerInvariant(),
+        [StringComparison]::Ordinal)
+    $ownerAuthorizationVerified = if ($ownerIsPrAuthor) {
+        [bool]$Request.approval.owner_approval
     }
-    return $approvals
+    else { $uniqueApprovers -contains $ownerLogin }
+    $ownerAuthorizationMode = if ($ownerIsPrAuthor) {
+        'owner_authenticated_pr_author_exact_request'
+    }
+    else { 'owner_current_head_review' }
+    if ($uniqueApprovers.Count -lt [int]$Request.approval.required_unique_non_author_approvals -or
+        -not $ownerAuthorizationVerified) {
+        Add-Failure 'Approval PR lacks two current-HEAD non-author reviews or verified owner authorization.'
+    }
+    return [pscustomobject][ordered]@{
+        approvals = $approvals
+        owner_authorization_verified = $ownerAuthorizationVerified
+        owner_authorization_mode = $ownerAuthorizationMode
+    }
 }
 
 $bindingPaths = [ordered]@{
@@ -188,6 +209,9 @@ if ($null -ne $request -and $null -ne $disposition -and $null -ne $reachability 
     if ([int]$request.duration.maximum_days -ne 30 -or
         [int]$request.approval.required_unique_non_author_approvals -ne 2 -or
         [string]$request.approval.owner_login -ne 'FaithandUnity' -or
+        [string]$request.approval.owner_authorization_mode -ne
+            'owner_as_pr_author_or_current_head_reviewer' -or
+        @($request.approval.approved_review_ids).Count -ne 0 -or
         -not [bool]$request.approval.reviews_must_match_current_head -or
         -not [bool]$request.approval.dismiss_stale_approvals -or
         -not [bool]$request.approval.authenticated_github_api_verification_required -or
@@ -199,7 +223,10 @@ if ($null -ne $request -and $null -ne $disposition -and $null -ne $reachability 
 }
 
 $observation = $null
+$approvalEvaluation = $null
 $approvals = @()
+$ownerAuthorizationVerified = $false
+$ownerAuthorizationMode = 'unverified'
 $effective = $false
 $decision = 'WAIVER_EVALUATION_FAILED_CLOSED'
 $evaluationMode = if ($FixtureMode) { 'offline_fixture_non_authoritative' } else { 'local_draft' }
@@ -254,8 +281,12 @@ if ($null -ne $request -and $failures.Count -eq 0) {
                     $evaluationMode = 'authenticated_github_api'
                     $observation = Get-LiveApprovalObservation -Request $request -RequestSha256 $requestSha
                 }
-                $approvals = @(Test-ApprovalObservation -Observation $observation `
-                        -Request $request -RequestSha256 $requestSha)
+                $approvalEvaluation = Test-ApprovalObservation -Observation $observation `
+                    -Request $request -RequestSha256 $requestSha
+                $approvals = @($approvalEvaluation.approvals)
+                $ownerAuthorizationVerified =
+                    [bool]$approvalEvaluation.owner_authorization_verified
+                $ownerAuthorizationMode = [string]$approvalEvaluation.owner_authorization_mode
             }
             catch { Add-Failure "Approval verification failed: $($_.Exception.Message)" }
         }
@@ -292,6 +323,8 @@ $report = [pscustomobject][ordered]@{
     release_authority = $false
     approval = [pscustomobject][ordered]@{
         owner_login = if ($null -ne $request) { [string]$request.approval.owner_login } else { '' }
+        owner_authorization_verified = $ownerAuthorizationVerified
+        owner_authorization_mode = $ownerAuthorizationMode
         required_unique_non_author_approvals = if ($null -ne $request) {
             [int]$request.approval.required_unique_non_author_approvals
         }

@@ -275,6 +275,10 @@ if ($Mode -ne 'ContractOnly') {
                     [bool]$waiver.component_policy_exception -and
                     -not [bool]$waiver.automatic_activation -and
                     -not [bool]$waiver.release_authority -and
+                    [bool]$waiver.approval.owner_authorization_verified -and
+                    [string]$waiver.approval.owner_authorization_mode -in @(
+                        'owner_authenticated_pr_author_exact_request',
+                        'owner_current_head_review') -and
                     [string]$waiver.bindings.request_sha256 -eq $requestSha -and
                     [string]$waiver.component.image_digest -eq
                         [string]$lock.database.development_image.image_id -and

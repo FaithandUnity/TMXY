@@ -164,6 +164,8 @@ $postgresWaiverBound = [string]$postgresWaiverRequest.waiver_id -eq 'WVR-0002' -
     [string]$postgresWaiverRequest.status -eq 'draft_not_approved' -and
     [string]$postgresWaiverRequest.policy_effect -eq 'none_still_blocking' -and
     -not [bool]$postgresWaiverRequest.approval.owner_approval -and
+    [string]$postgresWaiverRequest.approval.owner_authorization_mode -eq
+        'owner_as_pr_author_or_current_head_reviewer' -and
     [int]$postgresWaiverRequest.approval.pull_request_number -eq 0 -and
     @($postgresWaiverRequest.approval.approved_review_ids).Count -eq 0 -and
     [int]$postgresWaiverRequest.duration.maximum_days -eq 30 -and
@@ -191,6 +193,8 @@ $postgresWaiverBound = [string]$postgresWaiverRequest.waiver_id -eq 'WVR-0002' -
     -not [bool]$postgresWaiverDecision.automatic_activation -and
     -not [bool]$postgresWaiverDecision.release_authority -and
     [int]$postgresWaiverDecision.approval.verified_approval_count -eq 0 -and
+    -not [bool]$postgresWaiverDecision.approval.owner_authorization_verified -and
+    [string]$postgresWaiverDecision.approval.owner_authorization_mode -eq 'unverified' -and
     [string]$postgresWaiverDecision.bindings.vulnerability_disposition_sha256 -eq $dispositionSha -and
     [string]$postgresWaiverDecision.bindings.reachability_review_sha256 -eq
         $postgresReachabilitySha -and

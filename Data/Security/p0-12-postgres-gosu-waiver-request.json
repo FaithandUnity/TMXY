@@ -68,6 +68,7 @@
   "approval": {
     "owner_login": "FaithandUnity",
     "owner_approval": false,
+    "owner_authorization_mode": "owner_as_pr_author_or_current_head_reviewer",
     "required_unique_non_author_approvals": 2,
     "pull_request_number": 0,
     "approved_review_ids": [],

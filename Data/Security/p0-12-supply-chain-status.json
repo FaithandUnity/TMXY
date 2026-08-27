@@ -1,6 +1,6 @@
 {
   "schema_version": 9,
-  "captured_utc": "2026-08-27T17:15:43.8052602+00:00",
+  "captured_utc": "2026-08-27T17:40:47.5805416+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -100,9 +100,9 @@
   },
   "postgres_gosu_waiver_decision": {
     "request_file": "Data/Security/p0-12-postgres-gosu-waiver-request.json",
-    "request_sha256": "6586f298a20ead563e1c68f7eab448999e4c01e80a3adc2dbc7c312328fa93a6",
+    "request_sha256": "715f3ecdf165e57d510f76efd1fdaa3bcc26c0fdab66c29532f679a657a4d0c1",
     "decision_file": "Data/Security/p0-12-postgres-gosu-waiver-decision.json",
-    "decision_sha256": "64a2d6ed2de0b3987fe4364ac43b2601aad2692febf6c66b59e5299cd0ddaba4",
+    "decision_sha256": "21d7e968e0b075aa2cabb2bcb2083e0d6089e6cadae380d528aa9823d780ea83",
     "waiver_id": "WVR-0002",
     "request_status": "draft_not_approved",
     "decision": "DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE",

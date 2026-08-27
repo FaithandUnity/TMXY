@@ -63,7 +63,6 @@ try {
     $active.duration.remediation_deadline_utc = $active.duration.expires_utc
     $active.approval.owner_approval = $true
     $active.approval.pull_request_number = 99
-    $active.approval.approved_review_ids = @(1001, 1002)
     $active.activation.requested = $true
     $active.activation.effective = $true
     $activePath = Join-Path $testRoot 'active.json'
@@ -105,6 +104,24 @@ try {
         -not [bool]$fixture.waiver_effective -and [bool]$fixture.policy_blocking -and
         [int]$fixture.approval.verified_approval_count -eq 2) `
         'A structurally valid offline fixture must remain non-authoritative and ineffective.'
+
+    $ownerAuthoredObservation = $observation | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+    $ownerAuthoredObservation.pull_request_author = 'FaithandUnity'
+    $ownerAuthoredObservation.reviews[0].user = 'independent-reviewer-one'
+    $ownerAuthoredObservation.reviews[1].user = 'independent-reviewer-two'
+    $ownerAuthoredPath = Join-Path $testRoot 'owner-authored-observation.json'
+    Write-JsonFixture -Path $ownerAuthoredPath -Value $ownerAuthoredObservation
+    $ownerAuthoredFixture = (& $toolPath -RebuildRoot $root -RequestPath $activePath `
+            -ApprovalObservationPath $ownerAuthoredPath -FixtureMode `
+            -OutputPath (Join-Path $testRoot 'owner-authored-output.json')) | ConvertFrom-Json
+    Assert-WaiverTest ([string]$ownerAuthoredFixture.result -eq 'PASS_DIAGNOSTIC' -and
+        [string]$ownerAuthoredFixture.decision -eq
+            'STRUCTURE_VALID_FIXTURE_NOT_EFFECTIVE' -and
+        [bool]$ownerAuthoredFixture.approval.owner_authorization_verified -and
+        [string]$ownerAuthoredFixture.approval.owner_authorization_mode -eq
+            'owner_authenticated_pr_author_exact_request' -and
+        [int]$ownerAuthoredFixture.approval.verified_approval_count -eq 2) `
+        'An owner-authored PR must use explicit owner intent plus two other non-author approvals.'
 
     $staleObservation = $observation | ConvertTo-Json -Depth 8 | ConvertFrom-Json
     $staleObservation.reviews[1].commit_id = 'b' * 40
@@ -150,7 +167,7 @@ $report = [pscustomobject][ordered]@{
     schema_version = 1
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = if ($failures.Count -eq 0) { 'PASS' } else { 'FAIL' }
-    fixture_count = 4
+    fixture_count = 5
     effective_fixture_count = 0
     source_mutation_performed = $false
     failure_count = $failures.Count

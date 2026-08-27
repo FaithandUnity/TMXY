@@ -43,8 +43,12 @@ insufficient.
    the interval must be positive and no longer than 30 days.
 2. A non-draft GitHub PR contains the exact request bytes and current evidence
    bindings.
-3. At least two unique non-author reviewers approve the PR at its current HEAD;
-   one approval must be from `FaithandUnity`.
+3. At least two unique non-author reviewers approve the PR at its current HEAD.
+   If `FaithandUnity` authored the PR, owner authorization is the explicit
+   `owner_approval=true` intent in the exact request plus authenticated PR
+   authorship; the two approvals must then come from other reviewers. If the
+   owner did not author the PR, the owner's current-HEAD approval must be one
+   of the two non-author approvals.
 4. An authenticated GitHub API observation verifies the request hash, PR HEAD,
    review commit IDs, reviewer identities, and absence of stale approvals.
 5. The hosted supply-chain gate evaluates the live observation. Offline
@@ -65,7 +69,7 @@ insufficient.
 ## Immediate invalidation
 
 The decision becomes ineffective on expiry or whenever the image digest,
-`gosu` bytes/build, finding set, reachability report, scanner/database identity,
+`gosu` bytes/build, finding set, reachability report,
 entrypoint, source binding, approval PR HEAD, or required reviews change. A
 patched official image that passes qualification replaces this path.
 

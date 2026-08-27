@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T17:04:28.4006856+00:00",
+  "captured_utc": "2026-08-27T17:30:01.7550177+00:00",
   "result": "PASS_DIAGNOSTIC",
   "decision": "DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE",
   "evaluation_mode": "local_draft",
   "waiver_id": "WVR-0002",
   "request_status": "draft_not_approved",
-  "request_sha256": "6586f298a20ead563e1c68f7eab448999e4c01e80a3adc2dbc7c312328fa93a6",
+  "request_sha256": "715f3ecdf165e57d510f76efd1fdaa3bcc26c0fdab66c29532f679a657a4d0c1",
   "waiver_effective": false,
   "policy_blocking": true,
   "component_policy_exception": false,
@@ -14,6 +14,8 @@
   "release_authority": false,
   "approval": {
     "owner_login": "FaithandUnity",
+    "owner_authorization_verified": false,
+    "owner_authorization_mode": "unverified",
     "required_unique_non_author_approvals": 2,
     "verified_approval_count": 0,
     "verified_approvers": [],
@@ -72,7 +74,7 @@
   },
   "bindings": {
     "request": "Data/Security/p0-12-postgres-gosu-waiver-request.json",
-    "request_sha256": "6586f298a20ead563e1c68f7eab448999e4c01e80a3adc2dbc7c312328fa93a6",
+    "request_sha256": "715f3ecdf165e57d510f76efd1fdaa3bcc26c0fdab66c29532f679a657a4d0c1",
     "vulnerability_disposition_sha256": "f53f267aa2f12a3634ccd8e569a2db36ab01bf8770bfee51b73b8e797ea0d83e",
     "reachability_review_sha256": "fe54a53336a5acdcb7595127c7b1f2169d1f45a68a71de93556a6a28c71c5408",
     "official_candidate_sha256": "1aa9c38d04f938982a6f009e3e4115a8d6d165834100f5af158ffe8d817cc9f5",

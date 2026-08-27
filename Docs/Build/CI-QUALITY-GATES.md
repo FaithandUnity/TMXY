@@ -72,7 +72,9 @@ image, `gosu` binary, all 22 hosted findings, reachability evidence, candidate
 evaluation, toolchain lock, and Compose file. The checked-in request remains a
 non-effective draft. Activation requires a current interval of at most 30 days
 and an authenticated GitHub read of the exact PR HEAD with at least two unique
-non-author approvals, including `FaithandUnity`; stale approvals fail closed.
+non-author approvals. An owner-authored PR requires explicit owner intent in
+the exact request plus two other reviewers; otherwise the owner must be one of
+the current-HEAD reviewers. Stale approvals fail closed.
 Offline fixtures can validate structure but can never activate the exception,
 and no waiver result grants merge, gate, or release authority.
 The final builder image has a local CycloneDX 1.5 SBOM with 314 components: 266

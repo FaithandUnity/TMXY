@@ -219,6 +219,9 @@ Vulnerability DB:
         $waiverDecision.waiver_effective = $true
         $waiverDecision.policy_blocking = $false
         $waiverDecision.component_policy_exception = $true
+        $waiverDecision.approval.owner_authorization_verified = $true
+        $waiverDecision.approval.owner_authorization_mode =
+            'owner_authenticated_pr_author_exact_request'
         $waiverDecision.bindings.request_sha256 = (Get-FileHash -LiteralPath $waiverRequestPath `
                 -Algorithm SHA256).Hash.ToLowerInvariant()
         $activeDecisionPath = Join-Path $summaryTestRoot 'active-waiver-decision.json'

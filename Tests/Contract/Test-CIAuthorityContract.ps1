@@ -27,7 +27,7 @@ $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Jso
 $postgresSbomSha = (Get-FileHash -LiteralPath $postgresSbomPath -Algorithm SHA256).Hash.ToLowerInvariant()
 $licenseEvidenceSha = (Get-FileHash -LiteralPath $licenseEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
 
-Assert-Contract ([int]$contract.schema_version -eq 2) 'CI authority contract schema must be 2.'
+Assert-Contract ([int]$contract.schema_version -eq 3) 'CI authority contract schema must be 3.'
 Assert-Contract ([string]$contract.state -eq 'github_workflows_prepared_pending_external_authority') `
     'The GitHub binding must remain pending until protected hosted authority exists.'
 Assert-Contract ([bool]$contract.provider_binding.selected) `
@@ -83,8 +83,20 @@ Assert-Contract (-not [bool]$contract.workflow_binding.untrusted_workflow_has_re
     'Untrusted workflows must not receive release permissions.'
 Assert-Contract ([bool]$contract.workflow_binding.shared_cache_write_requires_protected_main) `
     'Shared cache writes must require protected main authority.'
+Assert-Contract (-not [bool]$contract.workflow_binding.fork_pull_request_uses_self_hosted_runner -and
+    [bool]$contract.workflow_binding.fork_pull_request_required_check_fails_closed) `
+    'Fork pull requests must never schedule the self-hosted UE runner and must fail the required check.'
 Assert-Contract (@($contract.workflow_binding.ue_runner_labels) -contains 'tmxy-ephemeral') `
     'UE authority must run on an ephemeral self-hosted runner.'
+Assert-Contract ([string]$contract.public_repository_runner_security.minimum_fork_workflow_approval_policy -eq
+        'all_external_contributors' -and
+    -not [bool]$contract.public_repository_runner_security.repository_runner_registration_authorized -and
+    [bool]$contract.public_repository_runner_security.disposable_vm_per_job_required -and
+    -not [bool]$contract.public_repository_runner_security.persistent_secret_material_allowed -and
+    -not [bool]$contract.public_repository_runner_security.internal_network_access_allowed -and
+    -not [bool]$contract.public_repository_runner_security.shared_writable_cache_allowed -and
+    -not [bool]$contract.public_repository_runner_security.base_workflow_fork_guard_is_registration_authority) `
+    'Public-repository self-hosted runner security must remain fail closed pending isolated authority.'
 
 Assert-Contract (
     [string]$contract.build_authority.backend_builder_digest -eq
@@ -110,7 +122,7 @@ Assert-Contract (-not [bool]$contract.authority_evidence.local_diagnostic_report
     'Local diagnostic evidence must never be release authority.'
 Assert-Contract ([int]$contract.authority_evidence.minimum_retention_days -eq 365) `
     'Hosted authority evidence retention must remain 365 days.'
-Assert-Contract ([int]$hostingStatus.schema_version -eq 2 -and
+Assert-Contract ([int]$hostingStatus.schema_version -eq 3 -and
     [string]$hostingStatus.provider.repository -eq 'FaithandUnity/TMXY' -and
     [string]$hostingStatus.provider.visibility -eq 'public') `
     'GitHub hosting observation must identify the bound repository.'
@@ -147,6 +159,16 @@ Assert-Contract ($hostingBlockers -notcontains 'main_unprotected' -and
     $hostingBlockers -notcontains 'branch_protection_api_unavailable' -and
     $hostingBlockers -notcontains 'branch_protection_contract_mismatch') `
     'Protected-main blockers must be absent after verified branch protection.'
+$forkApprovalPolicySatisfied = [bool]$hostingStatus.actions.fork_pr_contributor_approval_policy_satisfied
+Assert-Contract ([int]$hostingStatus.actions.fork_pr_contributor_approval_api_status -eq 200 -and
+    [string]$hostingStatus.actions.fork_pr_contributor_approval_policy -ne 'unknown' -and
+    -not [bool]$hostingStatus.actions.public_repository_runner_registration_authorized) `
+    'Current evidence must record the public fork approval policy and deny runner registration authority.'
+Assert-Contract (($forkApprovalPolicySatisfied -and
+        $hostingBlockers -notcontains 'public_fork_workflow_approval_not_all_external_contributors') -or
+    (-not $forkApprovalPolicySatisfied -and
+        $hostingBlockers -contains 'public_fork_workflow_approval_not_all_external_contributors')) `
+    'The public fork approval blocker must match the observed GitHub policy.'
 Assert-Contract ([int]$hostingStatus.runners.matching_ephemeral_ue58_count -eq 0) `
     'Current evidence must retain the missing UE 5.8 ephemeral runner blocker.'
 

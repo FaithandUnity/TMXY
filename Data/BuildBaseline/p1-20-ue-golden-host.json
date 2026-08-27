@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T18:19:15.6397510+00:00",
+  "captured_utc": "2026-08-27T19:01:51.3363469+00:00",
   "result": "PASS",
   "task": "P1-20",
   "completion_criteria_satisfied": true,
@@ -41,9 +41,9 @@
     "required": true,
     "passed": true,
     "report_path": "E:\\QQXYCodeDev\\Rebuild\\Data\\BuildBaseline\\p0-10a-ue-validation.json",
-    "report_sha256": "ade6aceafafc980647245368e11c3874ddd443f72c770cbfc6ede32e397809be"
+    "report_sha256": "88801eb82fbe7ee8b2792bbb9b20f2943994a697ce72411a8d26bbe68524fbcc"
   },
-  "dependency_report_sha256": "c58b860dbe67b71302bb1b307c591fbf999229563a3296c9e1432e07b818ab1b",
+  "dependency_report_sha256": "05d65b92a0099c0f39fc4daa1903460bf3eec2c055904004e9788cdab47a68d9",
   "failure_count": 0,
   "failures": []
 }

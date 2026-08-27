@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T18:18:52.9416251+00:00",
+  "captured_utc": "2026-08-27T19:01:31.8476962+00:00",
   "result": "PASS",
   "task": "P1-18",
   "completion_criteria_satisfied": true,
   "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
   "dependencies": {
-    "p1-08-package-normalized-tree.json": "0f9cfe952c6a5795795690c2e5e1413cd6b05065f7d37df52a430e7ab7bc8ce0",
-    "p1-13-qtx-texture.json": "9d6e3687278dbc020183a78b1d4b75463e7bae2f515101c193ad906ffb9d89c2"
+    "p1-08-package-normalized-tree.json": "544538520cfe8f85fe9e4b142c6264b7fdae95e77de10f95a5ab0b9aa7c510e7",
+    "p1-13-qtx-texture.json": "eac5f9e94c591e44687ae320ccd04c9ad57097f0ee92c250f9e00da5e682a17b"
   },
   "classification": {
     "zif": "BOM-less UTF-8 XML zone-navigation records",

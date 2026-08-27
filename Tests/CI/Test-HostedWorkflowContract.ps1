@@ -11,6 +11,7 @@ $releasePath = Join-Path $root '.github/workflows/p0-release-provenance.yml'
 $codeOwnersPath = Join-Path $root '.github/CODEOWNERS'
 $actionlintPath = Join-Path $root '.github/actionlint.yaml'
 $contractPath = Join-Path $root 'Data/Governance/p0-hosted-ci-contract.json'
+$runnerSecurityPath = Join-Path $root 'Docs/Build/PUBLIC-SELF-HOSTED-RUNNER-SECURITY.md'
 $summaryGeneratorPath = Join-Path $root 'Tools/TMXY.SupplyChain/New-HostedVulnerabilitySummary.ps1'
 $supplyChainPolicyPath = Join-Path $root 'Tests/CI/Test-HostedSupplyChainPolicy.ps1'
 $waiverEvaluatorPath = Join-Path $root 'Tools/TMXY.SupplyChain/Test-PostgresGosuWaiverDecision.ps1'
@@ -30,6 +31,7 @@ foreach ($path in @(
         $codeOwnersPath,
         $actionlintPath,
         $contractPath,
+        $runnerSecurityPath,
         $summaryGeneratorPath,
         $supplyChainPolicyPath,
         $waiverEvaluatorPath)) {
@@ -52,10 +54,20 @@ $actionlint = if (Test-Path -LiteralPath $actionlintPath) {
     Get-Content -LiteralPath $actionlintPath -Raw -Encoding UTF8
 }
 else { '' }
+$runnerSecurity = if (Test-Path -LiteralPath $runnerSecurityPath) {
+    Get-Content -LiteralPath $runnerSecurityPath -Raw -Encoding UTF8
+}
+else { '' }
 $contract = if (Test-Path -LiteralPath $contractPath) {
     Get-Content -LiteralPath $contractPath -Raw -Encoding UTF8 | ConvertFrom-Json
 }
 else { $null }
+$ueExecutionBlock = [regex]::Match(
+    $merge,
+    '(?ms)^  client_ue58_execution:\s*\n(?<body>.*?)(?=^  [A-Za-z0-9_]+:\s*$|\z)')
+$ueRequiredCheckBlock = [regex]::Match(
+    $merge,
+    '(?ms)^  client_ue58_build_automation:\s*\n(?<body>.*?)(?=^  [A-Za-z0-9_]+:\s*$|\z)')
 
 $requiredChecks = @(
     'policy/repository',
@@ -98,6 +110,35 @@ Assert-HostedContract ($merge -match '--network none --read-only --cap-drop ALL'
     'Locked backend jobs must build with no network, read-only root, and no capabilities.'
 Assert-HostedContract ($merge -match 'tmxy-ue58' -and $merge -match 'tmxy-ephemeral') `
     'UE authority must require an ephemeral UE 5.8 self-hosted runner.'
+Assert-HostedContract ($ueExecutionBlock.Success -and
+    $ueExecutionBlock.Groups['body'].Value -match '(?m)^    name:\s+client/ue58-execution\s*$' -and
+    $ueExecutionBlock.Groups['body'].Value -match
+        "(?m)^    if:\s+github\.event_name != 'pull_request' \|\| github\.event\.pull_request\.head\.repo\.full_name == github\.repository\s*$") `
+    'The self-hosted UE execution job must reject fork pull requests before runner scheduling.'
+Assert-HostedContract ($ueRequiredCheckBlock.Success -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match '(?m)^    name:\s+client/ue58-build-automation\s*$' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match '(?m)^    needs:\s+client_ue58_execution\s*$' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match '(?m)^    if:\s+always\(\)\s*$' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match '(?m)^    runs-on:\s+ubuntu-24\.04\s*$' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match 'TMXY_HEAD_REPOSITORY' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match 'TMXY_BASE_REPOSITORY' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match 'TMXY_UE_RESULT' -and
+    $ueRequiredCheckBlock.Groups['body'].Value -match 'exit 1') `
+    'The stable UE required check must run on a hosted runner and fail closed for forks or missing UE success.'
+$ueTrustFixtures = @(
+    [pscustomobject]@{ event = 'pull_request'; head = 'other/fork'; base = 'FaithandUnity/TMXY'; ue = 'skipped'; expected = $false },
+    [pscustomobject]@{ event = 'pull_request'; head = 'FaithandUnity/TMXY'; base = 'FaithandUnity/TMXY'; ue = 'success'; expected = $true },
+    [pscustomobject]@{ event = 'pull_request'; head = 'FaithandUnity/TMXY'; base = 'FaithandUnity/TMXY'; ue = 'failure'; expected = $false },
+    [pscustomobject]@{ event = 'push'; head = 'FaithandUnity/TMXY'; base = 'FaithandUnity/TMXY'; ue = 'success'; expected = $true },
+    [pscustomobject]@{ event = 'workflow_dispatch'; head = 'FaithandUnity/TMXY'; base = 'FaithandUnity/TMXY'; ue = 'cancelled'; expected = $false }
+)
+foreach ($fixture in $ueTrustFixtures) {
+    $forkPullRequest = [string]$fixture.event -eq 'pull_request' -and
+        [string]$fixture.head -ne [string]$fixture.base
+    $actual = -not $forkPullRequest -and [string]$fixture.ue -eq 'success'
+    Assert-HostedContract ($actual -eq [bool]$fixture.expected) `
+        "UE public-runner trust fixture failed: $($fixture.event)/$($fixture.ue)"
+}
 Assert-HostedContract ($merge -match 'retention-days:\s*90') `
     'Current hosted diagnostic retention must remain explicit until 365-day authority storage is available.'
 Assert-HostedContract ($merge -match "github\.event_name == 'pull_request' && always\(\)" -and
@@ -289,6 +330,10 @@ Assert-HostedContract ($codeOwners -match '(?m)^\*\s+@FaithandUnity\s*$') `
 Assert-HostedContract ($actionlint -match '(?m)^\s+-\s+tmxy-ue58\s*$' -and
     $actionlint -match '(?m)^\s+-\s+tmxy-ephemeral\s*$') `
     'Actionlint must recognize both custom ephemeral UE runner labels.'
+Assert-HostedContract ($runnerSecurity -match 'all_external_contributors' -and
+    $runnerSecurity -match 'disposable' -and
+    $runnerSecurity -match 'not registration authority') `
+    'The public-repository runner runbook must retain approval, disposal, and non-authority controls.'
 
 $report = [pscustomobject][ordered]@{
     schema_version = 1
@@ -299,6 +344,9 @@ $report = [pscustomobject][ordered]@{
     release_workflow = '.github/workflows/p0-release-provenance.yml'
     untrusted_secret_injection = $false
     untrusted_shared_cache_write = $false
+    fork_pull_request_self_hosted_execution = $false
+    fork_pull_request_required_check_fails_closed = $true
+    ue_public_runner_trust_fixture_count = $ueTrustFixtures.Count
     ue_runner = 'self-hosted/Windows/X64/tmxy-ue58/tmxy-ephemeral'
     diagnostic_retention_days = 90
     authority_retention_requirement_satisfied = $false

@@ -36,6 +36,9 @@ condition below is missing.
   nor two sensitive-change approvals can currently be satisfied.
 - No self-hosted runner exists; the required ephemeral Windows x64 UE 5.8.2
   runner is unavailable.
+- Public fork workflow approval is currently `first_time_contributors`, below
+  the required `all_external_contributors` policy for any future isolated
+  runner path.
 - The locked Clang 21 builder has not been verified at the frozen digest in
   GHCR, so hosted backend jobs fail closed instead of rebuilding another image.
 - Hosted vulnerability/license authority, signed provenance, OCI attestation,
@@ -54,10 +57,14 @@ hash, dependency lock hash when present, and source revision. Pull requests may
 restore a trusted cache, but only an API-confirmed protected `main` push may save
 it. Every hit still reconfigures, builds, analyzes, scans, and tests.
 
-The UE job requires the labels
-`self-hosted/Windows/X64/tmxy-ue58/tmxy-ephemeral`; this deliberately prevents an
-untrusted change from running on a persistent developer workstation or writing
-a shared DDC. No compatible runner currently exists.
+The UE execution job requires the labels
+`self-hosted/Windows/X64/tmxy-ue58/tmxy-ephemeral`. Fork pull requests skip that
+execution before runner scheduling, while a separate GitHub-hosted stable check
+fails closed rather than reporting untested success. No compatible runner
+currently exists. This workflow guard is defense in depth only because a pull
+request can modify workflow source; it does not authorize registering a runner.
+The mandatory isolation contract is
+`Docs/Build/PUBLIC-SELF-HOSTED-RUNNER-SECURITY.md`.
 
 ## Authorized completion sequence
 
@@ -68,7 +75,9 @@ confirmation before execution:
 
 1. add enough independent reviewers to satisfy ordinary and sensitive-change
    review policy;
-2. register an ephemeral UE 5.8.2 Windows x64 runner;
+2. set fork workflow approval to `all_external_contributors`, then provision a
+   disposable-per-job UE 5.8.2 Windows x64 execution boundary that satisfies the
+   public-runner security contract;
 3. publish the already-qualified builder manifest to GHCR without rebuilding,
    and verify the exact digest;
 4. approve the vulnerability database and component-specific license policy;

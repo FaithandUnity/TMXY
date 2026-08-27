@@ -80,6 +80,7 @@ $requests = @(
     @('runners', "$base/actions/runners?per_page=100"),
     @('actions_permissions', "$base/actions/permissions"),
     @('workflow_permissions', "$base/actions/permissions/workflow"),
+    @('fork_pr_contributor_approval', "$base/actions/permissions/fork-pr-contributor-approval"),
     @('environments', "$base/environments?per_page=100"),
     @('collaborators', "$base/collaborators?affiliation=direct&per_page=100"),
     @('secrets', "$base/actions/secrets?per_page=100"),
@@ -96,6 +97,13 @@ $remoteUrl = (& git -C $root remote get-url $RemoteName 2>$null).Trim()
 $head = (& git -C $root rev-parse HEAD 2>$null).Trim()
 $branchName = (& git -C $root branch --show-current 2>$null).Trim()
 $branchProtected = $results.branch.status -eq 200 -and [bool]$results.branch.body.protected
+$repositoryPublic = [string]$results.repository.body.visibility -eq 'public'
+$forkApprovalPolicy = if ($results.fork_pr_contributor_approval.status -eq 200) {
+    [string]$results.fork_pr_contributor_approval.body.approval_policy
+}
+else { 'unknown' }
+$forkApprovalPolicySatisfied = -not $repositoryPublic -or
+    $forkApprovalPolicy -eq 'all_external_contributors'
 $expectedRequiredChecks = @(
     'policy/repository',
     'security/secrets',
@@ -152,13 +160,16 @@ if ($collaboratorCount -lt 2) { $blockers.Add('independent_reviewer_unavailable'
 if ($collaboratorCount -lt 3) { $blockers.Add('two_sensitive_reviewers_unavailable') }
 if ($matchingUeRunners.Count -eq 0) { $blockers.Add('ue58_ephemeral_runner_unavailable') }
 if ($workflowCount -eq 0) { $blockers.Add('hosted_workflows_not_on_default_branch') }
+if ($repositoryPublic -and -not $forkApprovalPolicySatisfied) {
+    $blockers.Add('public_fork_workflow_approval_not_all_external_contributors')
+}
 $blockers.Add('locked_builder_not_verified_in_ghcr')
 $blockers.Add('hosted_vulnerability_and_license_authority_missing')
 $blockers.Add('signed_provenance_and_oci_attestation_missing')
 $blockers.Add('minimum_365_day_immutable_retention_missing')
 
 $report = [pscustomobject][ordered]@{
-    schema_version = 2
+    schema_version = 3
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = 'BLOCKED_EXTERNAL_AUTHORITY'
     completion_criteria_satisfied = $false
@@ -248,6 +259,10 @@ $report = [pscustomobject][ordered]@{
             [string]$results.workflow_permissions.body.default_workflow_permissions
         }
         else { 'unknown' }
+        fork_pr_contributor_approval_api_status = $results.fork_pr_contributor_approval.status
+        fork_pr_contributor_approval_policy = $forkApprovalPolicy
+        fork_pr_contributor_approval_policy_satisfied = $forkApprovalPolicySatisfied
+        public_repository_runner_registration_authorized = $false
         workflow_count_on_default_branch = $workflowCount
         repository_secret_count = if ($results.secrets.status -eq 200) {
             @($results.secrets.body.secrets).Count

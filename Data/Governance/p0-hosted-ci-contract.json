@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "state": "github_workflows_prepared_pending_external_authority",
   "provider_binding": {
     "selected": true,
@@ -12,8 +12,11 @@
     "required_checks_workflow": ".github/workflows/p0-required-checks.yml",
     "release_provenance_workflow": ".github/workflows/p0-release-provenance.yml",
     "code_owners": ".github/CODEOWNERS",
+    "public_runner_security_runbook": "Docs/Build/PUBLIC-SELF-HOSTED-RUNNER-SECURITY.md",
     "untrusted_workflow_has_release_permissions": false,
     "shared_cache_write_requires_protected_main": true,
+    "fork_pull_request_uses_self_hosted_runner": false,
+    "fork_pull_request_required_check_fails_closed": true,
     "ue_runner_labels": [
       "self-hosted",
       "Windows",
@@ -49,6 +52,15 @@
     "untrusted_change_publishes_release_artifacts": false,
     "release_job_requires_protected_branch": true,
     "release_job_requires_immutable_source_revision": true
+  },
+  "public_repository_runner_security": {
+    "minimum_fork_workflow_approval_policy": "all_external_contributors",
+    "repository_runner_registration_authorized": false,
+    "disposable_vm_per_job_required": true,
+    "persistent_secret_material_allowed": false,
+    "internal_network_access_allowed": false,
+    "shared_writable_cache_allowed": false,
+    "base_workflow_fork_guard_is_registration_authority": false
   },
   "cache_contract": {
     "key_includes_toolchain_lock_sha256": true,

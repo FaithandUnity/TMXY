@@ -197,8 +197,9 @@ jobs:
             -RebuildRoot $env:GITHUB_WORKSPACE `
             -OutputPath "$env:RUNNER_TEMP/p0-12-postgres-migration.json"
 
-  client_ue58_build_automation:
-    name: client/ue58-build-automation
+  client_ue58_execution:
+    name: client/ue58-execution
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on:
       - self-hosted
       - Windows
@@ -228,6 +229,33 @@ jobs:
             -RebuildRoot $env:GITHUB_WORKSPACE `
             -UnrealEngineRoot 'C:\Program Files\Epic Games\UE_5.8' `
             -OutputPath "$env:RUNNER_TEMP\p0-12-ue-packaging.json"
+
+  client_ue58_build_automation:
+    name: client/ue58-build-automation
+    needs: client_ue58_execution
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Fail closed unless trusted UE execution succeeded
+        shell: bash
+        env:
+          TMXY_EVENT_NAME: ${{ github.event_name }}
+          TMXY_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          TMXY_BASE_REPOSITORY: ${{ github.repository }}
+          TMXY_UE_RESULT: ${{ needs.client_ue58_execution.result }}
+        run: |
+          set -euo pipefail
+          if [[ "${TMXY_EVENT_NAME}" == "pull_request" && \
+                "${TMXY_HEAD_REPOSITORY}" != "${TMXY_BASE_REPOSITORY}" ]]; then
+            echo "::error::Fork pull requests cannot execute on the TMXY self-hosted UE runner."
+            exit 1
+          fi
+          if [[ "${TMXY_UE_RESULT}" != "success" ]]; then
+            echo "::error::The isolated UE execution did not complete successfully: ${TMXY_UE_RESULT}."
+            exit 1
+          fi
 
   supply_chain_policy:
     name: supply-chain/policy

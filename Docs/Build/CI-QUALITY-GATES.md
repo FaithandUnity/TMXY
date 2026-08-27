@@ -50,6 +50,12 @@ The repository is public and the read-only API now proves HTTP 200 branch
 protection with all eight strict checks, PR/CODEOWNERS review, stale-review
 dismissal, last-push approval, administrator enforcement, and force-push/delete
 prohibition. It still has only one collaborator and zero self-hosted runners.
+Fork workflow approval remains `first_time_contributors`; it must reach
+`all_external_contributors` and the disposable isolation contract must be proven
+before runner registration can be authorized. The base workflow prevents fork
+PRs from scheduling UE execution and makes the stable hosted check fail closed,
+but that guard is not sufficient registration authority because PR workflow
+source is attacker-controlled.
 These facts are captured without credentials in
 `Data/Governance/p0-github-hosting-status.json`.
 

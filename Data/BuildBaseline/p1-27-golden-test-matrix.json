@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T04:25:02.6345467+00:00",
-  "result": "FAIL",
+  "captured_utc": "2026-08-28T04:38:22.0612794+00:00",
+  "result": "PASS",
   "task": "P1-27",
-  "completion_criteria_satisfied": false,
+  "completion_criteria_satisfied": true,
   "matrix": {
     "schema": "tmxy.testing.golden-matrix",
     "version": "1.0.0",
@@ -39,7 +39,7 @@
   "ci": {
     "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
     "aggregate_sha256": "b6bb63ed254ccfbe922b2aebc82b66e9151e7825201add6abc2378a2f49e3184",
-    "all_declared_gates_bound": false
+    "all_declared_gates_bound": true
   },
   "source_binding": {
     "file_count": 14,
@@ -82,24 +82,24 @@
     "Tests/Contract/Test-UETerrainImport.ps1": "c19b54d1eea4e17ce78cc03bfb6e61579deab42d39ea107152975e69410782ea"
   },
   "evidence_report_sha256": {
-    "Data/BuildBaseline/p1-02-package-v1.json": "4f85461188d9f2c86b671145568626e6c6684ccd0fdefa1c30656800644f5a5d",
-    "Data/BuildBaseline/p1-05-package-v2.json": "64072e8d0dbb88cb49eef879a2acd098ee8ebd254767cfcdff40b3f82e4fd3b5",
-    "Data/BuildBaseline/p1-06-package-v3.json": "1014675022c3d91e12a8ed566f9553572f8a8a511c8dbd2b779f3678db04ee1a",
-    "Data/BuildBaseline/p1-07-package-pipeline.json": "a62742f0530ad5a863d34abd96bacf768b52c65d7b675b5d56a84fd480f6c732",
-    "Data/BuildBaseline/p1-08-package-normalized-tree.json": "525d04d1927ad2684f3e263d7de6682dde6f7281cc4fed5da399f8fdf1b92ed6",
-    "Data/BuildBaseline/p1-03-legacy-table.json": "b3a15805ec2e2a48ac494ea4995679988ddd1ee83b30637695a326316028620e",
-    "Data/BuildBaseline/p1-13-qtx-texture.json": "4af003a47985ac42ed84b5fd12112a3444584065c324faea1156ea679733dc44",
-    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "a8767b9d025c57da1a5b164ee60cd2ffbc18f35c4198d4e1f6a4018f04d1fa61",
-    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "23639c7e99ee977d209a1eda90afd2711759fb39a204ab309dbc80ea6942878f",
-    "Data/BuildBaseline/p1-16-anim-animation.json": "545084fec30633af6a00ef08290bd484514c0f528db36c92e8d261b63dd85703",
-    "Data/BuildBaseline/p1-17-ter-terrain.json": "2c98fd1b1ee02adf8e7bfe59d3692b1172f77c943dee5d0fe3d7d2d1cc85874b",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "3bcaaae2867cc143a2ae2df73cc155eba697b1747aca16ba8e7175b4ee3deece",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "5cee107ae0592d8487055cfdd3c08c0a80d1e780a1469bf1ca065945e4969120",
-    "Data/BuildBaseline/p1-22-ue-texture-import.json": "9b38174b4f09708ee8bd5e76f17f4637a0b912499f160afcbce3e9b414c85377",
-    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "523699fb95425b86c34f43d6d32867eecf4b471b2b1a9c19dc7ad4144c549c54",
-    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "4de3fdc61e7e49732df4ffaea73713fdf72878bc8f08966c728bb66d38316952",
-    "Data/BuildBaseline/p1-25-ue-animation-import.json": "8f74241c21ce733b4a984f5b2084be2d9ee52026ec84b76ca86eae3c763d9c29",
-    "Data/BuildBaseline/p1-26-ue-terrain-import.json": "86885f01cee7e59819dec7034325680010cdf932bce5e9d4f5d3774c10320fc2"
+    "Data/BuildBaseline/p1-02-package-v1.json": "bd256bb68f31cafb234c031990a285487202f20bd20a7fddc84e22e0b695efef",
+    "Data/BuildBaseline/p1-05-package-v2.json": "3b03601e696f0cddd7813f495811df38bf184a4ba98a5a728b43f86eb04fa364",
+    "Data/BuildBaseline/p1-06-package-v3.json": "6defab8ac40f3043df00dd00cc52d286612a345818b826f1d0ef50373012445d",
+    "Data/BuildBaseline/p1-07-package-pipeline.json": "6041378cf02d7cfbf0b393baddc0ce5d51c6cf905989996968518cedc5d90435",
+    "Data/BuildBaseline/p1-08-package-normalized-tree.json": "dbb65cba423f2b9ba4cb6620798838988a466ce586256ae9f221f2cf40712eac",
+    "Data/BuildBaseline/p1-03-legacy-table.json": "9f272fd61204dad49756cd18f10a68af53909602cf61a233f6dec40fe5f6c8ed",
+    "Data/BuildBaseline/p1-13-qtx-texture.json": "5da6539e95e16d65a56f5bce18714c93ae9b9acd6ab124dc3513f34e90c0c63c",
+    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "c873d99fcffe134026f188f1f8556cf0ef3614974cbfbd675e838a88a1deb92e",
+    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "0f66a8eba9282ad42f90cf857fe74bdec21b6e8b3b0aff154a56db31e12ed3b0",
+    "Data/BuildBaseline/p1-16-anim-animation.json": "dfece88652639bf2c9ae0f8eddc6e955c2a935386071ac98f7fe557be4a782b2",
+    "Data/BuildBaseline/p1-17-ter-terrain.json": "d38f2d2b1caa03a6f1114490a92d90dd2dff05e349652bd9d6faac51ef090449",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "e82d0bb11fef25fab62b4fb8012e3c2f246df20aa9bb74aa7118da9e8be3c5d1",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "5456b88e97501e1d2bea0f4519828223673850d1456d0e13d483d15817fbae16",
+    "Data/BuildBaseline/p1-22-ue-texture-import.json": "09c46c00a81ef6f91515431ead15c2029b574dbdf6a79c75020a75d1ced7cc02",
+    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "fa97f2d3ef804a08563237c52084cb47e3e42f38ed9eda1d5aa546254ef4aeb2",
+    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "d74afa5e4ae675c4ef210d42d1f3b713c36920e9bcb4cb787683d8a71091d3a1",
+    "Data/BuildBaseline/p1-25-ue-animation-import.json": "0c53f4ae281a5fb47096ad034a18c191bcb5b392d92f79cdbb7774d694a447fb",
+    "Data/BuildBaseline/p1-26-ue-terrain-import.json": "a35c04b57e504a9d3d978381823211e655d95f2ace3cd1b4ee38a293e2d66b7e"
   },
   "suites": [
     {
@@ -217,13 +217,6 @@
   },
   "document_sha256": "d5773e9986509a1405b22671c779dfbd9734882cffacb89bb4bdd59008ef8f06",
   "validator_sha256": "28679f08689c65bb763cce39a810a913ec858a4d601d624b3f2f46f9aaaed481",
-  "failure_count": 6,
-  "failures": [
-    "P1-27 UE Automation evidence is absent: Data/BuildBaseline/p1-21-ue-importer-plugin.json",
-    "P1-27 UE Automation evidence is absent: Data/BuildBaseline/p1-22-ue-texture-import.json",
-    "P1-27 UE Automation evidence is absent: Data/BuildBaseline/p1-23-ue-static-mesh-import.json",
-    "P1-27 UE Automation evidence is absent: Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json",
-    "P1-27 UE Automation evidence is absent: Data/BuildBaseline/p1-25-ue-animation-import.json",
-    "P1-27 UE Automation evidence is absent: Data/BuildBaseline/p1-26-ue-terrain-import.json"
-  ]
+  "failure_count": 0,
+  "failures": []
 }

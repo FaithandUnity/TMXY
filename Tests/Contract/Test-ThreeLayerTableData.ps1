@@ -99,6 +99,20 @@ Add-Assertion 'Every observed column has one type' ([long](
         $evidence.summary.inferred_column_types.int64 +
         $evidence.summary.inferred_column_types.decimal +
         $evidence.summary.inferred_column_types.string) -eq [long]$evidence.summary.columns)
+$delimiterCounts = @{}
+foreach ($entry in @($evidence.summary.delimiter_counts)) {
+    $delimiterCounts[[string]$entry.delimiter] = [int]$entry.tables
+}
+Add-Assertion 'All table delimiters classified' ($delimiterCounts['comma'] -eq 222 -and
+    $delimiterCounts['asterisk'] -eq 1 -and $delimiterCounts['single-column'] -eq 2)
+$quest = @($active | Where-Object source_path -eq 'Table/quest_table.tbl')
+Add-Assertion 'Quest asterisk compatibility parsed' ($quest.Count -eq 1 -and
+    $quest[0].delimiter -eq 'asterisk' -and $quest[0].header_columns -eq 78 -and
+    $quest[0].modal_columns -eq 78 -and $quest[0].minimum_columns -eq 78 -and
+    $quest[0].maximum_columns -eq 79 -and $quest[0].columns -eq 79)
+Add-Assertion 'Logical names have no extension residue' (@($active | Where-Object {
+            $_.logical_name.EndsWith('.', [StringComparison]::Ordinal)
+        }).Count -eq 0)
 
 $localPresent = Test-Path -LiteralPath $outputRoot -PathType Container
 if ($RequireLocalExports) { Add-Assertion 'Local exports required and present' $localPresent }

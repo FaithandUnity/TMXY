@@ -10,7 +10,7 @@ Each of the 225 active tables has a directory matching its source path without
 the `.tbl` suffix and containing:
 
 - `raw.csv`: the decoded payload bytes, byte-identical to the input of the legacy
-  comma-delimited parser, retaining source encoding and CRLF line endings;
+  parser, retaining source encoding and CRLF line endings;
 - `normalized.jsonl`: UTF-8 without BOM, one object per nonempty data row, stable
   `c0001`-style column IDs, empty or physically missing fields represented as
   JSON `null`, and conservative observed-value types;
@@ -21,6 +21,15 @@ the `.tbl` suffix and containing:
 
 JSON syntax is intentionally used for YAML so PowerShell and CI can parse every
 schema without an extra YAML package. The file remains valid YAML 1.2.
+
+Delimiter selection scans every nonempty line instead of assuming the P2-04
+comma probe is semantic. The frozen result is 222 comma-delimited tables, two
+single-column tables, and one 78-column asterisk-delimited compatibility table
+(`Table/quest_table.tbl`). Candidate tab, pipe, and semicolon delimiters remain
+supported. A header may declare more columns than the modal data row, as
+observed in the compatibility data. The quest table has 5,942 data rows at its
+78-column header width and one nonempty 79-column row; normalization preserves
+that overflow as `c0079` instead of truncating or guessing its meaning.
 
 The 113 historical shadows do not receive fabricated exports: their active
 runtime key does not decode them. Evidence records their verified newer active

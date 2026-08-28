@@ -190,6 +190,56 @@ function Get-ColumnId {
     return 'c{0:d4}' -f $OneBased
 }
 
+function Get-DelimiterProfile {
+    param([Parameter(Mandatory = $true)][string[]]$Lines)
+    $candidates = [Collections.Generic.List[object]]::new()
+    foreach ($definition in @(
+            [pscustomobject]@{ name = 'comma'; character = [char]44 },
+            [pscustomobject]@{ name = 'tab'; character = [char]9 },
+            [pscustomobject]@{ name = 'asterisk'; character = [char]42 },
+            [pscustomobject]@{ name = 'pipe'; character = [char]124 },
+            [pscustomobject]@{ name = 'semicolon'; character = [char]59 })) {
+        $frequency = [Collections.Generic.Dictionary[int, int]]::new()
+        $minimum = [int]::MaxValue
+        $maximum = 0
+        foreach ($line in $Lines) {
+            $count = $line.Split([char]$definition.character).Length
+            if ($frequency.ContainsKey($count)) { ++$frequency[$count] }
+            else { $frequency.Add($count, 1) }
+            $minimum = [Math]::Min($minimum, $count)
+            $maximum = [Math]::Max($maximum, $count)
+        }
+        $mode = $frequency.GetEnumerator() | Sort-Object -Property @(
+            @{ Expression = 'Value'; Descending = $true },
+            @{ Expression = 'Key'; Descending = $true }) | Select-Object -First 1
+        $headerColumns = $Lines[0].Split([char]$definition.character).Length
+        if ($headerColumns -gt 1) {
+            $candidates.Add([pscustomobject][ordered]@{
+                    name = $definition.name
+                    character = [char]$definition.character
+                    header_columns = $headerColumns
+                    modal_columns = [int]$mode.Key
+                    modal_line_count = [int]$mode.Value
+                    header_matches_mode = $headerColumns -eq [int]$mode.Key
+                    minimum_columns = $minimum
+                    maximum_columns = $maximum
+                })
+        }
+    }
+    $selected = $candidates | Sort-Object -Property @(
+        @{ Expression = 'header_matches_mode'; Descending = $true },
+        @{ Expression = 'modal_line_count'; Descending = $true },
+        @{ Expression = 'modal_columns'; Descending = $true }) | Select-Object -First 1
+    if ($null -eq $selected) {
+        return [pscustomobject][ordered]@{
+            name = 'single-column'; character = [char]44; header_columns = 1
+            modal_columns = 1; modal_line_count = $Lines.Count
+            header_matches_mode = $true; minimum_columns = 1; maximum_columns = 1
+        }
+    }
+    return $selected
+}
+
 function Get-ContentSetSha256 {
     param([Parameter(Mandatory = $true)][object[]]$Files)
     $lines = @($Files | Sort-Object path | ForEach-Object {
@@ -279,11 +329,14 @@ try {
             if ($lines.Count -lt 1 -or $lines.Count - 1 -ne $table.schema.rows) {
                 throw "Decoded row count differs from P2-04 for $($table.path)."
             }
-            [string[]]$headers = $lines[0].Split([char]',')
+            $delimiter = Get-DelimiterProfile -Lines $lines
+            [string[]]$headers = $lines[0].Split([char]$delimiter.character)
             $rows = @($lines | Select-Object -Skip 1)
-            $width = [int]$table.schema.maximum_columns
+            $width = [int]$delimiter.maximum_columns
             if ($headers.Length -gt $width) { throw "Invalid physical width for $($table.path)." }
-            $logical = [IO.Path]::ChangeExtension([string]$table.path, $null)
+            $sourceRelative = [string]$table.path
+            $extension = [IO.Path]::GetExtension($sourceRelative)
+            $logical = $sourceRelative.Substring(0, $sourceRelative.Length - $extension.Length)
             if ($logical -match '(^|/)\.\.?(\/|$)') { throw 'Unsafe table path.' }
             $tableRoot = Join-Path $staging ('tables\' + $logical.Replace('/', '\'))
             [IO.Directory]::CreateDirectory($tableRoot) | Out-Null
@@ -295,7 +348,7 @@ try {
             $missingCounts = [long[]]::new($width)
             for ($column = 0; $column -lt $width; ++$column) { $types[$column] = 'none' }
             foreach ($line in $rows) {
-                [string[]]$fields = $line.Split([char]',')
+                [string[]]$fields = $line.Split([char]$delimiter.character)
                 for ($column = 0; $column -lt $width; ++$column) {
                     if ($column -ge $fields.Length) { ++$missingCounts[$column]; continue }
                     if ($fields[$column].Length -eq 0) { ++$emptyCounts[$column]; continue }
@@ -315,7 +368,7 @@ try {
             $writer.NewLine = "`n"
             try {
                 foreach ($line in $rows) {
-                    [string[]]$fields = $line.Split([char]',')
+                    [string[]]$fields = $line.Split([char]$delimiter.character)
                     $record = [ordered]@{}
                     for ($column = 0; $column -lt $width; ++$column) {
                         $value = if ($column -lt $fields.Length) { $fields[$column] } else { '' }
@@ -369,7 +422,7 @@ try {
                 }
                 raw = [pscustomobject][ordered]@{
                     file = 'raw.csv'; sha256 = $rawSha; bytes = $payload.Length
-                    fidelity = 'decoded-payload-byte-identical'; delimiter = 'comma'
+                    fidelity = 'decoded-payload-byte-identical'; delimiter = $delimiter.name
                     line_ending = 'crlf'; header_sha256 = $table.schema.header_sha256
                 }
                 normalized = [pscustomobject][ordered]@{
@@ -428,7 +481,13 @@ try {
                     source_sha256 = $table.sha256; generated = $true
                     logical_name = $logical; source_encoding = $table.encoding.classification
                     rows = $rows.Count; columns = $width
-                    fixed_column_count = $table.schema.fixed_column_count
+                    delimiter = $delimiter.name
+                    header_columns = $delimiter.header_columns
+                    modal_columns = $delimiter.modal_columns
+                    minimum_columns = $delimiter.minimum_columns
+                    maximum_columns = $delimiter.maximum_columns
+                    fixed_column_count = $delimiter.minimum_columns -eq $delimiter.maximum_columns
+                    p2_04_comma_maximum_columns = $table.schema.maximum_columns
                     candidate_key_columns = $candidateColumns
                     type_counts = [pscustomobject][ordered]@{
                         boolean = @($types | Where-Object { $_ -eq 'boolean' }).Count
@@ -478,6 +537,10 @@ $manifest = [pscustomobject][ordered]@{
                 Measure-Object bytes -Sum).Sum)
         null_cells = $totalNulls
         inferred_column_types = [pscustomobject]$typeTotals
+        delimiter_counts = @($activeReports | Group-Object delimiter | Sort-Object Name |
+            ForEach-Object { [pscustomobject][ordered]@{
+                    delimiter = $_.Name; tables = $_.Count
+                } })
     }
     files = @($fileReports)
 }
@@ -537,6 +600,7 @@ $report = [pscustomobject][ordered]@{
         raw_payload_byte_identical = $true
         normalized_utf8_no_bom = $true
         empty_or_missing_to_null = $true
+        delimiter_detection_full_table = $true
         semantic_types_are_provisional = $true
         ownership_is_pending_p2_08 = $true
         keys_and_references_are_pending_p2_07 = $true

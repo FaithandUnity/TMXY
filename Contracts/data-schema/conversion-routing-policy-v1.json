@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-15",
+  "source_build": "qy-3.0.0.413",
+  "estimate_basis": "planning coefficient, not benchmark or schedule commitment",
+  "alias_validation_hours": 0.005,
+  "routes": [
+    {
+      "id": "automatic-qualified-interchange",
+      "tier": "automatic",
+      "families": ["qtx", "sm", "skem", "anim", "ter"],
+      "structures": ["PASS"],
+      "fixed_engineering_hours": 40,
+      "human_hours_per_job": 0.01,
+      "machine_seconds_per_job": 3,
+      "detail": "qualified production reader, interchange, and UE importer exist"
+    },
+    {
+      "id": "automatic-standard-audio",
+      "tier": "automatic",
+      "families": ["wav", "mp3"],
+      "structures": ["PASS"],
+      "fixed_engineering_hours": 24,
+      "human_hours_per_job": 0.02,
+      "machine_seconds_per_job": 5,
+      "detail": "standard audio container batch import with hash verification"
+    },
+    {
+      "id": "semi-automatic-navigation-adaptation",
+      "tier": "semi-automatic",
+      "families": ["zif"],
+      "structures": ["PASS"],
+      "fixed_engineering_hours": 160,
+      "human_hours_per_job": 0.25,
+      "machine_seconds_per_job": 10,
+      "detail": "parsed path data needs UE navigation or spline design review"
+    },
+    {
+      "id": "manual-descriptor-recovery",
+      "tier": "manual",
+      "families": ["qtx", "anim"],
+      "structures": ["UNRESOLVED"],
+      "fixed_engineering_hours": 80,
+      "human_hours_per_job": 0.5,
+      "machine_seconds_per_job": 0,
+      "detail": "headerless source lacks one qualified descriptor; never guess"
+    },
+    {
+      "id": "manual-repair-or-replace",
+      "tier": "manual",
+      "families": ["sm", "skem"],
+      "structures": ["FAIL"],
+      "fixed_engineering_hours": 32,
+      "human_hours_per_job": 8,
+      "machine_seconds_per_job": 0,
+      "detail": "independent structural failure requires repair evidence or replacement"
+    }
+  ],
+  "priority_mapping": {
+    "root_reachable": "P0-first-playable-slice",
+    "linked_outside_declared_roots": "P1-linked-content",
+    "unlinked_identity_rule_no_match": "P2-unlinked-review",
+    "unlinked_no_identity_rule": "P3-identity-rule-gap"
+  },
+  "exact_duplicate_reuse": {
+    "eligible_families": ["mp3", "skem", "sm", "ter", "wav", "zif"],
+    "requires_structure_pass": true,
+    "representative_order": "highest priority then lowercase asset id",
+    "preserves_every_source_path_alias": true,
+    "descriptor_bound_families_forbidden": ["qtx", "anim"]
+  },
+  "completion_policy": {
+    "requires_every_asset_one_route_tier_priority_and_estimate": true,
+    "requires_exact_aliases_preserved": true,
+    "forbids_descriptor_bound_conversion_reuse_without_descriptor_digest": true,
+    "forbids_automatic_deletion_or_source_repair": true,
+    "requires_estimates_labeled_as_planning_coefficients": true
+  },
+  "output_policy": {
+    "full_routing_report_tracked_in_git": false,
+    "tracked_evidence_contains_asset_paths": false,
+    "tracked_evidence_contains_per_asset_hashes": false,
+    "payload_bytes_copied": false
+  }
+}

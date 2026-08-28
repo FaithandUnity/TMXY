@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/conversion-routing-v1.schema.json",
+  "title": "TMXY P2-15 conversion routing evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "captured_utc", "task_id", "result", "task_status",
+    "completion_criteria_satisfied", "input", "report", "summary", "contracts",
+    "implementation", "disclosure", "reproduction", "next_scope"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "captured_utc": { "type": "string" },
+    "task_id": { "const": "P2-15" },
+    "result": { "enum": ["PASS", "FAIL"] },
+    "task_status": { "enum": ["COMPLETE", "IN_PROGRESS"] },
+    "completion_criteria_satisfied": { "type": "boolean" },
+    "input": { "type": "object" },
+    "report": { "type": "object" },
+    "summary": { "type": "object" },
+    "contracts": { "type": "object" },
+    "implementation": { "type": "object" },
+    "disclosure": { "type": "object" },
+    "reproduction": { "type": "object" },
+    "next_scope": { "type": "object" }
+  }
+}

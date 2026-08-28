@@ -104,6 +104,11 @@ P2-14 由 `Tools/TMXY.AssetHealth/New-AssetHealthReport.ps1` 对 40,090 个资�
 不宣称语义等价；根不可达、无 Package 匹配或尚无身份规则也都不等于可删除。逐资产报告
 位于 Git 忽略的 `Data/Exports/P2-14`，详见 `Docs/Formats/ASSET-HEALTH.md`。
 
+P2-15 由 `Tools/TMXY.ConversionRouting/New-ConversionRouting.ps1` 为全部 40,090 个资产冻结
+五条转换路线、三档执行层级、四档交付优先级和显式规划系数。完整哈希相同且格式可独立解析的
+资源可保留路径别名并复用转换结果；依赖外部描述的 QTX/ANIM 不据 payload 相同而错误复用。
+逐资产路线位于 Git 忽略的 `Data/Exports/P2-15`，详见 `Docs/Formats/CONVERSION-ROUTING.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

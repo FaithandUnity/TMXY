@@ -91,4 +91,9 @@ Package 到资产引用；14 条权威核心外键必须零悬空，歧义和未
 加 `-VerifyDerivedSources` 会从 P2-12 目录和 P2-13 闭包完整重建 42,356 行报告并要求逐
 byte 一致；默认托管模式只验证已提交策略、汇总证据和哈希链。
 
+`Contract/Test-ConversionRouting.ps1` 验证 P2-15 对 40,090 个资产的五条路线、三档执行
+层级、四档交付优先级、34,601 个转换作业和 5,489 个安全复用别名；QTX/ANIM 的描述符
+边界、规划系数口径、零删除和零未分类均为硬断言。加 `-VerifyDerivedSources` 会从 P2-14
+完整重建 40,090 行路线报告并要求逐 byte 一致；默认模式验证策略、汇总证据和哈希链。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

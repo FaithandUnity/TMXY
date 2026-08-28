@@ -153,6 +153,11 @@ if ($VerifyLegacyGoldenSources) { $assetHealthArguments.VerifyDerivedSources = $
 $assetHealth = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-AssetHealth.ps1') `
     -Arguments $assetHealthArguments
+$conversionRoutingArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $conversionRoutingArguments.VerifyDerivedSources = $true }
+$conversionRouting = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ConversionRouting.ps1') `
+    -Arguments $conversionRoutingArguments
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -266,6 +271,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$referenceClosure.completion_criteria_satisfied -and
     [string]$assetHealth.result -eq 'PASS' -and
     [bool]$assetHealth.completion_criteria_satisfied -and
+    [string]$conversionRouting.result -eq 'PASS' -and
+    [bool]$conversionRouting.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -329,6 +336,7 @@ $report = [pscustomobject][ordered]@{
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth
+    conversion_routing = $conversionRouting
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

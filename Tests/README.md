@@ -101,4 +101,8 @@ byte 一致；默认托管模式只验证已提交策略、汇总证据和哈希
 证明命中必须验证输出 SHA-256，哈希不符会失败关闭。加 `-VerifyDerivedSources` 会完整重建
 40,090 行计划并要求逐 byte 一致。
 
+`Contract/Test-LegacyCurrentDiff.ps1` 验证 P2-09 的 52/52 旧/当前表配对、列/类型/观察
+众数哈希、行多重集、10 张核心主键表和 12 条外键规则差异；旧 build 必须保持未知且报告
+不得泄露表头、行值或主键。加 `-VerifyDerivedSources` 会只读重扫 DevDoc 快照并逐 byte 复核。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

@@ -138,6 +138,11 @@ $coreTableSchema = Invoke-JsonTest `
 $tableOwnership = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-TableOwnershipRegistry.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$legacyCurrentArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $legacyCurrentArguments.VerifyDerivedSources = $true }
+$legacyCurrentDiff = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-LegacyCurrentDiff.ps1') `
+    -Arguments $legacyCurrentArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -270,6 +275,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$coreTableSchema.completion_criteria_satisfied -and
     [string]$tableOwnership.result -eq 'PASS' -and
     [bool]$tableOwnership.completion_criteria_satisfied -and
+    [string]$legacyCurrentDiff.result -eq 'PASS' -and
+    [bool]$legacyCurrentDiff.completion_criteria_satisfied -and
     [string]$fullAssetInventory.result -eq 'PASS' -and
     [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceClosure.result -eq 'PASS' -and
@@ -340,6 +347,7 @@ $report = [pscustomobject][ordered]@{
     three_layer_table_data = $threeLayerTableData
     core_table_schema = $coreTableSchema
     table_ownership = $tableOwnership
+    legacy_current_diff = $legacyCurrentDiff
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

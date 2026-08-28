@@ -114,6 +114,11 @@ P2-16 由 `Tools/TMXY.ConversionCache/New-ConversionCachePlan.ps1` 为 33,801 �
 转换器、中间格式、路由策略和目标配置；时间戳不参与。800 个人工项在缺少人工决策摘要时
 禁止缓存命中，任何输出还必须逐项验长度和 SHA-256，详见 `Docs/Formats/CONVERSION-CACHE.md`。
 
+P2-09 由 `Tools/TMXY.TableDiff/New-LegacyCurrentDiff.ps1` 将只读 DevDoc 中 52 张已解密
+旧 CSV 与当前 P2-06 数据逐表比较。旧快照没有可证明 build，因此仅以完整哈希清单标识；
+表头、列类型/分布候选、行多重集、10 个核心主键域和 12 条可比较外键均形成可查询差异，
+不复制旧行或把观察众数伪称默认值，详见 `Docs/Formats/LEGACY-CURRENT-TABLE-DIFF.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

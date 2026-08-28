@@ -158,6 +158,11 @@ if ($VerifyLegacyGoldenSources) { $conversionRoutingArguments.VerifyDerivedSourc
 $conversionRouting = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-ConversionRouting.ps1') `
     -Arguments $conversionRoutingArguments
+$conversionCacheArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $conversionCacheArguments.VerifyDerivedSources = $true }
+$conversionCache = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ConversionCache.ps1') `
+    -Arguments $conversionCacheArguments
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -273,6 +278,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$assetHealth.completion_criteria_satisfied -and
     [string]$conversionRouting.result -eq 'PASS' -and
     [bool]$conversionRouting.completion_criteria_satisfied -and
+    [string]$conversionCache.result -eq 'PASS' -and
+    [bool]$conversionCache.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -337,6 +344,7 @@ $report = [pscustomobject][ordered]@{
     reference_closure = $referenceClosure
     asset_health = $assetHealth
     conversion_routing = $conversionRouting
+    conversion_cache = $conversionCache
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

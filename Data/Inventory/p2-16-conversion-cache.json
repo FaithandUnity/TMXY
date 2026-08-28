@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T10:49:24.6380414+00:00",
+  "task_id": "P2-16",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+    "conversion_routing_sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559",
+    "routing_policy_sha256": "f545654c1838aae4f2d6bc1adf9e8667b91b4e8c842ebf84ed482f33eaf94563",
+    "source_copy_policy": "reference_only"
+  },
+  "report": {
+    "path": "Data/Exports/P2-16/p2-16-conversion-cache-plan.jsonl",
+    "tracked": false,
+    "lines": 40090,
+    "bytes": 28389045,
+    "sha256": "32130ce10d0df4db455b29d1efd69f1b9634c15fcbe8ac49e4c8afc537633487"
+  },
+  "summary": {
+    "assets": {
+      "aliases": 5489,
+      "bytes": 8882019027,
+      "conversion_jobs": 34601,
+      "files": 40090
+    },
+    "by_family": {
+      "anim": {
+        "aliases": 0,
+        "blocked_jobs": 30,
+        "bytes": 655802200,
+        "conversion_jobs": 1069,
+        "files": 1069,
+        "ready_jobs": 1039
+      },
+      "mp3": {
+        "aliases": 3,
+        "blocked_jobs": 0,
+        "bytes": 124002521,
+        "conversion_jobs": 61,
+        "files": 64,
+        "ready_jobs": 61
+      },
+      "qtx": {
+        "aliases": 0,
+        "blocked_jobs": 756,
+        "bytes": 3910277648,
+        "conversion_jobs": 24798,
+        "files": 24798,
+        "ready_jobs": 24042
+      },
+      "skem": {
+        "aliases": 78,
+        "blocked_jobs": 2,
+        "bytes": 515443174,
+        "conversion_jobs": 990,
+        "files": 1068,
+        "ready_jobs": 988
+      },
+      "sm": {
+        "aliases": 98,
+        "blocked_jobs": 12,
+        "bytes": 2307762148,
+        "conversion_jobs": 2826,
+        "files": 2924,
+        "ready_jobs": 2814
+      },
+      "ter": {
+        "aliases": 5244,
+        "blocked_jobs": 0,
+        "bytes": 1309215704,
+        "conversion_jobs": 3632,
+        "files": 8876,
+        "ready_jobs": 3632
+      },
+      "wav": {
+        "aliases": 31,
+        "blocked_jobs": 0,
+        "bytes": 54949730,
+        "conversion_jobs": 419,
+        "files": 450,
+        "ready_jobs": 419
+      },
+      "zif": {
+        "aliases": 35,
+        "blocked_jobs": 0,
+        "bytes": 4565902,
+        "conversion_jobs": 806,
+        "files": 841,
+        "ready_jobs": 806
+      }
+    },
+    "cache_keys": {
+      "absolute_paths_in_key": 0,
+      "alias_assignments": 5489,
+      "assets_with_ready_key": 39290,
+      "blocked_manual_jobs": 800,
+      "distinct_ready_keys": 33801,
+      "ready_jobs": 33801,
+      "timestamps_in_key": 0
+    },
+    "invalidation_proof": {
+      "descriptor_graph_mutation_changed_keys": 32515,
+      "identity_rebuild_stable_keys": 33801,
+      "routing_policy_mutation_changed_keys": 33801,
+      "source_mutation_changed_keys": 1,
+      "target_profile_mutation_changed_keys": 33801,
+      "tool_mutation_changed_keys_by_family": {
+        "anim": 1039,
+        "mp3": 61,
+        "qtx": 24042,
+        "skem": 988,
+        "sm": 2814,
+        "ter": 3632,
+        "wav": 419,
+        "zif": 806
+      }
+    },
+    "output_hash_verification_required": true,
+    "shared_cache_write_authorized": false
+  },
+  "key_inputs": {
+    "converter_source_sha256": {
+      "anim": "dab24c44d510604ba05afeee1dae99f9fab0d1dd722bd9e66ad67f1a10a1d295",
+      "mp3": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
+      "qtx": "6dfc868667ff44af46075a648602c22c17283a2ca0e478c89797791386a42d56",
+      "skem": "2f1df1671ffbeca72b11d95ca0c0e15d1ee50e6978bf1a3bb97a73ba08756bfa",
+      "sm": "1377fa8eaa9e9f7e460c5738965959f9500dba6cdeb596320bdad4b9d128d20f",
+      "ter": "da531146ef5c2b5d9db53a41a795205b8ba0f0a9b823aae8dd7d7d1fcaf99bd8",
+      "wav": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
+      "zif": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf"
+    },
+    "descriptor_graph_sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57",
+    "interchange_source_sha256": "894784e708e9f66d652789d001d0f3493f75177bccfb5ac899a014fae9dcfb22",
+    "routing_policy_sha256": "f545654c1838aae4f2d6bc1adf9e8667b91b4e8c842ebf84ed482f33eaf94563",
+    "target_profile_sha256": "bb265d50613470ad8998a40f73a3d1adb2c3ac45ca91eaff3e9ac581bac212d1"
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/conversion-cache-policy-v1.json",
+    "policy_sha256": "0191ba8ffa1b3c1736a7df830201295dcc3a6a6762592a6cbf35f4f465103648",
+    "schema": "Contracts/data-schema/conversion-cache-v1.schema.json",
+    "schema_sha256": "94dc52ffd1b1ea71bc5b2dc35da837dfd5d9bf2434972ea16f71990e02695bb3"
+  },
+  "implementation": {
+    "source_files": 4,
+    "source_sha256": "dc44f3c7a6e6533d20f937f2d9b3824112c74001de7e11e9dec29e9aa628635a",
+    "self_test_assertions": 5,
+    "generator": "Tools/TMXY.ConversionCache/New-ConversionCachePlan.ps1",
+    "query": "Tools/TMXY.ConversionCache/Find-ConversionCachePlan.ps1",
+    "verifier": "Tools/TMXY.ConversionCache/Test-ConversionCacheEntry.ps1"
+  },
+  "disclosure": {
+    "tracked_evidence_contains_asset_paths": false,
+    "tracked_evidence_contains_source_hashes": false,
+    "full_plan_committed_to_git": false,
+    "cache_artifacts_committed_to_git": false,
+    "payload_bytes_copied": false
+  },
+  "reproduction": {
+    "check_mode": "-Check",
+    "source_mount": "read-only",
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-17",
+      "P2-18",
+      "P2-19"
+    ],
+    "detail": "Use the cache key contract in conversion pilots and replace planning coefficients with measured throughput."
+  }
+}

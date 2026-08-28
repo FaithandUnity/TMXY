@@ -109,6 +109,11 @@ P2-15 由 `Tools/TMXY.ConversionRouting/New-ConversionRouting.ps1` 为全部 40,
 资源可保留路径别名并复用转换结果；依赖外部描述的 QTX/ANIM 不据 payload 相同而错误复用。
 逐资产路线位于 Git 忽略的 `Data/Exports/P2-15`，详见 `Docs/Formats/CONVERSION-ROUTING.md`。
 
+P2-16 由 `Tools/TMXY.ConversionCache/New-ConversionCachePlan.ps1` 为 33,801 个就绪转换作业
+生成内容寻址键，并让 5,489 个路径别名共享明确代表键。键绑定源载荷、解释记录、描述符范围、
+转换器、中间格式、路由策略和目标配置；时间戳不参与。800 个人工项在缺少人工决策摘要时
+禁止缓存命中，任何输出还必须逐项验长度和 SHA-256，详见 `Docs/Formats/CONVERSION-CACHE.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

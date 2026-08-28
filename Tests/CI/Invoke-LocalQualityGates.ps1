@@ -143,6 +143,11 @@ if ($VerifyLegacyGoldenSources) { $legacyCurrentArguments.VerifyDerivedSources =
 $legacyCurrentDiff = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-LegacyCurrentDiff.ps1') `
     -Arguments $legacyCurrentArguments
+$canonicalIdArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $canonicalIdArguments.VerifyDerivedSources = $true }
+$canonicalIdMap = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-CanonicalIdMap.ps1') `
+    -Arguments $canonicalIdArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -348,6 +353,7 @@ $report = [pscustomobject][ordered]@{
     core_table_schema = $coreTableSchema
     table_ownership = $tableOwnership
     legacy_current_diff = $legacyCurrentDiff
+    canonical_id_map = $canonicalIdMap
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

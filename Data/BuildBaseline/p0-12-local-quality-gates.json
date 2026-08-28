@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T11:46:39.3786290+00:00",
+  "captured_utc": "2026-08-28T12:23:29.5124513+00:00",
   "result": "PASS_DIAGNOSTIC",
   "authoritative_release_gate": false,
   "authority_note": "Local gates and the locked Clang 21 builder are operational; hosted CI and release-authority supply-chain evidence remain pending.",
   "repository": {
     "result": "PASS",
-    "checked_source_files": 231,
-    "checked_size_files": 580,
-    "checked_utf8_lf_files": 632,
+    "checked_source_files": 232,
+    "checked_size_files": 589,
+    "checked_utf8_lf_files": 642,
     "failure_count": 0,
     "failures": []
   },
   "secret": {
     "result": "PASS",
-    "repository_files_scanned": 620,
+    "repository_files_scanned": 629,
     "history_mode": "all_reachable_blobs",
-    "history_blobs_scanned": 1620,
+    "history_blobs_scanned": 1634,
     "scanner_self_test": "PASS",
     "secret_store_rotation": "PASS",
     "finding_count": 0,
@@ -57,7 +57,7 @@
   },
   "format_core": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:31:25.2041534+08:00",
+    "captured_utc": "2026-08-28T20:08:07.3509113+08:00",
     "result": "PASS",
     "task": "P1-01",
     "source_file_count": 6,
@@ -86,12 +86,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 27,
-      "output_sha256": "73ecbd774fd4362dfd142111e2cc467922466eeebe7decae495c82ed153ab310"
+      "output_sha256": "af1502b0abfd5af7da18926134927270e7036b35f7f026b087836856bfbe3634"
     }
   },
   "package_v1": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:32:26.0213401+08:00",
+    "captured_utc": "2026-08-28T20:09:08.6532378+08:00",
     "result": "PASS",
     "task": "P1-02",
     "source_file_count": 26,
@@ -168,12 +168,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "d0c619c6556b6eef13036089fb31e8bccc56aabd1780f13a302b2a7230db23ea"
+      "output_sha256": "12f0b6bcedbfa426c3626498e683efeafddcbee3b9da3a453eb33a4dcdf8ffc8"
     }
   },
   "package_v2": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:33:28.0502224+08:00",
+    "captured_utc": "2026-08-28T20:10:11.086214+08:00",
     "result": "PASS",
     "task": "P1-05",
     "source_file_count": 26,
@@ -334,12 +334,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "6c37b3553f8c07df61a11fbe35f74fe90fd0c59078a5b95c95b4bb6556dcc3a2"
+      "output_sha256": "271f46a69b21fc7b41380ee6e2d5a8b7a62bb0372518bd51316362dbccf74c40"
     }
   },
   "package_v3": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:34:30.207601+08:00",
+    "captured_utc": "2026-08-28T20:11:13.3295006+08:00",
     "result": "PASS",
     "task": "P1-06",
     "source_file_count": 26,
@@ -1103,19 +1103,19 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "0e8e374247e67c061d55dccad52ef6294a35d87f0eef92438c2d6d07da859ca5"
+      "output_sha256": "c5b91f4e61d359f8013cf31975a8895c6e39e24fbbde008be12655d5b33f0ed6"
     }
   },
   "package_pipeline": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:35:32.0961904+08:00",
+    "captured_utc": "2026-08-28T20:12:15.4462776+08:00",
     "result": "PASS",
     "task": "P1-07",
     "source_file_count": 26,
     "source_sha256": "2423e4f70a32e075c245d0ac49d8520294a15264858a4094e09f01f9b092dfe0",
     "input_reports": {
-      "package_v2_sha256": "fbefd6555797b2c657649d6faa472e404f2b0b996708c02a7b1fe9c109ea8cce",
-      "package_v3_sha256": "56177f166085a4b289662fbd83679e4d61d182c9316e2ae55e7180db9d98e759"
+      "package_v2_sha256": "0b6df52bfeb554b506062631bfbb82e816482866770cf25df63ef1b18c9cc036",
+      "package_v3_sha256": "7a69e3b3b929a75d08d8c8f3bc70a7adaa308730635e6279edd32a0d93494f21"
     },
     "pipeline": [
       "read-and-validate-outer-header",
@@ -1166,12 +1166,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "cfa1a049ff2f8a1cdffc626fd9075eff22df8ec1f1bac11f9e660bb28cd22750"
+      "output_sha256": "898044d9bc0034f37e94ce80ff3773f2cb5b65d3706bbf27fd917e0782282eed"
     }
   },
   "package_normalized_tree": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:36:33.3980308+08:00",
+    "captured_utc": "2026-08-28T20:13:16.6267778+08:00",
     "result": "PASS",
     "task": "P1-08",
     "source_file_count": 26,
@@ -1183,10 +1183,10 @@
       "passed": true
     },
     "dependency_report_sha256": {
-      "p1-02-package-v1.json": "cb6fff28fa7de58b4b833bfcb6cb7db0e671c76ccc96bde494b20ba5bf3cd741",
-      "p1-05-package-v2.json": "fbefd6555797b2c657649d6faa472e404f2b0b996708c02a7b1fe9c109ea8cce",
-      "p1-06-package-v3.json": "56177f166085a4b289662fbd83679e4d61d182c9316e2ae55e7180db9d98e759",
-      "p1-07-package-pipeline.json": "03a51c0e0d465cbe6323a602dad65cabe8a6ab96edf9f21c9a3585b94855c895"
+      "p1-02-package-v1.json": "86a8b5b93a045ba775e989f30ef69180b4e2fb2e206dff5f7194534c37d9b02d",
+      "p1-05-package-v2.json": "0b6df52bfeb554b506062631bfbb82e816482866770cf25df63ef1b18c9cc036",
+      "p1-06-package-v3.json": "7a69e3b3b929a75d08d8c8f3bc70a7adaa308730635e6279edd32a0d93494f21",
+      "p1-07-package-pipeline.json": "541362a442ac9915f79234ba470c2c7aed8c63f08f3e3e04b0479fad3532558d"
     },
     "semantic_states": {
       "names_and_classes": "opaque-bytes-hex",
@@ -1238,12 +1238,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "4dc729999c8e2aed163676f1a767c8c77d112b50362e6e5f3135e535fefe41f5"
+      "output_sha256": "119f0fd299f2e57274c5d7add770714efa7a9108d5490678b3d944c29d0e4a1a"
     }
   },
   "legacy_table": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:36:57.0587924+08:00",
+    "captured_utc": "2026-08-28T20:13:40.0754455+08:00",
     "result": "PASS",
     "task": "P1-03",
     "source_file_count": 7,
@@ -1350,12 +1350,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 44,
-      "output_sha256": "c5e4ead732d995cb65d2d96a87d03d1292c43056a0a3e9fb887d16948d9cc8b3"
+      "output_sha256": "7a2f187746167445df907bb8f661f9eeb8f68ba3cfd45de92163339375933a24"
     }
   },
   "current_table_investigation": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:37:05.9577172+08:00",
+    "captured_utc": "2026-08-28T20:13:48.8240084+08:00",
     "result": "PASS_DIAGNOSTIC",
     "task": "P1-09",
     "task_status": "COMPLETE",
@@ -1660,7 +1660,7 @@
   },
   "legacy_to_ue_transform": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:37:12.544525+08:00",
+    "captured_utc": "2026-08-28T20:13:55.327507+08:00",
     "result": "PASS",
     "task": "P1-12",
     "completion_criteria_satisfied": true,
@@ -1749,7 +1749,7 @@
   },
   "qtx_texture": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:37:50.1057727+08:00",
+    "captured_utc": "2026-08-28T20:14:32.9944723+08:00",
     "result": "PASS",
     "task": "P1-13",
     "completion_criteria_satisfied": true,
@@ -1922,12 +1922,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 76,
-      "output_sha256": "98e9ebdc5c47816775f4ebee89313eb541f15f92a2cd7eeb2c5dfee6b31aa91b"
+      "output_sha256": "0a15b87b79b8e2afd1624ad2b83dd844e74684d1f10306a9e4faeb7b4aeeea85"
     }
   },
   "sm_static_mesh": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:38:32.1442085+08:00",
+    "captured_utc": "2026-08-28T20:15:14.8438153+08:00",
     "result": "PASS",
     "task": "P1-14",
     "completion_criteria_satisfied": true,
@@ -2093,12 +2093,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 72,
-      "output_sha256": "104cf6832abde0ab9125e52098c4a099081184a516fbb7bcda199e853a937bc6"
+      "output_sha256": "26db43de634b9c51b83ea64b20ec1fd9a144821a17da5ca73eb3f294b2d9f347"
     }
   },
   "skem_skeletal_mesh": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:39:26.5094516+08:00",
+    "captured_utc": "2026-08-28T20:16:09.0837459+08:00",
     "result": "PASS",
     "task": "P1-15",
     "completion_criteria_satisfied": true,
@@ -2253,12 +2253,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 71,
-      "output_sha256": "28f7749c65de6662d4c9f6ab5105c1138e09dec633f2afe5b77e5aa1daf76de3"
+      "output_sha256": "529c9dbae39f0555ecf0464c3217baba12aed87183a7e5800a202ce2c5cc79aa"
     }
   },
   "anim_animation": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:12.7930855+08:00",
+    "captured_utc": "2026-08-28T20:16:55.0437185+08:00",
     "result": "PASS",
     "task": "P1-16",
     "completion_criteria_satisfied": true,
@@ -2394,12 +2394,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 76,
-      "output_sha256": "42e638fb6897e7f70a719505521169cf87c87885174c574bd68f74eb879cbb0b"
+      "output_sha256": "7bbbf85288270e7ba9a0a0e76929233385f3173086ee2d8568b2f453eecbfede"
     }
   },
   "ter_terrain": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:35.6530105+08:00",
+    "captured_utc": "2026-08-28T20:17:18.1719978+08:00",
     "result": "PASS",
     "task": "P1-17",
     "completion_criteria_satisfied": true,
@@ -2559,19 +2559,19 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 45,
-      "output_sha256": "5c19ff4dc0ad01ff787a9841f853f3bec44d80bbced2fe4b8447617d53289469"
+      "output_sha256": "ce1859187e5ade634e03340b1f339211b54385f44fafc03c5e74329825f89c41"
     }
   },
   "auxiliary_assets": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:40.1781581+08:00",
+    "captured_utc": "2026-08-28T20:17:22.6076054+08:00",
     "result": "PASS",
     "task": "P1-18",
     "completion_criteria_satisfied": true,
     "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
     "dependencies": {
-      "p1-08-package-normalized-tree.json": "608abd2a6f937762801466500a2b42e96b171be31da3c405651e221c5cdfbacb",
-      "p1-13-qtx-texture.json": "24fffa72d4fa2fbc323607e898927116d7dd55ed2662bd830add758d4c1f5ac8"
+      "p1-08-package-normalized-tree.json": "269edd8b1aa85376e163102d01808412a5cb44384b376fb1c4324bc90a7baf8f",
+      "p1-13-qtx-texture.json": "3bc5097d27b9e606d237906a67eab4777aaac17c08ff5af6b572479a3967fc6b"
     },
     "classification": {
       "zif": "BOM-less UTF-8 XML zone-navigation records",
@@ -2909,7 +2909,7 @@
   },
   "asset_interchange": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:40.2958559+08:00",
+    "captured_utc": "2026-08-28T20:17:22.7179832+08:00",
     "result": "PASS",
     "task": "P1-19",
     "completion_criteria_satisfied": true,
@@ -2978,13 +2978,13 @@
       "unknown_extensions_must_survive_read_write": true
     },
     "dependency_report_sha256": {
-      "p1-08-package-normalized-tree.json": "608abd2a6f937762801466500a2b42e96b171be31da3c405651e221c5cdfbacb",
-      "p1-13-qtx-texture.json": "24fffa72d4fa2fbc323607e898927116d7dd55ed2662bd830add758d4c1f5ac8",
-      "p1-14-sm-static-mesh.json": "660ae77b696ebc93ef483476c3227db19643ea5420fd80e820a9d869c83810c3",
-      "p1-15-skem-skeletal-mesh.json": "72e1d0ebfe96dfba55c6e9db1012aa017aa51fe7caf1fc71ba306b79ac1400c9",
-      "p1-16-anim-animation.json": "ebbc098b7d01bc5820372704763400814e9bbaeba0cdea64fb2d0676773c07b8",
-      "p1-17-ter-terrain.json": "7be77d126b6316ccf1f05da4d8b219e593e72fe72cddf186cdb5ae84fc9eb86c",
-      "p1-18-auxiliary-assets.json": "14ce43951cb0715a21d6d64fb363fdebdf38bf6d64a8c618a1a4be71c1d2b252"
+      "p1-08-package-normalized-tree.json": "269edd8b1aa85376e163102d01808412a5cb44384b376fb1c4324bc90a7baf8f",
+      "p1-13-qtx-texture.json": "3bc5097d27b9e606d237906a67eab4777aaac17c08ff5af6b572479a3967fc6b",
+      "p1-14-sm-static-mesh.json": "a37e403e75b8508f35cd3fc49f513cab6f19f29157f26c563038aff9d455c0a2",
+      "p1-15-skem-skeletal-mesh.json": "4fb7effb0bef7a0d1e6d3862faa74f629951f22d924eb1201e2187116b67f74d",
+      "p1-16-anim-animation.json": "93b884fdf701ce336f8fc6c4408983d07dee88cf643b0ecc055060bcbea9ee57",
+      "p1-17-ter-terrain.json": "310be31561597a82b0a56c46d4a911ac1f218f8108f6c4e2543a2b0842341c05",
+      "p1-18-auxiliary-assets.json": "33449ef8d05bec200b52cf59e17fa54d45aa1872d74bf9844b4a6cde28649349"
     },
     "exporter_source_sha256": {
       "Tools/TMXY.Package/src/package_normalized_tree.cpp": "1d9cf6cc0ea515a9ffe635d9d4a342e98f4003ead521ccdd390961a42f5c4eab",
@@ -2999,7 +2999,7 @@
   },
   "ue_golden_host": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.657613+08:00",
+    "captured_utc": "2026-08-28T20:17:41.436143+08:00",
     "result": "PASS",
     "task": "P1-20",
     "completion_criteria_satisfied": true,
@@ -3040,15 +3040,15 @@
       "required": true,
       "passed": true,
       "report_path": "E:\\QQXYCodeDev\\Rebuild\\Data\\BuildBaseline\\p0-10a-ue-validation.json",
-      "report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28"
+      "report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca"
     },
-    "dependency_report_sha256": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
+    "dependency_report_sha256": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
     "failure_count": 0,
     "failures": []
   },
   "ue_importer": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.6748439+08:00",
+    "captured_utc": "2026-08-28T20:17:41.4538873+08:00",
     "result": "PASS",
     "task": "P1-21",
     "completion_criteria_satisfied": true,
@@ -3103,21 +3103,21 @@
       "required": true,
       "passed": true,
       "test": "TMXY.Importer.ManifestBatch",
-      "ue_report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28",
+      "ue_report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca",
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-21-report.json",
       "generated_report_sha256": "5e635694f10b21c6d24dcacccb0fbf7b5f67ee0e3e2cafeeae7db75a4d1e255e",
       "generated_report_schema_passed": true
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "290720cdbaee0f0fae8b0c2fafe8e10abcd85733565e67f0ad9f595cf5da76a4"
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "66b49ebb854d1a72f63887ad2c3a68c9a9c9510e9a744a78d1e91b23bbb09a82"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_texture_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.7224079+08:00",
+    "captured_utc": "2026-08-28T20:17:41.5015071+08:00",
     "result": "PASS",
     "task": "P1-22",
     "completion_criteria_satisfied": true,
@@ -3194,20 +3194,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-22-texture-report.json",
       "generated_report_sha256": "18d779b54963f9bbd3ac7f605808a9150d1a6b3c5a4a148138864a22d2698825",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28"
+      "ue_report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-13-qtx-texture.json": "24fffa72d4fa2fbc323607e898927116d7dd55ed2662bd830add758d4c1f5ac8",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "290720cdbaee0f0fae8b0c2fafe8e10abcd85733565e67f0ad9f595cf5da76a4",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "75c65bacb6b782a166e0e526cf80236b776d810104692829c4578d2649678948"
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "3bc5097d27b9e606d237906a67eab4777aaac17c08ff5af6b572479a3967fc6b",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "66b49ebb854d1a72f63887ad2c3a68c9a9c9510e9a744a78d1e91b23bbb09a82",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fb777882b4b31c045793d56f0209b869200d88fdf9f0f396c48eedc3ec23b2a9"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_static_mesh_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.7978117+08:00",
+    "captured_utc": "2026-08-28T20:17:41.5731361+08:00",
     "result": "PASS",
     "task": "P1-23",
     "completion_criteria_satisfied": true,
@@ -3273,21 +3273,21 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-23-static-mesh-report.json",
       "generated_report_sha256": "a7ddfce428543ffd1504203c2f279100bbebbc48f950996cfd6bbd68c322bedf",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28"
+      "ue_report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "660ae77b696ebc93ef483476c3227db19643ea5420fd80e820a9d869c83810c3",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "290720cdbaee0f0fae8b0c2fafe8e10abcd85733565e67f0ad9f595cf5da76a4",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "75c65bacb6b782a166e0e526cf80236b776d810104692829c4578d2649678948",
-      "Data/BuildBaseline/p1-22-ue-texture-import.json": "d055f03c07491afb9b2333bdaf53e00d7ce26bac7e6745f0837afb4105a92577"
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "a37e403e75b8508f35cd3fc49f513cab6f19f29157f26c563038aff9d455c0a2",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "66b49ebb854d1a72f63887ad2c3a68c9a9c9510e9a744a78d1e91b23bbb09a82",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fb777882b4b31c045793d56f0209b869200d88fdf9f0f396c48eedc3ec23b2a9",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "ba4887f57613aaeb4abc2969e204e5b5bf7ab8b9f46dbbb542fa5a0060564c4d"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_skeletal_mesh_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.8473707+08:00",
+    "captured_utc": "2026-08-28T20:17:41.6178377+08:00",
     "result": "PASS",
     "task": "P1-24",
     "completion_criteria_satisfied": true,
@@ -3355,20 +3355,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-24-skeletal-mesh-report.json",
       "generated_report_sha256": "5925bb0491981de448b69664ab1723738c3bdf954b9aa22c02f3623d71173b5a",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28"
+      "ue_report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "72e1d0ebfe96dfba55c6e9db1012aa017aa51fe7caf1fc71ba306b79ac1400c9",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "75c65bacb6b782a166e0e526cf80236b776d810104692829c4578d2649678948",
-      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "b6d0b657e7697151676014eb384f8f362a2f25d094261c678700f21a95a78466"
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "4fb7effb0bef7a0d1e6d3862faa74f629951f22d924eb1201e2187116b67f74d",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fb777882b4b31c045793d56f0209b869200d88fdf9f0f396c48eedc3ec23b2a9",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "a00be38abb2499e0c4a8baf65c979022bb03b2b0ecd063637a1834b07b43e317"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_animation_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.8837994+08:00",
+    "captured_utc": "2026-08-28T20:17:41.6529637+08:00",
     "result": "PASS",
     "task": "P1-25",
     "completion_criteria_satisfied": true,
@@ -3441,20 +3441,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-25-animation-report.json",
       "generated_report_sha256": "af21d7e9917669cbf956b4cd7397cc18c4faf98205f7650c8789ac7cc1bcf39f",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28"
+      "ue_report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-16-anim-animation.json": "ebbc098b7d01bc5820372704763400814e9bbaeba0cdea64fb2d0676773c07b8",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "75c65bacb6b782a166e0e526cf80236b776d810104692829c4578d2649678948",
-      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "ffd821cfba1726414d206ab46ae5b05c8a56a32a228735240173e72d8543e696"
+      "Data/BuildBaseline/p1-16-anim-animation.json": "93b884fdf701ce336f8fc6c4408983d07dee88cf643b0ecc055060bcbea9ee57",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fb777882b4b31c045793d56f0209b869200d88fdf9f0f396c48eedc3ec23b2a9",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "37e8e70f3dd2863bc734dd1f89589d366c62012bd6698e710e09a30a89898ada"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_terrain_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.9711362+08:00",
+    "captured_utc": "2026-08-28T20:17:41.739345+08:00",
     "result": "PASS",
     "task": "P1-26",
     "completion_criteria_satisfied": true,
@@ -3525,20 +3525,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-26-terrain-report.json",
       "generated_report_sha256": "fcec353a7c50f20f665b20c1bc30b027a0e0ef7437dc717ccbd9b78d9305929b",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "4d7c28869f8efde4b671e52a7c96683a701c423d9aa8218fca3a684991c86b28"
+      "ue_report_sha256": "d1ad2e68e0807eac424fd394f7b415fdcbdddfbbb31427780e03c4471b44c7ca"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-17-ter-terrain.json": "7be77d126b6316ccf1f05da4d8b219e593e72fe72cddf186cdb5ae84fc9eb86c",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "75c65bacb6b782a166e0e526cf80236b776d810104692829c4578d2649678948",
-      "Data/BuildBaseline/p1-25-ue-animation-import.json": "e17a556f21419f7ecb1ab0ad3a4e9e4993210842bd79b0889fcc39d89da05569"
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "310be31561597a82b0a56c46d4a911ac1f218f8108f6c4e2543a2b0842341c05",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fb777882b4b31c045793d56f0209b869200d88fdf9f0f396c48eedc3ec23b2a9",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "4077db7b3fe6ffcf2238fcc0cd6f2751202c1babf4feed0ba38d88522cd5939f"
     },
     "failure_count": 0,
     "failures": []
   },
   "golden_test_matrix": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:41:00.0444624+08:00",
+    "captured_utc": "2026-08-28T20:17:41.809145+08:00",
     "result": "PASS",
     "task": "P1-27",
     "completion_criteria_satisfied": true,
@@ -3576,7 +3576,7 @@
     },
     "ci": {
       "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
-      "aggregate_sha256": "f92f5e9ad45321e6b83c554d9a3fd55e9e664bec196d1583dcdfccd585324808",
+      "aggregate_sha256": "77827775c04177fc548dc0b47b2105efedb3493a42e02c1f8fb70e843dcd71b1",
       "all_declared_gates_bound": true
     },
     "source_binding": {
@@ -3620,24 +3620,24 @@
       "Tests/Contract/Test-UETerrainImport.ps1": "c19b54d1eea4e17ce78cc03bfb6e61579deab42d39ea107152975e69410782ea"
     },
     "evidence_report_sha256": {
-      "Data/BuildBaseline/p1-02-package-v1.json": "cb6fff28fa7de58b4b833bfcb6cb7db0e671c76ccc96bde494b20ba5bf3cd741",
-      "Data/BuildBaseline/p1-05-package-v2.json": "fbefd6555797b2c657649d6faa472e404f2b0b996708c02a7b1fe9c109ea8cce",
-      "Data/BuildBaseline/p1-06-package-v3.json": "56177f166085a4b289662fbd83679e4d61d182c9316e2ae55e7180db9d98e759",
-      "Data/BuildBaseline/p1-07-package-pipeline.json": "03a51c0e0d465cbe6323a602dad65cabe8a6ab96edf9f21c9a3585b94855c895",
-      "Data/BuildBaseline/p1-08-package-normalized-tree.json": "608abd2a6f937762801466500a2b42e96b171be31da3c405651e221c5cdfbacb",
-      "Data/BuildBaseline/p1-03-legacy-table.json": "40d2f5f82ac52109682ab0051dada606842ef8024235b94e1c2cc5057bbb4613",
-      "Data/BuildBaseline/p1-13-qtx-texture.json": "24fffa72d4fa2fbc323607e898927116d7dd55ed2662bd830add758d4c1f5ac8",
-      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "660ae77b696ebc93ef483476c3227db19643ea5420fd80e820a9d869c83810c3",
-      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "72e1d0ebfe96dfba55c6e9db1012aa017aa51fe7caf1fc71ba306b79ac1400c9",
-      "Data/BuildBaseline/p1-16-anim-animation.json": "ebbc098b7d01bc5820372704763400814e9bbaeba0cdea64fb2d0676773c07b8",
-      "Data/BuildBaseline/p1-17-ter-terrain.json": "7be77d126b6316ccf1f05da4d8b219e593e72fe72cddf186cdb5ae84fc9eb86c",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "e4d5cb4fc25969c1de2addac9d67c5e7e133c081f7d778539ed87414b79eb85c",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "75c65bacb6b782a166e0e526cf80236b776d810104692829c4578d2649678948",
-      "Data/BuildBaseline/p1-22-ue-texture-import.json": "d055f03c07491afb9b2333bdaf53e00d7ce26bac7e6745f0837afb4105a92577",
-      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "b6d0b657e7697151676014eb384f8f362a2f25d094261c678700f21a95a78466",
-      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "ffd821cfba1726414d206ab46ae5b05c8a56a32a228735240173e72d8543e696",
-      "Data/BuildBaseline/p1-25-ue-animation-import.json": "e17a556f21419f7ecb1ab0ad3a4e9e4993210842bd79b0889fcc39d89da05569",
-      "Data/BuildBaseline/p1-26-ue-terrain-import.json": "104bb1453f65e819be5fb25fe1769681ae3287083759e8ff843256ec5551c668"
+      "Data/BuildBaseline/p1-02-package-v1.json": "86a8b5b93a045ba775e989f30ef69180b4e2fb2e206dff5f7194534c37d9b02d",
+      "Data/BuildBaseline/p1-05-package-v2.json": "0b6df52bfeb554b506062631bfbb82e816482866770cf25df63ef1b18c9cc036",
+      "Data/BuildBaseline/p1-06-package-v3.json": "7a69e3b3b929a75d08d8c8f3bc70a7adaa308730635e6279edd32a0d93494f21",
+      "Data/BuildBaseline/p1-07-package-pipeline.json": "541362a442ac9915f79234ba470c2c7aed8c63f08f3e3e04b0479fad3532558d",
+      "Data/BuildBaseline/p1-08-package-normalized-tree.json": "269edd8b1aa85376e163102d01808412a5cb44384b376fb1c4324bc90a7baf8f",
+      "Data/BuildBaseline/p1-03-legacy-table.json": "3a4a69a837fcd37827bb309762e4681164d40d53b2b2a2652b6b56122ba7eec2",
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "3bc5097d27b9e606d237906a67eab4777aaac17c08ff5af6b572479a3967fc6b",
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "a37e403e75b8508f35cd3fc49f513cab6f19f29157f26c563038aff9d455c0a2",
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "4fb7effb0bef7a0d1e6d3862faa74f629951f22d924eb1201e2187116b67f74d",
+      "Data/BuildBaseline/p1-16-anim-animation.json": "93b884fdf701ce336f8fc6c4408983d07dee88cf643b0ecc055060bcbea9ee57",
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "310be31561597a82b0a56c46d4a911ac1f218f8108f6c4e2543a2b0842341c05",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "0273253aae2dba666e21d5a831c1766fe055e4900537227688db01ee40b50f39",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fb777882b4b31c045793d56f0209b869200d88fdf9f0f396c48eedc3ec23b2a9",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "ba4887f57613aaeb4abc2969e204e5b5bf7ab8b9f46dbbb542fa5a0060564c4d",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "a00be38abb2499e0c4a8baf65c979022bb03b2b0ecd063637a1834b07b43e317",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "37e8e70f3dd2863bc734dd1f89589d366c62012bd6698e710e09a30a89898ada",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "4077db7b3fe6ffcf2238fcc0cd6f2751202c1babf4feed0ba38d88522cd5939f",
+      "Data/BuildBaseline/p1-26-ue-terrain-import.json": "bbb39273d3372080400a81f04babb575355ce9023a8b329ab976abdc64ffcf05"
     },
     "suites": [
       {
@@ -3764,7 +3764,7 @@
     "gate": "G1",
     "completion_criteria_satisfied": true,
     "assertions": 25,
-    "report_sha256": "b87ee478bda363c3a6c6406f4849c4a3b8320d6c2d3cf9c1bee166caeb128817",
+    "report_sha256": "327afe9504fc9078e2c0525b3e269db566e4c0a162ead359589cf0dbfb7f5f7a",
     "regenerated_semantic_match": true,
     "raw_key_required": false
   },
@@ -4675,6 +4675,591 @@
       },
       {
         "name": "Full deterministic legacy/current regeneration passes",
+        "result": "PASS",
+        "detail": ""
+      }
+    ]
+  },
+  "canonical_id_map": {
+    "schema_version": 1,
+    "task_id": "P2-10",
+    "result": "PASS",
+    "completion_criteria_satisfied": true,
+    "verify_derived_sources": true,
+    "report": {
+      "path": "Data/Exports/P2-10/p2-10-canonical-id-map.jsonl",
+      "tracked": false,
+      "lines": 87328,
+      "bytes": 26610829,
+      "sha256": "af21fefcfdc4e6819236d53d84d7de2af59fb4b00882093598c4f51667e5d2af"
+    },
+    "summary": {
+      "active_ids": 87044,
+      "automatic_renumberings": 0,
+      "collapsed_duplicate_groups": 700,
+      "collapsed_duplicate_occurrences": 800,
+      "comparable_legacy_domains": 10,
+      "conflicts": 0,
+      "current_only_ids": 60076,
+      "current_physical_rows": 87844,
+      "current_unique_ids": 87044,
+      "domain_count": 12,
+      "explicit_remaps": 0,
+      "legacy_preserved_ids": 27252,
+      "legacy_type_exception_components": 6,
+      "legacy_unique_ids": 27252,
+      "mapping_records": 87328,
+      "shared_ids": 26968,
+      "tombstones": 284,
+      "unresolved_conflicts": 0
+    },
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-28T20:00:24.3880561+08:00",
+      "task_id": "P2-10",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "legacy_snapshot": "legacy-devdoc-decrypted-csv-20120318",
+        "legacy_build": "unknown-not-inferred",
+        "legacy_manifest_sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+        "current_build": "qy-3.0.0.413",
+        "current_manifest_sha256": "6ea5cfa2dfd9104c28bb7289cc84b42791c2e3afd0ba480767f38aca85d5337d",
+        "p2_09_evidence_sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+        "p2_09_report_sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667",
+        "p2_07_evidence_sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+        "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-10/p2-10-canonical-id-map.jsonl",
+        "tracked": false,
+        "lines": 87328,
+        "bytes": 26610829,
+        "sha256": "af21fefcfdc4e6819236d53d84d7de2af59fb4b00882093598c4f51667e5d2af"
+      },
+      "summary": {
+        "active_ids": 87044,
+        "automatic_renumberings": 0,
+        "collapsed_duplicate_groups": 700,
+        "collapsed_duplicate_occurrences": 800,
+        "comparable_legacy_domains": 10,
+        "conflicts": 0,
+        "current_only_ids": 60076,
+        "current_physical_rows": 87844,
+        "current_unique_ids": 87044,
+        "domain_count": 12,
+        "explicit_remaps": 0,
+        "legacy_preserved_ids": 27252,
+        "legacy_type_exception_components": 6,
+        "legacy_unique_ids": 27252,
+        "mapping_records": 87328,
+        "shared_ids": 26968,
+        "tombstones": 284,
+        "unresolved_conflicts": 0
+      },
+      "domains": [
+        {
+          "actions": {
+            "adopt_current": 1638,
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 2401
+          },
+          "active": 4039,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 4039,
+          "current_unique_ids": 4039,
+          "domain": "CLSVShare/formula_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 2402,
+          "mappings": 4040,
+          "shared_ids": 2401,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 16575,
+            "preserve_legacy_tombstone": 238,
+            "preserve_shared": 12648
+          },
+          "active": 29223,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 29223,
+          "current_unique_ids": 29223,
+          "domain": "CLSVShare/item_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 12886,
+          "mappings": 29461,
+          "shared_ids": 12648,
+          "tombstones": 238
+        },
+        {
+          "actions": {
+            "preserve_legacy_tombstone": 21,
+            "preserve_shared": 100
+          },
+          "active": 100,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 100,
+          "current_unique_ids": 100,
+          "domain": "CLSVShare/LevelInfo",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 121,
+          "mappings": 121,
+          "shared_ids": 100,
+          "tombstones": 21
+        },
+        {
+          "actions": {
+            "adopt_current": 15200
+          },
+          "active": 15200,
+          "collapsed_duplicate_groups": 700,
+          "collapsed_duplicate_occurrences": 800,
+          "conflicts": 0,
+          "current_physical_rows": 16000,
+          "current_unique_ids": 15200,
+          "domain": "CLSVShare/Profession_lvl",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0002"
+          ],
+          "key_types": [
+            "int64",
+            "int64"
+          ],
+          "legacy_snapshot_present": false,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 0,
+          "mappings": 15200,
+          "shared_ids": 0,
+          "tombstones": 0
+        },
+        {
+          "actions": {
+            "adopt_current": 16051,
+            "preserve_legacy_tombstone": 11,
+            "preserve_shared": 7176
+          },
+          "active": 23227,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 23227,
+          "current_unique_ids": 23227,
+          "domain": "CLSVShare/skill_table",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0004"
+          ],
+          "key_types": [
+            "int64",
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 7187,
+          "mappings": 23238,
+          "shared_ids": 7176,
+          "tombstones": 11
+        },
+        {
+          "actions": {
+            "adopt_current": 4424,
+            "preserve_shared": 4260
+          },
+          "active": 8684,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 8684,
+          "current_unique_ids": 8684,
+          "domain": "CLSVShare/states",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 4260,
+          "mappings": 8684,
+          "shared_ids": 4260,
+          "tombstones": 0
+        },
+        {
+          "actions": {
+            "adopt_current": 155,
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 57
+          },
+          "active": 212,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 212,
+          "current_unique_ids": 212,
+          "domain": "CLSVShare/Suit_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 58,
+          "mappings": 213,
+          "shared_ids": 57,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 46,
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 77
+          },
+          "active": 123,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 123,
+          "current_unique_ids": 123,
+          "domain": "CLSVShare/Transpoints",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 78,
+          "mappings": 124,
+          "shared_ids": 77,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 16
+          },
+          "active": 16,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 16,
+          "current_unique_ids": 16,
+          "domain": "CLSVShare/unit_cls",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "string"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 17,
+          "mappings": 17,
+          "shared_ids": 16,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 44,
+            "preserve_legacy_tombstone": 9,
+            "preserve_shared": 117
+          },
+          "active": 161,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 161,
+          "current_unique_ids": 161,
+          "domain": "CLSVShare/unit_prop",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0004"
+          ],
+          "key_types": [
+            "string",
+            "string"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 126,
+          "mappings": 170,
+          "shared_ids": 117,
+          "tombstones": 9
+        },
+        {
+          "actions": {
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 116
+          },
+          "active": 116,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 116,
+          "current_unique_ids": 116,
+          "domain": "CLSVShare/waypoint",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0002"
+          ],
+          "key_types": [
+            "int64",
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 2,
+          "legacy_unique_ids": 117,
+          "mappings": 117,
+          "shared_ids": 116,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 5943
+          },
+          "active": 5943,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 5943,
+          "current_unique_ids": 5943,
+          "domain": "Table/quest_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": false,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 0,
+          "mappings": 5943,
+          "shared_ids": 0,
+          "tombstones": 0
+        }
+      ],
+      "contracts": {
+        "policy": "Contracts/data-schema/canonical-id-policy-v1.json",
+        "policy_sha256": "323b2788dc2666580ee2676057d6f00d51b3c7fcc088a0651250204ecd5a7341",
+        "schema": "Contracts/data-schema/canonical-id-map-v1.schema.json",
+        "schema_sha256": "f0c797b4537536f62192242b30cda52befa2f261eec00b445005b62e6e03f050"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "58335cac03726a61a78a7a8dc8330a0468594bf608b1c7473af733dda5a43d4d",
+        "self_test_assertions": 8,
+        "generator": "Tools/TMXY.CanonicalId/New-CanonicalIdMap.ps1",
+        "query": "Tools/TMXY.CanonicalId/Find-CanonicalIdMapping.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_primary_keys": false,
+        "tracked_evidence_contains_row_values": false,
+        "full_map_contains_primary_keys": true,
+        "full_map_committed_to_git": false,
+        "query_emits_primary_keys": false,
+        "legacy_payloads_copied": false
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "legacy_mount": "read-only",
+        "workspace_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-11",
+          "P2-17"
+        ],
+        "detail": "Audit ID widths and generate shared typed ID declarations from the frozen domains."
+      }
+    },
+    "assertions": [
+      {
+        "name": "Required file canonical-id-policy-v1.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file canonical-id-map-v1.schema.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file p2-10-canonical-id-map.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file New-CanonicalIdMap.ps1",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file canonical_id.py",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file Find-CanonicalIdMapping.ps1",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file smoke-map.jsonl",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file p2-09-legacy-current-diff.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file p2-07-core-table-schema.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file core-table-registry-v1.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Evidence completes P2-10",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Schema is closed draft 2020-12 evidence",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Policy preserves IDs and fails conflicts closed",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Legacy type exceptions cannot be coerced or activated",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Evidence binds P2-09 P2-07 and registry",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Ignored map is deterministic and complete",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Local map hash size and lines match evidence",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "All P2-07 domains have typed Canonical IDs",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Key component types stay bound to P2-07",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Active and Tombstone sets close exactly",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Every legacy and current ID is preserved",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Approved identical duplicates collapse without conflict",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Legacy type exceptions remain explicit",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "No implicit remap or unresolved conflict exists",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Contracts implementation and isolation are bound",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Tracked evidence preserves disclosure boundary",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Query returns digest metadata without primary keys",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Full deterministic Canonical ID regeneration passes",
         "result": "PASS",
         "detail": ""
       }
@@ -6984,7 +7569,7 @@
   },
   "reference_formats": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:52.7276324+08:00",
+    "captured_utc": "2026-08-28T20:21:42.7258453+08:00",
     "result": "PASS",
     "task": "P1-04",
     "document_version": "0.1",
@@ -7005,8 +7590,8 @@
       "table": "67bd122bc59d2fcfd4ab0cee279944a97f1950d146253f063b0feb3f785320e9"
     },
     "input_report_sha256": {
-      "package": "cb6fff28fa7de58b4b833bfcb6cb7db0e671c76ccc96bde494b20ba5bf3cd741",
-      "table": "40d2f5f82ac52109682ab0051dada606842ef8024235b94e1c2cc5057bbb4613"
+      "package": "86a8b5b93a045ba775e989f30ef69180b4e2fb2e206dff5f7194534c37d9b02d",
+      "table": "3a4a69a837fcd37827bb309762e4681164d40d53b2b2a2652b6b56122ba7eec2"
     },
     "secret_material_embedded": false,
     "failure_count": 0,
@@ -7014,7 +7599,7 @@
   },
   "ci_authority_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.0069822+08:00",
+    "captured_utc": "2026-08-28T20:21:43.0154634+08:00",
     "result": "PASS",
     "state": "github_workflows_prepared_pending_external_authority",
     "required_check_count": 8,
@@ -7028,7 +7613,7 @@
   },
   "hosted_workflow_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.1431176+08:00",
+    "captured_utc": "2026-08-28T20:21:43.1469859+08:00",
     "result": "PASS",
     "required_check_count": 8,
     "merge_workflow": ".github/workflows/p0-required-checks.yml",
@@ -7046,7 +7631,7 @@
   },
   "postgres_refresh_preflight": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.2194367+08:00",
+    "captured_utc": "2026-08-28T20:21:43.2216615+08:00",
     "result": "PASS",
     "fixture_count": 4,
     "source_mutation_performed": false,
@@ -7055,7 +7640,7 @@
   },
   "postgres_official_candidate": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.2857849+08:00",
+    "captured_utc": "2026-08-28T20:21:43.286331+08:00",
     "result": "PASS",
     "fixture_count": 3,
     "source_mutation_performed": false,
@@ -7064,7 +7649,7 @@
   },
   "postgres_derived_image_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.2947143+08:00",
+    "captured_utc": "2026-08-28T20:21:43.2943145+08:00",
     "result": "PASS",
     "assertion_count": 18,
     "source_mutation_performed": false,
@@ -7075,7 +7660,7 @@
   },
   "postgres_gosu_reachability": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.4417907+08:00",
+    "captured_utc": "2026-08-28T20:21:43.4363811+08:00",
     "result": "PASS",
     "fixture_count": 3,
     "source_mutation_performed": false,
@@ -7084,7 +7669,7 @@
   },
   "postgres_gosu_waiver": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:53.5398211+08:00",
+    "captured_utc": "2026-08-28T20:21:43.5382329+08:00",
     "result": "PASS",
     "fixture_count": 5,
     "effective_fixture_count": 0,
@@ -7208,7 +7793,7 @@
   },
   "backend_static_analysis": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:44:59.3545854+08:00",
+    "captured_utc": "2026-08-28T20:21:49.2640062+08:00",
     "result": "PASS_DIAGNOSTIC",
     "authoritative_release_analysis": false,
     "authority_note": "Host clang-tidy proves rule cleanliness; the locked Linux Clang 21 builder remains authoritative.",
@@ -7232,7 +7817,7 @@
   },
   "supply_chain": {
     "schema_version": 10,
-    "captured_utc": "2026-08-28T19:45:00.1651579+08:00",
+    "captured_utc": "2026-08-28T20:21:50.0516377+08:00",
     "result": "PASS_WITH_PENDING_AUTHORITY",
     "release_authority": false,
     "image": {
@@ -7385,7 +7970,7 @@
   },
   "postgres_migration": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:45:03.154687+08:00",
+    "captured_utc": "2026-08-28T20:21:52.9696664+08:00",
     "result": "PASS",
     "image": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
     "database_version": "18.6",
@@ -7402,15 +7987,15 @@
   },
   "backend_build": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:46:39.3740448+08:00",
+    "captured_utc": "2026-08-28T20:23:29.508422+08:00",
     "result": "PASS_DIAGNOSTIC",
     "authoritative_release_build": false,
     "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
     "repository_layout": {
       "result": "PASS",
-      "checked_source_files": 231,
-      "checked_size_files": 580,
-      "checked_utf8_lf_files": 632,
+      "checked_source_files": 232,
+      "checked_size_files": 589,
+      "checked_utf8_lf_files": 642,
       "failure_count": 0,
       "failures": []
     },
@@ -7439,7 +8024,7 @@
   },
   "ue": {
     "schema_version": 1,
-    "captured_utc": "2026-08-28T19:40:59.6155731+08:00",
+    "captured_utc": "2026-08-28T20:17:41.3922727+08:00",
     "result": "PASS",
     "project": {
       "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
@@ -7483,8 +8068,8 @@
     "project_generation": {
       "passed": true,
       "exit_code": 0,
-      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.92 seconds",
-      "output_sha256": "650435c205a01ba0718bed4fff36b126467bc3c9b690b2d13ccd0b89f11bc5e3",
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.56 seconds",
+      "output_sha256": "6314034c2754c4a93f9879aa9ba560ca68716a1796d444289301273724d10182",
       "error": ""
     },
     "editor_build": {
@@ -7492,8 +8077,8 @@
       "passed": true,
       "exit_code": 0,
       "compiler_not_preferred_warning": true,
-      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.85 seconds",
-      "output_sha256": "af4d4e7e3775d864215255656344664cbc699cf5b9554fc888054d06554f89cd",
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.81 seconds",
+      "output_sha256": "7bf65d9dec5bd1b7ade82f8aaec128e11c41660fc4418083e33f37735d4ad41a",
       "error": ""
     },
     "format": {
@@ -7516,7 +8101,7 @@
       "module_loaded": true,
       "golden_module_loaded": true,
       "importer_module_loaded": true,
-      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260828-114045832.log",
+      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260828-121727743.log",
       "process_exit_code": 0
     },
     "missing_paths": []

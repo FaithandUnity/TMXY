@@ -105,4 +105,8 @@ byte 一致；默认托管模式只验证已提交策略、汇总证据和哈希
 众数哈希、行多重集、10 张核心主键表和 12 条外键规则差异；旧 build 必须保持未知且报告
 不得泄露表头、行值或主键。加 `-VerifyDerivedSources` 会只读重扫 DevDoc 快照并逐 byte 复核。
 
+`Contract/Test-CanonicalIdMap.ps1` 验证 P2-10 的 12 个类型化主键域、87,044 个活动 ID、
+284 个永久 Tombstone 和 0 个自动重编号/未解决冲突；完整映射与查询输出边界不允许主键
+进入 Git。加 `-VerifyDerivedSources` 会只读重建 87,328 条映射并逐 byte 复核。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

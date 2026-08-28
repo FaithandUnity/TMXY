@@ -119,6 +119,11 @@ P2-09 由 `Tools/TMXY.TableDiff/New-LegacyCurrentDiff.ps1` 将只读 DevDoc 中 
 表头、列类型/分布候选、行多重集、10 个核心主键域和 12 条可比较外键均形成可查询差异，
 不复制旧行或把观察众数伪称默认值，详见 `Docs/Formats/LEGACY-CURRENT-TABLE-DIFF.md`。
 
+P2-10 由 `Tools/TMXY.CanonicalId/New-CanonicalIdMap.ps1` 为 12 个 P2-07 核心域冻结类型化、
+按表命名空间隔离的 Canonical ID。共享和当前新增 ID 不重编号，旧版独有 ID 永久保留为
+Tombstone；旧版类型例外不强制转换，冲突必须显式评审。完整键映射只留在 Git 忽略的
+`Data/Exports/P2-10`，详见 `Docs/Formats/CANONICAL-ID-MAP.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

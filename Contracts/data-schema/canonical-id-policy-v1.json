@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-10",
+  "namespace": "P2-07 logical table name with ASCII case folding",
+  "identity": "typed P2-07 primary-key tuple within its namespace",
+  "preservation": {
+    "shared_legacy_current": "preserve the typed key as an active Canonical ID",
+    "current_only": "adopt the typed current key as an active Canonical ID",
+    "legacy_only": "preserve the typed legacy key as a non-reusable Tombstone"
+  },
+  "duplicate_policy": {
+    "reject_divergent_or_unapproved_duplicates": true,
+    "allow_p2_07_identical_row_collapse": true
+  },
+  "legacy_type_exception_policy": {
+    "coerce_to_current_type": false,
+    "preserve_as_legacy_opaque_tombstone": true,
+    "may_become_active_without_explicit_review": false
+  },
+  "conflict_policy": {
+    "automatic_renumbering": false,
+    "implicit_key_reuse": false,
+    "requires_explicit_reviewed_remap": true,
+    "unresolved_conflicts_fail_closed": true
+  },
+  "evolution_policy": {
+    "tombstones_are_permanent": true,
+    "tombstone_resurrection_requires_explicit_review": true,
+    "namespace_or_key_type_change_requires_schema_version_bump": true
+  },
+  "output_policy": {
+    "full_map_tracked_in_git": false,
+    "tracked_evidence_contains_primary_keys": false,
+    "tracked_evidence_contains_row_values": false,
+    "query_emits_primary_keys": false,
+    "legacy_payloads_copied": false
+  }
+}

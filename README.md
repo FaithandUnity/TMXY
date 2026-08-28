@@ -93,6 +93,12 @@ MP3 文件。逐文件目录位于 Git 忽略的 `Data/Exports/P2-12`，Git 仅�
 格式说明和不含 payload/解码资产的汇总证据；缺失的 headerless 描述、Package 副本歧义
 和可独立确认的结构失败分别保留，详见 `Docs/Formats/FULL-ASSET-INVENTORY.md`。
 
+P2-13 由 `Tools/TMXY.ReferenceClosure/New-ReferenceClosure.ps1` 把核心表、Package 对象图
+和完整资产目录连接成可复现的跨域引用闭包。忽略目录中的 683,355 行图可从角色、场景和
+技能根查询；Git 仅跟踪脱敏合同和汇总证据。14 条权威核心外键的 55,361 个活动物理引用
+保持零悬空；可空旧版展示指针、同名歧义和未解析候选均保留为显式工作队列，不能被误报为
+权威外键或静默选择，详见 `Docs/Formats/REFERENCE-CLOSURE.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

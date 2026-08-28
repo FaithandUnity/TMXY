@@ -95,17 +95,20 @@ $passed = [string]$report.result -eq 'PASS' -and [string]$report.task -eq 'P2-03
     [int]$report.input.package_files -eq 167 -and [int]$report.input.integrity_failures -eq 0 -and
     [int]$report.graph.nodes -eq 121715 -and [int]$report.graph.edges -eq 147349 -and
     [int64]$report.graph.properties -eq 1639860 -and
-    [int64]$report.graph.bytes -eq 78175035 -and [int]$report.graph.lines -eq 269064 -and
-    [string]$report.graph.sha256 -eq 'c7582df5c9655f506142e056626baabb8e461dee488a962e3634ea013c06a481' -and
+    [int64]$report.graph.bytes -eq 106382503 -and [int]$report.graph.lines -eq 269064 -and
+    [string]$report.graph.sha256 -eq '7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57' -and
     [int]$report.graph.unique_logical_names -eq 92641 -and
     [int]$report.graph.duplicate_logical_names -eq 13177 -and
     [int]$report.graph.maximum_logical_name_multiplicity -eq 6 -and
+    [int]$report.graph.unique_ascii_lower_logical_names -eq 92485 -and
+    [int]$report.graph.duplicate_ascii_lower_logical_names -eq 13258 -and
+    [int]$report.graph.maximum_ascii_lower_logical_name_multiplicity -eq 12 -and
     $classProperties.Count -eq 19 -and $classTotal -eq 121715 -and
     $categoryProperties.Count -eq 8 -and $categoryTotal -eq 121715 -and
     $kindMatch -and
-    [int]$report.graph.resolution.unique -eq 95070 -and
-    [int]$report.graph.resolution.ambiguous -eq 20955 -and
-    [int]$report.graph.resolution.unresolved -eq 1079 -and
+    [int]$report.graph.resolution.unique -eq 94882 -and
+    [int]$report.graph.resolution.ambiguous -eq 21146 -and
+    [int]$report.graph.resolution.unresolved -eq 1076 -and
     [int]$report.graph.resolution.logical -eq 30245 -and
     [int]$report.coverage.object_envelopes -eq 121715 -and
     [int]$report.coverage.envelope_failures -eq 0 -and
@@ -116,12 +119,14 @@ $passed = [string]$report.result -eq 'PASS' -and [string]$report.task -eq 'P2-03
     [int]$report.query_contract.probe_outgoing -gt 0 -and
     [int]$report.implementation.source_file_count -eq $sourceFiles.Count -and
     [string]$report.implementation.source_sha256 -eq $sourceSha -and
-    [int]$report.implementation.self_test_assertions -eq 8 -and
+    [int]$report.implementation.self_test_assertions -eq 9 -and
+    @($report.implementation.name_hash_modes).Count -eq 2 -and
     [int]$report.implementation.ctest_count -eq 7 -and
     $legacyHashes.Count -eq 7 -and
     @($legacyHashes | Where-Object { $_ -notmatch '^[a-f0-9]{64}$' }).Count -eq 0 -and
     -not [bool]$report.disclosure.object_names_emitted -and
     [string]$report.disclosure.logical_names_stored_as -eq 'sha256' -and
+    [bool]$report.disclosure.ascii_case_insensitive_lookup_preserved -and
     -not [bool]$report.disclosure.object_bodies_copied -and
     -not [bool]$report.disclosure.full_graph_committed_to_git -and
     -not [bool]$report.graph.git_tracked -and

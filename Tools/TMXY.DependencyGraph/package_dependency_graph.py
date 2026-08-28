@@ -19,6 +19,10 @@ MAX_OBJECTS = 200_000
 MAX_PROPERTIES = 16_384
 MAX_PROPERTY_NAME_BYTES = 4_096
 
+
+def lower_ascii(value: bytes) -> bytes:
+    return bytes(item + 32 if 65 <= item <= 90 else item for item in value)
+
 EXACT_OBJECT_REFERENCES = {
     "diffuse": "texture",
     "bump": "texture",
@@ -105,6 +109,10 @@ class Node:
     @property
     def logical_name_hash(self) -> str:
         return hashlib.sha256(self.name).hexdigest()
+
+    @property
+    def logical_name_ascii_lower_hash(self) -> str:
+        return hashlib.sha256(lower_ascii(self.name)).hexdigest()
 
     @property
     def node_id(self) -> str:
@@ -231,6 +239,7 @@ def json_line(value: dict[str, object]) -> bytes:
 def write_graph(path: Path, nodes: Iterable[Node], candidates: Iterable[CandidateEdge]) -> dict[str, object]:
     ordered_nodes = sorted(nodes, key=lambda item: (item.package, item.name, item.class_name, item.body_offset))
     name_counts = collections.Counter(item.name for item in ordered_nodes)
+    lower_name_counts = collections.Counter(lower_ascii(item.name) for item in ordered_nodes)
     ordered_edges = sorted(
         candidates,
         key=lambda item: (item.source_id, item.kind, item.property_name, item.target_name),
@@ -254,6 +263,7 @@ def write_graph(path: Path, nodes: Iterable[Node], candidates: Iterable[Candidat
                 "category": CATEGORY_BY_CLASS.get(node.class_name, "other"),
                 "class": node.class_name,
                 "id": node.node_id,
+                "logical_name_ascii_lower_sha256": node.logical_name_ascii_lower_hash,
                 "logical_name_sha256": node.logical_name_hash,
                 "package": node.package,
                 "property_count": node.property_count,
@@ -265,7 +275,7 @@ def write_graph(path: Path, nodes: Iterable[Node], candidates: Iterable[Candidat
             byte_count += len(encoded)
             line_count += 1
         for edge in ordered_edges:
-            matches = 0 if edge.logical else name_counts[edge.target_name]
+            matches = 0 if edge.logical else lower_name_counts[lower_ascii(edge.target_name)]
             if edge.logical:
                 resolution = "logical"
             elif matches == 0:
@@ -283,6 +293,9 @@ def write_graph(path: Path, nodes: Iterable[Node], candidates: Iterable[Candidat
                 "record": "edge",
                 "resolution": resolution,
                 "source": edge.source_id,
+                "target_logical_name_ascii_lower_sha256": hashlib.sha256(
+                    lower_ascii(edge.target_name)
+                ).hexdigest(),
                 "target_logical_name_sha256": hashlib.sha256(edge.target_name).hexdigest(),
             }
             encoded = json_line(record)
@@ -299,6 +312,13 @@ def write_graph(path: Path, nodes: Iterable[Node], candidates: Iterable[Candidat
         "unique_logical_names": len(name_counts),
         "duplicate_logical_names": sum(1 for count in name_counts.values() if count > 1),
         "maximum_logical_name_multiplicity": max(name_counts.values(), default=0),
+        "unique_ascii_lower_logical_names": len(lower_name_counts),
+        "duplicate_ascii_lower_logical_names": sum(
+            1 for count in lower_name_counts.values() if count > 1
+        ),
+        "maximum_ascii_lower_logical_name_multiplicity": max(
+            lower_name_counts.values(), default=0
+        ),
         "classes": dict(sorted(class_counts.items())),
         "categories": dict(sorted(category_counts.items())),
         "edge_kinds": dict(sorted(edge_kinds.items())),
@@ -322,8 +342,12 @@ def run_self_test() -> int:
     assertions += int(decode_reference(properties[0][1]) == b"mat.tex")
     node = Node("Packages/test", b"mesh.object", "QStaticMesh", 20, 40, 2)
     assertions += int(len(node.node_id) == 64 and len(node.logical_name_hash) == 64)
+    assertions += int(
+        node.logical_name_ascii_lower_hash
+        == hashlib.sha256(b"mesh.object").hexdigest()
+    )
     assertions += int(b"mesh.object" not in json_line({"id": node.node_id}))
-    expected = 8
+    expected = 9
     print(json.dumps({"result": "PASS" if assertions == expected else "FAIL", "assertions": assertions}))
     return 0 if assertions == expected else 1
 

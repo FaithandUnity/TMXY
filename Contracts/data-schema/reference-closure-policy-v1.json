@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-13",
+  "source_build": "qy-3.0.0.413",
+  "core_dangling_definition": "declared authoritative P2-07 foreign-key rows whose target canonical row or distinct domain is absent",
+  "nullable_object_reference_policy": "classify every non-empty legacy getFieldObj value; never promote nullable presentation pointers to authoritative foreign keys",
+  "root_sets": {
+    "character": { "package_classes": ["QSkelMesh"] },
+    "scene": { "package_classes": ["QLevel", "QTerrainInfo"] },
+    "skill": { "table_role": "skill-level-definition" }
+  },
+  "table_object_references": [
+    { "id": "item_geometry", "table": "CLSVShare/item_table.tbl", "column_id": "c0066", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] },
+    { "id": "item_material", "table": "CLSVShare/item_table.tbl", "column_id": "c0067", "expected_classes": ["QGeomEffectShader", "QPhongShader"], "sentinel_values": ["0", "-1"] },
+    { "id": "item_effect_geometry", "table": "CLSVShare/item_table.tbl", "column_id": "c0068", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] },
+    { "id": "item_icon", "table": "CLSVShare/item_table.tbl", "column_id": "c0071", "expected_classes": ["QTexture"], "sentinel_values": ["0", "-1"] },
+    { "id": "item_shop_icon", "table": "CLSVShare/item_table.tbl", "column_id": "c0072", "expected_classes": ["QTexture"], "sentinel_values": ["0", "-1"] },
+    { "id": "skill_start_action", "table": "CLSVShare/skill_table.tbl", "column_id": "c0036", "expected_classes": ["QToolAction", "QToolSwitchAction", "QUnitAction"], "sentinel_values": ["0", "-1"] },
+    { "id": "skill_prepare_action", "table": "CLSVShare/skill_table.tbl", "column_id": "c0037", "expected_classes": ["QToolAction", "QToolSwitchAction", "QUnitAction"], "sentinel_values": ["0", "-1"], "runtime_assert_when": { "column_id": "c0027", "operator": "greater-than", "value": 0 } },
+    { "id": "skill_go_action", "table": "CLSVShare/skill_table.tbl", "column_id": "c0038", "expected_classes": ["QToolAction", "QToolSwitchAction", "QUnitAction"], "sentinel_values": ["0", "-1"] },
+    { "id": "skill_icon", "table": "CLSVShare/skill_table.tbl", "column_id": "c0039", "expected_classes": ["QTexture"], "sentinel_values": ["0", "-1"] },
+    { "id": "skill_projectile_effect", "table": "CLSVShare/skill_table.tbl", "column_id": "c0040", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] },
+    { "id": "skill_explosion_effect", "table": "CLSVShare/skill_table.tbl", "column_id": "c0042", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] },
+    { "id": "skill_action_effect", "table": "CLSVShare/skill_table.tbl", "column_id": "c0043", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] },
+    { "id": "unit_class_icon", "table": "CLSVShare/unit_cls.tbl", "column_id": "c0003", "expected_classes": ["QTexture"], "sentinel_values": ["0", "-1"] },
+    { "id": "state_icon", "table": "CLSVShare/states.tbl", "column_id": "c0018", "expected_classes": ["QTexture"], "sentinel_values": ["0", "-1"] },
+    { "id": "state_effect_0", "table": "CLSVShare/states.tbl", "column_id": "c0020", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] },
+    { "id": "state_effect_1", "table": "CLSVShare/states.tbl", "column_id": "c0022", "expected_classes": ["QEmitter", "QParticleSys", "QSkelMesh", "QStaticMesh"], "sentinel_values": ["0", "-1"] }
+  ],
+  "table_scoped_references": [
+    { "id": "state_animation", "table": "CLSVShare/states.tbl", "column_id": "c0019", "scope": "owning-skeletal-animation-set" },
+    { "id": "state_effect_bone_0", "table": "CLSVShare/states.tbl", "column_id": "c0021", "scope": "owning-skeleton-bone" },
+    { "id": "state_effect_bone_1", "table": "CLSVShare/states.tbl", "column_id": "c0023", "scope": "owning-skeleton-bone" }
+  ],
+  "asset_link_rules": [
+    { "family": "qtx", "method": "logical-name-ascii-lower", "expected_classes": ["QTexture"] },
+    { "family": "sm", "method": "logical-name-ascii-lower", "expected_classes": ["QStaticMesh"] },
+    { "family": "skem", "method": "logical-name-ascii-lower", "expected_classes": ["QSkelMesh"] },
+    { "family": "anim", "method": "logical-name-ascii-lower", "expected_classes": ["QSkelMesh"] },
+    { "family": "wav", "method": "logical-name-ascii-lower", "expected_classes": ["QANSound", "QSound"] },
+    { "family": "ter", "method": "path-segment-package-basename", "path_segment": 2, "package_prefix": "Packages/Level/", "expected_classes": ["QLevel", "QTerrainInfo"] }
+  ],
+  "terminal_package_edge_kinds": ["animation-name", "bone-name", "logical-name"],
+  "completion_policy": {
+    "requires_all_package_nodes_and_edges_preserved": true,
+    "requires_all_core_table_rows_classified": true,
+    "requires_all_assets_classified": true,
+    "requires_zero_core_dangling_references": true,
+    "allows_explicit_nullable_object_unresolved": true,
+    "allows_explicit_package_unresolved_or_ambiguous": true,
+    "forbids_heuristic_target_selection": true,
+    "forbids_raw_table_values_or_primary_keys_in_tracked_evidence": true
+  }
+}

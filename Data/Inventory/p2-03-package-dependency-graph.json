@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T02:16:17.1474036+00:00",
+  "captured_utc": "2026-08-28T08:24:30.3387559+00:00",
   "result": "PASS",
   "task": "P2-03",
   "task_status": "COMPLETE",
@@ -19,15 +19,18 @@
     "local_path": "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl",
     "git_tracked": false,
     "regeneration_required_for_query": true,
-    "bytes": 78175035,
+    "bytes": 106382503,
     "lines": 269064,
-    "sha256": "c7582df5c9655f506142e056626baabb8e461dee488a962e3634ea013c06a481",
+    "sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57",
     "nodes": 121715,
     "edges": 147349,
     "properties": 1639860,
     "unique_logical_names": 92641,
     "duplicate_logical_names": 13177,
     "maximum_logical_name_multiplicity": 6,
+    "unique_ascii_lower_logical_names": 92485,
+    "duplicate_ascii_lower_logical_names": 13258,
+    "maximum_ascii_lower_logical_name_multiplicity": 12,
     "classes": {
       "QANSound": 803,
       "QActor": 14684,
@@ -73,10 +76,10 @@
       "texture": 59812
     },
     "resolution": {
-      "ambiguous": 20955,
+      "ambiguous": 21146,
       "logical": 30245,
-      "unique": 95070,
-      "unresolved": 1079
+      "unique": 94882,
+      "unresolved": 1076
     }
   },
   "coverage": {
@@ -102,8 +105,12 @@
   },
   "implementation": {
     "source_file_count": 3,
-    "source_sha256": "0aad6b17b2b851ca58c4b67733c915e9baa790810167c1fa8168ed27b9b5f20a",
-    "self_test_assertions": 8,
+    "source_sha256": "5b41b50086f80f963dd3741780ddab314b0b0a150c68a2e71ea3e14c9584d439",
+    "self_test_assertions": 9,
+    "name_hash_modes": [
+      "exact-bytes-sha256",
+      "ascii-lower-bytes-sha256"
+    ],
     "ctest_count": 7
   },
   "legacy_registration_evidence_sha256": {
@@ -134,13 +141,14 @@
   "disclosure": {
     "object_names_emitted": false,
     "logical_names_stored_as": "sha256",
+    "ascii_case_insensitive_lookup_preserved": true,
     "class_names_emitted": true,
     "object_bodies_copied": false,
     "full_graph_committed_to_git": false
   },
   "execution": {
     "exit_code": 0,
-    "stdout_sha256": "ee32372b227bacd3f7508be16063b9273b2b324cf66b6a86365a477040ade34c",
+    "stdout_sha256": "63711d4b7fbe013a333c4f4a7f2e1809c710863d0ac874880e50f421862f1781",
     "stderr_sha256": "6e6dedb3314209e24ab536feef4a10ad799a17aa128906200c30513cf8191831"
   },
   "next_scope": {

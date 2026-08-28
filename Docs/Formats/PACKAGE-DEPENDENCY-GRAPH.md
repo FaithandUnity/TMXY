@@ -16,9 +16,9 @@ It covers texture, material, static/skeletal mesh, level/actor/terrain,
 particle/emitter, animation/notify, sound and action logical-name families.
 Object resolution is explicit:
 
-- 95,070 edges resolve to one object;
-- 20,955 resolve to multiple same-name candidates;
-- 1,079 have no object in the installed Package set;
+- 94,882 edges resolve to one object;
+- 21,146 resolve to multiple same-name candidates;
+- 1,076 have no object in the installed Package set;
 - 30,245 are intentionally logical names such as animation or bone names.
 
 Ambiguous and unresolved edges are valid work queues, not parser errors. No
@@ -27,13 +27,14 @@ consumer may silently pick the first candidate.
 ## Public-repository boundary
 
 Node IDs hash `package path + NUL + opaque object-name bytes`. Logical names are
-stored only as SHA-256. The graph includes known class and property names but no
-raw object names or body bytes. The 78,175,035-byte full graph is ignored by
+stored only as exact and ASCII-case-folded SHA-256 values, matching the legacy
+object lookup without disclosing names. The graph includes known class and
+property names but no raw object names or body bytes. The 106,382,503-byte full graph is ignored by
 Git; the repository tracks its SHA-256
-`c7582df5c9655f506142e056626baabb8e461dee488a962e3634ea013c06a481`,
+`7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57`,
 generator, query tool and aggregate evidence.
 
 `Find-PackageDependency.ps1` accepts a UTF-8 logical name, opaque name hex or a
-node SHA-256 ID and reports matching nodes plus incoming/outgoing edges without
+node SHA-256 ID, checks both exact and ASCII-case-folded hashes, and reports matching nodes plus incoming/outgoing edges without
 echoing the raw name. Regenerate the local graph before querying on a clean
 checkout.

@@ -246,16 +246,19 @@ $kindMatch = $true
 foreach ($entry in $expectedKinds.GetEnumerator()) {
     if ([int]$summary.edge_kinds.($entry.Key) -ne $entry.Value) { $kindMatch = $false }
 }
-$completed = [string]$selfTest.result -eq 'PASS' -and [int]$selfTest.assertions -eq 8 -and
+$completed = [string]$selfTest.result -eq 'PASS' -and [int]$selfTest.assertions -eq 9 -and
     [int]$summary.nodes -eq 121715 -and [int]$summary.edges -eq 147349 -and
     [int]$summary.envelope_failures -eq 0 -and
     [int]$summary.reference_value_failures -eq 0 -and
     [int]$summary.unique_logical_names -eq 92641 -and
     [int]$summary.duplicate_logical_names -eq 13177 -and
     [int]$summary.maximum_logical_name_multiplicity -eq 6 -and
-    [int]$summary.edge_resolution.unique -eq 95070 -and
-    [int]$summary.edge_resolution.ambiguous -eq 20955 -and
-    [int]$summary.edge_resolution.unresolved -eq 1079 -and
+    [int]$summary.unique_ascii_lower_logical_names -eq 92485 -and
+    [int]$summary.duplicate_ascii_lower_logical_names -eq 13258 -and
+    [int]$summary.maximum_ascii_lower_logical_name_multiplicity -eq 12 -and
+    [int]$summary.edge_resolution.unique -eq 94882 -and
+    [int]$summary.edge_resolution.ambiguous -eq 21146 -and
+    [int]$summary.edge_resolution.unresolved -eq 1076 -and
     [int]$summary.edge_resolution.logical -eq 30245 -and $kindMatch -and
     [int]$probe.matched_nodes -eq 1 -and [int]$probe.outgoing.count -gt 0 -and
     -not [bool]$summary.object_names_emitted -and
@@ -292,6 +295,9 @@ $result = [pscustomobject][ordered]@{
         unique_logical_names = [int]$summary.unique_logical_names
         duplicate_logical_names = [int]$summary.duplicate_logical_names
         maximum_logical_name_multiplicity = [int]$summary.maximum_logical_name_multiplicity
+        unique_ascii_lower_logical_names = [int]$summary.unique_ascii_lower_logical_names
+        duplicate_ascii_lower_logical_names = [int]$summary.duplicate_ascii_lower_logical_names
+        maximum_ascii_lower_logical_name_multiplicity = [int]$summary.maximum_ascii_lower_logical_name_multiplicity
         classes = $summary.classes
         categories = $summary.categories
         edge_kinds = $summary.edge_kinds
@@ -318,6 +324,7 @@ $result = [pscustomobject][ordered]@{
         source_file_count = $sourceFiles.Count
         source_sha256 = $sourceSha
         self_test_assertions = [int]$selfTest.assertions
+        name_hash_modes = @('exact-bytes-sha256', 'ascii-lower-bytes-sha256')
         ctest_count = 7
     }
     legacy_registration_evidence_sha256 = $legacyHashes
@@ -340,6 +347,7 @@ $result = [pscustomobject][ordered]@{
     disclosure = [pscustomobject][ordered]@{
         object_names_emitted = $false
         logical_names_stored_as = 'sha256'
+        ascii_case_insensitive_lookup_preserved = $true
         class_names_emitted = $true
         object_bodies_copied = $false
         full_graph_committed_to_git = $false

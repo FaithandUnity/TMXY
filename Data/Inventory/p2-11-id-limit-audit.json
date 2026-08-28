@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T12:39:45.9331056+00:00",
+  "task_id": "P2-11",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "p2_10_evidence_sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+    "p2_10_map_sha256": "af21fefcfdc4e6819236d53d84d7de2af59fb4b00882093598c4f51667e5d2af",
+    "p2_04_evidence_sha256": "9c374ad84bc2440c19ec039e3761db8d1398add7cc66544452823b5ed010892a",
+    "legacy_source_manifest_sha256": "2cae32f086d70efa858f0a0f83ead4771df484b862b328bb8a7375c85278dd51",
+    "copy_policy": "reference_only"
+  },
+  "report": {
+    "path": "Data/Exports/P2-11/p2-11-id-limit-audit.jsonl",
+    "tracked": false,
+    "lines": 1283,
+    "bytes": 323496,
+    "sha256": "9839296bc39b0a40d65c78b93f76c4ee703a9a3ab939e5ddc5d19f32b48ced9e"
+  },
+  "summary": {
+    "bit_width_buckets": {
+      "lte_16": 7,
+      "lte_8": 6,
+      "non_numeric": 3
+    },
+    "component_count": 16,
+    "domain_count": 12,
+    "numeric_components": 13,
+    "risk_counts": {
+      "legacy_type_exception": 6,
+      "level_cap_saturated": 3,
+      "sparse_lt_10pct": 4,
+      "string_identifier": 3,
+      "tombstone_reserved": 7,
+      "u16_near_limit": 2,
+      "u16_overflow": 0,
+      "u16_saturated": 3,
+      "u8_overflow": 7
+    },
+    "string_components": 3
+  },
+  "components": [
+    {
+      "active_distinct": 100,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "gte-50pct",
+      "domain": "CLSVShare/LevelInfo",
+      "legacy_opaque_records": 1,
+      "required_bits": 7,
+      "required_sign": "unsigned",
+      "reserved_distinct": 120,
+      "risks": [
+        "legacy_type_exception",
+        "level_cap_saturated",
+        "tombstone_reserved"
+      ],
+      "tombstone_records": 20,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 152,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "lt-1pct",
+      "domain": "CLSVShare/Profession_lvl",
+      "legacy_opaque_records": 0,
+      "required_bits": 15,
+      "required_sign": "unsigned",
+      "reserved_distinct": 152,
+      "risks": [
+        "sparse_lt_10pct",
+        "u8_overflow"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 100,
+      "column_id": "c0002",
+      "component_index": 1,
+      "density_band": "gte-50pct",
+      "domain": "CLSVShare/Profession_lvl",
+      "legacy_opaque_records": 0,
+      "required_bits": 7,
+      "required_sign": "unsigned",
+      "reserved_distinct": 100,
+      "risks": [
+        "level_cap_saturated"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 212,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "lt-1pct",
+      "domain": "CLSVShare/Suit_table",
+      "legacy_opaque_records": 1,
+      "required_bits": 16,
+      "required_sign": "unsigned",
+      "reserved_distinct": 212,
+      "risks": [
+        "legacy_type_exception",
+        "sparse_lt_10pct",
+        "u8_overflow"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 123,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "10-to-50pct",
+      "domain": "CLSVShare/Transpoints",
+      "legacy_opaque_records": 1,
+      "required_bits": 8,
+      "required_sign": "unsigned",
+      "reserved_distinct": 123,
+      "risks": [
+        "legacy_type_exception"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 4039,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "1-to-10pct",
+      "domain": "CLSVShare/formula_table",
+      "legacy_opaque_records": 1,
+      "required_bits": 16,
+      "required_sign": "unsigned",
+      "reserved_distinct": 4039,
+      "risks": [
+        "legacy_type_exception",
+        "sparse_lt_10pct",
+        "u16_near_limit",
+        "u8_overflow"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 29223,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "10-to-50pct",
+      "domain": "CLSVShare/item_table",
+      "legacy_opaque_records": 0,
+      "required_bits": 16,
+      "required_sign": "unsigned",
+      "reserved_distinct": 29461,
+      "risks": [
+        "tombstone_reserved",
+        "u16_saturated",
+        "u8_overflow"
+      ],
+      "tombstone_records": 238,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 9278,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "10-to-50pct",
+      "domain": "CLSVShare/skill_table",
+      "legacy_opaque_records": 0,
+      "required_bits": 16,
+      "required_sign": "unsigned",
+      "reserved_distinct": 9289,
+      "risks": [
+        "tombstone_reserved",
+        "u16_saturated",
+        "u8_overflow"
+      ],
+      "tombstone_records": 11,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 100,
+      "column_id": "c0004",
+      "component_index": 1,
+      "density_band": "gte-50pct",
+      "domain": "CLSVShare/skill_table",
+      "legacy_opaque_records": 0,
+      "required_bits": 7,
+      "required_sign": "unsigned",
+      "reserved_distinct": 100,
+      "risks": [
+        "level_cap_saturated",
+        "tombstone_reserved"
+      ],
+      "tombstone_records": 11,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 8684,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "10-to-50pct",
+      "domain": "CLSVShare/states",
+      "legacy_opaque_records": 0,
+      "required_bits": 16,
+      "required_sign": "unsigned",
+      "reserved_distinct": 8684,
+      "risks": [
+        "u16_saturated",
+        "u8_overflow"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 16,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "not-numeric",
+      "domain": "CLSVShare/unit_cls",
+      "legacy_opaque_records": 0,
+      "required_bits": null,
+      "required_sign": "not-numeric",
+      "reserved_distinct": 17,
+      "risks": [
+        "string_identifier",
+        "tombstone_reserved"
+      ],
+      "tombstone_records": 1,
+      "type": "string"
+    },
+    {
+      "active_distinct": 159,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "not-numeric",
+      "domain": "CLSVShare/unit_prop",
+      "legacy_opaque_records": 0,
+      "required_bits": null,
+      "required_sign": "not-numeric",
+      "reserved_distinct": 164,
+      "risks": [
+        "string_identifier",
+        "tombstone_reserved"
+      ],
+      "tombstone_records": 9,
+      "type": "string"
+    },
+    {
+      "active_distinct": 151,
+      "column_id": "c0004",
+      "component_index": 1,
+      "density_band": "not-numeric",
+      "domain": "CLSVShare/unit_prop",
+      "legacy_opaque_records": 0,
+      "required_bits": null,
+      "required_sign": "not-numeric",
+      "reserved_distinct": 160,
+      "risks": [
+        "string_identifier",
+        "tombstone_reserved"
+      ],
+      "tombstone_records": 9,
+      "type": "string"
+    },
+    {
+      "active_distinct": 12,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "gte-50pct",
+      "domain": "CLSVShare/waypoint",
+      "legacy_opaque_records": 1,
+      "required_bits": 4,
+      "required_sign": "unsigned",
+      "reserved_distinct": 12,
+      "risks": [
+        "legacy_type_exception"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 33,
+      "column_id": "c0002",
+      "component_index": 1,
+      "density_band": "gte-50pct",
+      "domain": "CLSVShare/waypoint",
+      "legacy_opaque_records": 1,
+      "required_bits": 6,
+      "required_sign": "unsigned",
+      "reserved_distinct": 33,
+      "risks": [
+        "legacy_type_exception"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    },
+    {
+      "active_distinct": 5943,
+      "column_id": "c0001",
+      "component_index": 0,
+      "density_band": "1-to-10pct",
+      "domain": "Table/quest_table",
+      "legacy_opaque_records": 0,
+      "required_bits": 16,
+      "required_sign": "unsigned",
+      "reserved_distinct": 5943,
+      "risks": [
+        "sparse_lt_10pct",
+        "u16_near_limit",
+        "u8_overflow"
+      ],
+      "tombstone_records": 0,
+      "type": "int64"
+    }
+  ],
+  "source_signals": {
+    "rules": {
+      "level_limit_symbol": {
+        "files": 9,
+        "hits": 26
+      },
+      "slot_limit_symbol": {
+        "files": 3,
+        "hits": 7
+      },
+      "u16_boundary": {
+        "files": 299,
+        "hits": 892
+      },
+      "u8_boundary": {
+        "files": 956,
+        "hits": 4370
+      }
+    },
+    "source_files": {
+      "legacy-client": 1086,
+      "legacy-server": 1956,
+      "legacy-tool": 5048
+    },
+    "total_signal_hits": 5295,
+    "total_signal_records": 1267,
+    "total_source_files": 8090
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/id-limit-audit-policy-v1.json",
+    "policy_sha256": "515b59f6555547ddecf96fbc9ea95938dc33d305b1b3fbf53a1aa65c8ca73433",
+    "schema": "Contracts/data-schema/id-limit-audit-v1.schema.json",
+    "schema_sha256": "8caaaf58b3049b3ccff2a011450ea4fecbdd2de3e3d7f2f8c54f91984aec976c"
+  },
+  "implementation": {
+    "source_files": 3,
+    "source_sha256": "4a0c9d5ba0dca5dc863197ddb9dbb5a679f3b2bfd1add21552727291ff919600",
+    "self_test_assertions": 7,
+    "generator": "Tools/TMXY.IdLimitAudit/New-IdLimitAudit.ps1",
+    "query": "Tools/TMXY.IdLimitAudit/Find-IdLimitRisk.ps1"
+  },
+  "disclosure": {
+    "tracked_evidence_contains_primary_keys": false,
+    "tracked_evidence_contains_minimum_or_maximum_values": false,
+    "tracked_evidence_contains_legacy_source_paths": false,
+    "tracked_evidence_contains_legacy_source_lines": false,
+    "full_audit_committed_to_git": false,
+    "legacy_sources_copied": false
+  },
+  "reproduction": {
+    "check_mode": "-Check",
+    "workspace_mount": "read-only",
+    "legacy_mounts": 3,
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-17"
+    ],
+    "detail": "Generate shared strongly typed ID declarations without narrowing past the audited limits."
+  }
+}

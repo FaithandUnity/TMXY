@@ -124,6 +124,11 @@ P2-10 由 `Tools/TMXY.CanonicalId/New-CanonicalIdMap.ps1` 为 12 个 P2-07 核�
 Tombstone；旧版类型例外不强制转换，冲突必须显式评审。完整键映射只留在 Git 忽略的
 `Data/Exports/P2-10`，详见 `Docs/Formats/CANONICAL-ID-MAP.md`。
 
+P2-11 由 `Tools/TMXY.IdLimitAudit/New-IdLimitAudit.ps1` 审计全部 Canonical ID 分量的位宽、
+稀疏率、u8/u16、等级上限、字符串与 Tombstone 风险，并只读扫描三个旧源码根中的等级、
+槽位和固定容量信号。精确极值和旧路径只留在 Git 忽略的 `Data/Exports/P2-11`，详见
+`Docs/Formats/ID-LIMIT-AUDIT.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

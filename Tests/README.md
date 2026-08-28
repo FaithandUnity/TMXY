@@ -109,4 +109,8 @@ byte 一致；默认托管模式只验证已提交策略、汇总证据和哈希
 284 个永久 Tombstone 和 0 个自动重编号/未解决冲突；完整映射与查询输出边界不允许主键
 进入 Git。加 `-VerifyDerivedSources` 会只读重建 87,328 条映射并逐 byte 复核。
 
+`Contract/Test-IdLimitAudit.ps1` 验证 P2-11 的 16 个 Canonical ID 分量位宽/稀疏率和
+u8/u16/等级/Tombstone 风险，并冻结 8,090 个旧源码文件中的四类固定容量信号统计。
+加 `-VerifyDerivedSources` 会通过三个只读挂载重建完整审计并逐 byte 复核。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-11",
+  "scope": {
+    "canonical_id_domains": "all P2-10 domains and components",
+    "legacy_source_roots": ["ClientCode", "ServerCode", "ToolCode"],
+    "source_copy_policy": "reference-only"
+  },
+  "fixed_limits": {
+    "u8_exclusive_upper": 256,
+    "u16_exclusive_upper": 65536,
+    "level_inclusive_upper": 100
+  },
+  "risk_policy": {
+    "u16_near_limit_ratio": 0.9,
+    "sparse_density_ratio": 0.1,
+    "automatic_type_narrowing": false,
+    "overflow_fails_closed": true,
+    "legacy_opaque_never_becomes_numeric_implicitly": true
+  },
+  "legacy_source_signals": {
+    "u16_boundary": "65535, 65536, or hexadecimal 16-bit all-ones literal",
+    "u8_boundary": "255, 256, or hexadecimal 8-bit all-ones literal",
+    "level_limit_symbol": "MAX_LEVEL, LEVEL_MAX, or MAXLEVEL spelling family",
+    "slot_limit_symbol": "MAX_SLOT(S), SLOT_COUNT, SLOT_MAX, or MAXSLOT spelling family"
+  },
+  "output_policy": {
+    "full_audit_tracked_in_git": false,
+    "tracked_evidence_contains_primary_keys": false,
+    "tracked_evidence_contains_minimum_or_maximum_values": false,
+    "tracked_evidence_contains_legacy_source_paths": false,
+    "tracked_evidence_contains_legacy_source_lines": false
+  }
+}

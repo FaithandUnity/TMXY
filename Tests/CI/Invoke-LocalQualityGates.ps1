@@ -148,6 +148,11 @@ if ($VerifyLegacyGoldenSources) { $canonicalIdArguments.VerifyDerivedSources = $
 $canonicalIdMap = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-CanonicalIdMap.ps1') `
     -Arguments $canonicalIdArguments
+$idLimitArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $idLimitArguments.VerifyDerivedSources = $true }
+$idLimitAudit = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-IdLimitAudit.ps1') `
+    -Arguments $idLimitArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -354,6 +359,7 @@ $report = [pscustomobject][ordered]@{
     table_ownership = $tableOwnership
     legacy_current_diff = $legacyCurrentDiff
     canonical_id_map = $canonicalIdMap
+    id_limit_audit = $idLimitAudit
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

@@ -23,3 +23,8 @@ add_executable(tmxy_package_normalized_tree_test package_normalized_tree_test.cp
 target_link_libraries(tmxy_package_normalized_tree_test PRIVATE tmxy::package)
 tmxy_apply_tool_defaults(tmxy_package_normalized_tree_test)
 add_test(NAME package.normalized_tree COMMAND tmxy_package_normalized_tree_test)
+
+add_executable(tmxy_package_inventory_test package_inventory_test.cpp)
+target_link_libraries(tmxy_package_inventory_test PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_inventory_test)
+add_test(NAME package.inventory COMMAND tmxy_package_inventory_test)

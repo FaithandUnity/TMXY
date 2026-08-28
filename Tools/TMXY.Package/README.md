@@ -21,3 +21,10 @@ Format evidence and field levels are documented in
 `Docs/Formats/PACKAGE-DIRECTORY-PIPELINE.md`. The deterministic normalized JSON
 tree and its explicit unparsed/unknown boundaries are documented in
 `Docs/Formats/PACKAGE-NORMALIZED-TREE.md`.
+
+P2-01 adds `tmxy_package_inventory`, a single-file classifier that reports only
+version, bounded parse status, size/count metrics, a stable error class, and a
+metadata fingerprint. `New-FullPackageInventory.ps1` runs it over all 167 frozen
+Package-directory files in the locked isolated builder; 163 recognized
+packages parse, while one empty file and three Subversion metadata files remain
+explicit non-Packages. Object bodies stay unknown source spans.

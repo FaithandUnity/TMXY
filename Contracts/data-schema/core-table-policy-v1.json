@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "policy_id": "tmxy-core-table-policy-v1",
+  "task_id": "P2-07",
+  "source_build": "qy-3.0.0.413",
+  "authority": "authoritative-for-frozen-build-import",
+  "range_policy": "closed-observed-range-requires-version-bump",
+  "string_policy": "utf8-byte-length-observed-maximum-requires-version-bump",
+  "null_policy": "empty-or-missing-source-field-is-null",
+  "tables": [
+    {
+      "source_path": "CLSVShare/item_table.tbl",
+      "role": "item-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/skill_table.tbl",
+      "role": "skill-level-definition",
+      "primary_key": {
+        "column_ids": ["c0001", "c0004"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/LevelInfo.tbl",
+      "role": "level-progression",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/Profession_lvl.tbl",
+      "role": "profession-level-progression",
+      "primary_key": {
+        "column_ids": ["c0001", "c0002"],
+        "duplicate_policy": "collapse-identical-rows"
+      }
+    },
+    {
+      "source_path": "CLSVShare/unit_cls.tbl",
+      "role": "unit-class-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/unit_prop.tbl",
+      "role": "unit-property-definition",
+      "primary_key": {
+        "column_ids": ["c0001", "c0004"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/states.tbl",
+      "role": "state-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/Suit_table.tbl",
+      "role": "item-suit-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "Table/quest_table.tbl",
+      "role": "quest-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/formula_table.tbl",
+      "role": "crafting-formula-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/waypoint.tbl",
+      "role": "waypoint-definition",
+      "primary_key": {
+        "column_ids": ["c0001", "c0002"],
+        "duplicate_policy": "reject"
+      }
+    },
+    {
+      "source_path": "CLSVShare/Transpoints.tbl",
+      "role": "transfer-point-definition",
+      "primary_key": {
+        "column_ids": ["c0001"],
+        "duplicate_policy": "reject"
+      }
+    }
+  ],
+  "foreign_keys": [
+    {
+      "id": "item_skill_identity",
+      "source_table": "CLSVShare/item_table.tbl",
+      "source_column_ids": ["c0049"],
+      "target_table": "CLSVShare/skill_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "distinct-domain",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "item_quest",
+      "source_table": "CLSVShare/item_table.tbl",
+      "source_column_ids": ["c0054"],
+      "target_table": "Table/quest_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "item_suit",
+      "source_table": "CLSVShare/item_table.tbl",
+      "source_column_ids": ["c0073"],
+      "target_table": "CLSVShare/Suit_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "item_required_level",
+      "source_table": "CLSVShare/item_table.tbl",
+      "source_column_ids": ["c0028"],
+      "target_table": "CLSVShare/LevelInfo.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "skill_prerequisite",
+      "source_table": "CLSVShare/skill_table.tbl",
+      "source_column_ids": ["c0013", "c0014"],
+      "target_table": "CLSVShare/skill_table.tbl",
+      "target_column_ids": ["c0001", "c0004"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "profession_level",
+      "source_table": "CLSVShare/Profession_lvl.tbl",
+      "source_column_ids": ["c0002"],
+      "target_table": "CLSVShare/LevelInfo.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "transfer_required_level",
+      "source_table": "CLSVShare/Transpoints.tbl",
+      "source_column_ids": ["c0003"],
+      "target_table": "CLSVShare/LevelInfo.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_material_0",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0008"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_material_1",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0010"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_material_2",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0012"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_material_3",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0014"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_material_4",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0016"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_material_5",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0018"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    },
+    {
+      "id": "formula_output",
+      "source_table": "CLSVShare/formula_table.tbl",
+      "source_column_ids": ["c0020"],
+      "target_table": "CLSVShare/item_table.tbl",
+      "target_column_ids": ["c0001"],
+      "target_key_mode": "primary-key",
+      "sentinel_values": [0, -1]
+    }
+  ],
+  "deferred_reference_candidates": [
+    {
+      "id": "skill_required_item",
+      "reason": "current-source-dangling-reference"
+    },
+    {
+      "id": "skill_required_level",
+      "reason": "source-domain-exceeds-level-table"
+    },
+    {
+      "id": "quest_level",
+      "reason": "field-contains-special-non-level-codes"
+    }
+  ]
+}

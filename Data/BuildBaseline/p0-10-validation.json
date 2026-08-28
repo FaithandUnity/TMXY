@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T04:39:51.3353417+00:00",
+  "captured_utc": "2026-08-28T05:28:55.0686984+00:00",
   "result": "PASS_DIAGNOSTIC",
   "authoritative_release_build": false,
   "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
   "repository_layout": {
     "result": "PASS",
     "checked_source_files": 223,
-    "checked_size_files": 511,
-    "checked_utf8_lf_files": 555,
+    "checked_size_files": 516,
+    "checked_utf8_lf_files": 562,
     "failure_count": 0,
     "failures": []
   },
@@ -31,7 +31,7 @@
   "build": {
     "passed": true,
     "exit_code": 0,
-    "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/9] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[6/9] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[7/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[8/9] Linking CXX executable apps/gateway/tmxy-gateway\n[9/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/2 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/2 Test #2: foundation.redaction .............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
+    "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/9] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/9] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/9] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[6/9] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[7/9] Linking CXX executable apps/gateway/tmxy-gateway\n[8/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[9/9] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/2 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/2 Test #2: foundation.redaction .............   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 2\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
     "stderr": ""
   }
 }

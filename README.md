@@ -75,6 +75,12 @@ P2 表数据统一由 `Tools/TMXY.Table/New-ThreeLayerTableData.ps1` 生成三�
 `Data/Exports/P2-06`；Git 仅跟踪生成器、Schema 合同、格式说明和无字段值的哈希证据。
 P2-06 的类型和主键仍是结构候选，P2-07/P2-08 才负责权威语义与所有权决策。
 
+P2-07 由 `Tools/TMXY.Table/New-CoreTableSchema.ps1` 将其中 12 张首个可玩切片核心表
+升级为冻结构建的权威导入合同。`Data/Schemas/core-table-registry-v1.json` 为 355 列
+记录类型、null 和闭区间/UTF-8 长度规则，并验证 12 个主键与 14 条零悬空严格引用；
+完整口径、重复行折叠与版本升级规则见 `Docs/Formats/CORE-TABLE-SCHEMA.md`。所有权和
+热加载仍由 P2-08 决定。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

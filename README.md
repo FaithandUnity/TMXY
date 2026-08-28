@@ -81,6 +81,12 @@ P2-07 由 `Tools/TMXY.Table/New-CoreTableSchema.ps1` 将其中 12 张首个可�
 完整口径、重复行折叠与版本升级规则见 `Docs/Formats/CORE-TABLE-SCHEMA.md`。所有权和
 热加载仍由 P2-08 决定。
 
+P2-08 由 `Tools/TMXY.Table/New-TableOwnershipRegistry.ps1` 将“观察到的消费者”、
+Schema 所有者和运行时权威拆开记录。225 张活动表全部分类为 117 张客户端展示目录与
+108 张共享/服务端权威目录；12 张核心表的 355 列进一步分为客户端展示/本地化、服务端
+规则和共享标识符。客户端持有数据副本不授予战斗、经济或进度决定权，详见
+`Docs/Formats/TABLE-OWNERSHIP.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

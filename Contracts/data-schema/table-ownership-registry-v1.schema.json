@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/table-ownership-registry-v1.schema.json",
+  "title": "TMXY table ownership registry v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "registry_id",
+    "task_id",
+    "status",
+    "source_build",
+    "principles",
+    "source",
+    "summary",
+    "tables",
+    "core_columns"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "registry_id": { "const": "tmxy-table-ownership-registry-v1" },
+    "task_id": { "const": "P2-08" },
+    "status": { "const": "authoritative-target-ownership-contract" },
+    "source_build": { "type": "string", "minLength": 1 },
+    "principles": {
+      "type": "object",
+      "required": [
+        "consumer_is_not_authority",
+        "client_copy_is_untrusted_for_server_decisions",
+        "unknown_gameplay_semantics_fail_to_server_authority"
+      ],
+      "properties": {
+        "consumer_is_not_authority": { "const": true },
+        "client_copy_is_untrusted_for_server_decisions": { "const": true },
+        "unknown_gameplay_semantics_fail_to_server_authority": { "const": true }
+      },
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "p2_05_evidence_sha256",
+        "p2_06_evidence_sha256",
+        "p2_07_registry_sha256",
+        "policy_sha256",
+        "contract_sha256",
+        "client_source_population_sha256",
+        "server_source_population_sha256",
+        "client_config_sha256"
+      ],
+      "properties": {
+        "p2_05_evidence_sha256": { "$ref": "#/$defs/sha256" },
+        "p2_06_evidence_sha256": { "$ref": "#/$defs/sha256" },
+        "p2_07_registry_sha256": { "$ref": "#/$defs/sha256" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_sha256": { "$ref": "#/$defs/sha256" },
+        "client_source_population_sha256": { "$ref": "#/$defs/sha256" },
+        "server_source_population_sha256": { "$ref": "#/$defs/sha256" },
+        "client_config_sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": true
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "active_tables",
+        "classified_tables",
+        "unclassified_tables",
+        "schema_owner_client",
+        "schema_owner_server",
+        "schema_owner_shared",
+        "runtime_client_presentation",
+        "runtime_server_authoritative",
+        "core_tables",
+        "core_columns",
+        "classified_core_columns",
+        "security_sensitive_client_authority_violations",
+        "result"
+      ],
+      "properties": {
+        "active_tables": { "const": 225 },
+        "classified_tables": { "const": 225 },
+        "unclassified_tables": { "const": 0 },
+        "schema_owner_client": { "type": "integer", "minimum": 0 },
+        "schema_owner_server": { "type": "integer", "minimum": 0 },
+        "schema_owner_shared": { "type": "integer", "minimum": 0 },
+        "runtime_client_presentation": { "type": "integer", "minimum": 0 },
+        "runtime_server_authoritative": { "type": "integer", "minimum": 1 },
+        "core_tables": { "const": 12 },
+        "core_columns": { "const": 355 },
+        "classified_core_columns": { "const": 355 },
+        "security_sensitive_client_authority_violations": { "const": 0 },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": true
+    },
+    "tables": {
+      "type": "array",
+      "minItems": 225,
+      "maxItems": 225,
+      "items": { "$ref": "#/$defs/table" }
+    },
+    "core_columns": {
+      "type": "array",
+      "minItems": 355,
+      "maxItems": 355,
+      "items": { "$ref": "#/$defs/coreColumn" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "columnId": {
+      "type": "string",
+      "pattern": "^c[0-9]{4}$"
+    },
+    "table": {
+      "type": "object",
+      "required": [
+        "source_path",
+        "logical_name",
+        "source_sha256",
+        "namespace",
+        "observed_consumers",
+        "schema_owner",
+        "runtime_authority",
+        "domain",
+        "server_must_not_trust_client_values",
+        "target_consumers",
+        "decision_basis",
+        "result"
+      ],
+      "properties": {
+        "source_path": { "type": "string", "pattern": "\\.tbl$" },
+        "logical_name": { "type": "string", "minLength": 1 },
+        "source_sha256": { "$ref": "#/$defs/sha256" },
+        "namespace": { "enum": ["CLSVShare", "Table"] },
+        "observed_consumers": {
+          "type": "object",
+          "required": [
+            "current_client_config",
+            "legacy_client_source_files",
+            "legacy_server_source_files",
+            "scope"
+          ],
+          "properties": {
+            "current_client_config": { "type": "boolean" },
+            "legacy_client_source_files": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "legacy_server_source_files": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "scope": { "enum": ["none", "client", "server", "shared"] }
+          },
+          "additionalProperties": false
+        },
+        "schema_owner": { "enum": ["client", "server", "shared"] },
+        "runtime_authority": { "enum": ["client-presentation", "server-authoritative"] },
+        "domain": { "type": "string", "minLength": 1 },
+        "server_must_not_trust_client_values": { "type": "boolean" },
+        "target_consumers": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["client", "server"] },
+          "uniqueItems": true
+        },
+        "decision_basis": { "type": "string", "minLength": 1 },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": false
+    },
+    "coreColumn": {
+      "type": "object",
+      "required": [
+        "table",
+        "column_id",
+        "source_name",
+        "type",
+        "owner",
+        "runtime_authority",
+        "role",
+        "localizable",
+        "server_must_not_trust_client_value",
+        "decision_rule",
+        "result"
+      ],
+      "properties": {
+        "table": { "type": "string", "pattern": "\\.tbl$" },
+        "column_id": { "$ref": "#/$defs/columnId" },
+        "source_name": { "type": "string" },
+        "type": { "enum": ["boolean", "int64", "decimal", "string"] },
+        "owner": { "enum": ["client", "server", "shared"] },
+        "runtime_authority": { "enum": ["client-presentation", "server-authoritative"] },
+        "role": { "enum": ["shared-identifier", "client-localization", "client-presentation-resource", "server-gameplay-rule"] },
+        "localizable": { "type": "boolean" },
+        "server_must_not_trust_client_value": { "type": "boolean" },
+        "decision_rule": { "type": "string", "minLength": 1 },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

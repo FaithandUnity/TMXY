@@ -135,6 +135,9 @@ $threeLayerTableData = Invoke-JsonTest `
 $coreTableSchema = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-CoreTableSchema.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$tableOwnership = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-TableOwnershipRegistry.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -240,6 +243,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$threeLayerTableData.completion_criteria_satisfied -and
     [string]$coreTableSchema.result -eq 'PASS' -and
     [bool]$coreTableSchema.completion_criteria_satisfied -and
+    [string]$tableOwnership.result -eq 'PASS' -and
+    [bool]$tableOwnership.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -299,6 +304,7 @@ $report = [pscustomobject][ordered]@{
     auxiliary_config_inventory = $auxiliaryConfigInventory
     three_layer_table_data = $threeLayerTableData
     core_table_schema = $coreTableSchema
+    table_ownership = $tableOwnership
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

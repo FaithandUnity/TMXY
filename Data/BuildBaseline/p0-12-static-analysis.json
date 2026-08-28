@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T05:27:30.8213944+00:00",
+  "captured_utc": "2026-08-28T06:01:58.3625204+00:00",
   "result": "PASS_DIAGNOSTIC",
   "authoritative_release_analysis": false,
   "authority_note": "Host clang-tidy proves rule cleanliness; the locked Linux Clang 21 builder remains authoritative.",

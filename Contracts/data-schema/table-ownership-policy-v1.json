@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "policy_id": "tmxy-table-ownership-policy-v1",
+  "task_id": "P2-08",
+  "source_build": "qy-3.0.0.413",
+  "principles": {
+    "consumer_is_not_authority": true,
+    "client_copy_is_untrusted_for_server_decisions": true,
+    "server_authority_default_for_shared_gameplay": true,
+    "presentation_and_localization_may_be_client_owned": true,
+    "unknown_gameplay_semantics_fail_to_server_authority": true
+  },
+  "namespace_defaults": [
+    {
+      "namespace": "CLSVShare",
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "domain": "shared-gameplay-catalog",
+      "basis": "legacy-shared-namespace-and-current-client-config"
+    },
+    {
+      "namespace": "Table",
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "domain": "client-presentation-catalog",
+      "basis": "legacy-client-table-namespace"
+    }
+  ],
+  "client_presentation_table_overrides": [
+    "CLSVShare/ElementLightInfo.tbl",
+    "CLSVShare/ShenqiName.tbl",
+    "CLSVShare/char_emote.tbl",
+    "CLSVShare/emote.tbl",
+    "CLSVShare/fabao_name.tbl",
+    "CLSVShare/map_icon.tbl",
+    "CLSVShare/map_mark.tbl",
+    "CLSVShare/spirit_name.tbl",
+    "CLSVShare/unit_disp_ids.tbl"
+  ],
+  "server_authoritative_table_overrides": [
+    "Table/Activities.tbl",
+    "Table/Create_UEqu.tbl",
+    "Table/quest_table.tbl",
+    "Table/supplytable.tbl"
+  ],
+  "core_column_policy": {
+    "precedence": [
+      "declared-primary-or-foreign-key-is-shared-identifier",
+      "presentation-name-rule-is-client-owned",
+      "all-other-fields-are-server-authoritative"
+    ],
+    "client_presentation_name_regex": "(?i)^(?:name|describe|desc|cl_name|cl_desc|icon|cl_icon|cl_start_action|cl_prep_action|cl_go_action|cl_proj_eff|cl_exp_eff|cl_act_eff|weapon1_act|weapon2_act|giver_dlg|direct_desc|unfinish_desc|receiver_dlg|dlg_content[0-9]+)$",
+    "localization_name_regex": "(?i)^(?:name|describe|desc|cl_name|cl_desc|giver_dlg|direct_desc|unfinish_desc|receiver_dlg|dlg_content[0-9]+)$",
+    "security_sensitive_name_regex": "(?i)(?:attack|defend|damage|price|money|exp|cool|threat|hp|mp|level|rank|reputation|contribute|reward|material|output|skill|quest|profession|capacity|stack|binding|target|radius|dist|time|num|effect|str|dex|con|int|spi|prop)"
+  }
+}

@@ -69,4 +69,9 @@ opaque hex、节点 ID 三种脱敏查询模式；任意字符串不会被猜成
 `-RequireLocalExports` 会从 Git 忽略的 P2-06 明文层完整重建并要求注册表和证据逐 byte
 一致；托管 CI 只复核跟踪合同及其哈希链。
 
+`Contract/Test-TableOwnershipRegistry.ps1` 验证 P2-08 的 225 张活动表和 355 个核心列
+全部分类，强制 108 张共享表及 307 个服务端/共享核心列保持服务端运行时权威，并确认
+48 个客户端列只属于展示或本地化。`-VerifyLegacySources` 会重扫只读客户端/服务端源码
+与冻结 ECF，要求注册表和证据逐 byte 一致；默认托管模式只验证跟踪哈希链和安全不变量。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

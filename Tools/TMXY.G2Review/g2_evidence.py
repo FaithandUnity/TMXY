@@ -207,6 +207,7 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
     resolution = closure["resolution"]
     conditional = closure["conditional_required"]
     asset_structure = closure["asset_structure"]
+    asset_binding = closure["asset_binding"]
     integrity = closure["integrity"]
     p213_sha = sha256(resolve_inside(root, "Data/Inventory/p2-13-reference-closure.json"))
     artifacts = {item["id"]: item for item in report["input_bindings"]["artifacts"]}
@@ -229,7 +230,8 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
                              is_sha256(conditional["member_set_sha256"]))
     first_candidate_used = not (scope["outcome_based_exclusion"] is False and
                                 resource_rules["selection"] == "all-matching-core-resource-rules" and
-                                resolution["heuristic_target_selections"] == 0)
+                                resolution["heuristic_target_selections"] == 0 and
+                                asset_binding["first_candidate_selection_used"] is False)
     integrity_mismatches = (integrity["recorded_resolution_mismatches"] +
                             integrity["catalog_candidate_mismatches"])
     logical_gap_sum = (resolution["table_unresolved"] + resolution["table_ambiguous"] +
@@ -242,6 +244,15 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
                  thresholds["core_auxiliary_config_scope_complete"] and
                  closure["asset_binding_resolution_explicit"] ==
                  thresholds["core_asset_binding_resolution_explicit"] and
+                 asset_binding["ambiguous_targets"] == thresholds["core_asset_binding_ambiguous"] and
+                 asset_binding["unresolved_targets"] == thresholds["core_asset_binding_unresolved"] and
+                 asset_binding["unknown_targets"] == thresholds["core_asset_binding_unknown"] and
+                 asset_binding["reachable_assets"] == asset_binding["workset_count"] and
+                 asset_binding["resolved_targets"] + asset_binding["ambiguous_targets"] +
+                 asset_binding["unresolved_targets"] + asset_binding["unknown_targets"] ==
+                 asset_binding["reachable_assets"] and
+                 is_sha256(asset_binding["workset_sha256"]) and
+                 asset_binding["first_candidate_selection_used"] is False and
                  resolution["table_unresolved"] == thresholds["core_table_resource_unresolved"] and
                  resolution["table_ambiguous"] == thresholds["core_table_resource_ambiguous"] and
                  resolution["package_unresolved"] == thresholds["core_package_resource_unresolved"] and
@@ -264,6 +275,13 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
         "scope_complete": closure["scope_complete"],
         "auxiliary_complete": closure["auxiliary_config_reference_scope_complete"],
         "asset_binding_explicit": closure["asset_binding_resolution_explicit"],
+        "asset_binding_resolved": asset_binding["resolved_targets"],
+        "asset_binding_ambiguous": asset_binding["ambiguous_targets"],
+        "asset_binding_unresolved": asset_binding["unresolved_targets"],
+        "asset_binding_unknown": asset_binding["unknown_targets"],
+        "asset_binding_workset_bound": (asset_binding["reachable_assets"] ==
+                                         asset_binding["workset_count"] and
+                                         is_sha256(asset_binding["workset_sha256"])),
         "table_unresolved": resolution["table_unresolved"],
         "table_ambiguous": resolution["table_ambiguous"],
         "package_unresolved": resolution["package_unresolved"],

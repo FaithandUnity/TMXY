@@ -71,6 +71,7 @@ try {
     $names = [ordered]@{
         detail = 'p2-20a-core-resource-closure.jsonl'
         workset = 'p2-20a-conditional-required-workset.jsonl'
+        asset_workset = 'p2-20a-asset-binding-workset.jsonl'
         json = 'p2-20a-core-resource-closure-report.json'
         markdown = 'p2-20a-core-resource-closure-report.md'
         governance = 'p2-g2-core-resource-closure.json'
@@ -80,6 +81,7 @@ try {
     $targets = [ordered]@{
         detail = Join-Path $root 'Data\Exports\P2-20\p2-20a-core-resource-closure.jsonl'
         workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-conditional-required-workset.jsonl'
+        asset_workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-workset.jsonl'
         json = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
         markdown = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.md'
         governance = Join-Path $root 'Data\Governance\p2-g2-core-resource-closure.json'
@@ -98,6 +100,7 @@ try {
         '--detail-output', "/output/$($names.detail)",
         '--table-root', '/workspace/Data/Exports/P2-06/tables',
         '--workset-output', "/output/$($names.workset)",
+        '--asset-workset-output', "/output/$($names.asset_workset)",
         '--json-output', "/output/$($names.json)",
         '--markdown-output', "/output/$($names.markdown)",
         '--governance-output', "/output/$($names.governance)"
@@ -136,13 +139,18 @@ try {
 
     $report = Get-Content -LiteralPath $targets.json -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
-    if ($report.evidence_revision -ne 'P2-20A.1' -or
+    if ($report.evidence_revision -ne 'P2-20A.2' -or
         $report.closure.conditional_required.member_set_exported -ne $true -or
         [int]$report.closure.conditional_required.member_set_count -ne
             (Get-LineCount $targets.workset) -or
         [string]$report.closure.conditional_required.member_set_sha256 -cne
-            (Get-Sha256 $targets.workset)) {
-        throw 'P2-20A.1 conditional-required workset binding failed.'
+            (Get-Sha256 $targets.workset) -or
+        $report.closure.asset_binding.resolution_explicit -ne $true -or
+        [int]$report.closure.asset_binding.workset_count -ne
+            (Get-LineCount $targets.asset_workset) -or
+        [string]$report.closure.asset_binding.workset_sha256 -cne
+            (Get-Sha256 $targets.asset_workset)) {
+        throw 'P2-20A.2 workset binding failed.'
     }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
@@ -153,7 +161,7 @@ try {
     $evidencePath = Join-Path $root 'Data\Inventory\p2-20a-core-resource-closure.json'
     $evidence = [pscustomobject][ordered]@{
         schema_version = 1
-        evidence_revision = 'P2-20A.1'
+        evidence_revision = 'P2-20A.2'
         captured_utc = [string]$report.captured_utc
         task_id = 'P2-20A'
         criterion_id = 'G2-06'
@@ -199,6 +207,11 @@ try {
                 count = [int]$report.closure.conditional_required.member_set_count
                 sha256 = Get-Sha256 $targets.workset
             }
+            asset_binding_workset = [pscustomobject][ordered]@{
+                tracked = $false
+                count = [int]$report.closure.asset_binding.workset_count
+                sha256 = Get-Sha256 $targets.asset_workset
+            }
         }
         scope_definition = $report.scope_definition
         closure = $report.closure
@@ -233,7 +246,7 @@ try {
         }
         next_scope = [pscustomobject][ordered]@{
             tasks = @('P2-20A-remediation', 'P2-20')
-            detail = 'Close configuration scope, asset-binding resolution, conditional-required missing values, logical queues, and reachable structural gaps; then regenerate P2-13/P2-18 and rerun G2. P3 remains unauthorized.'
+            detail = 'Close configuration scope, asset-binding ambiguity and unresolved states, conditional-required missing values, logical queues, and reachable structural gaps; then regenerate P2-13/P2-18 and rerun G2. P3 remains unauthorized.'
         }
     }
     if ($Check) {

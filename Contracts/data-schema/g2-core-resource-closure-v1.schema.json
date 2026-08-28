@@ -12,7 +12,7 @@
   ],
   "properties": {
     "schema_version": { "const": 1 },
-    "evidence_revision": { "const": "P2-20A.1" },
+    "evidence_revision": { "const": "P2-20A.2" },
     "captured_utc": { "type": "string", "minLength": 1 },
     "task_id": { "const": "P2-20A" },
     "criterion_id": { "const": "G2-06" },
@@ -185,6 +185,40 @@
         "fail": { "type": "integer", "minimum": 0 }
       }
     },
+    "asset_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "resolution_explicit", "reachable_assets", "resolved_targets",
+        "ambiguous_targets", "unresolved_targets", "unknown_targets",
+        "candidate_edges", "resolved_edges", "ambiguous_edges", "unresolved_edges",
+        "unknown_edges", "by_resolution_basis_targets", "by_resolution_basis_edges",
+        "workset_exported", "workset_count", "workset_sha256", "by_family",
+        "first_candidate_selection_used"
+      ],
+      "properties": {
+        "resolution_explicit": { "const": true },
+        "reachable_assets": { "type": "integer", "minimum": 1 },
+        "resolved_targets": { "type": "integer", "minimum": 0 },
+        "ambiguous_targets": { "type": "integer", "minimum": 0 },
+        "unresolved_targets": { "type": "integer", "minimum": 0 },
+        "unknown_targets": { "type": "integer", "minimum": 0 },
+        "candidate_edges": { "type": "integer", "minimum": 1 },
+        "resolved_edges": { "type": "integer", "minimum": 0 },
+        "ambiguous_edges": { "type": "integer", "minimum": 0 },
+        "unresolved_edges": { "type": "integer", "minimum": 0 },
+        "unknown_edges": { "type": "integer", "minimum": 0 },
+        "by_resolution_basis_targets": { "$ref": "#/$defs/count_map" },
+        "by_resolution_basis_edges": { "$ref": "#/$defs/count_map" },
+        "workset_exported": { "const": true },
+        "workset_count": { "type": "integer", "minimum": 1 },
+        "workset_sha256": { "$ref": "#/$defs/sha256" },
+        "by_family": {
+          "type": "object", "additionalProperties": { "$ref": "#/$defs/count_map" },
+          "required": ["anim", "qtx", "skem", "sm", "ter", "wav"]
+        },
+        "first_candidate_selection_used": { "const": false }
+      }
+    },
     "integrity": {
       "type": "object", "additionalProperties": false,
       "required": [
@@ -218,13 +252,13 @@
         "asset_binding_resolution_explicit", "start_nodes", "start_set_sha256",
         "reachable_nodes", "reachable_set_sha256", "reachable_nodes_by_kind",
         "traversed_edges_by_kind", "resolution", "conditional_required",
-        "asset_structure", "integrity",
+        "asset_binding", "asset_structure", "integrity",
         "logical_gap_count", "gap_set_sha256", "detail_export"
       ],
       "properties": {
         "scope_complete": { "const": false },
         "auxiliary_config_reference_scope_complete": { "const": false },
-        "asset_binding_resolution_explicit": { "const": false },
+        "asset_binding_resolution_explicit": { "const": true },
         "start_nodes": { "type": "integer", "minimum": 1 },
         "start_set_sha256": { "$ref": "#/$defs/sha256" },
         "reachable_nodes": { "type": "integer", "minimum": 1 },
@@ -233,6 +267,7 @@
         "traversed_edges_by_kind": { "$ref": "#/$defs/count_map" },
         "resolution": { "$ref": "#/$defs/resolution" },
         "conditional_required": { "$ref": "#/$defs/conditional_required" },
+        "asset_binding": { "$ref": "#/$defs/asset_binding" },
         "asset_structure": { "$ref": "#/$defs/asset_structure" },
         "integrity": { "$ref": "#/$defs/integrity" },
         "logical_gap_count": { "type": "integer", "minimum": 1 },
@@ -242,12 +277,15 @@
     },
     "thresholds": {
       "type": "object", "additionalProperties": false,
-      "required": ["scope_complete", "unresolved", "ambiguous", "conditional_required_missing", "heuristic", "asset_structure_gaps", "unknown"],
+      "required": ["scope_complete", "unresolved", "ambiguous", "conditional_required_missing", "asset_binding_ambiguous", "asset_binding_unresolved", "asset_binding_unknown", "heuristic", "asset_structure_gaps", "unknown"],
       "properties": {
         "scope_complete": { "const": true },
         "unresolved": { "const": 0 },
         "ambiguous": { "const": 0 },
         "conditional_required_missing": { "const": 0 },
+        "asset_binding_ambiguous": { "const": 0 },
+        "asset_binding_unresolved": { "const": 0 },
+        "asset_binding_unknown": { "const": 0 },
         "heuristic": { "const": 0 },
         "asset_structure_gaps": { "const": 0 },
         "unknown": { "const": 0 }

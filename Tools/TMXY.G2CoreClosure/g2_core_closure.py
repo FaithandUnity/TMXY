@@ -11,6 +11,7 @@ from core_closure import build_graph, select_rules, summarize, write_detail
 from core_common import bind_inputs, load_json, require, sha256_file, sha256_lines, write_text
 from core_report import build_governance, build_report, render_markdown
 from conditional_workset import build_conditional_workset
+from asset_binding_workset import build_asset_binding_workset
 
 
 def build(args: argparse.Namespace) -> dict[str, object]:
@@ -56,13 +57,22 @@ def build(args: argparse.Namespace) -> dict[str, object]:
     workset = build_conditional_workset(
         policy, reference_policy, documents["p2_06"], documents["p2_13"],
         core_registry, args.table_root.resolve(), args.workset_output)
+    asset_binding = build_asset_binding_workset(
+        policy, documents["asset_catalog_path"], graph,
+        args.asset_workset_output)
     p213_binding = next(item for item in bindings["artifacts"] if item["id"] == "P2-13")
     p206_binding = next(item for item in bindings["artifacts"] if item["id"] == "P2-06")
     closure = summarize(graph, documents["p2_13"], detail, p213_binding,
-                        p206_binding, workset)
+                        p206_binding, workset, asset_binding)
     require(closure["auxiliary_config_reference_scope_complete"] is False and
-            closure["asset_binding_resolution_explicit"] is False and
+            closure["asset_binding_resolution_explicit"] is True and
             closure["scope_complete"] is False, "Incomplete scope was incorrectly closed")
+    require(closure["asset_binding"]["reachable_assets"] == 21494 and
+            closure["asset_binding"]["ambiguous_targets"] == 183 and
+            closure["asset_binding"]["unresolved_targets"] == 19 and
+            closure["asset_binding"]["unknown_targets"] == 0 and
+            closure["asset_binding"]["first_candidate_selection_used"] is False,
+            "Reachable asset binding evidence is incomplete or heuristic")
     require(closure["logical_gap_count"] > 0, "Current core-resource gaps unexpectedly vanished")
     require(closure["conditional_required"]["conditional_required_missing"] > 0 and
             closure["conditional_required"]["member_set_exported"] is True and
@@ -145,6 +155,7 @@ def main() -> None:
     parser.add_argument("--detail-output", type=Path)
     parser.add_argument("--table-root", type=Path)
     parser.add_argument("--workset-output", type=Path)
+    parser.add_argument("--asset-workset-output", type=Path)
     parser.add_argument("--json-output", type=Path)
     parser.add_argument("--markdown-output", type=Path)
     parser.add_argument("--governance-output", type=Path)
@@ -154,7 +165,7 @@ def main() -> None:
         print(json.dumps(self_test(), sort_keys=True, separators=(",", ":")))
         return
     require(all((args.root, args.policy, args.schema, args.detail_output, args.table_root,
-                 args.workset_output, args.json_output,
+                 args.workset_output, args.asset_workset_output, args.json_output,
                  args.markdown_output, args.governance_output)), "Generation arguments are required")
     print(json.dumps(build(args), sort_keys=True, separators=(",", ":")))
 

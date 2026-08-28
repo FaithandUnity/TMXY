@@ -82,13 +82,13 @@ def build_graph(graph_path: Path, selected_rules: set[str], policy: dict[str, An
     field_sources: set[str] = set()
     node_kind: dict[str, str] = {}
     asset_structure: dict[str, str] = {}
+    asset_family: dict[str, str] = {}
+    asset_candidates: dict[str, set[str]] = collections.defaultdict(set)
     adjacency: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     scoped_edges: list[tuple[str, str]] = []
     unknown_records = 0
     unknown_resolutions = 0
     heuristic_selections = 0
-    asset_binding_edges = 0
-    asset_binding_with_resolution = 0
 
     with graph_path.open("r", encoding="utf-8") as stream:
         for line in stream:
@@ -103,6 +103,7 @@ def build_graph(graph_path: Path, selected_rules: set[str], policy: dict[str, An
                 node_kind[str(entry["id"])] = record
                 if record == "asset_node":
                     asset_structure[str(entry["id"])] = str(entry["structure"])
+                    asset_family[str(entry["id"])] = str(entry["family"])
             elif record == "table_scoped_edge":
                 scoped_edges.append((str(entry["source"]), str(entry["rule"])))
             elif record in traversable:
@@ -115,8 +116,7 @@ def build_graph(graph_path: Path, selected_rules: set[str], policy: dict[str, An
                     unknown_resolutions += unknown
                     heuristic_selections += heuristic
                 if record == "package_asset_edge":
-                    asset_binding_edges += 1
-                    asset_binding_with_resolution += int("resolution" in entry)
+                    asset_candidates[str(entry["target"])].add(str(entry["source"]))
                 adjacency[str(entry["source"])].append({
                     "record": record,
                     "rule": str(entry.get("rule", entry.get("kind", entry.get("family", "")))),
@@ -165,7 +165,6 @@ def build_graph(graph_path: Path, selected_rules: set[str], policy: dict[str, An
     gap_lines = [canonical_json(item) for item in gaps]
     root_counts = {kind: len(roots_by_kind[kind]) for kind in sorted(expected_kinds)}
     require(len(declared_roots) == sum(root_counts.values()), "Declared roots overlap unexpectedly")
-    asset_binding_explicit = asset_binding_edges > 0 and asset_binding_edges == asset_binding_with_resolution
     return {
         "roots": declared_roots,
         "root_counts": root_counts,
@@ -174,6 +173,8 @@ def build_graph(graph_path: Path, selected_rules: set[str], policy: dict[str, An
         "reachable": reachable,
         "node_kind": node_kind,
         "asset_structure": asset_structure,
+        "asset_family": asset_family,
+        "asset_candidates": asset_candidates,
         "node_counts": dict(sorted(node_counts.items())),
         "edge_counts": dict(sorted(edge_counts.items())),
         "resolutions": resolutions,
@@ -183,7 +184,6 @@ def build_graph(graph_path: Path, selected_rules: set[str], policy: dict[str, An
         "unknown_records": unknown_records,
         "unknown_resolutions": unknown_resolutions,
         "heuristic_selections": heuristic_selections,
-        "asset_binding_explicit": asset_binding_explicit,
         "asset_counts": asset_counts,
     }
 
@@ -224,7 +224,7 @@ def write_detail(path: Path, graph: dict[str, Any], roots_by_target: dict[str, l
 
 def summarize(graph: dict[str, Any], p213: dict[str, Any], detail: dict[str, Any],
               p213_binding: dict[str, Any], p206_binding: dict[str, Any],
-              workset: dict[str, Any]) -> dict[str, Any]:
+              workset: dict[str, Any], asset_binding: dict[str, Any]) -> dict[str, Any]:
     resolution = graph["resolutions"]
     table_unresolved = resolution["table_package_edge:unresolved"]
     table_ambiguous = resolution["table_package_edge:ambiguous"]
@@ -249,7 +249,7 @@ def summarize(graph: dict[str, Any], p213: dict[str, Any], detail: dict[str, Any
     return {
         "scope_complete": False,
         "auxiliary_config_reference_scope_complete": False,
-        "asset_binding_resolution_explicit": graph["asset_binding_explicit"],
+        "asset_binding_resolution_explicit": asset_binding["resolution_explicit"],
         "start_nodes": len(graph["starts"]),
         "start_set_sha256": sha256_lines(graph["starts"]),
         "reachable_nodes": len(graph["reachable"]),
@@ -281,6 +281,7 @@ def summarize(graph: dict[str, Any], p213: dict[str, Any], detail: dict[str, Any
             "member_set_sha256": workset["member_set_sha256"],
             "zero_threshold_satisfied": runtime["runtime_assert_missing_values"] == 0,
         },
+        "asset_binding": asset_binding,
         "asset_structure": {
             "pass": graph["asset_counts"]["pass"],
             "unresolved": graph["asset_counts"]["unresolved"],

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "evidence_revision": "P2-20A.1",
+  "evidence_revision": "P2-20A.2",
   "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
@@ -10,7 +10,7 @@
   "task_status": "BLOCKED",
   "completion_criteria_satisfied": false,
   "input_bindings": {
-    "aggregate_sha256": "e8e83171abd2c10023ca0062b3b54535cb5cf75b1f6c9ed7556c62c7523af226",
+    "aggregate_sha256": "141701f636eb75f1586f74e01c2dcf8b2d15b5327da0dad81ba79a0da9ad9481",
     "artifacts": [
       {
         "id": "P2-05",
@@ -83,8 +83,8 @@
       {
         "id": "g2-policy",
         "path": "Contracts/data-schema/g2-review-policy-v1.json",
-        "sha256": "db5a7effe7560d468b5210f14b09ae58e94419fdd1bc95a520da35a5401a4b4b",
-        "bytes": 6290
+        "sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
+        "bytes": 6502
       }
     ]
   },
@@ -129,7 +129,7 @@
   "closure": {
     "scope_complete": false,
     "auxiliary_config_reference_scope_complete": false,
-    "asset_binding_resolution_explicit": false,
+    "asset_binding_resolution_explicit": true,
     "start_nodes": 62256,
     "start_set_sha256": "417cd126187ccac5af9430685ff920995bcedc6c312d50a5a22f9aa5a761b018",
     "reachable_nodes": 127015,
@@ -172,6 +172,76 @@
       "member_set_sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d",
       "zero_threshold_satisfied": false
     },
+    "asset_binding": {
+      "resolution_explicit": true,
+      "reachable_assets": 21494,
+      "resolved_targets": 21292,
+      "ambiguous_targets": 183,
+      "unresolved_targets": 19,
+      "unknown_targets": 0,
+      "candidate_edges": 39351,
+      "resolved_edges": 38793,
+      "ambiguous_edges": 534,
+      "unresolved_edges": 24,
+      "unknown_edges": 0,
+      "by_resolution_basis_targets": {
+        "DESCRIPTOR_VALIDATION_FAILED": 19,
+        "DIVERGENT_DESCRIPTOR_SET": 183,
+        "EQUIVALENT_VALID_DESCRIPTOR_SET": 2514,
+        "SELF_DESCRIBING_RULE": 9007,
+        "UNIQUE_VALID_DESCRIPTOR": 9771
+      },
+      "by_resolution_basis_edges": {
+        "DESCRIPTOR_VALIDATION_FAILED": 24,
+        "DIVERGENT_DESCRIPTOR_SET": 534,
+        "EQUIVALENT_VALID_DESCRIPTOR_SET": 11271,
+        "SELF_DESCRIBING_RULE": 17751,
+        "UNIQUE_VALID_DESCRIPTOR": 9771
+      },
+      "workset_exported": true,
+      "workset_count": 21494,
+      "workset_sha256": "fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c",
+      "by_family": {
+        "anim": {
+          "ambiguous": 8,
+          "assets": 1044,
+          "candidate_edges": 1152,
+          "resolved": 1030,
+          "unresolved": 6
+        },
+        "qtx": {
+          "ambiguous": 171,
+          "assets": 9874,
+          "candidate_edges": 18601,
+          "resolved": 9691,
+          "unresolved": 12
+        },
+        "skem": {
+          "ambiguous": 2,
+          "assets": 1043,
+          "candidate_edges": 1151,
+          "resolved": 1041
+        },
+        "sm": {
+          "ambiguous": 2,
+          "assets": 526,
+          "candidate_edges": 696,
+          "resolved": 523,
+          "unresolved": 1
+        },
+        "ter": {
+          "assets": 8744,
+          "candidate_edges": 17488,
+          "resolved": 8744
+        },
+        "wav": {
+          "assets": 263,
+          "candidate_edges": 263,
+          "resolved": 263
+        }
+      },
+      "first_candidate_selection_used": false
+    },
     "asset_structure": {
       "pass": 21476,
       "unresolved": 18,
@@ -203,6 +273,9 @@
       "unresolved": 0,
       "ambiguous": 0,
       "conditional_required_missing": 0,
+      "asset_binding_ambiguous": 0,
+      "asset_binding_unresolved": 0,
+      "asset_binding_unknown": 0,
       "heuristic": 0,
       "asset_structure_gaps": 0,
       "unknown": 0
@@ -218,8 +291,8 @@
     },
     {
       "id": "G2-06-ASSET-BINDING",
-      "reason": "Package-to-asset edges do not publish an explicit binding resolution state.",
-      "required_action": "Version the graph contract so every core package-to-asset binding records evidence-backed resolution without first-candidate selection."
+      "reason": "All reachable Package-to-asset bindings now have explicit evidence states, but divergent or invalid descriptor sets remain ambiguous or unresolved.",
+      "required_action": "Resolve every divergent descriptor set and failed descriptor validation through qualified evidence while preserving all candidates and without first-candidate selection."
     },
     {
       "id": "G2-06-CONDITIONAL-REQUIRED",
@@ -246,9 +319,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-core-resource-closure-policy-v1.json",
-    "policy_sha256": "ae99f47fa26ad867cc1a0362ce08293016f59fd0a90fdb8fbc6a420b65a436a4",
+    "policy_sha256": "ee16b6faa81d450c05e655c5484c6f1f93de191fc996722f03bc77501e720852",
     "schema": "Contracts/data-schema/g2-core-resource-closure-v1.schema.json",
-    "schema_sha256": "e1c36c6128a35e6a69738c4c0a45d2780248ffd15b32ee2c2c6d88b1f7ff87e3"
+    "schema_sha256": "41c906327b9a24cade0fb7bdee1ad44c9a56204dfa0c2d32ebaeae19edecfdbc"
   },
   "disclosure": {
     "private_source_paths": false,

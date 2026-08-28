@@ -130,6 +130,11 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.thresholds.required_criteria -eq 9 -and
         $Candidate.fail_closed_rules.core_foreign_key_zero_does_not_prove_core_resource_reference_zero -and
         $Candidate.fail_closed_rules.first_candidate_or_heuristic_selection_never_proves_resource_closure -and
+        $Candidate.fail_closed_rules.explicit_asset_binding_state_does_not_substitute_for_zero_ambiguity_and_unresolved -and
+        $Candidate.thresholds.core_asset_binding_resolution_explicit -eq $true -and
+        $Candidate.thresholds.core_asset_binding_ambiguous -eq 0 -and
+        $Candidate.thresholds.core_asset_binding_unresolved -eq 0 -and
+        $Candidate.thresholds.core_asset_binding_unknown -eq 0 -and
         $Candidate.fail_closed_rules.audit_codegen_or_uint64_policy_is_not_a_complete_migration_decision_registry -and
         $Candidate.fail_closed_rules.machine_suggestions_never_count_as_migration_decisions_or_approvals -and
         $Candidate.fail_closed_rules.one_blocked_criterion_blocks_g2 -and
@@ -172,7 +177,12 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'declared_scope_hash_bound') -ne $true -or
         (Get-Metric $g206 'scope_complete') -ne $false -or
         (Get-Metric $g206 'auxiliary_config_scope_complete') -ne $false -or
-        (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $false -or
+        (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $true -or
+        (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21292 -or
+        (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 183 -or
+        (Get-Metric $g206 'asset_binding_unresolved_targets') -ne 19 -or
+        (Get-Metric $g206 'asset_binding_unknown_targets') -ne 0 -or
+        (Get-Metric $g206 'asset_binding_workset_hash_bound') -ne $true -or
         (Get-Metric $g206 'table_resource_unresolved') -ne 5161 -or
         (Get-Metric $g206 'table_resource_ambiguous') -ne 6945 -or
         (Get-Metric $g206 'package_resource_unresolved') -ne 407 -or
@@ -409,7 +419,14 @@ $g206 = Get-Criterion $report 'G2-06'
 Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without FK substitution' (
     $supplemental.closure.scope_complete -eq $false -and
     $supplemental.closure.auxiliary_config_reference_scope_complete -eq $false -and
-    $supplemental.closure.asset_binding_resolution_explicit -eq $false -and
+    $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
+    $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
+    $supplemental.closure.asset_binding.resolved_targets -eq 21292 -and
+    $supplemental.closure.asset_binding.ambiguous_targets -eq 183 -and
+    $supplemental.closure.asset_binding.unresolved_targets -eq 19 -and
+    $supplemental.closure.asset_binding.unknown_targets -eq 0 -and
+    $supplemental.closure.asset_binding.workset_count -eq 21494 -and
+    [string]$supplemental.closure.asset_binding.workset_sha256 -match '^[0-9a-f]{64}$' -and
     $supplemental.closure.conditional_required.conditional_required_missing -eq 29 -and
     $supplemental.closure.conditional_required.member_set_exported -eq $true -and
     $supplemental.closure.conditional_required.member_set_count -eq 29 -and
@@ -429,6 +446,12 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'conditional_member_set_exported') -eq $true -and
     (Get-Metric $g206 'conditional_member_set_count') -eq 29 -and
     (Get-Metric $g206 'conditional_member_set_hash_bound') -eq $true -and
+    (Get-Metric $g206 'asset_binding_resolution_explicit') -eq $true -and
+    (Get-Metric $g206 'asset_binding_resolved_targets') -eq 21292 -and
+    (Get-Metric $g206 'asset_binding_ambiguous_targets') -eq 183 -and
+    (Get-Metric $g206 'asset_binding_unresolved_targets') -eq 19 -and
+    (Get-Metric $g206 'asset_binding_unknown_targets') -eq 0 -and
+    (Get-Metric $g206 'asset_binding_workset_hash_bound') -eq $true -and
     (Get-Metric $g206 'first_candidate_selection_used') -eq $false -and
     (Get-Metric $g206 'asset_structure_unresolved') -eq 18 -and
     (Get-Metric $g206 'unknown_record_count') -eq 0 -and
@@ -530,6 +553,15 @@ $falseFk = Copy-JsonObject $report
 Set-CriterionSatisfied $falseFk 'G2-06'
 $negativeCases.core_fk_zero_substitution_rejected =
     (Test-AgainstSchema $falseFk) -and -not (Test-G2Semantics $falseFk $policy)
+$explicitBindingOnly = Copy-JsonObject $report
+Set-CriterionSatisfied $explicitBindingOnly 'G2-06'
+$negativeCases.explicit_asset_binding_with_open_states_rejected =
+    (Get-Metric (Get-Criterion $explicitBindingOnly 'G2-06') `
+        'asset_binding_resolution_explicit') -eq $true -and
+    (Get-Metric (Get-Criterion $explicitBindingOnly 'G2-06') `
+        'asset_binding_ambiguous_targets') -eq 183 -and
+    (Test-AgainstSchema $explicitBindingOnly) -and
+    -not (Test-G2Semantics $explicitBindingOnly $policy)
 $scopeForgery = Copy-JsonObject $report
 $scopeCriterion = Get-Criterion $scopeForgery 'G2-06'
 foreach ($name in @('scope_complete', 'auxiliary_config_scope_complete',
@@ -539,7 +571,9 @@ foreach ($name in @('scope_complete', 'auxiliary_config_scope_complete',
 }
 foreach ($name in @('table_resource_unresolved', 'table_resource_ambiguous',
         'package_resource_unresolved', 'package_resource_ambiguous',
-        'conditional_required_missing', 'asset_structure_unresolved')) {
+        'conditional_required_missing', 'asset_binding_ambiguous_targets',
+        'asset_binding_unresolved_targets', 'asset_binding_unknown_targets',
+        'asset_structure_unresolved')) {
     Set-Metric $scopeCriterion $name 0
 }
 Set-CriterionSatisfied $scopeForgery 'G2-06'

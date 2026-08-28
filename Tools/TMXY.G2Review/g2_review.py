@@ -129,6 +129,11 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("scope_complete", core["scope_complete"], "boolean"),
         metric("auxiliary_config_scope_complete", core["auxiliary_complete"], "boolean"),
         metric("asset_binding_resolution_explicit", core["asset_binding_explicit"], "boolean"),
+        metric("asset_binding_resolved_targets", core["asset_binding_resolved"], "assets"),
+        metric("asset_binding_ambiguous_targets", core["asset_binding_ambiguous"], "assets"),
+        metric("asset_binding_unresolved_targets", core["asset_binding_unresolved"], "assets"),
+        metric("asset_binding_unknown_targets", core["asset_binding_unknown"], "assets"),
+        metric("asset_binding_workset_hash_bound", core["asset_binding_workset_bound"], "boolean"),
         metric("table_resource_unresolved", core["table_unresolved"], "references"),
         metric("table_resource_ambiguous", core["table_ambiguous"], "references"),
         metric("package_resource_unresolved", core["package_unresolved"], "references"),
@@ -148,7 +153,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report and a complete anonymous conditional-required workset, but auxiliary scope, asset binding, nonzero conditional gaps, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Explicit asset-binding states do not erase remaining ambiguity or unresolved descriptors; auxiliary scope, conditional gaps, logical reference queues, and reachable structure also remain blocking. Core foreign-key zero cannot replace these resource-closure facts.", ["G2-BLK-06"] if not ok else []))
 
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
@@ -241,14 +246,18 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         closure = evidence["P2-20A"]["closure"]
         resolution = closure["resolution"]
         conditional = closure["conditional_required"]
+        asset_binding = closure["asset_binding"]
         asset_structure = closure["asset_structure"]
         blockers.append({
             "id": "G2-BLK-06",
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                "P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; "
-                f"the measured core queues contain {resolution['table_unresolved']} unresolved and "
+                "P2-20A is present and hash-bound; auxiliary configuration scope remains incomplete, "
+                "and explicit asset-binding evidence retains "
+                f"{asset_binding['ambiguous_targets']} ambiguous plus "
+                f"{asset_binding['unresolved_targets']} unresolved targets. "
+                f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "
                 f"{resolution['package_ambiguous']} ambiguous Package references, "
@@ -256,7 +265,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"and {asset_structure['unresolved']} structurally unresolved reachable assets."
             ),
             "required_action": (
-                "Complete auxiliary configuration scope and explicit asset binding, use the hash-bound "
+                "Complete auxiliary configuration scope, close every ambiguous or unresolved asset-binding state, use the hash-bound "
                 "conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, "
                 "unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection."
             ),
@@ -422,6 +431,13 @@ def self_test() -> dict[str, Any]:
     reference_queues_zero = False
     require(not (core_fk_zero and supplemental_bound and scope_complete and reference_queues_zero),
             "Core-resource distinction self-test failed")
+    assertions += 1
+    asset_binding_explicit = True
+    asset_binding_ambiguous = 183
+    asset_binding_unresolved = 19
+    require(not (asset_binding_explicit and asset_binding_ambiguous == 0 and
+                 asset_binding_unresolved == 0),
+            "Explicit asset-binding state must not erase blocking states")
     assertions += 1
     registry_present = True
     registry_coverage_complete = True

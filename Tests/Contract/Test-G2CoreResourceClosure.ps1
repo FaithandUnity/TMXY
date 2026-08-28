@@ -61,6 +61,64 @@ function Test-MemberWorkset($Records, [int]$ExpectedCount, [string]$ExpectedSha,
     return (Get-TextSha256 @($lines)) -ceq $ExpectedSha
 }
 
+function Test-AssetWorkset($Records, [object]$Facts) {
+    if (@($Records).Count -ne [int]$Facts.binding_assets) { return $false }
+    $ids = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $lines = [Collections.Generic.List[string]]::new()
+    $targets = @{ RESOLVED = 0; AMBIGUOUS = 0; UNRESOLVED = 0 }
+    $edges = @{ RESOLVED = 0; AMBIGUOUS = 0; UNRESOLVED = 0 }
+    $fields = @('asset_id', 'candidate_count', 'candidate_set_sha256',
+        'descriptor_variants', 'family', 'heuristic_selection', 'resolution',
+        'resolution_basis', 'structure', 'valid_variants')
+    foreach ($record in @($Records)) {
+        $names = @($record.PSObject.Properties.Name | Sort-Object)
+        $resolution = [string]$record.resolution
+        $basis = [string]$record.resolution_basis
+        $family = [string]$record.family
+        $valid = [int]$record.valid_variants
+        $candidateCount = [int]$record.candidate_count
+        $semantic = switch ($basis) {
+            'UNIQUE_VALID_DESCRIPTOR' { $resolution -eq 'RESOLVED' -and $valid -gt 0 }
+            'EQUIVALENT_VALID_DESCRIPTOR_SET' { $resolution -eq 'RESOLVED' -and $valid -gt 0 }
+            'SELF_DESCRIBING_RULE' { $resolution -eq 'RESOLVED' -and $family -in @('ter', 'wav') }
+            'DIVERGENT_DESCRIPTOR_SET' { $resolution -eq 'AMBIGUOUS' }
+            'DESCRIPTOR_VALIDATION_FAILED' { $resolution -eq 'UNRESOLVED' -and $valid -eq 0 }
+            default { $false }
+        }
+        if (@(Compare-Object $names $fields).Count -ne 0 -or
+            [string]$record.asset_id -notmatch '^[0-9a-f]{64}$' -or
+            [string]$record.candidate_set_sha256 -notmatch '^[0-9a-f]{64}$' -or
+            $family -notin @('anim', 'qtx', 'skem', 'sm', 'ter', 'wav') -or
+            $resolution -notin @('RESOLVED', 'AMBIGUOUS', 'UNRESOLVED') -or
+            [string]$record.structure -notin @('PASS', 'UNRESOLVED', 'FAIL') -or
+            $candidateCount -le 0 -or [int]$record.descriptor_variants -lt 0 -or $valid -lt 0 -or
+            $record.heuristic_selection -ne $false -or -not $semantic -or
+            -not $ids.Add([string]$record.asset_id)) { return $false }
+        ++$targets[$resolution]
+        $edges[$resolution] += $candidateCount
+        $ordered = [pscustomobject][ordered]@{
+            asset_id = [string]$record.asset_id
+            candidate_count = $candidateCount
+            candidate_set_sha256 = [string]$record.candidate_set_sha256
+            descriptor_variants = [int]$record.descriptor_variants
+            family = $family
+            heuristic_selection = $false
+            resolution = $resolution
+            resolution_basis = $basis
+            structure = [string]$record.structure
+            valid_variants = $valid
+        }
+        $lines.Add(($ordered | ConvertTo-Json -Compress))
+    }
+    return $targets.RESOLVED -eq [int]$Facts.binding_resolved -and
+        $targets.AMBIGUOUS -eq [int]$Facts.binding_ambiguous -and
+        $targets.UNRESOLVED -eq [int]$Facts.binding_unresolved -and
+        $edges.RESOLVED -eq [int]$Facts.binding_resolved_edges -and
+        $edges.AMBIGUOUS -eq [int]$Facts.binding_ambiguous_edges -and
+        $edges.UNRESOLVED -eq [int]$Facts.binding_unresolved_edges -and
+        (Get-TextSha256 @($lines)) -ceq [string]$Facts.binding_workset_sha
+}
+
 function Test-Candidate($Candidate, $Facts) {
     if ($Candidate.result -ne 'BLOCKED' -or $Candidate.task_status -ne 'BLOCKED' -or
         $Candidate.completion_criteria_satisfied -ne $false -or
@@ -80,17 +138,37 @@ function Test-Candidate($Candidate, $Facts) {
         [int]$scope.core_table_resource_rules.server_authoritative_rules -le 0) { return $false }
     $closure = $Candidate.closure
     if (-not ($closure.PSObject.Properties.Name -contains 'conditional_required') -or
+        -not ($closure.PSObject.Properties.Name -contains 'asset_binding') -or
         -not ($Candidate.decision.thresholds.PSObject.Properties.Name -contains
             'conditional_required_missing')) { return $false }
     if ($closure.scope_complete -ne $false -or
         $closure.auxiliary_config_reference_scope_complete -ne $false -or
-        $closure.asset_binding_resolution_explicit -ne $false -or
+        $closure.asset_binding_resolution_explicit -ne $true -or
         [int]$closure.start_nodes -ne [int]$Facts.start_nodes -or
         [int]$closure.reachable_nodes -ne [int]$Facts.reachable_nodes -or
         [string]$closure.start_set_sha256 -cne [string]$Facts.start_sha256 -or
         [string]$closure.reachable_set_sha256 -cne [string]$Facts.reachable_sha256 -or
         [int]$closure.logical_gap_count -ne [int]$Facts.logical_gaps -or
         [string]$closure.gap_set_sha256 -cne [string]$Facts.gap_sha256) { return $false }
+    $binding = $closure.asset_binding
+    if ($binding.resolution_explicit -ne $true -or
+        [int]$binding.reachable_assets -ne [int]$Facts.binding_assets -or
+        [int]$binding.resolved_targets -ne [int]$Facts.binding_resolved -or
+        [int]$binding.ambiguous_targets -ne [int]$Facts.binding_ambiguous -or
+        [int]$binding.unresolved_targets -ne [int]$Facts.binding_unresolved -or
+        [int]$binding.unknown_targets -ne 0 -or
+        [int]$binding.candidate_edges -ne [int]$Facts.binding_edges -or
+        [int]$binding.resolved_edges -ne [int]$Facts.binding_resolved_edges -or
+        [int]$binding.ambiguous_edges -ne [int]$Facts.binding_ambiguous_edges -or
+        [int]$binding.unresolved_edges -ne [int]$Facts.binding_unresolved_edges -or
+        [int]$binding.unknown_edges -ne 0 -or
+        [int]$binding.workset_count -ne [int]$Facts.binding_assets -or
+        [string]$binding.workset_sha256 -cne [string]$Facts.binding_workset_sha -or
+        $binding.workset_exported -ne $true -or
+        $binding.first_candidate_selection_used -ne $false -or
+        [int]$Candidate.decision.thresholds.asset_binding_ambiguous -ne 0 -or
+        [int]$Candidate.decision.thresholds.asset_binding_unresolved -ne 0 -or
+        [int]$Candidate.decision.thresholds.asset_binding_unknown -ne 0) { return $false }
     $conditional = $closure.conditional_required
     if (-not (@($conditional.PSObject.Properties.Name) -contains 'conditional_required_missing') -or
         [int]$conditional.runtime_assert_rows -ne [int]$Facts.conditional_rows -or
@@ -131,6 +209,7 @@ $required = @(
     'Tools/TMXY.G2CoreClosure/core_common.py',
     'Tools/TMXY.G2CoreClosure/core_closure.py',
     'Tools/TMXY.G2CoreClosure/core_report.py',
+    'Tools/TMXY.G2CoreClosure/asset_binding_workset.py',
     'Tools/TMXY.G2CoreClosure/New-G2CoreResourceClosure.ps1',
     'Data/Governance/p2-g2-core-resource-closure.json',
     'Data/Inventory/p2-20a-core-resource-closure.json',
@@ -141,7 +220,8 @@ $required = @(
 if ($VerifyDerivedSources) {
     $required += @(
         'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl',
-        'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl'
+        'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl',
+        'Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl'
     )
 }
 foreach ($relative in $required) {
@@ -156,6 +236,7 @@ $governancePath = Join-Path $root 'Data/Governance/p2-g2-core-resource-closure.j
 $evidencePath = Join-Path $root 'Data/Inventory/p2-20a-core-resource-closure.json'
 $detailPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl'
 $worksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl'
+$assetWorksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl'
 $p206Path = Join-Path $root 'Data/Inventory/p2-06-three-layer-data.json'
 $p213Path = Join-Path $root 'Data/Inventory/p2-13-reference-closure.json'
 $policy = Get-Content $policyPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100
@@ -198,10 +279,16 @@ Add-Assertion 'Policy requires config and asset-binding scope to fail closed' (
     $policy.auxiliary_config_scope.missing_adapters_fail_closed -and
     $policy.auxiliary_config_scope.new_roots_are_union_only -and
     $policy.traversal.first_candidate_selection -eq 'forbidden' -and
-    $policy.fail_closed_rules.core_foreign_key_zero_is_not_resource_closure)
+    $policy.fail_closed_rules.core_foreign_key_zero_is_not_resource_closure -and
+    $policy.asset_binding_scope.explicit_state_does_not_imply_resolved -and
+    $policy.asset_binding_scope.ambiguous_and_unresolved_remain_blocking -and
+    $policy.asset_binding_scope.first_candidate_selection -eq 'forbidden' -and
+    [int]$policy.completion.asset_binding_ambiguous -eq 0 -and
+    [int]$policy.completion.asset_binding_unresolved -eq 0 -and
+    [int]$policy.completion.asset_binding_unknown -eq 0)
 Add-Assertion 'Policy independently preserves conditional-required missing values' (
     $policy.conditional_required_scope.missing_values_remain_in_scope_without_table_package_edges -and
-    $policy.evidence_revision -eq 'P2-20A.1' -and
+    $policy.evidence_revision -eq 'P2-20A.2' -and
     $policy.conditional_required_scope.member_set_exported -eq $true -and
     $policy.conditional_required_scope.member_set_must_be_complete_unique_and_hash_bound -and
     $policy.conditional_required_scope.member_values_forbidden -and
@@ -233,6 +320,15 @@ $facts = [pscustomobject]@{
     p213_sha256 = Get-Sha256 $p213Path
     member_source_sha = [string]$report.closure.conditional_required.member_source_file_set_sha256
     member_set_sha = [string]$report.closure.conditional_required.member_set_sha256
+    binding_assets = [int]$report.closure.asset_binding.reachable_assets
+    binding_resolved = [int]$report.closure.asset_binding.resolved_targets
+    binding_ambiguous = [int]$report.closure.asset_binding.ambiguous_targets
+    binding_unresolved = [int]$report.closure.asset_binding.unresolved_targets
+    binding_edges = [int]$report.closure.asset_binding.candidate_edges
+    binding_resolved_edges = [int]$report.closure.asset_binding.resolved_edges
+    binding_ambiguous_edges = [int]$report.closure.asset_binding.ambiguous_edges
+    binding_unresolved_edges = [int]$report.closure.asset_binding.unresolved_edges
+    binding_workset_sha = [string]$report.closure.asset_binding.workset_sha256
 }
 Add-Assertion 'Tracked closure summary preserves the measured current blocker set' (
     $facts.start_nodes -eq 62256 -and $facts.reachable_nodes -eq 127015 -and
@@ -240,6 +336,11 @@ Add-Assertion 'Tracked closure summary preserves the measured current blocker se
     $facts.table_ambiguous -eq 6945 -and $facts.package_unresolved -eq 407 -and
     $facts.package_ambiguous -eq 8511 -and $facts.asset_unresolved -eq 18 -and
     $facts.asset_fail -eq 0 -and $facts.start_sha256 -match '^[0-9a-f]{64}$' -and
+    $facts.binding_assets -eq 21494 -and $facts.binding_resolved -eq 21292 -and
+    $facts.binding_ambiguous -eq 183 -and $facts.binding_unresolved -eq 19 -and
+    $facts.binding_edges -eq 39351 -and $facts.binding_resolved_edges -eq 38793 -and
+    $facts.binding_ambiguous_edges -eq 534 -and $facts.binding_unresolved_edges -eq 24 -and
+    $facts.binding_workset_sha -match '^[0-9a-f]{64}$' -and
     $facts.reachable_sha256 -match '^[0-9a-f]{64}$' -and $facts.gap_sha256 -match '^[0-9a-f]{64}$')
 Add-Assertion 'P2-13 conditional-required aggregate is preserved independently of graph edges' (
     $facts.conditional_rows -eq 5993 -and $facts.conditional_missing -eq 29 -and
@@ -260,18 +361,26 @@ Add-Assertion 'Ignored detail metadata stays hash-bound without requiring it in 
     [int64]$report.closure.detail_export.bytes -eq 33232029 -and
     [int]$report.closure.detail_export.lines -eq 210313 -and
     $report.closure.detail_export.tracked -eq $false)
-Add-Assertion 'Tracked evidence exposes only conditional workset count and hashes' (
-    $report.evidence_revision -eq 'P2-20A.1' -and
+Add-Assertion 'Tracked evidence exposes only anonymous workset counts and hashes' (
+    $report.evidence_revision -eq 'P2-20A.2' -and
     [int]$report.closure.conditional_required.member_set_count -eq 29 -and
     $report.closure.conditional_required.member_set_sha256 -match '^[0-9a-f]{64}$' -and
     @($evidence.outputs.conditional_required_workset.PSObject.Properties.Name).Count -eq 3 -and
     $evidence.outputs.conditional_required_workset.tracked -eq $false -and
     [int]$evidence.outputs.conditional_required_workset.count -eq 29 -and
-    [string]$evidence.outputs.conditional_required_workset.sha256 -ceq $facts.member_set_sha)
+    [string]$evidence.outputs.conditional_required_workset.sha256 -ceq $facts.member_set_sha -and
+    @($evidence.outputs.asset_binding_workset.PSObject.Properties.Name).Count -eq 3 -and
+    $evidence.outputs.asset_binding_workset.tracked -eq $false -and
+    [int]$evidence.outputs.asset_binding_workset.count -eq $facts.binding_assets -and
+    [string]$evidence.outputs.asset_binding_workset.sha256 -ceq $facts.binding_workset_sha)
 
 $memberOmissionRejected = $false
 $memberDuplicateRejected = $false
 $memberValueRejected = $false
+$assetOmissionRejected = $false
+$assetDuplicateRejected = $false
+$assetResolutionRejected = $false
+$assetHeuristicRejected = $false
 if ($VerifyDerivedSources) {
     $memberRecords = [Collections.Generic.List[object]]::new()
     foreach ($line in [IO.File]::ReadLines($worksetPath)) {
@@ -294,6 +403,31 @@ if ($VerifyDerivedSources) {
     Add-Assertion 'Negative case rejects an omitted conditional member' $memberOmissionRejected
     Add-Assertion 'Negative case rejects a duplicated conditional member' $memberDuplicateRejected
     Add-Assertion 'Negative case rejects a fabricated member value field' $memberValueRejected
+    $assetRecords = [Collections.Generic.List[object]]::new()
+    foreach ($line in [IO.File]::ReadLines($assetWorksetPath)) {
+        $assetRecords.Add(($line | ConvertFrom-Json -Depth 10))
+    }
+    Add-Assertion 'Asset binding workset is complete unique closed nonheuristic and SHA-bound' (
+        (Test-AssetWorkset @($assetRecords) $facts) -and
+        (Get-Sha256 $assetWorksetPath) -ceq $facts.binding_workset_sha)
+    $assetOmitted = @($assetRecords | Select-Object -SkipLast 1)
+    $assetDuplicated = @($assetRecords)
+    $assetDuplicated[-1] = $assetDuplicated[0]
+    $assetResolution = @($assetRecords)
+    $assetResolution[0] = Copy-Document $assetResolution[0]
+    $assetResolution[0].resolution = 'RESOLVED'
+    $assetResolution[0].resolution_basis = 'DESCRIPTOR_VALIDATION_FAILED'
+    $assetHeuristic = @($assetRecords)
+    $assetHeuristic[0] = Copy-Document $assetHeuristic[0]
+    $assetHeuristic[0].heuristic_selection = $true
+    $assetOmissionRejected = -not (Test-AssetWorkset $assetOmitted $facts)
+    $assetDuplicateRejected = -not (Test-AssetWorkset $assetDuplicated $facts)
+    $assetResolutionRejected = -not (Test-AssetWorkset $assetResolution $facts)
+    $assetHeuristicRejected = -not (Test-AssetWorkset $assetHeuristic $facts)
+    Add-Assertion 'Negative case rejects an omitted asset binding member' $assetOmissionRejected
+    Add-Assertion 'Negative case rejects a duplicated asset binding member' $assetDuplicateRejected
+    Add-Assertion 'Negative case rejects a contradictory asset binding state' $assetResolutionRejected
+    Add-Assertion 'Negative case rejects heuristic asset candidate selection' $assetHeuristicRejected
     $startIds = [Collections.Generic.List[string]]::new()
     $reachableIds = [Collections.Generic.List[string]]::new()
     $gapLines = [Collections.Generic.List[string]]::new()
@@ -361,6 +495,19 @@ $negativeMemberCount = Copy-Document $report
 $negativeMemberCount.closure.conditional_required.member_set_count = 28
 $negativeMemberSha = Copy-Document $report
 $negativeMemberSha.closure.conditional_required.member_set_sha256 = '0' * 64
+$negativeBindingImplicit = Copy-Document $report
+$negativeBindingImplicit.closure.asset_binding_resolution_explicit = $false
+$negativeBindingImplicit.closure.asset_binding.resolution_explicit = $false
+$negativeBindingZero = Copy-Document $report
+$negativeBindingZero.closure.asset_binding.resolved_targets = 21494
+$negativeBindingZero.closure.asset_binding.ambiguous_targets = 0
+$negativeBindingZero.closure.asset_binding.unresolved_targets = 0
+$negativeBindingFirst = Copy-Document $report
+$negativeBindingFirst.closure.asset_binding.first_candidate_selection_used = $true
+$negativeBindingCount = Copy-Document $report
+$negativeBindingCount.closure.asset_binding.workset_count = 21493
+$negativeBindingSha = Copy-Document $report
+$negativeBindingSha.closure.asset_binding.workset_sha256 = '0' * 64
 Add-Assertion 'Negative case rejects outcome-based root narrowing' (-not (Test-Candidate $negativeScope $facts))
 Add-Assertion 'Negative case rejects owner or rule narrowing' (-not (Test-Candidate $negativeRules $facts))
 Add-Assertion 'Negative case rejects first-candidate or heuristic selection' (-not (Test-Candidate $negativeFirst $facts))
@@ -371,6 +518,11 @@ Add-Assertion 'Negative case rejects changing conditional-required missing from 
 Add-Assertion 'Negative case rejects deleting the conditional-required metric' (-not (Test-Candidate $negativeConditionalDeleted $facts))
 Add-Assertion 'Negative case rejects conditional member count tampering' (-not (Test-Candidate $negativeMemberCount $facts))
 Add-Assertion 'Negative case rejects conditional member SHA tampering' (-not (Test-Candidate $negativeMemberSha $facts))
+Add-Assertion 'Negative case rejects reverting asset binding to implicit state' (-not (Test-Candidate $negativeBindingImplicit $facts))
+Add-Assertion 'Negative case rejects explicit binding falsely reported as fully resolved' (-not (Test-Candidate $negativeBindingZero $facts))
+Add-Assertion 'Negative case rejects first-candidate asset binding selection' (-not (Test-Candidate $negativeBindingFirst $facts))
+Add-Assertion 'Negative case rejects asset binding workset count tampering' (-not (Test-Candidate $negativeBindingCount $facts))
+Add-Assertion 'Negative case rejects asset binding workset SHA tampering' (-not (Test-Candidate $negativeBindingSha $facts))
 
 $bindingsPass = $true
 $ignoredBindings = @{
@@ -395,6 +547,12 @@ foreach ($binding in $report.input_bindings.artifacts) {
 Add-Assertion 'P2-05 P2-08 P2-12 P2-13 P2-18 G2 and ignored inputs are exact-hash bound' $bindingsPass
 Add-Assertion 'Governance remains blocked and binds the machine report' (
     $governance.status -eq 'BLOCKED' -and $governance.scope_complete -eq $false -and
+    $governance.asset_binding_resolution_explicit -eq $true -and
+    [int]$governance.asset_binding_resolved_targets -eq $facts.binding_resolved -and
+    [int]$governance.asset_binding_ambiguous_targets -eq $facts.binding_ambiguous -and
+    [int]$governance.asset_binding_unresolved_targets -eq $facts.binding_unresolved -and
+    [int]$governance.asset_binding_unknown_targets -eq 0 -and
+    [string]$governance.asset_binding_workset_sha256 -ceq $facts.binding_workset_sha -and
     [int]$governance.conditional_required_missing -eq $facts.conditional_missing -and
     $governance.conditional_required_member_set_exported -eq $true -and
     [int]$governance.conditional_required_member_set_count -eq 29 -and
@@ -413,9 +571,12 @@ Add-Assertion 'Evidence binds tracked reports governance and ignored-detail meta
     [int]$evidence.outputs.detail_export.lines -eq [int]$report.closure.detail_export.lines -and
     [int]$evidence.outputs.conditional_required_workset.count -eq 29 -and
     [string]$evidence.outputs.conditional_required_workset.sha256 -ceq $facts.member_set_sha -and
+    [int]$evidence.outputs.asset_binding_workset.count -eq $facts.binding_assets -and
+    [string]$evidence.outputs.asset_binding_workset.sha256 -ceq $facts.binding_workset_sha -and
     (-not $VerifyDerivedSources -or
         ($evidence.outputs.detail_export.sha256 -eq (Get-Sha256 $detailPath) -and
-         $evidence.outputs.conditional_required_workset.sha256 -eq (Get-Sha256 $worksetPath))))
+         $evidence.outputs.conditional_required_workset.sha256 -eq (Get-Sha256 $worksetPath) -and
+         $evidence.outputs.asset_binding_workset.sha256 -eq (Get-Sha256 $assetWorksetPath))))
 Add-Assertion 'No G2 P3 playable release repair or delete authority is claimed' (
     $report.authority_boundaries.g2_approved -eq $false -and
     $report.authority_boundaries.p3_authorized -eq $false -and
@@ -464,6 +625,15 @@ $output = [pscustomobject][ordered]@{
         conditional_member_count_tamper_rejected = -not (Test-Candidate $negativeMemberCount $facts)
         conditional_member_sha_tamper_rejected = -not (Test-Candidate $negativeMemberSha $facts)
         conditional_member_value_rejected = $memberValueRejected
+        asset_member_omission_rejected = $assetOmissionRejected
+        asset_member_duplicate_rejected = $assetDuplicateRejected
+        asset_member_resolution_rejected = $assetResolutionRejected
+        asset_member_heuristic_rejected = $assetHeuristicRejected
+        asset_binding_implicit_rejected = -not (Test-Candidate $negativeBindingImplicit $facts)
+        asset_binding_false_zero_rejected = -not (Test-Candidate $negativeBindingZero $facts)
+        asset_binding_first_candidate_rejected = -not (Test-Candidate $negativeBindingFirst $facts)
+        asset_binding_count_tamper_rejected = -not (Test-Candidate $negativeBindingCount $facts)
+        asset_binding_sha_tamper_rejected = -not (Test-Candidate $negativeBindingSha $facts)
     }
     closure = [pscustomobject][ordered]@{
         start_nodes = $facts.start_nodes
@@ -471,6 +641,9 @@ $output = [pscustomobject][ordered]@{
         logical_gaps = $facts.logical_gaps
         asset_structure_unresolved = $facts.asset_unresolved
         conditional_required_missing = $facts.conditional_missing
+        asset_binding_resolved = $facts.binding_resolved
+        asset_binding_ambiguous = $facts.binding_ambiguous
+        asset_binding_unresolved = $facts.binding_unresolved
         scope_complete = $false
     }
     derived_check = $derivedCheck

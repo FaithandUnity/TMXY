@@ -432,6 +432,7 @@ $requiredFiles = @(
     'Tools/TMXY.ResourceBudget/Measure-ConversionPilot.ps1',
     'Tools/TMXY.ResourceBudget/New-ResourceBudgetReport.ps1',
     'Tools/TMXY.G2CoreClosure/README.md',
+    'Tools/TMXY.G2CoreClosure/asset_binding_workset.py',
     'Tools/TMXY.G2CoreClosure/core_common.py',
     'Tools/TMXY.G2CoreClosure/conditional_workset.py',
     'Tools/TMXY.G2CoreClosure/core_closure.py',

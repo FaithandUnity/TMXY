@@ -1,4 +1,4 @@
-# P2-20A.1 G2-06 core-resource closure
+# P2-20A.2 G2-06 core-resource closure
 
 P2-20A turns the missing G2-06 proof into a reproducible blocked evidence set.
 It does not approve G2. The scope is frozen independently of the observed
@@ -32,26 +32,42 @@ different table-integrity fact and cannot satisfy G2-06.
 The current P2-13 aggregate records 5,993 runtime-assert rows, 29 missing
 conditionally required values, and zero unresolved nonempty values. The 29
 missing values are an independent blocker, not part of the edge-derived logical
-gap set. P2-20A.1 independently reproduces them from the exact-hash-bound P2-06
+gap set. P2-20A.2 independently reproduces them from the exact-hash-bound P2-06
 normalized source, the qualified core primary key, and the frozen P2-13 rule.
 Its ignored workset contains exactly three closed fields per member:
 `member_sha256`, `rule_id`, and `reason`. The tracked report records only the
 member count and set SHA-256; no value, primary key, row, or source path is
 published.
 
+## Explicit asset-binding states
+
+P2-20A.2 independently reconciles every reachable P2-13 asset node to the
+P2-12 catalog and every observed Package candidate. The ignored anonymous
+workset contains exactly 21,494 unique asset records covering 39,351 candidate
+edges. Every record publishes a closed `RESOLVED`, `AMBIGUOUS`, or `UNRESOLVED`
+state, its evidence basis, candidate-set SHA-256, counts, family, structure, and
+`heuristic_selection=false`; it never publishes a selected candidate.
+
+Explicit coverage is not successful resolution. The current evidence contains
+21,292 resolved targets, 183 ambiguous targets, and 19 unresolved targets
+(38,793, 534, and 24 candidate edges respectively). Equivalent candidate sets
+retain all members, identical payloads do not prove descriptor equivalence,
+and both ambiguous and unresolved counts have independent zero thresholds.
+
 ## Incomplete scope
 
-The current report deliberately records all three fields below as false:
+The current report deliberately records the first two fields as false and the
+third as true:
 
 - `scope_complete`;
 - `auxiliary_config_reference_scope_complete`;
-- `asset_binding_resolution_explicit`.
+- `asset_binding_resolution_explicit` (true only because every binding now has
+  an explicit state; this does not mean every state is resolved).
 
 P2-05 classifies every auxiliary configuration file but does not provide a
 complete semantic resource-reference adapter set. Later configuration-derived
-roots may only enlarge the union. Package-to-asset edges also need an explicit
-versioned resolution contract; absence of a resolution field never means
-unique.
+roots may only enlarge the union. The asset-binding contract is now explicit,
+but its 183 ambiguous and 19 unresolved targets remain fail-closed.
 
 Consequently, even a future zero logical queue would remain blocked until both
 coverage gaps close and conditionally required missing values reach their
@@ -60,8 +76,8 @@ assets are retained and are not automatic deletion authority.
 
 ## Evidence and reproduction
 
-The detailed hashed start, reachable, logical-gap, asset-structure, and
-conditional-required member records are regenerated under ignored
+The detailed hashed start, reachable, logical-gap, asset-structure,
+conditional-required, and asset-binding member records are regenerated under ignored
 `Data/Exports/P2-20`. The tracked report and task evidence contain only counts
 and SHA-256 bindings; they contain no exact primary keys, table rows, decoded
 confidential data, private source paths, or legacy source lines.

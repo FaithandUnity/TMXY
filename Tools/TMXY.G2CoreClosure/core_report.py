@@ -34,7 +34,7 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
     }
     return {
         "schema_version": 1,
-        "evidence_revision": "P2-20A.1",
+        "evidence_revision": "P2-20A.2",
         "captured_utc": documents["p2_18"]["captured_utc"],
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
@@ -61,6 +61,9 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
                 "unresolved": 0,
                 "ambiguous": 0,
                 "conditional_required_missing": 0,
+                "asset_binding_ambiguous": 0,
+                "asset_binding_unresolved": 0,
+                "asset_binding_unknown": 0,
                 "heuristic": 0,
                 "asset_structure_gaps": 0,
                 "unknown": 0,
@@ -76,8 +79,8 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
             },
             {
                 "id": "G2-06-ASSET-BINDING",
-                "reason": "Package-to-asset edges do not publish an explicit binding resolution state.",
-                "required_action": "Version the graph contract so every core package-to-asset binding records evidence-backed resolution without first-candidate selection.",
+                "reason": "All reachable Package-to-asset bindings now have explicit evidence states, but divergent or invalid descriptor sets remain ambiguous or unresolved.",
+                "required_action": "Resolve every divergent descriptor set and failed descriptor validation through qualified evidence while preserving all candidates and without first-candidate selection.",
             },
             {
                 "id": "G2-06-CONDITIONAL-REQUIRED",
@@ -117,6 +120,7 @@ def render_markdown(report: dict[str, Any]) -> str:
     resolution = closure["resolution"]
     structure = closure["asset_structure"]
     conditional = closure["conditional_required"]
+    binding = closure["asset_binding"]
     roots = report["scope_definition"]["declared_roots"]
     rules = report["scope_definition"]["core_table_resource_rules"]
     lines = [
@@ -134,7 +138,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         f"All {roots['count']} declared character, scene, and skill roots are included. All {rules['selected_rules']} resource-bearing core-table rules are included for every emitted non-sentinel canonical-row reference.",
         "",
-        "Auxiliary configuration reference adapters are absent and Package-to-asset edges lack explicit resolution states. Both omissions fail closed; later configuration roots may only enlarge the union.",
+        "Auxiliary configuration reference adapters are absent, so later configuration roots may only enlarge the union. Package-to-asset bindings are explicitly classified, but ambiguous and unresolved states remain blocking.",
         "",
         "## Measured closure",
         "",
@@ -151,12 +155,18 @@ def render_markdown(report: dict[str, Any]) -> str:
         f"| Conditional-required rows | {conditional['runtime_assert_rows']} |",
         f"| Conditional-required missing | {conditional['conditional_required_missing']} |",
         f"| Conditional-required unresolved | {conditional['conditional_required_unresolved']} |",
+        f"| Asset binding targets resolved | {binding['resolved_targets']} |",
+        f"| Asset binding targets ambiguous | {binding['ambiguous_targets']} |",
+        f"| Asset binding targets unresolved | {binding['unresolved_targets']} |",
+        f"| Asset binding targets unknown | {binding['unknown_targets']} |",
         f"| Reachable asset structure unresolved | {structure['unresolved']} |",
         f"| Reachable asset structure fail | {structure['fail']} |",
         "",
         "Core foreign-key dangling zero remains a distinct table-integrity fact and is not substituted for these resource-reference metrics. The conditional-required missing count is retained even though missing values produce no table-to-Package edge. Ambiguous edges retain every candidate; no first candidate is selected.",
         "",
         f"The {conditional['member_set_count']}-member conditional-required workset is exported only in the ignored evidence area and bound by SHA-256 `{conditional['member_set_sha256']}`. Each record contains only an anonymous member hash, a frozen rule ID, and a closed reason. No value, primary key, source row, or source path is disclosed.",
+        "",
+        f"The {binding['workset_count']}-member asset binding workset is also ignored and SHA-256 bound as `{binding['workset_sha256']}`. Explicit status does not mean resolved: every ambiguous or unresolved target remains a zero-threshold blocker, and no candidate is selected.",
         "",
         "## Blocking work",
         "",
@@ -180,14 +190,19 @@ def render_markdown(report: dict[str, Any]) -> str:
 def build_governance(report: dict[str, Any], report_binding: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": 1,
-        "evidence_revision": "P2-20A.1",
+        "evidence_revision": "P2-20A.2",
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
         "status": "BLOCKED",
         "scope_definition": "monotonic-union-all-declared-roots-plus-all-core-resource-fields",
         "scope_complete": False,
         "auxiliary_config_reference_scope_complete": False,
-        "asset_binding_resolution_explicit": False,
+        "asset_binding_resolution_explicit": True,
+        "asset_binding_resolved_targets": report["closure"]["asset_binding"]["resolved_targets"],
+        "asset_binding_ambiguous_targets": report["closure"]["asset_binding"]["ambiguous_targets"],
+        "asset_binding_unresolved_targets": report["closure"]["asset_binding"]["unresolved_targets"],
+        "asset_binding_unknown_targets": report["closure"]["asset_binding"]["unknown_targets"],
+        "asset_binding_workset_sha256": report["closure"]["asset_binding"]["workset_sha256"],
         "conditional_required_missing": report["closure"]["conditional_required"]["conditional_required_missing"],
         "conditional_required_member_set_exported": True,
         "conditional_required_member_set_count": report["closure"]["conditional_required"]["member_set_count"],

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "evidence_revision": "P2-20A.1",
+  "evidence_revision": "P2-20A.2",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -46,6 +46,21 @@
     "member_values_forbidden": true,
     "core_foreign_key_substitution": "forbidden"
   },
+  "asset_binding_scope": {
+    "source": "P2-12 catalog and P2-13 package-to-asset edges, independently reconciled for every reachable asset",
+    "families": ["anim", "qtx", "skem", "sm", "ter", "wav"],
+    "member_set_exported": true,
+    "member_record_fields": [
+      "asset_id", "candidate_count", "candidate_set_sha256", "descriptor_variants",
+      "family", "heuristic_selection", "resolution", "resolution_basis", "structure",
+      "valid_variants"
+    ],
+    "allowed_resolutions": ["RESOLVED", "AMBIGUOUS", "UNRESOLVED"],
+    "all_candidate_targets_are_preserved": true,
+    "first_candidate_selection": "forbidden",
+    "explicit_state_does_not_imply_resolved": true,
+    "ambiguous_and_unresolved_remain_blocking": true
+  },
   "auxiliary_config_scope": {
     "inventory_must_be_hash_bound": true,
     "reference_adapters": [],
@@ -85,6 +100,9 @@
     "scope_complete": true,
     "auxiliary_config_reference_scope_complete": true,
     "asset_binding_resolution_explicit": true,
+    "asset_binding_ambiguous": 0,
+    "asset_binding_unresolved": 0,
+    "asset_binding_unknown": 0,
     "table_reference_unresolved": 0,
     "table_reference_ambiguous": 0,
     "package_reference_unresolved": 0,
@@ -110,6 +128,7 @@
   "output": {
     "detail_export": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
     "conditional_required_workset": "Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl",
+    "asset_binding_workset": "Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl",
     "report_json": "Data/Reports/p2-20a-core-resource-closure-report.json",
     "report_markdown": "Data/Reports/p2-20a-core-resource-closure-report.md",
     "governance": "Data/Governance/p2-g2-core-resource-closure.json",

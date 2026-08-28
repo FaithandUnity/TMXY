@@ -33,10 +33,11 @@ to avoid a self-referential evidence hash.
 Before that final review, the aggregate runs `Test-G2CoreResourceClosure.ps1`
 and `Test-G2MigrationDecisions.ps1`. Clean checkouts validate their tracked
 hash chains; full local verification also rebuilds the G2-06 core-resource
-scope and conditional-required member workset plus the complete G2-07 V2
+scope, conditional-required member workset, complete explicit asset-binding
+workset, and the complete G2-07 V2
 decision workflow from ignored evidence and authorized read-only inputs. Their
 tracked summaries contain only aggregate facts and hashes; member-level closure
-and conditional-gap exports remain in the ignored evidence area.
+conditional-gap, and asset-binding exports remain in the ignored evidence area.
 Complete enumeration is not approval: nonzero closure gaps and every pending
 owner decision remain fail-closed inputs to G2.
 

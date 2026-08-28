@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "evidence_revision": "P2-20A.1",
+  "evidence_revision": "P2-20A.2",
   "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
@@ -11,7 +11,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "e8e83171abd2c10023ca0062b3b54535cb5cf75b1f6c9ed7556c62c7523af226",
+      "aggregate_sha256": "141701f636eb75f1586f74e01c2dcf8b2d15b5327da0dad81ba79a0da9ad9481",
       "artifacts": [
         {
           "id": "P2-05",
@@ -84,8 +84,8 @@
         {
           "id": "g2-policy",
           "path": "Contracts/data-schema/g2-review-policy-v1.json",
-          "sha256": "db5a7effe7560d468b5210f14b09ae58e94419fdd1bc95a520da35a5401a4b4b",
-          "bytes": 6290
+          "sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
+          "bytes": 6502
         }
       ]
     }
@@ -94,23 +94,23 @@
     "report_json": {
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
       "tracked": true,
-      "bytes": 9658,
-      "lines": 260,
-      "sha256": "f0e06080c327d2c7d68b6cbe58f1267bb8bb61cd582f732a5ff97d0e81081a4c"
+      "bytes": 11872,
+      "lines": 333,
+      "sha256": "73b680eb76a3f73fd5bb9f3a74ecbed7b35ff299ed6f084581578ab028d7fb98"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-core-resource-closure-report.md",
       "tracked": true,
-      "bytes": 3692,
-      "lines": 51,
-      "sha256": "3e3ee0b253ff6224326080a42461cc6018be06e38c9f998c5e595f1e4720a05a"
+      "bytes": 4271,
+      "lines": 57,
+      "sha256": "cd157939952b73bbe3bea9a64086795a6d172de4c6768019f20928ef509be80f"
     },
     "governance": {
       "path": "Data/Governance/p2-g2-core-resource-closure.json",
       "tracked": true,
-      "bytes": 1164,
-      "lines": 29,
-      "sha256": "8beadf63bb362cab9f265811d7617fd3d2d5277316120dc30277992f5c70aea0"
+      "bytes": 1430,
+      "lines": 34,
+      "sha256": "949e47c385d21f94bea4bd63e16070049a63667462e0ac31cf149e6f2034bd01"
     },
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
@@ -123,6 +123,11 @@
       "tracked": false,
       "count": 29,
       "sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d"
+    },
+    "asset_binding_workset": {
+      "tracked": false,
+      "count": 21494,
+      "sha256": "fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c"
     }
   },
   "scope_definition": {
@@ -166,7 +171,7 @@
   "closure": {
     "scope_complete": false,
     "auxiliary_config_reference_scope_complete": false,
-    "asset_binding_resolution_explicit": false,
+    "asset_binding_resolution_explicit": true,
     "start_nodes": 62256,
     "start_set_sha256": "417cd126187ccac5af9430685ff920995bcedc6c312d50a5a22f9aa5a761b018",
     "reachable_nodes": 127015,
@@ -209,6 +214,76 @@
       "member_set_sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d",
       "zero_threshold_satisfied": false
     },
+    "asset_binding": {
+      "resolution_explicit": true,
+      "reachable_assets": 21494,
+      "resolved_targets": 21292,
+      "ambiguous_targets": 183,
+      "unresolved_targets": 19,
+      "unknown_targets": 0,
+      "candidate_edges": 39351,
+      "resolved_edges": 38793,
+      "ambiguous_edges": 534,
+      "unresolved_edges": 24,
+      "unknown_edges": 0,
+      "by_resolution_basis_targets": {
+        "DESCRIPTOR_VALIDATION_FAILED": 19,
+        "DIVERGENT_DESCRIPTOR_SET": 183,
+        "EQUIVALENT_VALID_DESCRIPTOR_SET": 2514,
+        "SELF_DESCRIBING_RULE": 9007,
+        "UNIQUE_VALID_DESCRIPTOR": 9771
+      },
+      "by_resolution_basis_edges": {
+        "DESCRIPTOR_VALIDATION_FAILED": 24,
+        "DIVERGENT_DESCRIPTOR_SET": 534,
+        "EQUIVALENT_VALID_DESCRIPTOR_SET": 11271,
+        "SELF_DESCRIBING_RULE": 17751,
+        "UNIQUE_VALID_DESCRIPTOR": 9771
+      },
+      "workset_exported": true,
+      "workset_count": 21494,
+      "workset_sha256": "fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c",
+      "by_family": {
+        "anim": {
+          "ambiguous": 8,
+          "assets": 1044,
+          "candidate_edges": 1152,
+          "resolved": 1030,
+          "unresolved": 6
+        },
+        "qtx": {
+          "ambiguous": 171,
+          "assets": 9874,
+          "candidate_edges": 18601,
+          "resolved": 9691,
+          "unresolved": 12
+        },
+        "skem": {
+          "ambiguous": 2,
+          "assets": 1043,
+          "candidate_edges": 1151,
+          "resolved": 1041
+        },
+        "sm": {
+          "ambiguous": 2,
+          "assets": 526,
+          "candidate_edges": 696,
+          "resolved": 523,
+          "unresolved": 1
+        },
+        "ter": {
+          "assets": 8744,
+          "candidate_edges": 17488,
+          "resolved": 8744
+        },
+        "wav": {
+          "assets": 263,
+          "candidate_edges": 263,
+          "resolved": 263
+        }
+      },
+      "first_candidate_selection_used": false
+    },
     "asset_structure": {
       "pass": 21476,
       "unresolved": 18,
@@ -240,6 +315,9 @@
       "unresolved": 0,
       "ambiguous": 0,
       "conditional_required_missing": 0,
+      "asset_binding_ambiguous": 0,
+      "asset_binding_unresolved": 0,
+      "asset_binding_unknown": 0,
       "heuristic": 0,
       "asset_structure_gaps": 0,
       "unknown": 0
@@ -255,8 +333,8 @@
     },
     {
       "id": "G2-06-ASSET-BINDING",
-      "reason": "Package-to-asset edges do not publish an explicit binding resolution state.",
-      "required_action": "Version the graph contract so every core package-to-asset binding records evidence-backed resolution without first-candidate selection."
+      "reason": "All reachable Package-to-asset bindings now have explicit evidence states, but divergent or invalid descriptor sets remain ambiguous or unresolved.",
+      "required_action": "Resolve every divergent descriptor set and failed descriptor validation through qualified evidence while preserving all candidates and without first-candidate selection."
     },
     {
       "id": "G2-06-CONDITIONAL-REQUIRED",
@@ -283,17 +361,17 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-core-resource-closure-policy-v1.json",
-    "policy_sha256": "ae99f47fa26ad867cc1a0362ce08293016f59fd0a90fdb8fbc6a420b65a436a4",
+    "policy_sha256": "ee16b6faa81d450c05e655c5484c6f1f93de191fc996722f03bc77501e720852",
     "schema": "Contracts/data-schema/g2-core-resource-closure-v1.schema.json",
-    "schema_sha256": "e1c36c6128a35e6a69738c4c0a45d2780248ffd15b32ee2c2c6d88b1f7ff87e3"
+    "schema_sha256": "41c906327b9a24cade0fb7bdee1ad44c9a56204dfa0c2d32ebaeae19edecfdbc"
   },
   "implementation": {
-    "source_files": 6,
-    "source_sha256": "678211d33f1780ac5d0da36282ea54d058486a5b4058d0c0dbde0f748c2498e7",
+    "source_files": 7,
+    "source_sha256": "a648c8bff8bff69c9c5d97d7e704fb6b75e97ff2dc77125e8503a8811afda91d",
     "generator": "Tools/TMXY.G2CoreClosure/g2_core_closure.py",
-    "generator_sha256": "3999ab0f420cc8ccb14a102aee83357dfd3bc351b1bbd9763492d6acfdfce6e0",
+    "generator_sha256": "ae0deeb053e328bd1a0ca46706fa129be0221e775b300afcb464ff58abc957d9",
     "wrapper": "Tools/TMXY.G2CoreClosure/New-G2CoreResourceClosure.ps1",
-    "wrapper_sha256": "251e771bce86619dddd92fe1052eabf9515c3d8de30c2ca7f5105df4f0bc323e",
+    "wrapper_sha256": "3d056b271c196eaec45e3f328c1a09611f57156b6764246f5ac2e572a3780802",
     "self_test_assertions": 11
   },
   "disclosure": {
@@ -318,6 +396,6 @@
       "P2-20A-remediation",
       "P2-20"
     ],
-    "detail": "Close configuration scope, asset-binding resolution, conditional-required missing values, logical queues, and reachable structural gaps; then regenerate P2-13/P2-18 and rerun G2. P3 remains unauthorized."
+    "detail": "Close configuration scope, asset-binding ambiguity and unresolved states, conditional-required missing values, logical queues, and reachable structural gaps; then regenerate P2-13/P2-18 and rerun G2. P3 remains unauthorized."
   }
 }

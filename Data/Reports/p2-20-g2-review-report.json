@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "365b9b3e6d6ca31419ebe2f7c6722e9148be6568611635cb45aa78c6baf924c3",
+    "aggregate_sha256": "b314a24db4fbf5bf1d929445864a0780da41282d5b4ffe52f7a6f79b1717bf91",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -171,7 +171,7 @@
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-      "sha256": "f0e06080c327d2c7d68b6cbe58f1267bb8bb61cd582f732a5ff97d0e81081a4c",
+      "sha256": "73b680eb76a3f73fd5bb9f3a74ecbed7b35ff299ed6f084581578ab028d7fb98",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -181,7 +181,7 @@
       "task_id": "P2-20B",
       "criterion_id": "G2-07",
       "path": "Data/Governance/p2-g2-migration-decisions.json",
-      "sha256": "51a21af64fbdfd0e3012daa3ed36ccccfb3187584f565f9c8902162359664d79",
+      "sha256": "60e0986a6cd44e076348839b1ce89216dd5a7b9bbe344ff2142d0c64bfb81196",
       "result": "BLOCKED",
       "generation_result": "PASS",
       "task_status": "BLOCKED",
@@ -190,9 +190,9 @@
     },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "dc701a62b5701aaa76728f91de0a48f0c3be4c34531e570cf4f4592da4d3b9b5",
+      "sha256": "c61fced09010377ee7200ec74c9602be16c2671321f60ee5cdb050f606c73545",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-28T21:52:16.8703872+00:00"
+      "captured_utc": "2026-08-28T23:06:43.5388356+00:00"
     }
   },
   "summary": {
@@ -427,7 +427,32 @@
         },
         {
           "name": "asset_binding_resolution_explicit",
-          "value": false,
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "asset_binding_resolved_targets",
+          "value": 21292,
+          "unit": "assets"
+        },
+        {
+          "name": "asset_binding_ambiguous_targets",
+          "value": 183,
+          "unit": "assets"
+        },
+        {
+          "name": "asset_binding_unresolved_targets",
+          "value": 19,
+          "unit": "assets"
+        },
+        {
+          "name": "asset_binding_unknown_targets",
+          "value": 0,
+          "unit": "assets"
+        },
+        {
+          "name": "asset_binding_workset_hash_bound",
+          "value": true,
           "unit": "boolean"
         },
         {
@@ -526,7 +551,7 @@
           "unit": "references"
         }
       ],
-      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report and a complete anonymous conditional-required workset, but auxiliary scope, asset binding, nonzero conditional gaps, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.",
+      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Explicit asset-binding states do not erase remaining ambiguity or unresolved descriptors; auxiliary scope, conditional gaps, logical reference queues, and reachable structure also remain blocking. Core foreign-key zero cannot replace these resource-closure facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -761,8 +786,8 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; the measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
-      "required_action": "Complete auxiliary configuration scope and explicit asset binding, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
+      "reason": "P2-20A is present and hash-bound; auxiliary configuration scope remains incomplete, and explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Complete auxiliary configuration scope, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {
@@ -799,7 +824,7 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "db5a7effe7560d468b5210f14b09ae58e94419fdd1bc95a520da35a5401a4b4b",
+    "policy_sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
     "schema_sha256": "aae199ee8ee4a2d000e8aaa61ef84e47a63e2286c14080fec90ac62957d4bb31"
   },

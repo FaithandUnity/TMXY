@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T16:44:40.9795157+00:00",
+  "task_id": "P2-20",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "gate": "G2",
+  "gate_decision": "BLOCKED",
+  "g2_approved": false,
+  "p3_authorized": false,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "bindings": {
+      "aggregate_sha256": "1696ca484af1f5d6c16aa3478d204e0d95a99152e5879b77674975e573696345",
+      "prerequisites": [
+        {
+          "task_id": "P2-01",
+          "path": "Data/Inventory/p2-01-package-inventory.json",
+          "sha256": "ac6671219c41324f1e7aac0a1cd5c08a9dc66f7c75e30cd3081610c038a26d16",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-02",
+          "path": "Data/Inventory/p2-02-package-boundary-completeness.json",
+          "sha256": "8ecdc9b5af0b8bd3e009781452bcc68114f65fd2b7513e26b49402f76738863e",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-03",
+          "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+          "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-04",
+          "path": "Data/Inventory/p2-04-current-table-inventory.json",
+          "sha256": "9c374ad84bc2440c19ec039e3761db8d1398add7cc66544452823b5ed010892a",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-05",
+          "path": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+          "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-06",
+          "path": "Data/Inventory/p2-06-three-layer-data.json",
+          "sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-07",
+          "path": "Data/Inventory/p2-07-core-table-schema.json",
+          "sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-08",
+          "path": "Data/Inventory/p2-08-table-ownership.json",
+          "sha256": "423e3898c1089e140f9a8efc04a1dae8d4600512e8ba44a02fc2048487c960fc",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-09",
+          "path": "Data/Inventory/p2-09-legacy-current-diff.json",
+          "sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-10",
+          "path": "Data/Inventory/p2-10-canonical-id-map.json",
+          "sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-11",
+          "path": "Data/Inventory/p2-11-id-limit-audit.json",
+          "sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-12",
+          "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+          "sha256": "88bdda4ba1629a41f4e5772729713de9cd7cd614365efaf9328440fed086d8a9",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-13",
+          "path": "Data/Inventory/p2-13-reference-closure.json",
+          "sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-14",
+          "path": "Data/Inventory/p2-14-asset-health.json",
+          "sha256": "cfa26d331f03f6c87bf4143ff881c7df9a0ef4906b7954410b7a2623d46fc52b",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-15",
+          "path": "Data/Inventory/p2-15-conversion-routing.json",
+          "sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-16",
+          "path": "Data/Inventory/p2-16-conversion-cache.json",
+          "sha256": "a3e12232a8dd68b27ef1de30741432df9e84fa99c75329e85fa2450901588691",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-17",
+          "path": "Data/Inventory/p2-17-protocol-codegen.json",
+          "sha256": "23cd1f824a3fab1c203a648df8224de6257bea96dc4aa431fcc063c74aead222",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-18",
+          "path": "Data/Inventory/p2-18-content-health.json",
+          "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-19",
+          "path": "Data/Inventory/p2-19-resource-budget.json",
+          "sha256": "38148aba7fd510c06d16ec592b34712b90e1c0b2ae995c08654394e7e556d4ff",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        }
+      ],
+      "quality": {
+        "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
+        "sha256": "e517acf4b1426a820115a4d4de15d933e01abf27934079a410c1620517338910",
+        "result": "PASS_DIAGNOSTIC",
+        "captured_utc": "2026-08-28T18:27:14.8095622+00:00"
+      }
+    }
+  },
+  "report": {
+    "json": {
+      "path": "Data/Reports/p2-20-g2-review-report.json",
+      "tracked": true,
+      "bytes": 19809,
+      "lines": 636,
+      "sha256": "e7523ce39f7d92c947b4cbe52ded280db74e4c6bc61c8b2b52ef7aaf1a86f050"
+    },
+    "markdown": {
+      "path": "Data/Reports/p2-20-g2-review-report.md",
+      "tracked": true,
+      "bytes": 3398,
+      "lines": 52,
+      "sha256": "1a7c14a0a7178ba1a8d7d7148ca796d195d22d4467670b7d3dc0eb209f96dbe1"
+    }
+  },
+  "summary": {
+    "criteria_total": 9,
+    "satisfied": 7,
+    "blocked": 2,
+    "satisfied_ids": [
+      "G2-01",
+      "G2-02",
+      "G2-03",
+      "G2-04",
+      "G2-05",
+      "G2-08",
+      "G2-09"
+    ],
+    "blocked_ids": [
+      "G2-06",
+      "G2-07"
+    ]
+  },
+  "blockers": [
+    {
+      "id": "G2-BLK-06",
+      "criterion_id": "G2-06",
+      "title": "Core resource-reference closure is not proven",
+      "reason": "A hash-bound core-resource subset and its explicit unresolved, ambiguous, and heuristic-selection metrics are absent. Global queues remain risk context, while core foreign-key dangling zero cannot substitute for this proof.",
+      "required_action": "Define and hash-bind the core-resource subset, prove its unresolved, ambiguous, and heuristic-selection counts are zero, and regenerate closure evidence.",
+      "authority_required": false
+    },
+    {
+      "id": "G2-BLK-07",
+      "criterion_id": "G2-07",
+      "title": "Complete migration decisions are absent",
+      "reason": "Existing diff, limit, canonical-ID, and code-generation audits do not record every required migration decision.",
+      "required_action": "Create and review a complete migration-decision registry covering ID, width, old-to-new schema, and fixed-limit risks.",
+      "authority_required": true
+    }
+  ],
+  "budget_interpretation": {
+    "planning_cost_quantified": true,
+    "manual_content_assets": 800,
+    "total_content_assets": 40090,
+    "manual_content_rate_ppm": 19955,
+    "base_planning_hours": 1404.695,
+    "risk_adjusted_planning_hours": 2000.37,
+    "machine_projection_seconds": 15948.034291,
+    "storage_budget_bytes": 411066823486,
+    "incremental_storage_required_bytes": 364904613763,
+    "storage_capacity_gap_bytes": 157406357379,
+    "measured_schedule": false,
+    "monetary_amount_available": false,
+    "financial_total_cost_available": false,
+    "delivery_commitment": false
+  },
+  "authority_boundaries": {
+    "playable_experience_proven": false,
+    "release_authority": false,
+    "production_authority": false,
+    "automatic_repair_or_delete_authority": false,
+    "official_server_implementation_recovered": false
+  },
+  "security": {
+    "quality_result": "PASS_DIAGNOSTIC",
+    "repository_result": "PASS",
+    "repository_failures": 0,
+    "secret_result": "PASS",
+    "secret_findings": 0,
+    "security_review_result": "PASS"
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-review-policy-v1.json",
+    "policy_sha256": "01cd03e9281018c6f4649897426e2a3740165692e845cd8308c2505062bc8bde",
+    "schema": "Contracts/data-schema/g2-review-v1.schema.json",
+    "schema_sha256": "1ac9a7f5aa735fd01a0b9cc01ba61c5b2ccc3bcaa85066839d325d73484b644a"
+  },
+  "implementation": {
+    "source_files": 2,
+    "source_sha256": "48c85f77e284f1f62218173dc598cfd16ca34f9be22d08a1ef99e147beeac71c",
+    "generator": "Tools/TMXY.G2Review/g2_review.py",
+    "generator_sha256": "27716e7aa3ce847e64f927eb1293bc1ef595b50c1235e89bbc22d3f4d46f779a",
+    "wrapper": "Tools/TMXY.G2Review/New-G2Review.ps1",
+    "wrapper_sha256": "5c1ef61cb6c6d7a8d0efa25c3558543ad8435e56b79e4acb3cc958ee19ecf0da",
+    "self_test_assertions": 8
+  },
+  "disclosure": {
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  },
+  "reproduction": {
+    "check_mode": false,
+    "repository_mount": "read-only",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20-remediation"
+    ],
+    "detail": "Close G2-06 resource-reference proof and G2-07 migration decisions, then rerun the fail-closed G2 review. P3 remains unauthorized."
+  }
+}

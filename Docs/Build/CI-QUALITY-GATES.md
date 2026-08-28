@@ -24,6 +24,12 @@ evidence object. A passing budget contract proves deterministic accounting;
 open measurements, capacity gaps, G2 blockers, and release authority remain
 independent fail-closed decisions.
 
+P2-20 therefore runs `Test-G2Review.ps1 -VerifyDerivedSources` after the full
+aggregate whose exact SHA-256 it reviews. A passing test proves that the G2
+decision was evaluated and frozen correctly; it does not turn the current
+`BLOCKED` decision into success. The review is kept outside that same aggregate
+to avoid a self-referential evidence hash.
+
 ## Cache keys and trust boundary
 
 Cache keys include operating system, architecture, compiler identity, CMake

@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-review-v1.schema.json",
+  "title": "TMXY P2-20 fail-closed G2 review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "captured_utc", "task_id", "source_build", "result",
+    "review_execution_result", "task_status", "completion_criteria_satisfied",
+    "gate", "gate_decision", "g2_approved", "p3_authorized",
+    "input_bindings", "summary", "criteria", "security", "blockers",
+    "budget_interpretation", "authority_boundaries", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "captured_utc": { "type": "string", "minLength": 1 },
+    "task_id": { "const": "P2-20" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "result": { "const": "BLOCKED" },
+    "review_execution_result": { "const": "PASS" },
+    "task_status": { "const": "BLOCKED" },
+    "completion_criteria_satisfied": { "const": false },
+    "gate": { "const": "G2" },
+    "gate_decision": { "const": "BLOCKED" },
+    "g2_approved": { "const": false },
+    "p3_authorized": { "const": false },
+    "input_bindings": { "$ref": "#/$defs/input_bindings" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "criteria": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        { "$ref": "#/$defs/g2_01" }, { "$ref": "#/$defs/g2_02" },
+        { "$ref": "#/$defs/g2_03" }, { "$ref": "#/$defs/g2_04" },
+        { "$ref": "#/$defs/g2_05" }, { "$ref": "#/$defs/g2_06" },
+        { "$ref": "#/$defs/g2_07" }, { "$ref": "#/$defs/g2_08" },
+        { "$ref": "#/$defs/g2_09" }
+      ],
+      "items": false
+    },
+    "security": { "$ref": "#/$defs/security" },
+    "blockers": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/blocker" }, { "properties": { "id": { "const": "G2-BLK-06" }, "criterion_id": { "const": "G2-06" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/blocker" }, { "properties": { "id": { "const": "G2-BLK-07" }, "criterion_id": { "const": "G2-07" } } }] }
+      ],
+      "items": false
+    },
+    "budget_interpretation": { "$ref": "#/$defs/budget" },
+    "authority_boundaries": { "$ref": "#/$defs/authority" },
+    "contracts": { "$ref": "#/$defs/contracts" },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "path": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$" },
+    "prerequisite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "path", "sha256", "result", "task_status", "completion_criteria_satisfied"],
+      "properties": {
+        "task_id": { "type": "string", "pattern": "^P2-(0[1-9]|1[0-9])$" },
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "const": "PASS" },
+        "task_status": { "const": "COMPLETE" },
+        "completion_criteria_satisfied": { "const": true }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "result", "captured_utc"],
+      "properties": {
+        "path": { "const": "Data/BuildBaseline/p0-12-local-quality-gates.json" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "const": "PASS_DIAGNOSTIC" },
+        "captured_utc": { "type": "string", "minLength": 1 }
+      }
+    },
+    "input_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aggregate_sha256", "prerequisites", "quality"],
+      "properties": {
+        "aggregate_sha256": { "$ref": "#/$defs/sha256" },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 19,
+          "maxItems": 19,
+          "items": { "$ref": "#/$defs/prerequisite" }
+        },
+        "quality": { "$ref": "#/$defs/quality" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criteria_total", "satisfied", "blocked", "satisfied_ids", "blocked_ids"],
+      "properties": {
+        "criteria_total": { "const": 9 },
+        "satisfied": { "const": 7 },
+        "blocked": { "const": 2 },
+        "satisfied_ids": {
+          "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true,
+          "items": { "enum": ["G2-01", "G2-02", "G2-03", "G2-04", "G2-05", "G2-08", "G2-09"] }
+        },
+        "blocked_ids": {
+          "type": "array",
+          "prefixItems": [{ "const": "G2-06" }, { "const": "G2-07" }],
+          "items": false
+        }
+      }
+    },
+    "metric_value": { "type": ["integer", "number", "string", "boolean", "null"] },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "unit"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "$ref": "#/$defs/metric_value" },
+        "unit": { "type": "string", "minLength": 1 }
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "required_status", "observed_status", "satisfied", "evidence_task_ids", "metrics", "interpretation", "blocker_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^G2-0[1-9]$" },
+        "statement": { "type": "string", "minLength": 1 },
+        "required_status": { "const": "SATISFIED" },
+        "observed_status": { "enum": ["SATISFIED", "BLOCKED"] },
+        "satisfied": { "type": "boolean" },
+        "evidence_task_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^P2-(0[1-9]|1[0-9])$" } },
+        "metrics": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/metric" } },
+        "interpretation": { "type": "string", "minLength": 1 },
+        "blocker_ids": { "type": "array", "uniqueItems": true, "items": { "enum": ["G2-BLK-06", "G2-BLK-07"] } }
+      }
+    },
+    "g2_01": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-01" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_02": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-02" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_03": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-03" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_04": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-04" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_05": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-05" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_06": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-06" }, "observed_status": { "const": "BLOCKED" }, "satisfied": { "const": false }, "blocker_ids": { "const": ["G2-BLK-06"] } } }] },
+    "g2_07": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-07" }, "observed_status": { "const": "BLOCKED" }, "satisfied": { "const": false }, "blocker_ids": { "const": ["G2-BLK-07"] } } }] },
+    "g2_08": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-08" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_09": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-09" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quality_result", "repository_result", "repository_failures", "secret_result", "secret_findings", "security_review_result"],
+      "properties": {
+        "quality_result": { "const": "PASS_DIAGNOSTIC" },
+        "repository_result": { "const": "PASS" },
+        "repository_failures": { "const": 0 },
+        "secret_result": { "const": "PASS" },
+        "secret_findings": { "const": 0 },
+        "security_review_result": { "const": "PASS" }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "criterion_id", "title", "reason", "required_action", "authority_required"],
+      "properties": {
+        "id": { "enum": ["G2-BLK-06", "G2-BLK-07"] },
+        "criterion_id": { "enum": ["G2-06", "G2-07"] },
+        "title": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "required_action": { "type": "string", "minLength": 1 },
+        "authority_required": { "type": "boolean" }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planning_cost_quantified", "manual_content_assets", "total_content_assets", "manual_content_rate_ppm", "base_planning_hours", "risk_adjusted_planning_hours", "machine_projection_seconds", "storage_budget_bytes", "incremental_storage_required_bytes", "storage_capacity_gap_bytes", "measured_schedule", "monetary_amount_available", "financial_total_cost_available", "delivery_commitment"],
+      "properties": {
+        "planning_cost_quantified": { "const": true },
+        "manual_content_assets": { "const": 800 },
+        "total_content_assets": { "const": 40090 },
+        "manual_content_rate_ppm": { "const": 19955 },
+        "base_planning_hours": { "type": "number", "minimum": 0 },
+        "risk_adjusted_planning_hours": { "type": "number", "minimum": 0 },
+        "machine_projection_seconds": { "type": "number", "minimum": 0 },
+        "storage_budget_bytes": { "const": 411066823486 },
+        "incremental_storage_required_bytes": { "const": 364904613763 },
+        "storage_capacity_gap_bytes": { "const": 157406357379 },
+        "measured_schedule": { "const": false },
+        "monetary_amount_available": { "const": false },
+        "financial_total_cost_available": { "const": false },
+        "delivery_commitment": { "const": false }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["playable_experience_proven", "release_authority", "production_authority", "automatic_repair_or_delete_authority", "official_server_implementation_recovered"],
+      "properties": {
+        "playable_experience_proven": { "const": false },
+        "release_authority": { "const": false },
+        "production_authority": { "const": false },
+        "automatic_repair_or_delete_authority": { "const": false },
+        "official_server_implementation_recovered": { "const": false }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "policy_sha256", "schema", "schema_sha256"],
+      "properties": {
+        "policy": { "const": "Contracts/data-schema/g2-review-policy-v1.json" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "schema": { "const": "Contracts/data-schema/g2-review-v1.schema.json" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["private_source_paths", "exact_primary_keys", "exact_observed_extrema", "raw_table_rows", "decoded_confidential_payloads", "legacy_source_lines"],
+      "properties": {
+        "private_source_paths": { "const": false },
+        "exact_primary_keys": { "const": false },
+        "exact_observed_extrema": { "const": false },
+        "raw_table_rows": { "const": false },
+        "decoded_confidential_payloads": { "const": false },
+        "legacy_source_lines": { "const": false }
+      }
+    }
+  }
+}

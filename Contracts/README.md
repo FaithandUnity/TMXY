@@ -12,3 +12,7 @@ protoc 版本产生的临时结果。
 P2-19 的 `resource-budget-policy-v1.json` 与
 `resource-budget-report-v1.schema.json` 冻结资源预算系数、五类 basis、输出结构和权限边界。
 它们允许在缺测显式保留时形成条件规划基线，但不授予价格、工期承诺、G2、可玩性或发布权威。
+
+P2-20 的 `g2-review-policy-v1.json` 与 `g2-review-v1.schema.json` 把 9 条 G2 出口要求
+全部固定为 `SATISFIED`，并把当前观测状态分离记录。评审过程通过不能把 `BLOCKED`
+决策、未完成任务或 P3 禁止状态解释为批准。

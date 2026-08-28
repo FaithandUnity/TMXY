@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T06:01:22.8294680+00:00",
+  "captured_utc": "2026-08-28T07:54:46.5325639+00:00",
   "result": "PASS",
   "task": "P1-17",
   "completion_criteria_satisfied": true,
   "source_file_count": 11,
-  "source_sha256": "88c396a8b694cbfe118778375efea7191e8f663537d3d9f3aecfe462b8be5a66",
+  "source_sha256": "da531146ef5c2b5d9db53a41a795205b8ba0f0a9b823aae8dd7d7d1fcaf99bd8",
   "contract": {
     "vertex": "height f32 + normal xyz f32 + color rgba f32 + four layer-alpha u8",
     "grid": "row-major square grid; installed files are 64x64 vertices and 63x63 cells",
@@ -160,6 +160,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 45,
-    "output_sha256": "05d4eb6ea39ef6e6b25c730d74ca000696da6dd0ee26cabdae1e2fad7c921d11"
+    "output_sha256": "6077569e8efdccb07fe1c5d5fcba4eb5ffb6de557ca6f10971041b02faa2603f"
   }
 }

@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T07:36:50.2089382+00:00",
+  "result": "PASS",
+  "task": "P2-12",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "client_version": "3.0.0.413",
+    "manifest": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+    "manifest_sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3",
+    "selected_set_sha256": "d24dfa7aec9552402bc29b0280749dac3dd86edcef15c745695d0b3d60279a63",
+    "files": 40090,
+    "bytes": 8882019027,
+    "source_copy_policy": "reference_only"
+  },
+  "summary": {
+    "files": 40090,
+    "bytes": 8882019027,
+    "structurally_valid": 39290,
+    "unresolved_structure": 786,
+    "corrupt": 14,
+    "unsupported": 0,
+    "families": [
+      {
+        "family": "anim",
+        "files": 1069,
+        "bytes": 655802200,
+        "pass": 1039,
+        "unresolved": 30,
+        "corrupt": 0,
+        "package_missing": 25,
+        "package_ambiguous_equivalent": 100,
+        "package_ambiguous_divergent": 8
+      },
+      {
+        "family": "mp3",
+        "files": 64,
+        "bytes": 124002521,
+        "pass": 64,
+        "unresolved": 0,
+        "corrupt": 0,
+        "package_missing": 0,
+        "package_ambiguous_equivalent": 0,
+        "package_ambiguous_divergent": 0
+      },
+      {
+        "family": "qtx",
+        "files": 24798,
+        "bytes": 3910277648,
+        "pass": 24042,
+        "unresolved": 756,
+        "corrupt": 0,
+        "package_missing": 672,
+        "package_ambiguous_equivalent": 3517,
+        "package_ambiguous_divergent": 391
+      },
+      {
+        "family": "skem",
+        "files": 1068,
+        "bytes": 515443174,
+        "pass": 1066,
+        "unresolved": 0,
+        "corrupt": 2,
+        "package_missing": 23,
+        "package_ambiguous_equivalent": 106,
+        "package_ambiguous_divergent": 2
+      },
+      {
+        "family": "sm",
+        "files": 2924,
+        "bytes": 2307762148,
+        "pass": 2912,
+        "unresolved": 0,
+        "corrupt": 12,
+        "package_missing": 112,
+        "package_ambiguous_equivalent": 506,
+        "package_ambiguous_divergent": 2
+      },
+      {
+        "family": "ter",
+        "files": 8876,
+        "bytes": 1309215704,
+        "pass": 8876,
+        "unresolved": 0,
+        "corrupt": 0,
+        "package_missing": 0,
+        "package_ambiguous_equivalent": 0,
+        "package_ambiguous_divergent": 0
+      },
+      {
+        "family": "wav",
+        "files": 450,
+        "bytes": 54949730,
+        "pass": 450,
+        "unresolved": 0,
+        "corrupt": 0,
+        "package_missing": 0,
+        "package_ambiguous_equivalent": 0,
+        "package_ambiguous_divergent": 0
+      },
+      {
+        "family": "zif",
+        "files": 841,
+        "bytes": 4565902,
+        "pass": 841,
+        "unresolved": 0,
+        "corrupt": 0,
+        "package_missing": 0,
+        "package_ambiguous_equivalent": 0,
+        "package_ambiguous_divergent": 0
+      }
+    ],
+    "package_candidate_policy": "retain all exact logical-name candidates; classify equivalent or divergent descriptors",
+    "unresolved_policy": "retain and route; never guess a missing headerless descriptor",
+    "corrupt_policy": "retain source hash and parser error; never repair or delete during inventory"
+  },
+  "catalog": {
+    "path": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+    "tracked": false,
+    "lines": 40090,
+    "bytes": 16802213,
+    "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+    "contains_payload_bytes": false,
+    "contains_decoded_assets": false
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/full-asset-inventory-policy-v1.json",
+    "policy_sha256": "9497b6cd7a537ebff684208dd037c8c92ee23c4e8e23b62ed1b3827d76049af2",
+    "schema": "Contracts/data-schema/full-asset-inventory-v1.schema.json",
+    "schema_sha256": "ddbdf5b4a56e99b159de4e097756a8d67b6d2a1a6fa0cf2440918c5c3e6699b6"
+  },
+  "dependencies": {
+    "p2-01-package-inventory.json": "5b4ff6c7921458148a986ef02a60330ee560e1051f380b53b2a0f5be43c6c59d",
+    "p1-13-qtx-texture.json": "ac5268b9615ecdc159616eb9539fc54b7e70a3433949e69a9758ee72b3f6888b",
+    "p1-14-sm-static-mesh.json": "f1d2f42c10931cf803a2d124c5c4e5b71a0563c2cbec53b05ffe8c7000a09564",
+    "p1-15-skem-skeletal-mesh.json": "4283362732823709c21254d9092ee1987e283b845d648c0782e7ffdb052b2dbd",
+    "p1-16-anim-animation.json": "541d9c8678e46845e6f1b90237541d85ea5565a7c2f5a278422065785cabaf11",
+    "p1-17-ter-terrain.json": "9124c57c16ea132b95991b7032f118027c28fc5a262fb5a12dbbc873a6c1bbf2",
+    "p1-18-auxiliary-assets.json": "2059d6d0d071e1db0906cfbc2bd606be77ee57e26381a780af9a9dd644df1d12"
+  },
+  "implementation": {
+    "source_files": 144,
+    "source_sha256": "2b4ef35d2afb37852121b809a6aea0c04e5273fb6d261debd3f2df961c845a7a",
+    "scanner": "Tools/TMXY.AssetInventory/apps/asset_inventory_main.cpp",
+    "generator": "Tools/TMXY.AssetInventory/New-FullAssetInventory.ps1",
+    "production_readers": [
+      "TMXY.Texture",
+      "TMXY.StaticMesh",
+      "TMXY.SkeletalMesh",
+      "TMXY.Animation",
+      "TMXY.Terrain"
+    ],
+    "dependency_binding": "stable task result, completion state, and source fingerprint",
+    "package_names_emitted": false,
+    "object_names_emitted": false,
+    "payload_bytes_emitted": false
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "client_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "execution": {
+    "exit_code": 0,
+    "custom_asset_lines": 38735,
+    "auxiliary_asset_lines": 1355,
+    "stderr_sha256": "b5ba11edfb11e7c1287c88060322c6ff5c85bf5e21376c5ca825c755ad93e806"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-13",
+      "P2-14",
+      "P2-15",
+      "P2-16"
+    ],
+    "detail": "Build reference closure, duplicate/orphan analysis, conversion routing, and content-addressed cache policy from this catalog."
+  }
+}

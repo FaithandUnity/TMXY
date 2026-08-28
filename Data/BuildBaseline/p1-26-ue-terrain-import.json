@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T06:01:50.1444569+00:00",
+  "captured_utc": "2026-08-28T07:55:11.8132778+00:00",
   "result": "PASS",
   "task": "P1-26",
   "completion_criteria_satisfied": true,
@@ -71,13 +71,13 @@
     "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-26-terrain-report.json",
     "generated_report_sha256": "fcec353a7c50f20f665b20c1bc30b027a0e0ef7437dc717ccbd9b78d9305929b",
     "generated_report_schema_passed": true,
-    "ue_report_sha256": "5304631c2a19774171f634f776252ffcd8531f06eb388920821c1461e4e41f19"
+    "ue_report_sha256": "494c318ae41c9858ba174aa41402d789fe22b7c317f4db6b8f49d86bdcbcf8b3"
   },
   "dependency_report_sha256": {
-    "Data/BuildBaseline/p1-17-ter-terrain.json": "92058f16b31d5d5b8fc776991436ee1a544b14941b77b9a035182eb9c2562cc1",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "042ff65d8a5bd2dcece9c9aca236416a46e42bd7d2ffa360526ee01730ff952e",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "e72c0f7aebd1f96d4ecb4ab209975189e1711d3978378718ca318d3864c939b6",
-    "Data/BuildBaseline/p1-25-ue-animation-import.json": "42d8d4e0f3a75492afbb51b928137bf789156fd6323220f4da2d75527b667012"
+    "Data/BuildBaseline/p1-17-ter-terrain.json": "722b116fcc441276047e6a6243a807266a75448f16b9f5600be47cddafde3e52",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "064b3456a74556a542c64f7e1c98f080451b608ca3c04aa8603f01301fbdb74f",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "7f165b14dcf8a1c57084e67adbccb17d203300ac6fed0779d44051fcb5bdd93a",
+    "Data/BuildBaseline/p1-25-ue-animation-import.json": "49ddf73cd3545e9b220513bc6e78b39dc01e50271561ca3ab90f6ab4f2dbfed7"
   },
   "failure_count": 0,
   "failures": []

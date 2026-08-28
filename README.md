@@ -87,6 +87,12 @@ Schema 所有者和运行时权威拆开记录。225 张活动表全部分类为
 规则和共享标识符。客户端持有数据副本不授予战斗、经济或进度决定权，详见
 `Docs/Formats/TABLE-OWNERSHIP.md`。
 
+P2-12 由 `Tools/TMXY.AssetInventory/New-FullAssetInventory.ps1` 在锁定 Clang 21 容器中
+复用五个生产解析器，全量分类冻结客户端的 40,090 个 QTX/SM/SKEM/ANIM/TER/ZIF/WAV/
+MP3 文件。逐文件目录位于 Git 忽略的 `Data/Exports/P2-12`，Git 仅跟踪扫描器、合同、
+格式说明和不含 payload/解码资产的汇总证据；缺失的 headerless 描述、Package 副本歧义
+和可独立确认的结构失败分别保留，详见 `Docs/Formats/FULL-ASSET-INVENTORY.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

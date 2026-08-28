@@ -138,6 +138,11 @@ $coreTableSchema = Invoke-JsonTest `
 $tableOwnership = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-TableOwnershipRegistry.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$fullAssetArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
+$fullAssetInventory = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-FullAssetInventory.ps1') `
+    -Arguments $fullAssetArguments
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -245,6 +250,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$coreTableSchema.completion_criteria_satisfied -and
     [string]$tableOwnership.result -eq 'PASS' -and
     [bool]$tableOwnership.completion_criteria_satisfied -and
+    [string]$fullAssetInventory.result -eq 'PASS' -and
+    [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -305,6 +312,7 @@ $report = [pscustomobject][ordered]@{
     three_layer_table_data = $threeLayerTableData
     core_table_schema = $coreTableSchema
     table_ownership = $tableOwnership
+    full_asset_inventory = $fullAssetInventory
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

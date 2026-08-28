@@ -18,6 +18,7 @@ option(TMXY_BUILD_STATIC_MESH "Build the legacy sm static-mesh reconstruction mo
 option(TMXY_BUILD_SKELETAL_MESH "Build the legacy skem skeletal-mesh reconstruction module" ON)
 option(TMXY_BUILD_ANIMATION "Build the legacy anim skeletal-animation reconstruction module" ON)
 option(TMXY_BUILD_TERRAIN "Build the legacy ter terrain reconstruction module" ON)
+option(TMXY_BUILD_ASSET_INVENTORY "Build the full legacy asset inventory scanner" OFF)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
@@ -62,4 +63,12 @@ if(TMXY_BUILD_ANIMATION)
 endif()
 if(TMXY_BUILD_TERRAIN)
     add_subdirectory(TMXY.Terrain)
+endif()
+if(TMXY_BUILD_ASSET_INVENTORY)
+    if(NOT TMXY_BUILD_PACKAGE OR NOT TMXY_BUILD_TRANSFORM OR NOT TMXY_BUILD_TEXTURE OR
+       NOT TMXY_BUILD_STATIC_MESH OR NOT TMXY_BUILD_SKELETAL_MESH OR NOT TMXY_BUILD_ANIMATION OR
+       NOT TMXY_BUILD_TERRAIN)
+        message(FATAL_ERROR "TMXY.AssetInventory requires all Package and asset format modules")
+    endif()
+    add_subdirectory(TMXY.AssetInventory)
 endif()

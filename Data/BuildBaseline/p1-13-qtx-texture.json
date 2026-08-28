@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T05:58:32.3975693+00:00",
+  "captured_utc": "2026-08-28T07:52:04.8833864+00:00",
   "result": "PASS",
   "task": "P1-13",
   "completion_criteria_satisfied": true,
   "source_file_count": 21,
-  "source_sha256": "31d19b6ccc64abe55574f90e7bc62c586d155cd34152d43014f5e578caeccb67",
+  "source_sha256": "6dfc868667ff44af46075a648602c22c17283a2ca0e478c89797791386a42d56",
   "contract": {
     "descriptor_source": "Package QTexture QObject property body",
     "qtx_payload": "headerless contiguous mip bytes",
@@ -173,6 +173,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 76,
-    "output_sha256": "513a4dde45af803ac08f235cbc9c849e0f4f4a3edf5cd3da768de5e7da5846da"
+    "output_sha256": "08c61973a280960aa55f2066b2ee6bd7a304898a901000f3a1bee527fe39de88"
   }
 }

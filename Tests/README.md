@@ -74,4 +74,10 @@ opaque hex、节点 ID 三种脱敏查询模式；任意字符串不会被猜成
 48 个客户端列只属于展示或本地化。`-VerifyLegacySources` 会重扫只读客户端/服务端源码
 与冻结 ECF，要求注册表和证据逐 byte 一致；默认托管模式只验证跟踪哈希链和安全不变量。
 
+`Contract/Test-FullAssetInventory.ps1` 验证 P2-12 的 40,090 个目标资源和八类逐项汇总，
+强制 39,290 个结构通过、786 个 headerless 待解析、14 个独立结构失败、0 个未分类格式，
+并复核 Package 等价/分歧候选没有被静默选择。加 `-VerifyLegacySources` 会在锁定 Clang 21
+容器中重建扫描器、运行全套 CTest、重新读取约 8.88 GB 目标资源并要求忽略目录和跟踪
+证据逐 byte 一致；默认托管模式只验证已提交合同和哈希链。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

@@ -141,6 +141,7 @@ $requiredFiles = @(
     'Data/Inventory/p2-06-three-layer-data.json',
     'Data/Inventory/p2-07-core-table-schema.json',
     'Data/Inventory/p2-08-table-ownership.json',
+    'Data/Inventory/p2-12-full-asset-inventory.json',
     'Data/Schemas/core-table-registry-v1.json',
     'Data/Schemas/table-ownership-registry-v1.json',
     'Data/GoldenSamples/p1-golden-test-matrix-v1.json',
@@ -175,6 +176,7 @@ $requiredFiles = @(
     'Docs/Formats/THREE-LAYER-TABLE-DATA.md',
     'Docs/Formats/CORE-TABLE-SCHEMA.md',
     'Docs/Formats/TABLE-OWNERSHIP.md',
+    'Docs/Formats/FULL-ASSET-INVENTORY.md',
     'Docs/Formats/LEGACY-TBL-BASELINE.md',
     'Docs/Formats/CURRENT-TBL-INVESTIGATION.md',
     'Docs/Formats/LEGACY-TO-UE-TRANSFORM.md',
@@ -191,6 +193,8 @@ $requiredFiles = @(
     'Contracts/data-schema/core-table-registry-v1.schema.json',
     'Contracts/data-schema/table-ownership-policy-v1.json',
     'Contracts/data-schema/table-ownership-registry-v1.schema.json',
+    'Contracts/data-schema/full-asset-inventory-policy-v1.json',
+    'Contracts/data-schema/full-asset-inventory-v1.schema.json',
     'Docs/Testing/GOLDEN-TEST-MATRIX.md',
     'Docs/Build/CI-QUALITY-GATES.md',
     'Docs/Build/HOSTED-CI-AUTHORITY.md',
@@ -539,7 +543,7 @@ if ($null -ne $gitCommand -and (Test-Path -LiteralPath $repositoryMetadata)) {
 }
 
 $scanRoots = @('Apps', 'Backend', 'Contracts', 'Deploy', 'Tools') | ForEach-Object { Join-Path $root $_ }
-$generatedDirectoryPattern = '[\\/](?:Binaries|DerivedDataCache|Intermediate|Saved|\.vs|generated)[\\/]'
+$generatedDirectoryPattern = '[\\/](?:Binaries|DerivedDataCache|Intermediate|Saved|\.vs|generated|out)[\\/]'
 $sourceFiles = @(
     Get-ChildItem -LiteralPath $scanRoots -Recurse -File |
         Where-Object {

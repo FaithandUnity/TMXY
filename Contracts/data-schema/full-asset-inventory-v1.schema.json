@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/schemas/full-asset-inventory-v1.schema.json",
+  "title": "TMXY P2-12 full asset inventory evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "captured_utc",
+    "result",
+    "task",
+    "task_status",
+    "completion_criteria_satisfied",
+    "input",
+    "summary",
+    "catalog",
+    "contracts",
+    "dependencies",
+    "implementation",
+    "builder",
+    "isolation",
+    "execution",
+    "next_scope"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "captured_utc": { "type": "string", "format": "date-time" },
+    "result": { "enum": ["PASS", "FAIL"] },
+    "task": { "const": "P2-12" },
+    "task_status": { "enum": ["COMPLETE", "IN_PROGRESS"] },
+    "completion_criteria_satisfied": { "type": "boolean" },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["client_version", "manifest", "manifest_sha256", "selected_set_sha256", "files", "bytes", "source_copy_policy"],
+      "properties": {
+        "client_version": { "const": "3.0.0.413" },
+        "manifest": { "type": "string" },
+        "manifest_sha256": { "$ref": "#/$defs/sha256" },
+        "selected_set_sha256": { "$ref": "#/$defs/sha256" },
+        "files": { "const": 40090 },
+        "bytes": { "const": 8882019027 },
+        "source_copy_policy": { "const": "reference_only" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "bytes", "structurally_valid", "unresolved_structure", "corrupt", "unsupported", "families", "package_candidate_policy", "unresolved_policy", "corrupt_policy"],
+      "properties": {
+        "files": { "const": 40090 },
+        "bytes": { "const": 8882019027 },
+        "structurally_valid": { "type": "integer", "minimum": 0 },
+        "unresolved_structure": { "type": "integer", "minimum": 0 },
+        "corrupt": { "type": "integer", "minimum": 0 },
+        "unsupported": { "const": 0 },
+        "families": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": { "$ref": "#/$defs/family" }
+        },
+        "package_candidate_policy": { "type": "string", "minLength": 1 },
+        "unresolved_policy": { "type": "string", "minLength": 1 },
+        "corrupt_policy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "tracked", "lines", "bytes", "sha256", "contains_payload_bytes", "contains_decoded_assets"],
+      "properties": {
+        "path": { "const": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl" },
+        "tracked": { "const": false },
+        "lines": { "const": 40090 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "contains_payload_bytes": { "const": false },
+        "contains_decoded_assets": { "const": false }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "policy_sha256", "schema", "schema_sha256"],
+      "properties": {
+        "policy": { "const": "Contracts/data-schema/full-asset-inventory-policy-v1.json" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "schema": { "const": "Contracts/data-schema/full-asset-inventory-v1.schema.json" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "dependencies": { "type": "object", "minProperties": 7, "additionalProperties": { "$ref": "#/$defs/sha256" } },
+    "implementation": { "type": "object", "minProperties": 8 },
+    "builder": { "type": "object", "minProperties": 4 },
+    "isolation": { "type": "object", "minProperties": 7 },
+    "execution": { "type": "object", "minProperties": 4 },
+    "next_scope": { "type": "object", "minProperties": 2 }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "family": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "files", "bytes", "pass", "unresolved", "corrupt", "package_missing", "package_ambiguous_equivalent", "package_ambiguous_divergent"],
+      "properties": {
+        "family": { "enum": ["anim", "mp3", "qtx", "skem", "sm", "ter", "wav", "zif"] },
+        "files": { "type": "integer", "minimum": 1 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "pass": { "type": "integer", "minimum": 0 },
+        "unresolved": { "type": "integer", "minimum": 0 },
+        "corrupt": { "type": "integer", "minimum": 0 },
+        "package_missing": { "type": "integer", "minimum": 0 },
+        "package_ambiguous_equivalent": { "type": "integer", "minimum": 0 },
+        "package_ambiguous_divergent": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

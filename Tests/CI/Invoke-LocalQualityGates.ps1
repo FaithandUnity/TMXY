@@ -120,6 +120,9 @@ $fullPackageInventory = Invoke-JsonTest `
 $packageBoundaryCompleteness = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-PackageBoundaryCompleteness.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$packageDependencyGraph = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-PackageDependencyGraph.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -215,6 +218,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$fullPackageInventory.completion_criteria_satisfied -and
     [string]$packageBoundaryCompleteness.result -eq 'PASS' -and
     [bool]$packageBoundaryCompleteness.completion_criteria_satisfied -and
+    [string]$packageDependencyGraph.result -eq 'PASS' -and
+    [bool]$packageDependencyGraph.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -269,6 +274,7 @@ $report = [pscustomobject][ordered]@{
     g1_format_review = $g1FormatReview
     full_package_inventory = $fullPackageInventory
     package_boundary_completeness = $packageBoundaryCompleteness
+    package_dependency_graph = $packageDependencyGraph
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

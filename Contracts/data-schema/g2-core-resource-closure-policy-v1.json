@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "scope_authority": "monotonic union frozen from pre-existing P2-08 and P2-13 authorities; never selected from observed closure outcomes",
+  "inputs": {
+    "p2_05": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+    "p2_08": "Data/Inventory/p2-08-table-ownership.json",
+    "ownership_registry": "Data/Schemas/table-ownership-registry-v1.json",
+    "p2_12": "Data/Inventory/p2-12-full-asset-inventory.json",
+    "asset_catalog": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+    "reference_policy": "Contracts/data-schema/reference-closure-policy-v1.json",
+    "p2_13": "Data/Inventory/p2-13-reference-closure.json",
+    "reference_graph": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
+    "p2_18": "Data/Inventory/p2-18-content-health.json",
+    "g2_policy": "Contracts/data-schema/g2-review-policy-v1.json"
+  },
+  "declared_root_scope": {
+    "selection": "all P2-13 root records in all declared root kinds",
+    "root_kinds": ["character", "scene", "skill"],
+    "minimum_root_kinds": 3,
+    "allows_outcome_based_exclusion": false
+  },
+  "core_table_resource_scope": {
+    "selection": "all P2-13 table-object reference rules whose table and column_id exactly match a PASS P2-08 core column, applied to every emitted non-sentinel canonical-row reference",
+    "required_rule_count": 16,
+    "include_runtime_authorities": ["client-presentation", "server-authoritative"],
+    "owner_filtering": "forbidden",
+    "consumer_filtering": "forbidden",
+    "allows_outcome_based_exclusion": false
+  },
+  "conditional_required_scope": {
+    "source": "P2-13 table_closure.object_references runtime-assert aggregates",
+    "runtime_assert_rows_required": true,
+    "missing_values_remain_in_scope_without_table_package_edges": true,
+    "member_set_exported": false,
+    "member_set_absence_blocks_zero_proof": true,
+    "core_foreign_key_substitution": "forbidden"
+  },
+  "auxiliary_config_scope": {
+    "inventory_must_be_hash_bound": true,
+    "reference_adapters": [],
+    "required_coverage": "complete",
+    "current_coverage": "absent",
+    "new_roots_are_union_only": true,
+    "missing_adapters_fail_closed": true
+  },
+  "traversal": {
+    "mode": "directed-fixed-point",
+    "edge_records": [
+      "table_fk_edge",
+      "table_domain_edge",
+      "table_package_edge",
+      "package_edge",
+      "package_asset_edge"
+    ],
+    "known_nontraversed_records": [
+      "package_node",
+      "table_node",
+      "table_domain_node",
+      "asset_node",
+      "table_scoped_edge",
+      "root"
+    ],
+    "logical_resolution_records": ["table_package_edge", "package_edge"],
+    "allowed_logical_resolutions": ["unique", "ambiguous", "unresolved", "scoped-terminal"],
+    "gap_resolutions": ["ambiguous", "unresolved"],
+    "scoped_terminal_policy": "only package-edge kinds already listed by P2-13 may terminate without a global target",
+    "unknown_record_fails_closed": true,
+    "unknown_resolution_fails_closed": true,
+    "first_candidate_selection": "forbidden",
+    "heuristic_target_selection": "forbidden"
+  },
+  "completion": {
+    "required_status": "SATISFIED",
+    "scope_complete": true,
+    "auxiliary_config_reference_scope_complete": true,
+    "asset_binding_resolution_explicit": true,
+    "table_reference_unresolved": 0,
+    "table_reference_ambiguous": 0,
+    "package_reference_unresolved": 0,
+    "package_reference_ambiguous": 0,
+    "conditional_required_missing": 0,
+    "heuristic_target_selections": 0,
+    "reachable_asset_structure_unresolved": 0,
+    "reachable_asset_structure_fail": 0,
+    "unknown_record_count": 0,
+    "unknown_resolution_count": 0
+  },
+  "fail_closed_rules": {
+    "core_foreign_key_zero_is_not_resource_closure": true,
+    "conditional_required_metric_must_be_present_and_source_bound": true,
+    "conditional_required_missing_cannot_be_inferred_from_edge_absence": true,
+    "all_candidate_targets_are_preserved": true,
+    "summary_must_match_detailed_export_and_set_hashes": true,
+    "missing_ignored_inputs_block_generation": true,
+    "opaque_package_bodies_are_not_parse_failures": true,
+    "unlinked_or_duplicate_assets_are_not_delete_authority": true,
+    "blocked_evidence_never_authorizes_g2_p3_playability_or_release": true
+  },
+  "output": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+    "report_json": "Data/Reports/p2-20a-core-resource-closure-report.json",
+    "report_markdown": "Data/Reports/p2-20a-core-resource-closure-report.md",
+    "governance": "Data/Governance/p2-g2-core-resource-closure.json",
+    "evidence": "Data/Inventory/p2-20a-core-resource-closure.json",
+    "tracked_detail_export": false
+  },
+  "disclosure": {
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  }
+}

@@ -1,0 +1,302 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.local/schemas/g2-core-resource-closure-v1.schema.json",
+  "title": "TMXY P2-20A core resource closure report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "captured_utc", "task_id", "criterion_id", "source_build",
+    "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+    "input_bindings", "scope_definition", "closure", "decision", "blockers",
+    "authority_boundaries", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "captured_utc": { "type": "string", "minLength": 1 },
+    "task_id": { "const": "P2-20A" },
+    "criterion_id": { "const": "G2-06" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "result": { "const": "BLOCKED" },
+    "review_execution_result": { "const": "PASS" },
+    "task_status": { "const": "BLOCKED" },
+    "completion_criteria_satisfied": { "const": false },
+    "input_bindings": { "$ref": "#/$defs/input_bindings" },
+    "scope_definition": { "$ref": "#/$defs/scope_definition" },
+    "closure": { "$ref": "#/$defs/closure" },
+    "decision": { "$ref": "#/$defs/decision" },
+    "blockers": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/blocker" }
+    },
+    "authority_boundaries": { "$ref": "#/$defs/authority" },
+    "contracts": { "$ref": "#/$defs/contracts" },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "path", "sha256", "bytes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "lines": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "input_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "artifacts"],
+      "properties": {
+        "aggregate_sha256": { "$ref": "#/$defs/sha256" },
+        "artifacts": {
+          "type": "array", "minItems": 10, "maxItems": 10,
+          "items": { "$ref": "#/$defs/binding" }
+        }
+      }
+    },
+    "root_scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["selection", "root_kinds", "count", "by_kind", "set_sha256"],
+      "properties": {
+        "selection": { "const": "all-declared-roots" },
+        "root_kinds": {
+          "type": "array", "minItems": 3, "maxItems": 3,
+          "items": { "enum": ["character", "scene", "skill"] },
+          "uniqueItems": true
+        },
+        "count": { "type": "integer", "minimum": 1 },
+        "by_kind": {
+          "type": "object", "additionalProperties": false,
+          "required": ["character", "scene", "skill"],
+          "properties": {
+            "character": { "type": "integer", "minimum": 1 },
+            "scene": { "type": "integer", "minimum": 1 },
+            "skill": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "set_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "rule_scope": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "selection", "declared_rules", "selected_rules", "rules_with_edges",
+        "client_presentation_rules", "server_authoritative_rules", "source_rows",
+        "owner_filtering", "selection_sha256"
+      ],
+      "properties": {
+        "selection": { "const": "all-matching-core-resource-rules" },
+        "declared_rules": { "const": 16 },
+        "selected_rules": { "const": 16 },
+        "rules_with_edges": { "type": "integer", "minimum": 0, "maximum": 16 },
+        "client_presentation_rules": { "type": "integer", "minimum": 0 },
+        "server_authoritative_rules": { "type": "integer", "minimum": 0 },
+        "source_rows": { "type": "integer", "minimum": 1 },
+        "owner_filtering": { "const": "forbidden" },
+        "selection_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "auxiliary_scope": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "inventory_files", "malformed_isolated", "reference_adapters",
+        "reference_adapter_coverage", "new_roots_are_union_only", "scope_complete"
+      ],
+      "properties": {
+        "inventory_files": { "type": "integer", "minimum": 1 },
+        "malformed_isolated": { "type": "integer", "minimum": 0 },
+        "reference_adapters": { "type": "integer", "minimum": 0 },
+        "reference_adapter_coverage": { "const": "absent" },
+        "new_roots_are_union_only": { "const": true },
+        "scope_complete": { "const": false }
+      }
+    },
+    "scope_definition": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "mode", "outcome_based_exclusion", "declared_roots",
+        "core_table_resource_rules", "auxiliary_config"
+      ],
+      "properties": {
+        "mode": { "const": "monotonic-union" },
+        "outcome_based_exclusion": { "const": false },
+        "declared_roots": { "$ref": "#/$defs/root_scope" },
+        "core_table_resource_rules": { "$ref": "#/$defs/rule_scope" },
+        "auxiliary_config": { "$ref": "#/$defs/auxiliary_scope" }
+      }
+    },
+    "count_map": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "resolution": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "table_unique", "table_unresolved", "table_ambiguous",
+        "package_unique", "package_unresolved", "package_ambiguous",
+        "package_scoped_terminal", "heuristic_target_selections"
+      ],
+      "properties": {
+        "table_unique": { "type": "integer", "minimum": 0 },
+        "table_unresolved": { "type": "integer", "minimum": 0 },
+        "table_ambiguous": { "type": "integer", "minimum": 0 },
+        "package_unique": { "type": "integer", "minimum": 0 },
+        "package_unresolved": { "type": "integer", "minimum": 0 },
+        "package_ambiguous": { "type": "integer", "minimum": 0 },
+        "package_scoped_terminal": { "type": "integer", "minimum": 0 },
+        "heuristic_target_selections": { "const": 0 }
+      }
+    },
+    "conditional_required": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "runtime_assert_rows", "conditional_required_missing",
+        "conditional_required_unresolved", "source_inventory_id",
+        "source_inventory_sha256", "member_set_exported",
+        "member_set_sha256", "zero_threshold_satisfied"
+      ],
+      "properties": {
+        "runtime_assert_rows": { "type": "integer", "minimum": 1 },
+        "conditional_required_missing": { "type": "integer", "minimum": 1 },
+        "conditional_required_unresolved": { "type": "integer", "minimum": 0 },
+        "source_inventory_id": { "const": "P2-13" },
+        "source_inventory_sha256": { "$ref": "#/$defs/sha256" },
+        "member_set_exported": { "const": false },
+        "member_set_sha256": { "type": "null" },
+        "zero_threshold_satisfied": { "const": false }
+      }
+    },
+    "asset_structure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["pass", "unresolved", "fail"],
+      "properties": {
+        "pass": { "type": "integer", "minimum": 0 },
+        "unresolved": { "type": "integer", "minimum": 0 },
+        "fail": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "integrity": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "unknown_record_count", "unknown_resolution_count",
+        "recorded_resolution_mismatches", "catalog_candidate_mismatches",
+        "core_foreign_key_dangling"
+      ],
+      "properties": {
+        "unknown_record_count": { "type": "integer", "minimum": 0 },
+        "unknown_resolution_count": { "type": "integer", "minimum": 0 },
+        "recorded_resolution_mismatches": { "type": "integer", "minimum": 0 },
+        "catalog_candidate_mismatches": { "type": "integer", "minimum": 0 },
+        "core_foreign_key_dangling": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "export_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": { "const": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl" },
+        "tracked": { "const": false },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "lines": { "type": "integer", "minimum": 1 },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "closure": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "scope_complete", "auxiliary_config_reference_scope_complete",
+        "asset_binding_resolution_explicit", "start_nodes", "start_set_sha256",
+        "reachable_nodes", "reachable_set_sha256", "reachable_nodes_by_kind",
+        "traversed_edges_by_kind", "resolution", "conditional_required",
+        "asset_structure", "integrity",
+        "logical_gap_count", "gap_set_sha256", "detail_export"
+      ],
+      "properties": {
+        "scope_complete": { "const": false },
+        "auxiliary_config_reference_scope_complete": { "const": false },
+        "asset_binding_resolution_explicit": { "const": false },
+        "start_nodes": { "type": "integer", "minimum": 1 },
+        "start_set_sha256": { "$ref": "#/$defs/sha256" },
+        "reachable_nodes": { "type": "integer", "minimum": 1 },
+        "reachable_set_sha256": { "$ref": "#/$defs/sha256" },
+        "reachable_nodes_by_kind": { "$ref": "#/$defs/count_map" },
+        "traversed_edges_by_kind": { "$ref": "#/$defs/count_map" },
+        "resolution": { "$ref": "#/$defs/resolution" },
+        "conditional_required": { "$ref": "#/$defs/conditional_required" },
+        "asset_structure": { "$ref": "#/$defs/asset_structure" },
+        "integrity": { "$ref": "#/$defs/integrity" },
+        "logical_gap_count": { "type": "integer", "minimum": 1 },
+        "gap_set_sha256": { "$ref": "#/$defs/sha256" },
+        "detail_export": { "$ref": "#/$defs/export_binding" }
+      }
+    },
+    "thresholds": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scope_complete", "unresolved", "ambiguous", "conditional_required_missing", "heuristic", "asset_structure_gaps", "unknown"],
+      "properties": {
+        "scope_complete": { "const": true },
+        "unresolved": { "const": 0 },
+        "ambiguous": { "const": 0 },
+        "conditional_required_missing": { "const": 0 },
+        "heuristic": { "const": 0 },
+        "asset_structure_gaps": { "const": 0 },
+        "unknown": { "const": 0 }
+      }
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["required_status", "observed_status", "satisfied", "thresholds", "g2_approved", "p3_authorized"],
+      "properties": {
+        "required_status": { "const": "SATISFIED" },
+        "observed_status": { "const": "BLOCKED" },
+        "satisfied": { "const": false },
+        "thresholds": { "$ref": "#/$defs/thresholds" },
+        "g2_approved": { "const": false },
+        "p3_authorized": { "const": false }
+      }
+    },
+    "blocker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "reason", "required_action"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^G2-06-[A-Z0-9-]+$" },
+        "reason": { "type": "string", "minLength": 1 },
+        "required_action": { "type": "string", "minLength": 1 }
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["g2_approved", "p3_authorized", "playable_experience_proven", "release_authority", "automatic_repair_or_delete_authority"],
+      "properties": {
+        "g2_approved": { "const": false },
+        "p3_authorized": { "const": false },
+        "playable_experience_proven": { "const": false },
+        "release_authority": { "const": false },
+        "automatic_repair_or_delete_authority": { "const": false }
+      }
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy", "policy_sha256", "schema", "schema_sha256"],
+      "properties": {
+        "policy": { "const": "Contracts/data-schema/g2-core-resource-closure-policy-v1.json" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "schema": { "const": "Contracts/data-schema/g2-core-resource-closure-v1.schema.json" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["private_source_paths", "exact_primary_keys", "raw_table_rows", "decoded_confidential_payloads", "legacy_source_lines"],
+      "properties": {
+        "private_source_paths": { "const": false },
+        "exact_primary_keys": { "const": false },
+        "raw_table_rows": { "const": false },
+        "decoded_confidential_payloads": { "const": false },
+        "legacy_source_lines": { "const": false }
+      }
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
+  "task_id": "P2-20B",
+  "result": "BLOCKED",
+  "generation_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "gate_criterion": "G2-07",
+  "g2_07_satisfied": false,
+  "input": {
+    "aggregate_sha256": "48e5de5ffaf8879413f0b676585bfa8b8980df6ba324ca3ca46590ee0565e387",
+    "evidence": [
+      {
+        "task_id": "P2-09",
+        "path": "Data/Inventory/p2-09-legacy-current-diff.json",
+        "sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-10",
+        "path": "Data/Inventory/p2-10-canonical-id-map.json",
+        "sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-11",
+        "path": "Data/Inventory/p2-11-id-limit-audit.json",
+        "sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-17",
+        "path": "Data/Inventory/p2-17-protocol-codegen.json",
+        "sha256": "23cd1f824a3fab1c203a648df8224de6257bea96dc4aa431fcc063c74aead222",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-18",
+        "path": "Data/Inventory/p2-18-content-health.json",
+        "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      }
+    ],
+    "derived_sources": [
+      {
+        "artifact_id": "G2_POLICY",
+        "sha256": "4671783b9f5e28f2dd7d3b0f3216e9fcebd27f0ef78718b94f4d5f956f630f5a",
+        "records": 9
+      },
+      {
+        "artifact_id": "CORE_REGISTRY",
+        "sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "records": 12
+      },
+      {
+        "artifact_id": "P2_09_TABLE_DIFF_REPORT",
+        "sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667",
+        "records": 52
+      },
+      {
+        "artifact_id": "P2_11_ID_LIMIT_REPORT",
+        "sha256": "9839296bc39b0a40d65c78b93f76c4ee703a9a3ab939e5ddc5d19f32b48ced9e",
+        "records": 1283
+      },
+      {
+        "artifact_id": "LEGACY_SNAPSHOT_MANIFEST",
+        "sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+        "records": 52
+      }
+    ]
+  },
+  "registry": {
+    "path": "Data/Governance/p2-g2-migration-decisions.json",
+    "tracked": true,
+    "bytes": 2141363,
+    "lines": 68477,
+    "sha256": "a77018b67bb59a392fdda0b06a07b9e173f2ac71eb7cb85cbd4acbceb6a958f1"
+  },
+  "report": {
+    "path": "Data/Reports/p2-20b-migration-decisions-report.md",
+    "tracked": true,
+    "bytes": 1492,
+    "lines": 34,
+    "sha256": "59bec8c853d9bb5cf5ce5834e01267b5fdb07778ff265e5af89dfd165201e467"
+  },
+  "summary": {
+    "expected_units": 1359,
+    "enumerated_units": 1359,
+    "pending": 1359,
+    "decided": 0,
+    "approved": 0,
+    "approval_count": 0,
+    "by_subject_kind": {
+      "schema_table": 52,
+      "schema_reference": 12,
+      "canonical_id_domain": 12,
+      "id_component": 16,
+      "fixed_limit_signal": 1267
+    }
+  },
+  "completeness": {
+    "coverage_complete": true,
+    "decisions_complete": false,
+    "approvals_complete": false,
+    "missing": 0,
+    "duplicates": 0,
+    "orphans": 0,
+    "reference_membership_enumerated": true,
+    "all_inputs_hash_bound": true,
+    "failure_reasons": [
+      "DECISIONS_PENDING",
+      "APPROVALS_ABSENT"
+    ]
+  },
+  "hard_invariants": {
+    "numeric_identity_narrowing_forbidden": true,
+    "string_identity_numeric_conversion_forbidden": true,
+    "observed_mode_default_forbidden": true,
+    "tombstone_reuse_without_approval_forbidden": true,
+    "automatic_renumbering_without_approved_remap_forbidden": true,
+    "fixed_limit_copy_without_classification_forbidden": true
+  },
+  "authority_boundaries": {
+    "machine_generated": true,
+    "machine_can_approve": false,
+    "approval_authority_present": false,
+    "g2_approved": false,
+    "p3_authorized": false,
+    "release_authority": false
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-migration-decision-policy-v1.json",
+    "policy_sha256": "5ba93564d7cdbbb69ab6cdc97d39668f76374fdaaf531fcda4994ff5ed1cc457",
+    "schema": "Contracts/data-schema/g2-migration-decision-registry-v1.schema.json",
+    "schema_sha256": "1a92ce93b8f21c77e53bae9ad549a04775dc8c6019004d61b1eeaba5b3c199ed"
+  },
+  "implementation": {
+    "source_files": 4,
+    "source_sha256": "de2dc8adde9c0d8a4c005545b9109aa2be1f8567a18f6b6f60e951b9fcb9d225",
+    "generator": "Tools/TMXY.G2MigrationDecisions/migration_decisions.py",
+    "generator_sha256": "d2bbc6975887153d2dbe4932c776d5fc6227fb63a30652c1c4831d1b261195c5",
+    "wrapper": "Tools/TMXY.G2MigrationDecisions/New-G2MigrationDecisions.ps1",
+    "wrapper_sha256": "b04c21cd987d755909aacb90cb2de42f0846556e35519cc5489a815ee3477b6d",
+    "self_test_assertions": 11
+  },
+  "disclosure": {
+    "table_or_field_names": false,
+    "legacy_source_paths": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "matched_literal_values": false
+  },
+  "reproduction": {
+    "repository_mount": "read-only",
+    "legacy_mount": "read-only-authorized-input",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20B-owner-decisions",
+      "P2-20-g2-rerun"
+    ],
+    "detail": "Obtain real project/data-owner decisions and independently verifiable approvals for every active unit. Machine suggestions do not close G2-07."
+  }
+}

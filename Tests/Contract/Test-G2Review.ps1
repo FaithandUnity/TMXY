@@ -13,7 +13,10 @@ $reportPath = Join-Path $root 'Data\Reports\p2-20-g2-review-report.json'
 $markdownPath = Join-Path $root 'Data\Reports\p2-20-g2-review-report.md'
 $evidencePath = Join-Path $root 'Data\Inventory\p2-20-g2-review.json'
 $qualityPath = Join-Path $root 'Data\BuildBaseline\p0-12-local-quality-gates.json'
+$supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
+$remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
 $generatorPath = Join-Path $root 'Tools\TMXY.G2Review\g2_review.py'
+$helperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_evidence.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $assertions = [Collections.Generic.List[object]]::new()
 
@@ -75,18 +78,54 @@ function Get-Metric([object]$Criterion, [string]$Name) {
     return $matches[0].value
 }
 
+function Set-Metric([object]$Criterion, [string]$Name, [object]$Value) {
+    $matches = @($Criterion.metrics | Where-Object { [string]$_.name -eq $Name })
+    if ($matches.Count -ne 1) { throw "Metric is not unique: $Name" }
+    $matches[0].value = $Value
+}
+
+function Set-CriterionSatisfied([object]$Candidate, [string]$Id) {
+    $item = Get-Criterion $Candidate $Id
+    $item.satisfied = $true
+    $item.observed_status = 'SATISFIED'
+    $item.blocker_ids = @()
+    $Candidate.blockers = @($Candidate.blockers | Where-Object criterion_id -ne $Id)
+    $satisfied = @($Candidate.criteria | Where-Object satisfied | ForEach-Object id)
+    $blocked = @($Candidate.criteria | Where-Object { -not $_.satisfied } | ForEach-Object id)
+    $Candidate.summary.satisfied = $satisfied.Count
+    $Candidate.summary.blocked = $blocked.Count
+    $Candidate.summary.satisfied_ids = $satisfied
+    $Candidate.summary.blocked_ids = $blocked
+    if ($blocked.Count -eq 0) {
+        $Candidate.result = 'PASS'
+        $Candidate.task_status = 'COMPLETE'
+        $Candidate.completion_criteria_satisfied = $true
+        $Candidate.gate_decision = 'APPROVED'
+        $Candidate.g2_approved = $true
+        $Candidate.p3_authorized = $true
+    }
+}
+
 function Test-PolicySemantics([object]$Candidate) {
     $expectedIds = @(1..9 | ForEach-Object { 'G2-{0:D2}' -f $_ })
     $actualIds = @($Candidate.criteria.id)
     return $Candidate.schema_version -eq 1 -and $Candidate.task_id -eq 'P2-20' -and
         $Candidate.gate -eq 'G2' -and $Candidate.source_build -eq 'qy-3.0.0.413' -and
         @($Candidate.required_inputs).Count -eq 19 -and
+        $Candidate.supplemental.task_id -eq 'P2-20A' -and
+        $Candidate.supplemental.criterion_id -eq 'G2-06' -and
+        $Candidate.supplemental.path -eq 'Data/Reports/p2-20a-core-resource-closure-report.json' -and
+        $Candidate.remediation.task_id -eq 'P2-20B' -and
+        $Candidate.remediation.criterion_id -eq 'G2-07' -and
+        $Candidate.remediation.path -eq 'Data/Governance/p2-g2-migration-decisions.json' -and
         @($Candidate.criteria).Count -eq 9 -and
         @(Compare-Object $actualIds $expectedIds).Count -eq 0 -and
         @($Candidate.criteria | Where-Object required_status -ne 'SATISFIED').Count -eq 0 -and
         $Candidate.thresholds.required_criteria -eq 9 -and
         $Candidate.fail_closed_rules.core_foreign_key_zero_does_not_prove_core_resource_reference_zero -and
+        $Candidate.fail_closed_rules.first_candidate_or_heuristic_selection_never_proves_resource_closure -and
         $Candidate.fail_closed_rules.audit_codegen_or_uint64_policy_is_not_a_complete_migration_decision_registry -and
+        $Candidate.fail_closed_rules.machine_suggestions_never_count_as_migration_decisions_or_approvals -and
         $Candidate.fail_closed_rules.one_blocked_criterion_blocks_g2 -and
         $Candidate.fail_closed_rules.blocked_g2_never_authorizes_p3_or_release
 }
@@ -96,10 +135,15 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         $Candidate.task_status -ne 'BLOCKED' -or $Candidate.completion_criteria_satisfied -or
         $Candidate.gate -ne 'G2' -or $Candidate.gate_decision -ne 'BLOCKED' -or
         $Candidate.g2_approved -or $Candidate.p3_authorized) { return $false }
-    if ($Candidate.summary.criteria_total -ne 9 -or $Candidate.summary.satisfied -ne 7 -or
-        $Candidate.summary.blocked -ne 2 -or
-        @(Compare-Object -ReferenceObject @($Candidate.summary.satisfied_ids) -DifferenceObject @('G2-01', 'G2-02', 'G2-03', 'G2-04', 'G2-05', 'G2-08', 'G2-09')).Count -ne 0 -or
-        @(Compare-Object @($Candidate.summary.blocked_ids) @('G2-06', 'G2-07')).Count -ne 0) {
+    $derivedSatisfied = @($Candidate.criteria | Where-Object satisfied | ForEach-Object id)
+    $derivedBlocked = @($Candidate.criteria | Where-Object { -not $_.satisfied } | ForEach-Object id)
+    if ($Candidate.summary.criteria_total -ne @($Candidate.criteria).Count -or
+        $Candidate.summary.satisfied -ne $derivedSatisfied.Count -or
+        $Candidate.summary.blocked -ne $derivedBlocked.Count -or
+        @(Compare-Object @($Candidate.summary.satisfied_ids) $derivedSatisfied).Count -ne 0 -or
+        @(Compare-Object @($Candidate.summary.blocked_ids) $derivedBlocked).Count -ne 0 -or
+        $Candidate.summary.satisfied -ne 7 -or $Candidate.summary.blocked -ne 2 -or
+        @(Compare-Object $derivedBlocked @('G2-06', 'G2-07')).Count -ne 0) {
         return $false
     }
     if (@($Candidate.criteria).Count -ne 9) { return $false }
@@ -118,24 +162,48 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         }
     }
     $g206 = Get-Criterion $Candidate 'G2-06'
-    if ((Get-Metric $g206 'core_foreign_key_dangling') -ne 0 -or
-        (Get-Metric $g206 'core_resource_subset_hash_bound') -ne $false -or
-        (Get-Metric $g206 'core_resource_metrics_present') -ne $false -or
-        $null -ne (Get-Metric $g206 'core_resource_unresolved') -or
-        $null -ne (Get-Metric $g206 'core_resource_ambiguous') -or
-        $null -ne (Get-Metric $g206 'core_resource_heuristic_selections') -or
-        (Get-Metric $g206 'table_object_unresolved') -ne 5161 -or
-        (Get-Metric $g206 'table_object_ambiguous') -ne 6945 -or
-        (Get-Metric $g206 'package_unresolved') -ne 1076 -or
-        (Get-Metric $g206 'package_ambiguous') -ne 21146 -or
+    if ((Get-Metric $g206 'supplemental_report_present') -ne $true -or
+        (Get-Metric $g206 'declared_scope_hash_bound') -ne $true -or
+        (Get-Metric $g206 'scope_complete') -ne $false -or
+        (Get-Metric $g206 'auxiliary_config_scope_complete') -ne $false -or
+        (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $false -or
+        (Get-Metric $g206 'table_resource_unresolved') -ne 5161 -or
+        (Get-Metric $g206 'table_resource_ambiguous') -ne 6945 -or
+        (Get-Metric $g206 'package_resource_unresolved') -ne 407 -or
+        (Get-Metric $g206 'package_resource_ambiguous') -ne 8511 -or
+        (Get-Metric $g206 'conditional_required_missing') -ne 29 -or
+        (Get-Metric $g206 'conditional_member_set_exported') -ne $false -or
+        (Get-Metric $g206 'conditional_member_set_hash_bound') -ne $false -or
+        (Get-Metric $g206 'conditional_source_hash_bound') -ne $true -or
+        (Get-Metric $g206 'heuristic_target_selections') -ne 0 -or
+        (Get-Metric $g206 'first_candidate_selection_used') -ne $false -or
+        (Get-Metric $g206 'asset_structure_unresolved') -ne 18 -or
+        (Get-Metric $g206 'asset_structure_fail') -ne 0 -or
+        (Get-Metric $g206 'unknown_record_count') -ne 0 -or
+        (Get-Metric $g206 'unknown_resolution_count') -ne 0 -or
+        (Get-Metric $g206 'integrity_mismatches') -ne 0 -or
+        (Get-Metric $g206 'logical_gap_count') -ne 21024 -or
+        (Get-Metric $g206 'logical_gap_set_hash_bound') -ne $true -or
+        (Get-Metric $g206 'core_foreign_key_dangling_context') -ne 0 -or
         @($g206.blocker_ids).Count -ne 1 -or $g206.blocker_ids[0] -ne 'G2-BLK-06') {
         return $false
     }
     $g207 = Get-Criterion $Candidate 'G2-07'
-    if ((Get-Metric $g207 'migration_decision_registry_present') -ne $false -or
-        (Get-Metric $g207 'diff_audit_complete') -ne $true -or
-        (Get-Metric $g207 'limit_audit_complete') -ne $true -or
-        (Get-Metric $g207 'shared_uint64_codegen') -ne $true -or
+    if ((Get-Metric $g207 'migration_decision_registry_present') -ne $true -or
+        (Get-Metric $g207 'coverage_complete') -ne $true -or
+        (Get-Metric $g207 'expected_units') -ne 1359 -or
+        (Get-Metric $g207 'enumerated_units') -ne 1359 -or
+        (Get-Metric $g207 'missing_units') -ne 0 -or
+        (Get-Metric $g207 'duplicate_units') -ne 0 -or
+        (Get-Metric $g207 'orphan_units') -ne 0 -or
+        (Get-Metric $g207 'pending_decisions') -ne 1359 -or
+        (Get-Metric $g207 'decided_units') -ne 0 -or
+        (Get-Metric $g207 'approved_units') -ne 0 -or
+        (Get-Metric $g207 'approval_count') -ne 0 -or
+        (Get-Metric $g207 'machine_suggestions') -ne 1359 -or
+        (Get-Metric $g207 'machine_suggestions_count_as_decisions') -ne $false -or
+        (Get-Metric $g207 'pending_entries_have_no_chosen_decision') -ne $true -or
+        (Get-Metric $g207 'g2_07_registry_satisfied') -ne $false -or
         @($g207.blocker_ids).Count -ne 1 -or $g207.blocker_ids[0] -ne 'G2-BLK-07') {
         return $false
     }
@@ -148,7 +216,7 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
-    $qualityPath, $generatorPath, $wrapperPath)
+    $qualityPath, $supplementalPath, $remediationPath, $generatorPath, $helperPath, $wrapperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -169,6 +237,10 @@ $report = $reportText | ConvertFrom-Json -Depth 100 -DateKind String
 $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $quality = Get-Content -LiteralPath $qualityPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$supplemental = Get-Content -LiteralPath $supplementalPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$remediation = Get-Content -LiteralPath $remediationPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 
 function Test-EvidenceSemantics([object]$Candidate) {
@@ -219,7 +291,7 @@ function Test-EvidenceSemantics([object]$Candidate) {
         $Candidate.implementation.wrapper_sha256 -ne (Get-Sha256 $wrapperPath) -or
         $Candidate.implementation.source_files -ne $sourceFiles.Count -or
         $Candidate.implementation.source_sha256 -ne $sourceSha -or
-        $Candidate.implementation.self_test_assertions -lt 8) { return $false }
+        $Candidate.implementation.self_test_assertions -lt 10) { return $false }
     if ($Candidate.disclosure.private_source_paths -or $Candidate.disclosure.exact_primary_keys -or
         $Candidate.disclosure.exact_observed_extrema -or $Candidate.disclosure.raw_table_rows -or
         $Candidate.disclosure.decoded_confidential_payloads -or
@@ -228,7 +300,8 @@ function Test-EvidenceSemantics([object]$Candidate) {
         $Candidate.reproduction.network -ne 'none' -or $Candidate.reproduction.capabilities -ne 'none' -or
         -not $Candidate.reproduction.no_new_privileges -or
         $Candidate.reproduction.builder_user -ne 'tmxy' -or
-        @(Compare-Object @($Candidate.next_scope.tasks) @('P2-20-remediation')).Count -ne 0) {
+        @(Compare-Object @($Candidate.next_scope.tasks) @(
+                    'P2-20A-remediation', 'P2-20B-owner-decisions', 'P2-20-g2-rerun')).Count -ne 0) {
         return $false
     }
     return $true
@@ -276,6 +349,33 @@ foreach ($index in 0..18) {
     $aggregateLines.Add("$($binding.task_id)|$($binding.path)|$($binding.sha256)")
 }
 $qualityBinding = $report.input_bindings.quality
+$supplementalBinding = $report.input_bindings.supplemental
+$remediationBinding = $report.input_bindings.remediation
+$bindingsPassed = $bindingsPassed -and
+    $supplementalBinding.task_id -eq $policy.supplemental.task_id -and
+    $supplementalBinding.criterion_id -eq $policy.supplemental.criterion_id -and
+    $supplementalBinding.path -eq $policy.supplemental.path -and
+    $supplementalBinding.sha256 -eq (Get-Sha256 $supplementalPath) -and
+    $supplemental.task_id -eq 'P2-20A' -and $supplemental.criterion_id -eq 'G2-06' -and
+    $supplemental.review_execution_result -eq 'PASS' -and
+    $supplementalBinding.result -eq $supplemental.result -and
+    $supplementalBinding.task_status -eq $supplemental.task_status -and
+    $supplementalBinding.completion_criteria_satisfied -eq
+        $supplemental.completion_criteria_satisfied
+$aggregateLines.Add("SUPPLEMENTAL|$($supplementalBinding.task_id)|$($supplementalBinding.criterion_id)|$($supplementalBinding.path)|$($supplementalBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and
+    $remediationBinding.task_id -eq $policy.remediation.task_id -and
+    $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
+    $remediationBinding.path -eq $policy.remediation.path -and
+    $remediationBinding.sha256 -eq (Get-Sha256 $remediationPath) -and
+    $remediation.task_id -eq 'P2-20B' -and $remediation.gate_criterion -eq 'G2-07' -and
+    $remediation.generation_result -eq 'PASS' -and
+    $remediationBinding.result -eq $remediation.result -and
+    $remediationBinding.task_status -eq $remediation.task_status -and
+    $remediationBinding.completion_criteria_satisfied -eq
+        $remediation.completion_criteria_satisfied -and
+    $remediationBinding.g2_07_satisfied -eq $remediation.g2_07_satisfied
+$aggregateLines.Add("REMEDIATION|$($remediationBinding.task_id)|$($remediationBinding.criterion_id)|$($remediationBinding.path)|$($remediationBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and $qualityBinding.path -eq $policy.quality_evidence -and
     $qualityBinding.sha256 -eq (Get-Sha256 $qualityPath) -and
     $quality.result -eq 'PASS_DIAGNOSTIC' -and $quality.repository.result -eq 'PASS' -and
@@ -284,31 +384,49 @@ $bindingsPassed = $bindingsPassed -and $qualityBinding.path -eq $policy.quality_
 $aggregateLines.Add("QUALITY|$($qualityBinding.path)|$($qualityBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and $report.input_bindings.aggregate_sha256 -eq
     (Get-TextSha256 (($aggregateLines -join "`n") + "`n"))
-Add-A 'All 19 prerequisites and quality evidence are complete and exactly SHA-256 bound' $bindingsPassed
+Add-A 'All prerequisites supplemental remediation and quality evidence are exactly SHA-256 bound' $bindingsPassed
 
 $g206 = Get-Criterion $report 'G2-06'
-Add-A 'Core FK zero cannot substitute for absent hash-bound core-resource metrics' (
-    (Get-Metric $g206 'core_foreign_key_dangling') -eq 0 -and
-    (Get-Metric $g206 'core_resource_subset_hash_bound') -eq $false -and
-    (Get-Metric $g206 'core_resource_metrics_present') -eq $false -and
-    $null -eq (Get-Metric $g206 'core_resource_unresolved') -and
-    $null -eq (Get-Metric $g206 'core_resource_ambiguous') -and
-    $null -eq (Get-Metric $g206 'core_resource_heuristic_selections') -and
-    $policy.thresholds.core_resource_unresolved -eq 0 -and
-    $policy.thresholds.core_resource_ambiguous -eq 0 -and
-    (Get-Metric $g206 'table_object_unresolved') -eq 5161 -and
-    (Get-Metric $g206 'table_object_ambiguous') -eq 6945 -and
-    (Get-Metric $g206 'package_unresolved') -eq 1076 -and
-    (Get-Metric $g206 'package_ambiguous') -eq 21146 -and
-    $g206.interpretation -match 'Global queues are risk context, not the core exit threshold' -and
+Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without FK substitution' (
+    $supplemental.closure.scope_complete -eq $false -and
+    $supplemental.closure.auxiliary_config_reference_scope_complete -eq $false -and
+    $supplemental.closure.asset_binding_resolution_explicit -eq $false -and
+    $supplemental.closure.conditional_required.conditional_required_missing -eq 29 -and
+    $supplemental.closure.conditional_required.member_set_exported -eq $false -and
+    $supplemental.closure.resolution.heuristic_target_selections -eq 0 -and
+    $supplemental.closure.integrity.core_foreign_key_dangling -eq 0 -and
+    (Get-Metric $g206 'table_resource_unresolved') -eq
+        $supplemental.closure.resolution.table_unresolved -and
+    (Get-Metric $g206 'table_resource_ambiguous') -eq
+        $supplemental.closure.resolution.table_ambiguous -and
+    (Get-Metric $g206 'package_resource_unresolved') -eq
+        $supplemental.closure.resolution.package_unresolved -and
+    (Get-Metric $g206 'package_resource_ambiguous') -eq
+        $supplemental.closure.resolution.package_ambiguous -and
+    (Get-Metric $g206 'conditional_required_missing') -eq 29 -and
+    (Get-Metric $g206 'conditional_member_set_exported') -eq $false -and
+    (Get-Metric $g206 'first_candidate_selection_used') -eq $false -and
+    (Get-Metric $g206 'asset_structure_unresolved') -eq 18 -and
+    (Get-Metric $g206 'unknown_record_count') -eq 0 -and
+    (Get-Metric $g206 'unknown_resolution_count') -eq 0 -and
+    (Get-Metric $g206 'core_foreign_key_dangling_context') -eq 0 -and
+    $g206.interpretation -match 'hash-bound monotonic core-scope closure report' -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
 $g207 = Get-Criterion $report 'G2-07'
-Add-A 'P2-09 P2-11 and P2-17 audits do not impersonate complete migration decisions' (
-    (Get-Metric $g207 'migration_decision_registry_present') -eq $false -and
-    (Get-Metric $g207 'diff_audit_complete') -eq $true -and
-    (Get-Metric $g207 'limit_audit_complete') -eq $true -and
-    (Get-Metric $g207 'shared_uint64_codegen') -eq $true -and
-    -not (Test-Path -LiteralPath (Join-Path $root $policy.migration_decision_registry) -PathType Leaf) -and
+Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
+    (Get-Metric $g207 'migration_decision_registry_present') -eq $true -and
+    (Get-Metric $g207 'coverage_complete') -eq $true -and
+    $remediation.summary.expected_units -eq 1359 -and
+    $remediation.summary.enumerated_units -eq 1359 -and
+    $remediation.completeness.missing -eq 0 -and
+    $remediation.completeness.duplicates -eq 0 -and
+    $remediation.completeness.orphans -eq 0 -and
+    $remediation.summary.pending -eq 1359 -and $remediation.summary.decided -eq 0 -and
+    $remediation.summary.approved -eq 0 -and $remediation.summary.approval_count -eq 0 -and
+    (Get-Metric $g207 'machine_suggestions') -eq 1359 -and
+    (Get-Metric $g207 'machine_suggestions_count_as_decisions') -eq $false -and
+    -not $remediation.authority_boundaries.machine_can_approve -and
+    -not $remediation.g2_07_satisfied -and
     -not $g207.satisfied -and $g207.observed_status -eq 'BLOCKED')
 Add-A 'Both blocker records remain non-empty and mapped to their criteria' (
     @($report.blockers).Count -eq 2 -and
@@ -317,7 +435,10 @@ Add-A 'Both blocker records remain non-empty and mapped to their criteria' (
             [string]::IsNullOrWhiteSpace([string]$_.reason) -or
             [string]::IsNullOrWhiteSpace([string]$_.required_action)
         }).Count -eq 0 -and
-    @(Compare-Object @($report.blockers.id) @('G2-BLK-06', 'G2-BLK-07')).Count -eq 0)
+    @(Compare-Object @($report.blockers.id) @('G2-BLK-06', 'G2-BLK-07')).Count -eq 0 -and
+    @($report.blockers | Where-Object { $_.reason -match '\babsent\b|\bmissing evidence\b' }).Count -eq 0 -and
+    $report.blockers[0].reason -match 'measured core queues contain' -and
+    $report.blockers[1].reason -match 'remain pending')
 
 $p215 = Get-Content -LiteralPath (Join-Path $root 'Data\Inventory\p2-15-conversion-routing.json') `
     -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
@@ -369,28 +490,74 @@ $wrongPolicy = Copy-JsonObject $policy
 $wrongPolicy.criteria[5].required_status = 'BLOCKED'
 $negativeCases.blocked_exit_requirement_rejected = -not (Test-PolicySemantics $wrongPolicy)
 $falseFk = Copy-JsonObject $report
-$falseFk.criteria[5].observed_status = 'SATISFIED'
-$falseFk.criteria[5].satisfied = $true
-$falseFk.criteria[5].blocker_ids = @()
+Set-CriterionSatisfied $falseFk 'G2-06'
 $negativeCases.core_fk_zero_substitution_rejected =
-    -not (Test-AgainstSchema $falseFk) -and -not (Test-G2Semantics $falseFk $policy)
+    (Test-AgainstSchema $falseFk) -and -not (Test-G2Semantics $falseFk $policy)
+$scopeForgery = Copy-JsonObject $report
+$scopeCriterion = Get-Criterion $scopeForgery 'G2-06'
+foreach ($name in @('scope_complete', 'auxiliary_config_scope_complete',
+        'asset_binding_resolution_explicit', 'conditional_member_set_exported',
+        'conditional_member_set_hash_bound')) {
+    Set-Metric $scopeCriterion $name $true
+}
+foreach ($name in @('table_resource_unresolved', 'table_resource_ambiguous',
+        'package_resource_unresolved', 'package_resource_ambiguous',
+        'conditional_required_missing', 'asset_structure_unresolved')) {
+    Set-Metric $scopeCriterion $name 0
+}
+Set-CriterionSatisfied $scopeForgery 'G2-06'
+$negativeCases.scope_and_conditional_29_forgery_rejected =
+    (Test-AgainstSchema $scopeForgery) -and -not (Test-G2Semantics $scopeForgery $policy)
+$firstCandidate = Copy-JsonObject $scopeForgery
+Set-Metric (Get-Criterion $firstCandidate 'G2-06') 'first_candidate_selection_used' $true
+$negativeCases.first_candidate_selection_rejected =
+    (Test-AgainstSchema $firstCandidate) -and -not (Test-G2Semantics $firstCandidate $policy)
 $falseMigration = Copy-JsonObject $report
-$falseMigration.criteria[6].observed_status = 'SATISFIED'
-$falseMigration.criteria[6].satisfied = $true
 $falseMigration.criteria[6].evidence_task_ids = @('P2-09', 'P2-11', 'P2-17')
-$falseMigration.criteria[6].blocker_ids = @()
 $negativeCases.audit_codegen_migration_substitution_rejected =
-    -not (Test-AgainstSchema $falseMigration) -and -not (Test-G2Semantics $falseMigration $policy)
-$approved = Copy-JsonObject $report
-$approved.result = 'PASS'; $approved.task_status = 'COMPLETE'; $approved.gate_decision = 'APPROVED'
-$approved.completion_criteria_satisfied = $true; $approved.g2_approved = $true
-$approved.p3_authorized = $true
+    (Test-AgainstSchema $falseMigration) -and -not (Test-G2Semantics $falseMigration $policy)
+$pendingApproval = Copy-JsonObject $report
+$migrationCriterion = Get-Criterion $pendingApproval 'G2-07'
+Set-Metric $migrationCriterion 'pending_decisions' 0
+Set-Metric $migrationCriterion 'decided_units' 1359
+Set-Metric $migrationCriterion 'approved_units' 1359
+Set-Metric $migrationCriterion 'approval_count' 1359
+Set-Metric $migrationCriterion 'g2_07_registry_satisfied' $true
+Set-CriterionSatisfied $pendingApproval 'G2-07'
+$negativeCases.pending_1359_false_approval_rejected =
+    (Test-AgainstSchema $pendingApproval) -and -not (Test-G2Semantics $pendingApproval $policy)
+$machineDecision = Copy-JsonObject $pendingApproval
+Set-Metric (Get-Criterion $machineDecision 'G2-07') `
+    'machine_suggestions_count_as_decisions' $true
+$negativeCases.machine_suggestion_decision_substitution_rejected =
+    (Test-AgainstSchema $machineDecision) -and -not (Test-G2Semantics $machineDecision $policy)
+$approved = Copy-JsonObject $scopeForgery
+$approvedMigration = Get-Criterion $approved 'G2-07'
+Set-Metric $approvedMigration 'pending_decisions' 0
+Set-Metric $approvedMigration 'decided_units' 1359
+Set-Metric $approvedMigration 'approved_units' 1359
+Set-Metric $approvedMigration 'approval_count' 1359
+Set-Metric $approvedMigration 'g2_07_registry_satisfied' $true
+Set-CriterionSatisfied $approved 'G2-07'
 $negativeCases.approved_gate_rejected =
-    -not (Test-AgainstSchema $approved) -and -not (Test-G2Semantics $approved $policy)
+    (Test-AgainstSchema $approved) -and -not (Test-G2Semantics $approved $policy)
 $noBlockers = Copy-JsonObject $report
 $noBlockers.blockers = @()
 $negativeCases.empty_blockers_rejected =
     -not (Test-AgainstSchema $noBlockers) -and -not (Test-G2Semantics $noBlockers $policy)
+$missingSupplementalSha = Copy-JsonObject $report
+[void]$missingSupplementalSha.input_bindings.supplemental.PSObject.Properties.Remove('sha256')
+$negativeCases.missing_supplemental_sha_rejected = -not (Test-AgainstSchema $missingSupplementalSha)
+$badSupplementalSha = Copy-JsonObject $report
+$badSupplementalSha.input_bindings.supplemental.sha256 = '0' * 64
+$negativeCases.supplemental_sha_tamper_rejected =
+    (Test-AgainstSchema $badSupplementalSha) -and
+    $badSupplementalSha.input_bindings.supplemental.sha256 -ne (Get-Sha256 $supplementalPath)
+$badRemediationSha = Copy-JsonObject $report
+$badRemediationSha.input_bindings.remediation.sha256 = '0' * 64
+$negativeCases.remediation_sha_tamper_rejected =
+    (Test-AgainstSchema $badRemediationSha) -and
+    $badRemediationSha.input_bindings.remediation.sha256 -ne (Get-Sha256 $remediationPath)
 $badSha = Copy-JsonObject $report
 $badSha.input_bindings.prerequisites[0].sha256 = '0' * 64
 $negativeCases.sha_tamper_rejected = (Test-AgainstSchema $badSha)
@@ -399,10 +566,15 @@ if ($negativeCases.sha_tamper_rejected) {
     $negativeCases.sha_tamper_rejected =
         $badSha.input_bindings.prerequisites[0].sha256 -ne (Get-Sha256 $path)
 }
+$aggregateDrift = Copy-JsonObject $report
+$aggregateDrift.input_bindings.aggregate_sha256 = '0' * 64
+$negativeCases.aggregate_input_drift_rejected =
+    (Test-AgainstSchema $aggregateDrift) -and
+    $aggregateDrift.input_bindings.aggregate_sha256 -ne $report.input_bindings.aggregate_sha256
 $badEvidence = Copy-JsonObject $evidence
 $badEvidence.implementation.source_sha256 = '0' * 64
 $negativeCases.full_evidence_tamper_rejected = -not (Test-EvidenceSemantics $badEvidence)
-Add-A 'Policy exit FK migration gate blocker SHA and unknown-field negatives fail closed' (
+Add-A 'Policy supplemental scope FK migration approval drift and unknown-field negatives fail closed' (
     @($negativeCases.Values | Where-Object { -not $_ }).Count -eq 0)
 
 $localCheck = $null

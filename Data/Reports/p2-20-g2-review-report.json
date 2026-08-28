@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "1696ca484af1f5d6c16aa3478d204e0d95a99152e5879b77674975e573696345",
+    "aggregate_sha256": "a4d508fd73e377681c609b19742e7e50271244ac4fa5ef247d64e4e2039be163",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -167,11 +167,32 @@
         "completion_criteria_satisfied": true
       }
     ],
+    "supplemental": {
+      "task_id": "P2-20A",
+      "criterion_id": "G2-06",
+      "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+      "sha256": "888a3e48539190b509491d607a7df2fde23440ecd6f3eaf24bf45434b012e027",
+      "result": "BLOCKED",
+      "review_execution_result": "PASS",
+      "task_status": "BLOCKED",
+      "completion_criteria_satisfied": false
+    },
+    "remediation": {
+      "task_id": "P2-20B",
+      "criterion_id": "G2-07",
+      "path": "Data/Governance/p2-g2-migration-decisions.json",
+      "sha256": "a77018b67bb59a392fdda0b06a07b9e173f2ac71eb7cb85cbd4acbceb6a958f1",
+      "result": "BLOCKED",
+      "generation_result": "PASS",
+      "task_status": "BLOCKED",
+      "completion_criteria_satisfied": false,
+      "g2_07_satisfied": false
+    },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "e517acf4b1426a820115a4d4de15d933e01abf27934079a410c1620517338910",
+      "sha256": "e869f36618b54214eaa2cfde0aa456b8f7586aa6724ba4e9136431ff7b138134",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-28T18:27:14.8095622+00:00"
+      "captured_utc": "2026-08-28T20:26:52.9231831+00:00"
     }
   },
   "summary": {
@@ -380,61 +401,127 @@
       "evidence_task_ids": [
         "P2-03",
         "P2-13",
-        "P2-18"
+        "P2-18",
+        "P2-20A"
       ],
       "metrics": [
         {
-          "name": "core_foreign_key_dangling",
-          "value": 0,
-          "unit": "references"
+          "name": "supplemental_report_present",
+          "value": true,
+          "unit": "boolean"
         },
         {
-          "name": "core_resource_subset_hash_bound",
+          "name": "declared_scope_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "scope_complete",
           "value": false,
           "unit": "boolean"
         },
         {
-          "name": "core_resource_metrics_present",
+          "name": "auxiliary_config_scope_complete",
           "value": false,
           "unit": "boolean"
         },
         {
-          "name": "core_resource_unresolved",
-          "value": null,
-          "unit": "references"
+          "name": "asset_binding_resolution_explicit",
+          "value": false,
+          "unit": "boolean"
         },
         {
-          "name": "core_resource_ambiguous",
-          "value": null,
-          "unit": "references"
-        },
-        {
-          "name": "core_resource_heuristic_selections",
-          "value": null,
-          "unit": "references"
-        },
-        {
-          "name": "table_object_unresolved",
+          "name": "table_resource_unresolved",
           "value": 5161,
           "unit": "references"
         },
         {
-          "name": "table_object_ambiguous",
+          "name": "table_resource_ambiguous",
           "value": 6945,
           "unit": "references"
         },
         {
-          "name": "package_unresolved",
-          "value": 1076,
+          "name": "package_resource_unresolved",
+          "value": 407,
           "unit": "references"
         },
         {
-          "name": "package_ambiguous",
-          "value": 21146,
+          "name": "package_resource_ambiguous",
+          "value": 8511,
+          "unit": "references"
+        },
+        {
+          "name": "conditional_required_missing",
+          "value": 29,
+          "unit": "references"
+        },
+        {
+          "name": "conditional_member_set_exported",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "conditional_member_set_hash_bound",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "conditional_source_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "heuristic_target_selections",
+          "value": 0,
+          "unit": "references"
+        },
+        {
+          "name": "first_candidate_selection_used",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "asset_structure_unresolved",
+          "value": 18,
+          "unit": "assets"
+        },
+        {
+          "name": "asset_structure_fail",
+          "value": 0,
+          "unit": "assets"
+        },
+        {
+          "name": "unknown_record_count",
+          "value": 0,
+          "unit": "records"
+        },
+        {
+          "name": "unknown_resolution_count",
+          "value": 0,
+          "unit": "records"
+        },
+        {
+          "name": "integrity_mismatches",
+          "value": 0,
+          "unit": "records"
+        },
+        {
+          "name": "logical_gap_count",
+          "value": 21024,
+          "unit": "references"
+        },
+        {
+          "name": "logical_gap_set_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "core_foreign_key_dangling_context",
+          "value": 0,
           "unit": "references"
         }
       ],
-      "interpretation": "The explicit hash-bound core-resource subset and its zero unresolved, ambiguous, and heuristic metrics are absent. Global queues are risk context, not the core exit threshold; core foreign-key dangling zero is also a separate narrower fact.",
+      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report, but complete auxiliary scope, asset binding, conditional member evidence, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -450,31 +537,87 @@
         "P2-10",
         "P2-11",
         "P2-17",
-        "P2-18"
+        "P2-18",
+        "P2-20B"
       ],
       "metrics": [
         {
           "name": "migration_decision_registry_present",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "coverage_complete",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "expected_units",
+          "value": 1359,
+          "unit": "decisions"
+        },
+        {
+          "name": "enumerated_units",
+          "value": 1359,
+          "unit": "decisions"
+        },
+        {
+          "name": "missing_units",
+          "value": 0,
+          "unit": "decisions"
+        },
+        {
+          "name": "duplicate_units",
+          "value": 0,
+          "unit": "decisions"
+        },
+        {
+          "name": "orphan_units",
+          "value": 0,
+          "unit": "decisions"
+        },
+        {
+          "name": "pending_decisions",
+          "value": 1359,
+          "unit": "decisions"
+        },
+        {
+          "name": "decided_units",
+          "value": 0,
+          "unit": "decisions"
+        },
+        {
+          "name": "approved_units",
+          "value": 0,
+          "unit": "decisions"
+        },
+        {
+          "name": "approval_count",
+          "value": 0,
+          "unit": "approvals"
+        },
+        {
+          "name": "machine_suggestions",
+          "value": 1359,
+          "unit": "suggestions"
+        },
+        {
+          "name": "machine_suggestions_count_as_decisions",
           "value": false,
           "unit": "boolean"
         },
         {
-          "name": "diff_audit_complete",
+          "name": "pending_entries_have_no_chosen_decision",
           "value": true,
           "unit": "boolean"
         },
         {
-          "name": "limit_audit_complete",
-          "value": true,
-          "unit": "boolean"
-        },
-        {
-          "name": "shared_uint64_codegen",
-          "value": true,
+          "name": "g2_07_registry_satisfied",
+          "value": false,
           "unit": "boolean"
         }
       ],
-      "interpretation": "Diff, limit, and uint64 code-generation audits are inputs, not a complete approved migration-decision registry.",
+      "interpretation": "P2-20B completely enumerates and hash-binds all migration-decision units, but every unit remains pending with no independently verified decision or approval. Machine suggestions are non-authoritative and do not satisfy G2-07.",
       "blocker_ids": [
         "G2-BLK-07"
       ]
@@ -582,17 +725,17 @@
     {
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
-      "title": "Core resource-reference closure is not proven",
-      "reason": "A hash-bound core-resource subset and its explicit unresolved, ambiguous, and heuristic-selection metrics are absent. Global queues remain risk context, while core foreign-key dangling zero cannot substitute for this proof.",
-      "required_action": "Define and hash-bind the core-resource subset, prove its unresolved, ambiguous, and heuristic-selection counts are zero, and regenerate closure evidence.",
+      "title": "Core resource-reference closure has quantified open gaps",
+      "reason": "P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; the measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Complete auxiliary configuration scope and explicit asset binding, export and hash-bind the conditional member set, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {
       "id": "G2-BLK-07",
       "criterion_id": "G2-07",
-      "title": "Complete migration decisions are absent",
-      "reason": "Existing diff, limit, canonical-ID, and code-generation audits do not record every required migration decision.",
-      "required_action": "Create and review a complete migration-decision registry covering ID, width, old-to-new schema, and fixed-limit risks.",
+      "title": "Migration registry is complete in coverage but decisions remain pending",
+      "reason": "P2-20B enumerates 1359 of 1359 required units, but 1359 remain pending, only 0 are decided, 0 are approved, and the verified approval count is 0. Machine suggestions are not decisions.",
+      "required_action": "Record an explicit reviewed migration decision for every unit and bind independently verifiable approvals to each decision digest; machine-generated suggestions remain advisory.",
       "authority_required": true
     }
   ],
@@ -621,9 +764,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "01cd03e9281018c6f4649897426e2a3740165692e845cd8308c2505062bc8bde",
+    "policy_sha256": "4671783b9f5e28f2dd7d3b0f3216e9fcebd27f0ef78718b94f4d5f956f630f5a",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "1ac9a7f5aa735fd01a0b9cc01ba61c5b2ccc3bcaa85066839d325d73484b644a"
+    "schema_sha256": "aae199ee8ee4a2d000e8aaa61ef84e47a63e2286c14080fec90ac62957d4bb31"
   },
   "disclosure": {
     "private_source_paths": false,

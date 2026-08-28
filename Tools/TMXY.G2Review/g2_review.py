@@ -6,39 +6,12 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import re
 from pathlib import Path
 from typing import Any
 
-def load_json(path: Path) -> dict[str, Any]:
-    with path.open("r", encoding="utf-8-sig") as stream:
-        value = json.load(stream)
-    if not isinstance(value, dict):
-        raise ValueError(f"JSON root must be an object: {path.name}")
-    return value
-
-def sha256(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
-
-def require(condition: bool, message: str) -> None:
-    if not condition:
-        raise ValueError(message)
-
-def is_safe_relative(relative: str) -> bool:
-    candidate = Path(relative)
-    return (bool(relative) and "\\" not in relative and not relative.startswith("/") and
-            not candidate.is_absolute() and ".." not in candidate.parts)
-
-def resolve_inside(root: Path, relative: str) -> Path:
-    require(is_safe_relative(relative), "Path is not repository-relative")
-    candidate = (root / relative).resolve()
-    require(candidate.is_relative_to(root), "Path escaped repository root")
-    require(candidate.is_file(), f"Required input is missing: {relative}")
-    return candidate
+from g2_evidence import (bind_inputs, evaluate_core_closure,
+                         evaluate_migration_registry, is_safe_relative,
+                         is_sha256, load_json, require, resolve_inside, sha256)
 
 def metric(name: str, value: Any, unit: str) -> dict[str, Any]:
     return {"name": name, "value": value, "unit": unit}
@@ -62,64 +35,12 @@ def criterion(
         "blocker_ids": blockers or [],
     }
 
-def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
-    bindings: list[dict[str, Any]] = []
-    evidence: dict[str, dict[str, Any]] = {}
-    aggregate_lines: list[str] = []
-    for specification in policy["required_inputs"]:
-        task_id = specification["task_id"]
-        relative = specification["path"]
-        path = resolve_inside(root, relative)
-        document = load_json(path)
-        observed_task = document.get("task_id", document.get("task"))
-        require(observed_task == task_id, f"Task identity mismatch for {task_id}")
-        require(document.get("result") == "PASS", f"Prerequisite {task_id} did not pass")
-        require(document.get("task_status") == "COMPLETE", f"Prerequisite {task_id} is incomplete")
-        require(document.get("completion_criteria_satisfied") is True, f"Prerequisite {task_id} is not complete")
-        digest = sha256(path)
-        binding = {
-            "task_id": task_id,
-            "path": relative,
-            "sha256": digest,
-            "result": "PASS",
-            "task_status": "COMPLETE",
-            "completion_criteria_satisfied": True,
-        }
-        bindings.append(binding)
-        evidence[task_id] = document
-        aggregate_lines.append(f"{task_id}|{relative}|{digest}")
-
-    quality_relative = policy["quality_evidence"]
-    quality_path = resolve_inside(root, quality_relative)
-    quality = load_json(quality_path)
-    repository = quality.get("repository", {})
-    secret = quality.get("secret", {})
-    require(quality.get("result") == "PASS_DIAGNOSTIC", "Local quality aggregate did not pass")
-    require(repository.get("result") == "PASS" and repository.get("failure_count") == 0,
-            "Repository policy evidence did not pass")
-    require(secret.get("result") == "PASS" and secret.get("failure_count") == 0 and
-            secret.get("finding_count") == 0, "Secret evidence did not pass")
-    quality_digest = sha256(quality_path)
-    aggregate_lines.append(f"QUALITY|{quality_relative}|{quality_digest}")
-    joined = ("\n".join(aggregate_lines) + "\n").encode("utf-8")
-    return {
-        "aggregate_sha256": hashlib.sha256(joined).hexdigest(),
-        "prerequisites": bindings,
-        "quality": {
-            "path": quality_relative,
-            "sha256": quality_digest,
-            "result": quality["result"],
-            "captured_utc": quality["captured_utc"],
-        },
-    }, evidence
-
 def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], root: Path) -> list[dict[str, Any]]:
     by_id = {item["id"]: item for item in policy["criteria"]}
     p202 = evidence["P2-02"]["summary"]
     p204 = evidence["P2-04"]
     p207 = evidence["P2-07"]
     p208 = evidence["P2-08"]
-    p213 = evidence["P2-13"]
     p217 = evidence["P2-17"]
     p219 = evidence["P2-19"]
     thresholds = policy["thresholds"]
@@ -200,38 +121,53 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("client_copy_grants_no_runtime_authority", client_copy_no_authority, "boolean"),
     ], "Ownership is complete; combat, economy, and unknown gameplay semantics remain server-authoritative and fail closed."))
 
-    health = p213["health"]
-    core_subset_digest = health.get("core_resource_subset_sha256")
-    core_subset_hash_bound = isinstance(core_subset_digest, str) and bool(
-        re.fullmatch(r"[0-9a-f]{64}", core_subset_digest))
-    core_unresolved = health.get("core_resource_unresolved")
-    core_ambiguous = health.get("core_resource_ambiguous")
-    core_heuristic = health.get("core_resource_heuristic_target_selections")
-    core_metrics_present = all(isinstance(value, int) and not isinstance(value, bool)
-                               for value in (core_unresolved, core_ambiguous, core_heuristic))
-    ok = (core_subset_hash_bound and core_metrics_present and core_unresolved == 0 and
-          core_ambiguous == 0 and core_heuristic == 0)
+    core = evaluate_core_closure(root, evidence["P2-20A"], thresholds)
+    ok = core["satisfied"]
     reviews.append(criterion(by_id["G2-06"], ok, [
-        metric("core_foreign_key_dangling", health["core_dangling_references"], "references"),
-        metric("core_resource_subset_hash_bound", core_subset_hash_bound, "boolean"),
-        metric("core_resource_metrics_present", core_metrics_present, "boolean"),
-        metric("core_resource_unresolved", core_unresolved, "references"),
-        metric("core_resource_ambiguous", core_ambiguous, "references"),
-        metric("core_resource_heuristic_selections", core_heuristic, "references"),
-        metric("table_object_unresolved", health["nullable_object_unresolved"], "references"),
-        metric("table_object_ambiguous", health["nullable_object_ambiguous"], "references"),
-        metric("package_unresolved", health["package_unresolved_edges"], "references"),
-        metric("package_ambiguous", health["package_ambiguous_edges"], "references"),
-    ], "The explicit hash-bound core-resource subset and its zero unresolved, ambiguous, and heuristic metrics are absent. Global queues are risk context, not the core exit threshold; core foreign-key dangling zero is also a separate narrower fact.", ["G2-BLK-06"] if not ok else []))
+        metric("supplemental_report_present", True, "boolean"),
+        metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
+        metric("scope_complete", core["scope_complete"], "boolean"),
+        metric("auxiliary_config_scope_complete", core["auxiliary_complete"], "boolean"),
+        metric("asset_binding_resolution_explicit", core["asset_binding_explicit"], "boolean"),
+        metric("table_resource_unresolved", core["table_unresolved"], "references"),
+        metric("table_resource_ambiguous", core["table_ambiguous"], "references"),
+        metric("package_resource_unresolved", core["package_unresolved"], "references"),
+        metric("package_resource_ambiguous", core["package_ambiguous"], "references"),
+        metric("conditional_required_missing", core["conditional_missing"], "references"),
+        metric("conditional_member_set_exported", core["member_set_exported"], "boolean"),
+        metric("conditional_member_set_hash_bound", core["member_set_hash_bound"], "boolean"),
+        metric("conditional_source_hash_bound", core["conditional_source_bound"], "boolean"),
+        metric("heuristic_target_selections", core["heuristic"], "references"),
+        metric("first_candidate_selection_used", core["first_candidate_used"], "boolean"),
+        metric("asset_structure_unresolved", core["asset_unresolved"], "assets"),
+        metric("asset_structure_fail", core["asset_fail"], "assets"),
+        metric("unknown_record_count", core["unknown_records"], "records"),
+        metric("unknown_resolution_count", core["unknown_resolutions"], "records"),
+        metric("integrity_mismatches", core["integrity_mismatches"], "records"),
+        metric("logical_gap_count", core["logical_gap_count"], "references"),
+        metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
+        metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report, but complete auxiliary scope, asset binding, conditional member evidence, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.", ["G2-BLK-06"] if not ok else []))
 
-    registry_relative = policy["migration_decision_registry"]
-    registry_present = (root / registry_relative).is_file()
-    reviews.append(criterion(by_id["G2-07"], False, [
-        metric("migration_decision_registry_present", registry_present, "boolean"),
-        metric("diff_audit_complete", evidence["P2-09"]["result"] == "PASS", "boolean"),
-        metric("limit_audit_complete", evidence["P2-11"]["result"] == "PASS", "boolean"),
-        metric("shared_uint64_codegen", p217["summary"]["numeric_identity_storage"] == "uint64", "boolean"),
-    ], "Diff, limit, and uint64 code-generation audits are inputs, not a complete approved migration-decision registry.", ["G2-BLK-07"]))
+    migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
+    ok = migration["satisfied"]
+    reviews.append(criterion(by_id["G2-07"], ok, [
+        metric("migration_decision_registry_present", True, "boolean"),
+        metric("coverage_complete", migration["coverage"], "boolean"),
+        metric("expected_units", migration["expected"], "decisions"),
+        metric("enumerated_units", migration["enumerated"], "decisions"),
+        metric("missing_units", migration["missing"], "decisions"),
+        metric("duplicate_units", migration["duplicates"], "decisions"),
+        metric("orphan_units", migration["orphans"], "decisions"),
+        metric("pending_decisions", migration["pending"], "decisions"),
+        metric("decided_units", migration["decided"], "decisions"),
+        metric("approved_units", migration["approved"], "decisions"),
+        metric("approval_count", migration["approval_count"], "approvals"),
+        metric("machine_suggestions", migration["suggestions"], "suggestions"),
+        metric("machine_suggestions_count_as_decisions", migration["suggestions_count_as_decisions"], "boolean"),
+        metric("pending_entries_have_no_chosen_decision", migration["pending_empty"], "boolean"),
+        metric("g2_07_registry_satisfied", migration["registry_satisfied"], "boolean"),
+    ], "P2-20B completely enumerates and hash-binds all migration-decision units, but every unit remains pending with no independently verified decision or approval. Machine suggestions are non-authoritative and do not satisfy G2-07.", ["G2-BLK-07"] if not ok else []))
 
     human = p219["summary"]["human_budget"]
     machine = p219["summary"]["machine_budget"]
@@ -272,7 +208,11 @@ def validate_outcome(policy: dict[str, Any], criteria: list[dict[str, Any]]) -> 
     satisfied = [item["id"] for item in criteria if item["satisfied"]]
     blocked = [item["id"] for item in criteria if not item["satisfied"]]
     require(len(criteria) == policy["thresholds"]["required_criteria"], "Criterion count mismatch")
-    require(len(satisfied) == 7 and blocked == ["G2-06", "G2-07"], "Fail-closed outcome mismatch")
+    require(len(satisfied) + len(blocked) == len(criteria), "Criterion outcome count mismatch")
+    require(all(item["observed_status"] == ("SATISFIED" if item["satisfied"] else "BLOCKED")
+                for item in criteria), "Criterion observed status mismatch")
+    require(set(blocked).issubset({"G2-06", "G2-07"}),
+            "Unexpected prerequisite criterion drifted during G2 review")
     return satisfied, blocked
 
 def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, Any]:
@@ -285,19 +225,67 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
     human = p219["summary"]["human_budget"]
     machine = p219["summary"]["machine_budget"]
     storage = p219["summary"]["storage_budget"]
+    approved = len(blocked) == 0
+    state = "PASS" if approved else "BLOCKED"
+    task_status = "COMPLETE" if approved else "BLOCKED"
+    gate_decision = "APPROVED" if approved else "BLOCKED"
+    blockers: list[dict[str, Any]] = []
+    if "G2-06" in blocked:
+        closure = evidence["P2-20A"]["closure"]
+        resolution = closure["resolution"]
+        conditional = closure["conditional_required"]
+        asset_structure = closure["asset_structure"]
+        blockers.append({
+            "id": "G2-BLK-06",
+            "criterion_id": "G2-06",
+            "title": "Core resource-reference closure has quantified open gaps",
+            "reason": (
+                "P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; "
+                f"the measured core queues contain {resolution['table_unresolved']} unresolved and "
+                f"{resolution['table_ambiguous']} ambiguous table references, "
+                f"{resolution['package_unresolved']} unresolved and "
+                f"{resolution['package_ambiguous']} ambiguous Package references, "
+                f"{conditional['conditional_required_missing']} conditionally required missing values, "
+                f"and {asset_structure['unresolved']} structurally unresolved reachable assets."
+            ),
+            "required_action": (
+                "Complete auxiliary configuration scope and explicit asset binding, export and hash-bind "
+                "the conditional member set, and reduce every scoped unresolved, ambiguous, structural, "
+                "unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection."
+            ),
+            "authority_required": False,
+        })
+    if "G2-07" in blocked:
+        migration = evidence["P2-20B"]["summary"]
+        blockers.append({
+            "id": "G2-BLK-07",
+            "criterion_id": "G2-07",
+            "title": "Migration registry is complete in coverage but decisions remain pending",
+            "reason": (
+                f"P2-20B enumerates {migration['enumerated_units']} of {migration['expected_units']} "
+                f"required units, but {migration['pending']} remain pending, only "
+                f"{migration['decided']} are decided, {migration['approved']} are approved, and the "
+                f"verified approval count is {migration['approval_count']}. Machine suggestions are not decisions."
+            ),
+            "required_action": (
+                "Record an explicit reviewed migration decision for every unit and bind independently "
+                "verifiable approvals to each decision digest; machine-generated suggestions remain advisory."
+            ),
+            "authority_required": True,
+        })
     return {
         "schema_version": 1,
         "captured_utc": p219["captured_utc"],
         "task_id": "P2-20",
         "source_build": policy["source_build"],
-        "result": "BLOCKED",
+        "result": state,
         "review_execution_result": "PASS",
-        "task_status": "BLOCKED",
-        "completion_criteria_satisfied": False,
+        "task_status": task_status,
+        "completion_criteria_satisfied": approved,
         "gate": "G2",
-        "gate_decision": "BLOCKED",
-        "g2_approved": False,
-        "p3_authorized": False,
+        "gate_decision": gate_decision,
+        "g2_approved": approved,
+        "p3_authorized": approved,
         "input_bindings": bindings,
         "summary": {
             "criteria_total": len(criteria),
@@ -315,24 +303,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
             "secret_findings": quality["secret"]["finding_count"],
             "security_review_result": "PASS",
         },
-        "blockers": [
-            {
-                "id": "G2-BLK-06",
-                "criterion_id": "G2-06",
-                "title": "Core resource-reference closure is not proven",
-                "reason": "A hash-bound core-resource subset and its explicit unresolved, ambiguous, and heuristic-selection metrics are absent. Global queues remain risk context, while core foreign-key dangling zero cannot substitute for this proof.",
-                "required_action": "Define and hash-bind the core-resource subset, prove its unresolved, ambiguous, and heuristic-selection counts are zero, and regenerate closure evidence.",
-                "authority_required": False,
-            },
-            {
-                "id": "G2-BLK-07",
-                "criterion_id": "G2-07",
-                "title": "Complete migration decisions are absent",
-                "reason": "Existing diff, limit, canonical-ID, and code-generation audits do not record every required migration decision.",
-                "required_action": "Create and review a complete migration-decision registry covering ID, width, old-to-new schema, and fixed-limit risks.",
-                "authority_required": True,
-            },
-        ],
+        "blockers": blockers,
         "budget_interpretation": {
             "planning_cost_quantified": True,
             "manual_content_assets": int(evidence["P2-18"]["summary"]["effort"]["manual_assets"]),
@@ -379,11 +350,14 @@ def markdown(report: dict[str, Any]) -> str:
         f"- Review execution: `{report['review_execution_result']}`",
         f"- Gate decision: `{report['gate_decision']}`",
         f"- Task status: `{report['task_status']}`",
-        "- G2 approved: `false`",
-        "- P3 authorized: `false`",
+        f"- G2 approved: `{str(report['g2_approved']).lower()}`",
+        f"- P3 authorized: `{str(report['p3_authorized']).lower()}`",
         f"- Evidence snapshot: `{report['captured_utc']}`",
         "",
-        "The review procedure completed successfully, but the gate is fail-closed. A successful review execution is not a successful G2 decision.",
+        ("The review procedure completed successfully, but the gate remains fail-closed. "
+         "A successful review execution is not a successful G2 decision."
+         if not report["g2_approved"] else
+         "The review procedure and every policy criterion completed successfully; G2 is approved."),
         "",
         "## Criterion outcome",
         "",
@@ -435,13 +409,22 @@ def self_test() -> dict[str, Any]:
             "Gate fail-closed self-test failed")
     assertions += 1
     core_fk_zero = True
-    core_subset_bound = False
+    supplemental_bound = True
+    scope_complete = False
     reference_queues_zero = False
-    require(not (core_fk_zero and core_subset_bound and reference_queues_zero),
+    require(not (core_fk_zero and supplemental_bound and scope_complete and reference_queues_zero),
             "Core-resource distinction self-test failed")
     assertions += 1
-    registry_present = False
-    require(not registry_present, "Migration-registry fail-closed self-test failed")
+    registry_present = True
+    registry_coverage_complete = True
+    pending_decisions = 1359
+    approved_decisions = 0
+    require(not (registry_present and registry_coverage_complete and pending_decisions == 0 and
+                 approved_decisions == 1359), "Migration-registry fail-closed self-test failed")
+    assertions += 1
+    machine_suggestion_counts_as_decision = False
+    require(machine_suggestion_counts_as_decision is False,
+            "Machine suggestions must not count as decisions")
     assertions += 1
     planning_hours = 2000.37
     money_estimated = False
@@ -458,6 +441,9 @@ def self_test() -> dict[str, Any]:
     require(is_safe_relative("Data/Inventory/evidence.json") and
             not is_safe_relative("../outside.json") and not is_safe_relative("C:\\outside.json"),
             "Path-rejection self-test failed")
+    assertions += 1
+    require(is_sha256("a" * 64) and not is_sha256("a" * 63),
+            "SHA-256 shape self-test failed")
     assertions += 1
     return {"result": "PASS", "assertions": assertions}
 

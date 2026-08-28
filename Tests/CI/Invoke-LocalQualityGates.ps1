@@ -168,6 +168,16 @@ if ($VerifyLegacyGoldenSources) { $resourceBudgetArguments.VerifyDerivedSources 
 $resourceBudget = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-ResourceBudget.ps1') `
     -Arguments $resourceBudgetArguments
+$g2CoreClosureArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2CoreClosureArguments.VerifyDerivedSources = $true }
+$g2CoreClosure = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2CoreResourceClosure.ps1') `
+    -Arguments $g2CoreClosureArguments
+$g2MigrationArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2MigrationArguments.VerifyDerivedSources = $true }
+$g2MigrationDecisions = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2MigrationDecisions.ps1') `
+    -Arguments $g2MigrationArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -312,6 +322,13 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$contentHealth.completion_criteria_satisfied -and
     [string]$resourceBudget.result -eq 'PASS' -and
     [bool]$resourceBudget.completion_criteria_satisfied -and
+    [string]$g2CoreClosure.result -eq 'PASS' -and
+    [string]$g2CoreClosure.review_result -eq 'BLOCKED' -and
+    -not [bool]$g2CoreClosure.completion_criteria_satisfied -and
+    [string]$g2MigrationDecisions.result -eq 'PASS' -and
+    [bool]$g2MigrationDecisions.contract_assertions_satisfied -and
+    -not [bool]$g2MigrationDecisions.completion_criteria_satisfied -and
+    -not [bool]$g2MigrationDecisions.g2_07_satisfied -and
     [string]$fullAssetInventory.result -eq 'PASS' -and
     [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceClosure.result -eq 'PASS' -and
@@ -388,6 +405,8 @@ $report = [pscustomobject][ordered]@{
     protocol_codegen = $protocolCodegen
     content_health = $contentHealth
     resource_budget = $resourceBudget
+    g2_core_resource_closure = $g2CoreClosure
+    g2_migration_decisions = $g2MigrationDecisions
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

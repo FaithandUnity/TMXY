@@ -107,8 +107,22 @@ jobs:
             tmxy-clang21-${{ runner.os }}-${{ runner.arch }}-ci-linux-clang-${{ hashFiles('Data/Toolchain/toolchain.lock.json') }}-${{ hashFiles('**/conan.lock', '**/conan.lock.json') }}-
       - name: Pull and verify the locked builder manifest
         shell: bash
+        env:
+          DOCKER_CONFIG: ${{ runner.temp }}/tmxy-docker-config
+          GHCR_USERNAME: ${{ github.actor }}
+          GHCR_CREDENTIAL: ${{ github.token }}
         run: |
           set -euo pipefail
+          umask 077
+          mkdir -p "${DOCKER_CONFIG}"
+          cleanup_registry_auth() {
+            docker logout ghcr.io >/dev/null 2>&1 || true
+            rm -f -- "${DOCKER_CONFIG}/config.json"
+            rmdir -- "${DOCKER_CONFIG}" 2>/dev/null || true
+          }
+          trap cleanup_registry_auth EXIT
+          printf '%s' "${GHCR_CREDENTIAL}" | docker login ghcr.io \
+            --username "${GHCR_USERNAME}" --password-stdin
           docker pull "${TMXY_BACKEND_BUILDER_IMAGE}"
           repo_digests="$(docker image inspect --format '{{json .RepoDigests}}' "${TMXY_BACKEND_BUILDER_IMAGE}")"
           grep --fixed-strings --quiet "${TMXY_BACKEND_BUILDER_DIGEST}" <<< "${repo_digests}"
@@ -152,8 +166,22 @@ jobs:
           persist-credentials: false
       - name: Pull and verify the locked builder manifest
         shell: bash
+        env:
+          DOCKER_CONFIG: ${{ runner.temp }}/tmxy-docker-config
+          GHCR_USERNAME: ${{ github.actor }}
+          GHCR_CREDENTIAL: ${{ github.token }}
         run: |
           set -euo pipefail
+          umask 077
+          mkdir -p "${DOCKER_CONFIG}"
+          cleanup_registry_auth() {
+            docker logout ghcr.io >/dev/null 2>&1 || true
+            rm -f -- "${DOCKER_CONFIG}/config.json"
+            rmdir -- "${DOCKER_CONFIG}" 2>/dev/null || true
+          }
+          trap cleanup_registry_auth EXIT
+          printf '%s' "${GHCR_CREDENTIAL}" | docker login ghcr.io \
+            --username "${GHCR_USERNAME}" --password-stdin
           docker pull "${TMXY_BACKEND_BUILDER_IMAGE}"
           repo_digests="$(docker image inspect --format '{{json .RepoDigests}}' "${TMXY_BACKEND_BUILDER_IMAGE}")"
           grep --fixed-strings --quiet "${TMXY_BACKEND_BUILDER_DIGEST}" <<< "${repo_digests}"

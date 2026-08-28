@@ -30,6 +30,15 @@ decision was evaluated and frozen correctly; it does not turn the current
 `BLOCKED` decision into success. The review is kept outside that same aggregate
 to avoid a self-referential evidence hash.
 
+Before that final review, the aggregate runs `Test-G2CoreResourceClosure.ps1`
+and `Test-G2MigrationDecisions.ps1`. Clean checkouts validate their tracked
+hash chains; full local verification also rebuilds the G2-06 core-resource
+scope and complete G2-07 decision registry from ignored evidence and authorized
+read-only inputs. Their tracked summaries contain only aggregate facts and
+hashes; the member-level closure export remains in the ignored evidence area.
+Complete enumeration is not approval: nonzero closure gaps and every pending
+owner decision remain fail-closed inputs to G2.
+
 ## Cache keys and trust boundary
 
 Cache keys include operating system, architecture, compiler identity, CMake
@@ -41,6 +50,9 @@ must never bypass configure, dependency verification, tests, or scanning.
   release caches.
 - Secret files, `.env`, logs, test credentials, signing material, reports with
   sensitive inputs, and container auth never enter a cache.
+- Hosted container pulls use the job-scoped GitHub token through an isolated
+  runner-temporary Docker configuration, then log out and remove it before the
+  job exits; no registry credential is persisted in the workspace or cache.
 - CMake/Ninja outputs and dependency downloads may be cached after integrity
   validation.
 - UE DDC may use a separate access-controlled cache keyed by engine changelist,

@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "status": "BLOCKED",
+  "scope_definition": "monotonic-union-all-declared-roots-plus-all-core-resource-fields",
+  "scope_complete": false,
+  "auxiliary_config_reference_scope_complete": false,
+  "asset_binding_resolution_explicit": false,
+  "conditional_required_missing": 29,
+  "conditional_required_member_set_exported": false,
+  "logical_gap_count": 21024,
+  "report": {
+    "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+    "sha256": "888a3e48539190b509491d607a7df2fde23440ecd6f3eaf24bf45434b012e027"
+  },
+  "decisions": {
+    "first_candidate_selection_authorized": false,
+    "core_foreign_key_zero_substitution_authorized": false,
+    "conditional_required_edge_absence_substitution_authorized": false,
+    "outcome_based_scope_narrowing_authorized": false,
+    "automatic_repair_or_delete_authorized": false,
+    "g2_approved": false,
+    "p3_authorized": false
+  }
+}

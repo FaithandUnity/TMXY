@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-migration-decision-registry-v1.schema.json",
+  "title": "TMXY G2 migration decision registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "captured_utc", "task_id", "source_build", "result",
+    "generation_result", "task_status", "completion_criteria_satisfied",
+    "gate_criterion", "g2_07_satisfied", "input_bindings", "summary",
+    "completeness", "manifests", "decisions", "hard_invariants",
+    "authority_boundaries", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "captured_utc": { "type": "string", "minLength": 1 },
+    "task_id": { "const": "P2-20B" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "result": { "enum": ["BLOCKED", "PASS"] },
+    "generation_result": { "const": "PASS" },
+    "task_status": { "enum": ["BLOCKED", "COMPLETE"] },
+    "completion_criteria_satisfied": { "type": "boolean" },
+    "gate_criterion": { "const": "G2-07" },
+    "g2_07_satisfied": { "type": "boolean" },
+    "input_bindings": { "$ref": "#/$defs/input_bindings" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "completeness": { "$ref": "#/$defs/completeness" },
+    "manifests": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": { "$ref": "#/$defs/manifest" }
+    },
+    "decisions": {
+      "type": "array", "minItems": 1,
+      "items": { "$ref": "#/$defs/decision" }
+    },
+    "hard_invariants": { "$ref": "#/$defs/hard_invariants" },
+    "authority_boundaries": { "$ref": "#/$defs/authority" },
+    "contracts": { "$ref": "#/$defs/contracts" },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "g2_07_satisfied": { "const": false } } },
+      "then": {
+        "properties": {
+          "result": { "const": "BLOCKED" },
+          "task_status": { "const": "BLOCKED" },
+          "completion_criteria_satisfied": { "const": false }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "g2_07_satisfied": { "const": true } } },
+      "then": {
+        "properties": {
+          "result": { "const": "PASS" },
+          "task_status": { "const": "COMPLETE" },
+          "completion_criteria_satisfied": { "const": true }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "relative_path": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$" },
+    "evidence_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["task_id", "path", "sha256", "result", "task_status", "completion_criteria_satisfied"],
+      "properties": {
+        "task_id": { "enum": ["P2-09", "P2-10", "P2-11", "P2-17", "P2-18"] },
+        "path": { "$ref": "#/$defs/relative_path" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "const": "PASS" },
+        "task_status": { "const": "COMPLETE" },
+        "completion_criteria_satisfied": { "const": true }
+      }
+    },
+    "file_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["artifact_id", "sha256", "records"],
+      "properties": {
+        "artifact_id": { "enum": ["G2_POLICY", "CORE_REGISTRY", "P2_09_TABLE_DIFF_REPORT", "P2_11_ID_LIMIT_REPORT", "LEGACY_SNAPSHOT_MANIFEST"] },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "records": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "input_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "evidence", "derived_sources"],
+      "properties": {
+        "aggregate_sha256": { "$ref": "#/$defs/sha256" },
+        "evidence": {
+          "type": "array", "minItems": 5, "maxItems": 5,
+          "items": { "$ref": "#/$defs/evidence_binding" }
+        },
+        "derived_sources": {
+          "type": "array", "minItems": 5, "maxItems": 5,
+          "items": { "$ref": "#/$defs/file_binding" }
+        }
+      }
+    },
+    "unit_counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["schema_table", "schema_reference", "canonical_id_domain", "id_component", "fixed_limit_signal"],
+      "properties": {
+        "schema_table": { "type": "integer", "minimum": 0 },
+        "schema_reference": { "type": "integer", "minimum": 0 },
+        "canonical_id_domain": { "type": "integer", "minimum": 0 },
+        "id_component": { "type": "integer", "minimum": 0 },
+        "fixed_limit_signal": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["expected_units", "enumerated_units", "pending", "decided", "approved", "approval_count", "by_subject_kind"],
+      "properties": {
+        "expected_units": { "const": 1359 },
+        "enumerated_units": { "type": "integer", "minimum": 0 },
+        "pending": { "type": "integer", "minimum": 0 },
+        "decided": { "type": "integer", "minimum": 0 },
+        "approved": { "type": "integer", "minimum": 0 },
+        "approval_count": { "type": "integer", "minimum": 0 },
+        "by_subject_kind": { "$ref": "#/$defs/unit_counts" }
+      }
+    },
+    "completeness": {
+      "type": "object", "additionalProperties": false,
+      "required": ["coverage_complete", "decisions_complete", "approvals_complete", "missing", "duplicates", "orphans", "reference_membership_enumerated", "all_inputs_hash_bound", "failure_reasons"],
+      "properties": {
+        "coverage_complete": { "type": "boolean" },
+        "decisions_complete": { "type": "boolean" },
+        "approvals_complete": { "type": "boolean" },
+        "missing": { "type": "integer", "minimum": 0 },
+        "duplicates": { "type": "integer", "minimum": 0 },
+        "orphans": { "type": "integer", "minimum": 0 },
+        "reference_membership_enumerated": { "type": "boolean" },
+        "all_inputs_hash_bound": { "const": true },
+        "failure_reasons": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "manifest": {
+      "type": "object", "additionalProperties": false,
+      "required": ["subject_kind", "expected", "enumerated", "membership_sha256"],
+      "properties": {
+        "subject_kind": { "enum": ["SCHEMA_TABLE", "SCHEMA_REFERENCE", "CANONICAL_ID_DOMAIN", "ID_COMPONENT", "FIXED_LIMIT_SIGNAL"] },
+        "expected": { "type": "integer", "minimum": 0 },
+        "enumerated": { "type": "integer", "minimum": 0 },
+        "membership_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "evidence_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["task_id", "artifact_id", "artifact_sha256", "record_kind", "record_ordinal"],
+      "properties": {
+        "task_id": { "enum": ["P2-09", "P2-10", "P2-11", "P2-17"] },
+        "artifact_id": { "enum": ["P2_09_TABLE_DIFF_REPORT", "P2_09_REFERENCE_DERIVATION", "P2_10_EVIDENCE", "P2_11_EVIDENCE", "P2_11_ID_LIMIT_REPORT"] },
+        "artifact_sha256": { "$ref": "#/$defs/sha256" },
+        "record_kind": { "enum": ["table_diff", "reference_rule", "canonical_id_domain", "id_component_audit", "legacy_source_limit_signal"] },
+        "record_ordinal": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "machine_suggestion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "action_code", "rationale_codes", "counts_as_decision"],
+      "properties": {
+        "status": { "const": "GENERATED" },
+        "action_code": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+        "rationale_codes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" } },
+        "counts_as_decision": { "const": false }
+      }
+    },
+    "decision_state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "chosen_action", "rationale", "migration_plan_sha256", "rollback_plan_sha256", "compatibility_impact", "effective_schema_version"],
+      "properties": {
+        "status": { "enum": ["PENDING", "DECIDED", "SUPERSEDED"] },
+        "chosen_action": { "type": ["string", "null"] },
+        "rationale": { "type": ["string", "null"] },
+        "migration_plan_sha256": { "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "rollback_plan_sha256": { "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] },
+        "compatibility_impact": { "enum": ["UNKNOWN", "NONE", "BACKWARD_COMPATIBLE", "BREAKING"] },
+        "effective_schema_version": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "ownership": {
+      "type": "object", "additionalProperties": false,
+      "required": ["responsible_role", "required_approver_roles"],
+      "properties": {
+        "responsible_role": { "enum": ["data-owner", "project-owner"] },
+        "required_approver_roles": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["data-owner", "project-owner"] } }
+      }
+    },
+    "approval": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "approval_count", "external_authority_verified", "approval_refs"],
+      "properties": {
+        "status": { "enum": ["PENDING", "APPROVED", "REJECTED"] },
+        "approval_count": { "type": "integer", "minimum": 0 },
+        "external_authority_verified": { "type": "boolean" },
+        "approval_refs": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/approval_ref" } }
+      }
+    },
+    "approval_ref": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "authority_kind", "authority_record_sha256", "decision_digest_sha256", "verified"],
+      "properties": {
+        "role": { "enum": ["data-owner", "project-owner"] },
+        "authority_kind": { "enum": ["PROTECTED_PR_REVIEW", "SIGNED_DECISION_RECORD"] },
+        "authority_record_sha256": { "$ref": "#/$defs/sha256" },
+        "decision_digest_sha256": { "$ref": "#/$defs/sha256" },
+        "verified": { "const": true }
+      }
+    },
+    "verification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "evidence_sha256"],
+      "properties": {
+        "status": { "enum": ["NOT_RUN", "PASS", "FAIL"] },
+        "evidence_sha256": { "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }] }
+      }
+    },
+    "decision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["decision_id", "risk_class", "subject_kind", "subject_membership_sha256", "evidence_ref", "risk_codes", "machine_suggestion", "decision", "ownership", "approval", "verification"],
+      "properties": {
+        "decision_id": { "type": "string", "pattern": "^MIG-[A-Z-]+-[0-9]{4}$" },
+        "risk_class": { "enum": ["OLD_TO_NEW_SCHEMA", "CANONICAL_ID", "ID_WIDTH", "LEGACY_FIXED_LIMIT"] },
+        "subject_kind": { "enum": ["SCHEMA_TABLE", "SCHEMA_REFERENCE", "CANONICAL_ID_DOMAIN", "ID_COMPONENT", "FIXED_LIMIT_SIGNAL"] },
+        "subject_membership_sha256": { "$ref": "#/$defs/sha256" },
+        "evidence_ref": { "$ref": "#/$defs/evidence_ref" },
+        "risk_codes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" } },
+        "machine_suggestion": { "$ref": "#/$defs/machine_suggestion" },
+        "decision": { "$ref": "#/$defs/decision_state" },
+        "ownership": { "$ref": "#/$defs/ownership" },
+        "approval": { "$ref": "#/$defs/approval" },
+        "verification": { "$ref": "#/$defs/verification" }
+      }
+    },
+    "hard_invariants": {
+      "type": "object", "additionalProperties": false,
+      "required": ["numeric_identity_narrowing_forbidden", "string_identity_numeric_conversion_forbidden", "observed_mode_default_forbidden", "tombstone_reuse_without_approval_forbidden", "automatic_renumbering_without_approved_remap_forbidden", "fixed_limit_copy_without_classification_forbidden"],
+      "properties": {
+        "numeric_identity_narrowing_forbidden": { "const": true },
+        "string_identity_numeric_conversion_forbidden": { "const": true },
+        "observed_mode_default_forbidden": { "const": true },
+        "tombstone_reuse_without_approval_forbidden": { "const": true },
+        "automatic_renumbering_without_approved_remap_forbidden": { "const": true },
+        "fixed_limit_copy_without_classification_forbidden": { "const": true }
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["machine_generated", "machine_can_approve", "approval_authority_present", "g2_approved", "p3_authorized", "release_authority"],
+      "properties": {
+        "machine_generated": { "const": true },
+        "machine_can_approve": { "const": false },
+        "approval_authority_present": { "type": "boolean" },
+        "g2_approved": { "const": false },
+        "p3_authorized": { "const": false },
+        "release_authority": { "const": false }
+      }
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy", "policy_sha256", "schema", "schema_sha256"],
+      "properties": {
+        "policy": { "const": "Contracts/data-schema/g2-migration-decision-policy-v1.json" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "schema": { "const": "Contracts/data-schema/g2-migration-decision-registry-v1.schema.json" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["table_or_field_names", "legacy_source_paths", "exact_primary_keys", "exact_observed_extrema", "raw_table_rows", "legacy_source_lines", "matched_literal_values"],
+      "properties": {
+        "table_or_field_names": { "const": false },
+        "legacy_source_paths": { "const": false },
+        "exact_primary_keys": { "const": false },
+        "exact_observed_extrema": { "const": false },
+        "raw_table_rows": { "const": false },
+        "legacy_source_lines": { "const": false },
+        "matched_literal_values": { "const": false }
+      }
+    }
+  }
+}

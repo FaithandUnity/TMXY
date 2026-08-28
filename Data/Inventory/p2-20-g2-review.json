@@ -13,7 +13,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "1696ca484af1f5d6c16aa3478d204e0d95a99152e5879b77674975e573696345",
+      "aggregate_sha256": "a4d508fd73e377681c609b19742e7e50271244ac4fa5ef247d64e4e2039be163",
       "prerequisites": [
         {
           "task_id": "P2-01",
@@ -168,11 +168,32 @@
           "completion_criteria_satisfied": true
         }
       ],
+      "supplemental": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+        "sha256": "888a3e48539190b509491d607a7df2fde23440ecd6f3eaf24bf45434b012e027",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false
+      },
+      "remediation": {
+        "task_id": "P2-20B",
+        "criterion_id": "G2-07",
+        "path": "Data/Governance/p2-g2-migration-decisions.json",
+        "sha256": "a77018b67bb59a392fdda0b06a07b9e173f2ac71eb7cb85cbd4acbceb6a958f1",
+        "result": "BLOCKED",
+        "generation_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "g2_07_satisfied": false
+      },
       "quality": {
         "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-        "sha256": "e517acf4b1426a820115a4d4de15d933e01abf27934079a410c1620517338910",
+        "sha256": "e869f36618b54214eaa2cfde0aa456b8f7586aa6724ba4e9136431ff7b138134",
         "result": "PASS_DIAGNOSTIC",
-        "captured_utc": "2026-08-28T18:27:14.8095622+00:00"
+        "captured_utc": "2026-08-28T20:26:52.9231831+00:00"
       }
     }
   },
@@ -180,16 +201,16 @@
     "json": {
       "path": "Data/Reports/p2-20-g2-review-report.json",
       "tracked": true,
-      "bytes": 19809,
-      "lines": 636,
-      "sha256": "e7523ce39f7d92c947b4cbe52ded280db74e4c6bc61c8b2b52ef7aaf1a86f050"
+      "bytes": 24037,
+      "lines": 779,
+      "sha256": "2ed7b5c22f2adee83b94677f94c898077685beb69d1cd6241574d1093f573e9d"
     },
     "markdown": {
       "path": "Data/Reports/p2-20-g2-review-report.md",
       "tracked": true,
-      "bytes": 3398,
+      "bytes": 3957,
       "lines": 52,
-      "sha256": "1a7c14a0a7178ba1a8d7d7148ca796d195d22d4467670b7d3dc0eb209f96dbe1"
+      "sha256": "33f8258898b4d2c0637cce7dc33f11ecf8a459d75a2364b7ba91cc5c02153f15"
     }
   },
   "summary": {
@@ -214,17 +235,17 @@
     {
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
-      "title": "Core resource-reference closure is not proven",
-      "reason": "A hash-bound core-resource subset and its explicit unresolved, ambiguous, and heuristic-selection metrics are absent. Global queues remain risk context, while core foreign-key dangling zero cannot substitute for this proof.",
-      "required_action": "Define and hash-bind the core-resource subset, prove its unresolved, ambiguous, and heuristic-selection counts are zero, and regenerate closure evidence.",
+      "title": "Core resource-reference closure has quantified open gaps",
+      "reason": "P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; the measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Complete auxiliary configuration scope and explicit asset binding, export and hash-bind the conditional member set, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {
       "id": "G2-BLK-07",
       "criterion_id": "G2-07",
-      "title": "Complete migration decisions are absent",
-      "reason": "Existing diff, limit, canonical-ID, and code-generation audits do not record every required migration decision.",
-      "required_action": "Create and review a complete migration-decision registry covering ID, width, old-to-new schema, and fixed-limit risks.",
+      "title": "Migration registry is complete in coverage but decisions remain pending",
+      "reason": "P2-20B enumerates 1359 of 1359 required units, but 1359 remain pending, only 0 are decided, 0 are approved, and the verified approval count is 0. Machine suggestions are not decisions.",
+      "required_action": "Record an explicit reviewed migration decision for every unit and bind independently verifiable approvals to each decision digest; machine-generated suggestions remain advisory.",
       "authority_required": true
     }
   ],
@@ -261,18 +282,18 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "01cd03e9281018c6f4649897426e2a3740165692e845cd8308c2505062bc8bde",
+    "policy_sha256": "4671783b9f5e28f2dd7d3b0f3216e9fcebd27f0ef78718b94f4d5f956f630f5a",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "1ac9a7f5aa735fd01a0b9cc01ba61c5b2ccc3bcaa85066839d325d73484b644a"
+    "schema_sha256": "aae199ee8ee4a2d000e8aaa61ef84e47a63e2286c14080fec90ac62957d4bb31"
   },
   "implementation": {
-    "source_files": 2,
-    "source_sha256": "48c85f77e284f1f62218173dc598cfd16ca34f9be22d08a1ef99e147beeac71c",
+    "source_files": 3,
+    "source_sha256": "f23e83ca4bf75076551bfc5fd7fdc8c717a51f3ebc148b48c8ec9f24e7333965",
     "generator": "Tools/TMXY.G2Review/g2_review.py",
-    "generator_sha256": "27716e7aa3ce847e64f927eb1293bc1ef595b50c1235e89bbc22d3f4d46f779a",
+    "generator_sha256": "c3cf8b685b0d00b150697e7c01f46731d84669040e79d103d1fca666ea4c9ba9",
     "wrapper": "Tools/TMXY.G2Review/New-G2Review.ps1",
-    "wrapper_sha256": "5c1ef61cb6c6d7a8d0efa25c3558543ad8435e56b79e4acb3cc958ee19ecf0da",
-    "self_test_assertions": 8
+    "wrapper_sha256": "7751766c5ba8328de4ff14a7f83b9954e2612504ae7bd546881af209f80873ec",
+    "self_test_assertions": 10
   },
   "disclosure": {
     "private_source_paths": false,
@@ -294,8 +315,10 @@
   },
   "next_scope": {
     "tasks": [
-      "P2-20-remediation"
+      "P2-20A-remediation",
+      "P2-20B-owner-decisions",
+      "P2-20-g2-rerun"
     ],
-    "detail": "Close G2-06 resource-reference proof and G2-07 migration decisions, then rerun the fail-closed G2 review. P3 remains unauthorized."
+    "detail": "Close the quantified G2-06 resource gaps and obtain explicit approved G2-07 decisions, then rerun the fail-closed G2 review. P3 remains unauthorized."
   }
 }

@@ -7,7 +7,7 @@
 - P3 authorized: `false`
 - Evidence snapshot: `2026-08-28T16:44:40.9795157+00:00`
 
-The review procedure completed successfully, but the gate is fail-closed. A successful review execution is not a successful G2 decision.
+The review procedure completed successfully, but the gate remains fail-closed. A successful review execution is not a successful G2 decision.
 
 ## Criterion outcome
 
@@ -18,24 +18,24 @@ The review procedure completed successfully, but the gate is fail-closed. A succ
 | G2-03 | SATISFIED | The scoped core-table integrity contract passes with zero measured violations. |
 | G2-04 | SATISFIED | The evidence chain binds the same read-only sandbox executable and frozen build through P2-04 to P2-08. |
 | G2-05 | SATISFIED | Ownership is complete; combat, economy, and unknown gameplay semantics remain server-authoritative and fail closed. |
-| G2-06 | BLOCKED | The explicit hash-bound core-resource subset and its zero unresolved, ambiguous, and heuristic metrics are absent. Global queues are risk context, not the core exit threshold; core foreign-key dangling zero is also a separate narrower fact. |
-| G2-07 | BLOCKED | Diff, limit, and uint64 code-generation audits are inputs, not a complete approved migration-decision registry. |
+| G2-06 | BLOCKED | P2-20A supplies a hash-bound monotonic core-scope closure report, but complete auxiliary scope, asset binding, conditional member evidence, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts. |
+| G2-07 | BLOCKED | P2-20B completely enumerates and hash-binds all migration-decision units, but every unit remains pending with no independently verified decision or approval. Machine suggestions are non-authoritative and do not satisfy G2-07. |
 | G2-08 | SATISFIED | Planning effort, machine projection, storage, assumptions, and reserves are quantified; none is measured delivery duration or a monetary quote. |
 | G2-09 | SATISFIED | Backend and UE generated contracts bind to one schema digest and retain uint64 identity storage. |
 
 ## Blocking findings
 
-### G2-BLK-06: Core resource-reference closure is not proven
+### G2-BLK-06: Core resource-reference closure has quantified open gaps
 
-A hash-bound core-resource subset and its explicit unresolved, ambiguous, and heuristic-selection metrics are absent. Global queues remain risk context, while core foreign-key dangling zero cannot substitute for this proof.
+P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; the measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.
 
-Required closure: Define and hash-bind the core-resource subset, prove its unresolved, ambiguous, and heuristic-selection counts are zero, and regenerate closure evidence.
+Required closure: Complete auxiliary configuration scope and explicit asset binding, export and hash-bind the conditional member set, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.
 
-### G2-BLK-07: Complete migration decisions are absent
+### G2-BLK-07: Migration registry is complete in coverage but decisions remain pending
 
-Existing diff, limit, canonical-ID, and code-generation audits do not record every required migration decision.
+P2-20B enumerates 1359 of 1359 required units, but 1359 remain pending, only 0 are decided, 0 are approved, and the verified approval count is 0. Machine suggestions are not decisions.
 
-Required closure: Create and review a complete migration-decision registry covering ID, width, old-to-new schema, and fixed-limit risks.
+Required closure: Record an explicit reviewed migration decision for every unit and bind independently verifiable approvals to each decision digest; machine-generated suggestions remain advisory.
 
 ## Budget interpretation
 

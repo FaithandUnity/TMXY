@@ -16,14 +16,14 @@
     "captured_utc": { "type": "string", "minLength": 1 },
     "task_id": { "const": "P2-20" },
     "source_build": { "const": "qy-3.0.0.413" },
-    "result": { "const": "BLOCKED" },
+    "result": { "enum": ["PASS", "BLOCKED"] },
     "review_execution_result": { "const": "PASS" },
-    "task_status": { "const": "BLOCKED" },
-    "completion_criteria_satisfied": { "const": false },
+    "task_status": { "enum": ["COMPLETE", "BLOCKED"] },
+    "completion_criteria_satisfied": { "type": "boolean" },
     "gate": { "const": "G2" },
-    "gate_decision": { "const": "BLOCKED" },
-    "g2_approved": { "const": false },
-    "p3_authorized": { "const": false },
+    "gate_decision": { "enum": ["APPROVED", "BLOCKED"] },
+    "g2_approved": { "type": "boolean" },
+    "p3_authorized": { "type": "boolean" },
     "input_bindings": { "$ref": "#/$defs/input_bindings" },
     "summary": { "$ref": "#/$defs/summary" },
     "criteria": {
@@ -42,19 +42,41 @@
     "security": { "$ref": "#/$defs/security" },
     "blockers": {
       "type": "array",
-      "minItems": 2,
+      "minItems": 0,
       "maxItems": 2,
-      "prefixItems": [
-        { "allOf": [{ "$ref": "#/$defs/blocker" }, { "properties": { "id": { "const": "G2-BLK-06" }, "criterion_id": { "const": "G2-06" } } }] },
-        { "allOf": [{ "$ref": "#/$defs/blocker" }, { "properties": { "id": { "const": "G2-BLK-07" }, "criterion_id": { "const": "G2-07" } } }] }
-      ],
-      "items": false
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/blocker" }
     },
     "budget_interpretation": { "$ref": "#/$defs/budget" },
     "authority_boundaries": { "$ref": "#/$defs/authority" },
     "contracts": { "$ref": "#/$defs/contracts" },
     "disclosure": { "$ref": "#/$defs/disclosure" }
   },
+  "allOf": [
+    {
+      "if": { "properties": { "g2_approved": { "const": true } } },
+      "then": {
+        "properties": {
+          "result": { "const": "PASS" },
+          "task_status": { "const": "COMPLETE" },
+          "completion_criteria_satisfied": { "const": true },
+          "gate_decision": { "const": "APPROVED" },
+          "p3_authorized": { "const": true },
+          "blockers": { "maxItems": 0 }
+        }
+      },
+      "else": {
+        "properties": {
+          "result": { "const": "BLOCKED" },
+          "task_status": { "const": "BLOCKED" },
+          "completion_criteria_satisfied": { "const": false },
+          "gate_decision": { "const": "BLOCKED" },
+          "p3_authorized": { "const": false },
+          "blockers": { "minItems": 1 }
+        }
+      }
+    }
+  ],
   "$defs": {
     "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
     "path": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$" },
@@ -82,10 +104,41 @@
         "captured_utc": { "type": "string", "minLength": 1 }
       }
     },
+    "supplemental": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "path", "sha256", "result", "review_execution_result", "task_status", "completion_criteria_satisfied"],
+      "properties": {
+        "task_id": { "const": "P2-20A" },
+        "criterion_id": { "const": "G2-06" },
+        "path": { "const": "Data/Reports/p2-20a-core-resource-closure-report.json" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "enum": ["PASS", "BLOCKED"] },
+        "review_execution_result": { "const": "PASS" },
+        "task_status": { "enum": ["COMPLETE", "BLOCKED"] },
+        "completion_criteria_satisfied": { "type": "boolean" }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "path", "sha256", "result", "generation_result", "task_status", "completion_criteria_satisfied", "g2_07_satisfied"],
+      "properties": {
+        "task_id": { "const": "P2-20B" },
+        "criterion_id": { "const": "G2-07" },
+        "path": { "const": "Data/Governance/p2-g2-migration-decisions.json" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "enum": ["PASS", "BLOCKED"] },
+        "generation_result": { "const": "PASS" },
+        "task_status": { "enum": ["COMPLETE", "BLOCKED"] },
+        "completion_criteria_satisfied": { "type": "boolean" },
+        "g2_07_satisfied": { "type": "boolean" }
+      }
+    },
     "input_bindings": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["aggregate_sha256", "prerequisites", "quality"],
+      "required": ["aggregate_sha256", "prerequisites", "supplemental", "remediation", "quality"],
       "properties": {
         "aggregate_sha256": { "$ref": "#/$defs/sha256" },
         "prerequisites": {
@@ -94,6 +147,8 @@
           "maxItems": 19,
           "items": { "$ref": "#/$defs/prerequisite" }
         },
+        "supplemental": { "$ref": "#/$defs/supplemental" },
+        "remediation": { "$ref": "#/$defs/remediation" },
         "quality": { "$ref": "#/$defs/quality" }
       }
     },
@@ -103,16 +158,15 @@
       "required": ["criteria_total", "satisfied", "blocked", "satisfied_ids", "blocked_ids"],
       "properties": {
         "criteria_total": { "const": 9 },
-        "satisfied": { "const": 7 },
-        "blocked": { "const": 2 },
+        "satisfied": { "type": "integer", "minimum": 7, "maximum": 9 },
+        "blocked": { "type": "integer", "minimum": 0, "maximum": 2 },
         "satisfied_ids": {
-          "type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true,
-          "items": { "enum": ["G2-01", "G2-02", "G2-03", "G2-04", "G2-05", "G2-08", "G2-09"] }
+          "type": "array", "minItems": 7, "maxItems": 9, "uniqueItems": true,
+          "items": { "enum": ["G2-01", "G2-02", "G2-03", "G2-04", "G2-05", "G2-06", "G2-07", "G2-08", "G2-09"] }
         },
         "blocked_ids": {
-          "type": "array",
-          "prefixItems": [{ "const": "G2-06" }, { "const": "G2-07" }],
-          "items": false
+          "type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true,
+          "items": { "enum": ["G2-06", "G2-07"] }
         }
       }
     },
@@ -137,19 +191,26 @@
         "required_status": { "const": "SATISFIED" },
         "observed_status": { "enum": ["SATISFIED", "BLOCKED"] },
         "satisfied": { "type": "boolean" },
-        "evidence_task_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^P2-(0[1-9]|1[0-9])$" } },
+        "evidence_task_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^P2-(0[1-9]|1[0-9]|20[AB])$" } },
         "metrics": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/metric" } },
         "interpretation": { "type": "string", "minLength": 1 },
         "blocker_ids": { "type": "array", "uniqueItems": true, "items": { "enum": ["G2-BLK-06", "G2-BLK-07"] } }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "satisfied": { "const": true } } },
+          "then": { "properties": { "observed_status": { "const": "SATISFIED" }, "blocker_ids": { "maxItems": 0 } } },
+          "else": { "properties": { "observed_status": { "const": "BLOCKED" }, "blocker_ids": { "minItems": 1 } } }
+        }
+      ]
     },
     "g2_01": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-01" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
     "g2_02": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-02" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
     "g2_03": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-03" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
     "g2_04": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-04" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
     "g2_05": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-05" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
-    "g2_06": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-06" }, "observed_status": { "const": "BLOCKED" }, "satisfied": { "const": false }, "blocker_ids": { "const": ["G2-BLK-06"] } } }] },
-    "g2_07": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-07" }, "observed_status": { "const": "BLOCKED" }, "satisfied": { "const": false }, "blocker_ids": { "const": ["G2-BLK-07"] } } }] },
+    "g2_06": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-06" } } }, { "if": { "properties": { "satisfied": { "const": false } } }, "then": { "properties": { "blocker_ids": { "const": ["G2-BLK-06"] } } } }] },
+    "g2_07": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-07" } } }, { "if": { "properties": { "satisfied": { "const": false } } }, "then": { "properties": { "blocker_ids": { "const": ["G2-BLK-07"] } } } }] },
     "g2_08": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-08" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
     "g2_09": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-09" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
     "security": {

@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T18:27:14.8044704+00:00",
+  "captured_utc": "2026-08-28T20:26:52.9170890+00:00",
   "result": "PASS_DIAGNOSTIC",
   "authoritative_release_build": false,
   "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
   "repository_layout": {
     "result": "PASS",
-    "checked_source_files": 245,
-    "checked_size_files": 638,
-    "checked_utf8_lf_files": 705,
+    "checked_source_files": 253,
+    "checked_size_files": 658,
+    "checked_utf8_lf_files": 732,
     "failure_count": 0,
     "failures": []
   },

@@ -1,16 +1,22 @@
 [CmdletBinding()]
 param(
     [string]$RebuildRoot = 'E:\QQXYCodeDev\Rebuild',
+    [string]$DevDocRoot = 'E:\QQXYCodeDev\DevDoc',
     [switch]$Check
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
-$localRoot = [IO.Path]::GetFullPath((Join-Path $root 'Data\Local\P2-20'))
+$devDoc = [IO.Path]::GetFullPath($DevDocRoot).TrimEnd([char[]]'\/')
+$authorizedLegacy = [IO.Path]::GetFullPath((Join-Path (Split-Path $root -Parent) 'DevDoc')).TrimEnd([char[]]'\/')
+if (-not $devDoc.Equals($authorizedLegacy, [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'P2-20B requires the authorized read-only DevDoc root.'
+}
+$localRoot = [IO.Path]::GetFullPath((Join-Path $root 'Data\Local\P2-20B'))
 if (-not $localRoot.StartsWith($root + [IO.Path]::DirectorySeparatorChar,
         [StringComparison]::OrdinalIgnoreCase)) {
-    throw 'P2-20 temporary root escaped Rebuild.'
+    throw 'P2-20B temporary root escaped Rebuild.'
 }
 $runRoot = Join-Path $localRoot ([Guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $runRoot -Force | Out-Null
@@ -47,15 +53,13 @@ function Copy-Output([string]$Source, [string]$Target) {
 }
 
 try {
-    $moduleRoot = Join-Path $root 'Tools\TMXY.G2Review'
-    $generatorPath = Join-Path $moduleRoot 'g2_review.py'
-    $policyPath = Join-Path $root 'Contracts\data-schema\g2-review-policy-v1.json'
-    $schemaPath = Join-Path $root 'Contracts\data-schema\g2-review-v1.schema.json'
+    $moduleRoot = Join-Path $root 'Tools\TMXY.G2MigrationDecisions'
+    $generatorPath = Join-Path $moduleRoot 'migration_decisions.py'
+    $policyPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-policy-v1.json'
+    $schemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-registry-v1.schema.json'
     $lockPath = Join-Path $root 'Data\Toolchain\toolchain.lock.json'
-    foreach ($required in @($generatorPath, $policyPath, $schemaPath, $lockPath)) {
-        if (-not (Test-Path -LiteralPath $required -PathType Leaf)) {
-            throw "Missing P2-20 input: $required"
-        }
+    foreach ($required in @($devDoc, $generatorPath, $policyPath, $schemaPath, $lockPath)) {
+        if (-not (Test-Path -LiteralPath $required)) { throw "Missing P2-20B input: $required" }
     }
 
     $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -65,56 +69,56 @@ try {
     if ($LASTEXITCODE -ne 0 -or $image.Count -ne 1 -or
         [string]$image[0].Id -ne $expectedBuilderId -or
         [string]$image[0].Config.User -ne 'tmxy') {
-        throw 'P2-20 requires the qualified non-root Clang 21 builder image.'
+        throw 'P2-20B requires the qualified non-root Clang 21 builder image.'
     }
 
-    $jsonName = 'p2-20-g2-review-report.json'
-    $markdownName = 'p2-20-g2-review-report.md'
-    $generatedJson = Join-Path $runRoot $jsonName
+    $registryName = 'p2-g2-migration-decisions.json'
+    $markdownName = 'p2-20b-migration-decisions-report.md'
+    $generatedRegistry = Join-Path $runRoot $registryName
     $generatedMarkdown = Join-Path $runRoot $markdownName
-    $trackedJson = Join-Path $root "Data\Reports\$jsonName"
+    $trackedRegistry = Join-Path $root "Data\Governance\$registryName"
     $trackedMarkdown = Join-Path $root "Data\Reports\$markdownName"
     $docker = (Get-Command docker.exe -ErrorAction Stop).Source
     $arguments = @(
         'run', '--rm', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
         '--security-opt', 'no-new-privileges',
         '--mount', "type=bind,src=$root,dst=/workspace,readonly",
+        '--mount', "type=bind,src=$devDoc,dst=/legacy-root,readonly",
         '--mount', "type=bind,src=$runRoot,dst=/output",
         '--tmpfs', '/tmp:rw,nosuid,nodev,size=32m',
-        $builderReference, 'python3', '/workspace/Tools/TMXY.G2Review/g2_review.py',
-        '--root', '/workspace',
-        '--policy', '/workspace/Contracts/data-schema/g2-review-policy-v1.json',
-        '--schema', '/workspace/Contracts/data-schema/g2-review-v1.schema.json',
-        '--json-output', "/output/$jsonName",
-        '--markdown-output', "/output/$markdownName"
+        $builderReference, 'python3', '/workspace/Tools/TMXY.G2MigrationDecisions/migration_decisions.py',
+        '--root', '/workspace', '--legacy-root', '/legacy-root',
+        '--policy', '/workspace/Contracts/data-schema/g2-migration-decision-policy-v1.json',
+        '--schema', '/workspace/Contracts/data-schema/g2-migration-decision-registry-v1.schema.json',
+        '--registry-output', "/output/$registryName", '--markdown-output', "/output/$markdownName"
     )
     $summaryText = & $docker @arguments
-    if ($LASTEXITCODE -ne 0) { throw 'P2-20 isolated report generation failed.' }
+    if ($LASTEXITCODE -ne 0) { throw 'P2-20B isolated generation failed.' }
     $summary = $summaryText | ConvertFrom-Json -Depth 100
     $selfText = & $docker run --rm --network none --read-only --cap-drop ALL `
         --security-opt no-new-privileges `
         --mount "type=bind,src=$root,dst=/workspace,readonly" `
-        $builderReference python3 /workspace/Tools/TMXY.G2Review/g2_review.py --self-test
-    if ($LASTEXITCODE -ne 0) { throw 'P2-20 generator self-test failed.' }
+        $builderReference python3 /workspace/Tools/TMXY.G2MigrationDecisions/migration_decisions.py --self-test
+    if ($LASTEXITCODE -ne 0) { throw 'P2-20B generator self-test failed.' }
     $selfTest = $selfText | ConvertFrom-Json -Depth 100
-    $summaryApproved = [int]$summary.blocked -eq 0
-    $expectedResult = if ($summaryApproved) { 'PASS' } else { 'BLOCKED' }
-    if ($summary.result -ne $expectedResult -or $summary.review_execution_result -ne 'PASS' -or
-        [int]$summary.satisfied + [int]$summary.blocked -ne 9 -or
-        $selfTest.result -ne 'PASS' -or [int]$selfTest.assertions -lt 10) {
-        throw 'P2-20 generator summary or self-test failed.'
+    if ($summary.generation_result -ne 'PASS' -or $summary.result -ne 'BLOCKED' -or
+        [int]$summary.enumerated_units -ne 1359 -or [int]$summary.pending -ne 1359 -or
+        $summary.g2_07_satisfied -ne $false -or $selfTest.result -ne 'PASS' -or
+        [int]$selfTest.assertions -lt 11) {
+        throw 'P2-20B generation or self-test summary failed.'
     }
-    $valid = Get-Content -LiteralPath $generatedJson -Raw -Encoding UTF8 |
-        Test-Json -SchemaFile $schemaPath
-    if (-not $valid) { throw 'P2-20 generated report failed its closed JSON Schema.' }
+    if (-not (Get-Content -LiteralPath $generatedRegistry -Raw -Encoding UTF8 |
+            Test-Json -SchemaFile $schemaPath)) {
+        throw 'P2-20B registry failed its closed JSON Schema.'
+    }
 
-    $targets = [ordered]@{ json = $trackedJson; markdown = $trackedMarkdown }
-    $generated = [ordered]@{ json = $generatedJson; markdown = $generatedMarkdown }
+    $targets = [ordered]@{ registry = $trackedRegistry; markdown = $trackedMarkdown }
+    $generated = [ordered]@{ registry = $generatedRegistry; markdown = $generatedMarkdown }
     if ($Check) {
         foreach ($name in $targets.Keys) {
             if (-not (Test-Path -LiteralPath $targets[$name] -PathType Leaf) -or
                 (Get-Sha256 $targets[$name]) -ne (Get-Sha256 $generated[$name])) {
-                throw "Tracked P2-20 output differs from deterministic regeneration: $name"
+                throw "Tracked P2-20B output differs from deterministic regeneration: $name"
             }
         }
     }
@@ -122,52 +126,43 @@ try {
         foreach ($name in $targets.Keys) { Copy-Output $generated[$name] $targets[$name] }
     }
 
-    $report = Get-Content -LiteralPath $trackedJson -Raw -Encoding UTF8 |
+    $registry = Get-Content -LiteralPath $trackedRegistry -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {
             "$(Get-Relative $_.FullName)|$(Get-Sha256 $_.FullName)"
         })
-    $sourceSha = Get-TextSha256 (($sourceLines -join "`n") + "`n")
-    $evidencePath = Join-Path $root 'Data\Inventory\p2-20-g2-review.json'
+    $evidencePath = Join-Path $root 'Data\Inventory\p2-20b-migration-decisions.json'
     $evidence = [pscustomobject][ordered]@{
         schema_version = 1
-        captured_utc = [string]$report.captured_utc
-        task_id = 'P2-20'
-        result = [string]$report.result
-        review_execution_result = 'PASS'
-        task_status = [string]$report.task_status
-        completion_criteria_satisfied = [bool]$report.completion_criteria_satisfied
-        gate = 'G2'
-        gate_decision = [string]$report.gate_decision
-        g2_approved = [bool]$report.g2_approved
-        p3_authorized = [bool]$report.p3_authorized
-        input = [pscustomobject][ordered]@{
-            source_build = [string]$report.source_build
-            bindings = $report.input_bindings
+        captured_utc = [string]$registry.captured_utc
+        task_id = 'P2-20B'
+        result = 'BLOCKED'
+        generation_result = 'PASS'
+        task_status = 'BLOCKED'
+        completion_criteria_satisfied = $false
+        gate_criterion = 'G2-07'
+        g2_07_satisfied = $false
+        input = $registry.input_bindings
+        registry = [pscustomobject][ordered]@{
+            path = Get-Relative $trackedRegistry
+            tracked = $true
+            bytes = [int64](Get-Item -LiteralPath $trackedRegistry).Length
+            lines = Get-LineCount $trackedRegistry
+            sha256 = Get-Sha256 $trackedRegistry
         }
         report = [pscustomobject][ordered]@{
-            json = [pscustomobject][ordered]@{
-                path = Get-Relative $trackedJson
-                tracked = $true
-                bytes = [int64](Get-Item -LiteralPath $trackedJson).Length
-                lines = Get-LineCount $trackedJson
-                sha256 = Get-Sha256 $trackedJson
-            }
-            markdown = [pscustomobject][ordered]@{
-                path = Get-Relative $trackedMarkdown
-                tracked = $true
-                bytes = [int64](Get-Item -LiteralPath $trackedMarkdown).Length
-                lines = Get-LineCount $trackedMarkdown
-                sha256 = Get-Sha256 $trackedMarkdown
-            }
+            path = Get-Relative $trackedMarkdown
+            tracked = $true
+            bytes = [int64](Get-Item -LiteralPath $trackedMarkdown).Length
+            lines = Get-LineCount $trackedMarkdown
+            sha256 = Get-Sha256 $trackedMarkdown
         }
-        summary = $report.summary
-        blockers = $report.blockers
-        budget_interpretation = $report.budget_interpretation
-        authority_boundaries = $report.authority_boundaries
-        security = $report.security
+        summary = $registry.summary
+        completeness = $registry.completeness
+        hard_invariants = $registry.hard_invariants
+        authority_boundaries = $registry.authority_boundaries
         contracts = [pscustomobject][ordered]@{
             policy = Get-Relative $policyPath
             policy_sha256 = Get-Sha256 $policyPath
@@ -176,17 +171,17 @@ try {
         }
         implementation = [pscustomobject][ordered]@{
             source_files = $sourceFiles.Count
-            source_sha256 = $sourceSha
+            source_sha256 = Get-TextSha256 (($sourceLines -join "`n") + "`n")
             generator = Get-Relative $generatorPath
             generator_sha256 = Get-Sha256 $generatorPath
             wrapper = Get-Relative $MyInvocation.MyCommand.Path
             wrapper_sha256 = Get-Sha256 $MyInvocation.MyCommand.Path
             self_test_assertions = [int]$selfTest.assertions
         }
-        disclosure = $report.disclosure
+        disclosure = $registry.disclosure
         reproduction = [pscustomobject][ordered]@{
-            check_mode = $false
             repository_mount = 'read-only'
+            legacy_mount = 'read-only-authorized-input'
             network = 'none'
             capabilities = 'none'
             no_new_privileges = $true
@@ -195,25 +190,19 @@ try {
             builder_user = 'tmxy'
         }
         next_scope = [pscustomobject][ordered]@{
-            tasks = if ($report.g2_approved) { @('P3') } else { @('P2-20A-remediation', 'P2-20B-owner-decisions', 'P2-20-g2-rerun') }
-            detail = if ($report.g2_approved) {
-                'G2 is approved from complete hash-bound evidence; proceed only within the separately governed P3 scope.'
-            }
-            else {
-                'Close the quantified G2-06 resource gaps and obtain explicit approved G2-07 decisions, then rerun the fail-closed G2 review. P3 remains unauthorized.'
-            }
+            tasks = @('P2-20B-owner-decisions', 'P2-20-g2-rerun')
+            detail = 'Obtain real project/data-owner decisions and independently verifiable approvals for every active unit. Machine suggestions do not close G2-07.'
         }
     }
     if ($Check) {
         if (-not (Test-Path -LiteralPath $evidencePath -PathType Leaf)) {
-            throw 'Tracked P2-20 evidence is missing.'
+            throw 'Tracked P2-20B evidence is missing.'
         }
         $frozen = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 |
             ConvertFrom-Json -Depth 100 -DateKind String
-        $frozenCanonical = $frozen | ConvertTo-Json -Depth 100 -Compress
-        $generatedCanonical = $evidence | ConvertTo-Json -Depth 100 -Compress
-        if ($frozenCanonical -cne $generatedCanonical) {
-            throw 'Tracked P2-20 evidence differs from deterministic full-object regeneration.'
+        if (($frozen | ConvertTo-Json -Depth 100 -Compress) -cne
+            ($evidence | ConvertTo-Json -Depth 100 -Compress)) {
+            throw 'Tracked P2-20B evidence differs from deterministic full-object regeneration.'
         }
     }
     else {

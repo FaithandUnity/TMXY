@@ -25,6 +25,47 @@ function Assert-HostedContract {
     if (-not $Condition) { $failures.Add($Message) }
 }
 
+function Test-BackendRegistryContract {
+    param(
+        [Parameter(Mandatory = $true)][string]$JobBlock
+    )
+
+    $login = $JobBlock.IndexOf('docker login ghcr.io', [StringComparison]::Ordinal)
+    $pull = $JobBlock.IndexOf('docker pull "${TMXY_BACKEND_BUILDER_IMAGE}"',
+        [StringComparison]::Ordinal)
+    $inspect = $JobBlock.IndexOf('docker image inspect --format', [StringComparison]::Ordinal)
+    $verify = $JobBlock.IndexOf(
+        'grep --fixed-strings --quiet "${TMXY_BACKEND_BUILDER_DIGEST}" <<< "${repo_digests}"',
+        [StringComparison]::Ordinal)
+    $orderedRegistryOperations = $login -ge 0 -and $pull -gt $login -and
+        $inspect -gt $pull -and $verify -gt $inspect
+    $isolatedDockerConfig = $JobBlock -match
+        '(?m)^\s{10}DOCKER_CONFIG:\s+\$\{\{\s*runner\.temp\s*\}\}/tmxy-docker-config\s*$'
+    $ephemeralIdentity = $JobBlock -match
+        '(?m)^\s{10}GHCR_USERNAME:\s+\$\{\{\s*github\.actor\s*\}\}\s*$' -and
+        $JobBlock -match
+        '(?m)^\s{10}GHCR_CREDENTIAL:\s+\$\{\{\s*github\.token\s*\}\}\s*$'
+    $stdinLogin = $JobBlock.Contains(
+        'printf ''%s'' "${GHCR_CREDENTIAL}" | docker login ghcr.io',
+        [StringComparison]::Ordinal) -and
+        $JobBlock.Contains('--username "${GHCR_USERNAME}" --password-stdin',
+            [StringComparison]::Ordinal)
+    $credentialCleanup = $JobBlock.Contains('trap cleanup_registry_auth EXIT',
+        [StringComparison]::Ordinal) -and
+        $JobBlock.Contains('docker logout ghcr.io >/dev/null 2>&1 || true',
+            [StringComparison]::Ordinal) -and
+        $JobBlock.Contains('rm -f -- "${DOCKER_CONFIG}/config.json"',
+            [StringComparison]::Ordinal)
+    $unsafeCredentialUse = $JobBlock -match '(?m)^\s*set\s+-[^\r\n]*x' -or
+        $JobBlock -match '(?m)^\s*echo\s+.*GHCR_CREDENTIAL' -or
+        $JobBlock -match 'docker login[^\r\n]*--password(?:\s|=)' -or
+        $JobBlock -match '(?m)^\s{10}DOCKER_CONFIG:.*(?:github\.workspace|GITHUB_WORKSPACE|HOME)'
+
+    return $orderedRegistryOperations -and $isolatedDockerConfig -and
+        $ephemeralIdentity -and $stdinLogin -and $credentialCleanup -and
+        -not $unsafeCredentialUse
+}
+
 foreach ($path in @(
         $mergePath,
         $releasePath,
@@ -68,6 +109,12 @@ $ueExecutionBlock = [regex]::Match(
 $ueRequiredCheckBlock = [regex]::Match(
     $merge,
     '(?ms)^  client_ue58_build_automation:\s*\n(?<body>.*?)(?=^  [A-Za-z0-9_]+:\s*$|\z)')
+$backendClangBlock = [regex]::Match(
+    $merge,
+    '(?ms)^  backend_clang21:\s*\n(?<body>.*?)(?=^  [A-Za-z0-9_]+:\s*$|\z)')
+$backendStaticAnalysisBlock = [regex]::Match(
+    $merge,
+    '(?ms)^  backend_static_analysis:\s*\n(?<body>.*?)(?=^  [A-Za-z0-9_]+:\s*$|\z)')
 
 $requiredChecks = @(
     'policy/repository',
@@ -108,6 +155,50 @@ Assert-HostedContract ($merge -match "steps\.cache_authority\.outputs\.protected
     'Shared cache writes must require an API-confirmed protected main branch.'
 Assert-HostedContract ($merge -match '--network none --read-only --cap-drop ALL') `
     'Locked backend jobs must build with no network, read-only root, and no capabilities.'
+$backendRegistryBlocks = @($backendClangBlock, $backendStaticAnalysisBlock)
+$backendRegistryPassed = 0
+foreach ($backendBlock in $backendRegistryBlocks) {
+    $backendRegistryBlockPassed = $backendBlock.Success -and
+        (Test-BackendRegistryContract -JobBlock $backendBlock.Groups['body'].Value)
+    if ($backendRegistryBlockPassed) { $backendRegistryPassed++ }
+    Assert-HostedContract $backendRegistryBlockPassed `
+        'Each locked backend job must authenticate to GHCR with the ephemeral GitHub token, isolated Docker config, stdin-only credential flow, cleanup, and post-pull digest verification.'
+}
+$registryNegativeFixtures = @(
+    [pscustomobject]@{
+        name = 'missing-login'
+        content = $backendClangBlock.Groups['body'].Value.Replace(
+            'docker login ghcr.io', 'docker info')
+    },
+    [pscustomobject]@{
+        name = 'configured-secret'
+        content = $backendClangBlock.Groups['body'].Value.Replace(
+            '${{ github.token }}', '${{ secrets.GHCR_TOKEN }}')
+    },
+    [pscustomobject]@{
+        name = 'workspace-docker-config'
+        content = $backendClangBlock.Groups['body'].Value.Replace(
+            '${{ runner.temp }}/tmxy-docker-config', '${{ github.workspace }}/tmxy-docker-config')
+    },
+    [pscustomobject]@{
+        name = 'command-line-password'
+        content = $backendClangBlock.Groups['body'].Value.Replace(
+            '--password-stdin', '--password "${GHCR_CREDENTIAL}"')
+    },
+    [pscustomobject]@{
+        name = 'missing-digest-verification'
+        content = $backendClangBlock.Groups['body'].Value.Replace(
+            'grep --fixed-strings --quiet "${TMXY_BACKEND_BUILDER_DIGEST}" <<< "${repo_digests}"',
+            'true')
+    }
+)
+$registryNegativeRejected = 0
+foreach ($fixture in $registryNegativeFixtures) {
+    $fixtureRejected = -not (Test-BackendRegistryContract -JobBlock $fixture.content)
+    if ($fixtureRejected) { $registryNegativeRejected++ }
+    Assert-HostedContract $fixtureRejected `
+        "Backend registry contract negative fixture was not rejected: $($fixture.name)"
+}
 Assert-HostedContract ($merge -match 'tmxy-ue58' -and $merge -match 'tmxy-ephemeral') `
     'UE authority must require an ephemeral UE 5.8 self-hosted runner.'
 Assert-HostedContract ($ueExecutionBlock.Success -and
@@ -347,6 +438,11 @@ $report = [pscustomobject][ordered]@{
     fork_pull_request_self_hosted_execution = $false
     fork_pull_request_required_check_fails_closed = $true
     ue_public_runner_trust_fixture_count = $ueTrustFixtures.Count
+    backend_registry_negative_fixture_count = $registryNegativeFixtures.Count
+    backend_registry_negative_fixtures_rejected = $registryNegativeRejected
+    backend_registry_ephemeral_auth = $backendRegistryPassed -eq $backendRegistryBlocks.Count
+    backend_registry_digest_verified_after_pull = $backendRegistryPassed -eq
+        $backendRegistryBlocks.Count
     ue_runner = 'self-hosted/Windows/X64/tmxy-ue58/tmxy-ephemeral'
     diagnostic_retention_days = 90
     authority_retention_requirement_satisfied = $false

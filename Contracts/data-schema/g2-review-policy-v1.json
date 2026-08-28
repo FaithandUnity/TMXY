@@ -25,7 +25,16 @@
     { "task_id": "P2-19", "path": "Data/Inventory/p2-19-resource-budget.json" }
   ],
   "quality_evidence": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-  "migration_decision_registry": "Data/Governance/p2-g2-migration-decisions.json",
+  "supplemental": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "path": "Data/Reports/p2-20a-core-resource-closure-report.json"
+  },
+  "remediation": {
+    "task_id": "P2-20B",
+    "criterion_id": "G2-07",
+    "path": "Data/Governance/p2-g2-migration-decisions.json"
+  },
   "criteria": [
     {
       "id": "G2-01",
@@ -60,13 +69,13 @@
     {
       "id": "G2-06",
       "statement": "Missing core-resource references are zero and deterministic binding gaps are closed.",
-      "evidence_task_ids": ["P2-03", "P2-13", "P2-18"],
+      "evidence_task_ids": ["P2-03", "P2-13", "P2-18", "P2-20A"],
       "required_status": "SATISFIED"
     },
     {
       "id": "G2-07",
       "statement": "ID, width, old-to-new Schema, and legacy fixed-limit risks all have explicit migration decisions.",
-      "evidence_task_ids": ["P2-09", "P2-10", "P2-11", "P2-17", "P2-18"],
+      "evidence_task_ids": ["P2-09", "P2-10", "P2-11", "P2-17", "P2-18", "P2-20B"],
       "required_status": "SATISFIED"
     },
     {
@@ -89,6 +98,29 @@
     "core_integrity_violations": 0,
     "core_resource_unresolved": 0,
     "core_resource_ambiguous": 0,
+    "core_scope_complete": true,
+    "core_auxiliary_config_scope_complete": true,
+    "core_asset_binding_resolution_explicit": true,
+    "core_table_resource_unresolved": 0,
+    "core_table_resource_ambiguous": 0,
+    "core_package_resource_unresolved": 0,
+    "core_package_resource_ambiguous": 0,
+    "core_conditional_required_missing": 0,
+    "core_member_set_exported": true,
+    "core_heuristic_target_selections": 0,
+    "core_asset_structure_unresolved": 0,
+    "core_asset_structure_fail": 0,
+    "core_unknown_record_count": 0,
+    "core_unknown_resolution_count": 0,
+    "core_integrity_mismatches": 0,
+    "migration_expected_units": 1359,
+    "migration_missing": 0,
+    "migration_duplicates": 0,
+    "migration_orphans": 0,
+    "migration_pending": 0,
+    "migration_decided": 1359,
+    "migration_approved": 1359,
+    "migration_minimum_approval_count": 1359,
     "required_criteria": 9
   },
   "fail_closed_rules": {
@@ -97,7 +129,9 @@
     "core_foreign_key_zero_does_not_prove_core_resource_reference_zero": true,
     "core_resource_subset_and_explicit_metrics_are_required": true,
     "global_reference_queues_are_context_not_core_exit_thresholds": true,
+    "first_candidate_or_heuristic_selection_never_proves_resource_closure": true,
     "audit_codegen_or_uint64_policy_is_not_a_complete_migration_decision_registry": true,
+    "machine_suggestions_never_count_as_migration_decisions_or_approvals": true,
     "planning_hours_are_not_measured_duration_or_money": true,
     "one_blocked_criterion_blocks_g2": true,
     "blocked_g2_never_authorizes_p3_or_release": true

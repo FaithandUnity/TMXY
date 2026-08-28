@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T00:35:18.6912066+00:00",
+  "result": "PASS",
+  "task": "P1-10",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "inputs": [
+    {
+      "role": "current_encrypted_table",
+      "path": "CLSVShare/item_table.tbl",
+      "size": 7046704,
+      "sha256": "f0ccd185f736802661becb9581896497e2101f6a9dbcb28578d5351f71f820ce"
+    },
+    {
+      "role": "residual_plaintext_candidate",
+      "path": "CLSVShare/item_tabletemp.csv",
+      "size": 6551430,
+      "sha256": "2a16d952fe398571a3ae2f926acb7ecd8b3c2a843bc0b62e1cb2be463fcf39dd"
+    }
+  ],
+  "processing": {
+    "runtime_key_fingerprint": "cf760550b7af6c220331b258db1df781fe567221eb7c53fbfc65aca522085887",
+    "secret_reference": "se://tmxy/development/table/qy-3.0.0.413/runtime-key-base64",
+    "double_aes128_decode": true,
+    "current_payload_bytes": 7046695,
+    "current_strict_gbk": true,
+    "residual_strict_gbk": true,
+    "raw_key_emitted": false,
+    "plaintext_emitted": false,
+    "buffers_cleared": true
+  },
+  "schema_relation": {
+    "header_exact_match": true,
+    "current_header_sha256": "7ef6c517f4b2495fd4344d9471e8da5aae7b4e9b9ae20b63f84ac50b68a73bd8",
+    "residual_header_sha256": "7ef6c517f4b2495fd4344d9471e8da5aae7b4e9b9ae20b63f84ac50b68a73bd8",
+    "current_columns": 95,
+    "residual_columns": 95,
+    "current_rows": 29223,
+    "residual_rows": 27289,
+    "current_consistent_column_rows": 29223,
+    "residual_consistent_column_rows": 27289
+  },
+  "primary_key_relation": {
+    "field_ordinal": 0,
+    "current_unique": true,
+    "residual_unique": true,
+    "current_ascii_decimal": true,
+    "residual_ascii_decimal": true,
+    "shared": 27288,
+    "identical_rows": 26272,
+    "changed_rows": 1016,
+    "current_only": 1935,
+    "residual_only": 1
+  },
+  "positional_relation": {
+    "common_prefix_bytes": 13769,
+    "compared_line_ordinals": 27290,
+    "identical_line_ordinals": 916,
+    "first_different_line_ordinal": 60
+  },
+  "conclusion": {
+    "exact_replacement": false,
+    "residual_can_replace_current_table": false,
+    "permitted_use": "schema and historical row-difference evidence only"
+  }
+}

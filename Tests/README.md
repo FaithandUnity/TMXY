@@ -33,4 +33,9 @@ Fixture、glTF/BIN 边界、坐标/法线/绕序、源与渲染顶点、UV/材�
 活动表、三张 GBK 大型代表表和 113 张具有更新替代物的历史影子分类；报告只含指纹
 与结构计数，P1-09 由此完成，产品读取器继续由 P1-10 实现。
 
+`Contract/Test-CurrentTableCsvRelation.ps1` 不读取 Secret，而是验证 P1-10 的脱敏机器
+证据和生成器安全合同。它冻结当前/残留 item 表相同的 95 列 Schema、27,288 个共有
+主键、26,272 个逐 byte 相同行、1,016 个变化行以及 1,935/1 个单侧主键，并强制
+`residual_can_replace_current_table=false`。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

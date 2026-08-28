@@ -158,6 +158,11 @@ if ($VerifyLegacyGoldenSources) { $protocolArguments.VerifyGenerated = $true }
 $protocolCodegen = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-ProtocolCodegen.ps1') `
     -Arguments $protocolArguments
+$contentHealthArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $contentHealthArguments.VerifyDerivedSources = $true }
+$contentHealth = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ContentHealth.ps1') `
+    -Arguments $contentHealthArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -298,6 +303,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$idLimitAudit.completion_criteria_satisfied -and
     [string]$protocolCodegen.result -eq 'PASS' -and
     [bool]$protocolCodegen.completion_criteria_satisfied -and
+    [string]$contentHealth.result -eq 'PASS' -and
+    [bool]$contentHealth.completion_criteria_satisfied -and
     [string]$fullAssetInventory.result -eq 'PASS' -and
     [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceClosure.result -eq 'PASS' -and
@@ -372,6 +379,7 @@ $report = [pscustomobject][ordered]@{
     canonical_id_map = $canonicalIdMap
     id_limit_audit = $idLimitAudit
     protocol_codegen = $protocolCodegen
+    content_health = $contentHealth
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

@@ -134,6 +134,11 @@ Linux 后端和 UE 5.8 的 C++20 强类型 ID/记录结构。模型覆盖 12 张
 16 个 ID 分量；数值 ID 固定使用 64 位承载，不按当前极值缩窄。两套生成物分别进入真实
 Backend CMake/CTest 和 TMXYCore 编译，详见 `Docs/Formats/PROTOCOL-CODEGEN.md`。
 
+P2-18 由 `Tools/TMXY.ContentHealth/New-ContentHealthReport.ps1` 将 P2-01～P2-17 的
+精确证据摘要聚合为 JSON 和 Markdown 全量内容健康报告，量化解析覆盖、损坏、未知/不透明、
+悬空/歧义引用、转换就绪度、人工规划系数与容量风险。报告完成只表示风险核算闭合，不表示
+内容全部修复、已有可玩版本、G2 通过或获得发布权威，详见 `Docs/Formats/CONTENT-HEALTH.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

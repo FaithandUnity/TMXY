@@ -7,9 +7,13 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
-$policyPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-policy-v1.json'
-$schemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-registry-v1.schema.json'
+$policyPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-policy-v2.json'
+$schemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-registry-v2.schema.json'
+$authoritySchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-authority-v2.schema.json'
+$packetSchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-review-packets-v2.schema.json'
+$authorityPath = Join-Path $root 'Data\Governance\p2-g2-migration-decision-authority-v2.json'
 $registryPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
+$packetPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
 $evidencePath = Join-Path $root 'Data\Inventory\p2-20b-migration-decisions.json'
 $reportPath = Join-Path $root 'Data\Reports\p2-20b-migration-decisions-report.md'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2MigrationDecisions\New-G2MigrationDecisions.ps1'
@@ -62,18 +66,24 @@ function Get-ManifestSha([object[]]$Items) {
                 subject_membership_sha256 = [string]$_.subject_membership_sha256
             }
         })
-    return Get-TextSha ($members | ConvertTo-Json -Depth 5 -Compress)
+    return Get-TextSha (ConvertTo-Json -InputObject $members -Depth 5 -Compress)
 }
 
 function Test-DecisionState([object]$Item) {
     if ($Item.machine_suggestion.counts_as_decision -ne $false) { return $false }
     if ($Item.decision.status -eq 'PENDING') {
-        return $null -eq $Item.decision.chosen_action -and $null -eq $Item.decision.rationale -and
+        return [int]$Item.decision.revision -eq 0 -and
+            $null -eq $Item.decision.chosen_action -and @($Item.decision.rationale_codes).Count -eq 0 -and
             $null -eq $Item.decision.migration_plan_sha256 -and
             $null -eq $Item.decision.rollback_plan_sha256 -and
+            $Item.decision.compatibility_impact -eq 'UNKNOWN' -and
+            $null -eq $Item.decision.decision_digest_sha256 -and
             $Item.approval.status -eq 'PENDING' -and [int]$Item.approval.approval_count -eq 0 -and
             $Item.approval.external_authority_verified -eq $false -and
-            @($Item.approval.approval_refs).Count -eq 0
+            @($Item.approval.approval_refs).Count -eq 0 -and
+            $Item.verification.status -eq 'NOT_RUN' -and
+            $null -eq $Item.verification.decision_digest_sha256 -and
+            @($Item.superseded_revisions).Count -eq 0
     }
     return $false
 }
@@ -110,6 +120,7 @@ function Test-EvidenceBindings([object]$Registry, [object]$Policy) {
         CORE_REGISTRY = Get-Sha (Join-Path $root 'Data\Schemas\core-table-registry-v1.json')
         P2_09_TABLE_DIFF_REPORT = [string]$p209.report.sha256
         P2_11_ID_LIMIT_REPORT = [string]$p211.report.sha256
+        AUTHORITY_LEDGER = Get-Sha $authorityPath
     }
     foreach ($name in $checks.Keys) {
         $binding = @($derived | Where-Object artifact_id -eq $name)
@@ -135,6 +146,23 @@ function Test-EvidenceBindings([object]$Registry, [object]$Policy) {
     $lines += @($derived | ForEach-Object { "$($_.artifact_id)|$($_.sha256)|$($_.records)" })
     return (Get-TextSha ($lines | ConvertTo-Json -Compress)) -ceq
         [string]$Registry.input_bindings.aggregate_sha256
+}
+
+function Test-ReviewPackets([object]$Packets, [object[]]$Decisions) {
+    $all = [Collections.Generic.List[object]]::new()
+    foreach ($packet in @($Packets.packets)) {
+        $members = @($packet.members)
+        if ([int]$packet.member_count -ne $members.Count -or
+            [string]$packet.membership_sha256 -cne (Get-ManifestSha $members) -or
+            $packet.counts_as_decision -ne $false) { return $false }
+        foreach ($member in $members) { $all.Add($member) }
+    }
+    $ids = @($all.decision_id)
+    return @($Packets.packets).Count -eq 39 -and $all.Count -eq 1359 -and
+        @($ids | Sort-Object -Unique).Count -eq 1359 -and
+        ((@($Decisions.decision_id | Sort-Object) -join '|') -ceq
+            (@($ids | Sort-Object) -join '|')) -and
+        [string]$Packets.summary.aggregate_membership_sha256 -ceq (Get-ManifestSha @($all))
 }
 
 function Test-NoIdentityLeak([string]$Raw, [object]$Registry) {
@@ -178,30 +206,47 @@ function Test-NoIdentityLeak([string]$Raw, [object]$Registry) {
         if ([string]::IsNullOrWhiteSpace($identity)) { continue }
         if ($emitted.Contains($identity)) { return $false }
     }
-    return $Registry.disclosure.table_or_field_names -eq $false -and
-        $Registry.disclosure.legacy_source_paths -eq $false -and
-        $Registry.disclosure.exact_primary_keys -eq $false -and
-        $Registry.disclosure.exact_observed_extrema -eq $false -and
-        $Registry.disclosure.raw_table_rows -eq $false -and
+    if (@($Registry.disclosure.PSObject.Properties.Name) -contains 'table_or_field_names') {
+        return $Registry.disclosure.table_or_field_names -eq $false -and
+            $Registry.disclosure.legacy_source_paths -eq $false -and
+            $Registry.disclosure.exact_primary_keys -eq $false -and
+            $Registry.disclosure.exact_observed_extrema -eq $false -and
+            $Registry.disclosure.raw_table_rows -eq $false -and
+            $Registry.disclosure.legacy_source_lines -eq $false
+    }
+    return $Registry.disclosure.anonymous_subjects_only -eq $true -and
+        $Registry.disclosure.private_source_paths -eq $false -and
+        $Registry.disclosure.primary_keys -eq $false -and
+        $Registry.disclosure.observed_extrema -eq $false -and
+        $Registry.disclosure.raw_rows -eq $false -and
         $Registry.disclosure.legacy_source_lines -eq $false
 }
 
-$required = @($policyPath, $schemaPath, $registryPath, $evidencePath, $reportPath, $wrapperPath,
+$required = @($policyPath, $schemaPath, $authoritySchemaPath, $packetSchemaPath, $authorityPath,
+    $registryPath, $packetPath, $evidencePath, $reportPath, $wrapperPath,
     (Join-Path $root 'Tools\TMXY.G2MigrationDecisions\migration_decisions.py'),
     (Join-Path $root 'Tools\TMXY.G2MigrationDecisions\g2_common.py'),
-    (Join-Path $root 'Tools\TMXY.G2MigrationDecisions\legacy_reference.py'))
+    (Join-Path $root 'Tools\TMXY.G2MigrationDecisions\legacy_reference.py'),
+    (Join-Path $root 'Tools\TMXY.G2MigrationDecisions\workflow_v2.py'))
 foreach ($path in $required) { Add-A "Required file $([IO.Path]::GetRelativePath($root, $path))" (Test-Path $path -PathType Leaf) }
 if (@($required | Where-Object { -not (Test-Path $_ -PathType Leaf) }).Count -gt 0) {
     throw 'P2-20B required files are missing.'
 }
 
 $raw = Get-Content -LiteralPath $registryPath -Raw -Encoding UTF8
+$packetRaw = Get-Content -LiteralPath $packetPath -Raw -Encoding UTF8
+$authorityRaw = Get-Content -LiteralPath $authorityPath -Raw -Encoding UTF8
 $policy = Get-Content -LiteralPath $policyPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $schema = Get-Content -LiteralPath $schemaPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $registry = $raw | ConvertFrom-Json -Depth 100 -DateKind String
+$packets = $packetRaw | ConvertFrom-Json -Depth 100 -DateKind String
+$authority = $authorityRaw | ConvertFrom-Json -Depth 100 -DateKind String
 $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 Add-A 'Policy schema registry and task evidence are valid JSON' ($null -ne $policy -and $null -ne $schema -and $null -ne $registry -and $null -ne $evidence)
 Add-A 'Registry validates against the closed JSON Schema' ($raw | Test-Json -SchemaFile $schemaPath)
+Add-A 'Authority ledger and review packets validate against closed V2 Schemas' (
+    ($authorityRaw | Test-Json -SchemaFile $authoritySchemaPath) -and
+    ($packetRaw | Test-Json -SchemaFile $packetSchemaPath))
 Add-A 'Registry is fail-closed while generation succeeds' ($registry.result -eq 'BLOCKED' -and
     $registry.generation_result -eq 'PASS' -and $registry.task_status -eq 'BLOCKED' -and
     $registry.completion_criteria_satisfied -eq $false -and $registry.g2_07_satisfied -eq $false)
@@ -217,11 +262,14 @@ Add-A 'Subject populations are exactly 52 12 12 16 and 1267' (
 Add-A 'Reference membership is truly enumerated rather than count-filled' (
     $registry.completeness.reference_membership_enumerated -eq $true -and
     @($decisions | Where-Object subject_kind -eq 'SCHEMA_REFERENCE').Count -eq 12)
+Add-A 'All 39 review packets preserve all 1359 independent exact members' (
+    Test-ReviewPackets $packets $decisions)
 Add-A 'Every machine suggestion remains a pending non-decision without approval' (
     @($decisions | Where-Object { -not (Test-DecisionState $_) }).Count -eq 0 -and
     [int]$registry.summary.pending -eq 1359 -and [int]$registry.summary.approval_count -eq 0)
 Add-A 'All required evidence and derived inputs are exactly hash-bound' (Test-EvidenceBindings $registry $policy)
-Add-A 'No table field source-path primary-key extrema row or source-line identity leaks' (Test-NoIdentityLeak $raw $registry)
+Add-A 'No table field source-path primary-key extrema row or source-line identity leaks' (
+    (Test-NoIdentityLeak $raw $registry) -and (Test-NoIdentityLeak $packetRaw $packets))
 Add-A 'Hard invariants forbid narrowing implicit numeric IDs mode defaults Tombstone reuse and limit copying' (
     @($registry.hard_invariants.PSObject.Properties | Where-Object { $_.Value -ne $true }).Count -eq 0)
 Add-A 'Machine cannot approve G2 P3 or release' ($registry.authority_boundaries.machine_can_approve -eq $false -and
@@ -230,10 +278,13 @@ Add-A 'Machine cannot approve G2 P3 or release' ($registry.authority_boundaries.
     $registry.authority_boundaries.p3_authorized -eq $false -and
     $registry.authority_boundaries.release_authority -eq $false)
 Add-A 'Policy and Schema hashes are exact' ($registry.contracts.policy_sha256 -eq (Get-Sha $policyPath) -and
-    $registry.contracts.schema_sha256 -eq (Get-Sha $schemaPath))
+    $registry.contracts.schema_sha256 -eq (Get-Sha $schemaPath) -and
+    $registry.contracts.authority_schema_sha256 -eq (Get-Sha $authoritySchemaPath) -and
+    $registry.contracts.review_packet_schema_sha256 -eq (Get-Sha $packetSchemaPath))
 Add-A 'Task evidence exactly binds registry report contracts and blocked status' (
     $evidence.result -eq 'BLOCKED' -and $evidence.generation_result -eq 'PASS' -and
     $evidence.g2_07_satisfied -eq $false -and $evidence.registry.sha256 -eq (Get-Sha $registryPath) -and
+    $evidence.review_packets.sha256 -eq (Get-Sha $packetPath) -and
     $evidence.report.sha256 -eq (Get-Sha $reportPath) -and
     $evidence.contracts.policy_sha256 -eq (Get-Sha $policyPath) -and
     $evidence.contracts.schema_sha256 -eq (Get-Sha $schemaPath))
@@ -270,8 +321,17 @@ $negative = [ordered]@{
     aggregate_compression_rejected = -not (Test-Coverage $compressed @($registry.manifests) 1359)
     aggregate_without_membership_hash_rejected = -not (Test-Coverage $noMemberCase @($registry.manifests) 1359)
     unknown_field_rejected = -not (($unknownRawObject | ConvertTo-Json -Depth 100 -Compress) | Test-Json -SchemaFile $schemaPath -ErrorAction SilentlyContinue)
+    closed_action_rejected = $evidence.implementation.workflow_negative_cases.action_rejected
+    missing_plan_rejected = $evidence.implementation.workflow_negative_cases.plan_rejected
+    unknown_compatibility_rejected = $evidence.implementation.workflow_negative_cases.compatibility_rejected
+    decision_digest_drift_rejected = $evidence.implementation.workflow_negative_cases.digest_rejected
+    wrong_approval_role_rejected = $evidence.implementation.workflow_negative_cases.role_rejected
+    approval_digest_drift_rejected = $evidence.implementation.workflow_negative_cases.approval_digest_rejected
+    verification_digest_drift_rejected = $evidence.implementation.workflow_negative_cases.verification_digest_rejected
+    unbound_supersession_rejected = $evidence.implementation.workflow_negative_cases.supersession_binding_rejected
+    rejected_without_approved_replacement_rejected = $evidence.implementation.workflow_negative_cases.rejected_without_approved_replacement_rejected
 }
-Add-A 'Missing duplicate orphan fake approval input drift aggregate compression membership hash and unknown field fail closed' (
+Add-A 'Coverage authority action plan digest role verification and supersession negatives fail closed' (
     @($negative.Values | Where-Object { $_ -ne $true }).Count -eq 0)
 
 $localCheck = $null
@@ -283,7 +343,8 @@ if ($VerifyDerivedSources) {
 
 $failures = @($assertions | Where-Object result -eq 'FAIL')
 $result = [pscustomobject][ordered]@{
-    schema_version = 1
+    schema_version = 2
+    workflow_version = 2
     task_id = 'P2-20B'
     result = if ($failures.Count -eq 0) { 'PASS' } else { 'FAIL' }
     contract_assertions_satisfied = $failures.Count -eq 0

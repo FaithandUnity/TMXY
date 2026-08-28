@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "a4d508fd73e377681c609b19742e7e50271244ac4fa5ef247d64e4e2039be163",
+    "aggregate_sha256": "365b9b3e6d6ca31419ebe2f7c6722e9148be6568611635cb45aa78c6baf924c3",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -171,7 +171,7 @@
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-      "sha256": "888a3e48539190b509491d607a7df2fde23440ecd6f3eaf24bf45434b012e027",
+      "sha256": "f0e06080c327d2c7d68b6cbe58f1267bb8bb61cd582f732a5ff97d0e81081a4c",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -181,7 +181,7 @@
       "task_id": "P2-20B",
       "criterion_id": "G2-07",
       "path": "Data/Governance/p2-g2-migration-decisions.json",
-      "sha256": "a77018b67bb59a392fdda0b06a07b9e173f2ac71eb7cb85cbd4acbceb6a958f1",
+      "sha256": "51a21af64fbdfd0e3012daa3ed36ccccfb3187584f565f9c8902162359664d79",
       "result": "BLOCKED",
       "generation_result": "PASS",
       "task_status": "BLOCKED",
@@ -190,9 +190,9 @@
     },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "e869f36618b54214eaa2cfde0aa456b8f7586aa6724ba4e9136431ff7b138134",
+      "sha256": "dc701a62b5701aaa76728f91de0a48f0c3be4c34531e570cf4f4592da4d3b9b5",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-28T20:26:52.9231831+00:00"
+      "captured_utc": "2026-08-28T21:52:16.8703872+00:00"
     }
   },
   "summary": {
@@ -457,12 +457,17 @@
         },
         {
           "name": "conditional_member_set_exported",
-          "value": false,
+          "value": true,
           "unit": "boolean"
         },
         {
+          "name": "conditional_member_set_count",
+          "value": 29,
+          "unit": "members"
+        },
+        {
           "name": "conditional_member_set_hash_bound",
-          "value": false,
+          "value": true,
           "unit": "boolean"
         },
         {
@@ -521,7 +526,7 @@
           "unit": "references"
         }
       ],
-      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report, but complete auxiliary scope, asset binding, conditional member evidence, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.",
+      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report and a complete anonymous conditional-required workset, but auxiliary scope, asset binding, nonzero conditional gaps, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -545,6 +550,31 @@
           "name": "migration_decision_registry_present",
           "value": true,
           "unit": "boolean"
+        },
+        {
+          "name": "migration_workflow_version",
+          "value": 2,
+          "unit": "version"
+        },
+        {
+          "name": "migration_workflow_ready",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "review_packet_count",
+          "value": 39,
+          "unit": "packets"
+        },
+        {
+          "name": "review_packet_members",
+          "value": 1359,
+          "unit": "decisions"
+        },
+        {
+          "name": "authority_ledger_records",
+          "value": 0,
+          "unit": "records"
         },
         {
           "name": "coverage_complete",
@@ -592,6 +622,11 @@
           "unit": "decisions"
         },
         {
+          "name": "verified_units",
+          "value": 0,
+          "unit": "decisions"
+        },
+        {
           "name": "approval_count",
           "value": 0,
           "unit": "approvals"
@@ -617,7 +652,7 @@
           "unit": "boolean"
         }
       ],
-      "interpretation": "P2-20B completely enumerates and hash-binds all migration-decision units, but every unit remains pending with no independently verified decision or approval. Machine suggestions are non-authoritative and do not satisfy G2-07.",
+      "interpretation": "P2-20B V2 provides a fail-closed decision workflow and anonymous review packets that preserve all independent units, but every unit remains pending with no externally authorized decision, approval, or bound verification. Machine suggestions and review packets are non-authoritative and do not satisfy G2-07.",
       "blocker_ids": [
         "G2-BLK-07"
       ]
@@ -727,7 +762,7 @@
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
       "reason": "P2-20A is present and hash-bound, but scope or binding evidence remains incomplete; the measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
-      "required_action": "Complete auxiliary configuration scope and explicit asset binding, export and hash-bind the conditional member set, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
+      "required_action": "Complete auxiliary configuration scope and explicit asset binding, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {
@@ -735,7 +770,7 @@
       "criterion_id": "G2-07",
       "title": "Migration registry is complete in coverage but decisions remain pending",
       "reason": "P2-20B enumerates 1359 of 1359 required units, but 1359 remain pending, only 0 are decided, 0 are approved, and the verified approval count is 0. Machine suggestions are not decisions.",
-      "required_action": "Record an explicit reviewed migration decision for every unit and bind independently verifiable approvals to each decision digest; machine-generated suggestions remain advisory.",
+      "required_action": "Import explicit reviewed migration decisions into the V2 authority ledger, bind independently verifiable approvals and post-decision verification to each decision digest; machine-generated suggestions and the 39 review packets remain advisory.",
       "authority_required": true
     }
   ],
@@ -764,7 +799,7 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "4671783b9f5e28f2dd7d3b0f3216e9fcebd27f0ef78718b94f4d5f956f630f5a",
+    "policy_sha256": "db5a7effe7560d468b5210f14b09ae58e94419fdd1bc95a520da35a5401a4b4b",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
     "schema_sha256": "aae199ee8ee4a2d000e8aaa61ef84e47a63e2286c14080fec90ac62957d4bb31"
   },

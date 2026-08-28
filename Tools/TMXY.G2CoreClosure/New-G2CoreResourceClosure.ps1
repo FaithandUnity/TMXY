@@ -70,6 +70,7 @@ try {
 
     $names = [ordered]@{
         detail = 'p2-20a-core-resource-closure.jsonl'
+        workset = 'p2-20a-conditional-required-workset.jsonl'
         json = 'p2-20a-core-resource-closure-report.json'
         markdown = 'p2-20a-core-resource-closure-report.md'
         governance = 'p2-g2-core-resource-closure.json'
@@ -78,6 +79,7 @@ try {
     foreach ($name in $names.Keys) { $generated[$name] = Join-Path $runRoot $names[$name] }
     $targets = [ordered]@{
         detail = Join-Path $root 'Data\Exports\P2-20\p2-20a-core-resource-closure.jsonl'
+        workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-conditional-required-workset.jsonl'
         json = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
         markdown = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.md'
         governance = Join-Path $root 'Data\Governance\p2-g2-core-resource-closure.json'
@@ -94,6 +96,8 @@ try {
         '--policy', '/workspace/Contracts/data-schema/g2-core-resource-closure-policy-v1.json',
         '--schema', '/workspace/Contracts/data-schema/g2-core-resource-closure-v1.schema.json',
         '--detail-output', "/output/$($names.detail)",
+        '--table-root', '/workspace/Data/Exports/P2-06/tables',
+        '--workset-output', "/output/$($names.workset)",
         '--json-output', "/output/$($names.json)",
         '--markdown-output', "/output/$($names.markdown)",
         '--governance-output', "/output/$($names.governance)"
@@ -132,6 +136,14 @@ try {
 
     $report = Get-Content -LiteralPath $targets.json -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
+    if ($report.evidence_revision -ne 'P2-20A.1' -or
+        $report.closure.conditional_required.member_set_exported -ne $true -or
+        [int]$report.closure.conditional_required.member_set_count -ne
+            (Get-LineCount $targets.workset) -or
+        [string]$report.closure.conditional_required.member_set_sha256 -cne
+            (Get-Sha256 $targets.workset)) {
+        throw 'P2-20A.1 conditional-required workset binding failed.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {
@@ -141,6 +153,7 @@ try {
     $evidencePath = Join-Path $root 'Data\Inventory\p2-20a-core-resource-closure.json'
     $evidence = [pscustomobject][ordered]@{
         schema_version = 1
+        evidence_revision = 'P2-20A.1'
         captured_utc = [string]$report.captured_utc
         task_id = 'P2-20A'
         criterion_id = 'G2-06'
@@ -180,6 +193,11 @@ try {
                 bytes = [int64](Get-Item $targets.detail).Length
                 lines = Get-LineCount $targets.detail
                 sha256 = Get-Sha256 $targets.detail
+            }
+            conditional_required_workset = [pscustomobject][ordered]@{
+                tracked = $false
+                count = [int]$report.closure.conditional_required.member_set_count
+                sha256 = Get-Sha256 $targets.workset
             }
         }
         scope_definition = $report.scope_definition

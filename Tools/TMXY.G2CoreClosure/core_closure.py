@@ -223,7 +223,8 @@ def write_detail(path: Path, graph: dict[str, Any], roots_by_target: dict[str, l
 
 
 def summarize(graph: dict[str, Any], p213: dict[str, Any], detail: dict[str, Any],
-              p213_binding: dict[str, Any]) -> dict[str, Any]:
+              p213_binding: dict[str, Any], p206_binding: dict[str, Any],
+              workset: dict[str, Any]) -> dict[str, Any]:
     resolution = graph["resolutions"]
     table_unresolved = resolution["table_package_edge:unresolved"]
     table_ambiguous = resolution["table_package_edge:ambiguous"]
@@ -241,6 +242,10 @@ def summarize(graph: dict[str, Any], p213: dict[str, Any], detail: dict[str, Any
             health["legacy_runtime_assert_unresolved_values"],
             "P2-13 conditional-required unresolved aggregates disagree")
     require(p213_binding["id"] == "P2-13", "Conditional-required source is not P2-13")
+    require(p206_binding["id"] == "P2-06", "Conditional member source is not P2-06")
+    require(workset["runtime_assert_rows"] == runtime["runtime_assert_rows"] and
+            workset["conditional_required_missing"] == runtime["runtime_assert_missing_values"],
+            "Conditional-required workset does not reproduce P2-13 aggregates")
     return {
         "scope_complete": False,
         "auxiliary_config_reference_scope_complete": False,
@@ -267,8 +272,13 @@ def summarize(graph: dict[str, Any], p213: dict[str, Any], detail: dict[str, Any
             "conditional_required_unresolved": runtime["runtime_assert_unresolved_values"],
             "source_inventory_id": "P2-13",
             "source_inventory_sha256": p213_binding["sha256"],
-            "member_set_exported": False,
-            "member_set_sha256": None,
+            "member_source_inventory_id": "P2-06",
+            "member_source_inventory_sha256": p206_binding["sha256"],
+            "member_source_file_count": workset["member_source_file_count"],
+            "member_source_file_set_sha256": workset["member_source_file_set_sha256"],
+            "member_set_exported": True,
+            "member_set_count": workset["member_set_count"],
+            "member_set_sha256": workset["member_set_sha256"],
             "zero_threshold_satisfied": runtime["runtime_assert_missing_values"] == 0,
         },
         "asset_structure": {

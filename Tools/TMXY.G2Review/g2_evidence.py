@@ -51,7 +51,10 @@ def resolve_inside(root: Path, relative: str) -> Path:
 
 def verify_contract_binding(root: Path, document: dict[str, Any], label: str) -> None:
     contracts = document.get("contracts", {})
-    for kind in ("policy", "schema"):
+    kinds = ["policy", "schema"]
+    kinds.extend(kind for kind in ("authority_schema", "review_packet_schema")
+                 if kind in contracts)
+    for kind in kinds:
         relative = contracts.get(kind)
         require(isinstance(relative, str), f"{label} {kind} contract path is absent")
         path = resolve_inside(root, relative)
@@ -221,6 +224,8 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
                             is_sha256(closure["start_set_sha256"]) and
                             is_sha256(closure["reachable_set_sha256"]))
     member_set_hash_bound = (conditional["member_set_exported"] is True and
+                             conditional["member_set_count"] ==
+                             conditional["conditional_required_missing"] and
                              is_sha256(conditional["member_set_sha256"]))
     first_candidate_used = not (scope["outcome_based_exclusion"] is False and
                                 resource_rules["selection"] == "all-matching-core-resource-rules" and
@@ -265,6 +270,7 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
         "package_ambiguous": resolution["package_ambiguous"],
         "conditional_missing": conditional["conditional_required_missing"],
         "member_set_exported": conditional["member_set_exported"],
+        "member_set_count": conditional["member_set_count"],
         "member_set_hash_bound": member_set_hash_bound,
         "conditional_source_bound": conditional_source_bound,
         "heuristic": resolution["heuristic_target_selections"],
@@ -288,6 +294,7 @@ def evaluate_migration_registry(registry: dict[str, Any], thresholds: dict[str, 
     approved = sum(item["approval"]["status"] == "APPROVED" and
                    item["approval"]["external_authority_verified"] is True for item in decisions)
     approval_count = sum(item["approval"]["approval_count"] for item in decisions)
+    verified = sum(item["verification"]["status"] == "PASS" for item in decisions)
     suggestions = sum(item.get("machine_suggestion") is not None for item in decisions)
     suggestions_non_authoritative = all(
         item.get("machine_suggestion", {}).get("counts_as_decision") is False for item in decisions)
@@ -296,8 +303,17 @@ def evaluate_migration_registry(registry: dict[str, Any], thresholds: dict[str, 
                          item["approval"]["approval_count"] == 0) for item in decisions)
     require(summary["enumerated_units"] == len(decisions) and summary["pending"] == pending and
             summary["decided"] == decided and summary["approved"] == approved and
-            summary["approval_count"] == approval_count,
+            summary["approval_count"] == approval_count and summary["verified"] == verified,
             "P2-20B summary does not match the complete decision registry")
+    packets = registry["review_packets"]
+    workflow_ready = (registry["schema_version"] == thresholds["migration_workflow_version"] and
+                      registry["workflow_version"] == thresholds["migration_workflow_version"] and
+                      completeness["review_packets_complete"] is True and
+                      packets["packet_count"] == thresholds["migration_review_packets"] and
+                      packets["member_count"] == thresholds["migration_review_packet_members"] and
+                      is_sha256(packets["sha256"]) and
+                      is_sha256(packets["aggregate_membership_sha256"]) and
+                      registry["authority_boundaries"]["machine_can_approve"] is False)
     coverage = (summary["expected_units"] == thresholds["migration_expected_units"] and
                 summary["enumerated_units"] == thresholds["migration_expected_units"] and
                 completeness["coverage_complete"] is True and
@@ -306,20 +322,28 @@ def evaluate_migration_registry(registry: dict[str, Any], thresholds: dict[str, 
                 completeness["orphans"] == thresholds["migration_orphans"] and
                 completeness["reference_membership_enumerated"] is True and
                 completeness["all_inputs_hash_bound"] is True)
-    satisfied = (coverage and summary["pending"] == thresholds["migration_pending"] and
+    satisfied = (coverage and workflow_ready and
+                 summary["pending"] == thresholds["migration_pending"] and
                  summary["decided"] == thresholds["migration_decided"] and
                  summary["approved"] == thresholds["migration_approved"] and
+                 summary["verified"] == thresholds["migration_verified"] and
                  summary["approval_count"] >= thresholds["migration_minimum_approval_count"] and
                  completeness["decisions_complete"] is True and
-                 completeness["approvals_complete"] is True and suggestions_non_authoritative and
+                 completeness["approvals_complete"] is True and
+                 completeness["verification_complete"] is True and suggestions_non_authoritative and
                  pending_empty and registry["authority_boundaries"]["machine_can_approve"] is False and
                  registry["g2_07_satisfied"] is True)
     return {
-        "satisfied": satisfied, "coverage": coverage,
+        "satisfied": satisfied, "coverage": coverage, "workflow_ready": workflow_ready,
+        "workflow_version": registry["workflow_version"],
+        "review_packets": packets["packet_count"],
+        "review_packet_members": packets["member_count"],
+        "authority_records": registry["authority_boundaries"]["authority_ledger_records"],
         "expected": summary["expected_units"], "enumerated": summary["enumerated_units"],
         "missing": completeness["missing"], "duplicates": completeness["duplicates"],
         "orphans": completeness["orphans"], "pending": summary["pending"],
         "decided": summary["decided"], "approved": summary["approved"],
+        "verified": summary["verified"],
         "approval_count": summary["approval_count"], "suggestions": suggestions,
         "suggestions_count_as_decisions": not suggestions_non_authoritative,
         "pending_empty": pending_empty, "registry_satisfied": registry["g2_07_satisfied"],

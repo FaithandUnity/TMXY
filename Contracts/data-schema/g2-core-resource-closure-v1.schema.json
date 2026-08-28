@@ -5,13 +5,14 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "schema_version", "captured_utc", "task_id", "criterion_id", "source_build",
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id", "source_build",
     "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
     "input_bindings", "scope_definition", "closure", "decision", "blockers",
     "authority_boundaries", "contracts", "disclosure"
   ],
   "properties": {
     "schema_version": { "const": 1 },
+    "evidence_revision": { "const": "P2-20A.1" },
     "captured_utc": { "type": "string", "minLength": 1 },
     "task_id": { "const": "P2-20A" },
     "criterion_id": { "const": "G2-06" },
@@ -51,7 +52,7 @@
       "properties": {
         "aggregate_sha256": { "$ref": "#/$defs/sha256" },
         "artifacts": {
-          "type": "array", "minItems": 10, "maxItems": 10,
+          "type": "array", "minItems": 12, "maxItems": 12,
           "items": { "$ref": "#/$defs/binding" }
         }
       }
@@ -154,8 +155,10 @@
       "required": [
         "runtime_assert_rows", "conditional_required_missing",
         "conditional_required_unresolved", "source_inventory_id",
-        "source_inventory_sha256", "member_set_exported",
-        "member_set_sha256", "zero_threshold_satisfied"
+        "source_inventory_sha256", "member_source_inventory_id",
+        "member_source_inventory_sha256", "member_source_file_count",
+        "member_source_file_set_sha256", "member_set_exported",
+        "member_set_count", "member_set_sha256", "zero_threshold_satisfied"
       ],
       "properties": {
         "runtime_assert_rows": { "type": "integer", "minimum": 1 },
@@ -163,8 +166,13 @@
         "conditional_required_unresolved": { "type": "integer", "minimum": 0 },
         "source_inventory_id": { "const": "P2-13" },
         "source_inventory_sha256": { "$ref": "#/$defs/sha256" },
-        "member_set_exported": { "const": false },
-        "member_set_sha256": { "type": "null" },
+        "member_source_inventory_id": { "const": "P2-06" },
+        "member_source_inventory_sha256": { "$ref": "#/$defs/sha256" },
+        "member_source_file_count": { "type": "integer", "minimum": 1 },
+        "member_source_file_set_sha256": { "$ref": "#/$defs/sha256" },
+        "member_set_exported": { "const": true },
+        "member_set_count": { "type": "integer", "minimum": 1 },
+        "member_set_sha256": { "$ref": "#/$defs/sha256" },
         "zero_threshold_satisfied": { "const": false }
       }
     },

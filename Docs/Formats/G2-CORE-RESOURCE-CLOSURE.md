@@ -1,4 +1,4 @@
-# P2-20A G2-06 core-resource closure
+# P2-20A.1 G2-06 core-resource closure
 
 P2-20A turns the missing G2-06 proof into a reproducible blocked evidence set.
 It does not approve G2. The scope is frozen independently of the observed
@@ -32,9 +32,12 @@ different table-integrity fact and cannot satisfy G2-06.
 The current P2-13 aggregate records 5,993 runtime-assert rows, 29 missing
 conditionally required values, and zero unresolved nonempty values. The 29
 missing values are an independent blocker, not part of the edge-derived logical
-gap set. P2-13 is exact-hash bound. Because its current graph has no member
-records for missing values, P2-20A reports `member_set_exported = false` and a
-null member-set hash; that evidence gap cannot be interpreted as a zero count.
+gap set. P2-20A.1 independently reproduces them from the exact-hash-bound P2-06
+normalized source, the qualified core primary key, and the frozen P2-13 rule.
+Its ignored workset contains exactly three closed fields per member:
+`member_sha256`, `rule_id`, and `reason`. The tracked report records only the
+member count and set SHA-256; no value, primary key, row, or source path is
+published.
 
 ## Incomplete scope
 
@@ -57,11 +60,11 @@ assets are retained and are not automatic deletion authority.
 
 ## Evidence and reproduction
 
-The detailed hashed start, reachable, logical-gap, and asset-structure records
-are regenerated under ignored `Data/Exports/P2-20`. The tracked report and task
-evidence contain only counts and SHA-256 bindings; they contain no exact primary
-keys, table rows, decoded confidential data, private source paths, or legacy
-source lines.
+The detailed hashed start, reachable, logical-gap, asset-structure, and
+conditional-required member records are regenerated under ignored
+`Data/Exports/P2-20`. The tracked report and task evidence contain only counts
+and SHA-256 bindings; they contain no exact primary keys, table rows, decoded
+confidential data, private source paths, or legacy source lines.
 
 ```powershell
 pwsh -NoProfile -File Tools/TMXY.G2CoreClosure/New-G2CoreResourceClosure.ps1

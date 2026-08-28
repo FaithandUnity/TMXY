@@ -34,13 +34,13 @@ Auxiliary configuration reference adapters are absent and Package-to-asset edges
 
 Core foreign-key dangling zero remains a distinct table-integrity fact and is not substituted for these resource-reference metrics. The conditional-required missing count is retained even though missing values produce no table-to-Package edge. Ambiguous edges retain every candidate; no first candidate is selected.
 
-The conditional-required member set is not present in the current graph and is therefore not exported or assigned a fabricated set hash. Its aggregate is exact-hash bound to P2-13, but absence of member-level evidence cannot prove the required zero threshold.
+The 29-member conditional-required workset is exported only in the ignored evidence area and bound by SHA-256 `90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d`. Each record contains only an anonymous member hash, a frozen rule ID, and a closed reason. No value, primary key, source row, or source path is disclosed.
 
 ## Blocking work
 
 - `G2-06-CONFIG-SCOPE`: Auxiliary configuration reference adapters are absent, so configuration-derived roots are not proven complete. Define reviewed semantic adapters, including tolerant-parser coverage for isolated malformed XML, and add discovered roots by union.
 - `G2-06-ASSET-BINDING`: Package-to-asset edges do not publish an explicit binding resolution state. Version the graph contract so every core package-to-asset binding records evidence-backed resolution without first-candidate selection.
-- `G2-06-CONDITIONAL-REQUIRED`: P2-13 reports conditionally required resource fields with missing values; such rows may emit no table-to-Package edge and cannot disappear from review. Export a reviewed member-level work set, resolve every missing required value, retain the P2-13 source binding, and reach the independent zero threshold.
+- `G2-06-CONDITIONAL-REQUIRED`: P2-13 reports conditionally required resource fields with missing values; such rows may emit no table-to-Package edge and cannot disappear from review. Use the complete hashed member workset for authorized remediation, resolve every missing required value, retain the P2-06 and P2-13 source bindings, and reach the independent zero threshold.
 - `G2-06-LOGICAL-GAPS`: The monotonic core closure contains unresolved and ambiguous table or Package references. Resolve each hashed work item through reviewed aliases, equivalent-candidate proof, source recovery, or an explicit versioned scope decision.
 - `G2-06-ASSET-STRUCTURE`: Some reachable assets remain structurally unresolved. Recover qualified descriptors or provide reviewed replacements while retaining source hashes and audit history.
 

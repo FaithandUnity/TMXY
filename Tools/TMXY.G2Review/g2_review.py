@@ -135,6 +135,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("package_resource_ambiguous", core["package_ambiguous"], "references"),
         metric("conditional_required_missing", core["conditional_missing"], "references"),
         metric("conditional_member_set_exported", core["member_set_exported"], "boolean"),
+        metric("conditional_member_set_count", core["member_set_count"], "members"),
         metric("conditional_member_set_hash_bound", core["member_set_hash_bound"], "boolean"),
         metric("conditional_source_hash_bound", core["conditional_source_bound"], "boolean"),
         metric("heuristic_target_selections", core["heuristic"], "references"),
@@ -147,12 +148,17 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report, but complete auxiliary scope, asset binding, conditional member evidence, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report and a complete anonymous conditional-required workset, but auxiliary scope, asset binding, nonzero conditional gaps, logical reference queues, and reachable asset structure still contain quantified gaps. Core foreign-key zero cannot replace these resource-closure facts.", ["G2-BLK-06"] if not ok else []))
 
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
         metric("migration_decision_registry_present", True, "boolean"),
+        metric("migration_workflow_version", migration["workflow_version"], "version"),
+        metric("migration_workflow_ready", migration["workflow_ready"], "boolean"),
+        metric("review_packet_count", migration["review_packets"], "packets"),
+        metric("review_packet_members", migration["review_packet_members"], "decisions"),
+        metric("authority_ledger_records", migration["authority_records"], "records"),
         metric("coverage_complete", migration["coverage"], "boolean"),
         metric("expected_units", migration["expected"], "decisions"),
         metric("enumerated_units", migration["enumerated"], "decisions"),
@@ -162,12 +168,13 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("pending_decisions", migration["pending"], "decisions"),
         metric("decided_units", migration["decided"], "decisions"),
         metric("approved_units", migration["approved"], "decisions"),
+        metric("verified_units", migration["verified"], "decisions"),
         metric("approval_count", migration["approval_count"], "approvals"),
         metric("machine_suggestions", migration["suggestions"], "suggestions"),
         metric("machine_suggestions_count_as_decisions", migration["suggestions_count_as_decisions"], "boolean"),
         metric("pending_entries_have_no_chosen_decision", migration["pending_empty"], "boolean"),
         metric("g2_07_registry_satisfied", migration["registry_satisfied"], "boolean"),
-    ], "P2-20B completely enumerates and hash-binds all migration-decision units, but every unit remains pending with no independently verified decision or approval. Machine suggestions are non-authoritative and do not satisfy G2-07.", ["G2-BLK-07"] if not ok else []))
+    ], "P2-20B V2 provides a fail-closed decision workflow and anonymous review packets that preserve all independent units, but every unit remains pending with no externally authorized decision, approval, or bound verification. Machine suggestions and review packets are non-authoritative and do not satisfy G2-07.", ["G2-BLK-07"] if not ok else []))
 
     human = p219["summary"]["human_budget"]
     machine = p219["summary"]["machine_budget"]
@@ -249,8 +256,8 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"and {asset_structure['unresolved']} structurally unresolved reachable assets."
             ),
             "required_action": (
-                "Complete auxiliary configuration scope and explicit asset binding, export and hash-bind "
-                "the conditional member set, and reduce every scoped unresolved, ambiguous, structural, "
+                "Complete auxiliary configuration scope and explicit asset binding, use the hash-bound "
+                "conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, "
                 "unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection."
             ),
             "authority_required": False,
@@ -268,8 +275,9 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"verified approval count is {migration['approval_count']}. Machine suggestions are not decisions."
             ),
             "required_action": (
-                "Record an explicit reviewed migration decision for every unit and bind independently "
-                "verifiable approvals to each decision digest; machine-generated suggestions remain advisory."
+                "Import explicit reviewed migration decisions into the V2 authority ledger, bind independently "
+                "verifiable approvals and post-decision verification to each decision digest; machine-generated "
+                "suggestions and the 39 review packets remain advisory."
             ),
             "authority_required": True,
         })

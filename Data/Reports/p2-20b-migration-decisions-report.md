@@ -4,10 +4,12 @@
 - Registry result: `BLOCKED`
 - G2-07 satisfied: `false`
 - Enumerated units: 1359 / 1359
+- Workflow version: 2
 - Pending decisions: 1359
 - Approved decisions: 0
+- Review packets: 39 / 39
 
-The generator enumerated anonymous decision subjects. Every machine suggestion remains a suggestion; no decision or approval was inferred.
+The V2 workflow can validate future externally authorized decisions, but the current authority ledger is empty. Every machine suggestion remains a non-decision.
 
 ## Coverage
 
@@ -23,7 +25,9 @@ Reference membership was deterministically enumerated from the frozen read-only 
 
 ## Fail-closed status
 
-Coverage complete: `true`. Decisions complete: `false`. Approvals complete: `false`.
+Coverage complete: `true`. Decisions complete: `false`. Approvals complete: `false`. Verification complete: `false`.
+
+The 39 anonymous risk-signature packets preserve all 1,359 independent members and exact membership hashes. A packet is review routing, not a batch decision or approval.
 
 G2-07 remains blocked until every active subject has a chosen action, migration and rollback evidence where required, and independently verifiable approval from the required role. Candidate text, a self-asserted approver field, or an aggregate count cannot close the gate.
 

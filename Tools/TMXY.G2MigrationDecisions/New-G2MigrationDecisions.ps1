@@ -55,11 +55,19 @@ function Copy-Output([string]$Source, [string]$Target) {
 try {
     $moduleRoot = Join-Path $root 'Tools\TMXY.G2MigrationDecisions'
     $generatorPath = Join-Path $moduleRoot 'migration_decisions.py'
-    $policyPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-policy-v1.json'
-    $schemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-registry-v1.schema.json'
+    $policyPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-policy-v2.json'
+    $schemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-registry-v2.schema.json'
+    $authoritySchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-authority-v2.schema.json'
+    $packetSchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-review-packets-v2.schema.json'
+    $authorityPath = Join-Path $root 'Data\Governance\p2-g2-migration-decision-authority-v2.json'
     $lockPath = Join-Path $root 'Data\Toolchain\toolchain.lock.json'
-    foreach ($required in @($devDoc, $generatorPath, $policyPath, $schemaPath, $lockPath)) {
+    foreach ($required in @($devDoc, $generatorPath, $policyPath, $schemaPath,
+            $authoritySchemaPath, $packetSchemaPath, $authorityPath, $lockPath)) {
         if (-not (Test-Path -LiteralPath $required)) { throw "Missing P2-20B input: $required" }
+    }
+    if (-not (Get-Content -LiteralPath $authorityPath -Raw -Encoding UTF8 |
+            Test-Json -SchemaFile $authoritySchemaPath)) {
+        throw 'P2-20B authority ledger failed its closed JSON Schema.'
     }
 
     $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -73,10 +81,13 @@ try {
     }
 
     $registryName = 'p2-g2-migration-decisions.json'
+    $packetName = 'p2-g2-migration-review-packets.json'
     $markdownName = 'p2-20b-migration-decisions-report.md'
     $generatedRegistry = Join-Path $runRoot $registryName
+    $generatedPackets = Join-Path $runRoot $packetName
     $generatedMarkdown = Join-Path $runRoot $markdownName
     $trackedRegistry = Join-Path $root "Data\Governance\$registryName"
+    $trackedPackets = Join-Path $root "Data\Governance\$packetName"
     $trackedMarkdown = Join-Path $root "Data\Reports\$markdownName"
     $docker = (Get-Command docker.exe -ErrorAction Stop).Source
     $arguments = @(
@@ -88,9 +99,10 @@ try {
         '--tmpfs', '/tmp:rw,nosuid,nodev,size=32m',
         $builderReference, 'python3', '/workspace/Tools/TMXY.G2MigrationDecisions/migration_decisions.py',
         '--root', '/workspace', '--legacy-root', '/legacy-root',
-        '--policy', '/workspace/Contracts/data-schema/g2-migration-decision-policy-v1.json',
-        '--schema', '/workspace/Contracts/data-schema/g2-migration-decision-registry-v1.schema.json',
-        '--registry-output', "/output/$registryName", '--markdown-output', "/output/$markdownName"
+        '--policy', '/workspace/Contracts/data-schema/g2-migration-decision-policy-v2.json',
+        '--schema', '/workspace/Contracts/data-schema/g2-migration-decision-registry-v2.schema.json',
+        '--registry-output', "/output/$registryName", '--packet-output', "/output/$packetName",
+        '--markdown-output', "/output/$markdownName"
     )
     $summaryText = & $docker @arguments
     if ($LASTEXITCODE -ne 0) { throw 'P2-20B isolated generation failed.' }
@@ -103,17 +115,23 @@ try {
     $selfTest = $selfText | ConvertFrom-Json -Depth 100
     if ($summary.generation_result -ne 'PASS' -or $summary.result -ne 'BLOCKED' -or
         [int]$summary.enumerated_units -ne 1359 -or [int]$summary.pending -ne 1359 -or
-        $summary.g2_07_satisfied -ne $false -or $selfTest.result -ne 'PASS' -or
-        [int]$selfTest.assertions -lt 11) {
+        $summary.g2_07_satisfied -ne $false -or [int]$summary.review_packets -ne 39 -or
+        $selfTest.result -ne 'PASS' -or [int]$selfTest.assertions -lt 23 -or
+        @($selfTest.workflow_negative_cases.PSObject.Properties |
+            Where-Object Value -ne $true).Count -ne 0) {
         throw 'P2-20B generation or self-test summary failed.'
     }
     if (-not (Get-Content -LiteralPath $generatedRegistry -Raw -Encoding UTF8 |
             Test-Json -SchemaFile $schemaPath)) {
         throw 'P2-20B registry failed its closed JSON Schema.'
     }
+    if (-not (Get-Content -LiteralPath $generatedPackets -Raw -Encoding UTF8 |
+            Test-Json -SchemaFile $packetSchemaPath)) {
+        throw 'P2-20B review packets failed their closed JSON Schema.'
+    }
 
-    $targets = [ordered]@{ registry = $trackedRegistry; markdown = $trackedMarkdown }
-    $generated = [ordered]@{ registry = $generatedRegistry; markdown = $generatedMarkdown }
+    $targets = [ordered]@{ registry = $trackedRegistry; packets = $trackedPackets; markdown = $trackedMarkdown }
+    $generated = [ordered]@{ registry = $generatedRegistry; packets = $generatedPackets; markdown = $generatedMarkdown }
     if ($Check) {
         foreach ($name in $targets.Keys) {
             if (-not (Test-Path -LiteralPath $targets[$name] -PathType Leaf) -or
@@ -135,7 +153,8 @@ try {
         })
     $evidencePath = Join-Path $root 'Data\Inventory\p2-20b-migration-decisions.json'
     $evidence = [pscustomobject][ordered]@{
-        schema_version = 1
+        schema_version = 2
+        workflow_version = 2
         captured_utc = [string]$registry.captured_utc
         task_id = 'P2-20B'
         result = 'BLOCKED'
@@ -151,6 +170,17 @@ try {
             bytes = [int64](Get-Item -LiteralPath $trackedRegistry).Length
             lines = Get-LineCount $trackedRegistry
             sha256 = Get-Sha256 $trackedRegistry
+        }
+        review_packets = [pscustomobject][ordered]@{
+            path = Get-Relative $trackedPackets
+            tracked = $true
+            bytes = [int64](Get-Item -LiteralPath $trackedPackets).Length
+            lines = Get-LineCount $trackedPackets
+            sha256 = Get-Sha256 $trackedPackets
+            packet_count = [int]$registry.review_packets.packet_count
+            member_count = [int]$registry.review_packets.member_count
+            aggregate_membership_sha256 = [string]$registry.review_packets.aggregate_membership_sha256
+            counts_as_decision = $false
         }
         report = [pscustomobject][ordered]@{
             path = Get-Relative $trackedMarkdown
@@ -168,6 +198,12 @@ try {
             policy_sha256 = Get-Sha256 $policyPath
             schema = Get-Relative $schemaPath
             schema_sha256 = Get-Sha256 $schemaPath
+            authority_schema = Get-Relative $authoritySchemaPath
+            authority_schema_sha256 = Get-Sha256 $authoritySchemaPath
+            review_packet_schema = Get-Relative $packetSchemaPath
+            review_packet_schema_sha256 = Get-Sha256 $packetSchemaPath
+            authority_ledger = Get-Relative $authorityPath
+            authority_ledger_sha256 = Get-Sha256 $authorityPath
         }
         implementation = [pscustomobject][ordered]@{
             source_files = $sourceFiles.Count
@@ -177,6 +213,7 @@ try {
             wrapper = Get-Relative $MyInvocation.MyCommand.Path
             wrapper_sha256 = Get-Sha256 $MyInvocation.MyCommand.Path
             self_test_assertions = [int]$selfTest.assertions
+            workflow_negative_cases = $selfTest.workflow_negative_cases
         }
         disclosure = $registry.disclosure
         reproduction = [pscustomobject][ordered]@{
@@ -190,8 +227,8 @@ try {
             builder_user = 'tmxy'
         }
         next_scope = [pscustomobject][ordered]@{
-            tasks = @('P2-20B-owner-decisions', 'P2-20-g2-rerun')
-            detail = 'Obtain real project/data-owner decisions and independently verifiable approvals for every active unit. Machine suggestions do not close G2-07.'
+            tasks = @('P2-20B-owner-decisions', 'P2-20B-approved-verification', 'P2-20-g2-rerun')
+            detail = 'Review 39 anonymous packets while preserving all 1359 members; import only real owner decisions and independently verified digest-bound authority. Machine suggestions and packet grouping do not close G2-07.'
         }
     }
     if ($Check) {

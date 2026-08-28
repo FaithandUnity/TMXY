@@ -1,13 +1,16 @@
 {
   "schema_version": 1,
+  "evidence_revision": "P2-20A.1",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
   "scope_authority": "monotonic union frozen from pre-existing P2-08 and P2-13 authorities; never selected from observed closure outcomes",
   "inputs": {
+    "p2_06": "Data/Inventory/p2-06-three-layer-data.json",
     "p2_05": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
     "p2_08": "Data/Inventory/p2-08-table-ownership.json",
     "ownership_registry": "Data/Schemas/table-ownership-registry-v1.json",
+    "core_registry": "Data/Schemas/core-table-registry-v1.json",
     "p2_12": "Data/Inventory/p2-12-full-asset-inventory.json",
     "asset_catalog": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
     "reference_policy": "Contracts/data-schema/reference-closure-policy-v1.json",
@@ -31,11 +34,16 @@
     "allows_outcome_based_exclusion": false
   },
   "conditional_required_scope": {
-    "source": "P2-13 table_closure.object_references runtime-assert aggregates",
+    "source": "P2-13 runtime-assert aggregates independently reproduced from P2-06 normalized rows and the frozen P2-13 rule contract",
     "runtime_assert_rows_required": true,
     "missing_values_remain_in_scope_without_table_package_edges": true,
-    "member_set_exported": false,
-    "member_set_absence_blocks_zero_proof": true,
+    "required_rule_count": 1,
+    "member_set_exported": true,
+    "member_record_fields": ["member_sha256", "rule_id", "reason"],
+    "member_reason_values": ["missing-required-value"],
+    "member_identity": "sha256 over the frozen rule id and the stable anonymous canonical-row hash",
+    "member_set_must_be_complete_unique_and_hash_bound": true,
+    "member_values_forbidden": true,
     "core_foreign_key_substitution": "forbidden"
   },
   "auxiliary_config_scope": {
@@ -101,6 +109,7 @@
   },
   "output": {
     "detail_export": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+    "conditional_required_workset": "Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl",
     "report_json": "Data/Reports/p2-20a-core-resource-closure-report.json",
     "report_markdown": "Data/Reports/p2-20a-core-resource-closure-report.md",
     "governance": "Data/Governance/p2-g2-core-resource-closure.json",

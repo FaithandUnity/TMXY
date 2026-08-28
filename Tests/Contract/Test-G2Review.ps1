@@ -15,6 +15,12 @@ $evidencePath = Join-Path $root 'Data\Inventory\p2-20-g2-review.json'
 $qualityPath = Join-Path $root 'Data\BuildBaseline\p0-12-local-quality-gates.json'
 $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
 $remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
+$reviewPacketsPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
+$authorityLedgerPath = Join-Path $root 'Data\Governance\p2-g2-migration-decision-authority-v2.json'
+$migrationPolicyPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-policy-v2.json'
+$migrationSchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-registry-v2.schema.json'
+$authoritySchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decision-authority-v2.schema.json'
+$reviewPacketSchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-review-packets-v2.schema.json'
 $generatorPath = Join-Path $root 'Tools\TMXY.G2Review\g2_review.py'
 $helperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_evidence.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
@@ -172,8 +178,9 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'package_resource_unresolved') -ne 407 -or
         (Get-Metric $g206 'package_resource_ambiguous') -ne 8511 -or
         (Get-Metric $g206 'conditional_required_missing') -ne 29 -or
-        (Get-Metric $g206 'conditional_member_set_exported') -ne $false -or
-        (Get-Metric $g206 'conditional_member_set_hash_bound') -ne $false -or
+        (Get-Metric $g206 'conditional_member_set_exported') -ne $true -or
+        (Get-Metric $g206 'conditional_member_set_count') -ne 29 -or
+        (Get-Metric $g206 'conditional_member_set_hash_bound') -ne $true -or
         (Get-Metric $g206 'conditional_source_hash_bound') -ne $true -or
         (Get-Metric $g206 'heuristic_target_selections') -ne 0 -or
         (Get-Metric $g206 'first_candidate_selection_used') -ne $false -or
@@ -190,6 +197,11 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
     }
     $g207 = Get-Criterion $Candidate 'G2-07'
     if ((Get-Metric $g207 'migration_decision_registry_present') -ne $true -or
+        (Get-Metric $g207 'migration_workflow_version') -ne 2 -or
+        (Get-Metric $g207 'migration_workflow_ready') -ne $true -or
+        (Get-Metric $g207 'review_packet_count') -ne 39 -or
+        (Get-Metric $g207 'review_packet_members') -ne 1359 -or
+        (Get-Metric $g207 'authority_ledger_records') -ne 0 -or
         (Get-Metric $g207 'coverage_complete') -ne $true -or
         (Get-Metric $g207 'expected_units') -ne 1359 -or
         (Get-Metric $g207 'enumerated_units') -ne 1359 -or
@@ -199,6 +211,7 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g207 'pending_decisions') -ne 1359 -or
         (Get-Metric $g207 'decided_units') -ne 0 -or
         (Get-Metric $g207 'approved_units') -ne 0 -or
+        (Get-Metric $g207 'verified_units') -ne 0 -or
         (Get-Metric $g207 'approval_count') -ne 0 -or
         (Get-Metric $g207 'machine_suggestions') -ne 1359 -or
         (Get-Metric $g207 'machine_suggestions_count_as_decisions') -ne $false -or
@@ -216,7 +229,9 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
-    $qualityPath, $supplementalPath, $remediationPath, $generatorPath, $helperPath, $wrapperPath)
+    $qualityPath, $supplementalPath, $remediationPath, $reviewPacketsPath,
+    $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
+    $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath, $wrapperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -241,6 +256,10 @@ $quality = Get-Content -LiteralPath $qualityPath -Raw -Encoding UTF8 |
 $supplemental = Get-Content -LiteralPath $supplementalPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $remediation = Get-Content -LiteralPath $remediationPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$reviewPackets = Get-Content -LiteralPath $reviewPacketsPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$authorityLedger = Get-Content -LiteralPath $authorityLedgerPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 
 function Test-EvidenceSemantics([object]$Candidate) {
@@ -392,7 +411,10 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     $supplemental.closure.auxiliary_config_reference_scope_complete -eq $false -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $false -and
     $supplemental.closure.conditional_required.conditional_required_missing -eq 29 -and
-    $supplemental.closure.conditional_required.member_set_exported -eq $false -and
+    $supplemental.closure.conditional_required.member_set_exported -eq $true -and
+    $supplemental.closure.conditional_required.member_set_count -eq 29 -and
+    [string]$supplemental.closure.conditional_required.member_set_sha256 -match
+        '^[0-9a-f]{64}$' -and
     $supplemental.closure.resolution.heuristic_target_selections -eq 0 -and
     $supplemental.closure.integrity.core_foreign_key_dangling -eq 0 -and
     (Get-Metric $g206 'table_resource_unresolved') -eq
@@ -404,7 +426,9 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'package_resource_ambiguous') -eq
         $supplemental.closure.resolution.package_ambiguous -and
     (Get-Metric $g206 'conditional_required_missing') -eq 29 -and
-    (Get-Metric $g206 'conditional_member_set_exported') -eq $false -and
+    (Get-Metric $g206 'conditional_member_set_exported') -eq $true -and
+    (Get-Metric $g206 'conditional_member_set_count') -eq 29 -and
+    (Get-Metric $g206 'conditional_member_set_hash_bound') -eq $true -and
     (Get-Metric $g206 'first_candidate_selection_used') -eq $false -and
     (Get-Metric $g206 'asset_structure_unresolved') -eq 18 -and
     (Get-Metric $g206 'unknown_record_count') -eq 0 -and
@@ -415,7 +439,19 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
 $g207 = Get-Criterion $report 'G2-07'
 Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
     (Get-Metric $g207 'migration_decision_registry_present') -eq $true -and
+    (Get-Metric $g207 'migration_workflow_version') -eq 2 -and
+    (Get-Metric $g207 'migration_workflow_ready') -eq $true -and
+    (Get-Metric $g207 'review_packet_count') -eq 39 -and
+    (Get-Metric $g207 'review_packet_members') -eq 1359 -and
+    (Get-Metric $g207 'authority_ledger_records') -eq 0 -and
     (Get-Metric $g207 'coverage_complete') -eq $true -and
+    $remediation.workflow_version -eq 2 -and
+    $remediation.review_packets.packet_count -eq 39 -and
+    $remediation.review_packets.member_count -eq 1359 -and
+    $remediation.review_packets.sha256 -eq (Get-Sha256 $reviewPacketsPath) -and
+    @($reviewPackets.packets).Count -eq 39 -and
+    @($reviewPackets.packets.members).Count -eq 1359 -and
+    @($authorityLedger.records).Count -eq 0 -and
     $remediation.summary.expected_units -eq 1359 -and
     $remediation.summary.enumerated_units -eq 1359 -and
     $remediation.completeness.missing -eq 0 -and
@@ -423,6 +459,7 @@ Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remai
     $remediation.completeness.orphans -eq 0 -and
     $remediation.summary.pending -eq 1359 -and $remediation.summary.decided -eq 0 -and
     $remediation.summary.approved -eq 0 -and $remediation.summary.approval_count -eq 0 -and
+    $remediation.summary.verified -eq 0 -and
     (Get-Metric $g207 'machine_suggestions') -eq 1359 -and
     (Get-Metric $g207 'machine_suggestions_count_as_decisions') -eq $false -and
     -not $remediation.authority_boundaries.machine_can_approve -and

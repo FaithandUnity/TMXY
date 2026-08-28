@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "evidence_revision": "P2-20A.1",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "status": "BLOCKED",
@@ -8,11 +9,13 @@
   "auxiliary_config_reference_scope_complete": false,
   "asset_binding_resolution_explicit": false,
   "conditional_required_missing": 29,
-  "conditional_required_member_set_exported": false,
+  "conditional_required_member_set_exported": true,
+  "conditional_required_member_set_count": 29,
+  "conditional_required_member_set_sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d",
   "logical_gap_count": 21024,
   "report": {
     "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-    "sha256": "888a3e48539190b509491d607a7df2fde23440ecd6f3eaf24bf45434b012e027"
+    "sha256": "f0e06080c327d2c7d68b6cbe58f1267bb8bb61cd582f732a5ff97d0e81081a4c"
   },
   "decisions": {
     "first_candidate_selection_authorized": false,

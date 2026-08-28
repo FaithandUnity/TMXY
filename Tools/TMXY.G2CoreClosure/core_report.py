@@ -34,6 +34,7 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
     }
     return {
         "schema_version": 1,
+        "evidence_revision": "P2-20A.1",
         "captured_utc": documents["p2_18"]["captured_utc"],
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
@@ -81,7 +82,7 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
             {
                 "id": "G2-06-CONDITIONAL-REQUIRED",
                 "reason": "P2-13 reports conditionally required resource fields with missing values; such rows may emit no table-to-Package edge and cannot disappear from review.",
-                "required_action": "Export a reviewed member-level work set, resolve every missing required value, retain the P2-13 source binding, and reach the independent zero threshold.",
+                "required_action": "Use the complete hashed member workset for authorized remediation, resolve every missing required value, retain the P2-06 and P2-13 source bindings, and reach the independent zero threshold.",
             },
             {
                 "id": "G2-06-LOGICAL-GAPS",
@@ -155,7 +156,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         "Core foreign-key dangling zero remains a distinct table-integrity fact and is not substituted for these resource-reference metrics. The conditional-required missing count is retained even though missing values produce no table-to-Package edge. Ambiguous edges retain every candidate; no first candidate is selected.",
         "",
-        "The conditional-required member set is not present in the current graph and is therefore not exported or assigned a fabricated set hash. Its aggregate is exact-hash bound to P2-13, but absence of member-level evidence cannot prove the required zero threshold.",
+        f"The {conditional['member_set_count']}-member conditional-required workset is exported only in the ignored evidence area and bound by SHA-256 `{conditional['member_set_sha256']}`. Each record contains only an anonymous member hash, a frozen rule ID, and a closed reason. No value, primary key, source row, or source path is disclosed.",
         "",
         "## Blocking work",
         "",
@@ -179,6 +180,7 @@ def render_markdown(report: dict[str, Any]) -> str:
 def build_governance(report: dict[str, Any], report_binding: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": 1,
+        "evidence_revision": "P2-20A.1",
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
         "status": "BLOCKED",
@@ -187,7 +189,9 @@ def build_governance(report: dict[str, Any], report_binding: dict[str, Any]) -> 
         "auxiliary_config_reference_scope_complete": False,
         "asset_binding_resolution_explicit": False,
         "conditional_required_missing": report["closure"]["conditional_required"]["conditional_required_missing"],
-        "conditional_required_member_set_exported": False,
+        "conditional_required_member_set_exported": True,
+        "conditional_required_member_set_count": report["closure"]["conditional_required"]["member_set_count"],
+        "conditional_required_member_set_sha256": report["closure"]["conditional_required"]["member_set_sha256"],
         "logical_gap_count": report["closure"]["logical_gap_count"],
         "report": report_binding,
         "decisions": {

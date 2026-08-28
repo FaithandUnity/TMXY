@@ -42,6 +42,25 @@ function Copy-Document($Value) {
         ConvertFrom-Json -Depth 100 -DateKind String
 }
 
+function Test-MemberWorkset($Records, [int]$ExpectedCount, [string]$ExpectedSha,
+    [string[]]$AllowedRules) {
+    if (@($Records).Count -ne $ExpectedCount) { return $false }
+    $members = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    $lines = [Collections.Generic.List[string]]::new()
+    foreach ($record in @($Records)) {
+        $names = @($record.PSObject.Properties.Name | Sort-Object)
+        if (@(Compare-Object $names @('member_sha256', 'reason', 'rule_id')).Count -ne 0 -or
+            [string]$record.member_sha256 -notmatch '^[0-9a-f]{64}$' -or
+            [string]$record.reason -cne 'missing-required-value' -or
+            [string]$record.rule_id -cnotin $AllowedRules -or
+            -not $members.Add([string]$record.member_sha256)) { return $false }
+        $lines.Add('{"member_sha256":"' + [string]$record.member_sha256 +
+            '","reason":"missing-required-value","rule_id":"' +
+            [string]$record.rule_id + '"}')
+    }
+    return (Get-TextSha256 @($lines)) -ceq $ExpectedSha
+}
+
 function Test-Candidate($Candidate, $Facts) {
     if ($Candidate.result -ne 'BLOCKED' -or $Candidate.task_status -ne 'BLOCKED' -or
         $Candidate.completion_criteria_satisfied -ne $false -or
@@ -79,7 +98,13 @@ function Test-Candidate($Candidate, $Facts) {
         [int]$conditional.conditional_required_unresolved -ne [int]$Facts.conditional_unresolved -or
         $conditional.source_inventory_id -ne 'P2-13' -or
         [string]$conditional.source_inventory_sha256 -cne [string]$Facts.p213_sha256 -or
-        $conditional.member_set_exported -ne $false -or $null -ne $conditional.member_set_sha256 -or
+        $conditional.member_source_inventory_id -ne 'P2-06' -or
+        [string]$conditional.member_source_inventory_sha256 -cne [string]$Facts.p206_sha256 -or
+        [int]$conditional.member_source_file_count -ne 1 -or
+        [string]$conditional.member_source_file_set_sha256 -cne [string]$Facts.member_source_sha -or
+        $conditional.member_set_exported -ne $true -or
+        [int]$conditional.member_set_count -ne [int]$Facts.conditional_missing -or
+        [string]$conditional.member_set_sha256 -cne [string]$Facts.member_set_sha -or
         $conditional.zero_threshold_satisfied -ne $false -or
         [int]$Candidate.decision.thresholds.conditional_required_missing -ne 0) { return $false }
     $resolution = $closure.resolution
@@ -114,7 +139,10 @@ $required = @(
     'Docs/Formats/G2-CORE-RESOURCE-CLOSURE.md'
 )
 if ($VerifyDerivedSources) {
-    $required += 'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl'
+    $required += @(
+        'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl',
+        'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl'
+    )
 }
 foreach ($relative in $required) {
     Add-Assertion "Required file $relative" (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)
@@ -127,6 +155,8 @@ $markdownPath = Join-Path $root 'Data/Reports/p2-20a-core-resource-closure-repor
 $governancePath = Join-Path $root 'Data/Governance/p2-g2-core-resource-closure.json'
 $evidencePath = Join-Path $root 'Data/Inventory/p2-20a-core-resource-closure.json'
 $detailPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl'
+$worksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl'
+$p206Path = Join-Path $root 'Data/Inventory/p2-06-three-layer-data.json'
 $p213Path = Join-Path $root 'Data/Inventory/p2-13-reference-closure.json'
 $policy = Get-Content $policyPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100
 $report = Get-Content $reportPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
@@ -135,6 +165,9 @@ $evidence = Get-Content $evidencePath -Raw -Encoding UTF8 | ConvertFrom-Json -De
 $p212 = Get-Content (Join-Path $root 'Data/Inventory/p2-12-full-asset-inventory.json') `
     -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $p213 = Get-Content $p213Path -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+$p206 = Get-Content $p206Path -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+$referencePolicy = Get-Content (Join-Path $root ([string]$policy.inputs.reference_policy)) `
+    -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 
 $schemaValid = Get-Content $reportPath -Raw -Encoding UTF8 | Test-Json -SchemaFile $schemaPath
 Add-Assertion 'Report validates against the closed JSON Schema' $schemaValid
@@ -168,8 +201,12 @@ Add-Assertion 'Policy requires config and asset-binding scope to fail closed' (
     $policy.fail_closed_rules.core_foreign_key_zero_is_not_resource_closure)
 Add-Assertion 'Policy independently preserves conditional-required missing values' (
     $policy.conditional_required_scope.missing_values_remain_in_scope_without_table_package_edges -and
-    $policy.conditional_required_scope.member_set_exported -eq $false -and
-    $policy.conditional_required_scope.member_set_absence_blocks_zero_proof -and
+    $policy.evidence_revision -eq 'P2-20A.1' -and
+    $policy.conditional_required_scope.member_set_exported -eq $true -and
+    $policy.conditional_required_scope.member_set_must_be_complete_unique_and_hash_bound -and
+    $policy.conditional_required_scope.member_values_forbidden -and
+    @(Compare-Object @($policy.conditional_required_scope.member_record_fields | Sort-Object) `
+        @('member_sha256', 'reason', 'rule_id')).Count -eq 0 -and
     $policy.conditional_required_scope.core_foreign_key_substitution -eq 'forbidden' -and
     [int]$policy.completion.conditional_required_missing -eq 0 -and
     $policy.fail_closed_rules.conditional_required_metric_must_be_present_and_source_bound -and
@@ -192,7 +229,10 @@ $facts = [pscustomobject]@{
     conditional_rows = [int]$p213.table_closure.object_references.runtime_assert_rows
     conditional_missing = [int]$p213.table_closure.object_references.runtime_assert_missing_values
     conditional_unresolved = [int]$p213.table_closure.object_references.runtime_assert_unresolved_values
+    p206_sha256 = Get-Sha256 $p206Path
     p213_sha256 = Get-Sha256 $p213Path
+    member_source_sha = [string]$report.closure.conditional_required.member_source_file_set_sha256
+    member_set_sha = [string]$report.closure.conditional_required.member_set_sha256
 }
 Add-Assertion 'Tracked closure summary preserves the measured current blocker set' (
     $facts.start_nodes -eq 62256 -and $facts.reachable_nodes -eq 127015 -and
@@ -205,8 +245,10 @@ Add-Assertion 'P2-13 conditional-required aggregate is preserved independently o
     $facts.conditional_rows -eq 5993 -and $facts.conditional_missing -eq 29 -and
     $facts.conditional_unresolved -eq 0 -and
     [int]$p213.health.legacy_runtime_assert_missing_values -eq $facts.conditional_missing -and
-    $report.closure.conditional_required.member_set_exported -eq $false -and
-    $null -eq $report.closure.conditional_required.member_set_sha256 -and
+    $report.closure.conditional_required.member_set_exported -eq $true -and
+    [int]$report.closure.conditional_required.member_set_count -eq 29 -and
+    $report.closure.conditional_required.member_set_sha256 -match '^[0-9a-f]{64}$' -and
+    $report.closure.conditional_required.member_source_file_set_sha256 -match '^[0-9a-f]{64}$' -and
     $report.closure.conditional_required.zero_threshold_satisfied -eq $false)
 Add-Assertion 'Report matches frozen closure semantics and tracked facts' (Test-Candidate $report $facts)
 Add-Assertion 'Scoped terminal edges are reported but never counted as missing or guessed' (
@@ -218,8 +260,40 @@ Add-Assertion 'Ignored detail metadata stays hash-bound without requiring it in 
     [int64]$report.closure.detail_export.bytes -eq 33232029 -and
     [int]$report.closure.detail_export.lines -eq 210313 -and
     $report.closure.detail_export.tracked -eq $false)
+Add-Assertion 'Tracked evidence exposes only conditional workset count and hashes' (
+    $report.evidence_revision -eq 'P2-20A.1' -and
+    [int]$report.closure.conditional_required.member_set_count -eq 29 -and
+    $report.closure.conditional_required.member_set_sha256 -match '^[0-9a-f]{64}$' -and
+    @($evidence.outputs.conditional_required_workset.PSObject.Properties.Name).Count -eq 3 -and
+    $evidence.outputs.conditional_required_workset.tracked -eq $false -and
+    [int]$evidence.outputs.conditional_required_workset.count -eq 29 -and
+    [string]$evidence.outputs.conditional_required_workset.sha256 -ceq $facts.member_set_sha)
 
+$memberOmissionRejected = $false
+$memberDuplicateRejected = $false
+$memberValueRejected = $false
 if ($VerifyDerivedSources) {
+    $memberRecords = [Collections.Generic.List[object]]::new()
+    foreach ($line in [IO.File]::ReadLines($worksetPath)) {
+        $memberRecords.Add(($line | ConvertFrom-Json -Depth 10))
+    }
+    $allowedRules = @($referencePolicy.table_object_references |
+        Where-Object { $_.PSObject.Properties.Name -contains 'runtime_assert_when' -and
+            $null -ne $_.runtime_assert_when } | ForEach-Object { [string]$_.id })
+    Add-Assertion 'Conditional member workset is complete unique closed and SHA-bound' (
+        (Test-MemberWorkset @($memberRecords) 29 $facts.member_set_sha $allowedRules) -and
+        (Get-Sha256 $worksetPath) -ceq $facts.member_set_sha)
+    $omitted = @($memberRecords | Select-Object -SkipLast 1)
+    $duplicated = @($memberRecords | ForEach-Object { Copy-Document $_ })
+    $duplicated[-1] = Copy-Document $duplicated[0]
+    $fabricated = @($memberRecords | ForEach-Object { Copy-Document $_ })
+    $fabricated[0] | Add-Member -NotePropertyName value -NotePropertyValue 'forbidden'
+    $memberOmissionRejected = -not (Test-MemberWorkset $omitted 29 $facts.member_set_sha $allowedRules)
+    $memberDuplicateRejected = -not (Test-MemberWorkset $duplicated 29 $facts.member_set_sha $allowedRules)
+    $memberValueRejected = -not (Test-MemberWorkset $fabricated 29 $facts.member_set_sha $allowedRules)
+    Add-Assertion 'Negative case rejects an omitted conditional member' $memberOmissionRejected
+    Add-Assertion 'Negative case rejects a duplicated conditional member' $memberDuplicateRejected
+    Add-Assertion 'Negative case rejects a fabricated member value field' $memberValueRejected
     $startIds = [Collections.Generic.List[string]]::new()
     $reachableIds = [Collections.Generic.List[string]]::new()
     $gapLines = [Collections.Generic.List[string]]::new()
@@ -283,6 +357,10 @@ $negativeConditionalZero.closure.conditional_required.zero_threshold_satisfied =
 $negativeConditionalDeleted = Copy-Document $report
 $negativeConditionalDeleted.closure.conditional_required.PSObject.Properties.Remove(
     'conditional_required_missing')
+$negativeMemberCount = Copy-Document $report
+$negativeMemberCount.closure.conditional_required.member_set_count = 28
+$negativeMemberSha = Copy-Document $report
+$negativeMemberSha.closure.conditional_required.member_set_sha256 = '0' * 64
 Add-Assertion 'Negative case rejects outcome-based root narrowing' (-not (Test-Candidate $negativeScope $facts))
 Add-Assertion 'Negative case rejects owner or rule narrowing' (-not (Test-Candidate $negativeRules $facts))
 Add-Assertion 'Negative case rejects first-candidate or heuristic selection' (-not (Test-Candidate $negativeFirst $facts))
@@ -291,6 +369,8 @@ Add-Assertion 'Negative case rejects summary-only tampering against detailed set
 Add-Assertion 'Negative case rejects scope complete while config and binding coverage are false' (-not (Test-Candidate $negativeComplete $facts))
 Add-Assertion 'Negative case rejects changing conditional-required missing from twenty-nine to zero' (-not (Test-Candidate $negativeConditionalZero $facts))
 Add-Assertion 'Negative case rejects deleting the conditional-required metric' (-not (Test-Candidate $negativeConditionalDeleted $facts))
+Add-Assertion 'Negative case rejects conditional member count tampering' (-not (Test-Candidate $negativeMemberCount $facts))
+Add-Assertion 'Negative case rejects conditional member SHA tampering' (-not (Test-Candidate $negativeMemberSha $facts))
 
 $bindingsPass = $true
 $ignoredBindings = @{
@@ -316,7 +396,9 @@ Add-Assertion 'P2-05 P2-08 P2-12 P2-13 P2-18 G2 and ignored inputs are exact-has
 Add-Assertion 'Governance remains blocked and binds the machine report' (
     $governance.status -eq 'BLOCKED' -and $governance.scope_complete -eq $false -and
     [int]$governance.conditional_required_missing -eq $facts.conditional_missing -and
-    $governance.conditional_required_member_set_exported -eq $false -and
+    $governance.conditional_required_member_set_exported -eq $true -and
+    [int]$governance.conditional_required_member_set_count -eq 29 -and
+    [string]$governance.conditional_required_member_set_sha256 -ceq $facts.member_set_sha -and
     $governance.report.sha256 -eq (Get-Sha256 $reportPath) -and
     $governance.decisions.g2_approved -eq $false -and
     $governance.decisions.p3_authorized -eq $false)
@@ -329,8 +411,11 @@ Add-Assertion 'Evidence binds tracked reports governance and ignored-detail meta
     $evidence.outputs.detail_export.sha256 -eq $report.closure.detail_export.sha256 -and
     [int64]$evidence.outputs.detail_export.bytes -eq [int64]$report.closure.detail_export.bytes -and
     [int]$evidence.outputs.detail_export.lines -eq [int]$report.closure.detail_export.lines -and
+    [int]$evidence.outputs.conditional_required_workset.count -eq 29 -and
+    [string]$evidence.outputs.conditional_required_workset.sha256 -ceq $facts.member_set_sha -and
     (-not $VerifyDerivedSources -or
-        $evidence.outputs.detail_export.sha256 -eq (Get-Sha256 $detailPath)))
+        ($evidence.outputs.detail_export.sha256 -eq (Get-Sha256 $detailPath) -and
+         $evidence.outputs.conditional_required_workset.sha256 -eq (Get-Sha256 $worksetPath))))
 Add-Assertion 'No G2 P3 playable release repair or delete authority is claimed' (
     $report.authority_boundaries.g2_approved -eq $false -and
     $report.authority_boundaries.p3_authorized -eq $false -and
@@ -374,6 +459,11 @@ $output = [pscustomobject][ordered]@{
         false_scope_completion_rejected = -not (Test-Candidate $negativeComplete $facts)
         conditional_required_zero_tamper_rejected = -not (Test-Candidate $negativeConditionalZero $facts)
         conditional_required_metric_deletion_rejected = -not (Test-Candidate $negativeConditionalDeleted $facts)
+        conditional_member_omission_rejected = $memberOmissionRejected
+        conditional_member_duplicate_rejected = $memberDuplicateRejected
+        conditional_member_count_tamper_rejected = -not (Test-Candidate $negativeMemberCount $facts)
+        conditional_member_sha_tamper_rejected = -not (Test-Candidate $negativeMemberSha $facts)
+        conditional_member_value_rejected = $memberValueRejected
     }
     closure = [pscustomobject][ordered]@{
         start_nodes = $facts.start_nodes

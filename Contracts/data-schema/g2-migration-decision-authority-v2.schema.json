@@ -1,0 +1,218 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-migration-decision-authority-v2.schema.json",
+  "title": "TMXY G2 migration decision external authority ledger V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "workflow_version", "task_id", "source_build",
+    "authority_mode", "machine_can_assert_authority", "records", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "workflow_version": { "const": 2 },
+    "task_id": { "const": "P2-20B" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "authority_mode": { "const": "EXTERNAL_VERIFIED_RECORDS_ONLY" },
+    "machine_can_assert_authority": { "const": false },
+    "records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/authority_record" }
+    },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "subject_kind": {
+      "enum": [
+        "SCHEMA_TABLE", "SCHEMA_REFERENCE", "CANONICAL_ID_DOMAIN",
+        "ID_COMPONENT", "FIXED_LIMIT_SIGNAL"
+      ]
+    },
+    "action": {
+      "enum": [
+        "APPROVED_EXPLICIT_REMAP", "APPROVED_WIDER_REPRESENTATION",
+        "CONFIGURABLE_LIMIT", "ISOLATE_REFERENCE_RULE",
+        "ISOLATE_UNSUPPORTED_SCHEMA", "KEEP_STRING", "KEEP_UINT64",
+        "MIGRATE_REFERENCE_RULE", "MIGRATE_WITH_TRANSFORM",
+        "PRESERVE_CURRENT_SCHEMA", "PRESERVE_EXISTING_ID_POLICY",
+        "PRESERVE_REFERENCE_RULE", "REMOVE_OBSOLETE_LIMIT",
+        "RETAIN_APPROVED_LIMIT", "RETAIN_LEGACY_COMPATIBILITY",
+        "VALIDATED_PROTOCOL_LIMIT"
+      ]
+    },
+    "rationale_code": {
+      "enum": [
+        "CONTENT_BOUNDARY", "DATA_OWNER_JUDGMENT", "EXPLICIT_TRANSFORM_REQUIRED",
+        "PERSISTENCE_COMPATIBILITY", "PRESERVE_COMPATIBILITY", "PRODUCT_RULE",
+        "PROJECT_OWNER_JUDGMENT", "PROTOCOL_COMPATIBILITY", "ROLLBACK_VALIDATED",
+        "SECURITY_BOUNDARY", "UNKNOWN_SEMANTICS_ISOLATED"
+      ]
+    },
+    "approval_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role", "authority_kind", "authority_record_sha256",
+        "authority_verification_sha256", "decision_digest_sha256", "verified"
+      ],
+      "properties": {
+        "role": { "enum": ["data-owner", "project-owner"] },
+        "authority_kind": {
+          "enum": ["PROTECTED_PR_REVIEW", "SIGNED_DECISION_RECORD"]
+        },
+        "authority_record_sha256": { "$ref": "#/$defs/sha256" },
+        "authority_verification_sha256": { "$ref": "#/$defs/sha256" },
+        "decision_digest_sha256": { "$ref": "#/$defs/sha256" },
+        "verified": { "const": true }
+      }
+    },
+    "approval": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "approval_count", "external_authority_verified", "approval_refs"],
+          "properties": {
+            "status": { "const": "PENDING" },
+            "approval_count": { "const": 0 },
+            "external_authority_verified": { "const": false },
+            "approval_refs": { "type": "array", "maxItems": 0 }
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "approval_count", "external_authority_verified", "approval_refs"],
+          "properties": {
+            "status": { "enum": ["APPROVED", "REJECTED"] },
+            "approval_count": { "type": "integer", "minimum": 1, "maximum": 2 },
+            "external_authority_verified": { "const": true },
+            "approval_refs": {
+              "type": "array", "minItems": 1, "maxItems": 2,
+              "uniqueItems": true, "items": { "$ref": "#/$defs/approval_ref" }
+            }
+          }
+        }
+      ]
+    },
+    "verification": {
+      "oneOf": [
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "evidence_sha256", "decision_digest_sha256"],
+          "properties": {
+            "status": { "const": "NOT_RUN" },
+            "evidence_sha256": { "type": "null" },
+            "decision_digest_sha256": { "type": "null" }
+          }
+        },
+        {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "evidence_sha256", "decision_digest_sha256"],
+          "properties": {
+            "status": { "enum": ["PASS", "FAIL"] },
+            "evidence_sha256": { "$ref": "#/$defs/sha256" },
+            "decision_digest_sha256": { "$ref": "#/$defs/sha256" }
+          }
+        }
+      ]
+    },
+    "active_revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision", "status", "chosen_action", "rationale_codes",
+        "migration_plan_sha256", "rollback_plan_sha256", "compatibility_impact",
+        "effective_schema_version", "supersedes_decision_digest_sha256",
+        "decision_digest_sha256", "approval", "verification"
+      ],
+      "properties": {
+        "revision": { "type": "integer", "minimum": 1 },
+        "status": { "const": "DECIDED" },
+        "chosen_action": { "$ref": "#/$defs/action" },
+        "rationale_codes": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "$ref": "#/$defs/rationale_code" }
+        },
+        "migration_plan_sha256": { "$ref": "#/$defs/sha256" },
+        "rollback_plan_sha256": { "$ref": "#/$defs/sha256" },
+        "compatibility_impact": {
+          "enum": ["NONE", "BACKWARD_COMPATIBLE", "BREAKING"]
+        },
+        "effective_schema_version": { "type": "integer", "minimum": 1 },
+        "supersedes_decision_digest_sha256": {
+          "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "decision_digest_sha256": { "$ref": "#/$defs/sha256" },
+        "approval": { "$ref": "#/$defs/approval" },
+        "verification": { "$ref": "#/$defs/verification" }
+      }
+    },
+    "superseded_revision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision", "status", "chosen_action", "rationale_codes",
+        "migration_plan_sha256", "rollback_plan_sha256", "compatibility_impact",
+        "effective_schema_version", "supersedes_decision_digest_sha256",
+        "decision_digest_sha256", "superseded_by_decision_digest_sha256",
+        "approval", "verification"
+      ],
+      "properties": {
+        "revision": { "type": "integer", "minimum": 1 },
+        "status": { "const": "SUPERSEDED" },
+        "chosen_action": { "$ref": "#/$defs/action" },
+        "rationale_codes": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "$ref": "#/$defs/rationale_code" }
+        },
+        "migration_plan_sha256": { "$ref": "#/$defs/sha256" },
+        "rollback_plan_sha256": { "$ref": "#/$defs/sha256" },
+        "compatibility_impact": {
+          "enum": ["NONE", "BACKWARD_COMPATIBLE", "BREAKING"]
+        },
+        "effective_schema_version": { "type": "integer", "minimum": 1 },
+        "supersedes_decision_digest_sha256": {
+          "oneOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "decision_digest_sha256": { "$ref": "#/$defs/sha256" },
+        "superseded_by_decision_digest_sha256": { "$ref": "#/$defs/sha256" },
+        "approval": { "$ref": "#/$defs/approval" },
+        "verification": { "$ref": "#/$defs/verification" }
+      }
+    },
+    "authority_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id", "subject_kind", "subject_membership_sha256",
+        "active_revision", "superseded_revisions"
+      ],
+      "properties": {
+        "decision_id": { "type": "string", "pattern": "^MIG-[A-Z-]+-[0-9]{4}$" },
+        "subject_kind": { "$ref": "#/$defs/subject_kind" },
+        "subject_membership_sha256": { "$ref": "#/$defs/sha256" },
+        "active_revision": { "$ref": "#/$defs/active_revision" },
+        "superseded_revisions": {
+          "type": "array", "uniqueItems": true,
+          "items": { "$ref": "#/$defs/superseded_revision" }
+        }
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "anonymous_subjects_only", "private_source_paths", "primary_keys",
+        "observed_extrema", "raw_rows", "legacy_source_lines"
+      ],
+      "properties": {
+        "anonymous_subjects_only": { "const": true },
+        "private_source_paths": { "const": false },
+        "primary_keys": { "const": false },
+        "observed_extrema": { "const": false },
+        "raw_rows": { "const": false },
+        "legacy_source_lines": { "const": false }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "evidence_revision": "P2-20A.1",
   "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
@@ -9,13 +10,19 @@
   "task_status": "BLOCKED",
   "completion_criteria_satisfied": false,
   "input_bindings": {
-    "aggregate_sha256": "3ad91e94f8011a5928463e58e4d39e950c4c8ad5c2d904ec3a341e98b72185de",
+    "aggregate_sha256": "e8e83171abd2c10023ca0062b3b54535cb5cf75b1f6c9ed7556c62c7523af226",
     "artifacts": [
       {
         "id": "P2-05",
         "path": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
         "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
         "bytes": 252227
+      },
+      {
+        "id": "P2-06",
+        "path": "Data/Inventory/p2-06-three-layer-data.json",
+        "sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+        "bytes": 355622
       },
       {
         "id": "P2-08",
@@ -28,6 +35,12 @@
         "path": "Data/Schemas/table-ownership-registry-v1.json",
         "sha256": "7c1999a4205bfc3da6f8f66bf6e778cb94fd9f129d896546c92e4358941c7e22",
         "bytes": 326027
+      },
+      {
+        "id": "core-registry",
+        "path": "Data/Schemas/core-table-registry-v1.json",
+        "sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "bytes": 199609
       },
       {
         "id": "P2-12",
@@ -70,8 +83,8 @@
       {
         "id": "g2-policy",
         "path": "Contracts/data-schema/g2-review-policy-v1.json",
-        "sha256": "4671783b9f5e28f2dd7d3b0f3216e9fcebd27f0ef78718b94f4d5f956f630f5a",
-        "bytes": 6140
+        "sha256": "db5a7effe7560d468b5210f14b09ae58e94419fdd1bc95a520da35a5401a4b4b",
+        "bytes": 6290
       }
     ]
   },
@@ -150,8 +163,13 @@
       "conditional_required_unresolved": 0,
       "source_inventory_id": "P2-13",
       "source_inventory_sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633",
-      "member_set_exported": false,
-      "member_set_sha256": null,
+      "member_source_inventory_id": "P2-06",
+      "member_source_inventory_sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+      "member_source_file_count": 1,
+      "member_source_file_set_sha256": "04363e93bd623edad9d23c70912e7795bb33e68e93ebbc84ad34827ee4af68ce",
+      "member_set_exported": true,
+      "member_set_count": 29,
+      "member_set_sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d",
       "zero_threshold_satisfied": false
     },
     "asset_structure": {
@@ -206,7 +224,7 @@
     {
       "id": "G2-06-CONDITIONAL-REQUIRED",
       "reason": "P2-13 reports conditionally required resource fields with missing values; such rows may emit no table-to-Package edge and cannot disappear from review.",
-      "required_action": "Export a reviewed member-level work set, resolve every missing required value, retain the P2-13 source binding, and reach the independent zero threshold."
+      "required_action": "Use the complete hashed member workset for authorized remediation, resolve every missing required value, retain the P2-06 and P2-13 source bindings, and reach the independent zero threshold."
     },
     {
       "id": "G2-06-LOGICAL-GAPS",
@@ -228,9 +246,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-core-resource-closure-policy-v1.json",
-    "policy_sha256": "0973d168bf7329ef74e0e3bb493a8085a312924c435069af64642a316c8374ab",
+    "policy_sha256": "ae99f47fa26ad867cc1a0362ce08293016f59fd0a90fdb8fbc6a420b65a436a4",
     "schema": "Contracts/data-schema/g2-core-resource-closure-v1.schema.json",
-    "schema_sha256": "a2b9c66cf4f1c31d1c640ab7e8fb3ef1e9318848bcfbf3ab955a757e1936219f"
+    "schema_sha256": "e1c36c6128a35e6a69738c4c0a45d2780248ffd15b32ee2c2c6d88b1f7ff87e3"
   },
   "disclosure": {
     "private_source_paths": false,

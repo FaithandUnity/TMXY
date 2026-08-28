@@ -71,8 +71,10 @@ def validate_task(document: dict[str, Any], task_id: str) -> None:
 def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
     specifications = [
         ("P2-05", "p2_05", True),
+        ("P2-06", "p2_06", True),
         ("P2-08", "p2_08", True),
         ("ownership-registry", "ownership_registry", False),
+        ("core-registry", "core_registry", False),
         ("P2-12", "p2_12", True),
         ("asset-catalog", "asset_catalog", False),
         ("reference-policy", "reference_policy", False),
@@ -106,12 +108,18 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         documents[policy_key + "_path"] = path
 
     p208 = documents["p2_08"]
+    p206 = documents["p2_06"]
     p212 = documents["p2_12"]
     p213 = documents["p2_13"]
     p218 = documents["p2_18"]
     reference_policy_path = documents["reference_policy_path"]
     require(p208["output"]["registry_sha256"] == sha256_file(documents["ownership_registry_path"]),
             "P2-08 ownership registry hash mismatch")
+    require(p206["output"]["git_ignored"] is True and
+            p206["output"]["local_root"] == "Data/Exports/P2-06",
+            "P2-06 normalized source authority is not the frozen ignored export")
+    require(p213["input"]["core_registry_sha256"] == sha256_file(documents["core_registry_path"]),
+            "P2-13 core registry hash mismatch")
     require(p212["catalog"]["sha256"] == sha256_file(documents["asset_catalog_path"]),
             "P2-12 catalog hash mismatch")
     require(p212["catalog"]["lines"] == count_lines(documents["asset_catalog_path"]),

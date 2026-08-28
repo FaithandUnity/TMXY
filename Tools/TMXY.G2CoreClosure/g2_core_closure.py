@@ -10,6 +10,7 @@ from pathlib import Path
 from core_closure import build_graph, select_rules, summarize, write_detail
 from core_common import bind_inputs, load_json, require, sha256_file, sha256_lines, write_text
 from core_report import build_governance, build_report, render_markdown
+from conditional_workset import build_conditional_workset
 
 
 def build(args: argparse.Namespace) -> dict[str, object]:
@@ -22,6 +23,7 @@ def build(args: argparse.Namespace) -> dict[str, object]:
     bindings, documents = bind_inputs(root, policy)
     reference_policy = load_json(documents["reference_policy_path"])
     ownership = load_json(documents["ownership_registry_path"])
+    core_registry = load_json(documents["core_registry_path"])
     selected_rules, rule_summary = select_rules(policy, reference_policy, ownership)
     graph = build_graph(documents["reference_graph_path"], selected_rules,
                         policy, reference_policy)
@@ -51,14 +53,20 @@ def build(args: argparse.Namespace) -> dict[str, object]:
             if entry.get("record") == "root":
                 roots_by_target.setdefault(str(entry["target"]), []).append(str(entry["root_kind"]))
     detail = write_detail(args.detail_output, graph, roots_by_target)
+    workset = build_conditional_workset(
+        policy, reference_policy, documents["p2_06"], documents["p2_13"],
+        core_registry, args.table_root.resolve(), args.workset_output)
     p213_binding = next(item for item in bindings["artifacts"] if item["id"] == "P2-13")
-    closure = summarize(graph, documents["p2_13"], detail, p213_binding)
+    p206_binding = next(item for item in bindings["artifacts"] if item["id"] == "P2-06")
+    closure = summarize(graph, documents["p2_13"], detail, p213_binding,
+                        p206_binding, workset)
     require(closure["auxiliary_config_reference_scope_complete"] is False and
             closure["asset_binding_resolution_explicit"] is False and
             closure["scope_complete"] is False, "Incomplete scope was incorrectly closed")
     require(closure["logical_gap_count"] > 0, "Current core-resource gaps unexpectedly vanished")
     require(closure["conditional_required"]["conditional_required_missing"] > 0 and
-            closure["conditional_required"]["member_set_exported"] is False and
+            closure["conditional_required"]["member_set_exported"] is True and
+            closure["conditional_required"]["member_set_count"] == 29 and
             closure["conditional_required"]["zero_threshold_satisfied"] is False,
             "Conditional-required missing-value blocker was incorrectly closed")
     require(closure["resolution"]["heuristic_target_selections"] == 0,
@@ -135,6 +143,8 @@ def main() -> None:
     parser.add_argument("--policy", type=Path)
     parser.add_argument("--schema", type=Path)
     parser.add_argument("--detail-output", type=Path)
+    parser.add_argument("--table-root", type=Path)
+    parser.add_argument("--workset-output", type=Path)
     parser.add_argument("--json-output", type=Path)
     parser.add_argument("--markdown-output", type=Path)
     parser.add_argument("--governance-output", type=Path)
@@ -143,7 +153,8 @@ def main() -> None:
     if args.self_test:
         print(json.dumps(self_test(), sort_keys=True, separators=(",", ":")))
         return
-    require(all((args.root, args.policy, args.schema, args.detail_output, args.json_output,
+    require(all((args.root, args.policy, args.schema, args.detail_output, args.table_root,
+                 args.workset_output, args.json_output,
                  args.markdown_output, args.governance_output)), "Generation arguments are required")
     print(json.dumps(build(args), sort_keys=True, separators=(",", ":")))
 

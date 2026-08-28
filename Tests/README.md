@@ -129,9 +129,11 @@ u8/u16/等级/Tombstone 风险，并冻结 8,090 个旧源码文件中的四类�
 `Contract/Test-G2Review.ps1` 验证 P2-20 对 P2-01～P2-19 和完整质量门禁的精确哈希
 绑定，并消费两个独立补救证据。`Contract/Test-G2CoreResourceClosure.ps1` 从 P2-13 的
 冻结根集合重建五类边的闭包，验证范围、条件必需字段、引用队列和资产结构缺口均没有被
-省略；成员级明细只保存在 Git 忽略区。`Contract/Test-G2MigrationDecisions.ps1` 则枚举
+省略；条件必需的 29 个匿名成员工作集只保存在 Git 忽略区，跟踪证据仅保存 count/SHA。
+`Contract/Test-G2MigrationDecisions.ps1` 则枚举
 Schema、引用规则、Canonical ID 域、ID 分量和固定容量信号的完整决定集合，强制机器建议
-不得冒充负责人选择或审批。合同成功表示评审正确失败关闭，不表示 G2 通过；当前 7/9
+和 39 个匿名审阅包不得冒充负责人选择或审批；V2 决定、审批、验证与 supersession 都须
+绑定决定摘要和外部权威台账。合同成功表示评审正确失败关闭，不表示 G2 通过；当前 7/9
 满足、G2-06/G2-07 阻塞，任务完成、G2/P3/可玩性/发布权威均为 false。三份合同的
 `-VerifyDerivedSources` 会隔离重建并逐 byte 复核；负例防止删减范围、归零真实缺口、
 伪造迁移决定或把审计冒充授权。

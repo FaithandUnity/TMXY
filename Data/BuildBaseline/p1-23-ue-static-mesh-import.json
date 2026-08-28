@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T03:36:16.2253414+00:00",
+  "captured_utc": "2026-08-28T04:24:49.4871223+00:00",
   "result": "PASS",
   "task": "P1-23",
   "completion_criteria_satisfied": true,
@@ -60,20 +60,20 @@
     ]
   },
   "automation_evidence": {
-    "required": true,
-    "passed": true,
+    "required": false,
+    "passed": null,
     "test": "TMXY.Importer.StaticMesh",
-    "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-23-static-mesh-report.json",
-    "generated_report_sha256": "a7ddfce428543ffd1504203c2f279100bbebbc48f950996cfd6bbd68c322bedf",
-    "generated_report_schema_passed": true,
-    "ue_report_sha256": "a26f797cb3583f4e5854a20a227487331f95aa37643c7fba16380d7d0cb73186"
+    "generated_report_path": null,
+    "generated_report_sha256": null,
+    "generated_report_schema_passed": null,
+    "ue_report_sha256": null
   },
   "dependency_report_sha256": {
-    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "62aaa00ee52ac674714eb2fb802c8282c8e8b722dc0b2fe1a7d306b999fe4381",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "2210fd11561459837005261e1b2b6c83ea3ea83fc626f7732f0026b1fbd49a6e",
-    "Data/BuildBaseline/p1-20-ue-golden-host.json": "406d69c472cb274f4f10c15e6541f7599fca1ff31bb1b17de78ff65c8dc0cfce",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "ceaa0d3d79b67e7c677220ab920847b8bc9d98906e7c4cceacf023bd2c2775cd",
-    "Data/BuildBaseline/p1-22-ue-texture-import.json": "415dff420e57d67b79f940368063e9b6571cc6da9fdbd62c477ccdd78956c7d0"
+    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "a8767b9d025c57da1a5b164ee60cd2ffbc18f35c4198d4e1f6a4018f04d1fa61",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "3bcaaae2867cc143a2ae2df73cc155eba697b1747aca16ba8e7175b4ee3deece",
+    "Data/BuildBaseline/p1-20-ue-golden-host.json": "cf13cc5eff0d3d6d908695fd0116c52ca26ade748cda26c95cedd0aac05aef88",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "5cee107ae0592d8487055cfdd3c08c0a80d1e780a1469bf1ca065945e4969120",
+    "Data/BuildBaseline/p1-22-ue-texture-import.json": "9b38174b4f09708ee8bd5e76f17f4637a0b912499f160afcbce3e9b414c85377"
   },
   "failure_count": 0,
   "failures": []

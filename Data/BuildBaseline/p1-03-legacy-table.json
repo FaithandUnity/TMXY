@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T03:32:04.2046288+00:00",
+  "captured_utc": "2026-08-28T04:21:06.6662260+00:00",
   "result": "PASS",
   "task": "P1-03",
   "source_file_count": 7,
-  "source_sha256": "7bbe7c5fbc71c56f0c546737b409225610fb676cd86f017e795d6b6589b2b1bc",
+  "source_sha256": "1542cf3e4e1be22a51c5860020fac99692f41bd0062c6384bd14651181fa0cc3",
   "error_schema_version": 1,
   "legacy_format_evidence": [
     {
@@ -107,6 +107,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 44,
-    "output_sha256": "30d3b09bfe3eeb42c1e2216befb044ac06551055a86c0fcc2ab4cd7b88da94f1"
+    "output_sha256": "43864d44490403a5919526b207aca8348513136ad3efe01864b6030c7d20e028"
   }
 }

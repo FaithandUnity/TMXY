@@ -129,6 +129,9 @@ $fullCurrentTableInventory = Invoke-JsonTest `
 $auxiliaryConfigInventory = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-AuxiliaryConfigInventory.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$threeLayerTableData = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ThreeLayerTableData.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -230,6 +233,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$fullCurrentTableInventory.completion_criteria_satisfied -and
     [string]$auxiliaryConfigInventory.result -eq 'PASS' -and
     [bool]$auxiliaryConfigInventory.completion_criteria_satisfied -and
+    [string]$threeLayerTableData.result -eq 'PASS' -and
+    [bool]$threeLayerTableData.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -287,6 +292,7 @@ $report = [pscustomobject][ordered]@{
     package_dependency_graph = $packageDependencyGraph
     full_current_table_inventory = $fullCurrentTableInventory
     auxiliary_config_inventory = $auxiliaryConfigInventory
+    three_layer_table_data = $threeLayerTableData
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

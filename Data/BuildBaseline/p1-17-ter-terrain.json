@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T03:35:48.6531524+00:00",
+  "captured_utc": "2026-08-28T04:24:44.8755469+00:00",
   "result": "PASS",
   "task": "P1-17",
   "completion_criteria_satisfied": true,
@@ -160,6 +160,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 45,
-    "output_sha256": "989071c0d72a9c52e902c5253e9bde9cf569450196652efce41ad1bdf837162b"
+    "output_sha256": "27315642340f69b49e82531c08268ac594e1499412dd9fbe9888acd786d6c642"
   }
 }

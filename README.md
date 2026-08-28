@@ -48,6 +48,8 @@ Rebuild/
 ├─ Data/Toolchain/               工具链锁定清单与主机环境快照
 ├─ Data/Security/                脱敏后的安全门禁报告
 ├─ Data/Performance/             平台、容量和性能预算基线
+├─ Data/Inventory/               脱敏后的格式、表和依赖全量证据
+├─ Data/Exports/                 Git 忽略的可重建批量明文/转换产物
 ├─ Docs/Governance/              权利与治理基线
 ├─ Docs/Build/                   构建依赖与可编译性报告
 ├─ Docs/Architecture/            已冻结的最终技术架构
@@ -67,6 +69,11 @@ Rebuild/
 P1 资产交换统一使用 `manifest.json` + 独立哈希载荷；Schema、格式注册表、示例、版本与
 未知字段保留规则见 `Docs/Formats/ASSET-INTERCHANGE-V1.md`。OBJ/PNG/TGA/CSV 只作审查，
 不得被导入器当作权威输入。
+
+P2 表数据统一由 `Tools/TMXY.Table/New-ThreeLayerTableData.ps1` 生成三层产物：忠实
+`raw.csv`、UTF-8 `normalized.jsonl` 与逐表 `schema.yaml`。批量内容只保留在
+`Data/Exports/P2-06`；Git 仅跟踪生成器、Schema 合同、格式说明和无字段值的哈希证据。
+P2-06 的类型和主键仍是结构候选，P2-07/P2-08 才负责权威语义与所有权决策。
 
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个

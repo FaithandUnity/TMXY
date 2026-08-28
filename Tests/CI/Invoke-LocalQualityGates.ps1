@@ -148,6 +148,11 @@ if ($VerifyLegacyGoldenSources) { $referenceClosureArguments.VerifyDerivedSource
 $referenceClosure = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-ReferenceClosure.ps1') `
     -Arguments $referenceClosureArguments
+$assetHealthArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $assetHealthArguments.VerifyDerivedSources = $true }
+$assetHealth = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-AssetHealth.ps1') `
+    -Arguments $assetHealthArguments
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -259,6 +264,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceClosure.result -eq 'PASS' -and
     [bool]$referenceClosure.completion_criteria_satisfied -and
+    [string]$assetHealth.result -eq 'PASS' -and
+    [bool]$assetHealth.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -321,6 +328,7 @@ $report = [pscustomobject][ordered]@{
     table_ownership = $tableOwnership
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
+    asset_health = $assetHealth
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

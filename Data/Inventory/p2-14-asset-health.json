@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T09:23:02.4831207+00:00",
+  "task_id": "P2-14",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+    "reference_closure_sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+    "source_copy_policy": "reference_only"
+  },
+  "report": {
+    "path": "Data/Exports/P2-14/p2-14-asset-health.jsonl",
+    "tracked": false,
+    "lines": 42356,
+    "bytes": 23686877,
+    "sha256": "9a0db19c7809da06e7225ec900864f0854c8b61af224366aac746be312880b9f",
+    "records": {
+      "asset_health": 40090,
+      "exact_duplicate_group": 1743,
+      "structural_review_group": 523
+    }
+  },
+  "summary": {
+    "assets": {
+      "by_family": {
+        "anim": {
+          "root_reachable": 1044,
+          "unlinked_identity_rule_no_match": 25
+        },
+        "mp3": {
+          "unlinked_no_identity_rule": 64
+        },
+        "qtx": {
+          "linked_outside_declared_roots": 21344,
+          "root_reachable": 2782,
+          "unlinked_identity_rule_no_match": 672
+        },
+        "skem": {
+          "root_reachable": 1043,
+          "unlinked_identity_rule_no_match": 25
+        },
+        "sm": {
+          "linked_outside_declared_roots": 2619,
+          "root_reachable": 182,
+          "unlinked_identity_rule_no_match": 123
+        },
+        "ter": {
+          "root_reachable": 8744,
+          "unlinked_identity_rule_no_match": 132
+        },
+        "wav": {
+          "linked_outside_declared_roots": 156,
+          "root_reachable": 263,
+          "unlinked_identity_rule_no_match": 31
+        },
+        "zif": {
+          "unlinked_no_identity_rule": 841
+        }
+      },
+      "bytes": 8882019027,
+      "files": 40090,
+      "reference_states": {
+        "linked_outside_declared_roots": 24119,
+        "root_reachable": 14058,
+        "unlinked_identity_rule_no_match": 1008,
+        "unlinked_no_identity_rule": 905
+      },
+      "root_count": 24465,
+      "root_reachable_graph_nodes": 60512
+    },
+    "duplicates": {
+      "by_family": {
+        "anim": {
+          "exact_files": 471,
+          "exact_groups": 155,
+          "redundant_bytes_within_family": 203970664,
+          "redundant_files_within_family": 316,
+          "structural_review_files": 268,
+          "structural_review_groups": 47
+        },
+        "mp3": {
+          "exact_files": 6,
+          "exact_groups": 3,
+          "redundant_bytes_within_family": 5726390,
+          "redundant_files_within_family": 3,
+          "structural_review_files": 0,
+          "structural_review_groups": 0
+        },
+        "qtx": {
+          "exact_files": 2880,
+          "exact_groups": 1326,
+          "redundant_bytes_within_family": 242876664,
+          "redundant_files_within_family": 1554,
+          "structural_review_files": 23905,
+          "structural_review_groups": 272
+        },
+        "skem": {
+          "exact_files": 154,
+          "exact_groups": 76,
+          "redundant_bytes_within_family": 39406874,
+          "redundant_files_within_family": 78,
+          "structural_review_files": 132,
+          "structural_review_groups": 41
+        },
+        "sm": {
+          "exact_files": 162,
+          "exact_groups": 64,
+          "redundant_bytes_within_family": 17505262,
+          "redundant_files_within_family": 98,
+          "structural_review_files": 252,
+          "structural_review_groups": 98
+        },
+        "ter": {
+          "exact_files": 5325,
+          "exact_groups": 81,
+          "redundant_bytes_within_family": 773494744,
+          "redundant_files_within_family": 5244,
+          "structural_review_files": 8876,
+          "structural_review_groups": 9
+        },
+        "wav": {
+          "exact_files": 55,
+          "exact_groups": 24,
+          "redundant_bytes_within_family": 3822950,
+          "redundant_files_within_family": 31,
+          "structural_review_files": 162,
+          "structural_review_groups": 44
+        },
+        "zif": {
+          "exact_files": 49,
+          "exact_groups": 14,
+          "redundant_bytes_within_family": 84281,
+          "redundant_files_within_family": 35,
+          "structural_review_files": 34,
+          "structural_review_groups": 12
+        }
+      },
+      "cross_family_exact_groups": 0,
+      "exact_files": 9102,
+      "exact_groups": 1743,
+      "redundant_bytes": 1286887829,
+      "redundant_files": 7359,
+      "semantic_equivalence_proven_groups": 0,
+      "structural_review_files": 33629,
+      "structural_review_groups": 523
+    },
+    "identity_rule_families": [
+      "anim",
+      "qtx",
+      "skem",
+      "sm",
+      "ter",
+      "wav"
+    ],
+    "deletion_recommendations": 0,
+    "semantic_equivalence_claims_without_digest": 0
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/asset-health-policy-v1.json",
+    "policy_sha256": "1fe5a3d8fc21e6ace93d03c669f6052ad815bf57450d35934040f33b51c276f0",
+    "schema": "Contracts/data-schema/asset-health-v1.schema.json",
+    "schema_sha256": "1d0fce185df4fe8b9ba9c4aeb533a8234b4ef5a1346bc9a8cb83217dfd17c59f",
+    "orphan_definition": "root reachability review state; never automatic deletion proof"
+  },
+  "implementation": {
+    "source_files": 3,
+    "source_sha256": "18bebab571717f580aead3e39a2b38a15f2cdaaf200a8464d29795bd1ded7ca2",
+    "self_test_assertions": 8,
+    "generator": "Tools/TMXY.AssetHealth/New-AssetHealthReport.ps1",
+    "query": "Tools/TMXY.AssetHealth/Find-AssetHealth.ps1"
+  },
+  "disclosure": {
+    "tracked_evidence_contains_asset_paths": false,
+    "tracked_evidence_contains_per_asset_hashes": false,
+    "full_report_committed_to_git": false,
+    "payload_bytes_copied": false,
+    "automatic_deletions_performed": 0
+  },
+  "reproduction": {
+    "check_mode": "-Check",
+    "source_mount": "read-only",
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-15",
+      "P2-16",
+      "P2-18"
+    ],
+    "detail": "Route exact duplicates and unreachable candidates for review; never delete from P2-14 evidence alone."
+  }
+}

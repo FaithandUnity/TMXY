@@ -99,6 +99,11 @@ P2-13 由 `Tools/TMXY.ReferenceClosure/New-ReferenceClosure.ps1` 把核心表、
 保持零悬空；可空旧版展示指针、同名歧义和未解析候选均保留为显式工作队列，不能被误报为
 权威外键或静默选择，详见 `Docs/Formats/REFERENCE-CLOSURE.md`。
 
+P2-14 由 `Tools/TMXY.AssetHealth/New-AssetHealthReport.ps1` 对 40,090 个资产做完整源哈希
+重复分析和角色/场景/技能根可达性分类。相同解析指标但不同哈希的资源只列为结构审查候选，
+不宣称语义等价；根不可达、无 Package 匹配或尚无身份规则也都不等于可删除。逐资产报告
+位于 Git 忽略的 `Data/Exports/P2-14`，详见 `Docs/Formats/ASSET-HEALTH.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

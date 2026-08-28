@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T09:06:19.6427162+00:00",
+  "captured_utc": "2026-08-28T09:43:58.9325458+00:00",
   "result": "PASS",
   "image": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
   "database_version": "18.6",

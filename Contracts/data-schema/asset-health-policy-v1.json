@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-14",
+  "source_build": "qy-3.0.0.413",
+  "exact_duplicate_definition": "two or more catalog assets with the same full-source SHA-256",
+  "structural_candidate_definition": "two or more structurally valid assets in one family with the same format contract, byte length, and canonical parser metrics but more than one source SHA-256",
+  "semantic_proof_policy": "structural candidates are review hints, not proven semantic duplicates; proof requires a future format-qualified normalized-payload digest",
+  "reachability_roots": ["character", "scene", "skill"],
+  "reference_states": [
+    "root_reachable",
+    "linked_outside_declared_roots",
+    "unlinked_identity_rule_no_match",
+    "unlinked_no_identity_rule"
+  ],
+  "orphan_policy": {
+    "root_unreachable_is_review_only": true,
+    "unlinked_does_not_mean_unused": true,
+    "no_identity_rule_is_not_an_orphan_finding": true,
+    "all_assets_delete_eligible": false
+  },
+  "completion_policy": {
+    "requires_every_p2_12_asset_classified_once": true,
+    "requires_exact_duplicate_groups_from_full_source_hash": true,
+    "requires_root_reachability_from_p2_13_edges": true,
+    "requires_structural_candidates_separate_from_proven_duplicates": true,
+    "forbids_automatic_deletion_or_repair": true,
+    "forbids_semantic_equivalence_claim_without_normalized_payload_digest": true
+  },
+  "output_policy": {
+    "full_report_tracked_in_git": false,
+    "tracked_evidence_contains_asset_paths": false,
+    "tracked_evidence_contains_per_asset_hashes": false,
+    "payload_bytes_copied": false
+  }
+}

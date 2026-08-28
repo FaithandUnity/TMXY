@@ -28,6 +28,9 @@ Fixture、glTF/BIN 边界、坐标/法线/绕序、源与渲染顶点、UV/材�
 
 `Contract/Test-PackageNormalizedTree.ps1` 验证 Package 1.0/2.0/3.0 的统一 JSON Schema、显式 `unparsed`/`source-span` 边界及三种冻结实样的确定性输出摘要。
 
-`Contract/Test-CurrentTableInvestigation.ps1` 冻结 338 张当前 TBL 的独立块统计、当前 `QY.exe` double-AES-128 读取链与运行时密钥变更处理器，并证明磁盘基础密钥和残留 CSV 都不能充当最终表输入；该测试输出 `PASS_DIAGNOSTIC`，不会把 P1-09 虚假标记完成。
+`Contract/Test-CurrentTableInvestigation.ps1` 冻结 338 张 TBL 的独立块统计、当前
+`QY.exe` double-AES-128 读取链、授权运行时指纹及安全捕获工具契约。它验证 225 张
+活动表、三张 GBK 大型代表表和 113 张具有更新替代物的历史影子分类；报告只含指纹
+与结构计数，P1-09 由此完成，产品读取器继续由 P1-10 实现。
 
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

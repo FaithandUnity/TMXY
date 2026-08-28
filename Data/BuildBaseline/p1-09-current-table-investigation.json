@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T23:27:07.0405881+00:00",
+  "captured_utc": "2026-08-28T00:24:29.2080990+00:00",
   "result": "PASS_DIAGNOSTIC",
   "task": "P1-09",
-  "task_status": "IN_PROGRESS",
-  "completion_criteria_satisfied": false,
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
   "read_only_evidence": {
     "client_executable": {
       "path": "QY.exe",
@@ -245,23 +245,36 @@
     "current_cipher_extra_bytes": 495264,
     "exact_replacement": false
   },
+  "authorized_runtime_capture": {
+    "evidence_path": "Data/BuildBaseline/p1-09-runtime-key-capture.json",
+    "tool_path": "Tools/TMXY.Table/Capture-CurrentTableRuntimeKey.ps1",
+    "key_fingerprint": "cf760550b7af6c220331b258db1df781fe567221eb7c53fbfc65aca522085887",
+    "keychain_reference": "se://tmxy/development/table/qy-3.0.0.413/runtime-key-base64",
+    "keychain_read_back_verified": true,
+    "verified_old_format_tables": 225,
+    "unresolved_tables": 113,
+    "superseded_historical_copies": 113,
+    "unresolved_active_tables": 0,
+    "required_core_tables_verified": true,
+    "raw_key_emitted": false,
+    "plaintext_emitted": false
+  },
   "confirmed_processing": [
     "read block-aligned ciphertext",
-    "double AES-128 block decode"
+    "runtime-mutated 16-byte key for the core table domain",
+    "double AES-128 ECB-like independent-block decode",
+    "one-byte padding length with zero tail for the core table domain",
+    "CRLF payload for the current table domain",
+    "GBK for representative non-ASCII item, skill, and quest tables",
+    "113 non-matching files are older shadow copies with newer verified replacements"
   ],
   "unresolved_processing": [
-    "runtime final key bytes",
-    "post-decrypt compression",
-    "post-decrypt text encoding"
+    "table-specific schema variation beyond simple comma splitting",
+    "runtime key rotation lifecycle across sessions"
   ],
-  "blocker": {
-    "classification": "missing-authorized-runtime-key-mutation-input",
-    "detail": "The installed executable contains only a base key. Current message handlers can permute all 16 bytes or overwrite four indexed bytes before table use; no authorized local capture of those inputs is present.",
-    "prohibited_shortcuts": [
-      "hard-code guessed key",
-      "contact live service without authorization",
-      "treat residual CSV as an exact replacement"
-    ]
+  "next_scope": {
+    "task": "P1-10",
+    "detail": "Implement the current-table reader with explicit key injection, GBK handling, and per-table schema rules while excluding the proven historical shadow copies."
   },
   "secret_handling": {
     "raw_key_written": false,

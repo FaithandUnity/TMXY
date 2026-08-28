@@ -1,0 +1,3885 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T01:53:34.6800638+00:00",
+  "result": "PASS",
+  "task": "P2-02",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "client_version": "3.0.0.413",
+    "manifest": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+    "manifest_sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3",
+    "p2_01_inventory": "Data/Inventory/p2-01-package-inventory.json",
+    "p2_01_inventory_sha256": "ac6671219c41324f1e7aac0a1cd5c08a9dc66f7c75e30cd3081610c038a26d16",
+    "golden_samples": "Data/GoldenSamples/p0-golden-samples.json",
+    "golden_samples_sha256": "3d99ff3585c02746119421aa130e190671a079aa2d0ba1b72a9092f50bbeff17",
+    "integrity_failures": 0,
+    "copy_policy": "reference_only"
+  },
+  "summary": {
+    "files_classified": 167,
+    "recognized_packages": 163,
+    "explicit_non_packages": 4,
+    "complete_packages": 163,
+    "complete_parse_rate_ppm": 1000000,
+    "required_parse_rate_ppm": 999000,
+    "core_packages": 12,
+    "complete_core_packages": 12,
+    "core_parse_rate_ppm": 1000000,
+    "required_core_rate_ppm": 1000000,
+    "records": 121715,
+    "source_bytes": 42437084,
+    "header_bytes": 5514738,
+    "object_bytes": 36922346,
+    "covered_bytes": 42437084,
+    "uncovered_bytes": 0,
+    "mutation_checks": 326,
+    "mutation_rejections": 326,
+    "silent_truncation_accepts": 0,
+    "silent_trailing_byte_accepts": 0
+  },
+  "core_definition": {
+    "authority": "Data/GoldenSamples/p0-golden-samples.json",
+    "rule": "source_verified Package samples with format version 1.0, 2.0, or 3.0",
+    "paths": [
+      "Packages/Level/bydfb",
+      "Packages/Level/world",
+      "Packages/Material/matchar",
+      "Packages/Material/tempfile.5.tmp",
+      "Packages/particle01",
+      "Packages/SkelMesh/sknpc",
+      "Packages/SkelMesh/tempfile.tmp",
+      "Packages/StaticMesh/scene09",
+      "Packages/tempfile.tmp",
+      "Packages/Texture/tempfile.tmp",
+      "Packages/Texture/texeditor",
+      "Packages/UI/interface"
+    ]
+  },
+  "packages": [
+    {
+      "path": "Packages/card",
+      "version": "3.0",
+      "bytes": 19885,
+      "sha256": "cf89014c2fdff11a50114dc54256a587ab6a026e430e0bebd9384f4dbba55d78",
+      "core": false,
+      "record_count": 224,
+      "header_bytes": 6893,
+      "object_bytes": 12992,
+      "covered_bytes": 19885,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 19827
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 19885
+      }
+    },
+    {
+      "path": "Packages/editactions",
+      "version": "3.0",
+      "bytes": 17690,
+      "sha256": "b7e4bc73b34a1a73e99737dbff81be89a04da77499cbcb987dae03e5f33992d2",
+      "core": false,
+      "record_count": 40,
+      "header_bytes": 1880,
+      "object_bytes": 15810,
+      "covered_bytes": 17690,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 17131
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 17690
+      }
+    },
+    {
+      "path": "Packages/editactions01",
+      "version": "3.0",
+      "bytes": 21630,
+      "sha256": "acc73971b626c6970c12f58f3f9a12e7d1f8709095577ea0ff983cfef8483cd9",
+      "core": false,
+      "record_count": 47,
+      "header_bytes": 2440,
+      "object_bytes": 19190,
+      "covered_bytes": 21630,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 21188
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 21630
+      }
+    },
+    {
+      "path": "Packages/editactions02",
+      "version": "3.0",
+      "bytes": 13026,
+      "sha256": "6ed33826c628465bbfa12a1abfc526e9b858e7917a0968bd4cb226049498d4f7",
+      "core": false,
+      "record_count": 38,
+      "header_bytes": 2097,
+      "object_bytes": 10929,
+      "covered_bytes": 13026,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 12703
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 13026
+      }
+    },
+    {
+      "path": "Packages/editactions03",
+      "version": "3.0",
+      "bytes": 6971,
+      "sha256": "274bcf0341d1010ef0769b06649d9b621ca18f9d644dddb93dff47b0ce940207",
+      "core": false,
+      "record_count": 38,
+      "header_bytes": 2210,
+      "object_bytes": 4761,
+      "covered_bytes": 6971,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 6772
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 6971
+      }
+    },
+    {
+      "path": "Packages/editactions04",
+      "version": "3.0",
+      "bytes": 668,
+      "sha256": "5785c72a928eace2f3a96a2845cbcfa643a43be97d0f1b504b2a7f8464e2a665",
+      "core": false,
+      "record_count": 3,
+      "header_bytes": 219,
+      "object_bytes": 449,
+      "covered_bytes": 668,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 474
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 668
+      }
+    },
+    {
+      "path": "Packages/editactions05",
+      "version": "3.0",
+      "bytes": 2210,
+      "sha256": "e1362251d91904f01c80d6217df23ab526780e776a3c11495024f9c56db021fb",
+      "core": false,
+      "record_count": 8,
+      "header_bytes": 504,
+      "object_bytes": 1706,
+      "covered_bytes": 2210,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2017
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 2210
+      }
+    },
+    {
+      "path": "Packages/editactions06",
+      "version": "3.0",
+      "bytes": 18947,
+      "sha256": "e5f1a3acedb301230222386ca2ce079ce6c20987b40724379b3b74cd5c0cc23b",
+      "core": false,
+      "record_count": 52,
+      "header_bytes": 2908,
+      "object_bytes": 16039,
+      "covered_bytes": 18947,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 18630
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 18947
+      }
+    },
+    {
+      "path": "Packages/editorui",
+      "version": "3.0",
+      "bytes": 222,
+      "sha256": "1f7d7c535a2ff76eb328ddc0ad0b9e9126f32efb1c4f0ad075c51242520567a7",
+      "core": false,
+      "record_count": 2,
+      "header_bytes": 134,
+      "object_bytes": 88,
+      "covered_bytes": 222,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 178
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 222
+      }
+    },
+    {
+      "path": "Packages/icon",
+      "version": "3.0",
+      "bytes": 525676,
+      "sha256": "3452284f271efa4c43a3914677b054263e48bfa63f7d5b13a85fcfcb8196409a",
+      "core": false,
+      "record_count": 6865,
+      "header_bytes": 223588,
+      "object_bytes": 302088,
+      "covered_bytes": 525676,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 525632
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 525676
+      }
+    },
+    {
+      "path": "Packages/interface",
+      "version": "3.0",
+      "bytes": 68552,
+      "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f",
+      "core": false,
+      "record_count": 764,
+      "header_bytes": 29924,
+      "object_bytes": 38628,
+      "covered_bytes": 68552,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 68508
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 68552
+      }
+    },
+    {
+      "path": "Packages/Level/bgdfb_001",
+      "version": "3.0",
+      "bytes": 20185,
+      "sha256": "e0b2c51848e7d90672be8a6a9ad7bb39ab4e5ca929c3fe44a0380cce02193743",
+      "core": false,
+      "record_count": 94,
+      "header_bytes": 3693,
+      "object_bytes": 16492,
+      "covered_bytes": 20185,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 19319
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 20185
+      }
+    },
+    {
+      "path": "Packages/Level/bkfb_01",
+      "version": "3.0",
+      "bytes": 5052,
+      "sha256": "16b7d3bf06f4491da5c41da1593abd5aebf410fa227d7bf47ec6ec1d3e4d8b96",
+      "core": false,
+      "record_count": 8,
+      "header_bytes": 338,
+      "object_bytes": 4714,
+      "covered_bytes": 5052,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2744
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 5052
+      }
+    },
+    {
+      "path": "Packages/Level/bpzd",
+      "version": "3.0",
+      "bytes": 6843,
+      "sha256": "b48773f6e44d1e5756fb2192f52f2673a71ef99548a59ae826a48d1f10f8ba3a",
+      "core": false,
+      "record_count": 18,
+      "header_bytes": 638,
+      "object_bytes": 6205,
+      "covered_bytes": 6843,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 6659
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 6843
+      }
+    },
+    {
+      "path": "Packages/Level/bqg2",
+      "version": "3.0",
+      "bytes": 5677,
+      "sha256": "65cdce1c7589060929ec873a17150fa79b0c1f0cd12dfa19b8369bcfa6eeac49",
+      "core": false,
+      "record_count": 12,
+      "header_bytes": 356,
+      "object_bytes": 5321,
+      "covered_bytes": 5677,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 5557
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 5677
+      }
+    },
+    {
+      "path": "Packages/Level/bydfb",
+      "version": "2.0",
+      "bytes": 4944,
+      "sha256": "bc2e39be4f51c770dd059d3d45d38626878f80870f761939c18b413f54080e48",
+      "core": true,
+      "record_count": 12,
+      "header_bytes": 458,
+      "object_bytes": 4486,
+      "covered_bytes": 4944,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 4824
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4944
+      }
+    },
+    {
+      "path": "Packages/Level/cdrmgfb01",
+      "version": "3.0",
+      "bytes": 19720,
+      "sha256": "0a119ef29c823b24ffed42420c98d717b8affeab3b8a187b3cd79003a589934c",
+      "core": false,
+      "record_count": 65,
+      "header_bytes": 2743,
+      "object_bytes": 16977,
+      "covered_bytes": 19720,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 19504
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 19720
+      }
+    },
+    {
+      "path": "Packages/Level/chechiguofuben",
+      "version": "3.0",
+      "bytes": 4887,
+      "sha256": "54d3acbbb36244ad80648669d7c8fb7995dfca23fdc049846fdf53e37881d59c",
+      "core": false,
+      "record_count": 5,
+      "header_bytes": 252,
+      "object_bytes": 4635,
+      "covered_bytes": 4887,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2587
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4887
+      }
+    },
+    {
+      "path": "Packages/Level/dffb_001",
+      "version": "3.0",
+      "bytes": 21656,
+      "sha256": "108bb4f32ffb12e5be7c30cf28806c826b73d91abc265f64e58ed5d3f682b335",
+      "core": false,
+      "record_count": 82,
+      "header_bytes": 3126,
+      "object_bytes": 18530,
+      "covered_bytes": 21656,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 21536
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 21656
+      }
+    },
+    {
+      "path": "Packages/Level/djdl2019",
+      "version": "3.0",
+      "bytes": 109816,
+      "sha256": "532e0cf1819b606642ab678c612e1c685a8a556a87c18a52782a8440160baf7d",
+      "core": false,
+      "record_count": 459,
+      "header_bytes": 19656,
+      "object_bytes": 90160,
+      "covered_bytes": 109816,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 109653
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 109816
+      }
+    },
+    {
+      "path": "Packages/Level/dntg_02",
+      "version": "3.0",
+      "bytes": 22620,
+      "sha256": "5d505ea68650e5ec43dbddcd6e6ec07084ca445e1dd6469366557ff953035398",
+      "core": false,
+      "record_count": 90,
+      "header_bytes": 3451,
+      "object_bytes": 19169,
+      "covered_bytes": 22620,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 22427
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 22620
+      }
+    },
+    {
+      "path": "Packages/Level/dttlfb",
+      "version": "3.0",
+      "bytes": 14201,
+      "sha256": "9f2a70fc38101aba6faef70655dd92a7ec11ea0608a02772236c7972bc621480",
+      "core": false,
+      "record_count": 52,
+      "header_bytes": 2034,
+      "object_bytes": 12167,
+      "covered_bytes": 14201,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 14061
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 14201
+      }
+    },
+    {
+      "path": "Packages/Level/dzytj",
+      "version": "3.0",
+      "bytes": 23420,
+      "sha256": "3c54f258bd611a6811ce4c2b009495052f952ed0fbea7e8e3f63d0b0d03bf5ce",
+      "core": false,
+      "record_count": 67,
+      "header_bytes": 3115,
+      "object_bytes": 20305,
+      "covered_bytes": 23420,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 23280
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 23420
+      }
+    },
+    {
+      "path": "Packages/Level/ftszfb",
+      "version": "3.0",
+      "bytes": 8047,
+      "sha256": "1b8e6ef57cdefef3409119a957b77be625c244838963468703b4eaffad84059b",
+      "core": false,
+      "record_count": 26,
+      "header_bytes": 1023,
+      "object_bytes": 7024,
+      "covered_bytes": 8047,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 5745
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 8047
+      }
+    },
+    {
+      "path": "Packages/Level/gxt01fb",
+      "version": "3.0",
+      "bytes": 5954,
+      "sha256": "813ceb78574d7bb018426ba6be79c4b85e53fabad414bf69a8d29afec8d92e47",
+      "core": false,
+      "record_count": 16,
+      "header_bytes": 617,
+      "object_bytes": 5337,
+      "covered_bytes": 5954,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 5836
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 5954
+      }
+    },
+    {
+      "path": "Packages/Level/hflfb",
+      "version": "2.0",
+      "bytes": 8902,
+      "sha256": "4f024e428653bcbc6b6dae70aae527009c5ca31138f1d0ba36793ce94dc950b9",
+      "core": false,
+      "record_count": 32,
+      "header_bytes": 1219,
+      "object_bytes": 7683,
+      "covered_bytes": 8902,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 6600
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 8902
+      }
+    },
+    {
+      "path": "Packages/Level/hgs",
+      "version": "3.0",
+      "bytes": 18168,
+      "sha256": "952ec6f9c63de29dc24815f1cf7db134d4419d88e8a32c098ecbab5773e99699",
+      "core": false,
+      "record_count": 49,
+      "header_bytes": 1521,
+      "object_bytes": 16647,
+      "covered_bytes": 18168,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 14542
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 18168
+      }
+    },
+    {
+      "path": "Packages/Level/hgsdzc_001",
+      "version": "3.0",
+      "bytes": 126988,
+      "sha256": "8aae59a426758013276b6afda1cd992372ad86f33fb845210f9041cdfd0567f9",
+      "core": false,
+      "record_count": 507,
+      "header_bytes": 22951,
+      "object_bytes": 104037,
+      "covered_bytes": 126988,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 123747
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 126988
+      }
+    },
+    {
+      "path": "Packages/Level/hjzjd_01",
+      "version": "3.0",
+      "bytes": 22882,
+      "sha256": "8552bdf939fd162dabe05886137091c2f30f74efdafbc255d772a386c65b2142",
+      "core": false,
+      "record_count": 93,
+      "header_bytes": 3814,
+      "object_bytes": 19068,
+      "covered_bytes": 22882,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 21724
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 22882
+      }
+    },
+    {
+      "path": "Packages/Level/hslsfb_01",
+      "version": "3.0",
+      "bytes": 7096,
+      "sha256": "6a5e30f1f7aa6c00c8b2b773ca6646f54d0b47ae8aa89917ad654b312199435f",
+      "core": false,
+      "record_count": 19,
+      "header_bytes": 803,
+      "object_bytes": 6293,
+      "covered_bytes": 7096,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 6977
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7096
+      }
+    },
+    {
+      "path": "Packages/Level/huaguoshan",
+      "version": "3.0",
+      "bytes": 32208,
+      "sha256": "c0d3e78c18619bd219f80fb2e8a45b69dec3a8a9690d730bebb0064399cf70e6",
+      "core": false,
+      "record_count": 122,
+      "header_bytes": 4407,
+      "object_bytes": 27801,
+      "covered_bytes": 32208,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 32071
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 32208
+      }
+    },
+    {
+      "path": "Packages/Level/jenszhch",
+      "version": "3.0",
+      "bytes": 20680,
+      "sha256": "7c5d21279e3159ca7c2e11013db101dec28deae379c93ba191f04e5ebc263711",
+      "core": false,
+      "record_count": 70,
+      "header_bytes": 2986,
+      "object_bytes": 17694,
+      "covered_bytes": 20680,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 18380
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 20680
+      }
+    },
+    {
+      "path": "Packages/Level/jiehunlitang001",
+      "version": "3.0",
+      "bytes": 4259,
+      "sha256": "2e4c9a22476c8cf2f6a8307d03cf0c05a31c51f26ba89983c67a919bb3148613",
+      "core": false,
+      "record_count": 6,
+      "header_bytes": 322,
+      "object_bytes": 3937,
+      "covered_bytes": 4259,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1951
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4259
+      }
+    },
+    {
+      "path": "Packages/Level/jlsfb_001",
+      "version": "3.0",
+      "bytes": 28150,
+      "sha256": "66d1c73842cc2868f1170343f604e009055e4bdfc26d8d56c8319f3038c48a02",
+      "core": false,
+      "record_count": 114,
+      "header_bytes": 4454,
+      "object_bytes": 23696,
+      "covered_bytes": 28150,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 27980
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 28150
+      }
+    },
+    {
+      "path": "Packages/Level/jltfb",
+      "version": "3.0",
+      "bytes": 50667,
+      "sha256": "3af9ddd7aeefdd5ff1a91ff081fe85972472aa3b4e107c8d3ed5b5fddd31c880",
+      "core": false,
+      "record_count": 209,
+      "header_bytes": 8373,
+      "object_bytes": 42294,
+      "covered_bytes": 50667,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 50462
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 50667
+      }
+    },
+    {
+      "path": "Packages/Level/jxfb_01",
+      "version": "3.0",
+      "bytes": 11065,
+      "sha256": "9e00dfc93d4881973f5945cd50d51e0e00e40e57593c0f30429f17fd61c0610f",
+      "core": false,
+      "record_count": 23,
+      "header_bytes": 890,
+      "object_bytes": 10175,
+      "covered_bytes": 11065,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 10899
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 11065
+      }
+    },
+    {
+      "path": "Packages/Level/jxt_01",
+      "version": "3.0",
+      "bytes": 7586,
+      "sha256": "a7ad1d13f992cd804bf88e744cc4d5e796275114fcc916eb5db6107e97e82a2b",
+      "core": false,
+      "record_count": 26,
+      "header_bytes": 956,
+      "object_bytes": 6630,
+      "covered_bytes": 7586,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 5278
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7586
+      }
+    },
+    {
+      "path": "Packages/Level/jzpsdfb",
+      "version": "3.0",
+      "bytes": 7656,
+      "sha256": "bf661d89b8783feb37ea4105fe63f3a966259411f77748a882b4caf07bd8cdc0",
+      "core": false,
+      "record_count": 26,
+      "header_bytes": 898,
+      "object_bytes": 6758,
+      "covered_bytes": 7656,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 5348
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7656
+      }
+    },
+    {
+      "path": "Packages/Level/kfjjc01",
+      "version": "3.0",
+      "bytes": 28144,
+      "sha256": "8327d14726fea49dbc8dc292ed157d947fd54e3848ed6983abc723c55777e24d",
+      "core": false,
+      "record_count": 120,
+      "header_bytes": 5285,
+      "object_bytes": 22859,
+      "covered_bytes": 28144,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 27983
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 28144
+      }
+    },
+    {
+      "path": "Packages/Level/kkd001",
+      "version": "3.0",
+      "bytes": 4433,
+      "sha256": "ce288eaddb1b0d74c6e4acfe66e53118b27319cb3d5c818dc82bff4f97b08e54",
+      "core": false,
+      "record_count": 4,
+      "header_bytes": 182,
+      "object_bytes": 4251,
+      "covered_bytes": 4433,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2125
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4433
+      }
+    },
+    {
+      "path": "Packages/Level/ldlhfb01",
+      "version": "3.0",
+      "bytes": 21270,
+      "sha256": "0483016ad1db8c101a2b4fd030b52735b20c6075f3305fabcba0c0535361f373",
+      "core": false,
+      "record_count": 77,
+      "header_bytes": 3204,
+      "object_bytes": 18066,
+      "covered_bytes": 21270,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 21059
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 21270
+      }
+    },
+    {
+      "path": "Packages/Level/lg",
+      "version": "3.0",
+      "bytes": 22739,
+      "sha256": "ea6469ec2fbda0495ca76987af2e92063a29435fd398373dc2c92530c7df3b61",
+      "core": false,
+      "record_count": 75,
+      "header_bytes": 2149,
+      "object_bytes": 20590,
+      "covered_bytes": 22739,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 20672
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 22739
+      }
+    },
+    {
+      "path": "Packages/Level/lhd_001",
+      "version": "3.0",
+      "bytes": 19305,
+      "sha256": "35e183df756c9b8a89d38c7a34a7b2c15f817abe8cd0ab8d3c510bfc2d42b871",
+      "core": false,
+      "record_count": 86,
+      "header_bytes": 3093,
+      "object_bytes": 16212,
+      "covered_bytes": 19305,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 17545
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 19305
+      }
+    },
+    {
+      "path": "Packages/Level/lmzc001",
+      "version": "3.0",
+      "bytes": 20322,
+      "sha256": "7083688c52d3084d8c4b528be0469373c14f3775c4c0f9ffb93879a1792f9a65",
+      "core": false,
+      "record_count": 81,
+      "header_bytes": 3365,
+      "object_bytes": 16957,
+      "covered_bytes": 20322,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 20163
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 20322
+      }
+    },
+    {
+      "path": "Packages/Level/mzlw001",
+      "version": "3.0",
+      "bytes": 27776,
+      "sha256": "81a4cc316c0d089a9844e0b3b297a7a00a94559c7f9c712ddb41f427c35a1ed9",
+      "core": false,
+      "record_count": 87,
+      "header_bytes": 3495,
+      "object_bytes": 24281,
+      "covered_bytes": 27776,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 27592
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 27776
+      }
+    },
+    {
+      "path": "Packages/Level/qilinshan01",
+      "version": "3.0",
+      "bytes": 39903,
+      "sha256": "bd3da87e49e85f7dfb9c202973ce95af910066561901a698d529f21dac0173ba",
+      "core": false,
+      "record_count": 168,
+      "header_bytes": 6672,
+      "object_bytes": 33231,
+      "covered_bytes": 39903,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 37382
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 39903
+      }
+    },
+    {
+      "path": "Packages/Level/qkyyp01fb",
+      "version": "3.0",
+      "bytes": 3828,
+      "sha256": "0eb24ed0c1354ddf014738e37866b12eb6e1eca29ff03c11d159f9bbc1845157",
+      "core": false,
+      "record_count": 4,
+      "header_bytes": 199,
+      "object_bytes": 3629,
+      "covered_bytes": 3828,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1520
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 3828
+      }
+    },
+    {
+      "path": "Packages/Level/qqznxyx",
+      "version": "3.0",
+      "bytes": 21404,
+      "sha256": "d206975c53bd74c1f43042b282f7484fffadf3e2fafa61d42771cdb9b12a41b5",
+      "core": false,
+      "record_count": 87,
+      "header_bytes": 3129,
+      "object_bytes": 18275,
+      "covered_bytes": 21404,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 19098
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 21404
+      }
+    },
+    {
+      "path": "Packages/Level/qswz_01",
+      "version": "3.0",
+      "bytes": 4921,
+      "sha256": "fd23c84376d6ad452be4ee7ce73d6ccc527bf6b1175a54b87ff0197244be1bfd",
+      "core": false,
+      "record_count": 6,
+      "header_bytes": 263,
+      "object_bytes": 4658,
+      "covered_bytes": 4921,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2613
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4921
+      }
+    },
+    {
+      "path": "Packages/Level/qswz_02",
+      "version": "3.0",
+      "bytes": 6339,
+      "sha256": "d594f73795449bfe18623037e75597188362d8a4184839d47387b23ab290e098",
+      "core": false,
+      "record_count": 14,
+      "header_bytes": 553,
+      "object_bytes": 5786,
+      "covered_bytes": 6339,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 6173
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 6339
+      }
+    },
+    {
+      "path": "Packages/Level/rzslfb001",
+      "version": "3.0",
+      "bytes": 11397,
+      "sha256": "a3bb24281f9f04588aea26b8925ca6ac16ff16cb4d78fcc7784302edc76479fd",
+      "core": false,
+      "record_count": 35,
+      "header_bytes": 1376,
+      "object_bytes": 10021,
+      "covered_bytes": 11397,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 8876
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 11397
+      }
+    },
+    {
+      "path": "Packages/Level/sanda",
+      "version": "3.0",
+      "bytes": 55086,
+      "sha256": "ad38fc88bd03845928cfbd91651f1b184ff8c2865159e2503357fcb7b71ab08d",
+      "core": false,
+      "record_count": 208,
+      "header_bytes": 6525,
+      "object_bytes": 48561,
+      "covered_bytes": 55086,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 54952
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 55086
+      }
+    },
+    {
+      "path": "Packages/Level/sanhuan_001",
+      "version": "3.0",
+      "bytes": 4733,
+      "sha256": "d4cdf24b91f8805518b5b0c315404633dc86a5ac3c781fc6af1ff568d82ba2d1",
+      "core": false,
+      "record_count": 10,
+      "header_bytes": 426,
+      "object_bytes": 4307,
+      "covered_bytes": 4733,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 4593
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4733
+      }
+    },
+    {
+      "path": "Packages/Level/sanhuan_003",
+      "version": "3.0",
+      "bytes": 124007,
+      "sha256": "5250a7d9bae6250e55ebdcd0cfcc4e2a82ab7d63c9de7b8e30ff0fc9417f1c87",
+      "core": false,
+      "record_count": 448,
+      "header_bytes": 36941,
+      "object_bytes": 87066,
+      "covered_bytes": 124007,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 123805
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 124007
+      }
+    },
+    {
+      "path": "Packages/Level/shwg",
+      "version": "3.0",
+      "bytes": 22930,
+      "sha256": "db39dcab825e18445adc129c44309cd55d95aa03b45f2a395573a9ad6d977446",
+      "core": false,
+      "record_count": 66,
+      "header_bytes": 2752,
+      "object_bytes": 20178,
+      "covered_bytes": 22930,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 20306
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 22930
+      }
+    },
+    {
+      "path": "Packages/Level/smzc",
+      "version": "3.0",
+      "bytes": 4494,
+      "sha256": "b100e85349f2fde94a4cd9ef022b4fef264a85dcd2b3feff864f42839c92279a",
+      "core": false,
+      "record_count": 7,
+      "header_bytes": 290,
+      "object_bytes": 4204,
+      "covered_bytes": 4494,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2190
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4494
+      }
+    },
+    {
+      "path": "Packages/Level/srsxsdfb01",
+      "version": "3.0",
+      "bytes": 36439,
+      "sha256": "f1aa954729ab4d4f3917014df53c6b91a3c9989d4cb5f694aa542305b87d5041",
+      "core": false,
+      "record_count": 134,
+      "header_bytes": 5813,
+      "object_bytes": 30626,
+      "covered_bytes": 36439,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 36205
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 36439
+      }
+    },
+    {
+      "path": "Packages/Level/sszfb01",
+      "version": "3.0",
+      "bytes": 20042,
+      "sha256": "e82d7ead14a26f1bb5d91c048cf0a98018f267aad7085b3aded2cb8fb504aea5",
+      "core": false,
+      "record_count": 69,
+      "header_bytes": 3003,
+      "object_bytes": 17039,
+      "covered_bytes": 20042,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 19012
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 20042
+      }
+    },
+    {
+      "path": "Packages/Level/stsfb",
+      "version": "3.0",
+      "bytes": 12014,
+      "sha256": "e3baa20909c2713a62502d0d48b9afb9c8b270c0231be0bf8338dc7baa8cca18",
+      "core": false,
+      "record_count": 43,
+      "header_bytes": 1613,
+      "object_bytes": 10401,
+      "covered_bytes": 12014,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 11810
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 12014
+      }
+    },
+    {
+      "path": "Packages/Level/twjjcfb",
+      "version": "3.0",
+      "bytes": 14424,
+      "sha256": "f8ae9ece28b5ed932be08bb73bde64c6ed4780b53992598d956198e31fbdc617",
+      "core": false,
+      "record_count": 51,
+      "header_bytes": 2076,
+      "object_bytes": 12348,
+      "covered_bytes": 14424,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 13394
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 14424
+      }
+    },
+    {
+      "path": "Packages/Level/tyhj01",
+      "version": "3.0",
+      "bytes": 108585,
+      "sha256": "b51964387a11750b6216cf099c9c728f4dc4510d94b1b9a477402d76800f3ab0",
+      "core": false,
+      "record_count": 481,
+      "header_bytes": 20748,
+      "object_bytes": 87837,
+      "covered_bytes": 108585,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 108414
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 108585
+      }
+    },
+    {
+      "path": "Packages/Level/world",
+      "version": "3.0",
+      "bytes": 2067098,
+      "sha256": "281bc9f9d51ed435e49587bff25b84489e40ffd9273ec4ae5bb202d443f70d31",
+      "core": true,
+      "record_count": 8816,
+      "header_bytes": 318188,
+      "object_bytes": 1748910,
+      "covered_bytes": 2067098,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2066878
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 2067098
+      }
+    },
+    {
+      "path": "Packages/Level/wudidong",
+      "version": "3.0",
+      "bytes": 14355,
+      "sha256": "c7d62ad56fa59f211874a362145859d63c210c59975dfd94cf36ef351716ac4b",
+      "core": false,
+      "record_count": 55,
+      "header_bytes": 1883,
+      "object_bytes": 12472,
+      "covered_bytes": 14355,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 14170
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 14355
+      }
+    },
+    {
+      "path": "Packages/Level/wzgfb",
+      "version": "3.0",
+      "bytes": 6284,
+      "sha256": "96d1732032c1fbaf198dca84a65174abfe6c8e8a18022e0f743356bb08c5fd0b",
+      "core": false,
+      "record_count": 15,
+      "header_bytes": 490,
+      "object_bytes": 5794,
+      "covered_bytes": 6284,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 3976
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 6284
+      }
+    },
+    {
+      "path": "Packages/Level/wzgfb_02",
+      "version": "3.0",
+      "bytes": 27090,
+      "sha256": "bf6721064c7f7b1e02ddb5cb6257a9dec5064df2c03ab7084e9cdb7827beabbf",
+      "core": false,
+      "record_count": 99,
+      "header_bytes": 3902,
+      "object_bytes": 23188,
+      "covered_bytes": 27090,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 26927
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 27090
+      }
+    },
+    {
+      "path": "Packages/Level/xccgfb_002",
+      "version": "3.0",
+      "bytes": 82353,
+      "sha256": "6911eb917cd8b67c7dfdb4b5621c7cc2daaeade4a6e5332ba8c9b45a5a5e1a04",
+      "core": false,
+      "record_count": 250,
+      "header_bytes": 14344,
+      "object_bytes": 68009,
+      "covered_bytes": 82353,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 82174
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 82353
+      }
+    },
+    {
+      "path": "Packages/Level/xhltlfb",
+      "version": "3.0",
+      "bytes": 6513,
+      "sha256": "396565d23d14168bb11b01b526dc3e140afd616153c358bff5f12d0dcf7e0229",
+      "core": false,
+      "record_count": 16,
+      "header_bytes": 684,
+      "object_bytes": 5829,
+      "covered_bytes": 6513,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 4207
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 6513
+      }
+    },
+    {
+      "path": "Packages/Level/xhud001",
+      "version": "3.0",
+      "bytes": 12123,
+      "sha256": "8af088de7f9be46a1757e8819976b0123c53c42f3dc3614520e89768b5bfce4f",
+      "core": false,
+      "record_count": 30,
+      "header_bytes": 1110,
+      "object_bytes": 11013,
+      "covered_bytes": 12123,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 9815
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 12123
+      }
+    },
+    {
+      "path": "Packages/Level/xinxuan",
+      "version": "3.0",
+      "bytes": 22096,
+      "sha256": "b0a493edd804bbe0c131514987deecf914e685e7c70b5ed09473fb047294e549",
+      "core": false,
+      "record_count": 82,
+      "header_bytes": 2691,
+      "object_bytes": 19405,
+      "covered_bytes": 22096,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 21904
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 22096
+      }
+    },
+    {
+      "path": "Packages/Level/xpl001",
+      "version": "3.0",
+      "bytes": 26268,
+      "sha256": "a74eeaaac6e222f6b0f01c912a2d90e9d2d7f0f8672ce51688bf8e728f14f0f8",
+      "core": false,
+      "record_count": 102,
+      "header_bytes": 3723,
+      "object_bytes": 22545,
+      "covered_bytes": 26268,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 23640
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 26268
+      }
+    },
+    {
+      "path": "Packages/Level/xwzgfb_001",
+      "version": "3.0",
+      "bytes": 3330,
+      "sha256": "e0cecf884079ad04d7b2339fed1d815a85a012a94aa774f36860dc7bf5c40c29",
+      "core": false,
+      "record_count": 2,
+      "header_bytes": 128,
+      "object_bytes": 3202,
+      "covered_bytes": 3330,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1028
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 3330
+      }
+    },
+    {
+      "path": "Packages/Level/xydong01fb",
+      "version": "3.0",
+      "bytes": 7822,
+      "sha256": "de8fe17a2d44925691da14c6a077044eac46ecc9c5492833c5430ec71e52b817",
+      "core": false,
+      "record_count": 23,
+      "header_bytes": 919,
+      "object_bytes": 6903,
+      "covered_bytes": 7822,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 7663
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7822
+      }
+    },
+    {
+      "path": "Packages/Level/xyxeg01fb",
+      "version": "3.0",
+      "bytes": 78827,
+      "sha256": "26f103df010ed8a59d9b7dd418f1be28985c56d28c413ab93028044d9bc9c6c8",
+      "core": false,
+      "record_count": 290,
+      "header_bytes": 12149,
+      "object_bytes": 66678,
+      "covered_bytes": 78827,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 78623
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 78827
+      }
+    },
+    {
+      "path": "Packages/Level/yanmgfb001",
+      "version": "3.0",
+      "bytes": 17328,
+      "sha256": "82557ce5dc8a30518530373d8cb37b80d5d75df2544ce8a164926324cd428c68",
+      "core": false,
+      "record_count": 63,
+      "header_bytes": 2729,
+      "object_bytes": 14599,
+      "covered_bytes": 17328,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 17124
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 17328
+      }
+    },
+    {
+      "path": "Packages/Level/ycj001",
+      "version": "3.0",
+      "bytes": 7649,
+      "sha256": "fd126132e9337a7c128ac01c1f21efcc44c2e1ef58213504c510831d4cd0f1d7",
+      "core": false,
+      "record_count": 18,
+      "header_bytes": 667,
+      "object_bytes": 6982,
+      "covered_bytes": 7649,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 7428
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7649
+      }
+    },
+    {
+      "path": "Packages/Level/ymj001",
+      "version": "3.0",
+      "bytes": 34576,
+      "sha256": "b5a1fba0f4e2766d10637a22269de94067fc7da903b4f76cc553f85e0617f0e2",
+      "core": false,
+      "record_count": 124,
+      "header_bytes": 4408,
+      "object_bytes": 30168,
+      "covered_bytes": 34576,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 31952
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 34576
+      }
+    },
+    {
+      "path": "Packages/Level/yunjiandong001",
+      "version": "3.0",
+      "bytes": 4882,
+      "sha256": "03e8772f375b1c5878d65b31377a9aa3b1f5a7ac3e7adee74b250ab8782bfa62",
+      "core": false,
+      "record_count": 10,
+      "header_bytes": 446,
+      "object_bytes": 4436,
+      "covered_bytes": 4882,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2574
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4882
+      }
+    },
+    {
+      "path": "Packages/Level/yyp_01",
+      "version": "3.0",
+      "bytes": 5248,
+      "sha256": "c913e7975ef4a4698b0958a78c8241fe6541afd0432961f5b38debb4444f6cd0",
+      "core": false,
+      "record_count": 13,
+      "header_bytes": 478,
+      "object_bytes": 4770,
+      "covered_bytes": 5248,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2928
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 5248
+      }
+    },
+    {
+      "path": "Packages/Level/yzg",
+      "version": "3.0",
+      "bytes": 14676,
+      "sha256": "87494b9207f88de74187ad5563ddb6f092b5c03c8396dd2832d6bcdeb01f2aae",
+      "core": false,
+      "record_count": 48,
+      "header_bytes": 1925,
+      "object_bytes": 12751,
+      "covered_bytes": 14676,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 13091
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 14676
+      }
+    },
+    {
+      "path": "Packages/Level/zhjw",
+      "version": "3.0",
+      "bytes": 28809,
+      "sha256": "f498d554a2a1efb086105452b22596809daf0e14714f7d1a2c558f99ba23ceee",
+      "core": false,
+      "record_count": 97,
+      "header_bytes": 3593,
+      "object_bytes": 25216,
+      "covered_bytes": 28809,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 22935
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 28809
+      }
+    },
+    {
+      "path": "Packages/Level/zjhl_001",
+      "version": "3.0",
+      "bytes": 11629,
+      "sha256": "2568a377e9dff44630456892641836afccf6dde65e5503828632d782b0a9f0ad",
+      "core": false,
+      "record_count": 42,
+      "header_bytes": 1465,
+      "object_bytes": 10164,
+      "covered_bytes": 11629,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 10620
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 11629
+      }
+    },
+    {
+      "path": "Packages/Level/zyhsz",
+      "version": "3.0",
+      "bytes": 22720,
+      "sha256": "06c15b13d18fee589b8d0bac3dec2a065f0a7c4bcc97b95199cd1b80dae5fb1f",
+      "core": false,
+      "record_count": 87,
+      "header_bytes": 4168,
+      "object_bytes": 18552,
+      "covered_bytes": 22720,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 22532
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 22720
+      }
+    },
+    {
+      "path": "Packages/lvlparticle",
+      "version": "3.0",
+      "bytes": 14353,
+      "sha256": "a34f2f096fc0c1968c0c78620faa758f8da409569a856412fb53740bda692bae",
+      "core": false,
+      "record_count": 14,
+      "header_bytes": 673,
+      "object_bytes": 13680,
+      "covered_bytes": 14353,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 12992
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 14353
+      }
+    },
+    {
+      "path": "Packages/map",
+      "version": "3.0",
+      "bytes": 10859,
+      "sha256": "b81b616a2b60c0da35ec854c331f37f269a601e587f53eccb3aff9285f7af411",
+      "core": false,
+      "record_count": 148,
+      "header_bytes": 4305,
+      "object_bytes": 6554,
+      "covered_bytes": 10859,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 10815
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 10859
+      }
+    },
+    {
+      "path": "Packages/Material/matchar",
+      "version": "3.0",
+      "bytes": 330574,
+      "sha256": "bbe9c875db12d6fa69439a4df23ae85fec88fa7c86d19b35956f611033ad9fe5",
+      "core": true,
+      "record_count": 3490,
+      "header_bytes": 171198,
+      "object_bytes": 159376,
+      "covered_bytes": 330574,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 330532
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 330574
+      }
+    },
+    {
+      "path": "Packages/Material/matnpc",
+      "version": "3.0",
+      "bytes": 153594,
+      "sha256": "bc897b05783a3671f450079a7d7af562fd85ff47e97aa1352a27d92155ed5186",
+      "core": false,
+      "record_count": 1611,
+      "header_bytes": 78369,
+      "object_bytes": 75225,
+      "covered_bytes": 153594,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 153529
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 153594
+      }
+    },
+    {
+      "path": "Packages/Material/matnpc2",
+      "version": "3.0",
+      "bytes": 1392,
+      "sha256": "ab0b8e7225abe7262f9af44f74c3425f77b511fd80720092591bb105b0c40dd2",
+      "core": false,
+      "record_count": 15,
+      "header_bytes": 773,
+      "object_bytes": 619,
+      "covered_bytes": 1392,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1349
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 1392
+      }
+    },
+    {
+      "path": "Packages/Material/matnpc3",
+      "version": "3.0",
+      "bytes": 9081,
+      "sha256": "5989cb818b5de845bc4a9006558a035c14a62eb25b0855de521ff265bb498e38",
+      "core": false,
+      "record_count": 98,
+      "header_bytes": 4931,
+      "object_bytes": 4150,
+      "covered_bytes": 9081,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 9048
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 9081
+      }
+    },
+    {
+      "path": "Packages/Material/matparticle",
+      "version": "3.0",
+      "bytes": 1334,
+      "sha256": "dadc1c690d0210cf0fd6c996ed93a3246584e00d98385a71c2a9272a6dd05d95",
+      "core": false,
+      "record_count": 13,
+      "header_bytes": 738,
+      "object_bytes": 596,
+      "covered_bytes": 1334,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1287
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 1334
+      }
+    },
+    {
+      "path": "Packages/Material/tempfile.2.tmp",
+      "version": "2.0",
+      "bytes": 131534,
+      "sha256": "d2dc5b088264c6b716a65f83d0aad4bbe9ed184ecfdc020f966d870fa1da1a69",
+      "core": false,
+      "record_count": 1378,
+      "header_bytes": 66664,
+      "object_bytes": 64870,
+      "covered_bytes": 131534,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 131493
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 131534
+      }
+    },
+    {
+      "path": "Packages/Material/tempfile.3.tmp",
+      "version": "2.0",
+      "bytes": 132588,
+      "sha256": "8af94b7661502f293cd447fe77a4a6341fe9549c9b85dcf0666adc4dbbb9e224",
+      "core": false,
+      "record_count": 1389,
+      "header_bytes": 67226,
+      "object_bytes": 65362,
+      "covered_bytes": 132588,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 132547
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 132588
+      }
+    },
+    {
+      "path": "Packages/Material/tempfile.4.tmp",
+      "version": "2.0",
+      "bytes": 202691,
+      "sha256": "7129f0753ecb03709722d64451511c546ffbe8fb3266ce220e5d6e41abf00054",
+      "core": false,
+      "record_count": 2162,
+      "header_bytes": 105007,
+      "object_bytes": 97684,
+      "covered_bytes": 202691,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 202649
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 202691
+      }
+    },
+    {
+      "path": "Packages/Material/tempfile.5.tmp",
+      "version": "2.0",
+      "bytes": 213083,
+      "sha256": "742e2b02f6834837fdd36faaf88506695b0d44ecd9999cfc8a284bb4a76acafe",
+      "core": true,
+      "record_count": 2274,
+      "header_bytes": 110595,
+      "object_bytes": 102488,
+      "covered_bytes": 213083,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 213041
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 213083
+      }
+    },
+    {
+      "path": "Packages/Material/tempfile.tmp",
+      "version": "2.0",
+      "bytes": 184117,
+      "sha256": "b559a7df8ad8e39c53ad877606d2e7abe26d9c468993dd2373bc3d71c2911e5a",
+      "core": false,
+      "record_count": 1960,
+      "header_bytes": 95013,
+      "object_bytes": 89104,
+      "covered_bytes": 184117,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 184075
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 184117
+      }
+    },
+    {
+      "path": "Packages/matitem",
+      "version": "3.0",
+      "bytes": 10790,
+      "sha256": "7b009a6de5ceaaa0bc56a91500c35f651b38ec6efdc6591ae76431ce1e63bce3",
+      "core": false,
+      "record_count": 116,
+      "header_bytes": 5791,
+      "object_bytes": 4999,
+      "covered_bytes": 10790,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 10731
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 10790
+      }
+    },
+    {
+      "path": "Packages/newscenc",
+      "version": "3.0",
+      "bytes": 43554,
+      "sha256": "79bf6e339149b9a37535d6d5c92e5a4c09b5737072be1ac9fe21681630f8d433",
+      "core": false,
+      "record_count": 237,
+      "header_bytes": 11584,
+      "object_bytes": 31970,
+      "covered_bytes": 43554,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 43501
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 43554
+      }
+    },
+    {
+      "path": "Packages/particle",
+      "version": "3.0",
+      "bytes": 3435518,
+      "sha256": "2e74819ee5eb665b5298710c06ea73de5016909535dee0ad388b7c194c6bd3b9",
+      "core": false,
+      "record_count": 2393,
+      "header_bytes": 111707,
+      "object_bytes": 3323811,
+      "covered_bytes": 3435518,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 3434470
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 3435518
+      }
+    },
+    {
+      "path": "Packages/particle01",
+      "version": "3.0",
+      "bytes": 5338675,
+      "sha256": "a08c5a0a792e6abca389bf34c0d6458a6c0ee41c58776ab3249ed85981547f30",
+      "core": true,
+      "record_count": 5312,
+      "header_bytes": 214279,
+      "object_bytes": 5124396,
+      "covered_bytes": 5338675,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 5338098
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 5338675
+      }
+    },
+    {
+      "path": "Packages/particle04",
+      "version": "3.0",
+      "bytes": 1837511,
+      "sha256": "fa2103897af8ec05e20ff69f6b74218889c8b205ae10f3c87385c1214b0496a5",
+      "core": false,
+      "record_count": 1398,
+      "header_bytes": 54515,
+      "object_bytes": 1782996,
+      "covered_bytes": 1837511,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1835975
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 1837511
+      }
+    },
+    {
+      "path": "Packages/particle05",
+      "version": "3.0",
+      "bytes": 49459,
+      "sha256": "8947b3eedd37f2a68ab15551f039532624d578b207ec17e495b344e3359d1d25",
+      "core": false,
+      "record_count": 99,
+      "header_bytes": 4862,
+      "object_bytes": 44597,
+      "covered_bytes": 49459,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 49300
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 49459
+      }
+    },
+    {
+      "path": "Packages/particle06",
+      "version": "3.0",
+      "bytes": 574941,
+      "sha256": "c3684928fb21d76f10dd75e334860529ce327172d8109bddaad68de7a7472730",
+      "core": false,
+      "record_count": 871,
+      "header_bytes": 41454,
+      "object_bytes": 533487,
+      "covered_bytes": 574941,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 574353
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 574941
+      }
+    },
+    {
+      "path": "Packages/shopicon",
+      "version": "3.0",
+      "bytes": 188157,
+      "sha256": "1b44ecb957b7cee41839ef96c7bc1faedc4ad2471c7d720dfbd46ffd638f1652",
+      "core": false,
+      "record_count": 2340,
+      "header_bytes": 85197,
+      "object_bytes": 102960,
+      "covered_bytes": 188157,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 188113
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 188157
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/scene_skel",
+      "version": "3.0",
+      "bytes": 227797,
+      "sha256": "d587ab0c921dd28b41f58076d32229b674f4ac64dd92e1d2a96309599c2b8267",
+      "core": false,
+      "record_count": 66,
+      "header_bytes": 3765,
+      "object_bytes": 224032,
+      "covered_bytes": 227797,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 227718
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 227797
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/skchar",
+      "version": "3.0",
+      "bytes": 281615,
+      "sha256": "0867a016dd0b2a75a35d453ffe2242ffeb5329d003de61ba9b121dcebdba10e7",
+      "core": false,
+      "record_count": 1530,
+      "header_bytes": 69741,
+      "object_bytes": 211874,
+      "covered_bytes": 281615,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 281535
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 281615
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/sknpc",
+      "version": "3.0",
+      "bytes": 13520637,
+      "sha256": "78e4cfc332369b69ce5f838be0623c310177b876ca95b6674300db7171039d26",
+      "core": true,
+      "record_count": 10726,
+      "header_bytes": 593956,
+      "object_bytes": 12926681,
+      "covered_bytes": 13520637,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 13520562
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 13520637
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/sknpc2",
+      "version": "3.0",
+      "bytes": 229950,
+      "sha256": "c20375f50c0d47185fdc6c04d8a8f97874f2dd79ef48587c3208e4f6647bbdcb",
+      "core": false,
+      "record_count": 181,
+      "header_bytes": 9569,
+      "object_bytes": 220381,
+      "covered_bytes": 229950,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 229875
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 229950
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/sknpc3",
+      "version": "3.0",
+      "bytes": 423017,
+      "sha256": "b1a0fe17239974c36cc0ef8cc8f7fcd85b2e0184d44819cf4aecdbe64f08863a",
+      "core": false,
+      "record_count": 218,
+      "header_bytes": 12055,
+      "object_bytes": 410962,
+      "covered_bytes": 423017,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 422938
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 423017
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/skparticle",
+      "version": "3.0",
+      "bytes": 16049,
+      "sha256": "8ae954eec0bc6dd5bbec4fe70256b94c75d0dc184bddabb1d73658700f786ebb",
+      "core": false,
+      "record_count": 17,
+      "header_bytes": 1006,
+      "object_bytes": 15043,
+      "covered_bytes": 16049,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 16020
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 16049
+      }
+    },
+    {
+      "path": "Packages/SkelMesh/tempfile.tmp",
+      "version": "2.0",
+      "bytes": 274861,
+      "sha256": "286c3d82515762e2c6eb0fca47a2f1bb0ee920875b11fa4f673843c3a42ab663",
+      "core": true,
+      "record_count": 1510,
+      "header_bytes": 68777,
+      "object_bytes": 206084,
+      "covered_bytes": 274861,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 274781
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 274861
+      }
+    },
+    {
+      "path": "Packages/skelsnd",
+      "version": "3.0",
+      "bytes": 69949,
+      "sha256": "51a3d412fe8cfd768a75851ac00302a0615aa38c2a0ff27fc18f135cbd9ff7e9",
+      "core": false,
+      "record_count": 803,
+      "header_bytes": 38761,
+      "object_bytes": 31188,
+      "covered_bytes": 69949,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 69824
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 69949
+      }
+    },
+    {
+      "path": "Packages/sound",
+      "version": "3.0",
+      "bytes": 18184,
+      "sha256": "615738eb465e36510ca7e067435533f68c711082bc91d5264cd909752a6f0d48",
+      "core": false,
+      "record_count": 450,
+      "header_bytes": 17284,
+      "object_bytes": 900,
+      "covered_bytes": 18184,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 18182
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 18184
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/npcsmitem",
+      "version": "3.0",
+      "bytes": 16894,
+      "sha256": "66f4459cf2d0d98008faac9b852a9607cd49c3c6eb74312e79776ab19137f990",
+      "core": false,
+      "record_count": 92,
+      "header_bytes": 4867,
+      "object_bytes": 12027,
+      "covered_bytes": 16894,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 16635
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 16894
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene01",
+      "version": "3.0",
+      "bytes": 25414,
+      "sha256": "2a0086fc0596078f532dbeba11ca48371ec1b0077d315e6ec8ca7da839007d88",
+      "core": false,
+      "record_count": 157,
+      "header_bytes": 7809,
+      "object_bytes": 17605,
+      "covered_bytes": 25414,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 25155
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 25414
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene02",
+      "version": "3.0",
+      "bytes": 86073,
+      "sha256": "077127687b02e6b99bb9aae872512a83163f15201343d4ebfe821671635bdece",
+      "core": false,
+      "record_count": 510,
+      "header_bytes": 26774,
+      "object_bytes": 59299,
+      "covered_bytes": 86073,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 86031
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 86073
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene03",
+      "version": "3.0",
+      "bytes": 52308,
+      "sha256": "ec229718f4b3574123be9da4c7508dca450071d276d6a9ea24e55b38bf50c620",
+      "core": false,
+      "record_count": 277,
+      "header_bytes": 14470,
+      "object_bytes": 37838,
+      "covered_bytes": 52308,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 52269
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 52308
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene04",
+      "version": "3.0",
+      "bytes": 202855,
+      "sha256": "1302bba60cd9386da5764cf508d87749e0401fa56a807eac46883a650ab4bb72",
+      "core": false,
+      "record_count": 1158,
+      "header_bytes": 60679,
+      "object_bytes": 142176,
+      "covered_bytes": 202855,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 202769
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 202855
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene05",
+      "version": "3.0",
+      "bytes": 122386,
+      "sha256": "e8e9ec765d040950468d66151252b7a2a85b186895dec88ba97136fd88b18cb9",
+      "core": false,
+      "record_count": 701,
+      "header_bytes": 36875,
+      "object_bytes": 85511,
+      "covered_bytes": 122386,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 122298
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 122386
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene06",
+      "version": "3.0",
+      "bytes": 650380,
+      "sha256": "d60ee54a51ce870bd5a1538bcb085c3a573f949087491777cba39d7a1b88c3ba",
+      "core": false,
+      "record_count": 3754,
+      "header_bytes": 189251,
+      "object_bytes": 461129,
+      "covered_bytes": 650380,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 650307
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 650380
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene07",
+      "version": "3.0",
+      "bytes": 511700,
+      "sha256": "f4a2051e7028c67af4f2f5dbada8c85461405aecbbe6caf54cd3009cc9445c88",
+      "core": false,
+      "record_count": 2948,
+      "header_bytes": 150128,
+      "object_bytes": 361572,
+      "covered_bytes": 511700,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 511628
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 511700
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene08",
+      "version": "3.0",
+      "bytes": 260763,
+      "sha256": "0cb887b70752929c69686ed9927327e98da1ab007a41a2888c96f3389e13aee3",
+      "core": false,
+      "record_count": 1550,
+      "header_bytes": 78536,
+      "object_bytes": 182227,
+      "covered_bytes": 260763,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 260018
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 260763
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene09",
+      "version": "2.0",
+      "bytes": 215837,
+      "sha256": "481f0d93560eaabed09db7e2c71b35d5b0b757903378cb4c42c9d8f1beb5bd2c",
+      "core": true,
+      "record_count": 1207,
+      "header_bytes": 62570,
+      "object_bytes": 153267,
+      "covered_bytes": 215837,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 215520
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 215837
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene10",
+      "version": "3.0",
+      "bytes": 8369,
+      "sha256": "276248b7968d9c33d0e404cca68249e8505fbfb4410f39c325e38590d8b3d77f",
+      "core": false,
+      "record_count": 46,
+      "header_bytes": 2363,
+      "object_bytes": 6006,
+      "covered_bytes": 8369,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 8292
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 8369
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene11",
+      "version": "3.0",
+      "bytes": 188675,
+      "sha256": "766997a74e8d5412694ef0eecc01928c2bff5d109c6acb155e481d01200cf845",
+      "core": false,
+      "record_count": 989,
+      "header_bytes": 54596,
+      "object_bytes": 134079,
+      "covered_bytes": 188675,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 188321
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 188675
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene12",
+      "version": "3.0",
+      "bytes": 228973,
+      "sha256": "3d33009335a27d337bcaf9c9a9dcef799a315ec0217fcd0797cae3906d59a1f2",
+      "core": false,
+      "record_count": 1266,
+      "header_bytes": 67708,
+      "object_bytes": 161265,
+      "covered_bytes": 228973,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 228887
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 228973
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene13",
+      "version": "3.0",
+      "bytes": 261667,
+      "sha256": "88b59dbb2bdd7c6f8d9c42ad8895a678782e180c614906cc3ac08513cdfceefc",
+      "core": false,
+      "record_count": 1384,
+      "header_bytes": 76168,
+      "object_bytes": 185499,
+      "covered_bytes": 261667,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 261580
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 261667
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene14",
+      "version": "3.0",
+      "bytes": 185077,
+      "sha256": "d700970e7b575c19b5ffdbd2306348ab7dadd2228e461de9c176f680c83a2d49",
+      "core": false,
+      "record_count": 975,
+      "header_bytes": 51695,
+      "object_bytes": 133382,
+      "covered_bytes": 185077,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 184853
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 185077
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene15",
+      "version": "3.0",
+      "bytes": 155032,
+      "sha256": "6eaa0a14c3a8578ba9d34a4b2a902b49b3904dad745f450c9e41f76e5dd82130",
+      "core": false,
+      "record_count": 868,
+      "header_bytes": 46370,
+      "object_bytes": 108662,
+      "covered_bytes": 155032,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 154948
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 155032
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene16",
+      "version": "2.0",
+      "bytes": 42375,
+      "sha256": "f5ec26013ba90d263a2d212201f1974b22aec376e591d1579c09537c57e60744",
+      "core": false,
+      "record_count": 220,
+      "header_bytes": 12643,
+      "object_bytes": 29732,
+      "covered_bytes": 42375,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 42286
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 42375
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene17",
+      "version": "3.0",
+      "bytes": 19425,
+      "sha256": "469c65c7d6596f2f3cf3b2031c1bff863d19ff9d01a45aa91f6e95aa8daf3f78",
+      "core": false,
+      "record_count": 94,
+      "header_bytes": 5197,
+      "object_bytes": 14228,
+      "covered_bytes": 19425,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 19150
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 19425
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene18",
+      "version": "3.0",
+      "bytes": 81687,
+      "sha256": "cebedf33a054fdbda58efb0b6b3638007bc2be21ddb8cf99493de3a522b66301",
+      "core": false,
+      "record_count": 478,
+      "header_bytes": 24250,
+      "object_bytes": 57437,
+      "covered_bytes": 81687,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 81612
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 81687
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/scene19",
+      "version": "3.0",
+      "bytes": 7291,
+      "sha256": "8f34cd9b9eb44e59b63b0915351f81e2118508d3ae4ba8b06da14382d8cdf5c2",
+      "core": false,
+      "record_count": 46,
+      "header_bytes": 2497,
+      "object_bytes": 4794,
+      "covered_bytes": 7291,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 7022
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7291
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/smitem",
+      "version": "3.0",
+      "bytes": 189012,
+      "sha256": "4000258241f1f0d8a686232b4a0b233d5567f9090f10f7c2d73aad111f4639d7",
+      "core": false,
+      "record_count": 922,
+      "header_bytes": 45986,
+      "object_bytes": 143026,
+      "covered_bytes": 189012,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 188757
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 189012
+      }
+    },
+    {
+      "path": "Packages/StaticMesh/tempfile.tmp",
+      "version": "2.0",
+      "bytes": 311527,
+      "sha256": "ab398a0b38204de106f77c5440ffd63edd50dd89d6a4740cbdad0c1df8dbdebf",
+      "core": false,
+      "record_count": 1819,
+      "header_bytes": 91440,
+      "object_bytes": 220087,
+      "covered_bytes": 311527,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 311318
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 311527
+      }
+    },
+    {
+      "path": "Packages/system",
+      "version": "3.0",
+      "bytes": 4542,
+      "sha256": "1c2abc325ac783aadb73a8a4769ced9a8d8869de6a24ac02ee3a68d3559a50b0",
+      "core": false,
+      "record_count": 44,
+      "header_bytes": 1571,
+      "object_bytes": 2971,
+      "covered_bytes": 4542,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 4498
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 4542
+      }
+    },
+    {
+      "path": "Packages/tempfile.2.tmp",
+      "version": "2.0",
+      "bytes": 117476,
+      "sha256": "0677db226bd233b604d831b90d2c57022c5be3991f3da8db359a36adb854ad5c",
+      "core": false,
+      "record_count": 1463,
+      "header_bytes": 53104,
+      "object_bytes": 64372,
+      "covered_bytes": 117476,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 117432
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 117476
+      }
+    },
+    {
+      "path": "Packages/tempfile.3.tmp",
+      "version": "2.0",
+      "bytes": 117716,
+      "sha256": "53687d0095eb60f40ef3c98a8a339ed75189e216eaafbd29fbb81e9854194d92",
+      "core": false,
+      "record_count": 1466,
+      "header_bytes": 53212,
+      "object_bytes": 64504,
+      "covered_bytes": 117716,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 117672
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 117716
+      }
+    },
+    {
+      "path": "Packages/tempfile.4.tmp",
+      "version": "2.0",
+      "bytes": 125236,
+      "sha256": "39e7fa99b7196d827920ae5b1010076b2ec134a23a31f9085c08074f268047fd",
+      "core": false,
+      "record_count": 1560,
+      "header_bytes": 56596,
+      "object_bytes": 68640,
+      "covered_bytes": 125236,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 125192
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 125236
+      }
+    },
+    {
+      "path": "Packages/tempfile.5.tmp",
+      "version": "2.0",
+      "bytes": 8793,
+      "sha256": "7951fc97288d0a78e95634fbd82ddaba9bcb49b2c0a09c7bca445641d3e20e63",
+      "core": false,
+      "record_count": 120,
+      "header_bytes": 3499,
+      "object_bytes": 5294,
+      "covered_bytes": 8793,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 8749
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 8793
+      }
+    },
+    {
+      "path": "Packages/tempfile.6.tmp",
+      "version": "2.0",
+      "bytes": 131476,
+      "sha256": "e90da93f33daaa339ea0b95b1da2f1f4337fa32d4ac4dd93447e791456b99d41",
+      "core": false,
+      "record_count": 1638,
+      "header_bytes": 59404,
+      "object_bytes": 72072,
+      "covered_bytes": 131476,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 131432
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 131476
+      }
+    },
+    {
+      "path": "Packages/tempfile.7.tmp",
+      "version": "2.0",
+      "bytes": 134516,
+      "sha256": "c4e47b1d62bf730b53b0f1ecca9b979005082078f0339653f5e9ce0cfd23e71c",
+      "core": false,
+      "record_count": 1676,
+      "header_bytes": 60772,
+      "object_bytes": 73744,
+      "covered_bytes": 134516,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 134472
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 134516
+      }
+    },
+    {
+      "path": "Packages/tempfile.tmp",
+      "version": "2.0",
+      "bytes": 3081249,
+      "sha256": "d3af9fb45328843257f4f76701b7c016367923aa8e391ff9d115cc9d485ab034",
+      "core": true,
+      "record_count": 2169,
+      "header_bytes": 99969,
+      "object_bytes": 2981280,
+      "covered_bytes": 3081249,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 3080210
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 3081249
+      }
+    },
+    {
+      "path": "Packages/Texture/gcursor",
+      "version": "3.0",
+      "bytes": 2319,
+      "sha256": "b93e53f68c69f8cdfe11ff06d25fb927ce917c14f1940d35be22f8751fdf5329",
+      "core": false,
+      "record_count": 28,
+      "header_bytes": 1073,
+      "object_bytes": 1246,
+      "covered_bytes": 2319,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2275
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 2319
+      }
+    },
+    {
+      "path": "Packages/Texture/tailtexture",
+      "version": "3.0",
+      "bytes": 1126,
+      "sha256": "07fd01ad1d52064df57a94ccee7f54cb1a3ed8416bcfe39db102df40bba99a02",
+      "core": false,
+      "record_count": 10,
+      "header_bytes": 546,
+      "object_bytes": 580,
+      "covered_bytes": 1126,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1068
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 1126
+      }
+    },
+    {
+      "path": "Packages/Texture/tempfile.2.tmp",
+      "version": "2.0",
+      "bytes": 154405,
+      "sha256": "96af94a5637fc36aac5e7bb2de537101cb3aa373dea5de380bb9b32374cac4fa",
+      "core": false,
+      "record_count": 1456,
+      "header_bytes": 69957,
+      "object_bytes": 84448,
+      "covered_bytes": 154405,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 154347
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 154405
+      }
+    },
+    {
+      "path": "Packages/Texture/tempfile.tmp",
+      "version": "1.0",
+      "bytes": 319813,
+      "sha256": "11804bcbd1c28a4243670f519cee12d6b8fe7f46ebfaf8033e43b0509f9bc0e6",
+      "core": true,
+      "record_count": 3004,
+      "header_bytes": 145581,
+      "object_bytes": 174232,
+      "covered_bytes": 319813,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 319755
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 319813
+      }
+    },
+    {
+      "path": "Packages/Texture/tex_terr",
+      "version": "3.0",
+      "bytes": 7172,
+      "sha256": "d728b9cf8519f10e16552776648e45c4e49521d215694544fb8ff8a883e33a28",
+      "core": false,
+      "record_count": 75,
+      "header_bytes": 2822,
+      "object_bytes": 4350,
+      "covered_bytes": 7172,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 7114
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 7172
+      }
+    },
+    {
+      "path": "Packages/Texture/texchar",
+      "version": "3.0",
+      "bytes": 431138,
+      "sha256": "1117d8b9f6c0f2e81295c13b354f5ea7fa76a14f1bcac88cc60c58fc20a4a167",
+      "core": false,
+      "record_count": 4102,
+      "header_bytes": 193334,
+      "object_bytes": 237804,
+      "covered_bytes": 431138,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 431080
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 431138
+      }
+    },
+    {
+      "path": "Packages/Texture/texeditor",
+      "version": "3.0",
+      "bytes": 155,
+      "sha256": "a03afb1c5d5fa60234ad3fe54d012f8fa14bf1b81d16db3324222289c070647b",
+      "core": true,
+      "record_count": 1,
+      "header_bytes": 97,
+      "object_bytes": 58,
+      "covered_bytes": 155,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 97
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 155
+      }
+    },
+    {
+      "path": "Packages/Texture/texfestival",
+      "version": "3.0",
+      "bytes": 161,
+      "sha256": "335258929fa9f8a109d5ef1b023440d038af741f3462e2eee161f23e4e6f48af",
+      "core": false,
+      "record_count": 1,
+      "header_bytes": 103,
+      "object_bytes": 58,
+      "covered_bytes": 161,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 103
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 161
+      }
+    },
+    {
+      "path": "Packages/Texture/texitem",
+      "version": "3.0",
+      "bytes": 54692,
+      "sha256": "f52b204cde2e6fdee44ad2991dbbf216ffce48133c5cd6b38de585e0f0e848a4",
+      "core": false,
+      "record_count": 521,
+      "header_bytes": 24474,
+      "object_bytes": 30218,
+      "covered_bytes": 54692,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 54634
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 54692
+      }
+    },
+    {
+      "path": "Packages/Texture/texnpc",
+      "version": "3.0",
+      "bytes": 166972,
+      "sha256": "3c7526f825b713d8cdeb546d1bb1fa594831be0a6d3a23f786a123a13b48f9b3",
+      "core": false,
+      "record_count": 1596,
+      "header_bytes": 74404,
+      "object_bytes": 92568,
+      "covered_bytes": 166972,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 166914
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 166972
+      }
+    },
+    {
+      "path": "Packages/Texture/texnpc2",
+      "version": "3.0",
+      "bytes": 1508,
+      "sha256": "ba9eae131eff804814fd1efa170aa2c30a72d96cb4ec0d9eb34698785e1fe35f",
+      "core": false,
+      "record_count": 14,
+      "header_bytes": 696,
+      "object_bytes": 812,
+      "covered_bytes": 1508,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 1450
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 1508
+      }
+    },
+    {
+      "path": "Packages/Texture/texother",
+      "version": "3.0",
+      "bytes": 11997,
+      "sha256": "f435f1a4d03a8fd8034351947d880f5d6dfa00adb26f252b31dc9edad652c190",
+      "core": false,
+      "record_count": 121,
+      "header_bytes": 4979,
+      "object_bytes": 7018,
+      "covered_bytes": 11997,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 11939
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 11997
+      }
+    },
+    {
+      "path": "Packages/Texture/texparticle",
+      "version": "3.0",
+      "bytes": 162914,
+      "sha256": "607a4f926ce977a67f5168928f54a111b0f88711c88c997eb5e067bea4da9a58",
+      "core": false,
+      "record_count": 1531,
+      "header_bytes": 74116,
+      "object_bytes": 88798,
+      "covered_bytes": 162914,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 162856
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 162914
+      }
+    },
+    {
+      "path": "Packages/Texture/texstone",
+      "version": "3.0",
+      "bytes": 695794,
+      "sha256": "350c7d5da525f8ea4490345ad4948da4c2d6d4551ee5136f9aa0ce540d147d23",
+      "core": false,
+      "record_count": 6728,
+      "header_bytes": 305580,
+      "object_bytes": 390214,
+      "covered_bytes": 695794,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 695736
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 695794
+      }
+    },
+    {
+      "path": "Packages/Texture/texwood",
+      "version": "3.0",
+      "bytes": 120294,
+      "sha256": "1cf89444bda24a7bed46f504a02a4a531e8931b07db22d8395593419722d5670",
+      "core": false,
+      "record_count": 1188,
+      "header_bytes": 51390,
+      "object_bytes": 68904,
+      "covered_bytes": 120294,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 120236
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 120294
+      }
+    },
+    {
+      "path": "Packages/UI/.svn/text-base/interface.svn-base",
+      "version": "3.0",
+      "bytes": 66606,
+      "sha256": "0f827328070fc52bdf1c8427ee3a4bafa02f65f54dd6bda98893949b08d5c799",
+      "core": false,
+      "record_count": 742,
+      "header_bytes": 29016,
+      "object_bytes": 37590,
+      "covered_bytes": 66606,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 66562
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 66606
+      }
+    },
+    {
+      "path": "Packages/UI/interface",
+      "version": "3.0",
+      "bytes": 68552,
+      "sha256": "1e75b6ae794e3be80f900e7c26c85c58469e5121776146d9e9334b6f55c47e5f",
+      "core": true,
+      "record_count": 764,
+      "header_bytes": 29924,
+      "object_bytes": 38628,
+      "covered_bytes": 68552,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 68508
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 68552
+      }
+    },
+    {
+      "path": "Packages/UI/tempfile.2.tmp",
+      "version": "2.0",
+      "bytes": 64684,
+      "sha256": "8361d5f87dfede93f1ef62a6dc7cae1c6feeaeea2799cbff749ffefa249cbdc5",
+      "core": false,
+      "record_count": 721,
+      "header_bytes": 28172,
+      "object_bytes": 36512,
+      "covered_bytes": 64684,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 64640
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 64684
+      }
+    },
+    {
+      "path": "Packages/UI/tempfile.3.tmp",
+      "version": "2.0",
+      "bytes": 65307,
+      "sha256": "97cf46f217722cb426664be22234cc60d23695c6cd5edf4ce88d15629a09161f",
+      "core": false,
+      "record_count": 728,
+      "header_bytes": 28459,
+      "object_bytes": 36848,
+      "covered_bytes": 65307,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 65263
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 65307
+      }
+    },
+    {
+      "path": "Packages/UI/tempfile.tmp",
+      "version": "2.0",
+      "bytes": 60625,
+      "sha256": "b7f843b3c672afde95be6553987d3547c18b3c65ef613946c325b20efea9c973",
+      "core": false,
+      "record_count": 677,
+      "header_bytes": 26413,
+      "object_bytes": 34212,
+      "covered_bytes": 60625,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 60581
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 60625
+      }
+    },
+    {
+      "path": "Packages/uisound",
+      "version": "3.0",
+      "bytes": 2733,
+      "sha256": "ec0c03dd91ae05ea7c677b60fb843d91817c25d1a23592969506eb44acef5814",
+      "core": false,
+      "record_count": 70,
+      "header_bytes": 2593,
+      "object_bytes": 140,
+      "covered_bytes": 2733,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 2731
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 2733
+      }
+    },
+    {
+      "path": "Packages/unitactions",
+      "version": "3.0",
+      "bytes": 56512,
+      "sha256": "b4688e904ec5dd8312b4635f626c8f6ea7401079579c34f564d259e1a6bce3d8",
+      "core": false,
+      "record_count": 195,
+      "header_bytes": 9082,
+      "object_bytes": 47430,
+      "covered_bytes": 56512,
+      "uncovered_bytes": 0,
+      "boundary_complete": true,
+      "truncated_tail": {
+        "rejected": true,
+        "error": "object_range_out_of_file",
+        "error_offset": 56315
+      },
+      "appended_tail": {
+        "rejected": true,
+        "error": "non_contiguous_object_range",
+        "error_offset": 56512
+      }
+    }
+  ],
+  "non_packages": [
+    {
+      "path": "Packages/edtiactions06",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "empty",
+      "error": "empty_file"
+    },
+    {
+      "path": "Packages/UI/.svn/all-wcprops",
+      "bytes": 208,
+      "sha256": "1522b04df145c526939c22b25666d992d4bcb47c170add8bf18f7abd2ef7c4fe",
+      "classification": "unknown",
+      "error": "unknown_version"
+    },
+    {
+      "path": "Packages/UI/.svn/entries",
+      "bytes": 354,
+      "sha256": "ec2ef1eaa08170b75de66ac646f5f95fd680ec642c2fedfc1d05a5ffab328e4a",
+      "classification": "unknown",
+      "error": "unknown_version"
+    },
+    {
+      "path": "Packages/UI/.svn/prop-base/interface.svn-base",
+      "bytes": 53,
+      "sha256": "ebbf7e8800c3446bc3a195fa53573bde1073b0bf7581a614372f1391a9286d02",
+      "classification": "unknown",
+      "error": "unknown_version"
+    }
+  ],
+  "parser_invariants": [
+    "Every object range begins at the prior range end.",
+    "The first object begins at header_size.",
+    "The final object range ends exactly at file_size.",
+    "Directory readers reject trailing directory bytes."
+  ],
+  "mutation_policy": {
+    "tail_truncation": "Remove exactly one byte from every recognized frozen Package; parsing must fail with object_range_out_of_file.",
+    "trailing_byte": "Append exactly one zero byte to every recognized frozen Package; parsing must fail with non_contiguous_object_range."
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "client_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs"
+  },
+  "disclosure": {
+    "object_names_emitted": false,
+    "class_names_emitted": false,
+    "object_bodies_copied": false
+  },
+  "execution": {
+    "exit_code": 0,
+    "ctest_count": 7,
+    "original_scans": 167,
+    "mutation_scans": 332,
+    "stdout_sha256": "dacdb76a79465b577802f416e21c8b4c20c417ae007708c95c705b0f69666be3",
+    "stderr_sha256": "6e6dedb3314209e24ab536feef4a10ad799a17aa128906200c30513cf8191831"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-03",
+      "P2-04"
+    ],
+    "detail": "Use proven source spans to build a dependency graph and catalog object classes without guessing opaque body semantics."
+  }
+}

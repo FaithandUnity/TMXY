@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T01:41:11.0699186+00:00",
+  "captured_utc": "2026-08-28T01:58:08.5802682+00:00",
   "result": "PASS",
   "task": "P1-27",
   "completion_criteria_satisfied": true,
@@ -38,7 +38,7 @@
   },
   "ci": {
     "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
-    "aggregate_sha256": "a41450ac3c6217aa0c54fc721e4a052a4b4216f87db22cd7ca19e64fd6b571d1",
+    "aggregate_sha256": "f6955ad6d5326346cf230fff85172b97b28829cb626fc25d5fcccaac6a13defe",
     "all_declared_gates_bound": true
   },
   "source_binding": {

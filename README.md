@@ -34,7 +34,7 @@ Rebuild/
 ├─ Tools/TMXY.GitHub/            GitHub 托管 CI 状态只读采集与脱敏证据
 ├─ Tools/TMXY.FormatCore/        P1 有界二进制读取与稳定错误契约
 ├─ Tools/TMXY.Package/           Package 头解析、边界验证与格式指纹
-├─ Tools/TMXY.Table/             老 TBL 显式密钥解码、分隔表验证及当前 TBL 读取链诊断
+├─ Tools/TMXY.Table/             TBL 解码/盘点及 XML、ClassCfg 非表配置清单
 ├─ Tools/TMXY.Transform/         遗留坐标、单位、矩阵、UV 与绕序的 UE 单一转换边界
 ├─ Tools/TMXY.Texture/           Package 元数据与 qtx mip 解析、Alpha 分析和纹理中间输出
 ├─ Tools/TMXY.StaticMesh/        Package 材质绑定、sm 有界解析及静态网格审查中间输出

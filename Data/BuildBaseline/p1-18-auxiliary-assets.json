@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T01:22:30.3151844+00:00",
+  "captured_utc": "2026-08-28T02:52:48.3802847+00:00",
   "result": "PASS",
   "task": "P1-18",
   "completion_criteria_satisfied": true,
   "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
   "dependencies": {
-    "p1-08-package-normalized-tree.json": "0b157b8a6f5dbaf826f21359ae03cb9626d30cfe02c8108af04918ec62754696",
-    "p1-13-qtx-texture.json": "f96050e5e7fdf88be6725534d311e504b72f027b64eb7c52fa861f0752a5ad06"
+    "p1-08-package-normalized-tree.json": "ac8fb13f90e2a6358b5df481225405a5d12c68e256dcf093faeb6ffe2e347a6c",
+    "p1-13-qtx-texture.json": "54d675ea9d182f24271267e2a80ee380d06676fe2554a9171bb4de43fa9046bd"
   },
   "classification": {
     "zif": "BOM-less UTF-8 XML zone-navigation records",
@@ -339,7 +339,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 18,
-    "output_sha256": "173ae44079987fe56510107bf5879e6f7a389ffa42c87fbd97c87e42eed19584"
+    "output_line_count": 20,
+    "output_sha256": "d57e3518dc300b56053f824d99d038beb27d9df67785e12d9700d75d903a82da"
   }
 }

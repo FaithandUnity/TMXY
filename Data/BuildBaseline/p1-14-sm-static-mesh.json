@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T01:20:25.7341037+00:00",
+  "captured_utc": "2026-08-28T02:50:44.7284834+00:00",
   "result": "PASS",
   "task": "P1-14",
   "completion_criteria_satisfied": true,
   "source_file_count": 16,
-  "source_sha256": "4b81de661b327e21a71edcaf16528ecfd668c362cd738bd7028a1c69fc6694dc",
+  "source_sha256": "babedfc5c261934facb124dab6ae7f7f62167792dcb1e41c35ea29b1cb872754",
   "contract": {
     "descriptor_source": "Package QStaticMesh QObject property body",
     "sm_payload": "headerless ordered runtime arrays",
@@ -165,7 +165,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 71,
-    "output_sha256": "bb57c7e842e0699492d61ea0de4222437c328e5ace3a28061ee63a66e7fe1f2b"
+    "output_line_count": 72,
+    "output_sha256": "7508b7b1174c77b93bf854273ecd09bd0c7193359c397a41485654a24450d156"
   }
 }

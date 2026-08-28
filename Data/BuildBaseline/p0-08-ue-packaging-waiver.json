@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:12:58.6281206+00:00",
+  "captured_utc": "2026-08-28T13:43:31.7874009+00:00",
   "result": "PASS",
   "qualification": "UE_5_8_2_MSVC_14_51_TIME_BOUNDED_WAIVER",
   "waiver": {
@@ -29,43 +29,43 @@
       "configuration": "Development",
       "exit_code": 0,
       "passed": true,
-      "duration_seconds": 47.434,
+      "duration_seconds": 61.237,
       "editor_target_observed": true,
       "client_target_observed": true,
       "compiler_version_observed": true,
-      "sdk_version_observed": false,
+      "sdk_version_observed": true,
       "compiler_preference_warning_observed": true,
       "build_success_marker_observed": true,
-      "log_line_count": 815,
-      "log_sha256": "779316327d4887aecc207da043e59ea6057831863cf951ae83fef4b5bc0c738a",
-      "generated_log": "Apps/UEClient/Saved/P0-08QualificationLogs/UAT-Development-20260826-221105000.log"
+      "log_line_count": 842,
+      "log_sha256": "a74f8e43d9a901d94310a773afd3ced99af3c8c2831bf91f11260ca5c268963b",
+      "generated_log": "Apps/UEClient/Saved/P0-08QualificationLogs/UAT-Development-20260828-134106253.log"
     },
     {
       "configuration": "Shipping",
       "exit_code": 0,
       "passed": true,
-      "duration_seconds": 46.21,
+      "duration_seconds": 64.002,
       "editor_target_observed": true,
       "client_target_observed": true,
       "compiler_version_observed": true,
-      "sdk_version_observed": false,
+      "sdk_version_observed": true,
       "compiler_preference_warning_observed": true,
       "build_success_marker_observed": true,
-      "log_line_count": 815,
-      "log_sha256": "d705c3ce2d4e296d3a37c4c59eeccea1a6b0aff56fa72fec6fbf45d4836ea38b",
-      "generated_log": "Apps/UEClient/Saved/P0-08QualificationLogs/UAT-Shipping-20260826-221105000.log"
+      "log_line_count": 842,
+      "log_sha256": "eff485039a85a9cb99e5f9c1074d75a330be099b5d3c50fd8249dc140271c51a",
+      "generated_log": "Apps/UEClient/Saved/P0-08QualificationLogs/UAT-Shipping-20260828-134106253.log"
     }
   ],
   "packages": [
     {
       "configuration": "Development",
       "passed": true,
-      "archive": "Apps/UEClient/Saved/P0-08Qualification/20260826-221105000/Development",
+      "archive": "Apps/UEClient/Saved/P0-08Qualification/20260828-134106253/Development",
       "file_count": 48,
-      "total_bytes": 962454125,
-      "runtime_executable": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\P0-08Qualification\\20260826-221105000\\Development\\Windows\\TMXY\\Binaries\\Win64\\TMXY.exe",
+      "total_bytes": 962462317,
+      "runtime_executable": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\P0-08Qualification\\20260828-134106253\\Development\\Windows\\TMXY\\Binaries\\Win64\\TMXY.exe",
       "runtime_bytes": 331844096,
-      "runtime_sha256": "9d8d094c7e9b555de7e0e320191ee6c99dd815a6ab49f990c433940b01a1281d",
+      "runtime_sha256": "9315bc1f8ada9f0008e96ea0a8b170117c8042d6b8c9cb6457aa5edb7e7d6804",
       "bootstrap_present": true,
       "pak_count": 1,
       "utoc_count": 2,
@@ -74,12 +74,12 @@
     {
       "configuration": "Shipping",
       "passed": true,
-      "archive": "Apps/UEClient/Saved/P0-08Qualification/20260826-221105000/Shipping",
+      "archive": "Apps/UEClient/Saved/P0-08Qualification/20260828-134106253/Shipping",
       "file_count": 30,
       "total_bytes": 609888274,
-      "runtime_executable": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\P0-08Qualification\\20260826-221105000\\Shipping\\Windows\\TMXY\\Binaries\\Win64\\TMXY-Win64-Shipping.exe",
+      "runtime_executable": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\P0-08Qualification\\20260828-134106253\\Shipping\\Windows\\TMXY\\Binaries\\Win64\\TMXY-Win64-Shipping.exe",
       "runtime_bytes": 165813248,
-      "runtime_sha256": "81128fe8bdc86752c6d65e3de410c563c195b328b5a1ee6debdcb948d72ef061",
+      "runtime_sha256": "71c6c0e8e09c07c4a9c6db20044d09e335271f671669ad682071364af1bdd08b",
       "bootstrap_present": true,
       "pak_count": 1,
       "utoc_count": 2,
@@ -93,7 +93,7 @@
       "exited_within_seconds": 60,
       "exit_code": 0,
       "controlled_termination": false,
-      "duration_milliseconds": 2254.0
+      "duration_milliseconds": 2156.0
     },
     "shipping": {
       "policy": "stable_liveness_then_controlled_termination",
@@ -102,14 +102,14 @@
       "exited_early": false,
       "early_exit_code": null,
       "controlled_termination": true,
-      "duration_milliseconds": 17061.0
+      "duration_milliseconds": 17055.0
     }
   },
   "boundaries": {
     "source_binding": {
-      "file_count": 136,
-      "manifest_sha256": "119cb080e514483ea6f0d74f434a8300f0dc15acc058e7a488be15d96fef76e0",
-      "scope": "TMXY.uproject; Config/**; Source/**/*.{cs,cpp,h}; Plugins/**/*.{uplugin,cs,cpp,h}; Content/**/*.{uasset,umap}; Apps/UEClient/Scripts/Create*GoldenFixtures.ps1; Tests/Fixtures/UE/Texture/**/*.{json,dds,png,tga}; Tests/Fixtures/UE/{StaticMesh,SkeletalMesh}/**/*.{json,gltf,bin,obj}; Tests/Fixtures/UE/Animation/**/*.{json,gltf,bin}; Tests/Fixtures/UE/Terrain/**/*.{json,f32le,rgba8,csv}"
+      "file_count": 138,
+      "manifest_sha256": "3ac101ab7c695839f9e23a871e911ce3d0965793169b9cabc5be21b7eaa12438",
+      "scope": "TMXY.uproject; Config/**; Source/**/*.{cs,cpp,h}; Contracts/generated/ue/**/*.{h,hpp}; Plugins/**/*.{uplugin,cs,cpp,h}; Content/**/*.{uasset,umap}; Apps/UEClient/Scripts/Create*GoldenFixtures.ps1; Tests/Fixtures/UE/Texture/**/*.{json,dds,png,tga}; Tests/Fixtures/UE/{StaticMesh,SkeletalMesh}/**/*.{json,gltf,bin,obj}; Tests/Fixtures/UE/Animation/**/*.{json,gltf,bin}; Tests/Fixtures/UE/Terrain/**/*.{json,f32le,rgba8,csv}"
     },
     "source_content_asset_count": 14,
     "source_content_assets": [

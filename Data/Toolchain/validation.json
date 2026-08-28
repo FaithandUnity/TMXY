@@ -3,7 +3,7 @@
   "required_failure_count": 0,
   "pending_freeze_count": 0,
   "postgres_smoke_version": null,
-  "lock_sha256": "e1ce126e43cb9625836f4ca37287e41a9c647897744b02a90dc298d6cf6fa496",
+  "lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
   "environment_sha256": "9e34c14d0d9936c7d876bd4fd5a96e3949351a60ea53a88c2c2ccd861131d969",
   "checks": [
     {

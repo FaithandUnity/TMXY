@@ -47,8 +47,8 @@
         "issuer": "Codex engineering execution owner",
         "policy": "Docs/Build/MSVC-14.51-WAIVER.md",
         "report": "Data/BuildBaseline/p0-08-ue-packaging-waiver.json",
-        "report_sha256": "fd6b68efa3ca078ebfee2b0935bf7efef4c6e3cf9e5404e936a2ceecaafee657",
-        "source_manifest_sha256": "119cb080e514483ea6f0d74f434a8300f0dc15acc058e7a488be15d96fef76e0"
+        "report_sha256": "5bc031a04fc0a14d8eb27ff120ca8f7047edc76ac5f26d6cce7dc0d68ecee7c6",
+        "source_manifest_sha256": "3ac101ab7c695839f9e23a871e911ce3d0965793169b9cabc5be21b7eaa12438"
       }
     },
     "windows_sdk": "10.0.26100.0",

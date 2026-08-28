@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "policy_id": "tmxy-protocol-codegen-policy-v1",
+  "task_id": "P2-17",
+  "source_contract": {
+    "core_table_registry": "Data/Schemas/core-table-registry-v1.json",
+    "id_limit_audit": "Data/Inventory/p2-11-id-limit-audit.json"
+  },
+  "identity": {
+    "numeric_storage": "uint64",
+    "string_storage": "utf8-string",
+    "composite_ids": "ordered-strong-struct",
+    "tombstone_policy": "reserved-never-reused",
+    "narrowing": "forbidden",
+    "implicit_cross_domain_conversion": "forbidden"
+  },
+  "values": {
+    "int64": "signed-64",
+    "decimal": "ieee-754-binary64-prototype",
+    "string": "utf8-string",
+    "nullable": "explicit-optional"
+  },
+  "targets": {
+    "backend": "portable-cpp20",
+    "ue": "unreal-engine-5.8-cpp20"
+  },
+  "generated_roots": {
+    "backend": "Contracts/generated/cpp",
+    "ue": "Contracts/generated/ue"
+  },
+  "change_policy": "schema-version-bump-full-regeneration-and-both-target-builds"
+}

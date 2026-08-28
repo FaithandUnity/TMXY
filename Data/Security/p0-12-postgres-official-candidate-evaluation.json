@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T16:14:34.3558009+00:00",
+  "captured_utc": "2026-08-28T14:06:04.3149749+00:00",
   "result": "PASS_DIAGNOSTIC",
   "release_authority": false,
   "evaluation_mode": "read_only_https_and_local_docker",
@@ -83,11 +83,11 @@
     "vulnerability_disposition": "Data/Security/p0-12-postgres-vulnerability-disposition.json",
     "vulnerability_disposition_sha256": "f53f267aa2f12a3634ccd8e569a2db36ab01bf8770bfee51b73b8e797ea0d83e",
     "toolchain_lock": "Data/Toolchain/toolchain.lock.json",
-    "toolchain_lock_sha256": "e1ce126e43cb9625836f4ca37287e41a9c647897744b02a90dc298d6cf6fa496",
+    "toolchain_lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
     "compose": "Deploy/compose/compose.yaml",
     "compose_sha256": "0bd6f2d8f1865b3fc8d6b11e674fc613db13f055f701d89eab5d52b30f4612c6",
     "refresh_preflight": "Data/Security/p0-12-postgres-refresh-preflight.json",
-    "refresh_preflight_sha256": "a471849069f624ad109c546a3b0b44b43e23a6f25e2da1ab2507a81d87be5e68"
+    "refresh_preflight_sha256": "c5e620b49ccfb3f8d0b4d0ab64eb37bcc19a9fa879be1564117d1fb75a8146e0"
   },
   "failure_count": 0,
   "failures": []

@@ -23,10 +23,11 @@ builder and does not close P0-08 by itself.
 - Platform: Windows x64.
 - Project input binding: `TMXY.uproject`, `Config/**`, `Source/**`, importer
   plugin sources, the fourteen checked-in `.uasset`/`.umap` golden assets, golden
-  fixture generators and the texture/static-mesh/skeletal-mesh/animation/terrain fixture inputs.
-- Bound input count: 136 files.
+  fixture generators, the shared generated UE contract header, and the
+  texture/static-mesh/skeletal-mesh/animation/terrain fixture inputs.
+- Bound input count: 138 files.
 - Bound input manifest SHA-256:
-  `119cb080e514483ea6f0d74f434a8300f0dc15acc058e7a488be15d96fef76e0`.
+  `3ac101ab7c695839f9e23a871e911ce3d0965793169b9cabc5be21b7eaa12438`.
 
 The machine report is
 `Data/BuildBaseline/p0-08-ue-packaging-waiver.json`. Its SHA-256 and expiry are

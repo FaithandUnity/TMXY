@@ -36,6 +36,8 @@ function Get-SourceBinding {
         Get-ChildItem -LiteralPath (Join-Path $root 'Apps\UEClient\Config') -Recurse -File
         Get-ChildItem -LiteralPath (Join-Path $root 'Apps\UEClient\Source') -Recurse -File |
             Where-Object { $_.Extension -in @('.cs', '.cpp', '.h') }
+        Get-ChildItem -LiteralPath (Join-Path $root 'Contracts\generated\ue') -Recurse -File |
+            Where-Object { $_.Extension -in @('.h', '.hpp') }
         Get-ChildItem -LiteralPath (Join-Path $root 'Apps\UEClient\Plugins') -Recurse -File |
             Where-Object {
                 $_.Extension -in @('.uplugin', '.cs', '.cpp', '.h') -and
@@ -75,7 +77,7 @@ function Get-SourceBinding {
     [pscustomobject][ordered]@{
         file_count = $inputFiles.Count
         manifest_sha256 = ([Convert]::ToHexString($digest)).ToLowerInvariant()
-        scope = 'TMXY.uproject; Config/**; Source/**/*.{cs,cpp,h}; Plugins/**/*.{uplugin,cs,cpp,h}; Content/**/*.{uasset,umap}; Apps/UEClient/Scripts/Create*GoldenFixtures.ps1; Tests/Fixtures/UE/Texture/**/*.{json,dds,png,tga}; Tests/Fixtures/UE/{StaticMesh,SkeletalMesh}/**/*.{json,gltf,bin,obj}; Tests/Fixtures/UE/Animation/**/*.{json,gltf,bin}; Tests/Fixtures/UE/Terrain/**/*.{json,f32le,rgba8,csv}'
+            scope = 'TMXY.uproject; Config/**; Source/**/*.{cs,cpp,h}; Contracts/generated/ue/**/*.{h,hpp}; Plugins/**/*.{uplugin,cs,cpp,h}; Content/**/*.{uasset,umap}; Apps/UEClient/Scripts/Create*GoldenFixtures.ps1; Tests/Fixtures/UE/Texture/**/*.{json,dds,png,tga}; Tests/Fixtures/UE/{StaticMesh,SkeletalMesh}/**/*.{json,gltf,bin,obj}; Tests/Fixtures/UE/Animation/**/*.{json,gltf,bin}; Tests/Fixtures/UE/Terrain/**/*.{json,f32le,rgba8,csv}'
     }
 }
 

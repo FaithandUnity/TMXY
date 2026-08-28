@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T13:16:59.4679548+00:00",
+  "task_id": "P2-17",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "inputs": {
+    "core_table_registry_path": "Data/Schemas/core-table-registry-v1.json",
+    "core_table_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+    "id_limit_audit_path": "Data/Inventory/p2-11-id-limit-audit.json",
+    "id_limit_audit_sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+    "policy_sha256": "2d7e3fa854e50b5bc7009905c37a81c744b11dae553b2e0fb37a9cf8ca625157",
+    "contract_sha256": "4c74184aa02b0fd5d7109381c6c1bdbcd4110ce3a68af8131d6094bb10acbbeb"
+  },
+  "summary": {
+    "models": 12,
+    "source_fields": 355,
+    "identity_components": 16,
+    "nullable_fields": 263,
+    "targets": 2,
+    "numeric_identity_storage": "uint64",
+    "narrowing": "forbidden"
+  },
+  "outputs": {
+    "schema": {
+      "path": "Contracts/data-schema/core-data-model-v1.json",
+      "bytes": 76142,
+      "lines": 2952,
+      "sha256": "4176831de7fade02eedc0e445e9fe757ace5bb692b2f4fdc277b35cf6bc7078c"
+    },
+    "backend": {
+      "path": "Contracts/generated/cpp/tmxy/contracts/data/core_data_types.generated.hpp",
+      "bytes": 15313,
+      "lines": 501,
+      "sha256": "e846b1435365756d7bdb2ce16d047b44cd2585d6419598ecd13aee117822a04e"
+    },
+    "ue": {
+      "path": "Contracts/generated/ue/TMXYCoreDataTypes.generated.hpp",
+      "bytes": 12123,
+      "lines": 499,
+      "sha256": "e9cebd395a54ba57475f2289fc273154ff7d8e6a344b0d93b78a6d73247ddd26"
+    }
+  },
+  "target_contracts": {
+    "backend": "portable-cpp20-compiled-by-backend-cmake",
+    "ue": "unreal-engine-5.8-cpp20-compiled-by-tmxy-core",
+    "same_schema_sha256": "4176831de7fade02eedc0e445e9fe757ace5bb692b2f4fdc277b35cf6bc7078c"
+  },
+  "implementation": {
+    "generator": "Tools/TMXY.ProtocolGen/protocol_gen.py",
+    "generator_sha256": "8d5989b9648039b7778c46f9390d5fe1fe05d79215e777459b782f587fbc402d",
+    "wrapper": "Tools/TMXY.ProtocolGen/New-ProtocolTypes.ps1",
+    "wrapper_sha256": "a34308bea8164ed2a6e595be000352ab92bc7cb8482bce82fae17c7ff49e4782",
+    "self_test_assertions": 6
+  },
+  "reproduction": {
+    "builder_image": "mmorpg-source-builder:local",
+    "builder_user": "tmxy",
+    "repository_mount": "read-only",
+    "network": "none",
+    "check_mode": false
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-18"
+    ],
+    "detail": "Aggregate parse, integrity, reference, conversion, and capacity evidence into the content health report."
+  }
+}

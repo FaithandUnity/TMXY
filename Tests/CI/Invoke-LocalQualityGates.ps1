@@ -153,6 +153,11 @@ if ($VerifyLegacyGoldenSources) { $idLimitArguments.VerifyDerivedSources = $true
 $idLimitAudit = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-IdLimitAudit.ps1') `
     -Arguments $idLimitArguments
+$protocolArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $protocolArguments.VerifyGenerated = $true }
+$protocolCodegen = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ProtocolCodegen.ps1') `
+    -Arguments $protocolArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -287,6 +292,12 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$tableOwnership.completion_criteria_satisfied -and
     [string]$legacyCurrentDiff.result -eq 'PASS' -and
     [bool]$legacyCurrentDiff.completion_criteria_satisfied -and
+    [string]$canonicalIdMap.result -eq 'PASS' -and
+    [bool]$canonicalIdMap.completion_criteria_satisfied -and
+    [string]$idLimitAudit.result -eq 'PASS' -and
+    [bool]$idLimitAudit.completion_criteria_satisfied -and
+    [string]$protocolCodegen.result -eq 'PASS' -and
+    [bool]$protocolCodegen.completion_criteria_satisfied -and
     [string]$fullAssetInventory.result -eq 'PASS' -and
     [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceClosure.result -eq 'PASS' -and
@@ -360,6 +371,7 @@ $report = [pscustomobject][ordered]@{
     legacy_current_diff = $legacyCurrentDiff
     canonical_id_map = $canonicalIdMap
     id_limit_audit = $idLimitAudit
+    protocol_codegen = $protocolCodegen
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

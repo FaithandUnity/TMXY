@@ -113,4 +113,8 @@ byte 一致；默认托管模式只验证已提交策略、汇总证据和哈希
 u8/u16/等级/Tombstone 风险，并冻结 8,090 个旧源码文件中的四类固定容量信号统计。
 加 `-VerifyDerivedSources` 会通过三个只读挂载重建完整审计并逐 byte 复核。
 
+`Contract/Test-ProtocolCodegen.ps1` 验证 P2-17 的单一核心数据模型、12 个领域强类型 ID、
+355 个字段、16 个 ID 分量和 backend/UE 两套输出哈希；检查 64 位数值 ID、显式可空值、
+禁止缩窄及两条真实编译锚点。加 `-VerifyGenerated` 会在锁定、断网、只读容器中逐 byte 重建。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

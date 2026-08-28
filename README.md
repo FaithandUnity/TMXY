@@ -129,6 +129,11 @@ P2-11 由 `Tools/TMXY.IdLimitAudit/New-IdLimitAudit.ps1` 审计全部 Canonical 
 槽位和固定容量信号。精确极值和旧路径只留在 Git 忽略的 `Data/Exports/P2-11`，详见
 `Docs/Formats/ID-LIMIT-AUDIT.md`。
 
+P2-17 由 `Tools/TMXY.ProtocolGen/New-ProtocolTypes.ps1` 从同一份核心数据模型确定性生成
+Linux 后端和 UE 5.8 的 C++20 强类型 ID/记录结构。模型覆盖 12 张核心表、355 个字段和
+16 个 ID 分量；数值 ID 固定使用 64 位承载，不按当前极值缩窄。两套生成物分别进入真实
+Backend CMake/CTest 和 TMXYCore 编译，详见 `Docs/Formats/PROTOCOL-CODEGEN.md`。
+
 PostgreSQL/gosu 的 WVR-0002 当前仅是待所有者决策的草案。机器判定器会绑定精确镜像、
 二进制、22 项发现与全部上游证据；只有最长 30 天的有效区间、GitHub 当前 HEAD 上两个
 非作者审批和只读认证 API 复核同时成立时，才允许组件级临时例外。负责人若是 PR 作者，

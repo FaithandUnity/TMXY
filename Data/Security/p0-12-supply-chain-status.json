@@ -1,6 +1,6 @@
 {
   "schema_version": 10,
-  "captured_utc": "2026-08-28T09:43:56.0000463+00:00",
+  "captured_utc": "2026-08-28T14:26:54.9342833+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -57,7 +57,7 @@
   },
   "postgres_derived_candidate": {
     "file": "Data/Security/p0-12-postgres-derived-image-qualification.json",
-    "sha256": "65ca7a33d1146d8c95cc0f448513e81118d877a8eed20d37eb6f798938dc3e68",
+    "sha256": "9440350afb2dbed5301097ff0e1cf492ebaefd61a1995c0ee88b305324a7e97a",
     "result": "PASS_DIAGNOSTIC",
     "image_id": "sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b",
     "gosu_sha256": "dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb",
@@ -73,7 +73,7 @@
   },
   "postgres_refresh_preflight": {
     "file": "Data/Security/p0-12-postgres-refresh-preflight.json",
-    "sha256": "a471849069f624ad109c546a3b0b44b43e23a6f25e2da1ab2507a81d87be5e68",
+    "sha256": "c5e620b49ccfb3f8d0b4d0ab64eb37bcc19a9fa879be1564117d1fb75a8146e0",
     "result": "PASS_DIAGNOSTIC",
     "status": "NO_REFRESH_AVAILABLE",
     "tag_manifest_changed": false,
@@ -84,7 +84,7 @@
   },
   "postgres_official_candidate": {
     "file": "Data/Security/p0-12-postgres-official-candidate-evaluation.json",
-    "sha256": "1aa9c38d04f938982a6f009e3e4115a8d6d165834100f5af158ffe8d817cc9f5",
+    "sha256": "a5e1310aa4b2e0a051cc07faca65edd2fd52d843fe4b40da30a687cc439149fa",
     "result": "PASS_DIAGNOSTIC",
     "tag": "18.6-alpine3.23",
     "candidate_index_digest": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
@@ -98,7 +98,7 @@
   },
   "postgres_gosu_reachability": {
     "file": "Data/Security/p0-12-postgres-gosu-reachability-review.json",
-    "sha256": "fe54a53336a5acdcb7595127c7b1f2169d1f45a68a71de93556a6a28c71c5408",
+    "sha256": "ce0996c503edfbfaa09db0e35d4052cb5a9a9e4b9d1d0db050009cf237ce11d4",
     "result": "PASS_DIAGNOSTIC",
     "status": "REVIEW_COMPLETE_NO_SYMBOL_REACHABILITY_STILL_BLOCKING",
     "risk_assessment": "reduced_reachability_not_zero_risk",
@@ -116,9 +116,9 @@
   },
   "postgres_gosu_waiver_decision": {
     "request_file": "Data/Security/p0-12-postgres-gosu-waiver-request.json",
-    "request_sha256": "715f3ecdf165e57d510f76efd1fdaa3bcc26c0fdab66c29532f679a657a4d0c1",
+    "request_sha256": "5f3988faf18d48cd49dc82c7d341212bf253009bd192a8e016dc61d35acdb721",
     "decision_file": "Data/Security/p0-12-postgres-gosu-waiver-decision.json",
-    "decision_sha256": "21d7e968e0b075aa2cabb2bcb2083e0d6089e6cadae380d528aa9823d780ea83",
+    "decision_sha256": "153667598ab97c4bbdfa333f6cfbda8c4d38271ea36690d08c11c428710eb124",
     "waiver_id": "WVR-0002",
     "request_status": "draft_not_approved",
     "decision": "DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE",

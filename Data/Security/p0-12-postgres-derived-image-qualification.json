@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T21:20:49.8564410+00:00",
+  "captured_utc": "2026-08-28T14:07:34.8373980+00:00",
   "result": "PASS_DIAGNOSTIC",
   "completion_criteria_satisfied": false,
   "release_authority": false,
@@ -76,7 +76,7 @@
   "bindings": {
     "dockerfile": "Deploy/postgres/Dockerfile",
     "dockerfile_sha256": "ca81ab27df00fce41dbb399e8c81826c7fad3d90838dbd3e09fcca842fdb65fd",
-    "toolchain_lock_sha256": "e1ce126e43cb9625836f4ca37287e41a9c647897744b02a90dc298d6cf6fa496",
+    "toolchain_lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
     "vulnerability_disposition_sha256": "f53f267aa2f12a3634ccd8e569a2db36ab01bf8770bfee51b73b8e797ea0d83e",
     "sbom_sha256": "c2a9abab01d3c6e51009deec8bf93ed514e6aa276a70ac08cbe74cc87fb40ddb",
     "direct_image_scan_sha256": "7a3d017cf84719e627d28c5964aa116b7c2340fe46133ab6854ae3f62c8a6bef",

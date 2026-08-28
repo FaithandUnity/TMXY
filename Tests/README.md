@@ -38,4 +38,8 @@ Fixture、glTF/BIN 边界、坐标/法线/绕序、源与渲染顶点、UV/材�
 主键、26,272 个逐 byte 相同行、1,016 个变化行以及 1,935/1 个单侧主键，并强制
 `residual_can_replace_current_table=false`。
 
+`Contract/Test-CurrentTableRepresentatives.ps1` 验证 P1-11 脱敏报告和生成器安全合同，
+固定 10 张简单/10 张复杂表、20/20 解码、20/20 固定列数、11 张 ASCII/9 张 GBK、
+15 张唯一首字段候选和 5 张复合键分类；测试本身不需要读取运行时 Secret。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

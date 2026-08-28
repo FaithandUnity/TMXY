@@ -50,6 +50,9 @@ $currentTable = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-Cu
 $currentTableCsvRelation = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-CurrentTableCsvRelation.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$currentTableRepresentatives = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-CurrentTableRepresentatives.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $legacyToUE = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-LegacyToUETransform.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $qtxTexture = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-QtxTexture.ps1') `
@@ -162,6 +165,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$currentTable.completion_criteria_satisfied -and
     [string]$currentTableCsvRelation.result -eq 'PASS' -and
     [bool]$currentTableCsvRelation.completion_criteria_satisfied -and
+    [string]$currentTableRepresentatives.result -eq 'PASS' -and
+    [bool]$currentTableRepresentatives.completion_criteria_satisfied -and
     [string]$legacyToUE.result -eq 'PASS' -and
     [bool]$legacyToUE.completion_criteria_satisfied -and
     [string]$qtxTexture.result -eq 'PASS' -and
@@ -229,6 +234,7 @@ $report = [pscustomobject][ordered]@{
     legacy_table = $legacyTable
     current_table_investigation = $currentTable
     current_table_csv_relation = $currentTableCsvRelation
+    current_table_representatives = $currentTableRepresentatives
     legacy_to_ue_transform = $legacyToUE
     qtx_texture = $qtxTexture
     sm_static_mesh = $smStaticMesh

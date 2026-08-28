@@ -18,3 +18,8 @@ P1-09 已证明 225 张当前活动表沿用 double-AES-128、旧 padding 和 CR
 `item_table.tbl` 与残留 CSV。它只报告表头指纹、行数、唯一主键集合以及相同/变化/
 新增/删除行计数，不输出字段或主键。该证据完成 P1-10，并明确残留 CSV 只能用于
 Schema 与历史差异研究。
+
+`Inspect-CurrentTableRepresentativeSet.ps1` 固定 10 张最小和 10 张最大活动
+`CLSVShare` 表，逐表验证解密、padding、CRLF、编码、列数、首字段唯一性和空字段，
+只输出计数与分类。20/20 样本通过，P1-11 完成；需要复合键的表会明确分类，不会把
+首字段重复误报为解析失败。

@@ -1,0 +1,691 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T16:44:40.9795157+00:00",
+  "task_id": "P2-19",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "bindings": {
+      "aggregate_sha256": "879d8174479d943a595369a8995cfd800f099601aff3a91c697179cf0dc739b4",
+      "content_health": {
+        "completion_criteria_satisfied": true,
+        "path": "Data/Inventory/p2-18-content-health.json",
+        "result": "PASS",
+        "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+        "task_id": "P2-18",
+        "task_status": "COMPLETE"
+      },
+      "conversion_pilot": {
+        "completion_criteria_satisfied": true,
+        "path": "Data/Performance/p2-19-conversion-pilot.json",
+        "result": "PASS",
+        "sha256": "725401c1032915948e28f01c380cd0b2bb821835afc83ecc0d87f2852dc18522",
+        "task_id": "P2-19-PILOT",
+        "task_status": "COMPLETE"
+      },
+      "conversion_routing": {
+        "completion_criteria_satisfied": true,
+        "path": "Data/Inventory/p2-15-conversion-routing.json",
+        "result": "PASS",
+        "sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+        "task_id": "P2-15",
+        "task_status": "COMPLETE"
+      }
+    },
+    "basis_kinds": [
+      "assumption",
+      "measured_fact",
+      "missing_measurement",
+      "planning_coefficient",
+      "risk_reserve"
+    ]
+  },
+  "report": {
+    "json": {
+      "path": "Data/Reports/p2-19-resource-budget-report.json",
+      "tracked": true,
+      "bytes": 35449,
+      "lines": 1179,
+      "sha256": "dbe34086b68fe2c054cbdec8035c615a425b2a2136ac8e597ad8e9f094fa60b7"
+    },
+    "markdown": {
+      "path": "Data/Reports/p2-19-resource-budget-report.md",
+      "tracked": true,
+      "bytes": 4938,
+      "lines": 98,
+      "sha256": "66ab7291a29a36202b41cbc929a6cd39b8afff6823b5474d44ddee005940f535"
+    }
+  },
+  "summary": {
+    "report_result": "PASS_WITH_OPEN_MEASUREMENT_GAPS",
+    "budget_status": "CONDITIONAL_PLANNING_BASELINE",
+    "human_budget": {
+      "base_planning_hours": 1404.695,
+      "basis_ids": [
+        "BAS-PLAN-P2-15-HUMAN",
+        "BAS-RISK-HUMAN-ROUTES",
+        "BAS-ASSUME-WORKFORCE",
+        "BAS-MISSING-HUMAN-TIME",
+        "BAS-MISSING-PRICE-RATES"
+      ],
+      "by_route": [
+        {
+          "base_hours": 392.25,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "risk_reserve_basis_points": 2500,
+          "risk_reserve_hours": 98.0625,
+          "route": "automatic-qualified-interchange",
+          "total_hours": 490.3125
+        },
+        {
+          "base_hours": 33.77,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "risk_reserve_basis_points": 2500,
+          "risk_reserve_hours": 8.4425,
+          "route": "automatic-standard-audio",
+          "total_hours": 42.2125
+        },
+        {
+          "base_hours": 361.675,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "risk_reserve_basis_points": 4000,
+          "risk_reserve_hours": 144.67,
+          "route": "semi-automatic-navigation-adaptation",
+          "total_hours": 506.345
+        },
+        {
+          "base_hours": 473,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "risk_reserve_basis_points": 5000,
+          "risk_reserve_hours": 236.5,
+          "route": "manual-descriptor-recovery",
+          "total_hours": 709.5
+        },
+        {
+          "base_hours": 144,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "risk_reserve_basis_points": 7500,
+          "risk_reserve_hours": 108,
+          "route": "manual-repair-or-replace",
+          "total_hours": 252
+        }
+      ],
+      "money_budget": {
+        "amount": null,
+        "currency": null,
+        "estimated": false,
+        "missing_inputs": [
+          "currency",
+          "labor_rate_by_role",
+          "machine_rate_by_profile",
+          "storage_rate_by_tier",
+          "license_and_vendor_rates"
+        ],
+        "reason": "Labor, infrastructure, storage, licensing, and regional currency rates are not supplied."
+      },
+      "risk_reserve_hours": 595.675,
+      "total_planning_hours": 2000.37,
+      "unit": "human_hours",
+      "workforce_scenarios": [
+        {
+          "base_weeks": 25.083839,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "content_specialist_fte": 2,
+          "productive_hours_per_fte_week": 28,
+          "risk_adjusted_weeks": 35.720893,
+          "risk_reserve_weeks": 10.637054
+        },
+        {
+          "base_weeks": 16.72256,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "content_specialist_fte": 3,
+          "productive_hours_per_fte_week": 28,
+          "risk_adjusted_weeks": 23.813929,
+          "risk_reserve_weeks": 7.091369
+        },
+        {
+          "base_weeks": 12.54192,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-MISSING-HUMAN-TIME"
+          ],
+          "content_specialist_fte": 4,
+          "productive_hours_per_fte_week": 28,
+          "risk_adjusted_weeks": 17.860446,
+          "risk_reserve_weeks": 5.318527
+        }
+      ]
+    },
+    "machine_budget": {
+      "base_sequential_seconds": 10632.022861,
+      "basis_ids": [
+        "BAS-MEASURED-PILOT",
+        "BAS-PLAN-MACHINE-FALLBACK",
+        "BAS-ASSUME-PILOT-EXTRAPOLATION",
+        "BAS-RISK-MACHINE",
+        "BAS-MISSING-MACHINE-CAPACITY"
+      ],
+      "by_route": [
+        {
+          "base_seconds": 172.022861,
+          "basis_ids": [
+            "BAS-MEASURED-PILOT",
+            "BAS-MEASURED-INVENTORY",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION",
+            "BAS-RISK-MACHINE",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "pilot_sample_count": 25,
+          "risk_reserve_seconds": 86.01143,
+          "route": "automatic-qualified-interchange",
+          "total_seconds": 258.034291
+        },
+        {
+          "base_seconds": 2400,
+          "basis_ids": [
+            "BAS-PLAN-MACHINE-FALLBACK",
+            "BAS-RISK-MACHINE",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "pilot_sample_count": 0,
+          "risk_reserve_seconds": 1200,
+          "route": "automatic-standard-audio",
+          "total_seconds": 3600
+        },
+        {
+          "base_seconds": 8060,
+          "basis_ids": [
+            "BAS-PLAN-MACHINE-FALLBACK",
+            "BAS-RISK-MACHINE",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "pilot_sample_count": 0,
+          "risk_reserve_seconds": 4030,
+          "route": "semi-automatic-navigation-adaptation",
+          "total_seconds": 12090
+        },
+        {
+          "base_seconds": 0,
+          "basis_ids": [
+            "BAS-PLAN-MACHINE-FALLBACK",
+            "BAS-RISK-MACHINE",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "pilot_sample_count": 0,
+          "risk_reserve_seconds": 0,
+          "route": "manual-descriptor-recovery",
+          "total_seconds": 0
+        },
+        {
+          "base_seconds": 0,
+          "basis_ids": [
+            "BAS-PLAN-MACHINE-FALLBACK",
+            "BAS-RISK-MACHINE",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "pilot_sample_count": 0,
+          "risk_reserve_seconds": 0,
+          "route": "manual-repair-or-replace",
+          "total_seconds": 0
+        }
+      ],
+      "projection_status": "PARTIALLY_PILOT_CALIBRATED",
+      "requirements": [
+        {
+          "basis_ids": [
+            "BAS-MEASURED-PILOT",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "id": "pilot-reference-host",
+          "profile": "32 logical processors; 203533176832 memory bytes",
+          "purpose": "Reproduce single-process pilot; not a fleet claim.",
+          "quantity": 1
+        },
+        {
+          "basis_ids": [
+            "BAS-MEASURED-PILOT",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "id": "locked-builder-container",
+          "profile": "32 visible processors; 99951980544 visible memory bytes",
+          "purpose": "Preserve measured toolchain visibility.",
+          "quantity": 1
+        }
+      ],
+      "risk_reserve_basis_points": 5000,
+      "risk_reserve_seconds": 5316.01143,
+      "total_sequential_seconds": 15948.034291,
+      "unit": "machine_seconds"
+    },
+    "storage_budget": {
+      "basis_ids": [
+        "BAS-MEASURED-INVENTORY",
+        "BAS-MEASURED-PILOT",
+        "BAS-MEASURED-HOST-STORAGE",
+        "BAS-ASSUME-PILOT-EXTRAPOLATION",
+        "BAS-ASSUME-STORAGE",
+        "BAS-RISK-STORAGE"
+      ],
+      "build_cache_estimated_bytes": 45765646066,
+      "by_component": [
+        {
+          "base_bytes": 8882019027,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY"
+          ],
+          "expansion_basis_points": 10000,
+          "id": "source-retained",
+          "projected_bytes": 8882019027
+        },
+        {
+          "base_bytes": 412311241,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY"
+          ],
+          "expansion_basis_points": 10000,
+          "id": "metadata-retained",
+          "projected_bytes": 412311241
+        },
+        {
+          "base_bytes": 3775058240,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-MEASURED-PILOT",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION"
+          ],
+          "expansion_basis_points": 30007,
+          "id": "intermediate-qtx",
+          "projected_bytes": 11327817261
+        },
+        {
+          "base_bytes": 2271161297,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-MEASURED-PILOT",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION"
+          ],
+          "expansion_basis_points": 12197,
+          "id": "intermediate-sm",
+          "projected_bytes": 2770135434
+        },
+        {
+          "base_bytes": 475806600,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-MEASURED-PILOT",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION"
+          ],
+          "expansion_basis_points": 298,
+          "id": "intermediate-skem",
+          "projected_bytes": 14179037
+        },
+        {
+          "base_bytes": 646230188,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-MEASURED-PILOT",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION"
+          ],
+          "expansion_basis_points": 1132,
+          "id": "intermediate-anim",
+          "projected_bytes": 73153258
+        },
+        {
+          "base_bytes": 535720960,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-MEASURED-PILOT",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION"
+          ],
+          "expansion_basis_points": 3756,
+          "id": "intermediate-ter",
+          "projected_bytes": 201216793
+        },
+        {
+          "base_bytes": 169402911,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-ASSUME-STORAGE"
+          ],
+          "expansion_basis_points": 12000,
+          "id": "intermediate-audio",
+          "projected_bytes": 203283494
+        },
+        {
+          "base_bytes": 4481621,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-ASSUME-STORAGE"
+          ],
+          "expansion_basis_points": 20000,
+          "id": "intermediate-zif",
+          "projected_bytes": 8963242
+        },
+        {
+          "base_bytes": 164116709,
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-ASSUME-STORAGE"
+          ],
+          "expansion_basis_points": 40000,
+          "id": "intermediate-manual",
+          "projected_bytes": 656466836
+        },
+        {
+          "base_bytes": 15255215355,
+          "basis_ids": [
+            "BAS-ASSUME-STORAGE"
+          ],
+          "expansion_basis_points": 15000,
+          "id": "ue-content",
+          "projected_bytes": 22882823033
+        },
+        {
+          "base_bytes": 22882823033,
+          "basis_ids": [
+            "BAS-ASSUME-STORAGE"
+          ],
+          "expansion_basis_points": 20000,
+          "id": "build-cache",
+          "projected_bytes": 45765646066
+        },
+        {
+          "base_bytes": 93198014722,
+          "basis_ids": [
+            "BAS-ASSUME-STORAGE"
+          ],
+          "expansion_basis_points": 20000,
+          "id": "durable-recovery",
+          "projected_bytes": 186396029444
+        }
+      ],
+      "capacity_gap_bytes": 157406357379,
+      "capacity_sufficient": false,
+      "deduplication_savings_assumed": false,
+      "disk_free_bytes": 207498256384,
+      "disk_total_bytes": 1073742868480,
+      "duplicate_redundant_review_only_bytes": 1286887829,
+      "existing_workspace_bytes": 46162209723,
+      "incremental_required_bytes": 364904613763,
+      "intermediate_estimated_bytes": 15255215355,
+      "one_copy_bytes": 93198014722,
+      "recovery_bytes": 186396029444,
+      "recovery_copy_count": 2,
+      "risk_reserve_basis_points": 3500,
+      "risk_reserve_bytes": 94604899865,
+      "source_retained_bytes": 8882019027,
+      "total_budget_bytes": 411066823486,
+      "ue_content_estimated_bytes": 22882823033,
+      "unit": "bytes"
+    },
+    "program_forecast": {
+      "basis_ids": [
+        "BAS-PLAN-PROGRAM-PHASES",
+        "BAS-ASSUME-PROGRAM-SCENARIOS",
+        "BAS-RISK-PROGRAM",
+        "BAS-MISSING-G2-DELAY"
+      ],
+      "delivery_commitment": false,
+      "g2_blocking_delay_weeks": null,
+      "g2_delay_status": "unbounded",
+      "phase_ranges": [
+        {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES"
+          ],
+          "maximum_weeks": 10,
+          "minimum_weeks": 6,
+          "phase": "P3"
+        },
+        {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES"
+          ],
+          "maximum_weeks": 12,
+          "minimum_weeks": 8,
+          "phase": "P4"
+        },
+        {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES"
+          ],
+          "maximum_weeks": 16,
+          "minimum_weeks": 8,
+          "phase": "P5"
+        },
+        {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES"
+          ],
+          "maximum_weeks": 28,
+          "minimum_weeks": 16,
+          "phase": "P6"
+        },
+        {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES"
+          ],
+          "maximum_weeks": 40,
+          "minimum_weeks": 16,
+          "phase": "P7"
+        },
+        {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES"
+          ],
+          "maximum_weeks": 16,
+          "minimum_weeks": 8,
+          "phase": "P8"
+        }
+      ],
+      "scenarios": [
+        {
+          "base_weeks": {
+            "maximum": 103.7,
+            "minimum": 52.7
+          },
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES",
+            "BAS-ASSUME-PROGRAM-SCENARIOS",
+            "BAS-RISK-PROGRAM",
+            "BAS-MISSING-G2-DELAY"
+          ],
+          "core_fte": 8,
+          "id": "constrained",
+          "phase_overlap_basis_points": 8500,
+          "risk_reserve_basis_points": 3000,
+          "risk_reserve_weeks": {
+            "maximum": 31.11,
+            "minimum": 15.81
+          },
+          "shared_fte": 1,
+          "total_weeks": {
+            "maximum": 134.81,
+            "minimum": 68.51
+          }
+        },
+        {
+          "base_weeks": {
+            "maximum": 85.4,
+            "minimum": 43.4
+          },
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES",
+            "BAS-ASSUME-PROGRAM-SCENARIOS",
+            "BAS-RISK-PROGRAM",
+            "BAS-MISSING-G2-DELAY"
+          ],
+          "core_fte": 10,
+          "id": "recommended",
+          "phase_overlap_basis_points": 7000,
+          "risk_reserve_basis_points": 2500,
+          "risk_reserve_weeks": {
+            "maximum": 21.35,
+            "minimum": 10.85
+          },
+          "shared_fte": 1.5,
+          "total_weeks": {
+            "maximum": 106.75,
+            "minimum": 54.25
+          }
+        },
+        {
+          "base_weeks": {
+            "maximum": 73.2,
+            "minimum": 37.2
+          },
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES",
+            "BAS-ASSUME-PROGRAM-SCENARIOS",
+            "BAS-RISK-PROGRAM",
+            "BAS-MISSING-G2-DELAY"
+          ],
+          "core_fte": 12,
+          "id": "accelerated",
+          "phase_overlap_basis_points": 6000,
+          "risk_reserve_basis_points": 2000,
+          "risk_reserve_weeks": {
+            "maximum": 14.64,
+            "minimum": 7.44
+          },
+          "shared_fte": 2,
+          "total_weeks": {
+            "maximum": 87.84,
+            "minimum": 44.64
+          }
+        }
+      ],
+      "scope": "P3-P8"
+    },
+    "team_plan": {
+      "basis_ids": [
+        "BAS-ASSUME-WORKFORCE",
+        "BAS-ASSUME-PROGRAM-SCENARIOS"
+      ],
+      "content_specialist_fte": {
+        "maximum": 4,
+        "minimum": 2,
+        "recommended": 3
+      },
+      "productive_hours_per_fte_week": 28,
+      "scenarios": [
+        {
+          "basis_ids": [
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-ASSUME-PROGRAM-SCENARIOS"
+          ],
+          "content_specialist_fte": 2,
+          "core_fte": 8,
+          "id": "constrained",
+          "productive_hours_per_week": 28,
+          "shared_fte": 1
+        },
+        {
+          "basis_ids": [
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-ASSUME-PROGRAM-SCENARIOS"
+          ],
+          "content_specialist_fte": 3,
+          "core_fte": 10,
+          "id": "recommended",
+          "productive_hours_per_week": 28,
+          "shared_fte": 1.5
+        },
+        {
+          "basis_ids": [
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-ASSUME-PROGRAM-SCENARIOS"
+          ],
+          "content_specialist_fte": 4,
+          "core_fte": 12,
+          "id": "accelerated",
+          "productive_hours_per_week": 28,
+          "shared_fte": 2
+        }
+      ]
+    },
+    "risk_items": 8,
+    "missing_measurements": 11,
+    "decisions": {
+      "all_numeric_outputs_are_non_price_planning_values": true,
+      "g2_approved": false,
+      "money_budget_estimated": false,
+      "playable_experience_proven": false,
+      "release_authority": false,
+      "schedule_is_delivery_commitment": false
+    }
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/resource-budget-policy-v1.json",
+    "policy_sha256": "d5092b10984c71640d52ced7ef3d758c3b18d9d26314e2b88992cf8f47e4fe82",
+    "schema": "Contracts/data-schema/resource-budget-report-v1.schema.json",
+    "schema_sha256": "b91d5bb7c9d89339b08690cfa89cd3addf4e61fe8fb3b74e0c6bc4f733b156e5",
+    "pilot": "Data/Performance/p2-19-conversion-pilot.json",
+    "pilot_sha256": "725401c1032915948e28f01c380cd0b2bb821835afc83ecc0d87f2852dc18522"
+  },
+  "implementation": {
+    "source_files": 7,
+    "source_sha256": "1b990388048d332769c590c6810c938606d6f585748eeb44c89040efe22bfd57",
+    "generator": "Tools/TMXY.ResourceBudget/resource_budget.py",
+    "generator_sha256": "663d1cb037ba0c032d90ce666cd4d393585915b539e38da0f0f953b1a612568d",
+    "wrapper": "Tools/TMXY.ResourceBudget/New-ResourceBudgetReport.ps1",
+    "wrapper_sha256": "40c9ccb0baa7630ab873f633ecf798dffb0877272a8427115a2b25b886f47798",
+    "self_test_assertions": 12
+  },
+  "disclosure": {
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  },
+  "reproduction": {
+    "check_mode": false,
+    "repository_mount": "read-only",
+    "network": "none",
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20"
+    ],
+    "detail": "Execute the fail-closed G2 review; open measurements remain explicit and do not grant schedule, price, playable, gate, or release authority."
+  }
+}

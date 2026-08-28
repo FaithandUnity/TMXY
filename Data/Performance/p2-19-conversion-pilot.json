@@ -1,0 +1,369 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T16:42:43.4536385+00:00",
+  "result": "PASS",
+  "task_id": "P2-19-PILOT",
+  "evidence_kind": "conversion-pilot",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "measurement_complete": true,
+  "task_completion_claimed": false,
+  "protocol": {
+    "sample_families": [
+      "qtx",
+      "sm",
+      "skem",
+      "anim",
+      "ter"
+    ],
+    "warmup_runs_per_case": 1,
+    "measurement_runs_per_case": 5,
+    "timing_scope": "exporter process only; configure and build are excluded",
+    "median_method": "median of measured elapsed milliseconds",
+    "p80_method": "nearest-rank ceiling at 80 percent",
+    "output_stability": "SHA-256 over sorted generated filenames and bytes"
+  },
+  "selection": {
+    "source": "tracked P1-13 through P1-17 evidence",
+    "qtx": "upper-middle payload size after stable size and digest ordering",
+    "sm": "upper-middle payload size after stable size and digest ordering",
+    "skem": "canonical-player role",
+    "anim": "sample sharing the canonical-player skeletal identity",
+    "ter": "non-flat role",
+    "source_paths_emitted": false,
+    "object_names_emitted": false,
+    "sample_bytes_are_case_facts_not_population_bounds": true
+  },
+  "input_bindings": {
+    "p1": [
+      {
+        "family": "qtx",
+        "task_id": "P1-13",
+        "evidence": "Data/BuildBaseline/p1-13-qtx-texture.json",
+        "evidence_sha256": "66f705d349df177e8c6e6bc05c9fd56af08fb9f74f1b1cd12d3dfcdb99a17393"
+      },
+      {
+        "family": "sm",
+        "task_id": "P1-14",
+        "evidence": "Data/BuildBaseline/p1-14-sm-static-mesh.json",
+        "evidence_sha256": "4efbc6bd4a0ab527a586a193fbed444afc79c20c5b3558b3973cc51cc7086574"
+      },
+      {
+        "family": "skem",
+        "task_id": "P1-15",
+        "evidence": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json",
+        "evidence_sha256": "66b63fb13bc83661e63963d679806daa09a03a8e03df9da64e8483b2ce14af2d"
+      },
+      {
+        "family": "anim",
+        "task_id": "P1-16",
+        "evidence": "Data/BuildBaseline/p1-16-anim-animation.json",
+        "evidence_sha256": "b8591d360ccbde926e2e87cda24570ff5d80b270c1422e114d7e298396e06101"
+      },
+      {
+        "family": "ter",
+        "task_id": "P1-17",
+        "evidence": "Data/BuildBaseline/p1-17-ter-terrain.json",
+        "evidence_sha256": "e177b8f1399c8762f0d36a25b11ad63fbc708ce61c1839e58f153f64fd722677"
+      }
+    ],
+    "p2_15": {
+      "evidence": "Data/Inventory/p2-15-conversion-routing.json",
+      "evidence_sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+      "full_report_sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559",
+      "full_report_bytes": 21021383,
+      "full_report_lines": 40090
+    },
+    "selected_source_records_verified": 9,
+    "selected_unique_source_files_verified": 8
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy",
+    "exporters_compiled_before_measurement": 5
+  },
+  "isolation": {
+    "containers": 1,
+    "network": "none",
+    "repository_mount": "read-only",
+    "legacy_evidence_mount": "read-only",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "temporary_storage": "container tmpfs and cleaned Data/Local manifest"
+  },
+  "environment": {
+    "host": {
+      "logical_processors": 32,
+      "physical_memory_bytes": 203533176832
+    },
+    "container": {
+      "cgroup_cpu_max": "max 100000",
+      "cgroup_memory_max": "max",
+      "visible_logical_processors": 32,
+      "visible_memory_bytes": 99951980544
+    },
+    "storage": {
+      "workspace_volume": "E:",
+      "workspace_volume_total_bytes": 1073742868480,
+      "workspace_volume_available_bytes": 207498256384,
+      "rebuild_bytes": 46162209723,
+      "git_database_bytes": 7860433,
+      "tracked_worktree_bytes": 21269303,
+      "generated_directories_bytes": 34278976046,
+      "generated_breakdown": [
+        {
+          "scope": "data_exports",
+          "bytes": 619872916
+        },
+        {
+          "scope": "generated_contracts",
+          "bytes": 27436
+        },
+        {
+          "scope": "native_build",
+          "bytes": 16928309
+        },
+        {
+          "scope": "ue_binaries",
+          "bytes": 1242030548
+        },
+        {
+          "scope": "ue_intermediate",
+          "bytes": 8092234191
+        },
+        {
+          "scope": "ue_saved",
+          "bytes": 24307882646
+        }
+      ]
+    }
+  },
+  "routing_by_family": [
+    {
+      "family": "anim",
+      "files": 1069,
+      "jobs": 1069,
+      "aliases": 0,
+      "bytes": 655802200,
+      "ready": 1039,
+      "manual": 30,
+      "ready_job_bytes": 646230188,
+      "manual_job_bytes": 9572012
+    },
+    {
+      "family": "mp3",
+      "files": 64,
+      "jobs": 61,
+      "aliases": 3,
+      "bytes": 124002521,
+      "ready": 64,
+      "manual": 0,
+      "ready_job_bytes": 118276131,
+      "manual_job_bytes": 0
+    },
+    {
+      "family": "qtx",
+      "files": 24798,
+      "jobs": 24798,
+      "aliases": 0,
+      "bytes": 3910277648,
+      "ready": 24042,
+      "manual": 756,
+      "ready_job_bytes": 3775058240,
+      "manual_job_bytes": 135219408
+    },
+    {
+      "family": "skem",
+      "files": 1068,
+      "jobs": 990,
+      "aliases": 78,
+      "bytes": 515443174,
+      "ready": 1066,
+      "manual": 2,
+      "ready_job_bytes": 475806600,
+      "manual_job_bytes": 229700
+    },
+    {
+      "family": "sm",
+      "files": 2924,
+      "jobs": 2826,
+      "aliases": 98,
+      "bytes": 2307762148,
+      "ready": 2912,
+      "manual": 12,
+      "ready_job_bytes": 2271161297,
+      "manual_job_bytes": 19095589
+    },
+    {
+      "family": "ter",
+      "files": 8876,
+      "jobs": 3632,
+      "aliases": 5244,
+      "bytes": 1309215704,
+      "ready": 8876,
+      "manual": 0,
+      "ready_job_bytes": 535720960,
+      "manual_job_bytes": 0
+    },
+    {
+      "family": "wav",
+      "files": 450,
+      "jobs": 419,
+      "aliases": 31,
+      "bytes": 54949730,
+      "ready": 450,
+      "manual": 0,
+      "ready_job_bytes": 51126780,
+      "manual_job_bytes": 0
+    },
+    {
+      "family": "zif",
+      "files": 841,
+      "jobs": 806,
+      "aliases": 35,
+      "bytes": 4565902,
+      "ready": 841,
+      "manual": 0,
+      "ready_job_bytes": 4481621,
+      "manual_job_bytes": 0
+    }
+  ],
+  "routing_totals": {
+    "files": 40090,
+    "jobs": 34601,
+    "aliases": 5489,
+    "bytes": 8882019027,
+    "ready": 39290,
+    "manual": 800,
+    "ready_job_bytes": 7877861817,
+    "manual_job_bytes": 164116709
+  },
+  "extrapolation_invariants": {
+    "throughput_population": "conversion jobs only",
+    "ready_job_count": 33801,
+    "manual_job_count": 800,
+    "alias_file_count": 5489,
+    "aliases_excluded_from_job_counts": true,
+    "aliases_excluded_from_ready_job_bytes": true,
+    "ready_job_bytes_plus_manual_job_bytes": 8041978526,
+    "full_asset_bytes_include_aliases": 8882019027
+  },
+  "cases": [
+    {
+      "case_id": "6e4afb3772d098e0ae31e70747e616c22878ab99bf2b09dcaff1f2f21b604142",
+      "descriptor_bytes": 222,
+      "elapsed_ms": [
+        24.133,
+        25.981,
+        24.365,
+        21.958,
+        23.142
+      ],
+      "family": "qtx",
+      "input_bytes": 1048798,
+      "median_ms": 24.133,
+      "output_bytes": 3147065,
+      "output_file_count": 4,
+      "output_hash_stable": true,
+      "output_sha256": "a5de3b19d41ae007bb93049a78753c1583558ff1c3ce5511dc47e335b8db7892",
+      "output_size_stable": true,
+      "p80_ms": 24.365,
+      "payload_bytes": 1048576
+    },
+    {
+      "case_id": "44e65692a727695348746221cd7c2d153e995e9fbb2fccdcf93c0e11cb027d0e",
+      "descriptor_bytes": 43554,
+      "elapsed_ms": [
+        288.873,
+        323.082,
+        265.362,
+        260.726,
+        286.119
+      ],
+      "family": "sm",
+      "input_bytes": 12229025,
+      "median_ms": 286.119,
+      "output_bytes": 14915451,
+      "output_file_count": 4,
+      "output_hash_stable": true,
+      "output_sha256": "7a26fdf07872f7cdafc98d6b8a8e22c1275e80b46ee3d8a9ca1361dd929c0903",
+      "output_size_stable": true,
+      "p80_ms": 288.873,
+      "payload_bytes": 12185471
+    },
+    {
+      "case_id": "16a50c4d9edf3659cb4cd91bc214c419f11f13d49885e9f9b1611846147e06ce",
+      "descriptor_bytes": 281615,
+      "elapsed_ms": [
+        1284.044,
+        1322.54,
+        1309.893,
+        1281.854,
+        1259.246
+      ],
+      "family": "skem",
+      "input_bytes": 95981755,
+      "median_ms": 1284.044,
+      "output_bytes": 2855065,
+      "output_file_count": 4,
+      "output_hash_stable": true,
+      "output_sha256": "62e247970bf61eb3fa82b8afe4b389d136d237d73a16e8cfd2eccc2294570f6d",
+      "output_size_stable": true,
+      "p80_ms": 1309.893,
+      "payload_bytes": 95700140
+    },
+    {
+      "case_id": "c6238bef27f5947a6abd18442719a4a35a2d978c7e21fae9312b295ae80dc9db",
+      "descriptor_bytes": 281615,
+      "elapsed_ms": [
+        303.659,
+        294.543,
+        371.295,
+        348.951,
+        293.101
+      ],
+      "family": "anim",
+      "input_bytes": 33137431,
+      "median_ms": 303.659,
+      "output_bytes": 3749298,
+      "output_file_count": 2,
+      "output_hash_stable": true,
+      "output_sha256": "e915847762ace459f3effc5d50a8401d328e52f586cf2f33e924ff913b35fad4",
+      "output_size_stable": true,
+      "p80_ms": 348.951,
+      "payload_bytes": 32855816
+    },
+    {
+      "case_id": "c5e0a61e15c38361460b22d4dc2aa639e9e745b7dc585394569e469f0c7d2d82",
+      "descriptor_bytes": 0,
+      "elapsed_ms": [
+        4.741,
+        4.784,
+        5.367,
+        4.544,
+        4.459
+      ],
+      "family": "ter",
+      "input_bytes": 147501,
+      "median_ms": 4.741,
+      "output_bytes": 55401,
+      "output_file_count": 4,
+      "output_hash_stable": true,
+      "output_sha256": "c2d50bd3363186c8e68a5dedbe64b879686f8a0b16659cb8382150e23d98025f",
+      "output_size_stable": true,
+      "p80_ms": 4.784,
+      "payload_bytes": 147501
+    }
+  ],
+  "disclosure": {
+    "legacy_source_paths": false,
+    "legacy_object_names": false,
+    "raw_table_rows": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "decoded_confidential_payloads": false
+  }
+}

@@ -121,4 +121,9 @@ u8/u16/等级/Tombstone 风险，并冻结 8,090 个旧源码文件中的四类�
 绑定，以及解析、损坏、不透明/未知、引用、转换、工作量、容量和 13 项风险清单。加
 `-VerifyDerivedSources` 会在锁定、断网、只读容器中逐 byte 重建 JSON 与 Markdown 报告。
 
+`Contract/Test-ResourceBudget.ps1` 验证 P2-19 对 P2-15、P2-18 和五类匿名转换试验的精确
+哈希绑定，并把实测事实、规划系数、假设、风险储备和缺失实测严格分开。专项合同拒绝
+极值选样、alias 重复计费、basis 错分和冻结证据篡改；加 `-VerifyDerivedSources` 会在锁定、
+断网、只读容器中逐 byte 重建预算 JSON 与 Markdown，并比较完整机器证据。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

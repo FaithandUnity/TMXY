@@ -17,6 +17,13 @@ maps every frozen check name. The source contract is validated by
 `Tests/CI/Test-HostedWorkflowContract.ps1`; only a successful protected hosted
 run may issue release evidence.
 
+The aggregate also runs the P2-19 resource-budget contract. Full verification
+regenerates its JSON and Markdown in the locked non-root builder with a
+read-only repository mount and no network, then compares the complete frozen
+evidence object. A passing budget contract proves deterministic accounting;
+open measurements, capacity gaps, G2 blockers, and release authority remain
+independent fail-closed decisions.
+
 ## Cache keys and trust boundary
 
 Cache keys include operating system, architecture, compiler identity, CMake

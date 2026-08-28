@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-19",
+  "source_build": "qy-3.0.0.413",
+  "input_contracts": {
+    "conversion_routing": {
+      "task_id": "P2-15",
+      "path": "Data/Inventory/p2-15-conversion-routing.json",
+      "requires_pass": true,
+      "requires_complete": true,
+      "requires_exact_sha256_binding": true
+    },
+    "content_health": {
+      "task_id": "P2-18",
+      "path": "Data/Inventory/p2-18-content-health.json",
+      "requires_pass": true,
+      "requires_complete": true,
+      "requires_exact_sha256_binding": true
+    },
+    "conversion_pilot": {
+      "task_id": "P2-19-PILOT",
+      "path": "Data/Performance/p2-19-conversion-pilot.json",
+      "requires_pass": true,
+      "requires_complete": true,
+      "requires_exact_sha256_binding": true
+    }
+  },
+  "basis_categories": [
+    "measured_fact",
+    "planning_coefficient",
+    "assumption",
+    "risk_reserve",
+    "missing_measurement"
+  ],
+  "route_risk_reserve_basis_points": {
+    "automatic-qualified-interchange": 2500,
+    "automatic-standard-audio": 2500,
+    "semi-automatic-navigation-adaptation": 4000,
+    "manual-descriptor-recovery": 5000,
+    "manual-repair-or-replace": 7500
+  },
+  "workforce_policy": {
+    "productive_hours_per_fte_week": 28,
+    "content_specialist_fte": {
+      "minimum": 2,
+      "recommended": 3,
+      "maximum": 4
+    }
+  },
+  "program_phase_ranges_weeks": {
+    "P3": {
+      "minimum": 6,
+      "maximum": 10
+    },
+    "P4": {
+      "minimum": 8,
+      "maximum": 12
+    },
+    "P5": {
+      "minimum": 8,
+      "maximum": 16
+    },
+    "P6": {
+      "minimum": 16,
+      "maximum": 28
+    },
+    "P7": {
+      "minimum": 16,
+      "maximum": 40
+    },
+    "P8": {
+      "minimum": 8,
+      "maximum": 16
+    }
+  },
+  "program_scenarios": {
+    "constrained": {
+      "core_fte": 8,
+      "shared_fte": 1,
+      "phase_overlap_basis_points": 8500,
+      "risk_reserve_basis_points": 3000
+    },
+    "recommended": {
+      "core_fte": 10,
+      "shared_fte": 1.5,
+      "phase_overlap_basis_points": 7000,
+      "risk_reserve_basis_points": 2500
+    },
+    "accelerated": {
+      "core_fte": 12,
+      "shared_fte": 2,
+      "phase_overlap_basis_points": 6000,
+      "risk_reserve_basis_points": 2000
+    }
+  },
+  "machine_projection": {
+    "risk_reserve_basis_points": 5000
+  },
+  "storage_projection": {
+    "output_expansion_basis_points": {
+      "audio": 12000,
+      "zif": 20000,
+      "manual": 40000
+    },
+    "ue_content_per_intermediate_basis_points": 15000,
+    "build_cache_per_ue_content_basis_points": 20000,
+    "recovery_copy_count": 2,
+    "total_risk_reserve_basis_points": 3500
+  },
+  "money_budget": {
+    "estimated": false,
+    "currency": null,
+    "amount": null,
+    "reason": "Labor, infrastructure, storage, licensing, and regional currency rates are not supplied.",
+    "missing_inputs": [
+      "currency",
+      "labor_rate_by_role",
+      "machine_rate_by_profile",
+      "storage_rate_by_tier",
+      "license_and_vendor_rates"
+    ]
+  },
+  "authority_policy": {
+    "all_numeric_outputs_are_non_price_planning_values": true,
+    "all_schedule_outputs_are_scenarios_not_commitments": true,
+    "measured_facts_must_not_be_reclassified_as_assumptions": true,
+    "planning_coefficients_must_not_be_reclassified_as_measurements": true,
+    "risk_reserve_must_be_reported_separately_from_base": true,
+    "missing_measurements_must_remain_explicit": true,
+    "review_only_duplicate_bytes_are_not_authorized_savings": true,
+    "money_budget_must_remain_not_estimated_without_rates_and_currency": true,
+    "forbids_claiming_playable_experience": true,
+    "forbids_claiming_g2_approval": true,
+    "forbids_claiming_release_authority": true
+  },
+  "output_policy": {
+    "machine_report_tracked_in_git": true,
+    "human_report_tracked_in_git": true,
+    "tracked_outputs_contain_private_source_paths": false,
+    "tracked_outputs_contain_exact_primary_keys": false,
+    "tracked_outputs_contain_observed_extrema": false,
+    "tracked_outputs_contain_raw_rows": false,
+    "tracked_outputs_contain_decoded_confidential_payloads": false,
+    "tracked_outputs_contain_legacy_source_lines": false,
+    "tracked_outputs_contain_prices": false,
+    "tracked_outputs_contain_schedule_commitments": false
+  },
+  "completion_policy": {
+    "requires_all_input_contracts_exactly_bound": true,
+    "requires_all_five_basis_categories": true,
+    "requires_human_machine_storage_and_program_projections": true,
+    "requires_separate_base_and_risk_reserve_values": true,
+    "requires_money_budget_missing_measurement": true,
+    "requires_deterministic_json_and_markdown": true,
+    "allows_open_measurement_gaps_when_explicit": true
+  }
+}

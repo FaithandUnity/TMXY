@@ -163,6 +163,11 @@ if ($VerifyLegacyGoldenSources) { $contentHealthArguments.VerifyDerivedSources =
 $contentHealth = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-ContentHealth.ps1') `
     -Arguments $contentHealthArguments
+$resourceBudgetArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $resourceBudgetArguments.VerifyDerivedSources = $true }
+$resourceBudget = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ResourceBudget.ps1') `
+    -Arguments $resourceBudgetArguments
 $fullAssetArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
 $fullAssetInventory = Invoke-JsonTest `
@@ -305,6 +310,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$protocolCodegen.completion_criteria_satisfied -and
     [string]$contentHealth.result -eq 'PASS' -and
     [bool]$contentHealth.completion_criteria_satisfied -and
+    [string]$resourceBudget.result -eq 'PASS' -and
+    [bool]$resourceBudget.completion_criteria_satisfied -and
     [string]$fullAssetInventory.result -eq 'PASS' -and
     [bool]$fullAssetInventory.completion_criteria_satisfied -and
     [string]$referenceClosure.result -eq 'PASS' -and
@@ -380,6 +387,7 @@ $report = [pscustomobject][ordered]@{
     id_limit_audit = $idLimitAudit
     protocol_codegen = $protocolCodegen
     content_health = $contentHealth
+    resource_budget = $resourceBudget
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure
     asset_health = $assetHealth

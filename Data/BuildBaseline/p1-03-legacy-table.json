@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-27T23:26:58.1302021+00:00",
+  "captured_utc": "2026-08-28T01:18:51.4508308+00:00",
   "result": "PASS",
   "task": "P1-03",
   "source_file_count": 7,
-  "source_sha256": "6ce0582eef991ec14154695bc5fa63b93a6bf04791205702070741a7b042877a",
+  "source_sha256": "96f7f078064b5b5c64c4fc185583def83c893ea8b4e613476af811d698fb1f91",
   "error_schema_version": 1,
   "legacy_format_evidence": [
     {

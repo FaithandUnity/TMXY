@@ -111,6 +111,9 @@ $ueTerrainImport = Invoke-JsonTest `
 $goldenTestMatrix = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-GoldenTestMatrix.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$g1FormatReview = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G1FormatReview.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
@@ -200,6 +203,8 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$ueTerrainImport.completion_criteria_satisfied -and
     [string]$goldenTestMatrix.result -eq 'PASS' -and
     [bool]$goldenTestMatrix.completion_criteria_satisfied -and
+    [string]$g1FormatReview.result -eq 'PASS' -and
+    [bool]$g1FormatReview.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
     [string]$hostedWorkflowContract.result -eq 'PASS' -and
@@ -251,6 +256,7 @@ $report = [pscustomobject][ordered]@{
     ue_animation_import = $ueAnimationImport
     ue_terrain_import = $ueTerrainImport
     golden_test_matrix = $goldenTestMatrix
+    g1_format_review = $g1FormatReview
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
     hosted_workflow_contract = $hostedWorkflowContract

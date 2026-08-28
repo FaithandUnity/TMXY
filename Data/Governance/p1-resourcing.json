@@ -61,5 +61,11 @@
     "contract": "Data/Governance/p1-local-start-waiver.json",
     "document": "Docs/Waivers/WVR-0001-p1-local-start-before-g0.md",
     "scope": "P1-01_through_P1-27_local_evidence"
+  },
+  "g1_stage_authorization": {
+    "id": "AUTH-2026-08-28-P1-28",
+    "contract": "Data/Governance/p1-g1-stage-authorization.json",
+    "review": "Data/BuildBaseline/p1-28-g1-format-review.json",
+    "scope": "P1-28_and_G1_format_gate_only"
   }
 }

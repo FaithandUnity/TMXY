@@ -42,3 +42,11 @@ and pull-request evidence for `FaithandUnity/TMXY`. That later authorization
 supersedes this waiver's remote/login prohibition only for P0-12 GitHub CI
 onboarding. It does not extend the P1 scope, disclose a Secret, authorize branch
 protection/plan/publicity/runner/signing changes, or approve G0/G1.
+
+## 2026-08-28 P1-28/G1 authorization
+
+After P1-01 through P1-27 completed, the project lead issued the separate
+bounded authorization `AUTH-2026-08-28-P1-28`. It supersedes this document's G1
+prohibition only for executing P1-28 and deciding the technical G1 format gate.
+Every other WVR-0001 boundary remains unchanged, including no G0/P0 completion,
+no release-authority claim, read-only legacy inputs, and no Secret disclosure.

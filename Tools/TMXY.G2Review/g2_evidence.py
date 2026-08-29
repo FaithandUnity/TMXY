@@ -1,42 +1,34 @@
 #!/usr/bin/env python3
 """Hash binding and supplemental fact evaluation for the P2-20 G2 review."""
-
 from __future__ import annotations
-
 import hashlib
 import json
 import re
 from pathlib import Path
 from typing import Any
-
 from g2_descriptor import bind_descriptor_diagnostics
-
+from g2_aux_semantic import bind_aux_semantic_diagnostics
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as stream:
         value = json.load(stream)
     if not isinstance(value, dict):
         raise ValueError(f"JSON root must be an object: {path.name}")
     return value
-
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
-
 def is_sha256(value: Any) -> bool:
     return isinstance(value, str) and bool(re.fullmatch(r"[0-9a-f]{64}", value))
-
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise ValueError(message)
-
 def is_safe_relative(relative: str) -> bool:
     candidate = Path(relative)
     return (bool(relative) and "\\" not in relative and not relative.startswith("/") and
             not candidate.is_absolute() and ".." not in candidate.parts)
-
 def resolve_inside(root: Path, relative: str) -> Path:
     require(is_safe_relative(relative), "Path is not repository-relative")
     candidate = (root / relative).resolve()
@@ -127,6 +119,11 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
     evidence["P2-20A.4"] = descriptor
     aggregate_lines.append(descriptor_aggregate)
 
+    aux_semantic_binding, aux_semantic, aux_semantic_aggregate = bind_aux_semantic_diagnostics(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.5"] = aux_semantic
+    aggregate_lines.append(aux_semantic_aggregate)
+
     remediation_spec = policy["remediation"]
     remediation_relative = remediation_spec["path"]
     remediation_path = resolve_inside(root, remediation_relative)
@@ -188,6 +185,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "prerequisites": bindings,
         "supplemental": supplemental_binding,
         "descriptor_diagnostics": descriptor_binding,
+        "aux_semantic_diagnostics": aux_semantic_binding,
         "remediation": remediation_binding,
         "quality": {
             "path": quality_relative,

@@ -15,6 +15,7 @@ $evidencePath = Join-Path $root 'Data\Inventory\p2-20-g2-review.json'
 $qualityPath = Join-Path $root 'Data\BuildBaseline\p0-12-local-quality-gates.json'
 $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
 $descriptorDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json'
+$auxSemanticDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-aux-semantic-diagnostics-report.json'
 $auxiliaryReportPath = Join-Path $root 'Data\Reports\p2-20a-aux-config-reference-report.json'
 $remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
 $reviewPacketsPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
@@ -25,6 +26,7 @@ $authoritySchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-decis
 $reviewPacketSchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-review-packets-v2.schema.json'
 $generatorPath = Join-Path $root 'Tools\TMXY.G2Review\g2_review.py'
 $helperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_evidence.py'
+$auxSemanticHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_aux_semantic.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $assertions = [Collections.Generic.List[object]]::new()
 
@@ -165,6 +167,11 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.descriptor_diagnostics.evidence_revision -eq 'P2-20A.4' -and
         $Candidate.descriptor_diagnostics.path -eq
             'Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json' -and
+        $Candidate.aux_semantic_diagnostics.task_id -eq 'P2-20A' -and
+        $Candidate.aux_semantic_diagnostics.criterion_id -eq 'G2-06' -and
+        $Candidate.aux_semantic_diagnostics.evidence_revision -eq 'P2-20A.5' -and
+        $Candidate.aux_semantic_diagnostics.path -eq
+            'Data/Reports/p2-20a-aux-semantic-diagnostics-report.json' -and
         $Candidate.remediation.task_id -eq 'P2-20B' -and
         $Candidate.remediation.criterion_id -eq 'G2-07' -and
         $Candidate.remediation.path -eq 'Data/Governance/p2-g2-migration-decisions.json' -and
@@ -246,6 +253,14 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -ne 3617 -or
         (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -ne 15 -or
         (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -ne 19 -or
+        (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -ne $true -or
+        (Get-Metric $g206 'aux_semantic_scope_complete') -ne $false -or
+        (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -ne $false -or
+        (Get-Metric $g206 'aux_semantic_unique_references') -ne 3180 -or
+        (Get-Metric $g206 'aux_semantic_ambiguous_objects') -ne 211 -or
+        (Get-Metric $g206 'aux_semantic_unresolved_resources') -ne 1 -or
+        (Get-Metric $g206 'aux_semantic_ecf_parser_differences') -ne 3 -or
+        (Get-Metric $g206 'aux_semantic_ecf_missed_assignments') -ne 4 -or
         (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $true -or
         (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21460 -or
         (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 15 -or
@@ -308,10 +323,12 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
-    $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxiliaryReportPath,
+    $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxSemanticDiagnosticPath,
+    $auxiliaryReportPath,
     $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
-    $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath, $wrapperPath)
+    $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath,
+    $auxSemanticHelperPath, $wrapperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -336,6 +353,8 @@ $quality = Get-Content -LiteralPath $qualityPath -Raw -Encoding UTF8 |
 $supplemental = Get-Content -LiteralPath $supplementalPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $descriptorDiagnostic = Get-Content -LiteralPath $descriptorDiagnosticPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$auxSemanticDiagnostic = Get-Content -LiteralPath $auxSemanticDiagnosticPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $auxiliaryReport = Get-Content -LiteralPath $auxiliaryReportPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
@@ -454,6 +473,7 @@ foreach ($index in 0..18) {
 $qualityBinding = $report.input_bindings.quality
 $supplementalBinding = $report.input_bindings.supplemental
 $descriptorBinding = $report.input_bindings.descriptor_diagnostics
+$auxSemanticBinding = $report.input_bindings.aux_semantic_diagnostics
 $remediationBinding = $report.input_bindings.remediation
 $bindingsPassed = $bindingsPassed -and
     $supplementalBinding.task_id -eq $policy.supplemental.task_id -and
@@ -480,6 +500,19 @@ $bindingsPassed = $bindingsPassed -and
     $descriptorDiagnostic.result -eq 'BLOCKED' -and
     $descriptorDiagnostic.g2_06_satisfied -eq $false
 $aggregateLines.Add("DESCRIPTOR|$($descriptorBinding.task_id)|$($descriptorBinding.criterion_id)|$($descriptorBinding.evidence_revision)|$($descriptorBinding.path)|$($descriptorBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and
+    $auxSemanticBinding.task_id -eq $policy.aux_semantic_diagnostics.task_id -and
+    $auxSemanticBinding.criterion_id -eq $policy.aux_semantic_diagnostics.criterion_id -and
+    $auxSemanticBinding.evidence_revision -eq $policy.aux_semantic_diagnostics.evidence_revision -and
+    $auxSemanticBinding.path -eq $policy.aux_semantic_diagnostics.path -and
+    $auxSemanticBinding.sha256 -eq (Get-Sha256 $auxSemanticDiagnosticPath) -and
+    $auxSemanticDiagnostic.evidence_revision -eq 'P2-20A.5' -and
+    $auxSemanticDiagnostic.review_execution_result -eq 'PASS' -and
+    $auxSemanticDiagnostic.diagnostic_scope_complete -eq $true -and
+    $auxSemanticDiagnostic.scope_complete -eq $false -and
+    $auxSemanticDiagnostic.result -eq 'BLOCKED' -and
+    $auxSemanticDiagnostic.g2_06_satisfied -eq $false
+$aggregateLines.Add("AUX_SEMANTIC|$($auxSemanticBinding.task_id)|$($auxSemanticBinding.criterion_id)|$($auxSemanticBinding.evidence_revision)|$($auxSemanticBinding.path)|$($auxSemanticBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
     $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
@@ -522,6 +555,14 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -eq 3617 -and
     (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -eq 15 -and
     (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -eq 19 -and
+    (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -eq $true -and
+    (Get-Metric $g206 'aux_semantic_scope_complete') -eq $false -and
+    (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -eq $false -and
+    (Get-Metric $g206 'aux_semantic_unique_references') -eq 3180 -and
+    (Get-Metric $g206 'aux_semantic_ambiguous_objects') -eq 211 -and
+    (Get-Metric $g206 'aux_semantic_unresolved_resources') -eq 1 -and
+    (Get-Metric $g206 'aux_semantic_ecf_parser_differences') -eq 3 -and
+    (Get-Metric $g206 'aux_semantic_ecf_missed_assignments') -eq 4 -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolved_targets -eq 21292 -and
@@ -737,6 +778,21 @@ $negativeCases.descriptor_sha_tamper_rejected =
     (Test-AgainstSchema $badDescriptorSha) -and
     $badDescriptorSha.input_bindings.descriptor_diagnostics.sha256 -ne
         (Get-Sha256 $descriptorDiagnosticPath)
+$missingAuxSemanticSha = Copy-JsonObject $report
+[void]$missingAuxSemanticSha.input_bindings.aux_semantic_diagnostics.PSObject.Properties.Remove('sha256')
+$negativeCases.missing_aux_semantic_sha_rejected = -not (Test-AgainstSchema $missingAuxSemanticSha)
+$badAuxSemanticSha = Copy-JsonObject $report
+$badAuxSemanticSha.input_bindings.aux_semantic_diagnostics.sha256 = '0' * 64
+$negativeCases.aux_semantic_sha_tamper_rejected =
+    (Test-AgainstSchema $badAuxSemanticSha) -and
+    $badAuxSemanticSha.input_bindings.aux_semantic_diagnostics.sha256 -ne
+        (Get-Sha256 $auxSemanticDiagnosticPath)
+$badAuxSemanticReady = Copy-JsonObject $report
+Set-Metric (Get-Criterion $badAuxSemanticReady 'G2-06') 'aux_semantic_scope_complete' $true
+Set-Metric (Get-Criterion $badAuxSemanticReady 'G2-06') 'aux_semantic_g2_06_satisfied' $true
+$negativeCases.aux_semantic_false_readiness_rejected =
+    (Test-AgainstSchema $badAuxSemanticReady) -and
+    -not (Test-G2Semantics $badAuxSemanticReady $policy)
 $badAuxMetric = Copy-JsonObject $report
 Set-Metric (Get-Criterion $badAuxMetric 'G2-06') `
     'auxiliary_reference_evidence_hash_bound' $false

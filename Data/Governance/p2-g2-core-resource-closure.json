@@ -26,7 +26,7 @@
   "logical_gap_count": 21024,
   "report": {
     "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-    "sha256": "31e28d3673ba7fe8ae240c392c433c669238612d88059769c40946df4ce5e315"
+    "sha256": "c8f0ba4006c1ab78ad0e712c47ed24f4b13aab34ad50a2cfde92f6ed028672d8"
   },
   "decisions": {
     "first_candidate_selection_authorized": false,

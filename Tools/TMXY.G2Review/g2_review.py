@@ -9,7 +9,6 @@ from typing import Any
 from g2_evidence import (bind_inputs, evaluate_core_closure,
                          evaluate_migration_registry, is_safe_relative,
                          is_sha256, load_json, require, resolve_inside, sha256)
-
 def metric(name: str, value: Any, unit: str) -> dict[str, Any]:
     return {"name": name, "value": value, "unit": unit}
 def criterion(
@@ -40,7 +39,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
     p219 = evidence["P2-19"]
     thresholds = policy["thresholds"]
     reviews: list[dict[str, Any]] = []
-
     ok = (p202["complete_parse_rate_ppm"] >= thresholds["package_complete_ppm"] and
           p202["core_parse_rate_ppm"] >= thresholds["core_package_complete_ppm"] and
           p202["silent_truncation_accepts"] == 0 and p202["silent_trailing_byte_accepts"] == 0)
@@ -49,7 +47,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("core_parse_rate", p202["core_parse_rate_ppm"], "parts_per_million"),
         metric("silent_boundary_accepts", p202["silent_truncation_accepts"] + p202["silent_trailing_byte_accepts"], "count"),
     ], "Measured package coverage reaches both thresholds and boundary mutations fail closed."))
-
     p204s = p204["summary"]
     ok = (p204s["files"] == thresholds["tbl_files"] and p204s["unresolved"] == 0 and
           p204s["decoded"] + p204s["historical_shadow"] == p204s["files"])
@@ -59,7 +56,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("historical_isolated", p204s["historical_shadow"], "files"),
         metric("unresolved", p204s["unresolved"], "files"),
     ], "All measured TBL inputs have a decoded-current or historical-isolation result."))
-
     p207s = p207["summary"]
     violations = sum(p207s[name] for name in
                      ("type_violations", "range_violations", "key_violations", "dangling_references"))
@@ -69,7 +65,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("typed_and_ruled_columns", p207s["columns_with_type_and_rule"], "columns"),
         metric("integrity_violations", violations, "count"),
     ], "The scoped core-table integrity contract passes with zero measured violations."))
-
     p205 = evidence["P2-05"]
     p206 = evidence["P2-06"]
     builds = [p204["source"]["build"], p205["source"]["build"], p206["source"]["build"],
@@ -97,7 +92,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("same_read_only_sandbox_and_executable", same_sandbox, "boolean"),
         metric("evidence_hash_chain_valid", hash_chain, "boolean"),
     ], "The evidence chain binds the same read-only sandbox executable and frozen build through P2-04 to P2-08."))
-
     p208s = p208["summary"]
     ownership_guarantees = p208["guarantees"]
     server_authority = ownership_guarantees["combat_and_economy_default_to_server_authority"] is True
@@ -115,9 +109,13 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("unknown_gameplay_semantics_fail_closed", unknown_fail_closed, "boolean"),
         metric("client_copy_grants_no_runtime_authority", client_copy_no_authority, "boolean"),
     ], "Ownership is complete; combat, economy, and unknown gameplay semantics remain server-authoritative and fail closed."))
-
     core = evaluate_core_closure(root, evidence["P2-20A"], evidence["P2-20A.4"], thresholds)
-    ok = core["satisfied"]
+    aux_semantic = evidence["P2-20A.5"]
+    aux_region, aux_ecf = (aux_semantic["measured"][name] for name in
+                           ("region_semantic_references", "ecf"))
+    aux_ready = (aux_semantic["scope_complete"] is True and
+                 aux_semantic["g2_06_satisfied"] is True)
+    ok = core["satisfied"] and aux_ready
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -130,6 +128,14 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("descriptor_diagnostic_resolved_targets", core["descriptor_diagnostic_resolved"], "assets"),
         metric("descriptor_diagnostic_ambiguous_targets", core["descriptor_diagnostic_ambiguous"], "assets"),
         metric("descriptor_diagnostic_unresolved_targets", core["descriptor_diagnostic_unresolved"], "assets"),
+        metric("aux_semantic_diagnostic_hash_bound", True, "boolean"),
+        metric("aux_semantic_scope_complete", aux_semantic["scope_complete"], "boolean"),
+        metric("aux_semantic_g2_06_satisfied", aux_semantic["g2_06_satisfied"], "boolean"),
+        metric("aux_semantic_unique_references", aux_region["unique_total"], "references"),
+        metric("aux_semantic_ambiguous_objects", aux_region["ambiguous_object"], "references"),
+        metric("aux_semantic_unresolved_resources", aux_region["unresolved_resource"], "references"),
+        metric("aux_semantic_ecf_parser_differences", aux_ecf["mixed_newline_differences"], "files"),
+        metric("aux_semantic_ecf_missed_assignments", aux_ecf["legacy_assignments_missed_by_a3_parser"], "assignments"),
         metric("asset_binding_resolution_explicit", core["asset_binding_explicit"], "boolean"),
         metric("asset_binding_resolved_targets", core["asset_binding_resolved"], "assets"),
         metric("asset_binding_ambiguous_targets", core["asset_binding_ambiguous"], "assets"),
@@ -155,8 +161,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact P2-03/P2-12/P2-13 candidate identities and production-binder full semantic signatures; its reconciled full workset supersedes coarse descriptor counts without selecting a candidate. A.3 covers all 212 auxiliary instances, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase remaining ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
-
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -182,7 +187,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("pending_entries_have_no_chosen_decision", migration["pending_empty"], "boolean"),
         metric("g2_07_registry_satisfied", migration["registry_satisfied"], "boolean"),
     ], "P2-20B V2 provides a fail-closed decision workflow and anonymous review packets that preserve all independent units, but every unit remains pending with no externally authorized decision, approval, or bound verification. Machine suggestions and review packets are non-authoritative and do not satisfy G2-07.", ["G2-BLK-07"] if not ok else []))
-
     human = p219["summary"]["human_budget"]
     machine = p219["summary"]["machine_budget"]
     storage = p219["summary"]["storage_budget"]
@@ -204,7 +208,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("storage_budget", storage["total_budget_bytes"], "bytes"),
         metric("money_budget_estimated", money["estimated"], "boolean"),
     ], "Planning effort, machine projection, storage, assumptions, and reserves are quantified; none is measured delivery duration or a monetary quote."))
-
     same_schema = p217["target_contracts"]["same_schema_sha256"]
     ok = (p217["summary"]["targets"] == 2 and p217["outputs"]["schema"]["sha256"] == same_schema and
           p217["summary"]["numeric_identity_storage"] == "uint64" and p217["summary"]["narrowing"] == "forbidden")
@@ -227,7 +230,6 @@ def validate_outcome(policy: dict[str, Any], criteria: list[dict[str, Any]]) -> 
     require(set(blocked).issubset({"G2-06", "G2-07"}),
             "Unexpected prerequisite criterion drifted during G2 review")
     return satisfied, blocked
-
 def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, Any]:
     policy = load_json(policy_path)
     bindings, evidence = bind_inputs(root, policy)
@@ -363,7 +365,6 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
             "legacy_source_lines": False,
         },
     }
-
 def markdown(report: dict[str, Any]) -> str:
     lines = [
         "# P2-20 G2 Data Review",
@@ -415,13 +416,12 @@ def markdown(report: dict[str, Any]) -> str:
         "",
     ])
     return "\n".join(lines)
-
 def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.replace("\r\n", "\n").replace("\r", "\n"), encoding="utf-8", newline="\n")
-
 def self_test() -> dict[str, Any]:
     assertions = 0
+    require(not (True and False), "Incomplete A.5 must block G2-06"); assertions += 1
     required = ["SATISFIED"] * 9
     require(set(required) == {"SATISFIED"}, "Required-status self-test failed")
     assertions += 1

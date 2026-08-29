@@ -153,6 +153,16 @@ try {
         [int]$g206Metrics.asset_binding_unresolved_targets -ne 19) {
         throw 'P2-20 A.4 descriptor evidence did not remain hash-bound and fail closed.'
     }
+    if ($g206Metrics.aux_semantic_diagnostic_hash_bound -ne $true -or
+        $g206Metrics.aux_semantic_scope_complete -ne $false -or
+        $g206Metrics.aux_semantic_g2_06_satisfied -ne $false -or
+        [int]$g206Metrics.aux_semantic_unique_references -ne 3180 -or
+        [int]$g206Metrics.aux_semantic_ambiguous_objects -ne 211 -or
+        [int]$g206Metrics.aux_semantic_unresolved_resources -ne 1 -or
+        [int]$g206Metrics.aux_semantic_ecf_parser_differences -ne 3 -or
+        [int]$g206Metrics.aux_semantic_ecf_missed_assignments -ne 4) {
+        throw 'P2-20 A.5 auxiliary semantic evidence did not remain hash-bound and fail closed.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {

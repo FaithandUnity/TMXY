@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-aux-semantic-diagnostics-v1.schema.json",
+  "title": "TMXY P2-20A.5 auxiliary semantic consumer diagnostics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "source_build", "result", "review_execution_result", "task_status",
+    "completion_criteria_satisfied", "diagnostic_scope_complete", "scope_complete",
+    "g2_06_satisfied", "p3_authorized", "input_bindings", "measured",
+    "parser_and_consumer_controls", "semantic_state", "blockers", "negative_contracts",
+    "g2_projection", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.5"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "source_build": {"const": "qy-3.0.0.413"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "scope_complete": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {"$ref": "#/$defs/input_bindings"},
+    "measured": {"$ref": "#/$defs/measured"},
+    "parser_and_consumer_controls": {"$ref": "#/$defs/controls"},
+    "semantic_state": {"$ref": "#/$defs/semantic_state"},
+    "blockers": {"$ref": "#/$defs/blockers"},
+    "negative_contracts": {"$ref": "#/$defs/negative_contracts"},
+    "g2_projection": {"$ref": "#/$defs/g2_projection"},
+    "contracts": {"$ref": "#/$defs/contracts"},
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "sha256"],
+      "properties": {"role": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "input_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries", "legacy_sources"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {"type": "array", "minItems": 8, "maxItems": 8, "prefixItems": [
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "auxiliary_inventory"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "three_layer_inventory"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "lexical_report"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "package_inventory"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "asset_inventory"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "reference_closure"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "policy"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "schema"}}}]}
+        ], "items": false},
+        "legacy_sources": {"type": "array", "minItems": 6, "maxItems": 6, "prefixItems": [
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "encrypted_config_reader"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "line_and_pair_parser"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "object_and_package_resolver"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "reflection_config_loader"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "region_consumer"}}}]},
+          {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "typed_property_importers"}}}]}
+        ], "items": false}
+      }
+    },
+    "region": {
+      "type": "object", "additionalProperties": false,
+      "required": ["unique_total", "unique_file", "unique_object", "unique_package_root",
+        "ambiguous_object", "ambiguous_object_candidate_edges", "ambiguous_object_divergent_bodies",
+        "unresolved_resource", "first_candidate_selections"],
+      "properties": {
+        "unique_total": {"const": 3180}, "unique_file": {"const": 3042},
+        "unique_object": {"const": 4}, "unique_package_root": {"const": 134},
+        "ambiguous_object": {"const": 211}, "ambiguous_object_candidate_edges": {"const": 422},
+        "ambiguous_object_divergent_bodies": {"const": 211},
+        "unresolved_resource": {"const": 1}, "first_candidate_selections": {"const": 0}
+      }
+    },
+    "ecf": {
+      "type": "object", "additionalProperties": false,
+      "required": ["instances", "mixed_newline_differences", "legacy_assignments_missed_by_a3_parser",
+        "runtime_with_candidates", "runtime_without_candidates", "editor_without_candidates"],
+      "properties": {
+        "instances": {"const": 64}, "mixed_newline_differences": {"const": 3},
+        "legacy_assignments_missed_by_a3_parser": {"const": 4},
+        "runtime_with_candidates": {"const": 15}, "runtime_without_candidates": {"const": 21},
+        "editor_without_candidates": {"const": 28}
+      }
+    },
+    "measured": {
+      "type": "object", "additionalProperties": false,
+      "required": ["file_instances", "source_instances_verified", "region_strict_instances", "region_semantic_references",
+        "ecf", "parsed_shared_help_zero_lexical", "malformed_instances"],
+      "properties": {
+        "file_instances": {"const": 212}, "source_instances_verified": {"const": 212},
+        "region_strict_instances": {"const": 135},
+        "region_semantic_references": {"$ref": "#/$defs/region"}, "ecf": {"$ref": "#/$defs/ecf"},
+        "parsed_shared_help_zero_lexical": {"const": 7}, "malformed_instances": {"const": 6}
+      }
+    },
+    "controls": {
+      "type": "object", "additionalProperties": false,
+      "required": ["strict_region_xml", "consumer_selected_fields_only", "legacy_ecf_crlf_parser_compared",
+        "mixed_newline_difference_is_blocking", "first_candidate_selection", "zero_match_is_no_reference",
+        "shadow_without_roots_is_no_reference", "malformed_auto_fix", "unknown_field_is_ignored"],
+      "properties": {
+        "strict_region_xml": {"const": true}, "consumer_selected_fields_only": {"const": true},
+        "legacy_ecf_crlf_parser_compared": {"const": true}, "mixed_newline_difference_is_blocking": {"const": true},
+        "first_candidate_selection": {"const": false}, "zero_match_is_no_reference": {"const": false},
+        "shadow_without_roots_is_no_reference": {"const": false}, "malformed_auto_fix": {"const": false},
+        "unknown_field_is_ignored": {"const": false}
+      }
+    },
+    "semantic_state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["approved_consumer_contracts", "approved_no_reference_instances", "approved_roots",
+        "terminal_instances", "nonterminal_instances", "ordinary_development_authorization_is_semantic_approval"],
+      "properties": {
+        "approved_consumer_contracts": {"const": 0}, "approved_no_reference_instances": {"const": 0},
+        "approved_roots": {"const": 0}, "terminal_instances": {"const": 0},
+        "nonterminal_instances": {"const": 212},
+        "ordinary_development_authorization_is_semantic_approval": {"const": false}
+      }
+    },
+    "blocker": {
+      "type": "object", "additionalProperties": false, "required": ["reason_code", "count"],
+      "properties": {
+        "reason_code": {"enum": ["AMBIGUOUS_OBJECT_TARGETS", "UNRESOLVED_RESOURCE_TARGETS",
+          "LEGACY_PARSER_PARITY_GAPS", "MALFORMED_INPUTS_UNDISPOSED", "APPROVED_ROOT_SET_EMPTY",
+          "CONSUMER_CONTRACTS_UNAPPROVED"]},
+        "count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "blockers": {"type": "array", "minItems": 6, "maxItems": 6, "prefixItems": [
+      {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "AMBIGUOUS_OBJECT_TARGETS"}, "count": {"const": 211}}}]},
+      {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "UNRESOLVED_RESOURCE_TARGETS"}, "count": {"const": 1}}}]},
+      {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "LEGACY_PARSER_PARITY_GAPS"}, "count": {"const": 3}}}]},
+      {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "MALFORMED_INPUTS_UNDISPOSED"}, "count": {"const": 6}}}]},
+      {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "APPROVED_ROOT_SET_EMPTY"}, "count": {"const": 0}}}]},
+      {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "CONSUMER_CONTRACTS_UNAPPROVED"}, "count": {"const": 212}}}]}
+    ], "items": false},
+    "negative_contracts": {
+      "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true,
+      "prefixItems": [
+        {"const": "MIXED_NEWLINE_PARSER_DRIFT_REJECTED"}, {"const": "FIRST_CANDIDATE_SELECTION_REJECTED"},
+        {"const": "ZERO_MATCH_IS_NO_REFERENCE_REJECTED"}, {"const": "SHADOW_WITHOUT_ROOTS_REJECTED"},
+        {"const": "MALFORMED_AUTO_FIX_REJECTED"}, {"const": "UNKNOWN_FIELD_REJECTED"}
+      ], "items": false
+    },
+    "g2_projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["criteria_total", "satisfied", "blocked", "g2_decision"],
+      "properties": {"criteria_total": {"const": 9}, "satisfied": {"const": 7},
+        "blocked": {"const": 2}, "g2_decision": {"const": "BLOCKED"}}
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256"],
+      "properties": {"policy_sha256": {"$ref": "#/$defs/sha256"}, "schema_sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anonymous_aggregate_and_hash_only", "raw_values", "key_names", "file_names",
+        "private_source_paths", "source_line_numbers", "legacy_source_lines", "exact_primary_keys", "decoded_payloads"],
+      "properties": {
+        "anonymous_aggregate_and_hash_only": {"const": true}, "raw_values": {"const": false},
+        "key_names": {"const": false}, "file_names": {"const": false},
+        "private_source_paths": {"const": false}, "source_line_numbers": {"const": false},
+        "legacy_source_lines": {"const": false}, "exact_primary_keys": {"const": false},
+        "decoded_payloads": {"const": false}
+      }
+    }
+  }
+}

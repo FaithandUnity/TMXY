@@ -29,3 +29,8 @@ G2-07 的 V1 基线及 V2 policy/registry/authority/review-packet Schema 分别�
 完整标量等值候选和五态适配器边界。候选不是语义引用批准；零匹配不是无引用批准；6 个
 malformed XML 不能自动排除；歧义 Package 候选必须全部保留。当前 0 个批准适配器、
 0 个批准根，因此成功生成仍是 `BLOCKED`，不能授权 G2、P3 或发布。
+
+`g2-aux-semantic-diagnostics-policy-v1.json` 与
+`g2-aux-semantic-diagnostics-v1.schema.json` 冻结 P2-20A.5 的消费者级复算。它把区域字段的
+文件、对象和包根语义与 ECF 遗留解析差异分开记录，保留 211 个歧义对象、1 个未解析资源、
+3 个换行差异和 6 个 malformed 实例。诊断观察不是语义审批，普通开发授权也不能替代审批。

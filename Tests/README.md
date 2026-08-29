@@ -148,4 +148,9 @@ Schema、引用规则、Canonical ID 域、ID 分量和固定容量信号的完�
 substring、首候选选择、实例去重、伪造批准根和把零匹配冒充无引用批准。加
 `-VerifyDerivedSources` 会在断网、只读、非 root 容器中逐 byte 复核忽略区候选集及跟踪报告。
 
+`Contract/Test-G2AuxSemanticDiagnostics.ps1` 验证 P2-20A.5 的消费者级诊断：135 个严格区域
+实例产生 3,180 个唯一语义引用、211 个保留歧义和 1 个未解析资源；64 个 ECF 中 3 个存在
+遗留换行解析差异并漏枚举 4 个赋值。合同拒绝首候选、零匹配冒充 no-ref、无根影子排除、
+malformed 自动修复和未知字段。成功仅表示诊断正确，G2 仍为 7/9、`BLOCKED`。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

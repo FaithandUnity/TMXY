@@ -173,6 +173,11 @@ if ($VerifyLegacyGoldenSources) { $g2AuxConfigArguments.VerifyDerivedSources = $
 $g2AuxConfigReferences = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-G2AuxiliaryConfigReferences.ps1') `
     -Arguments $g2AuxConfigArguments
+$g2AuxSemanticArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxSemanticArguments.VerifyDerivedSources = $true }
+$g2AuxSemanticDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxSemanticDiagnostics.ps1') `
+    -Arguments $g2AuxSemanticArguments
 $g2AssetDescriptorArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2AssetDescriptorArguments.VerifyDerivedSources = $true }
 $g2AssetDescriptorDiagnostics = Invoke-JsonTest `
@@ -340,6 +345,11 @@ $passed = [string]$repository.result -eq 'PASS' -and
     -not [bool]$g2AuxConfigReferences.completion_criteria_satisfied -and
     -not [bool]$g2AuxConfigReferences.g2_approved -and
     -not [bool]$g2AuxConfigReferences.p3_authorized -and
+    [string]$g2AuxSemanticDiagnostics.result -eq 'PASS' -and
+    [bool]$g2AuxSemanticDiagnostics.contract_assertions_satisfied -and
+    -not [bool]$g2AuxSemanticDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2AuxSemanticDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2AuxSemanticDiagnostics.p3_authorized -and
     [string]$g2AssetDescriptorDiagnostics.result -eq 'PASS' -and
     [bool]$g2AssetDescriptorDiagnostics.contract_assertions_satisfied -and
     -not [bool]$g2AssetDescriptorDiagnostics.completion_criteria_satisfied -and
@@ -427,6 +437,7 @@ $report = [pscustomobject][ordered]@{
     resource_budget = $resourceBudget
     g2_core_resource_closure = $g2CoreClosure
     g2_auxiliary_config_references = $g2AuxConfigReferences
+    g2_auxiliary_semantic_diagnostics = $g2AuxSemanticDiagnostics
     g2_asset_descriptor_diagnostics = $g2AssetDescriptorDiagnostics
     g2_migration_decisions = $g2MigrationDecisions
     full_asset_inventory = $fullAssetInventory

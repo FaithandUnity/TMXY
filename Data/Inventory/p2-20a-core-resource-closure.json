@@ -11,7 +11,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "382f95a02caee459fb7305110798f15a8c4c70c475c2b71a638f437b3328f40e",
+      "aggregate_sha256": "3bfd46a6cd733f1ad0bc3eb7507f55303a40aadac3b2bdceca273aa5a2501635",
       "artifacts": [
         {
           "id": "P2-05",
@@ -102,8 +102,8 @@
         {
           "id": "g2-policy",
           "path": "Contracts/data-schema/g2-review-policy-v1.json",
-          "sha256": "a03cd5efcfca260d4576cfbb62da77a919c9e2e6f543405081ad0e841f9f561b",
-          "bytes": 6703
+          "sha256": "9b9e0aeb4d046b16ce0af37031b4344b384e09edd1bf61d5831d2fca1f49f787",
+          "bytes": 6902
         }
       ]
     }
@@ -114,7 +114,7 @@
       "tracked": true,
       "bytes": 13434,
       "lines": 370,
-      "sha256": "31e28d3673ba7fe8ae240c392c433c669238612d88059769c40946df4ce5e315"
+      "sha256": "c8f0ba4006c1ab78ad0e712c47ed24f4b13aab34ad50a2cfde92f6ed028672d8"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-core-resource-closure-report.md",
@@ -128,7 +128,7 @@
       "tracked": true,
       "bytes": 1656,
       "lines": 40,
-      "sha256": "d9a1dbacb4df9ef85c6a5c10325a3971c8d1c13a035740bbfa4770a447a8e096"
+      "sha256": "8ebd01204b9699c02f734bc8365eb10b0437ae5b00035e2465e0e5fcb8a75356"
     },
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",

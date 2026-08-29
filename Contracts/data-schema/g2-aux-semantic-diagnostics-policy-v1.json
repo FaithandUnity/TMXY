@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.5",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "expected_measured": {
+    "file_instances": 212,
+    "source_instances_verified": 212,
+    "region_strict_instances": 135,
+    "region_semantic_references": {
+      "unique_total": 3180,
+      "unique_file": 3042,
+      "unique_object": 4,
+      "unique_package_root": 134,
+      "ambiguous_object": 211,
+      "ambiguous_object_candidate_edges": 422,
+      "ambiguous_object_divergent_bodies": 211,
+      "unresolved_resource": 1,
+      "first_candidate_selections": 0
+    },
+    "ecf": {
+      "instances": 64,
+      "mixed_newline_differences": 3,
+      "legacy_assignments_missed_by_a3_parser": 4,
+      "runtime_with_candidates": 15,
+      "runtime_without_candidates": 21,
+      "editor_without_candidates": 28
+    },
+    "parsed_shared_help_zero_lexical": 7,
+    "malformed_instances": 6
+  },
+  "legacy_source_bindings": {
+    "region_consumer": "a1e5d33643d633234b2eeb07c6dc9358814d9802d4a9f43c959c1a4b155f1853",
+    "encrypted_config_reader": "f1bef9a8221f2e05bdf855d7038d71f9222792a349f8e29944651cbddf0c4042",
+    "line_and_pair_parser": "bab39ccce47907e06dbac0913c2edf2b43350a7efae867cb8b9c61fb56880314",
+    "reflection_config_loader": "3a4ba187ea1099706328c0b49084ad555fa3d2f68f16d8b8e7f0a53fa0b8fc57",
+    "typed_property_importers": "b92a93ba136e1de845b5c5f6d385fad3904db202b7396f213a3749a2e4584a57",
+    "object_and_package_resolver": "1f10ae3b06062564ac283a9396b1d232c261c669bcd6c22271b414aa6d6323e5"
+  },
+  "negative_contracts": [
+    "MIXED_NEWLINE_PARSER_DRIFT_REJECTED",
+    "FIRST_CANDIDATE_SELECTION_REJECTED",
+    "ZERO_MATCH_IS_NO_REFERENCE_REJECTED",
+    "SHADOW_WITHOUT_ROOTS_REJECTED",
+    "MALFORMED_AUTO_FIX_REJECTED",
+    "UNKNOWN_FIELD_REJECTED"
+  ],
+  "authority_rules": {
+    "diagnostic_is_semantic_approval": false,
+    "ordinary_development_authorization_is_semantic_approval": false,
+    "candidate_is_target_selection": false,
+    "zero_match_is_no_reference_disposition": false,
+    "malformed_can_be_auto_repaired": false,
+    "shadow_can_be_excluded_without_roots": false,
+    "this_evidence_can_approve_g2_or_p3": false
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "raw_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_payloads": false
+  }
+}

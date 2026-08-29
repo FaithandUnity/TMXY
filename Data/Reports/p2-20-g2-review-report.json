@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "f1e3be2f589af33b936b3081d60b858773116bcd581372d46da3809afe3c7377",
+    "aggregate_sha256": "d0086be8cb4241daa058ae5a6db4243ad715f9240cc49eaa576a79c47564e208",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -171,7 +171,7 @@
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-      "sha256": "31e28d3673ba7fe8ae240c392c433c669238612d88059769c40946df4ce5e315",
+      "sha256": "c8f0ba4006c1ab78ad0e712c47ed24f4b13aab34ad50a2cfde92f6ed028672d8",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -190,11 +190,25 @@
       "diagnostic_scope_complete": true,
       "g2_06_satisfied": false
     },
+    "aux_semantic_diagnostics": {
+      "task_id": "P2-20A",
+      "criterion_id": "G2-06",
+      "evidence_revision": "P2-20A.5",
+      "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json",
+      "sha256": "be5c895d9214d47ba46a78cfd5890c4fd6529c43f29601d63e395b57b26dd99f",
+      "result": "BLOCKED",
+      "review_execution_result": "PASS",
+      "task_status": "BLOCKED",
+      "completion_criteria_satisfied": false,
+      "diagnostic_scope_complete": true,
+      "scope_complete": false,
+      "g2_06_satisfied": false
+    },
     "remediation": {
       "task_id": "P2-20B",
       "criterion_id": "G2-07",
       "path": "Data/Governance/p2-g2-migration-decisions.json",
-      "sha256": "e2930f87c1c18e495f772c23001cef142d548ea5af2b5c226815572ae045ff08",
+      "sha256": "d78161341333a9445b246e05b8f7e8ab22f4d3f6f81c33d9381d381ff26f2cff",
       "result": "BLOCKED",
       "generation_result": "PASS",
       "task_status": "BLOCKED",
@@ -203,9 +217,9 @@
     },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "811f3cc56de6185b9285b156f5a96cd0eab2c1b0dbc689ebc7825bae0b246623",
+      "sha256": "d78a509fd7b489ce764c6224ed9d85ad811967b3c14c80ac5891189e6ce762a3",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-29T08:20:13.6353368+00:00"
+      "captured_utc": "2026-08-29T10:31:24.7028512+00:00"
     }
   },
   "summary": {
@@ -564,6 +578,46 @@
           "unit": "assets"
         },
         {
+          "name": "aux_semantic_diagnostic_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_semantic_scope_complete",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_semantic_g2_06_satisfied",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_semantic_unique_references",
+          "value": 3180,
+          "unit": "references"
+        },
+        {
+          "name": "aux_semantic_ambiguous_objects",
+          "value": 211,
+          "unit": "references"
+        },
+        {
+          "name": "aux_semantic_unresolved_resources",
+          "value": 1,
+          "unit": "references"
+        },
+        {
+          "name": "aux_semantic_ecf_parser_differences",
+          "value": 3,
+          "unit": "files"
+        },
+        {
+          "name": "aux_semantic_ecf_missed_assignments",
+          "value": 4,
+          "unit": "assignments"
+        },
+        {
           "name": "asset_binding_resolution_explicit",
           "value": true,
           "unit": "boolean"
@@ -689,7 +743,7 @@
           "unit": "references"
         }
       ],
-      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact P2-03/P2-12/P2-13 candidate identities and production-binder full semantic signatures; its reconciled full workset supersedes coarse descriptor counts without selecting a candidate. A.3 covers all 212 auxiliary instances, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase remaining ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
+      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -962,9 +1016,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "a03cd5efcfca260d4576cfbb62da77a919c9e2e6f543405081ad0e841f9f561b",
+    "policy_sha256": "9b9e0aeb4d046b16ce0af37031b4344b384e09edd1bf61d5831d2fca1f49f787",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "89c34fb699c5b0a3af76ef3ecf3af499ad26fa4397d9eff54960c24df9f4bddf"
+    "schema_sha256": "a954691a8e3c39ba23baac276b787adf71ca30fafb5ebd033f68990c90824a64"
   },
   "disclosure": {
     "private_source_paths": false,

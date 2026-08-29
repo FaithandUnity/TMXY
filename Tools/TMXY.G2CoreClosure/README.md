@@ -1,4 +1,4 @@
-# TMXY.G2CoreClosure P2-20A.2
+# TMXY.G2CoreClosure P2-20A.3
 
 This module computes the fail-closed P2-20A remediation evidence for G2-06.
 It takes the monotonic union of every P2-13 declared root and every emitted
@@ -7,8 +7,10 @@ evidence-backed P2-13 edge records to a fixed point.
 
 The detailed hashed sets remain under ignored `Data/Exports/P2-20`. Tracked
 outputs contain aggregate counts and exact SHA-256 bindings only. A successful
-execution remains `BLOCKED` because configuration reference coverage is
-incomplete, explicit Package-to-asset states still include 183 ambiguous and
+execution remains `BLOCKED` because the hash-bound auxiliary evidence keeps all
+212 file instances nonterminal (171 candidate-only, 35 editor-undecided, and 6
+malformed-blocked), with zero approved semantic adapters, no-reference
+dispositions, or roots. Explicit Package-to-asset states still include 183 ambiguous and
 19 unresolved targets, conditionally required values are missing, and measured
 logical gaps are open. Missing conditional values may
 emit no edge, so their P2-13-bound aggregate is independently reproduced from

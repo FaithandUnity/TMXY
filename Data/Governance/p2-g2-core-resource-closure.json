@@ -1,12 +1,18 @@
 {
   "schema_version": 1,
-  "evidence_revision": "P2-20A.2",
+  "evidence_revision": "P2-20A.3",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "status": "BLOCKED",
   "scope_definition": "monotonic-union-all-declared-roots-plus-all-core-resource-fields",
   "scope_complete": false,
   "auxiliary_config_reference_scope_complete": false,
+  "auxiliary_reference_evidence_hash_bound": true,
+  "auxiliary_file_instances": 212,
+  "auxiliary_candidate_only": 171,
+  "auxiliary_editor_undecided": 35,
+  "auxiliary_malformed_blocked": 6,
+  "auxiliary_approved_roots": 0,
   "asset_binding_resolution_explicit": true,
   "asset_binding_resolved_targets": 21292,
   "asset_binding_ambiguous_targets": 183,
@@ -20,7 +26,7 @@
   "logical_gap_count": 21024,
   "report": {
     "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-    "sha256": "73b680eb76a3f73fd5bb9f3a74ecbed7b35ff299ed6f084581578ab028d7fb98"
+    "sha256": "13aacb78334266cfe58cd3661b8afea189d849f193b7083b307a1c0cd6b573d1"
   },
   "decisions": {
     "first_candidate_selection_authorized": false,

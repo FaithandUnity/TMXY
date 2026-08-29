@@ -27,13 +27,15 @@ No consumer may reinterpret successful review execution as a gate pass.
 
 ## Current blocking evidence
 
-G2-06 is blocked because the evidence does not define and hash-bind a scoped
-core-resource reference set or publish its explicit unresolved, ambiguous, and
-heuristic-selection metrics. Those three core metrics must all be zero. The
-non-core/global package and nullable table-object queues are risk context, not
-the core exit threshold, so future non-zero global queues do not permanently
-block G2-06. Core foreign-key dangling count zero is a narrower integrity fact
-and cannot replace the missing core-resource proof.
+G2-06 now has a hash-bound monotonic core-resource scope and explicit reference,
+asset-binding, conditional-required, and structure metrics. P2-20A.3 also
+hash-binds all 212 auxiliary configuration instances and their lexical
+candidates: 171 remain candidate-only, 35 editor-undecided, and 6
+malformed-blocked; approved semantic adapters, no-reference dispositions, and
+roots are all zero. The scoped queues remain nonzero, so the exit still fails
+closed. Lexical candidates are not semantic approvals. Core foreign-key
+dangling count zero is a narrower integrity fact and cannot replace these
+resource-closure facts.
 
 G2-07 is blocked because diff, canonical-ID, fixed-limit, and shared uint64
 code-generation audits do not constitute a complete reviewed registry of

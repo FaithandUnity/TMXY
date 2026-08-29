@@ -12,7 +12,7 @@
   ],
   "properties": {
     "schema_version": { "const": 1 },
-    "evidence_revision": { "const": "P2-20A.2" },
+    "evidence_revision": { "const": "P2-20A.3" },
     "captured_utc": { "type": "string", "minLength": 1 },
     "task_id": { "const": "P2-20A" },
     "criterion_id": { "const": "G2-06" },
@@ -52,8 +52,22 @@
       "properties": {
         "aggregate_sha256": { "$ref": "#/$defs/sha256" },
         "artifacts": {
-          "type": "array", "minItems": 12, "maxItems": 12,
-          "items": { "$ref": "#/$defs/binding" }
+          "type": "array", "minItems": 15, "maxItems": 15,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/binding" },
+          "contains": {
+            "allOf": [
+              { "$ref": "#/$defs/binding" },
+              {
+                "properties": {
+                  "id": { "const": "P2-20A.3-AUX" },
+                  "path": { "const": "Data/Reports/p2-20a-aux-config-reference-report.json" }
+                }
+              }
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
         }
       }
     },
@@ -102,14 +116,39 @@
     "auxiliary_scope": {
       "type": "object", "additionalProperties": false,
       "required": [
-        "inventory_files", "malformed_isolated", "reference_adapters",
-        "reference_adapter_coverage", "new_roots_are_union_only", "scope_complete"
+        "evidence_revision", "evidence_hash_bound", "measurement_authority",
+        "inventory_files", "unique_content_bodies", "parsed_file_instances",
+        "malformed_isolated", "scalar_positions", "nonempty_scalar_positions",
+        "asset_exact_occurrences", "package_exact_occurrences", "config_exact_edges",
+        "reference_adapters", "reference_adapter_coverage", "terminal_file_instances",
+        "candidate_only", "editor_undecided", "malformed_blocked", "semantic_approved",
+        "no_ref_approved", "approved_roots", "exact_complete_scalar_matching",
+        "first_candidate_selection_used", "new_roots_are_union_only", "scope_complete"
       ],
       "properties": {
-        "inventory_files": { "type": "integer", "minimum": 1 },
-        "malformed_isolated": { "type": "integer", "minimum": 0 },
-        "reference_adapters": { "type": "integer", "minimum": 0 },
-        "reference_adapter_coverage": { "const": "absent" },
+        "evidence_revision": { "const": "P2-20A.3" },
+        "evidence_hash_bound": { "const": true },
+        "measurement_authority": { "const": "LEXICAL_ONLY" },
+        "inventory_files": { "const": 212 },
+        "unique_content_bodies": { "const": 196 },
+        "parsed_file_instances": { "const": 206 },
+        "malformed_isolated": { "const": 6 },
+        "scalar_positions": { "const": 39522 },
+        "nonempty_scalar_positions": { "const": 39498 },
+        "asset_exact_occurrences": { "const": 3043 },
+        "package_exact_occurrences": { "const": 638 },
+        "config_exact_edges": { "const": 8 },
+        "reference_adapters": { "const": 0 },
+        "reference_adapter_coverage": { "const": "lexical-candidate-inventory-only" },
+        "terminal_file_instances": { "const": 0 },
+        "candidate_only": { "const": 171 },
+        "editor_undecided": { "const": 35 },
+        "malformed_blocked": { "const": 6 },
+        "semantic_approved": { "const": 0 },
+        "no_ref_approved": { "const": 0 },
+        "approved_roots": { "const": 0 },
+        "exact_complete_scalar_matching": { "const": true },
+        "first_candidate_selection_used": { "const": false },
         "new_roots_are_union_only": { "const": true },
         "scope_complete": { "const": false }
       }

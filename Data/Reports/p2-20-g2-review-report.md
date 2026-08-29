@@ -18,7 +18,7 @@ The review procedure completed successfully, but the gate remains fail-closed. A
 | G2-03 | SATISFIED | The scoped core-table integrity contract passes with zero measured violations. |
 | G2-04 | SATISFIED | The evidence chain binds the same read-only sandbox executable and frozen build through P2-04 to P2-08. |
 | G2-05 | SATISFIED | Ownership is complete; combat, economy, and unknown gameplay semantics remain server-authoritative and fail closed. |
-| G2-06 | BLOCKED | P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Explicit asset-binding states do not erase remaining ambiguity or unresolved descriptors; auxiliary scope, conditional gaps, logical reference queues, and reachable structure also remain blocking. Core foreign-key zero cannot replace these resource-closure facts. |
+| G2-06 | BLOCKED | P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Its separately hash-bound A.3 evidence covers all 212 auxiliary instances and measured lexical candidates, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts. |
 | G2-07 | BLOCKED | P2-20B V2 provides a fail-closed decision workflow and anonymous review packets that preserve all independent units, but every unit remains pending with no externally authorized decision, approval, or bound verification. Machine suggestions and review packets are non-authoritative and do not satisfy G2-07. |
 | G2-08 | SATISFIED | Planning effort, machine projection, storage, assumptions, and reserves are quantified; none is measured delivery duration or a monetary quote. |
 | G2-09 | SATISFIED | Backend and UE generated contracts bind to one schema digest and retain uint64 identity storage. |
@@ -27,9 +27,9 @@ The review procedure completed successfully, but the gate remains fail-closed. A
 
 ### G2-BLK-06: Core resource-reference closure has quantified open gaps
 
-P2-20A is present and hash-bound; auxiliary configuration scope remains incomplete, and explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.
+P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.
 
-Required closure: Complete auxiliary configuration scope, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.
+Required closure: Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.
 
 ### G2-BLK-07: Migration registry is complete in coverage but decisions remain pending
 

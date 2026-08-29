@@ -12,7 +12,7 @@ The review computes a monotonic union fixed before observing the result. It does
 
 All 24465 declared character, scene, and skill roots are included. All 16 resource-bearing core-table rules are included for every emitted non-sentinel canonical-row reference.
 
-Auxiliary configuration reference adapters are absent, so later configuration roots may only enlarge the union. Package-to-asset bindings are explicitly classified, but ambiguous and unresolved states remain blocking.
+Auxiliary lexical evidence is SHA-256 bound for all 212 file instances. It records 171 candidate-only, 35 editor-undecided, and 6 malformed-blocked states; approved adapters, no-reference dispositions, and roots remain zero. Package-to-asset bindings are explicitly classified, but ambiguous and unresolved states remain blocking.
 
 ## Measured closure
 
@@ -44,7 +44,7 @@ The 21494-member asset binding workset is also ignored and SHA-256 bound as `fb9
 
 ## Blocking work
 
-- `G2-06-CONFIG-SCOPE`: Auxiliary configuration reference adapters are absent, so configuration-derived roots are not proven complete. Define reviewed semantic adapters, including tolerant-parser coverage for isolated malformed XML, and add discovered roots by union.
+- `G2-06-CONFIG-SCOPE`: Auxiliary configuration lexical candidates are measured and hash-bound, but all 212 file instances remain nonterminal and no semantic adapter, no-reference disposition, or root is approved. Define reviewed semantic adapters or explicit no-reference dispositions for all file instances, dispose every malformed XML input, and add only approved roots by union.
 - `G2-06-ASSET-BINDING`: All reachable Package-to-asset bindings now have explicit evidence states, but divergent or invalid descriptor sets remain ambiguous or unresolved. Resolve every divergent descriptor set and failed descriptor validation through qualified evidence while preserving all candidates and without first-candidate selection.
 - `G2-06-CONDITIONAL-REQUIRED`: P2-13 reports conditionally required resource fields with missing values; such rows may emit no table-to-Package edge and cannot disappear from review. Use the complete hashed member workset for authorized remediation, resolve every missing required value, retain the P2-06 and P2-13 source bindings, and reach the independent zero threshold.
 - `G2-06-LOGICAL-GAPS`: The monotonic core closure contains unresolved and ambiguous table or Package references. Resolve each hashed work item through reviewed aliases, equivalent-candidate proof, source recovery, or an explicit versioned scope decision.

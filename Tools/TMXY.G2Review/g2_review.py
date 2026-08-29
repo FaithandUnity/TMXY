@@ -128,6 +128,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
         metric("scope_complete", core["scope_complete"], "boolean"),
         metric("auxiliary_config_scope_complete", core["auxiliary_complete"], "boolean"),
+        *(metric(name, value, unit) for name, value, unit in core["auxiliary_metrics"]),
         metric("asset_binding_resolution_explicit", core["asset_binding_explicit"], "boolean"),
         metric("asset_binding_resolved_targets", core["asset_binding_resolved"], "assets"),
         metric("asset_binding_ambiguous_targets", core["asset_binding_ambiguous"], "assets"),
@@ -153,7 +154,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Explicit asset-binding states do not erase remaining ambiguity or unresolved descriptors; auxiliary scope, conditional gaps, logical reference queues, and reachable structure also remain blocking. Core foreign-key zero cannot replace these resource-closure facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Its separately hash-bound A.3 evidence covers all 212 auxiliary instances and measured lexical candidates, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
 
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
@@ -248,13 +249,16 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         conditional = closure["conditional_required"]
         asset_binding = closure["asset_binding"]
         asset_structure = closure["asset_structure"]
+        auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
         blockers.append({
             "id": "G2-BLK-06",
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                "P2-20A is present and hash-bound; auxiliary configuration scope remains incomplete, "
-                "and explicit asset-binding evidence retains "
+                f"P2-20A and its A.3 auxiliary evidence are hash-bound; all {auxiliary['inventory_files']} "
+                f"configuration instances remain nonterminal ({auxiliary['candidate_only']} candidate-only, "
+                f"{auxiliary['editor_undecided']} editor-undecided, {auxiliary['malformed_blocked']} malformed) "
+                f"with {auxiliary['approved_roots']} approved roots. Explicit asset-binding evidence retains "
                 f"{asset_binding['ambiguous_targets']} ambiguous plus "
                 f"{asset_binding['unresolved_targets']} unresolved targets. "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
@@ -265,7 +269,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"and {asset_structure['unresolved']} structurally unresolved reachable assets."
             ),
             "required_action": (
-                "Complete auxiliary configuration scope, close every ambiguous or unresolved asset-binding state, use the hash-bound "
+                "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound "
                 "conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, "
                 "unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection."
             ),

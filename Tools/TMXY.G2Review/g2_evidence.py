@@ -198,11 +198,115 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
     }, evidence
 
 
+def evaluate_auxiliary_binding(root: Path, report: dict[str, Any],
+                               scope: dict[str, Any]) -> dict[str, Any]:
+    artifacts = report["input_bindings"]["artifacts"]
+    by_id: dict[str, list[dict[str, Any]]] = {}
+    for item in artifacts:
+        by_id.setdefault(str(item["id"]), []).append(item)
+    require(len(by_id.get("P2-20A.3-AUX", [])) == 1,
+            "P2-20A.3 auxiliary binding is missing or duplicated")
+    binding = by_id["P2-20A.3-AUX"][0]
+    relative = "Data/Reports/p2-20a-aux-config-reference-report.json"
+    require(binding["path"] == relative, "P2-20A.3 auxiliary path drifted")
+    path = resolve_inside(root, relative)
+    auxiliary = load_json(path)
+    require(binding["sha256"] == sha256(path) and
+            binding["bytes"] == path.stat().st_size,
+            "P2-20A.3 auxiliary report hash or size drifted")
+    policy_path = resolve_inside(
+        root, "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json")
+    schema_path = resolve_inside(
+        root, "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json")
+    require(len(by_id.get("auxiliary-reference-policy", [])) == 1 and
+            len(by_id.get("auxiliary-reference-schema", [])) == 1 and
+            by_id["auxiliary-reference-policy"][0]["sha256"] == sha256(policy_path) and
+            by_id["auxiliary-reference-schema"][0]["sha256"] == sha256(schema_path) and
+            auxiliary["contracts"]["policy_sha256"] == sha256(policy_path) and
+            auxiliary["contracts"]["schema_sha256"] == sha256(schema_path),
+            "P2-20A.3 auxiliary contracts are not exactly hash-bound")
+    measured = auxiliary["measured_lexical_candidates"]
+    states = auxiliary["adapter_state_summary"]
+    semantic = auxiliary["semantic_resolution"]
+    closure = auxiliary["config_closure"]
+    require(auxiliary["evidence_revision"] == "P2-20A.3" and
+            auxiliary["task_id"] == "P2-20A" and auxiliary["criterion_id"] == "G2-06" and
+            auxiliary["result"] == "BLOCKED" and
+            auxiliary["review_execution_result"] == "PASS" and
+            auxiliary["task_status"] == "BLOCKED" and
+            auxiliary["completion_criteria_satisfied"] is False and
+            auxiliary["scope_complete"] is False and
+            auxiliary["g2_06_satisfied"] is False and auxiliary["p3_authorized"] is False,
+            "P2-20A.3 auxiliary state was falsely promoted")
+    require(len(auxiliary["file_instances"]) == 212 and
+            measured["measurement_authority"] == "LEXICAL_ONLY" and
+            measured["file_instances"] == 212 and measured["unique_content_bodies"] == 196 and
+            measured["parsed_file_instances"] == 206 and measured["malformed_file_instances"] == 6 and
+            measured["asset_exact_occurrences"] == 3043 and
+            measured["package_exact_occurrences"] == 638 and
+            measured["package_unique_occurrences"] == 218 and
+            measured["package_ambiguous_occurrences"] == 420 and
+            measured["package_ambiguous_candidate_edges"] == 1136 and
+            measured["config_exact_edges"] == 8,
+            "P2-20A.3 measured lexical baseline drifted")
+    require(states == {"file_instances": 212, "terminal_file_instances": 0,
+                       "nonterminal_file_instances": 212, "semantic_approved": 0,
+                       "no_ref_approved": 0, "candidate_only": 171,
+                       "malformed_blocked": 6, "editor_undecided": 35,
+                       "approved_roots": 0} and semantic["status"] == "UNASSESSED" and
+            all(semantic[name] is None for name in
+                ("unknown_occurrences", "ambiguous_occurrences",
+                 "unresolved_occurrences", "resolved_occurrences")) and
+            semantic["first_candidate_selections"] == 0 and
+            semantic["heuristic_target_selections"] == 0 and
+            closure["approved_root_count"] == 0 and closure["closure_complete"] is False and
+            closure["cycle_detection_complete"] is False,
+            "P2-20A.3 semantic or closure state was inferred without approval")
+    require(scope == {
+        "evidence_revision": "P2-20A.3", "evidence_hash_bound": True,
+        "measurement_authority": "LEXICAL_ONLY", "inventory_files": 212,
+        "unique_content_bodies": 196, "parsed_file_instances": 206,
+        "malformed_isolated": 6, "scalar_positions": 39522,
+        "nonempty_scalar_positions": 39498, "asset_exact_occurrences": 3043,
+        "package_exact_occurrences": 638, "config_exact_edges": 8,
+        "reference_adapters": 0,
+        "reference_adapter_coverage": "lexical-candidate-inventory-only",
+        "terminal_file_instances": 0, "candidate_only": 171,
+        "editor_undecided": 35, "malformed_blocked": 6,
+        "semantic_approved": 0, "no_ref_approved": 0, "approved_roots": 0,
+        "exact_complete_scalar_matching": True, "first_candidate_selection_used": False,
+        "new_roots_are_union_only": True, "scope_complete": False,
+    }, "Core auxiliary summary does not exactly match P2-20A.3")
+    metrics = [
+        ("auxiliary_reference_evidence_hash_bound", True, "boolean"),
+        ("auxiliary_file_instances", 212, "files"),
+        ("auxiliary_terminal_file_instances", 0, "files"),
+        ("auxiliary_nonterminal_file_instances", 212, "files"),
+        ("auxiliary_candidate_only", 171, "files"),
+        ("auxiliary_editor_undecided", 35, "files"),
+        ("auxiliary_malformed_blocked", 6, "files"),
+        ("auxiliary_semantic_approved", 0, "files"),
+        ("auxiliary_no_ref_approved", 0, "files"),
+        ("auxiliary_approved_roots", 0, "roots"),
+        ("auxiliary_asset_exact_occurrences", 3043, "occurrences"),
+        ("auxiliary_package_exact_occurrences", 638, "occurrences"),
+        ("auxiliary_package_unique_occurrences", 218, "occurrences"),
+        ("auxiliary_package_ambiguous_occurrences", 420, "occurrences"),
+        ("auxiliary_package_ambiguous_candidate_edges", 1136, "edges"),
+        ("auxiliary_config_exact_edges", 8, "edges"),
+        ("auxiliary_semantic_status", "UNASSESSED", "state"),
+        ("auxiliary_config_closure_complete", False, "boolean"),
+        ("auxiliary_cycle_detection_complete", False, "boolean"),
+    ]
+    return {"bound": True, "metrics": metrics, "report": auxiliary}
+
+
 def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[str, Any]) -> dict[str, Any]:
     scope = report["scope_definition"]
     declared_roots = scope["declared_roots"]
     resource_rules = scope["core_table_resource_rules"]
     auxiliary = scope["auxiliary_config"]
+    auxiliary_context = evaluate_auxiliary_binding(root, report, auxiliary)
     closure = report["closure"]
     resolution = closure["resolution"]
     conditional = closure["conditional_required"]
@@ -238,7 +342,8 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
                        resolution["package_unresolved"] + resolution["package_ambiguous"])
     logical_gap_set_bound = (closure["logical_gap_count"] == logical_gap_sum and
                              is_sha256(closure["gap_set_sha256"]))
-    satisfied = (declared_scope_bound and closure["scope_complete"] == thresholds["core_scope_complete"] and
+    satisfied = (declared_scope_bound and auxiliary_context["bound"] and
+                 closure["scope_complete"] == thresholds["core_scope_complete"] and
                  auxiliary["scope_complete"] == thresholds["core_auxiliary_config_scope_complete"] and
                  closure["auxiliary_config_reference_scope_complete"] ==
                  thresholds["core_auxiliary_config_scope_complete"] and
@@ -272,6 +377,8 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
             "P2-20A decision does not match independently recomputed closure facts")
     return {
         "satisfied": satisfied, "declared_scope_bound": declared_scope_bound,
+        "auxiliary_evidence_bound": auxiliary_context["bound"],
+        "auxiliary_metrics": auxiliary_context["metrics"],
         "scope_complete": closure["scope_complete"],
         "auxiliary_complete": closure["auxiliary_config_reference_scope_complete"],
         "asset_binding_explicit": closure["asset_binding_resolution_explicit"],

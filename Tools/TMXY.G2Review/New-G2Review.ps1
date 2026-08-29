@@ -124,6 +124,24 @@ try {
 
     $report = Get-Content -LiteralPath $trackedJson -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
+    $g206 = @($report.criteria | Where-Object id -eq 'G2-06')
+    if ($g206.Count -ne 1) { throw 'P2-20 G2-06 criterion is missing or duplicated.' }
+    $g206Metrics = @{}
+    foreach ($item in $g206[0].metrics) { $g206Metrics[[string]$item.name] = $item.value }
+    if ($g206Metrics.auxiliary_reference_evidence_hash_bound -ne $true -or
+        [int]$g206Metrics.auxiliary_file_instances -ne 212 -or
+        [int]$g206Metrics.auxiliary_nonterminal_file_instances -ne 212 -or
+        [int]$g206Metrics.auxiliary_candidate_only -ne 171 -or
+        [int]$g206Metrics.auxiliary_editor_undecided -ne 35 -or
+        [int]$g206Metrics.auxiliary_malformed_blocked -ne 6 -or
+        [int]$g206Metrics.auxiliary_semantic_approved -ne 0 -or
+        [int]$g206Metrics.auxiliary_no_ref_approved -ne 0 -or
+        [int]$g206Metrics.auxiliary_approved_roots -ne 0 -or
+        [string]$g206Metrics.auxiliary_semantic_status -ne 'UNASSESSED' -or
+        $g206Metrics.auxiliary_config_closure_complete -ne $false -or
+        $g206Metrics.auxiliary_cycle_detection_complete -ne $false) {
+        throw 'P2-20 A.3 auxiliary evidence did not remain hash-bound and fail closed.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {

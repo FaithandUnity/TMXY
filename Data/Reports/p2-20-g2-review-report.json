@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "b314a24db4fbf5bf1d929445864a0780da41282d5b4ffe52f7a6f79b1717bf91",
+    "aggregate_sha256": "7344e16a8554997839d68945d6be6b331e3a9c537cb1a547d00f0ac4c1d0175e",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -171,7 +171,7 @@
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-      "sha256": "73b680eb76a3f73fd5bb9f3a74ecbed7b35ff299ed6f084581578ab028d7fb98",
+      "sha256": "13aacb78334266cfe58cd3661b8afea189d849f193b7083b307a1c0cd6b573d1",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -190,9 +190,9 @@
     },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "c61fced09010377ee7200ec74c9602be16c2671321f60ee5cdb050f606c73545",
+      "sha256": "77307ed11bd509ae90dc04336324f129851bc99c8b6e0c1cf36de2ee62232089",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-28T23:06:43.5388356+00:00"
+      "captured_utc": "2026-08-29T04:25:16.9510227+00:00"
     }
   },
   "summary": {
@@ -426,6 +426,101 @@
           "unit": "boolean"
         },
         {
+          "name": "auxiliary_reference_evidence_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "auxiliary_file_instances",
+          "value": 212,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_terminal_file_instances",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_nonterminal_file_instances",
+          "value": 212,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_candidate_only",
+          "value": 171,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_editor_undecided",
+          "value": 35,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_malformed_blocked",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_semantic_approved",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_no_ref_approved",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "auxiliary_approved_roots",
+          "value": 0,
+          "unit": "roots"
+        },
+        {
+          "name": "auxiliary_asset_exact_occurrences",
+          "value": 3043,
+          "unit": "occurrences"
+        },
+        {
+          "name": "auxiliary_package_exact_occurrences",
+          "value": 638,
+          "unit": "occurrences"
+        },
+        {
+          "name": "auxiliary_package_unique_occurrences",
+          "value": 218,
+          "unit": "occurrences"
+        },
+        {
+          "name": "auxiliary_package_ambiguous_occurrences",
+          "value": 420,
+          "unit": "occurrences"
+        },
+        {
+          "name": "auxiliary_package_ambiguous_candidate_edges",
+          "value": 1136,
+          "unit": "edges"
+        },
+        {
+          "name": "auxiliary_config_exact_edges",
+          "value": 8,
+          "unit": "edges"
+        },
+        {
+          "name": "auxiliary_semantic_status",
+          "value": "UNASSESSED",
+          "unit": "state"
+        },
+        {
+          "name": "auxiliary_config_closure_complete",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "auxiliary_cycle_detection_complete",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
           "name": "asset_binding_resolution_explicit",
           "value": true,
           "unit": "boolean"
@@ -551,7 +646,7 @@
           "unit": "references"
         }
       ],
-      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Explicit asset-binding states do not erase remaining ambiguity or unresolved descriptors; auxiliary scope, conditional gaps, logical reference queues, and reachable structure also remain blocking. Core foreign-key zero cannot replace these resource-closure facts.",
+      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Its separately hash-bound A.3 evidence covers all 212 auxiliary instances and measured lexical candidates, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -786,8 +881,8 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A is present and hash-bound; auxiliary configuration scope remains incomplete, and explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
-      "required_action": "Complete auxiliary configuration scope, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
+      "reason": "P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {

@@ -58,6 +58,8 @@ try {
         }
     }
 
+    $policy = Get-Content -LiteralPath $policyPath -Raw -Encoding UTF8 |
+        ConvertFrom-Json -Depth 100 -DateKind String
     $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $builderReference = [string]$lock.backend_toolchain.container_image_reference
     $expectedBuilderId = [string]$lock.backend_toolchain.container_image_digest
@@ -139,7 +141,40 @@ try {
 
     $report = Get-Content -LiteralPath $targets.json -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
-    if ($report.evidence_revision -ne 'P2-20A.2' -or
+    $auxiliaryBindings = @($report.input_bindings.artifacts |
+        Where-Object { $_.id -eq 'P2-20A.3-AUX' })
+    if ($auxiliaryBindings.Count -ne 1) {
+        throw 'P2-20A.3 auxiliary evidence binding is missing or duplicated.'
+    }
+    $auxiliaryPath = Join-Path $root ([string]$auxiliaryBindings[0].path)
+    $auxiliary = Get-Content -LiteralPath $auxiliaryPath -Raw -Encoding UTF8 |
+        ConvertFrom-Json -Depth 100 -DateKind String
+    $auxiliaryScope = $report.scope_definition.auxiliary_config
+    if ($report.evidence_revision -ne 'P2-20A.3' -or
+        [string]$auxiliaryBindings[0].sha256 -cne (Get-Sha256 $auxiliaryPath) -or
+        [string]$auxiliaryBindings[0].path -cne
+            [string]$policy.inputs.auxiliary_reference_evidence -or
+        $auxiliary.evidence_revision -ne 'P2-20A.3' -or
+        $auxiliary.source_build -ne [string]$policy.source_build -or
+        $auxiliary.task_id -ne 'P2-20A' -or $auxiliary.criterion_id -ne 'G2-06' -or
+        $auxiliary.result -ne 'BLOCKED' -or
+        $auxiliary.review_execution_result -ne 'PASS' -or
+        $auxiliary.task_status -ne 'BLOCKED' -or
+        $auxiliary.completion_criteria_satisfied -ne $false -or
+        $auxiliary.scope_complete -ne $false -or
+        $auxiliary.g2_06_satisfied -ne $false -or $auxiliary.p3_authorized -ne $false -or
+        @($auxiliary.file_instances).Count -ne 212 -or
+        [int]$auxiliary.config_closure.approved_root_count -ne 0 -or
+        $auxiliary.config_closure.closure_complete -ne $false -or
+        [int]$auxiliaryScope.inventory_files -ne 212 -or
+        [int]$auxiliaryScope.candidate_only -ne 171 -or
+        [int]$auxiliaryScope.editor_undecided -ne 35 -or
+        [int]$auxiliaryScope.malformed_blocked -ne 6 -or
+        [int]$auxiliaryScope.semantic_approved -ne 0 -or
+        [int]$auxiliaryScope.no_ref_approved -ne 0 -or
+        [int]$auxiliaryScope.approved_roots -ne 0 -or
+        $auxiliaryScope.evidence_hash_bound -ne $true -or
+        $auxiliaryScope.scope_complete -ne $false -or
         $report.closure.conditional_required.member_set_exported -ne $true -or
         [int]$report.closure.conditional_required.member_set_count -ne
             (Get-LineCount $targets.workset) -or
@@ -150,7 +185,7 @@ try {
             (Get-LineCount $targets.asset_workset) -or
         [string]$report.closure.asset_binding.workset_sha256 -cne
             (Get-Sha256 $targets.asset_workset)) {
-        throw 'P2-20A.2 workset binding failed.'
+        throw 'P2-20A.3 workset or auxiliary-evidence binding failed.'
     }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
@@ -161,7 +196,7 @@ try {
     $evidencePath = Join-Path $root 'Data\Inventory\p2-20a-core-resource-closure.json'
     $evidence = [pscustomobject][ordered]@{
         schema_version = 1
-        evidence_revision = 'P2-20A.2'
+        evidence_revision = 'P2-20A.3'
         captured_utc = [string]$report.captured_utc
         task_id = 'P2-20A'
         criterion_id = 'G2-06'

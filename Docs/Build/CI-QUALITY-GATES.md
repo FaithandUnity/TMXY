@@ -30,10 +30,14 @@ decision was evaluated and frozen correctly; it does not turn the current
 `BLOCKED` decision into success. The review is kept outside that same aggregate
 to avoid a self-referential evidence hash.
 
-Before that final review, the aggregate runs `Test-G2CoreResourceClosure.ps1`
-and `Test-G2MigrationDecisions.ps1`. Clean checkouts validate their tracked
+Before that final review, the aggregate runs
+`Test-G2AuxiliaryConfigReferences.ps1`, then
+`Test-G2CoreResourceClosure.ps1`, and finally `Test-G2MigrationDecisions.ps1`.
+The ordering proves the core report consumes the current auxiliary evidence
+rather than an adjacent, unbound result. Clean checkouts validate their tracked
 hash chains; full local verification also rebuilds the G2-06 core-resource
-scope, conditional-required member workset, complete explicit asset-binding
+scope, all 212 auxiliary instances and lexical candidates, the
+conditional-required member workset, complete explicit asset-binding
 workset, and the complete G2-07 V2
 decision workflow from ignored evidence and authorized read-only inputs. Their
 tracked summaries contain only aggregate facts and hashes; member-level closure

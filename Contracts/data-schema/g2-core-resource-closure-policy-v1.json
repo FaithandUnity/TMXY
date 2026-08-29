@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "evidence_revision": "P2-20A.2",
+  "evidence_revision": "P2-20A.3",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -17,6 +17,9 @@
     "p2_13": "Data/Inventory/p2-13-reference-closure.json",
     "reference_graph": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
     "p2_18": "Data/Inventory/p2-18-content-health.json",
+    "auxiliary_reference_policy": "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json",
+    "auxiliary_reference_schema": "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json",
+    "auxiliary_reference_evidence": "Data/Reports/p2-20a-aux-config-reference-report.json",
     "g2_policy": "Contracts/data-schema/g2-review-policy-v1.json"
   },
   "declared_root_scope": {
@@ -63,11 +66,18 @@
   },
   "auxiliary_config_scope": {
     "inventory_must_be_hash_bound": true,
+    "lexical_evidence_must_be_hash_bound": true,
+    "lexical_evidence_revision": "P2-20A.3",
+    "measurement_authority": "LEXICAL_ONLY",
     "reference_adapters": [],
     "required_coverage": "complete",
-    "current_coverage": "absent",
+    "current_coverage": "lexical-candidate-inventory-only",
     "new_roots_are_union_only": true,
-    "missing_adapters_fail_closed": true
+    "missing_adapters_fail_closed": true,
+    "semantic_approval_required": true,
+    "zero_lexical_match_is_not_no_reference_approval": true,
+    "malformed_inputs_remain_blocking": true,
+    "machine_candidates_are_not_approvals": true
   },
   "traversal": {
     "mode": "directed-fixed-point",
@@ -120,6 +130,7 @@
     "conditional_required_missing_cannot_be_inferred_from_edge_absence": true,
     "all_candidate_targets_are_preserved": true,
     "summary_must_match_detailed_export_and_set_hashes": true,
+    "blocked_auxiliary_evidence_must_not_be_validated_as_a_complete_prerequisite": true,
     "missing_ignored_inputs_block_generation": true,
     "opaque_package_bodies_are_not_parse_failures": true,
     "unlinked_or_duplicate_assets_are_not_delete_authority": true,

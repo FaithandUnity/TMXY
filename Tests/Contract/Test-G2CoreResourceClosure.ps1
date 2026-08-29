@@ -37,9 +37,145 @@ function Get-TextSha256([string[]]$Lines) {
     finally { [Array]::Clear($bytes, 0, $bytes.Length) }
 }
 
+function Get-OrderedTextSha256([string[]]$Lines) {
+    $text = ($Lines -join "`n") + "`n"
+    $bytes = [Text.Encoding]::UTF8.GetBytes($text)
+    try {
+        return [Convert]::ToHexString(
+            [Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
+    }
+    finally { [Array]::Clear($bytes, 0, $bytes.Length) }
+}
+
 function Copy-Document($Value) {
     return ($Value | ConvertTo-Json -Depth 100 -Compress) |
         ConvertFrom-Json -Depth 100 -DateKind String
+}
+
+function Test-AuxiliaryDocument($Candidate) {
+    if ($Candidate.evidence_revision -ne 'P2-20A.3' -or
+        $Candidate.task_id -ne 'P2-20A' -or $Candidate.criterion_id -ne 'G2-06' -or
+        $Candidate.source_build -ne 'qy-3.0.0.413' -or
+        $Candidate.result -ne 'BLOCKED' -or $Candidate.review_execution_result -ne 'PASS' -or
+        $Candidate.task_status -ne 'BLOCKED' -or
+        $Candidate.completion_criteria_satisfied -ne $false -or
+        $Candidate.scope_complete -ne $false -or $Candidate.g2_06_satisfied -ne $false -or
+        $Candidate.p3_authorized -ne $false -or @($Candidate.file_instances).Count -ne 212) {
+        return $false
+    }
+    $measured = $Candidate.measured_lexical_candidates
+    $states = $Candidate.adapter_state_summary
+    $semantic = $Candidate.semantic_resolution
+    $config = $Candidate.config_closure
+    $completion = $Candidate.completion
+    $stateCounts = @{}
+    $instanceIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($item in $Candidate.file_instances) {
+        $name = [string]$item.adapter_state
+        $stateCounts[$name] = 1 + [int]($stateCounts[$name] ?? 0)
+        if (-not $instanceIds.Add([string]$item.instance_sha256)) { return $false }
+    }
+    return $measured.measurement_authority -eq 'LEXICAL_ONLY' -and
+        [int]$measured.file_instances -eq 212 -and
+        [int]$measured.unique_content_bodies -eq 196 -and
+        [int]$measured.parsed_file_instances -eq 206 -and
+        [int]$measured.malformed_file_instances -eq 6 -and
+        [int]$measured.scalar_positions -eq 39522 -and
+        [int]$measured.nonempty_scalar_positions -eq 39498 -and
+        [int]$measured.asset_exact_occurrences -eq 3043 -and
+        [int]$measured.package_exact_occurrences -eq 638 -and
+        [int]$measured.package_unique_occurrences -eq 218 -and
+        [int]$measured.package_ambiguous_occurrences -eq 420 -and
+        [int]$measured.package_ambiguous_candidate_edges -eq 1136 -and
+        [int]$measured.config_exact_edges -eq 8 -and
+        [int]$states.terminal_file_instances -eq 0 -and
+        [int]$states.nonterminal_file_instances -eq 212 -and
+        [int]$states.semantic_approved -eq 0 -and [int]$states.no_ref_approved -eq 0 -and
+        [int]$states.candidate_only -eq 171 -and [int]$states.editor_undecided -eq 35 -and
+        [int]$states.malformed_blocked -eq 6 -and [int]$states.approved_roots -eq 0 -and
+        [int]($stateCounts['candidate-only'] ?? 0) -eq 171 -and
+        [int]($stateCounts['editor-undecided'] ?? 0) -eq 35 -and
+        [int]($stateCounts['malformed-blocked'] ?? 0) -eq 6 -and
+        $semantic.status -eq 'UNASSESSED' -and
+        $null -eq $semantic.resolved_occurrences -and $null -eq $semantic.ambiguous_occurrences -and
+        $null -eq $semantic.unresolved_occurrences -and $null -eq $semantic.unknown_occurrences -and
+        [int]$semantic.first_candidate_selections -eq 0 -and
+        [int]$semantic.heuristic_target_selections -eq 0 -and
+        [int]$config.approved_root_count -eq 0 -and $config.closure_complete -eq $false -and
+        $config.cycle_detection_complete -eq $false -and $null -eq $config.cycle_count -and
+        $null -eq $config.unresolved_cycle_count -and
+        $config.reason_code -eq 'APPROVED_ROOTS_AND_SEMANTIC_EDGES_UNAVAILABLE' -and
+        $completion.semantic_adapters_terminal -eq $false -and
+        $completion.semantic_resolution_complete -eq $false -and
+        $completion.config_closure_complete -eq $false -and
+        $completion.scope_complete -eq $false -and $completion.satisfied -eq $false -and
+        $Candidate.authority_boundaries.g2_06_satisfied -eq $false -and
+        $Candidate.authority_boundaries.g2_approved -eq $false -and
+        $Candidate.authority_boundaries.p3_authorized -eq $false -and
+        $Candidate.disclosure.anonymous_hash_count_reason_only -eq $true -and
+        $Candidate.disclosure.raw_scalar_values -eq $false -and
+        $Candidate.disclosure.file_names -eq $false -and
+        $Candidate.disclosure.private_source_paths -eq $false -and
+        $Candidate.disclosure.exact_primary_keys -eq $false -and
+        $Candidate.disclosure.raw_table_rows -eq $false -and
+        $Candidate.disclosure.decoded_payloads -eq $false
+}
+
+function Test-AuxiliaryBinding($Candidate, [string]$AuxiliaryPath, $Auxiliary) {
+    $bindings = @($Candidate.input_bindings.artifacts |
+        Where-Object { $_.id -eq 'P2-20A.3-AUX' })
+    if ($bindings.Count -ne 1) { return $false }
+    $binding = $bindings[0]
+    return [string]$binding.path -ceq
+        'Data/Reports/p2-20a-aux-config-reference-report.json' -and
+        [string]$binding.sha256 -ceq (Get-Sha256 $AuxiliaryPath) -and
+        [int64]$binding.bytes -eq (Get-Item $AuxiliaryPath).Length -and
+        (Test-AuxiliaryDocument $Auxiliary)
+}
+
+function Test-CoreInputBindings($Candidate, $Policy, $IgnoredBindings) {
+    $expected = [ordered]@{
+        'P2-05' = [string]$Policy.inputs.p2_05
+        'P2-06' = [string]$Policy.inputs.p2_06
+        'P2-08' = [string]$Policy.inputs.p2_08
+        'ownership-registry' = [string]$Policy.inputs.ownership_registry
+        'core-registry' = [string]$Policy.inputs.core_registry
+        'P2-12' = [string]$Policy.inputs.p2_12
+        'asset-catalog' = [string]$Policy.inputs.asset_catalog
+        'reference-policy' = [string]$Policy.inputs.reference_policy
+        'P2-13' = [string]$Policy.inputs.p2_13
+        'reference-graph' = [string]$Policy.inputs.reference_graph
+        'P2-18' = [string]$Policy.inputs.p2_18
+        'auxiliary-reference-policy' = [string]$Policy.inputs.auxiliary_reference_policy
+        'auxiliary-reference-schema' = [string]$Policy.inputs.auxiliary_reference_schema
+        'P2-20A.3-AUX' = [string]$Policy.inputs.auxiliary_reference_evidence
+        'g2-policy' = [string]$Policy.inputs.g2_policy
+    }
+    $bindings = @($Candidate.input_bindings.artifacts)
+    if ($bindings.Count -ne $expected.Count -or
+        @(Compare-Object @($bindings.id) @($expected.Keys) -SyncWindow 0).Count -ne 0 -or
+        @($bindings.id | Sort-Object -Unique).Count -ne $expected.Count) { return $false }
+    $aggregateLines = [Collections.Generic.List[string]]::new()
+    foreach ($binding in $bindings) {
+        $id = [string]$binding.id
+        if (-not $expected.Contains($id) -or
+            [string]$binding.path -cne [string]$expected[$id]) { return $false }
+        $path = Join-Path $root ([string]$binding.path)
+        if (Test-Path $path -PathType Leaf) {
+            if ([string]$binding.sha256 -cne (Get-Sha256 $path) -or
+                [int64]$binding.bytes -ne (Get-Item $path).Length) { return $false }
+        }
+        elseif ($IgnoredBindings.ContainsKey($id)) {
+            $metadata = $IgnoredBindings[$id]
+            if ([string]$binding.sha256 -cne [string]$metadata.sha256 -or
+                [int64]$binding.bytes -ne [int64]$metadata.bytes -or
+                [int]$binding.lines -ne [int]$metadata.lines) { return $false }
+        }
+        else { return $false }
+        $aggregateLines.Add("$id|$($binding.path)|$($binding.sha256)")
+    }
+    return [string]$Candidate.input_bindings.aggregate_sha256 -ceq
+        (Get-OrderedTextSha256 @($aggregateLines))
 }
 
 function Test-MemberWorkset($Records, [int]$ExpectedCount, [string]$ExpectedSha,
@@ -136,6 +272,30 @@ function Test-Candidate($Candidate, $Facts) {
         $scope.core_table_resource_rules.owner_filtering -ne 'forbidden' -or
         [int]$scope.core_table_resource_rules.client_presentation_rules -le 0 -or
         [int]$scope.core_table_resource_rules.server_authoritative_rules -le 0) { return $false }
+    $auxiliary = $scope.auxiliary_config
+    if ($auxiliary.evidence_revision -ne 'P2-20A.3' -or
+        $auxiliary.evidence_hash_bound -ne $true -or
+        $auxiliary.measurement_authority -ne 'LEXICAL_ONLY' -or
+        [int]$auxiliary.inventory_files -ne 212 -or
+        [int]$auxiliary.unique_content_bodies -ne 196 -or
+        [int]$auxiliary.parsed_file_instances -ne 206 -or
+        [int]$auxiliary.malformed_isolated -ne 6 -or
+        [int]$auxiliary.nonempty_scalar_positions -ne 39498 -or
+        [int]$auxiliary.asset_exact_occurrences -ne 3043 -or
+        [int]$auxiliary.package_exact_occurrences -ne 638 -or
+        [int]$auxiliary.config_exact_edges -ne 8 -or
+        [int]$auxiliary.reference_adapters -ne 0 -or
+        $auxiliary.reference_adapter_coverage -ne 'lexical-candidate-inventory-only' -or
+        [int]$auxiliary.terminal_file_instances -ne 0 -or
+        [int]$auxiliary.candidate_only -ne 171 -or
+        [int]$auxiliary.editor_undecided -ne 35 -or
+        [int]$auxiliary.malformed_blocked -ne 6 -or
+        [int]$auxiliary.semantic_approved -ne 0 -or
+        [int]$auxiliary.no_ref_approved -ne 0 -or
+        [int]$auxiliary.approved_roots -ne 0 -or
+        $auxiliary.exact_complete_scalar_matching -ne $true -or
+        $auxiliary.first_candidate_selection_used -ne $false -or
+        $auxiliary.scope_complete -ne $false) { return $false }
     $closure = $Candidate.closure
     if (-not ($closure.PSObject.Properties.Name -contains 'conditional_required') -or
         -not ($closure.PSObject.Properties.Name -contains 'asset_binding') -or
@@ -237,12 +397,17 @@ $evidencePath = Join-Path $root 'Data/Inventory/p2-20a-core-resource-closure.jso
 $detailPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl'
 $worksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl'
 $assetWorksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl'
+$auxiliaryReportPath = Join-Path $root 'Data/Reports/p2-20a-aux-config-reference-report.json'
+$auxiliaryPolicyPath = Join-Path $root 'Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json'
+$auxiliarySchemaPath = Join-Path $root 'Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json'
 $p206Path = Join-Path $root 'Data/Inventory/p2-06-three-layer-data.json'
 $p213Path = Join-Path $root 'Data/Inventory/p2-13-reference-closure.json'
 $policy = Get-Content $policyPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100
 $report = Get-Content $reportPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $governance = Get-Content $governancePath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100
 $evidence = Get-Content $evidencePath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+$auxiliaryReport = Get-Content $auxiliaryReportPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
 $p212 = Get-Content (Join-Path $root 'Data/Inventory/p2-12-full-asset-inventory.json') `
     -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $p213 = Get-Content $p213Path -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
@@ -277,6 +442,14 @@ Add-Assertion 'Policy traverses the exact five evidence-backed edge records' (
             'table_fk_edge', 'table_package_edge')).Count -eq 0)
 Add-Assertion 'Policy requires config and asset-binding scope to fail closed' (
     $policy.auxiliary_config_scope.missing_adapters_fail_closed -and
+    $policy.auxiliary_config_scope.lexical_evidence_must_be_hash_bound -and
+    $policy.auxiliary_config_scope.lexical_evidence_revision -eq 'P2-20A.3' -and
+    $policy.auxiliary_config_scope.measurement_authority -eq 'LEXICAL_ONLY' -and
+    $policy.auxiliary_config_scope.current_coverage -eq 'lexical-candidate-inventory-only' -and
+    $policy.auxiliary_config_scope.semantic_approval_required -and
+    $policy.auxiliary_config_scope.zero_lexical_match_is_not_no_reference_approval -and
+    $policy.auxiliary_config_scope.malformed_inputs_remain_blocking -and
+    $policy.auxiliary_config_scope.machine_candidates_are_not_approvals -and
     $policy.auxiliary_config_scope.new_roots_are_union_only -and
     $policy.traversal.first_candidate_selection -eq 'forbidden' -and
     $policy.fail_closed_rules.core_foreign_key_zero_is_not_resource_closure -and
@@ -288,7 +461,7 @@ Add-Assertion 'Policy requires config and asset-binding scope to fail closed' (
     [int]$policy.completion.asset_binding_unknown -eq 0)
 Add-Assertion 'Policy independently preserves conditional-required missing values' (
     $policy.conditional_required_scope.missing_values_remain_in_scope_without_table_package_edges -and
-    $policy.evidence_revision -eq 'P2-20A.2' -and
+    $policy.evidence_revision -eq 'P2-20A.3' -and
     $policy.conditional_required_scope.member_set_exported -eq $true -and
     $policy.conditional_required_scope.member_set_must_be_complete_unique_and_hash_bound -and
     $policy.conditional_required_scope.member_values_forbidden -and
@@ -352,6 +525,10 @@ Add-Assertion 'P2-13 conditional-required aggregate is preserved independently o
     $report.closure.conditional_required.member_source_file_set_sha256 -match '^[0-9a-f]{64}$' -and
     $report.closure.conditional_required.zero_threshold_satisfied -eq $false)
 Add-Assertion 'Report matches frozen closure semantics and tracked facts' (Test-Candidate $report $facts)
+Add-Assertion 'A.3 auxiliary report remains blocked and is exactly SHA-256 bound by core closure' (
+    (Test-AuxiliaryBinding $report $auxiliaryReportPath $auxiliaryReport) -and
+    [string]$auxiliaryReport.contracts.policy_sha256 -ceq (Get-Sha256 $auxiliaryPolicyPath) -and
+    [string]$auxiliaryReport.contracts.schema_sha256 -ceq (Get-Sha256 $auxiliarySchemaPath))
 Add-Assertion 'Scoped terminal edges are reported but never counted as missing or guessed' (
     $facts.scoped_terminal -eq 22040 -and
     [int]$report.closure.resolution.heuristic_target_selections -eq 0)
@@ -362,7 +539,7 @@ Add-Assertion 'Ignored detail metadata stays hash-bound without requiring it in 
     [int]$report.closure.detail_export.lines -eq 210313 -and
     $report.closure.detail_export.tracked -eq $false)
 Add-Assertion 'Tracked evidence exposes only anonymous workset counts and hashes' (
-    $report.evidence_revision -eq 'P2-20A.2' -and
+    $report.evidence_revision -eq 'P2-20A.3' -and
     [int]$report.closure.conditional_required.member_set_count -eq 29 -and
     $report.closure.conditional_required.member_set_sha256 -match '^[0-9a-f]{64}$' -and
     @($evidence.outputs.conditional_required_workset.PSObject.Properties.Name).Count -eq 3 -and
@@ -508,6 +685,31 @@ $negativeBindingCount = Copy-Document $report
 $negativeBindingCount.closure.asset_binding.workset_count = 21493
 $negativeBindingSha = Copy-Document $report
 $negativeBindingSha.closure.asset_binding.workset_sha256 = '0' * 64
+$negativeAuxScope = Copy-Document $report
+$negativeAuxScope.scope_definition.auxiliary_config.scope_complete = $true
+$negativeAuxRoots = Copy-Document $report
+$negativeAuxRoots.scope_definition.auxiliary_config.approved_roots = 1
+$negativeAuxFiles = Copy-Document $report
+$negativeAuxFiles.scope_definition.auxiliary_config.inventory_files = 211
+$negativeAuxBindingSha = Copy-Document $report
+@($negativeAuxBindingSha.input_bindings.artifacts |
+    Where-Object id -eq 'P2-20A.3-AUX')[0].sha256 = '0' * 64
+$negativeAuxAggregate = Copy-Document $report
+$negativeAuxAggregate.input_bindings.aggregate_sha256 = '0' * 64
+$negativeAuxMissing = Copy-Document $report
+$negativeAuxMissing.input_bindings.artifacts = @(
+    $negativeAuxMissing.input_bindings.artifacts | Where-Object id -ne 'P2-20A.3-AUX')
+$negativeAuxDuplicate = Copy-Document $report
+$negativeAuxDuplicate.input_bindings.artifacts[-1] = Copy-Document `
+    @($negativeAuxDuplicate.input_bindings.artifacts |
+        Where-Object id -eq 'P2-20A.3-AUX')[0]
+$negativeAuxPass = Copy-Document $auxiliaryReport
+$negativeAuxPass.result = 'PASS'
+$negativeAuxComplete = Copy-Document $auxiliaryReport
+$negativeAuxComplete.task_status = 'COMPLETE'
+$negativeAuxComplete.completion_criteria_satisfied = $true
+$negativeAuxDisclosure = Copy-Document $auxiliaryReport
+$negativeAuxDisclosure.disclosure.private_source_paths = $true
 Add-Assertion 'Negative case rejects outcome-based root narrowing' (-not (Test-Candidate $negativeScope $facts))
 Add-Assertion 'Negative case rejects owner or rule narrowing' (-not (Test-Candidate $negativeRules $facts))
 Add-Assertion 'Negative case rejects first-candidate or heuristic selection' (-not (Test-Candidate $negativeFirst $facts))
@@ -523,30 +725,35 @@ Add-Assertion 'Negative case rejects explicit binding falsely reported as fully 
 Add-Assertion 'Negative case rejects first-candidate asset binding selection' (-not (Test-Candidate $negativeBindingFirst $facts))
 Add-Assertion 'Negative case rejects asset binding workset count tampering' (-not (Test-Candidate $negativeBindingCount $facts))
 Add-Assertion 'Negative case rejects asset binding workset SHA tampering' (-not (Test-Candidate $negativeBindingSha $facts))
+Add-Assertion 'Negative case rejects falsely completed auxiliary scope' (-not (Test-Candidate $negativeAuxScope $facts))
+Add-Assertion 'Negative case rejects a fabricated approved auxiliary root' (-not (Test-Candidate $negativeAuxRoots $facts))
+Add-Assertion 'Negative case rejects auxiliary file-instance count tampering' (-not (Test-Candidate $negativeAuxFiles $facts))
+Add-Assertion 'Negative case rejects auxiliary BLOCKED evidence promoted to PASS' (-not (Test-AuxiliaryDocument $negativeAuxPass))
+Add-Assertion 'Negative case rejects auxiliary evidence promoted to COMPLETE' (-not (Test-AuxiliaryDocument $negativeAuxComplete))
+Add-Assertion 'Negative case rejects weakened auxiliary disclosure' (-not (Test-AuxiliaryDocument $negativeAuxDisclosure))
 
-$bindingsPass = $true
 $ignoredBindings = @{
     'asset-catalog' = $p212.catalog
     'reference-graph' = $p213.graph
 }
-foreach ($binding in $report.input_bindings.artifacts) {
-    $path = Join-Path $root ([string]$binding.path)
-    if (Test-Path $path -PathType Leaf) {
-        if ([string]$binding.sha256 -cne (Get-Sha256 $path) -or
-            [int64]$binding.bytes -ne (Get-Item $path).Length) { $bindingsPass = $false }
-    }
-    elseif ($ignoredBindings.ContainsKey([string]$binding.id)) {
-        $metadata = $ignoredBindings[[string]$binding.id]
-        if ([string]$binding.path -cne [string]$metadata.path -or
-            [string]$binding.sha256 -cne [string]$metadata.sha256 -or
-            [int64]$binding.bytes -ne [int64]$metadata.bytes -or
-            [int]$binding.lines -ne [int]$metadata.lines) { $bindingsPass = $false }
-    }
-    else { $bindingsPass = $false }
-}
-Add-Assertion 'P2-05 P2-08 P2-12 P2-13 P2-18 G2 and ignored inputs are exact-hash bound' $bindingsPass
+$bindingsPass = Test-CoreInputBindings $report $policy $ignoredBindings
+Add-Assertion 'All fifteen ordered prerequisite and supplemental inputs are uniquely exact-hash bound' $bindingsPass
+Add-Assertion 'Negative case rejects auxiliary binding SHA tampering' (-not (
+        Test-CoreInputBindings $negativeAuxBindingSha $policy $ignoredBindings))
+Add-Assertion 'Negative case rejects input aggregate SHA tampering' (-not (
+        Test-CoreInputBindings $negativeAuxAggregate $policy $ignoredBindings))
+Add-Assertion 'Negative case rejects a missing auxiliary binding' (-not (
+        Test-CoreInputBindings $negativeAuxMissing $policy $ignoredBindings))
+Add-Assertion 'Negative case rejects a duplicated auxiliary binding' (-not (
+        Test-CoreInputBindings $negativeAuxDuplicate $policy $ignoredBindings))
 Add-Assertion 'Governance remains blocked and binds the machine report' (
     $governance.status -eq 'BLOCKED' -and $governance.scope_complete -eq $false -and
+    $governance.auxiliary_reference_evidence_hash_bound -eq $true -and
+    [int]$governance.auxiliary_file_instances -eq 212 -and
+    [int]$governance.auxiliary_candidate_only -eq 171 -and
+    [int]$governance.auxiliary_editor_undecided -eq 35 -and
+    [int]$governance.auxiliary_malformed_blocked -eq 6 -and
+    [int]$governance.auxiliary_approved_roots -eq 0 -and
     $governance.asset_binding_resolution_explicit -eq $true -and
     [int]$governance.asset_binding_resolved_targets -eq $facts.binding_resolved -and
     [int]$governance.asset_binding_ambiguous_targets -eq $facts.binding_ambiguous -and
@@ -634,6 +841,21 @@ $output = [pscustomobject][ordered]@{
         asset_binding_first_candidate_rejected = -not (Test-Candidate $negativeBindingFirst $facts)
         asset_binding_count_tamper_rejected = -not (Test-Candidate $negativeBindingCount $facts)
         asset_binding_sha_tamper_rejected = -not (Test-Candidate $negativeBindingSha $facts)
+        auxiliary_false_scope_rejected = -not (Test-Candidate $negativeAuxScope $facts)
+        auxiliary_fabricated_root_rejected = -not (Test-Candidate $negativeAuxRoots $facts)
+        auxiliary_file_count_tamper_rejected = -not (Test-Candidate $negativeAuxFiles $facts)
+        auxiliary_binding_sha_tamper_rejected = -not (
+            Test-CoreInputBindings $negativeAuxBindingSha $policy $ignoredBindings)
+        auxiliary_aggregate_sha_tamper_rejected = -not (
+            Test-CoreInputBindings $negativeAuxAggregate $policy $ignoredBindings)
+        auxiliary_missing_binding_rejected = -not (
+            Test-CoreInputBindings $negativeAuxMissing $policy $ignoredBindings)
+        auxiliary_duplicate_binding_rejected = -not (
+            Test-CoreInputBindings $negativeAuxDuplicate $policy $ignoredBindings)
+        auxiliary_false_pass_rejected = -not (Test-AuxiliaryDocument $negativeAuxPass)
+        auxiliary_false_complete_rejected = -not (Test-AuxiliaryDocument $negativeAuxComplete)
+        auxiliary_disclosure_weakening_rejected = -not (
+            Test-AuxiliaryDocument $negativeAuxDisclosure)
     }
     closure = [pscustomobject][ordered]@{
         start_nodes = $facts.start_nodes

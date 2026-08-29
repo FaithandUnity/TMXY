@@ -14,6 +14,7 @@ $markdownPath = Join-Path $root 'Data\Reports\p2-20-g2-review-report.md'
 $evidencePath = Join-Path $root 'Data\Inventory\p2-20-g2-review.json'
 $qualityPath = Join-Path $root 'Data\BuildBaseline\p0-12-local-quality-gates.json'
 $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
+$auxiliaryReportPath = Join-Path $root 'Data\Reports\p2-20a-aux-config-reference-report.json'
 $remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
 $reviewPacketsPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
 $authorityLedgerPath = Join-Path $root 'Data\Governance\p2-g2-migration-decision-authority-v2.json'
@@ -70,6 +71,43 @@ function Test-AgainstSchema([object]$Value) {
 function Test-JsonEqual([object]$Left, [object]$Right) {
     return ($Left | ConvertTo-Json -Depth 100 -Compress) -ceq
         ($Right | ConvertTo-Json -Depth 100 -Compress)
+}
+
+function Test-AuxiliaryCoreBinding([object]$Core, [object]$Auxiliary) {
+    $bindings = @($Core.input_bindings.artifacts | Where-Object id -eq 'P2-20A.3-AUX')
+    if ($bindings.Count -ne 1 -or
+        [string]$bindings[0].path -cne
+            'Data/Reports/p2-20a-aux-config-reference-report.json' -or
+        [string]$bindings[0].sha256 -cne (Get-Sha256 $auxiliaryReportPath) -or
+        [int64]$bindings[0].bytes -ne (Get-Item $auxiliaryReportPath).Length -or
+        $Auxiliary.evidence_revision -ne 'P2-20A.3' -or
+        $Auxiliary.result -ne 'BLOCKED' -or $Auxiliary.review_execution_result -ne 'PASS' -or
+        $Auxiliary.task_status -ne 'BLOCKED' -or
+        $Auxiliary.completion_criteria_satisfied -ne $false -or
+        $Auxiliary.scope_complete -ne $false -or $Auxiliary.g2_06_satisfied -ne $false -or
+        $Auxiliary.p3_authorized -ne $false -or @($Auxiliary.file_instances).Count -ne 212) {
+        return $false
+    }
+    $scope = $Core.scope_definition.auxiliary_config
+    $measured = $Auxiliary.measured_lexical_candidates
+    $states = $Auxiliary.adapter_state_summary
+    return $scope.evidence_hash_bound -eq $true -and
+        [int]$scope.inventory_files -eq [int]$measured.file_instances -and
+        [int]$scope.unique_content_bodies -eq [int]$measured.unique_content_bodies -and
+        [int]$scope.parsed_file_instances -eq [int]$measured.parsed_file_instances -and
+        [int]$scope.malformed_isolated -eq [int]$measured.malformed_file_instances -and
+        [int]$scope.asset_exact_occurrences -eq [int]$measured.asset_exact_occurrences -and
+        [int]$scope.package_exact_occurrences -eq [int]$measured.package_exact_occurrences -and
+        [int]$scope.config_exact_edges -eq [int]$measured.config_exact_edges -and
+        [int]$scope.terminal_file_instances -eq [int]$states.terminal_file_instances -and
+        [int]$scope.candidate_only -eq [int]$states.candidate_only -and
+        [int]$scope.editor_undecided -eq [int]$states.editor_undecided -and
+        [int]$scope.malformed_blocked -eq [int]$states.malformed_blocked -and
+        [int]$scope.semantic_approved -eq 0 -and [int]$scope.no_ref_approved -eq 0 -and
+        [int]$scope.approved_roots -eq 0 -and $scope.scope_complete -eq $false -and
+        $Auxiliary.semantic_resolution.status -eq 'UNASSESSED' -and
+        $Auxiliary.config_closure.closure_complete -eq $false -and
+        $Auxiliary.config_closure.cycle_detection_complete -eq $false
 }
 
 function Get-Criterion([object]$Candidate, [string]$Id) {
@@ -177,6 +215,25 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'declared_scope_hash_bound') -ne $true -or
         (Get-Metric $g206 'scope_complete') -ne $false -or
         (Get-Metric $g206 'auxiliary_config_scope_complete') -ne $false -or
+        (Get-Metric $g206 'auxiliary_reference_evidence_hash_bound') -ne $true -or
+        (Get-Metric $g206 'auxiliary_file_instances') -ne 212 -or
+        (Get-Metric $g206 'auxiliary_terminal_file_instances') -ne 0 -or
+        (Get-Metric $g206 'auxiliary_nonterminal_file_instances') -ne 212 -or
+        (Get-Metric $g206 'auxiliary_candidate_only') -ne 171 -or
+        (Get-Metric $g206 'auxiliary_editor_undecided') -ne 35 -or
+        (Get-Metric $g206 'auxiliary_malformed_blocked') -ne 6 -or
+        (Get-Metric $g206 'auxiliary_semantic_approved') -ne 0 -or
+        (Get-Metric $g206 'auxiliary_no_ref_approved') -ne 0 -or
+        (Get-Metric $g206 'auxiliary_approved_roots') -ne 0 -or
+        (Get-Metric $g206 'auxiliary_asset_exact_occurrences') -ne 3043 -or
+        (Get-Metric $g206 'auxiliary_package_exact_occurrences') -ne 638 -or
+        (Get-Metric $g206 'auxiliary_package_unique_occurrences') -ne 218 -or
+        (Get-Metric $g206 'auxiliary_package_ambiguous_occurrences') -ne 420 -or
+        (Get-Metric $g206 'auxiliary_package_ambiguous_candidate_edges') -ne 1136 -or
+        (Get-Metric $g206 'auxiliary_config_exact_edges') -ne 8 -or
+        (Get-Metric $g206 'auxiliary_semantic_status') -ne 'UNASSESSED' -or
+        (Get-Metric $g206 'auxiliary_config_closure_complete') -ne $false -or
+        (Get-Metric $g206 'auxiliary_cycle_detection_complete') -ne $false -or
         (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $true -or
         (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21292 -or
         (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 183 -or
@@ -239,7 +296,7 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
-    $qualityPath, $supplementalPath, $remediationPath, $reviewPacketsPath,
+    $qualityPath, $supplementalPath, $auxiliaryReportPath, $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
     $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath, $wrapperPath)
 foreach ($path in $required) {
@@ -264,6 +321,8 @@ $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 |
 $quality = Get-Content -LiteralPath $qualityPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $supplemental = Get-Content -LiteralPath $supplementalPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$auxiliaryReport = Get-Content -LiteralPath $auxiliaryReportPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $remediation = Get-Content -LiteralPath $remediationPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
@@ -390,7 +449,8 @@ $bindingsPassed = $bindingsPassed -and
     $supplementalBinding.result -eq $supplemental.result -and
     $supplementalBinding.task_status -eq $supplemental.task_status -and
     $supplementalBinding.completion_criteria_satisfied -eq
-        $supplemental.completion_criteria_satisfied
+        $supplemental.completion_criteria_satisfied -and
+    (Test-AuxiliaryCoreBinding $supplemental $auxiliaryReport)
 $aggregateLines.Add("SUPPLEMENTAL|$($supplementalBinding.task_id)|$($supplementalBinding.criterion_id)|$($supplementalBinding.path)|$($supplementalBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
@@ -419,6 +479,15 @@ $g206 = Get-Criterion $report 'G2-06'
 Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without FK substitution' (
     $supplemental.closure.scope_complete -eq $false -and
     $supplemental.closure.auxiliary_config_reference_scope_complete -eq $false -and
+    (Test-AuxiliaryCoreBinding $supplemental $auxiliaryReport) -and
+    (Get-Metric $g206 'auxiliary_reference_evidence_hash_bound') -eq $true -and
+    (Get-Metric $g206 'auxiliary_file_instances') -eq 212 -and
+    (Get-Metric $g206 'auxiliary_candidate_only') -eq 171 -and
+    (Get-Metric $g206 'auxiliary_editor_undecided') -eq 35 -and
+    (Get-Metric $g206 'auxiliary_malformed_blocked') -eq 6 -and
+    (Get-Metric $g206 'auxiliary_semantic_approved') -eq 0 -and
+    (Get-Metric $g206 'auxiliary_no_ref_approved') -eq 0 -and
+    (Get-Metric $g206 'auxiliary_approved_roots') -eq 0 -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolved_targets -eq 21292 -and
@@ -624,6 +693,37 @@ $badSupplementalSha.input_bindings.supplemental.sha256 = '0' * 64
 $negativeCases.supplemental_sha_tamper_rejected =
     (Test-AgainstSchema $badSupplementalSha) -and
     $badSupplementalSha.input_bindings.supplemental.sha256 -ne (Get-Sha256 $supplementalPath)
+$badAuxMetric = Copy-JsonObject $report
+Set-Metric (Get-Criterion $badAuxMetric 'G2-06') `
+    'auxiliary_reference_evidence_hash_bound' $false
+$negativeCases.auxiliary_metric_tamper_rejected =
+    (Test-AgainstSchema $badAuxMetric) -and -not (Test-G2Semantics $badAuxMetric $policy)
+$badAuxBinding = Copy-JsonObject $supplemental
+@($badAuxBinding.input_bindings.artifacts |
+    Where-Object id -eq 'P2-20A.3-AUX')[0].sha256 = '0' * 64
+$negativeCases.auxiliary_nested_sha_tamper_rejected = -not (
+    Test-AuxiliaryCoreBinding $badAuxBinding $auxiliaryReport)
+$badAuxScope = Copy-JsonObject $supplemental
+$badAuxScope.scope_definition.auxiliary_config.scope_complete = $true
+$negativeCases.auxiliary_false_scope_rejected = -not (
+    Test-AuxiliaryCoreBinding $badAuxScope $auxiliaryReport)
+$badAuxRoot = Copy-JsonObject $supplemental
+$badAuxRoot.scope_definition.auxiliary_config.approved_roots = 1
+$negativeCases.auxiliary_fabricated_root_rejected = -not (
+    Test-AuxiliaryCoreBinding $badAuxRoot $auxiliaryReport)
+$badAuxCount = Copy-JsonObject $supplemental
+$badAuxCount.scope_definition.auxiliary_config.inventory_files = 211
+$negativeCases.auxiliary_file_count_tamper_rejected = -not (
+    Test-AuxiliaryCoreBinding $badAuxCount $auxiliaryReport)
+$badAuxPass = Copy-JsonObject $auxiliaryReport
+$badAuxPass.result = 'PASS'
+$negativeCases.auxiliary_false_pass_rejected = -not (
+    Test-AuxiliaryCoreBinding $supplemental $badAuxPass)
+$badAuxComplete = Copy-JsonObject $auxiliaryReport
+$badAuxComplete.task_status = 'COMPLETE'
+$badAuxComplete.completion_criteria_satisfied = $true
+$negativeCases.auxiliary_false_complete_rejected = -not (
+    Test-AuxiliaryCoreBinding $supplemental $badAuxComplete)
 $badRemediationSha = Copy-JsonObject $report
 $badRemediationSha.input_bindings.remediation.sha256 = '0' * 64
 $negativeCases.remediation_sha_tamper_rejected =

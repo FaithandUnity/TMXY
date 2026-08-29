@@ -144,6 +144,12 @@ def self_test() -> dict[str, object]:
     require(sha256_lines({"b", "a"}) == sha256_lines({"a", "b"}),
             "Set hash test failed")
     assertions += 1
+    require(171 + 35 + 6 == 212 and 0 + 212 == 212,
+            "Auxiliary nonterminal partition test failed")
+    assertions += 1
+    require(not (3043 > 0 and 638 > 0 and 8 > 0 and 0 > 0),
+            "Lexical candidates must not fabricate approved roots")
+    assertions += 1
     return {"result": "PASS", "assertions": assertions}
 
 

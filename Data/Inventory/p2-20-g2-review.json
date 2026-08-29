@@ -13,7 +13,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "b314a24db4fbf5bf1d929445864a0780da41282d5b4ffe52f7a6f79b1717bf91",
+      "aggregate_sha256": "7344e16a8554997839d68945d6be6b331e3a9c537cb1a547d00f0ac4c1d0175e",
       "prerequisites": [
         {
           "task_id": "P2-01",
@@ -172,7 +172,7 @@
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
         "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-        "sha256": "73b680eb76a3f73fd5bb9f3a74ecbed7b35ff299ed6f084581578ab028d7fb98",
+        "sha256": "13aacb78334266cfe58cd3661b8afea189d849f193b7083b307a1c0cd6b573d1",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -191,9 +191,9 @@
       },
       "quality": {
         "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-        "sha256": "c61fced09010377ee7200ec74c9602be16c2671321f60ee5cdb050f606c73545",
+        "sha256": "77307ed11bd509ae90dc04336324f129851bc99c8b6e0c1cf36de2ee62232089",
         "result": "PASS_DIAGNOSTIC",
-        "captured_utc": "2026-08-28T23:06:43.5388356+00:00"
+        "captured_utc": "2026-08-29T04:25:16.9510227+00:00"
       }
     }
   },
@@ -201,16 +201,16 @@
     "json": {
       "path": "Data/Reports/p2-20-g2-review-report.json",
       "tracked": true,
-      "bytes": 25875,
-      "lines": 839,
-      "sha256": "7db2b6548813cc1ad3a0702d8bdcc677c7fc04554546ac6344174b6e30462d9b"
+      "bytes": 28501,
+      "lines": 934,
+      "sha256": "04fd73c01f2c85c1e50119e7ef534815fc18bf4f92d71019ab6b73747935b50f"
     },
     "markdown": {
       "path": "Data/Reports/p2-20-g2-review-report.md",
       "tracked": true,
-      "bytes": 4354,
+      "bytes": 4589,
       "lines": 52,
-      "sha256": "15aa545b59b0d87572d414ff5f4fad44c9d7db1eae18b70e0082c65955295650"
+      "sha256": "1bf1b05172b46452eb03be3e719ea075078ae8da4edab9ed78fa9dd5aa1e48aa"
     }
   },
   "summary": {
@@ -236,8 +236,8 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A is present and hash-bound; auxiliary configuration scope remains incomplete, and explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
-      "required_action": "Complete auxiliary configuration scope, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
+      "reason": "P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {
@@ -288,11 +288,11 @@
   },
   "implementation": {
     "source_files": 3,
-    "source_sha256": "2478ab8cfee44b7f0591db96a888d068bb87652fce389a76ea93aafb41cf4e42",
+    "source_sha256": "19d7fabbd901919d65089a2f51afa6a63b30142d63f4d46675a452a11b0127c2",
     "generator": "Tools/TMXY.G2Review/g2_review.py",
-    "generator_sha256": "a5cde928e993e6b56fb8fe8269e8aa1f7b04264053e19fad87ba688428d8e6a0",
+    "generator_sha256": "7b7283407d45354979775dce1cf5fc0b30e2ffde36df81dd348b8ed5b824b1f2",
     "wrapper": "Tools/TMXY.G2Review/New-G2Review.ps1",
-    "wrapper_sha256": "7751766c5ba8328de4ff14a7f83b9954e2612504ae7bd546881af209f80873ec",
+    "wrapper_sha256": "b5cd6f47d62e7666bb2cf6ffc5d8174118ae840869fbb875e613ec4a05aa6264",
     "self_test_assertions": 11
   },
   "disclosure": {

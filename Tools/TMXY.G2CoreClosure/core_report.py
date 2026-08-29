@@ -13,6 +13,9 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
                  rule_summary: dict[str, Any], graph: dict[str, Any],
                  closure: dict[str, Any]) -> dict[str, Any]:
     p205 = documents["p2_05"]
+    auxiliary_evidence = documents["auxiliary_reference_evidence"]
+    measured = auxiliary_evidence["measured_lexical_candidates"]
+    adapter_states = auxiliary_evidence["adapter_state_summary"]
     roots = {
         "selection": "all-declared-roots",
         "root_kinds": sorted(graph["root_counts"]),
@@ -25,16 +28,35 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
     rule_summary["rules_with_edges"] = len(graph["rules_with_edges"])
     rule_summary["source_rows"] = len(graph["field_sources"])
     auxiliary = {
+        "evidence_revision": auxiliary_evidence["evidence_revision"],
+        "evidence_hash_bound": True,
+        "measurement_authority": measured["measurement_authority"],
         "inventory_files": p205["summary"]["files"],
+        "unique_content_bodies": measured["unique_content_bodies"],
+        "parsed_file_instances": measured["parsed_file_instances"],
         "malformed_isolated": p205["summary"]["xml"]["malformed_isolated"],
+        "scalar_positions": measured["scalar_positions"],
+        "nonempty_scalar_positions": measured["nonempty_scalar_positions"],
+        "asset_exact_occurrences": measured["asset_exact_occurrences"],
+        "package_exact_occurrences": measured["package_exact_occurrences"],
+        "config_exact_edges": measured["config_exact_edges"],
         "reference_adapters": len(policy["auxiliary_config_scope"]["reference_adapters"]),
         "reference_adapter_coverage": policy["auxiliary_config_scope"]["current_coverage"],
+        "terminal_file_instances": adapter_states["terminal_file_instances"],
+        "candidate_only": adapter_states["candidate_only"],
+        "editor_undecided": adapter_states["editor_undecided"],
+        "malformed_blocked": adapter_states["malformed_blocked"],
+        "semantic_approved": adapter_states["semantic_approved"],
+        "no_ref_approved": adapter_states["no_ref_approved"],
+        "approved_roots": adapter_states["approved_roots"],
+        "exact_complete_scalar_matching": True,
+        "first_candidate_selection_used": False,
         "new_roots_are_union_only": True,
         "scope_complete": False,
     }
     return {
         "schema_version": 1,
-        "evidence_revision": "P2-20A.2",
+        "evidence_revision": "P2-20A.3",
         "captured_utc": documents["p2_18"]["captured_utc"],
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
@@ -74,8 +96,8 @@ def build_report(policy: dict[str, Any], policy_path: Path, schema_path: Path,
         "blockers": [
             {
                 "id": "G2-06-CONFIG-SCOPE",
-                "reason": "Auxiliary configuration reference adapters are absent, so configuration-derived roots are not proven complete.",
-                "required_action": "Define reviewed semantic adapters, including tolerant-parser coverage for isolated malformed XML, and add discovered roots by union.",
+                "reason": "Auxiliary configuration lexical candidates are measured and hash-bound, but all 212 file instances remain nonterminal and no semantic adapter, no-reference disposition, or root is approved.",
+                "required_action": "Define reviewed semantic adapters or explicit no-reference dispositions for all file instances, dispose every malformed XML input, and add only approved roots by union.",
             },
             {
                 "id": "G2-06-ASSET-BINDING",
@@ -138,7 +160,7 @@ def render_markdown(report: dict[str, Any]) -> str:
         "",
         f"All {roots['count']} declared character, scene, and skill roots are included. All {rules['selected_rules']} resource-bearing core-table rules are included for every emitted non-sentinel canonical-row reference.",
         "",
-        "Auxiliary configuration reference adapters are absent, so later configuration roots may only enlarge the union. Package-to-asset bindings are explicitly classified, but ambiguous and unresolved states remain blocking.",
+        f"Auxiliary lexical evidence is SHA-256 bound for all {report['scope_definition']['auxiliary_config']['inventory_files']} file instances. It records {report['scope_definition']['auxiliary_config']['candidate_only']} candidate-only, {report['scope_definition']['auxiliary_config']['editor_undecided']} editor-undecided, and {report['scope_definition']['auxiliary_config']['malformed_blocked']} malformed-blocked states; approved adapters, no-reference dispositions, and roots remain zero. Package-to-asset bindings are explicitly classified, but ambiguous and unresolved states remain blocking.",
         "",
         "## Measured closure",
         "",
@@ -190,13 +212,19 @@ def render_markdown(report: dict[str, Any]) -> str:
 def build_governance(report: dict[str, Any], report_binding: dict[str, Any]) -> dict[str, Any]:
     return {
         "schema_version": 1,
-        "evidence_revision": "P2-20A.2",
+        "evidence_revision": "P2-20A.3",
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
         "status": "BLOCKED",
         "scope_definition": "monotonic-union-all-declared-roots-plus-all-core-resource-fields",
         "scope_complete": False,
         "auxiliary_config_reference_scope_complete": False,
+        "auxiliary_reference_evidence_hash_bound": True,
+        "auxiliary_file_instances": report["scope_definition"]["auxiliary_config"]["inventory_files"],
+        "auxiliary_candidate_only": report["scope_definition"]["auxiliary_config"]["candidate_only"],
+        "auxiliary_editor_undecided": report["scope_definition"]["auxiliary_config"]["editor_undecided"],
+        "auxiliary_malformed_blocked": report["scope_definition"]["auxiliary_config"]["malformed_blocked"],
+        "auxiliary_approved_roots": report["scope_definition"]["auxiliary_config"]["approved_roots"],
         "asset_binding_resolution_explicit": True,
         "asset_binding_resolved_targets": report["closure"]["asset_binding"]["resolved_targets"],
         "asset_binding_ambiguous_targets": report["closure"]["asset_binding"]["ambiguous_targets"],

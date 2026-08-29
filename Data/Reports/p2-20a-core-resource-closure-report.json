@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "evidence_revision": "P2-20A.2",
+  "evidence_revision": "P2-20A.3",
   "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
@@ -10,7 +10,7 @@
   "task_status": "BLOCKED",
   "completion_criteria_satisfied": false,
   "input_bindings": {
-    "aggregate_sha256": "141701f636eb75f1586f74e01c2dcf8b2d15b5327da0dad81ba79a0da9ad9481",
+    "aggregate_sha256": "1a41aaccf8d7c1078f283be03e85f9ef83cc0d8106fd2aa76ccf674ac706d5cf",
     "artifacts": [
       {
         "id": "P2-05",
@@ -81,6 +81,24 @@
         "bytes": 10740
       },
       {
+        "id": "auxiliary-reference-policy",
+        "path": "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json",
+        "sha256": "a829f6ffc428ec5f5e104c387d114ef2b0e33b09b0d683646a6c261a7ea354db",
+        "bytes": 4735
+      },
+      {
+        "id": "auxiliary-reference-schema",
+        "path": "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json",
+        "sha256": "c92032c6dd35bd243f99868d4e2747af445bc2a99c7884c66512471baf412bc0",
+        "bytes": 20676
+      },
+      {
+        "id": "P2-20A.3-AUX",
+        "path": "Data/Reports/p2-20a-aux-config-reference-report.json",
+        "sha256": "cbb81593e482bb8386733a7d208a5d67ce1409988aa4fb4f7b0c640f4214cf2f",
+        "bytes": 157387
+      },
+      {
         "id": "g2-policy",
         "path": "Contracts/data-schema/g2-review-policy-v1.json",
         "sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
@@ -118,10 +136,29 @@
       "source_rows": 60884
     },
     "auxiliary_config": {
+      "evidence_revision": "P2-20A.3",
+      "evidence_hash_bound": true,
+      "measurement_authority": "LEXICAL_ONLY",
       "inventory_files": 212,
+      "unique_content_bodies": 196,
+      "parsed_file_instances": 206,
       "malformed_isolated": 6,
+      "scalar_positions": 39522,
+      "nonempty_scalar_positions": 39498,
+      "asset_exact_occurrences": 3043,
+      "package_exact_occurrences": 638,
+      "config_exact_edges": 8,
       "reference_adapters": 0,
-      "reference_adapter_coverage": "absent",
+      "reference_adapter_coverage": "lexical-candidate-inventory-only",
+      "terminal_file_instances": 0,
+      "candidate_only": 171,
+      "editor_undecided": 35,
+      "malformed_blocked": 6,
+      "semantic_approved": 0,
+      "no_ref_approved": 0,
+      "approved_roots": 0,
+      "exact_complete_scalar_matching": true,
+      "first_candidate_selection_used": false,
       "new_roots_are_union_only": true,
       "scope_complete": false
     }
@@ -286,8 +323,8 @@
   "blockers": [
     {
       "id": "G2-06-CONFIG-SCOPE",
-      "reason": "Auxiliary configuration reference adapters are absent, so configuration-derived roots are not proven complete.",
-      "required_action": "Define reviewed semantic adapters, including tolerant-parser coverage for isolated malformed XML, and add discovered roots by union."
+      "reason": "Auxiliary configuration lexical candidates are measured and hash-bound, but all 212 file instances remain nonterminal and no semantic adapter, no-reference disposition, or root is approved.",
+      "required_action": "Define reviewed semantic adapters or explicit no-reference dispositions for all file instances, dispose every malformed XML input, and add only approved roots by union."
     },
     {
       "id": "G2-06-ASSET-BINDING",
@@ -319,9 +356,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-core-resource-closure-policy-v1.json",
-    "policy_sha256": "ee16b6faa81d450c05e655c5484c6f1f93de191fc996722f03bc77501e720852",
+    "policy_sha256": "b18d29b8259f5d7973c343570779c80b3883a81e534f337ecf0a156e23d72922",
     "schema": "Contracts/data-schema/g2-core-resource-closure-v1.schema.json",
-    "schema_sha256": "41c906327b9a24cade0fb7bdee1ad44c9a56204dfa0c2d32ebaeae19edecfdbc"
+    "schema_sha256": "99d182c3ada5563c2001fa4343f2c1bd23c4e66106f0e7335dc3185ae8760437"
   },
   "disclosure": {
     "private_source_paths": false,

@@ -1,4 +1,4 @@
-# P2-20A.2 G2-06 core-resource closure
+# P2-20A.3 G2-06 core-resource closure
 
 P2-20A turns the missing G2-06 proof into a reproducible blocked evidence set.
 It does not approve G2. The scope is frozen independently of the observed
@@ -32,7 +32,7 @@ different table-integrity fact and cannot satisfy G2-06.
 The current P2-13 aggregate records 5,993 runtime-assert rows, 29 missing
 conditionally required values, and zero unresolved nonempty values. The 29
 missing values are an independent blocker, not part of the edge-derived logical
-gap set. P2-20A.2 independently reproduces them from the exact-hash-bound P2-06
+gap set. P2-20A independently reproduces them from the exact-hash-bound P2-06
 normalized source, the qualified core primary key, and the frozen P2-13 rule.
 Its ignored workset contains exactly three closed fields per member:
 `member_sha256`, `rule_id`, and `reason`. The tracked report records only the
@@ -41,7 +41,7 @@ published.
 
 ## Explicit asset-binding states
 
-P2-20A.2 independently reconciles every reachable P2-13 asset node to the
+P2-20A independently reconciles every reachable P2-13 asset node to the
 P2-12 catalog and every observed Package candidate. The ignored anonymous
 workset contains exactly 21,494 unique asset records covering 39,351 candidate
 edges. Every record publishes a closed `RESOLVED`, `AMBIGUOUS`, or `UNRESOLVED`
@@ -64,10 +64,14 @@ third as true:
 - `asset_binding_resolution_explicit` (true only because every binding now has
   an explicit state; this does not mean every state is resolved).
 
-P2-05 classifies every auxiliary configuration file but does not provide a
-complete semantic resource-reference adapter set. Later configuration-derived
-roots may only enlarge the union. The asset-binding contract is now explicit,
-but its 183 ambiguous and 19 unresolved targets remain fail-closed.
+P2-20A.3 SHA-binds the separate auxiliary reference report and its policy and
+Schema. It preserves all 212 file instances/196 unique content bodies and the
+measured 3,043 asset, 638 Package, and 8 configuration lexical occurrences. The
+states remain 171 candidate-only, 35 editor-undecided, and 6 malformed-blocked;
+approved semantic adapters, no-reference dispositions, and roots are all zero.
+Lexical candidates are not semantic approvals, and later approved roots may only
+enlarge the union. The asset-binding contract is also explicit, but its 183
+ambiguous and 19 unresolved targets remain fail-closed.
 
 Consequently, even a future zero logical queue would remain blocked until both
 coverage gaps close and conditionally required missing values reach their

@@ -1,4 +1,4 @@
-"""Deterministic anonymous package-to-asset binding evidence for P2-20A.2."""
+"""Deterministic anonymous package-to-asset binding evidence for P2-20A."""
 
 from __future__ import annotations
 

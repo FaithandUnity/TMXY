@@ -168,16 +168,16 @@ if ($VerifyLegacyGoldenSources) { $resourceBudgetArguments.VerifyDerivedSources 
 $resourceBudget = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-ResourceBudget.ps1') `
     -Arguments $resourceBudgetArguments
-$g2CoreClosureArguments = @{ RebuildRoot = $root }
-if ($VerifyLegacyGoldenSources) { $g2CoreClosureArguments.VerifyDerivedSources = $true }
-$g2CoreClosure = Invoke-JsonTest `
-    -Script (Join-Path $root 'Tests\Contract\Test-G2CoreResourceClosure.ps1') `
-    -Arguments $g2CoreClosureArguments
 $g2AuxConfigArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2AuxConfigArguments.VerifyDerivedSources = $true }
 $g2AuxConfigReferences = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-G2AuxiliaryConfigReferences.ps1') `
     -Arguments $g2AuxConfigArguments
+$g2CoreClosureArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2CoreClosureArguments.VerifyDerivedSources = $true }
+$g2CoreClosure = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2CoreResourceClosure.ps1') `
+    -Arguments $g2CoreClosureArguments
 $g2MigrationArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2MigrationArguments.VerifyDerivedSources = $true }
 $g2MigrationDecisions = Invoke-JsonTest `

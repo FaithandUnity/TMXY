@@ -9,6 +9,7 @@ from typing import Any
 from g2_descriptor import bind_descriptor_diagnostics
 from g2_aux_semantic import bind_aux_semantic_diagnostics
 from g2_identity_normalization import bind_identity_normalization_safety
+from g2_binding_failure import bind_binding_failure_diagnostics
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as stream:
         value = json.load(stream)
@@ -119,12 +120,14 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.5"] = aux_semantic
     aggregate_lines.append(aux_semantic_aggregate)
-
     identity_binding, identity_safety, identity_aggregate = bind_identity_normalization_safety(
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.6"] = identity_safety
     aggregate_lines.append(identity_aggregate)
-
+    failure_binding, failure_diagnostics, failure_aggregate = bind_binding_failure_diagnostics(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.7"] = failure_diagnostics
+    aggregate_lines.append(failure_aggregate)
     remediation_spec = policy["remediation"]
     remediation_relative = remediation_spec["path"]
     remediation_path = resolve_inside(root, remediation_relative)
@@ -188,6 +191,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "descriptor_diagnostics": descriptor_binding,
         "aux_semantic_diagnostics": aux_semantic_binding,
         "identity_normalization_safety": identity_binding,
+        "binding_failure_diagnostics": failure_binding,
         "remediation": remediation_binding,
         "quality": {
             "path": quality_relative,
@@ -196,8 +200,6 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
             "captured_utc": quality["captured_utc"],
         },
     }, evidence
-
-
 def evaluate_auxiliary_binding(root: Path, report: dict[str, Any],
                                scope: dict[str, Any]) -> dict[str, Any]:
     artifacts = report["input_bindings"]["artifacts"]
@@ -299,8 +301,6 @@ def evaluate_auxiliary_binding(root: Path, report: dict[str, Any],
         ("auxiliary_cycle_detection_complete", False, "boolean"),
     ]
     return {"bound": True, "metrics": metrics, "report": auxiliary}
-
-
 def evaluate_core_closure(root: Path, report: dict[str, Any],
                           descriptor: dict[str, Any],
                           thresholds: dict[str, Any]) -> dict[str, Any]:

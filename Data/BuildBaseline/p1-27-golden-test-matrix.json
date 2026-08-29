@@ -38,7 +38,7 @@
   },
   "ci": {
     "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
-    "aggregate_sha256": "e8f8ed9697c531c44625d172d28090aa731ae362b227bc10c0f345b49be755ca",
+    "aggregate_sha256": "c3fcfc0121c808d9c872ea984fd137c19d67abf6f62c023b8e0fbf939956392b",
     "all_declared_gates_bound": true
   },
   "source_binding": {

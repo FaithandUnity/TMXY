@@ -6,9 +6,9 @@
   "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
   "repository_layout": {
     "result": "PASS",
-    "checked_source_files": 279,
-    "checked_size_files": 724,
-    "checked_utf8_lf_files": 801,
+    "checked_source_files": 285,
+    "checked_size_files": 738,
+    "checked_utf8_lf_files": 817,
     "failure_count": 0,
     "failures": []
   },

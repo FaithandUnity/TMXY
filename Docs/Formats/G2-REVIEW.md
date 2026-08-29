@@ -49,6 +49,16 @@ semantic equivalence are both zero. A.6 therefore selects no candidate and
 retains all 15/30 ambiguous plus 19/24 unresolved states. Identity grouping is
 not runtime-selection or semantic-equivalence authority.
 
+P2-20A.7 independently reruns the production binders for all 19 unresolved
+targets and 24 candidate edges. All 24 edges receive a closed, family-typed
+error classification (16 QTX payload-size mismatches, 5 Animation frame-count
+mismatches, 1 Animation invalid-track-count, and 2 StaticMesh material-slot
+mismatches), with no unclassified edge. This closes the diagnostic taxonomy,
+not remediation: candidate selections, automatic resolutions, and owner
+dispositions remain zero, so the effective unresolved population stays 19/24.
+A technical adapter must be contract-proven; a content change or explicit
+no-reference disposition requires content/project authority.
+
 G2-07 is blocked because diff, canonical-ID, fixed-limit, and shared uint64
 code-generation audits do not constitute a complete reviewed registry of
 migration decisions. The registry must cover ID, width, old-to-new Schema, and

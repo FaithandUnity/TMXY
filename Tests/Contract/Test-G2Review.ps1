@@ -17,6 +17,7 @@ $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-r
 $descriptorDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json'
 $auxSemanticDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-aux-semantic-diagnostics-report.json'
 $identityNormalizationPath = Join-Path $root 'Data\Reports\p2-20a-asset-identity-normalization-report.json'
+$bindingFailurePath = Join-Path $root 'Data\Reports\p2-20a-asset-binding-failure-diagnostics-report.json'
 $auxiliaryReportPath = Join-Path $root 'Data\Reports\p2-20a-aux-config-reference-report.json'
 $remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
 $reviewPacketsPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
@@ -29,6 +30,7 @@ $generatorPath = Join-Path $root 'Tools\TMXY.G2Review\g2_review.py'
 $helperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_evidence.py'
 $auxSemanticHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_aux_semantic.py'
 $identityNormalizationHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_identity_normalization.py'
+$bindingFailureHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_binding_failure.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $assertions = [Collections.Generic.List[object]]::new()
 
@@ -179,6 +181,9 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.identity_normalization_safety.evidence_revision -eq 'P2-20A.6' -and
         $Candidate.identity_normalization_safety.path -eq
             'Data/Reports/p2-20a-asset-identity-normalization-report.json' -and
+        $Candidate.binding_failure_diagnostics.evidence_revision -eq 'P2-20A.7' -and
+        $Candidate.binding_failure_diagnostics.path -eq
+            'Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json' -and
         $Candidate.remediation.task_id -eq 'P2-20B' -and
         $Candidate.remediation.criterion_id -eq 'G2-07' -and
         $Candidate.remediation.path -eq 'Data/Governance/p2-g2-migration-decisions.json' -and
@@ -190,6 +195,7 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.fail_closed_rules.first_candidate_or_heuristic_selection_never_proves_resource_closure -and
         $Candidate.fail_closed_rules.explicit_asset_binding_state_does_not_substitute_for_zero_ambiguity_and_unresolved -and
         $Candidate.fail_closed_rules.ascii_lower_identity_collision_does_not_prove_semantic_equivalence_or_candidate_selection -and
+        $Candidate.fail_closed_rules.binding_error_diagnosis_does_not_reduce_unresolved_without_verified_remediation -and
         $Candidate.thresholds.core_asset_binding_resolution_explicit -eq $true -and
         $Candidate.thresholds.core_asset_binding_ambiguous -eq 0 -and
         $Candidate.thresholds.core_asset_binding_unresolved -eq 0 -and
@@ -273,6 +279,18 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'identity_retained_ambiguous_edges') -ne 30 -or
         (Get-Metric $g206 'identity_retained_unresolved_targets') -ne 19 -or
         (Get-Metric $g206 'identity_retained_unresolved_edges') -ne 24 -or
+        (Get-Metric $g206 'binding_failure_diagnostic_hash_bound') -ne $true -or
+        (Get-Metric $g206 'binding_failure_diagnostic_scope_complete') -ne $true -or
+        (Get-Metric $g206 'binding_failure_remediation_scope_complete') -ne $false -or
+        (Get-Metric $g206 'binding_failure_diagnosed_targets') -ne 19 -or
+        (Get-Metric $g206 'binding_failure_diagnosed_edges') -ne 24 -or
+        (Get-Metric $g206 'binding_failure_typed_error_edges') -ne 24 -or
+        (Get-Metric $g206 'binding_failure_unclassified_error_edges') -ne 0 -or
+        (Get-Metric $g206 'binding_failure_effective_unresolved_targets') -ne 19 -or
+        (Get-Metric $g206 'binding_failure_effective_unresolved_edges') -ne 24 -or
+        (Get-Metric $g206 'binding_failure_candidate_selections') -ne 0 -or
+        (Get-Metric $g206 'binding_failure_automatic_resolutions') -ne 0 -or
+        (Get-Metric $g206 'binding_failure_owner_dispositions') -ne 0 -or
         (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -ne $true -or
         (Get-Metric $g206 'aux_semantic_scope_complete') -ne $false -or
         (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -ne $false -or
@@ -344,12 +362,12 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
     $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxSemanticDiagnosticPath,
-    $identityNormalizationPath,
+    $identityNormalizationPath, $bindingFailurePath,
     $auxiliaryReportPath,
     $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
     $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath,
-    $auxSemanticHelperPath, $identityNormalizationHelperPath, $wrapperPath)
+    $auxSemanticHelperPath, $identityNormalizationHelperPath, $bindingFailureHelperPath, $wrapperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -378,6 +396,8 @@ $descriptorDiagnostic = Get-Content -LiteralPath $descriptorDiagnosticPath -Raw 
 $auxSemanticDiagnostic = Get-Content -LiteralPath $auxSemanticDiagnosticPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $identityNormalization = Get-Content -LiteralPath $identityNormalizationPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$bindingFailure = Get-Content -LiteralPath $bindingFailurePath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $auxiliaryReport = Get-Content -LiteralPath $auxiliaryReportPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
@@ -498,6 +518,7 @@ $supplementalBinding = $report.input_bindings.supplemental
 $descriptorBinding = $report.input_bindings.descriptor_diagnostics
 $auxSemanticBinding = $report.input_bindings.aux_semantic_diagnostics
 $identityNormalizationBinding = $report.input_bindings.identity_normalization_safety
+$bindingFailureBinding = $report.input_bindings.binding_failure_diagnostics
 $remediationBinding = $report.input_bindings.remediation
 $bindingsPassed = $bindingsPassed -and
     $supplementalBinding.task_id -eq $policy.supplemental.task_id -and
@@ -553,6 +574,12 @@ $bindingsPassed = $bindingsPassed -and
     $identityNormalization.measured.candidate_selections -eq 0 -and
     $identityNormalization.measured.effective.ambiguous_targets -eq 15
 $aggregateLines.Add("IDENTITY_NORMALIZATION|$($identityNormalizationBinding.task_id)|$($identityNormalizationBinding.criterion_id)|$($identityNormalizationBinding.evidence_revision)|$($identityNormalizationBinding.path)|$($identityNormalizationBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and $bindingFailureBinding.evidence_revision -eq 'P2-20A.7' -and
+    $bindingFailureBinding.sha256 -eq (Get-Sha256 $bindingFailurePath) -and
+    $bindingFailure.diagnostic_scope_complete -and -not $bindingFailure.remediation_scope_complete -and
+    $bindingFailure.measured.typed_error_edges -eq 24 -and
+    $bindingFailure.measured.effective.unresolved_targets -eq 19
+$aggregateLines.Add("BINDING_FAILURE_DIAGNOSTICS|$($bindingFailureBinding.task_id)|$($bindingFailureBinding.criterion_id)|$($bindingFailureBinding.evidence_revision)|$($bindingFailureBinding.path)|$($bindingFailureBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
     $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
@@ -653,9 +680,9 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'unknown_record_count') -eq 0 -and
     (Get-Metric $g206 'unknown_resolution_count') -eq 0 -and
     (Get-Metric $g206 'core_foreign_key_dangling_context') -eq 0 -and
-    $g206.interpretation -match 'hash-bound monotonic core-scope closure report' -and
-    $g206.interpretation -match 'A.4 independently binds exact' -and
-    $g206.interpretation -match 'A.6 binds every A.4 ambiguous candidate' -and
+    $g206.interpretation -match 'hash-bound core, descriptor' -and
+    $g206.interpretation -match 'A.7 classifies all 24 rejected candidate edges' -and
+    $g206.interpretation -match 'Diagnostic completeness cannot substitute for remediation' -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
 $g207 = Get-Criterion $report 'G2-07'
 Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
@@ -874,6 +901,12 @@ Set-Metric (Get-Criterion $falseIdentityReduction 'G2-06') `
 $negativeCases.identity_ambiguous_reduction_rejected =
     (Test-AgainstSchema $falseIdentityReduction) -and
     -not (Test-G2Semantics $falseIdentityReduction $policy)
+$missingFailureSha = Copy-JsonObject $report
+[void]$missingFailureSha.input_bindings.binding_failure_diagnostics.PSObject.Properties.Remove('sha256')
+$negativeCases.missing_binding_failure_sha_rejected = -not (Test-AgainstSchema $missingFailureSha)
+$falseFailureRemediation = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseFailureRemediation 'G2-06') 'binding_failure_remediation_scope_complete' $true
+$negativeCases.binding_failure_false_remediation_rejected = -not (Test-G2Semantics $falseFailureRemediation $policy)
 $badAuxMetric = Copy-JsonObject $report
 Set-Metric (Get-Criterion $badAuxMetric 'G2-06') `
     'auxiliary_reference_evidence_hash_bound' $false

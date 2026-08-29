@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-binding-failure-diagnostics-v1.schema.json",
+  "title": "TMXY P2-20A.7 production-binding failure diagnostics",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "source_build", "result", "review_execution_result", "task_status",
+    "completion_criteria_satisfied", "diagnostic_scope_complete", "remediation_scope_complete",
+    "g2_06_satisfied", "p3_authorized", "input_bindings", "detail_export", "scope",
+    "measured", "classification_controls", "authority_boundary", "preserved_blockers",
+    "blockers", "negative_contracts", "g2_projection", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.7"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "source_build": {"const": "qy-3.0.0.413"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "remediation_scope_complete": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {"$ref": "#/$defs/input_bindings"},
+    "detail_export": {"$ref": "#/$defs/detail_export"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "measured": {"$ref": "#/$defs/measured"},
+    "classification_controls": {"$ref": "#/$defs/controls"},
+    "authority_boundary": {"$ref": "#/$defs/authority"},
+    "preserved_blockers": {"$ref": "#/$defs/preserved"},
+    "blockers": {"$ref": "#/$defs/blockers"},
+    "negative_contracts": {"$ref": "#/$defs/negative"},
+    "g2_projection": {"$ref": "#/$defs/g2"},
+    "contracts": {"$ref": "#/$defs/contracts"},
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+$"},
+        "tracked": {"type": "boolean"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "input_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {"type": "array", "minItems": 15, "maxItems": 15, "items": {"$ref": "#/$defs/binding"}}
+      }
+    },
+    "detail_export": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"const": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl"},
+        "tracked": {"const": false},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"const": 19},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "family_count": {
+      "type": "object", "additionalProperties": false,
+      "required": ["targets", "candidate_edges"],
+      "properties": {
+        "targets": {"type": "integer", "minimum": 0},
+        "candidate_edges": {"type": "integer", "minimum": 0}
+      }
+    },
+    "families": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anim", "qtx", "sm"],
+      "properties": {
+        "anim": {"allOf": [{"$ref": "#/$defs/family_count"}, {"properties": {"targets": {"const": 6}, "candidate_edges": {"const": 6}}}]},
+        "qtx": {"allOf": [{"$ref": "#/$defs/family_count"}, {"properties": {"targets": {"const": 12}, "candidate_edges": {"const": 16}}}]},
+        "sm": {"allOf": [{"$ref": "#/$defs/family_count"}, {"properties": {"targets": {"const": 1}, "candidate_edges": {"const": 2}}}]}
+      }
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_revision", "source_resolution", "targets", "candidate_edges",
+        "unique_candidates", "descriptor_parsed_edges", "binding_rejected_edges", "by_family"],
+      "properties": {
+        "source_revision": {"const": "P2-20A.4"},
+        "source_resolution": {"const": "UNRESOLVED"},
+        "targets": {"const": 19}, "candidate_edges": {"const": 24},
+        "unique_candidates": {"const": 24}, "descriptor_parsed_edges": {"const": 24},
+        "binding_rejected_edges": {"const": 24}, "by_family": {"$ref": "#/$defs/families"}
+      }
+    },
+    "error_count": {
+      "type": "object", "additionalProperties": false,
+      "required": ["family", "error_schema", "error_code", "count"],
+      "properties": {
+        "family": {"enum": ["anim", "qtx", "sm"]},
+        "error_schema": {"enum": ["AnimationError/v1", "TextureError/v1", "StaticMeshError/v1"]},
+        "error_code": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+        "count": {"type": "integer", "minimum": 1, "maximum": 24}
+      }
+    },
+    "effective": {
+      "type": "object", "additionalProperties": false,
+      "required": ["resolved_targets", "resolved_edges", "unresolved_targets", "unresolved_edges"],
+      "properties": {
+        "resolved_targets": {"const": 0}, "resolved_edges": {"const": 0},
+        "unresolved_targets": {"const": 19}, "unresolved_edges": {"const": 24}
+      }
+    },
+    "measured": {
+      "type": "object", "additionalProperties": false,
+      "required": ["diagnosed_targets", "diagnosed_candidate_edges", "typed_error_edges",
+        "unclassified_error_edges", "candidate_selections", "automatic_resolutions",
+        "owner_dispositions", "by_family", "by_error", "effective"],
+      "properties": {
+        "diagnosed_targets": {"const": 19}, "diagnosed_candidate_edges": {"const": 24},
+        "typed_error_edges": {"const": 24}, "unclassified_error_edges": {"const": 0},
+        "candidate_selections": {"const": 0}, "automatic_resolutions": {"const": 0},
+        "owner_dispositions": {"const": 0}, "by_family": {"$ref": "#/$defs/families"},
+        "by_error": {
+          "type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true,
+          "prefixItems": [
+            {"allOf": [{"$ref": "#/$defs/error_count"}, {"properties": {"family": {"const": "anim"}, "error_schema": {"const": "AnimationError/v1"}, "error_code": {"const": "frame_count_mismatch"}, "count": {"const": 5}}}]},
+            {"allOf": [{"$ref": "#/$defs/error_count"}, {"properties": {"family": {"const": "anim"}, "error_schema": {"const": "AnimationError/v1"}, "error_code": {"const": "invalid_track_count"}, "count": {"const": 1}}}]},
+            {"allOf": [{"$ref": "#/$defs/error_count"}, {"properties": {"family": {"const": "qtx"}, "error_schema": {"const": "TextureError/v1"}, "error_code": {"const": "payload_size_mismatch"}, "count": {"const": 16}}}]},
+            {"allOf": [{"$ref": "#/$defs/error_count"}, {"properties": {"family": {"const": "sm"}, "error_schema": {"const": "StaticMeshError/v1"}, "error_code": {"const": "material_slot_mismatch"}, "count": {"const": 2}}}]}
+          ],
+          "items": false
+        },
+        "effective": {"$ref": "#/$defs/effective"}
+      }
+    },
+    "controls": {
+      "type": "object", "additionalProperties": false,
+      "required": ["same_production_binders_required", "family_typed_error_required",
+        "candidate_identity_exact", "candidate_set_exact", "source_hash_reverified",
+        "binding_pass_requires_a4_rerun", "error_code_is_authority_disposition",
+        "error_code_is_content_corruption_proof", "first_candidate_selection",
+        "automatic_resolution", "machine_approval", "raw_context_output", "absolute_offset_output"],
+      "properties": {
+        "same_production_binders_required": {"const": true},
+        "family_typed_error_required": {"const": true}, "candidate_identity_exact": {"const": true},
+        "candidate_set_exact": {"const": true}, "source_hash_reverified": {"const": true},
+        "binding_pass_requires_a4_rerun": {"const": true},
+        "error_code_is_authority_disposition": {"const": false},
+        "error_code_is_content_corruption_proof": {"const": false},
+        "first_candidate_selection": {"const": false}, "automatic_resolution": {"const": false},
+        "machine_approval": {"const": false}, "raw_context_output": {"const": false},
+        "absolute_offset_output": {"const": false}
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["machine_can_reproduce", "machine_can_classify_errors",
+        "machine_can_select_candidate", "machine_can_approve_disposition",
+        "technical_adapter_must_be_contract_proven", "content_change_or_no_ref_requires_owner",
+        "owner_records", "approved_fixes", "verified_resolutions"],
+      "properties": {
+        "machine_can_reproduce": {"const": true}, "machine_can_classify_errors": {"const": true},
+        "machine_can_select_candidate": {"const": false},
+        "machine_can_approve_disposition": {"const": false},
+        "technical_adapter_must_be_contract_proven": {"const": true},
+        "content_change_or_no_ref_requires_owner": {"const": true},
+        "owner_records": {"const": 0},
+        "approved_fixes": {"const": 0}, "verified_resolutions": {"const": 0}
+      }
+    },
+    "preserved": {
+      "type": "object", "additionalProperties": false,
+      "required": ["asset_ambiguous_targets", "asset_ambiguous_edges", "asset_unresolved_targets",
+        "asset_unresolved_edges", "auxiliary_nonterminal_instances", "conditional_required_missing",
+        "migration_pending", "g2_satisfied", "g2_blocked"],
+      "properties": {
+        "asset_ambiguous_targets": {"const": 15}, "asset_ambiguous_edges": {"const": 30},
+        "asset_unresolved_targets": {"const": 19}, "asset_unresolved_edges": {"const": 24},
+        "auxiliary_nonterminal_instances": {"const": 212},
+        "conditional_required_missing": {"const": 29}, "migration_pending": {"const": 1359},
+        "g2_satisfied": {"const": 7}, "g2_blocked": {"const": 2}
+      }
+    },
+    "blocker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reason_code", "count"],
+      "properties": {
+        "reason_code": {"enum": ["PRODUCTION_BINDING_REJECTIONS_DIAGNOSED_NOT_REMEDIATED", "REMEDIATION_EVIDENCE_ABSENT"]},
+        "count": {"const": 19}
+      }
+    },
+    "blockers": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/blocker"}},
+    "negative": {"type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true, "items": {"type": "string"}},
+    "g2": {
+      "type": "object", "additionalProperties": false,
+      "required": ["criteria_total", "satisfied", "blocked", "g2_decision"],
+      "properties": {"criteria_total": {"const": 9}, "satisfied": {"const": 7}, "blocked": {"const": 2}, "g2_decision": {"const": "BLOCKED"}}
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256"],
+      "properties": {"policy_sha256": {"$ref": "#/$defs/sha256"}, "schema_sha256": {"$ref": "#/$defs/sha256"}, "detail_schema_sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anonymous_aggregate_and_hash_only", "anonymous_detail_only", "raw_names",
+        "private_source_paths", "exact_primary_keys", "raw_table_rows", "legacy_source_lines",
+        "decoded_confidential_payloads", "raw_error_contexts", "absolute_offsets", "observed_payload_values"],
+      "properties": {
+        "anonymous_aggregate_and_hash_only": {"const": true}, "anonymous_detail_only": {"const": true},
+        "raw_names": {"const": false}, "private_source_paths": {"const": false},
+        "exact_primary_keys": {"const": false}, "raw_table_rows": {"const": false},
+        "legacy_source_lines": {"const": false}, "decoded_confidential_payloads": {"const": false},
+        "raw_error_contexts": {"const": false}, "absolute_offsets": {"const": false},
+        "observed_payload_values": {"const": false}
+      }
+    }
+  }
+}

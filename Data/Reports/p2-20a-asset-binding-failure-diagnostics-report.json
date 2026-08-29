@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.7",
+  "captured_utc": "2026-08-29T13:57:23.133576Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "remediation_scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "input_bindings": {
+    "aggregate_sha256": "af16b1784bace0ada81a3665ac1b6ef16b612e4a0b60610fc70445882f82a66c",
+    "entries": [
+      {
+        "role": "a4_report",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 5077,
+        "lines": 174,
+        "sha256": "da7c2069acc6b3ea556473b0b7e552bd6efb42f09ee983737d018a9b8db68903"
+      },
+      {
+        "role": "a4_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 10776199,
+        "lines": 3651,
+        "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384"
+      },
+      {
+        "role": "a4_evidence",
+        "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+        "tracked": true,
+        "bytes": 6859,
+        "lines": 224,
+        "sha256": "7b3665623aa4f138f37bb11be4f7935b04ce3ad25e7c34fd92ac2a71b45cc173"
+      },
+      {
+        "role": "a4_policy",
+        "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
+        "tracked": true,
+        "bytes": 3477,
+        "lines": 86,
+        "sha256": "461d65c4cc7e7f3ce61651362814c85c92ec4e29225ed8a2aecb5a5335a6974b"
+      },
+      {
+        "role": "p2_03_evidence",
+        "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+        "tracked": true,
+        "bytes": 5424,
+        "lines": 162,
+        "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab"
+      },
+      {
+        "role": "p2_03_graph",
+        "path": "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl",
+        "tracked": false,
+        "bytes": 106382503,
+        "lines": 269064,
+        "sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57"
+      },
+      {
+        "role": "p2_12_evidence",
+        "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+        "tracked": true,
+        "bytes": 6306,
+        "lines": 189,
+        "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a"
+      },
+      {
+        "role": "p2_12_catalog",
+        "path": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+        "tracked": false,
+        "bytes": 16802213,
+        "lines": 40090,
+        "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92"
+      },
+      {
+        "role": "core_report",
+        "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+        "tracked": true,
+        "bytes": 13434,
+        "lines": 370,
+        "sha256": "799a00c954e7e0635c568bda8c8712d5572f874b32548206a6f73d6b8a98fc77"
+      },
+      {
+        "role": "a5_report",
+        "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 5442,
+        "lines": 179,
+        "sha256": "be5c895d9214d47ba46a78cfd5890c4fd6529c43f29601d63e395b57b26dd99f"
+      },
+      {
+        "role": "a6_report",
+        "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
+        "tracked": true,
+        "bytes": 6205,
+        "lines": 191,
+        "sha256": "fe95ccda8546beadbcbbfee71f73ccdbe12637375915c2cbec07e1f759e4b579"
+      },
+      {
+        "role": "b1_evidence",
+        "path": "Data/Inventory/p2-20b-migration-decisions.json",
+        "tracked": true,
+        "bytes": 8169,
+        "lines": 225,
+        "sha256": "c850a4f17cc1bf597520048b1545f9d3361c634024a7b4c983537cde9f2bd99a"
+      },
+      {
+        "role": "policy",
+        "path": "Contracts/data-schema/g2-asset-binding-failure-diagnostics-policy-v1.json",
+        "tracked": true,
+        "bytes": 5214,
+        "lines": 118,
+        "sha256": "59b404a070fe5106eda971d257ca191bd55d73708c4e8d6ea06ef250f9b2822b"
+      },
+      {
+        "role": "schema",
+        "path": "Contracts/data-schema/g2-asset-binding-failure-diagnostics-v1.schema.json",
+        "tracked": true,
+        "bytes": 12525,
+        "lines": 229,
+        "sha256": "73c75847d3908102d91c431ba64a9d7c0accc35c4929ca3acd4974a5d3d8d84c"
+      },
+      {
+        "role": "detail_schema",
+        "path": "Contracts/data-schema/g2-asset-binding-failure-detail-v1.schema.json",
+        "tracked": true,
+        "bytes": 2261,
+        "lines": 51,
+        "sha256": "907c19bc90df367de65090e5db466a22f66529db9c32ce12720eb872feb5177f"
+      }
+    ]
+  },
+  "detail_export": {
+    "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
+    "tracked": false,
+    "bytes": 21243,
+    "lines": 19,
+    "sha256": "a9afcdeceb277a152dacf2d772a7f146afcee2784721863eec9bd504e25ec462"
+  },
+  "scope": {
+    "source_revision": "P2-20A.4",
+    "source_resolution": "UNRESOLVED",
+    "targets": 19,
+    "candidate_edges": 24,
+    "unique_candidates": 24,
+    "descriptor_parsed_edges": 24,
+    "binding_rejected_edges": 24,
+    "by_family": {
+      "anim": {
+        "targets": 6,
+        "candidate_edges": 6
+      },
+      "qtx": {
+        "targets": 12,
+        "candidate_edges": 16
+      },
+      "sm": {
+        "targets": 1,
+        "candidate_edges": 2
+      }
+    }
+  },
+  "measured": {
+    "diagnosed_targets": 19,
+    "diagnosed_candidate_edges": 24,
+    "typed_error_edges": 24,
+    "unclassified_error_edges": 0,
+    "candidate_selections": 0,
+    "automatic_resolutions": 0,
+    "owner_dispositions": 0,
+    "by_family": {
+      "anim": {
+        "targets": 6,
+        "candidate_edges": 6
+      },
+      "qtx": {
+        "targets": 12,
+        "candidate_edges": 16
+      },
+      "sm": {
+        "targets": 1,
+        "candidate_edges": 2
+      }
+    },
+    "by_error": [
+      {
+        "family": "anim",
+        "error_schema": "AnimationError/v1",
+        "error_code": "frame_count_mismatch",
+        "count": 5
+      },
+      {
+        "family": "anim",
+        "error_schema": "AnimationError/v1",
+        "error_code": "invalid_track_count",
+        "count": 1
+      },
+      {
+        "family": "qtx",
+        "error_schema": "TextureError/v1",
+        "error_code": "payload_size_mismatch",
+        "count": 16
+      },
+      {
+        "family": "sm",
+        "error_schema": "StaticMeshError/v1",
+        "error_code": "material_slot_mismatch",
+        "count": 2
+      }
+    ],
+    "effective": {
+      "resolved_targets": 0,
+      "resolved_edges": 0,
+      "unresolved_targets": 19,
+      "unresolved_edges": 24
+    }
+  },
+  "classification_controls": {
+    "same_production_binders_required": true,
+    "family_typed_error_required": true,
+    "candidate_identity_exact": true,
+    "candidate_set_exact": true,
+    "source_hash_reverified": true,
+    "binding_pass_requires_a4_rerun": true,
+    "error_code_is_authority_disposition": false,
+    "error_code_is_content_corruption_proof": false,
+    "first_candidate_selection": false,
+    "automatic_resolution": false,
+    "machine_approval": false,
+    "raw_context_output": false,
+    "absolute_offset_output": false
+  },
+  "authority_boundary": {
+    "machine_can_reproduce": true,
+    "machine_can_classify_errors": true,
+    "machine_can_select_candidate": false,
+    "machine_can_approve_disposition": false,
+    "technical_adapter_must_be_contract_proven": true,
+    "content_change_or_no_ref_requires_owner": true,
+    "owner_records": 0,
+    "approved_fixes": 0,
+    "verified_resolutions": 0
+  },
+  "preserved_blockers": {
+    "asset_ambiguous_targets": 15,
+    "asset_ambiguous_edges": 30,
+    "asset_unresolved_targets": 19,
+    "asset_unresolved_edges": 24,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "blockers": [
+    {
+      "reason_code": "PRODUCTION_BINDING_REJECTIONS_DIAGNOSED_NOT_REMEDIATED",
+      "count": 19
+    },
+    {
+      "reason_code": "REMEDIATION_EVIDENCE_ABSENT",
+      "count": 19
+    }
+  ],
+  "negative_contracts": [
+    "BINDING_PASS_REQUIRES_A4_RERUN",
+    "FIRST_CANDIDATE_SELECTION_REJECTED",
+    "AUTOMATIC_RESOLUTION_REJECTED",
+    "ERROR_CODE_AS_AUTHORITY_REJECTED",
+    "FAMILY_ERROR_SCHEMA_MISMATCH_REJECTED",
+    "NUMERIC_ERROR_ORDINAL_REJECTED",
+    "RAW_CONTEXT_OR_OFFSET_REJECTED",
+    "CANDIDATE_SET_OR_HASH_TAMPER_REJECTED",
+    "COUNT_RECONCILIATION_REJECTED",
+    "PRESERVED_BLOCKER_REDUCTION_REJECTED",
+    "FALSE_G2_OR_P3_REJECTED",
+    "MISSING_OR_UNKNOWN_FIELD_REJECTED"
+  ],
+  "g2_projection": {
+    "criteria_total": 9,
+    "satisfied": 7,
+    "blocked": 2,
+    "g2_decision": "BLOCKED"
+  },
+  "contracts": {
+    "policy_sha256": "59b404a070fe5106eda971d257ca191bd55d73708c4e8d6ea06ef250f9b2822b",
+    "schema_sha256": "73c75847d3908102d91c431ba64a9d7c0accc35c4929ca3acd4974a5d3d8d84c",
+    "detail_schema_sha256": "907c19bc90df367de65090e5db466a22f66529db9c32ce12720eb872feb5177f"
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_confidential_payloads": false,
+    "raw_error_contexts": false,
+    "absolute_offsets": false,
+    "observed_payload_values": false
+  }
+}

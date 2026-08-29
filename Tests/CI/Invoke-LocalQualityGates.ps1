@@ -186,6 +186,9 @@ $g2AssetDescriptorDiagnostics = Invoke-JsonTest `
 $g2IdentityNormalization = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-G2AssetIdentityNormalization.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$g2BindingFailureDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AssetBindingFailureDiagnostics.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $g2CoreClosureArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2CoreClosureArguments.VerifyDerivedSources = $true }
 $g2CoreClosure = Invoke-JsonTest `
@@ -363,6 +366,11 @@ $passed = [string]$repository.result -eq 'PASS' -and
     -not [bool]$g2IdentityNormalization.completion_criteria_satisfied -and
     -not [bool]$g2IdentityNormalization.g2_06_satisfied -and
     -not [bool]$g2IdentityNormalization.p3_authorized -and
+    [string]$g2BindingFailureDiagnostics.result -eq 'PASS' -and
+    [bool]$g2BindingFailureDiagnostics.contract_assertions_satisfied -and
+    -not [bool]$g2BindingFailureDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2BindingFailureDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2BindingFailureDiagnostics.p3_authorized -and
     [string]$g2MigrationDecisions.result -eq 'PASS' -and
     [bool]$g2MigrationDecisions.contract_assertions_satisfied -and
     -not [bool]$g2MigrationDecisions.completion_criteria_satisfied -and
@@ -448,6 +456,7 @@ $report = [pscustomobject][ordered]@{
     g2_auxiliary_semantic_diagnostics = $g2AuxSemanticDiagnostics
     g2_asset_descriptor_diagnostics = $g2AssetDescriptorDiagnostics
     g2_asset_identity_normalization = $g2IdentityNormalization
+    g2_asset_binding_failure_diagnostics = $g2BindingFailureDiagnostics
     g2_migration_decisions = $g2MigrationDecisions
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure

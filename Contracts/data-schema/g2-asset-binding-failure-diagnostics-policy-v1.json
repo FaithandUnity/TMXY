@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.7",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "scope": {
+    "source_revision": "P2-20A.4",
+    "source_resolution": "UNRESOLVED",
+    "targets": 19,
+    "candidate_edges": 24,
+    "unique_candidates": 24,
+    "descriptor_parsed_edges": 24,
+    "binding_rejected_edges": 24,
+    "by_family": {
+      "anim": {"targets": 6, "candidate_edges": 6},
+      "qtx": {"targets": 12, "candidate_edges": 16},
+      "sm": {"targets": 1, "candidate_edges": 2}
+    }
+  },
+  "production_error_schemas": {
+    "TextureError/v1": [
+      "read_failure", "item_count_limit_exceeded", "property_name_limit_exceeded",
+      "duplicate_property", "invalid_property_size", "invalid_format", "invalid_clamp_mode",
+      "invalid_dimension", "invalid_mip_count", "trailing_descriptor_bytes", "mip_size_overflow",
+      "payload_size_mismatch", "non_finite_pixel", "output_limit_exceeded", "invalid_package",
+      "texture_object_not_found", "wrong_object_class", "object_range_out_of_file"
+    ],
+    "StaticMeshError/v1": [
+      "read_failure", "negative_count", "count_limit_exceeded", "non_finite_component",
+      "attribute_count_mismatch", "index_count_not_triangles", "index_out_of_range",
+      "invalid_boolean", "invalid_section", "section_index_count_mismatch",
+      "invalid_collision_flag", "invalid_octree_node_reference", "invalid_octree_face_range",
+      "trailing_bytes", "invalid_package", "mesh_object_not_found", "wrong_object_class",
+      "object_range_out_of_file", "descriptor_item_limit_exceeded",
+      "descriptor_name_limit_exceeded", "invalid_property_size", "duplicate_property",
+      "invalid_material_slot", "invalid_declared_bounds", "material_slot_mismatch",
+      "declared_bounds_mismatch", "transform_failure"
+    ],
+    "AnimationError/v1": [
+      "read_failure", "invalid_package", "skeletal_mesh_descriptor_failure",
+      "animation_object_not_found", "wrong_object_class", "object_range_out_of_file",
+      "descriptor_item_limit_exceeded", "descriptor_name_limit_exceeded",
+      "invalid_property_size", "duplicate_property", "missing_property", "invalid_frame_count",
+      "invalid_frame_delta", "invalid_boolean", "animation_count_mismatch",
+      "invalid_track_count", "frame_count_mismatch", "key_count_limit_exceeded",
+      "non_finite_key", "invalid_quaternion", "invalid_emitter_count", "trailing_bytes",
+      "gltf_contract_failure"
+    ]
+  },
+  "read_error_codes": ["out_of_bounds", "invalid_seek", "offset_overflow"],
+  "expected_error_counts": [
+    {"family": "anim", "error_schema": "AnimationError/v1", "error_code": "frame_count_mismatch", "count": 5},
+    {"family": "anim", "error_schema": "AnimationError/v1", "error_code": "invalid_track_count", "count": 1},
+    {"family": "qtx", "error_schema": "TextureError/v1", "error_code": "payload_size_mismatch", "count": 16},
+    {"family": "sm", "error_schema": "StaticMeshError/v1", "error_code": "material_slot_mismatch", "count": 2}
+  ],
+  "controls": {
+    "same_production_binders_required": true,
+    "family_typed_error_required": true,
+    "candidate_identity_exact": true,
+    "candidate_set_exact": true,
+    "source_hash_reverified": true,
+    "binding_pass_requires_a4_rerun": true,
+    "error_code_is_authority_disposition": false,
+    "error_code_is_content_corruption_proof": false,
+    "first_candidate_selection": false,
+    "automatic_resolution": false,
+    "machine_approval": false,
+    "raw_context_output": false,
+    "absolute_offset_output": false
+  },
+  "preserved_blockers": {
+    "asset_ambiguous_targets": 15,
+    "asset_ambiguous_edges": 30,
+    "asset_unresolved_targets": 19,
+    "asset_unresolved_edges": 24,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "negative_contracts": [
+    "BINDING_PASS_REQUIRES_A4_RERUN",
+    "FIRST_CANDIDATE_SELECTION_REJECTED",
+    "AUTOMATIC_RESOLUTION_REJECTED",
+    "ERROR_CODE_AS_AUTHORITY_REJECTED",
+    "FAMILY_ERROR_SCHEMA_MISMATCH_REJECTED",
+    "NUMERIC_ERROR_ORDINAL_REJECTED",
+    "RAW_CONTEXT_OR_OFFSET_REJECTED",
+    "CANDIDATE_SET_OR_HASH_TAMPER_REJECTED",
+    "COUNT_RECONCILIATION_REJECTED",
+    "PRESERVED_BLOCKER_REDUCTION_REJECTED",
+    "FALSE_G2_OR_P3_REJECTED",
+    "MISSING_OR_UNKNOWN_FIELD_REJECTED"
+  ],
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
+    "report_json": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+    "report_markdown": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.md",
+    "evidence": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_confidential_payloads": false,
+    "raw_error_contexts": false,
+    "absolute_offsets": false,
+    "observed_payload_values": false
+  }
+}

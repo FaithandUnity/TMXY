@@ -129,7 +129,14 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                      identity_effective["ambiguous_targets"] == 15 and
                      identity_reconciled["ambiguous_targets"] == core["asset_binding_ambiguous"] and
                      identity_reconciled["unresolved_targets"] == core["asset_binding_unresolved"])
-    ok = core["satisfied"] and aux_ready and identity_safe
+    binding_failure = evidence["P2-20A.7"]
+    failure_measured, failure_effective = (binding_failure["measured"],
+                                           binding_failure["measured"]["effective"])
+    binding_safe = (binding_failure["diagnostic_scope_complete"] is True and
+                    failure_measured["typed_error_edges"] == 24 and failure_measured["unclassified_error_edges"] == 0)
+    binding_ready = (binding_failure["remediation_scope_complete"] is True and
+                     binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
+    ok = core["satisfied"] and aux_ready and identity_safe and binding_safe and binding_ready
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -154,6 +161,18 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("identity_retained_ambiguous_edges", identity_effective["ambiguous_edges"], "edges"),
         metric("identity_retained_unresolved_targets", identity_reconciled["unresolved_targets"], "assets"),
         metric("identity_retained_unresolved_edges", identity_reconciled["unresolved_edges"], "edges"),
+        metric("binding_failure_diagnostic_hash_bound", True, "boolean"),
+        metric("binding_failure_diagnostic_scope_complete", binding_failure["diagnostic_scope_complete"], "boolean"),
+        metric("binding_failure_remediation_scope_complete", binding_failure["remediation_scope_complete"], "boolean"),
+        metric("binding_failure_diagnosed_targets", failure_measured["diagnosed_targets"], "assets"),
+        metric("binding_failure_diagnosed_edges", failure_measured["diagnosed_candidate_edges"], "edges"),
+        metric("binding_failure_typed_error_edges", failure_measured["typed_error_edges"], "edges"),
+        metric("binding_failure_unclassified_error_edges", failure_measured["unclassified_error_edges"], "edges"),
+        metric("binding_failure_effective_unresolved_targets", failure_effective["unresolved_targets"], "assets"),
+        metric("binding_failure_effective_unresolved_edges", failure_effective["unresolved_edges"], "edges"),
+        metric("binding_failure_candidate_selections", failure_measured["candidate_selections"], "assets"),
+        metric("binding_failure_automatic_resolutions", failure_measured["automatic_resolutions"], "assets"),
+        metric("binding_failure_owner_dispositions", failure_measured["owner_dispositions"], "assets"),
         metric("aux_semantic_diagnostic_hash_bound", True, "boolean"),
         metric("aux_semantic_scope_complete", aux_semantic["scope_complete"], "boolean"),
         metric("aux_semantic_g2_06_satisfied", aux_semantic["g2_06_satisfied"], "boolean"),
@@ -187,7 +206,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. A.6 binds every A.4 ambiguous candidate to P2-03 identity hashes and proves that ASCII-lower identity collision is not strict semantic equivalence: it performs zero automatic selections and retains all blocking states. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, identity, and production-binding diagnostics. A.7 classifies all 24 rejected candidate edges with family-typed production errors but supplies no verified remediation, candidate selection, or owner disposition, so 19 targets and 24 edges remain unresolved. Diagnostic completeness cannot substitute for remediation. Explicit states do not erase ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -277,6 +296,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         conditional = closure["conditional_required"]
         asset_binding = evidence["P2-20A.4"]["measured"]["reconciled_full_workset"]
         identity = evidence["P2-20A.6"]["measured"]
+        binding_failure = evidence["P2-20A.7"]["measured"]
         asset_structure = closure["asset_structure"]
         auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
         blockers.append({
@@ -295,6 +315,10 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"{identity['strict_full_semantic_equivalent_targets']} strict full-semantic equivalences and "
                 f"made {identity['candidate_selections']} selections; all "
                 f"{identity['effective']['ambiguous_targets']} ambiguous targets remain blocked. "
+                f"A.7 classified {binding_failure['typed_error_edges']} of "
+                f"{binding_failure['diagnosed_candidate_edges']} rejected candidate edges, but made "
+                f"{binding_failure['automatic_resolutions']} automatic resolutions and retains "
+                f"{binding_failure['effective']['unresolved_targets']} unresolved targets. "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "

@@ -177,6 +177,20 @@ try {
         [int]$g206Metrics.identity_retained_unresolved_edges -ne 24) {
         throw 'P2-20 A.6 identity-normalization evidence did not remain hash-bound and fail closed.'
     }
+    if ($g206Metrics.binding_failure_diagnostic_hash_bound -ne $true -or
+        $g206Metrics.binding_failure_diagnostic_scope_complete -ne $true -or
+        $g206Metrics.binding_failure_remediation_scope_complete -ne $false -or
+        [int]$g206Metrics.binding_failure_diagnosed_targets -ne 19 -or
+        [int]$g206Metrics.binding_failure_diagnosed_edges -ne 24 -or
+        [int]$g206Metrics.binding_failure_typed_error_edges -ne 24 -or
+        [int]$g206Metrics.binding_failure_unclassified_error_edges -ne 0 -or
+        [int]$g206Metrics.binding_failure_effective_unresolved_targets -ne 19 -or
+        [int]$g206Metrics.binding_failure_effective_unresolved_edges -ne 24 -or
+        [int]$g206Metrics.binding_failure_candidate_selections -ne 0 -or
+        [int]$g206Metrics.binding_failure_automatic_resolutions -ne 0 -or
+        [int]$g206Metrics.binding_failure_owner_dispositions -ne 0) {
+        throw 'P2-20 A.7 binding-failure diagnosis did not remain hash-bound and fail closed.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {

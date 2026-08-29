@@ -142,6 +142,17 @@ try {
         $g206Metrics.auxiliary_cycle_detection_complete -ne $false) {
         throw 'P2-20 A.3 auxiliary evidence did not remain hash-bound and fail closed.'
     }
+    if ($g206Metrics.descriptor_diagnostic_hash_bound -ne $true -or
+        [int]$g206Metrics.descriptor_diagnostic_targets -ne 3651 -or
+        [int]$g206Metrics.descriptor_diagnostic_candidate_edges -ne 12764 -or
+        [int]$g206Metrics.descriptor_diagnostic_resolved_targets -ne 3617 -or
+        [int]$g206Metrics.descriptor_diagnostic_ambiguous_targets -ne 15 -or
+        [int]$g206Metrics.descriptor_diagnostic_unresolved_targets -ne 19 -or
+        [int]$g206Metrics.asset_binding_resolved_targets -ne 21460 -or
+        [int]$g206Metrics.asset_binding_ambiguous_targets -ne 15 -or
+        [int]$g206Metrics.asset_binding_unresolved_targets -ne 19) {
+        throw 'P2-20 A.4 descriptor evidence did not remain hash-bound and fail closed.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {

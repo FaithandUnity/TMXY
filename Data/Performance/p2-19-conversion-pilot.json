@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T16:42:43.4536385+00:00",
+  "captured_utc": "2026-08-29T06:57:24.5044025+00:00",
   "result": "PASS",
   "task_id": "P2-19-PILOT",
   "evidence_kind": "conversion-pilot",
@@ -40,36 +40,36 @@
         "family": "qtx",
         "task_id": "P1-13",
         "evidence": "Data/BuildBaseline/p1-13-qtx-texture.json",
-        "evidence_sha256": "66f705d349df177e8c6e6bc05c9fd56af08fb9f74f1b1cd12d3dfcdb99a17393"
+        "evidence_sha256": "4299426f9f863db43f2f739c39719c3e2acc7044f7f16941a896674ee433b0fb"
       },
       {
         "family": "sm",
         "task_id": "P1-14",
         "evidence": "Data/BuildBaseline/p1-14-sm-static-mesh.json",
-        "evidence_sha256": "4efbc6bd4a0ab527a586a193fbed444afc79c20c5b3558b3973cc51cc7086574"
+        "evidence_sha256": "ed0f6b1cdda53ee11ba66d22a37f05b404233ff1c08f27ef21687b057b8621d6"
       },
       {
         "family": "skem",
         "task_id": "P1-15",
         "evidence": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json",
-        "evidence_sha256": "66b63fb13bc83661e63963d679806daa09a03a8e03df9da64e8483b2ce14af2d"
+        "evidence_sha256": "b4add72e6aa063e2eae5eccddaddb0e8e3ddc86282b811259742399f37ed5eca"
       },
       {
         "family": "anim",
         "task_id": "P1-16",
         "evidence": "Data/BuildBaseline/p1-16-anim-animation.json",
-        "evidence_sha256": "b8591d360ccbde926e2e87cda24570ff5d80b270c1422e114d7e298396e06101"
+        "evidence_sha256": "dc4112a397b25ab78deaa3d7157b35ca80cfba959d32aefb3d5ca532293a267a"
       },
       {
         "family": "ter",
         "task_id": "P1-17",
         "evidence": "Data/BuildBaseline/p1-17-ter-terrain.json",
-        "evidence_sha256": "e177b8f1399c8762f0d36a25b11ad63fbc708ce61c1839e58f153f64fd722677"
+        "evidence_sha256": "e1aad8f3acc92b4fc3c2facf095f29afcfd1f160c4b545bfade6230b36267600"
       }
     ],
     "p2_15": {
       "evidence": "Data/Inventory/p2-15-conversion-routing.json",
-      "evidence_sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+      "evidence_sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b",
       "full_report_sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559",
       "full_report_bytes": 21021383,
       "full_report_lines": 40090
@@ -108,15 +108,15 @@
     "storage": {
       "workspace_volume": "E:",
       "workspace_volume_total_bytes": 1073742868480,
-      "workspace_volume_available_bytes": 207498256384,
-      "rebuild_bytes": 46162209723,
-      "git_database_bytes": 7860433,
-      "tracked_worktree_bytes": 21269303,
-      "generated_directories_bytes": 34278976046,
+      "workspace_volume_available_bytes": 199953072128,
+      "rebuild_bytes": 46460916237,
+      "git_database_bytes": 9540443,
+      "tracked_worktree_bytes": 25307235,
+      "generated_directories_bytes": 34332174576,
       "generated_breakdown": [
         {
           "scope": "data_exports",
-          "bytes": 619872916
+          "bytes": 670444320
         },
         {
           "scope": "generated_contracts",
@@ -132,11 +132,11 @@
         },
         {
           "scope": "ue_intermediate",
-          "bytes": 8092234191
+          "bytes": 8092232685
         },
         {
           "scope": "ue_saved",
-          "bytes": 24307882646
+          "bytes": 24310511278
         }
       ]
     }
@@ -256,105 +256,105 @@
       "case_id": "6e4afb3772d098e0ae31e70747e616c22878ab99bf2b09dcaff1f2f21b604142",
       "descriptor_bytes": 222,
       "elapsed_ms": [
-        24.133,
-        25.981,
-        24.365,
-        21.958,
-        23.142
+        21.927,
+        22.962,
+        21.849,
+        21.821,
+        22.114
       ],
       "family": "qtx",
       "input_bytes": 1048798,
-      "median_ms": 24.133,
+      "median_ms": 21.927,
       "output_bytes": 3147065,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "a5de3b19d41ae007bb93049a78753c1583558ff1c3ce5511dc47e335b8db7892",
       "output_size_stable": true,
-      "p80_ms": 24.365,
+      "p80_ms": 22.114,
       "payload_bytes": 1048576
     },
     {
       "case_id": "44e65692a727695348746221cd7c2d153e995e9fbb2fccdcf93c0e11cb027d0e",
       "descriptor_bytes": 43554,
       "elapsed_ms": [
-        288.873,
-        323.082,
-        265.362,
-        260.726,
-        286.119
+        246.389,
+        261.005,
+        251.713,
+        247.784,
+        260.584
       ],
       "family": "sm",
       "input_bytes": 12229025,
-      "median_ms": 286.119,
+      "median_ms": 251.713,
       "output_bytes": 14915451,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "7a26fdf07872f7cdafc98d6b8a8e22c1275e80b46ee3d8a9ca1361dd929c0903",
       "output_size_stable": true,
-      "p80_ms": 288.873,
+      "p80_ms": 260.584,
       "payload_bytes": 12185471
     },
     {
       "case_id": "16a50c4d9edf3659cb4cd91bc214c419f11f13d49885e9f9b1611846147e06ce",
       "descriptor_bytes": 281615,
       "elapsed_ms": [
-        1284.044,
-        1322.54,
-        1309.893,
-        1281.854,
-        1259.246
+        1185.42,
+        1177.608,
+        1177.739,
+        1169.894,
+        1163.343
       ],
       "family": "skem",
       "input_bytes": 95981755,
-      "median_ms": 1284.044,
+      "median_ms": 1177.608,
       "output_bytes": 2855065,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "62e247970bf61eb3fa82b8afe4b389d136d237d73a16e8cfd2eccc2294570f6d",
       "output_size_stable": true,
-      "p80_ms": 1309.893,
+      "p80_ms": 1177.739,
       "payload_bytes": 95700140
     },
     {
       "case_id": "c6238bef27f5947a6abd18442719a4a35a2d978c7e21fae9312b295ae80dc9db",
       "descriptor_bytes": 281615,
       "elapsed_ms": [
-        303.659,
-        294.543,
-        371.295,
-        348.951,
-        293.101
+        286.993,
+        282.646,
+        281.386,
+        282.866,
+        291.308
       ],
       "family": "anim",
       "input_bytes": 33137431,
-      "median_ms": 303.659,
+      "median_ms": 282.866,
       "output_bytes": 3749298,
       "output_file_count": 2,
       "output_hash_stable": true,
       "output_sha256": "e915847762ace459f3effc5d50a8401d328e52f586cf2f33e924ff913b35fad4",
       "output_size_stable": true,
-      "p80_ms": 348.951,
+      "p80_ms": 286.993,
       "payload_bytes": 32855816
     },
     {
       "case_id": "c5e0a61e15c38361460b22d4dc2aa639e9e745b7dc585394569e469f0c7d2d82",
       "descriptor_bytes": 0,
       "elapsed_ms": [
-        4.741,
-        4.784,
-        5.367,
-        4.544,
-        4.459
+        5.048,
+        5.071,
+        4.631,
+        4.341,
+        4.791
       ],
       "family": "ter",
       "input_bytes": 147501,
-      "median_ms": 4.741,
+      "median_ms": 4.791,
       "output_bytes": 55401,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "c2d50bd3363186c8e68a5dedbe64b879686f8a0b16659cb8382150e23d98025f",
       "output_size_stable": true,
-      "p80_ms": 4.784,
+      "p80_ms": 5.048,
       "payload_bytes": 147501
     }
   ],

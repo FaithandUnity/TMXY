@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-descriptor-diagnostics-v1.schema.json",
+  "title": "P2-20A.4 full-semantic descriptor diagnostic report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "source_build", "task_id",
+    "criterion_id", "result", "review_execution_result", "task_status",
+    "completion_criteria_satisfied", "diagnostic_scope_complete", "g2_06_satisfied",
+    "p3_authorized", "input_bindings", "scope", "measured", "completion",
+    "detail_export", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.4"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "source_build": {"const": "qy-3.0.0.413"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {"$ref": "#/$defs/fileBinding"}
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection", "targets", "candidate_edges", "candidate_identity_exact",
+        "production_binder_used", "first_candidate_selection_used"],
+      "properties": {
+        "selection": {"type": "string", "minLength": 1},
+        "targets": {"const": 3651},
+        "candidate_edges": {"const": 12764},
+        "candidate_identity_exact": {"const": true},
+        "production_binder_used": {"const": true},
+        "first_candidate_selection_used": {"const": false}
+      }
+    },
+    "measured": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["descriptor_parsed_candidates", "descriptor_rejected_candidates",
+        "binding_pass_candidates", "binding_rejected_candidates", "resolved_targets",
+        "ambiguous_targets", "unresolved_targets", "by_resolution_basis_targets",
+        "by_resolution_basis_edges", "by_prior_resolution_basis", "by_family",
+        "reconciled_full_workset"],
+      "properties": {
+        "descriptor_parsed_candidates": {"type": "integer", "minimum": 0},
+        "descriptor_rejected_candidates": {"type": "integer", "minimum": 0},
+        "binding_pass_candidates": {"type": "integer", "minimum": 0},
+        "binding_rejected_candidates": {"type": "integer", "minimum": 0},
+        "resolved_targets": {"type": "integer", "minimum": 0},
+        "ambiguous_targets": {"type": "integer", "minimum": 0},
+        "unresolved_targets": {"type": "integer", "minimum": 0},
+        "by_resolution_basis_targets": {"$ref": "#/$defs/countMap"},
+        "by_resolution_basis_edges": {"$ref": "#/$defs/countMap"},
+        "by_prior_resolution_basis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["DESCRIPTOR_VALIDATION_FAILED", "DIVERGENT_DESCRIPTOR_SET",
+            "EQUIVALENT_VALID_DESCRIPTOR_SET", "UNIQUE_VALID_DESCRIPTOR"],
+          "properties": {
+            "DESCRIPTOR_VALIDATION_FAILED": {"$ref": "#/$defs/countMap"},
+            "DIVERGENT_DESCRIPTOR_SET": {"$ref": "#/$defs/countMap"},
+            "EQUIVALENT_VALID_DESCRIPTOR_SET": {"$ref": "#/$defs/countMap"},
+            "UNIQUE_VALID_DESCRIPTOR": {"$ref": "#/$defs/countMap"}
+          }
+        },
+        "by_family": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["anim", "qtx", "skem", "sm"],
+          "properties": {
+            "anim": {"$ref": "#/$defs/countMap"},
+            "qtx": {"$ref": "#/$defs/countMap"},
+            "skem": {"$ref": "#/$defs/countMap"},
+            "sm": {"$ref": "#/$defs/countMap"}
+          }
+        },
+        "reconciled_full_workset": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["targets", "candidate_edges", "resolved_targets", "ambiguous_targets",
+            "unresolved_targets", "unknown_targets", "resolved_edges", "ambiguous_edges",
+            "unresolved_edges", "unknown_edges"],
+          "properties": {
+            "targets": {"const": 21494},
+            "candidate_edges": {"const": 39351},
+            "resolved_targets": {"const": 21460},
+            "ambiguous_targets": {"const": 15},
+            "unresolved_targets": {"const": 19},
+            "unknown_targets": {"const": 0},
+            "resolved_edges": {"const": 39297},
+            "ambiguous_edges": {"const": 30},
+            "unresolved_edges": {"const": 24},
+            "unknown_edges": {"const": 0}
+          }
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_ambiguous_targets", "required_unresolved_targets",
+        "observed_ambiguous_targets", "observed_unresolved_targets", "satisfied",
+        "g2_remains_blocked_by_other_open_criteria"],
+      "properties": {
+        "required_ambiguous_targets": {"const": 0},
+        "required_unresolved_targets": {"const": 0},
+        "observed_ambiguous_targets": {"type": "integer", "minimum": 0},
+        "observed_unresolved_targets": {"type": "integer", "minimum": 0},
+        "satisfied": {"type": "boolean"},
+        "g2_remains_blocked_by_other_open_criteria": {"const": true}
+      }
+    },
+    "detail_export": {"$ref": "#/$defs/fileBinding"},
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anonymous_identities_only", "private_source_paths", "exact_primary_keys",
+        "raw_table_rows", "decoded_confidential_payloads", "legacy_source_lines"],
+      "properties": {
+        "anonymous_identities_only": {"const": true},
+        "private_source_paths": {"const": false},
+        "exact_primary_keys": {"const": false},
+        "raw_table_rows": {"const": false},
+        "decoded_confidential_payloads": {"const": false},
+        "legacy_source_lines": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "tracked": {"type": "boolean"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "lines": {"type": "integer", "minimum": 0},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "countMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    }
+  }
+}

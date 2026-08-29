@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.3",
-  "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
+  "captured_utc": "2026-08-29T06:56:43.4049825+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -11,7 +11,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "1a41aaccf8d7c1078f283be03e85f9ef83cc0d8106fd2aa76ccf674ac706d5cf",
+      "aggregate_sha256": "382f95a02caee459fb7305110798f15a8c4c70c475c2b71a638f437b3328f40e",
       "artifacts": [
         {
           "id": "P2-05",
@@ -46,7 +46,7 @@
         {
           "id": "P2-12",
           "path": "Data/Inventory/p2-12-full-asset-inventory.json",
-          "sha256": "88bdda4ba1629a41f4e5772729713de9cd7cd614365efaf9328440fed086d8a9",
+          "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a",
           "bytes": 6306
         },
         {
@@ -65,7 +65,7 @@
         {
           "id": "P2-13",
           "path": "Data/Inventory/p2-13-reference-closure.json",
-          "sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633",
+          "sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef",
           "bytes": 7789
         },
         {
@@ -78,7 +78,7 @@
         {
           "id": "P2-18",
           "path": "Data/Inventory/p2-18-content-health.json",
-          "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+          "sha256": "5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b",
           "bytes": 10740
         },
         {
@@ -96,14 +96,14 @@
         {
           "id": "P2-20A.3-AUX",
           "path": "Data/Reports/p2-20a-aux-config-reference-report.json",
-          "sha256": "cbb81593e482bb8386733a7d208a5d67ce1409988aa4fb4f7b0c640f4214cf2f",
+          "sha256": "a81be00b5ca6ba2a6030f5a1a0537d361ad929ba342569a74091ccf9bfd07935",
           "bytes": 157387
         },
         {
           "id": "g2-policy",
           "path": "Contracts/data-schema/g2-review-policy-v1.json",
-          "sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
-          "bytes": 6502
+          "sha256": "a03cd5efcfca260d4576cfbb62da77a919c9e2e6f543405081ad0e841f9f561b",
+          "bytes": 6703
         }
       ]
     }
@@ -114,7 +114,7 @@
       "tracked": true,
       "bytes": 13434,
       "lines": 370,
-      "sha256": "13aacb78334266cfe58cd3661b8afea189d849f193b7083b307a1c0cd6b573d1"
+      "sha256": "31e28d3673ba7fe8ae240c392c433c669238612d88059769c40946df4ce5e315"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-core-resource-closure-report.md",
@@ -128,7 +128,7 @@
       "tracked": true,
       "bytes": 1656,
       "lines": 40,
-      "sha256": "50ad89aa6d6873bee702ccd1b43038395389fdd96b3633ecb7cc30e92aca0203"
+      "sha256": "d9a1dbacb4df9ef85c6a5c10325a3971c8d1c13a035740bbfa4770a447a8e096"
     },
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
@@ -241,7 +241,7 @@
       "conditional_required_missing": 29,
       "conditional_required_unresolved": 0,
       "source_inventory_id": "P2-13",
-      "source_inventory_sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633",
+      "source_inventory_sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef",
       "member_source_inventory_id": "P2-06",
       "member_source_inventory_sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
       "member_source_file_count": 1,

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
+  "captured_utc": "2026-08-29T06:56:43.4049825+00:00",
   "task_id": "P2-18",
   "result": "PASS",
   "task_status": "COMPLETE",
@@ -8,7 +8,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "completed_tasks": 17,
-    "binding_sha256": "3f8d62312eb4f5397131eaa88ef7cbdc9d9cfbf07323c4de1376de4a3a7c63c3",
+    "binding_sha256": "93617e5c9455bd035a83eefcaefd9a41c895547d312ae96bdf67e6526c939b0b",
     "inputs": [
       {
         "path": "Data/Inventory/p2-01-package-inventory.json",
@@ -79,31 +79,31 @@
       {
         "path": "Data/Inventory/p2-12-full-asset-inventory.json",
         "result": "PASS",
-        "sha256": "88bdda4ba1629a41f4e5772729713de9cd7cd614365efaf9328440fed086d8a9",
+        "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a",
         "task_id": "P2-12"
       },
       {
         "path": "Data/Inventory/p2-13-reference-closure.json",
         "result": "PASS",
-        "sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633",
+        "sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef",
         "task_id": "P2-13"
       },
       {
         "path": "Data/Inventory/p2-14-asset-health.json",
         "result": "PASS",
-        "sha256": "cfa26d331f03f6c87bf4143ff881c7df9a0ef4906b7954410b7a2623d46fc52b",
+        "sha256": "397b8fea897dfc698c068f9f4d6d48be862e0cd054f8d047542f2fe9bd02aa81",
         "task_id": "P2-14"
       },
       {
         "path": "Data/Inventory/p2-15-conversion-routing.json",
         "result": "PASS",
-        "sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+        "sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b",
         "task_id": "P2-15"
       },
       {
         "path": "Data/Inventory/p2-16-conversion-cache.json",
         "result": "PASS",
-        "sha256": "a3e12232a8dd68b27ef1de30741432df9e84fa99c75329e85fa2450901588691",
+        "sha256": "3f6baf634ac61936ae0a4845aed00d64103f0813fda63144e4b16d68e58d5f1c",
         "task_id": "P2-16"
       },
       {
@@ -120,14 +120,14 @@
       "tracked": true,
       "bytes": 14205,
       "lines": 448,
-      "sha256": "dd3d2d33cb347686eeb7b4f0d0d1c302f245644b943529312e21eb192d535bb6"
+      "sha256": "bb894efade45bf9c8bff6410bf4fe4d058780508a72e28371860151d77730242"
     },
     "markdown": {
       "path": "Data/Reports/p2-18-content-health-report.md",
       "tracked": true,
       "bytes": 2419,
       "lines": 48,
-      "sha256": "70e9cfb79c1eb5e7cc74d32b971feefe157aa0832e282044a1c6f0d98610110d"
+      "sha256": "3be0972574ab2c781e53a2bb68671a315ebd3f7336e6eaf8b1dd2555fd7f0088"
     }
   },
   "summary": {

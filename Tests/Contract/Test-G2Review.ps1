@@ -14,6 +14,7 @@ $markdownPath = Join-Path $root 'Data\Reports\p2-20-g2-review-report.md'
 $evidencePath = Join-Path $root 'Data\Inventory\p2-20-g2-review.json'
 $qualityPath = Join-Path $root 'Data\BuildBaseline\p0-12-local-quality-gates.json'
 $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
+$descriptorDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json'
 $auxiliaryReportPath = Join-Path $root 'Data\Reports\p2-20a-aux-config-reference-report.json'
 $remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
 $reviewPacketsPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
@@ -159,6 +160,11 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.supplemental.task_id -eq 'P2-20A' -and
         $Candidate.supplemental.criterion_id -eq 'G2-06' -and
         $Candidate.supplemental.path -eq 'Data/Reports/p2-20a-core-resource-closure-report.json' -and
+        $Candidate.descriptor_diagnostics.task_id -eq 'P2-20A' -and
+        $Candidate.descriptor_diagnostics.criterion_id -eq 'G2-06' -and
+        $Candidate.descriptor_diagnostics.evidence_revision -eq 'P2-20A.4' -and
+        $Candidate.descriptor_diagnostics.path -eq
+            'Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json' -and
         $Candidate.remediation.task_id -eq 'P2-20B' -and
         $Candidate.remediation.criterion_id -eq 'G2-07' -and
         $Candidate.remediation.path -eq 'Data/Governance/p2-g2-migration-decisions.json' -and
@@ -234,9 +240,15 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'auxiliary_semantic_status') -ne 'UNASSESSED' -or
         (Get-Metric $g206 'auxiliary_config_closure_complete') -ne $false -or
         (Get-Metric $g206 'auxiliary_cycle_detection_complete') -ne $false -or
+        (Get-Metric $g206 'descriptor_diagnostic_hash_bound') -ne $true -or
+        (Get-Metric $g206 'descriptor_diagnostic_targets') -ne 3651 -or
+        (Get-Metric $g206 'descriptor_diagnostic_candidate_edges') -ne 12764 -or
+        (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -ne 3617 -or
+        (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -ne 15 -or
+        (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -ne 19 -or
         (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $true -or
-        (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21292 -or
-        (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 183 -or
+        (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21460 -or
+        (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 15 -or
         (Get-Metric $g206 'asset_binding_unresolved_targets') -ne 19 -or
         (Get-Metric $g206 'asset_binding_unknown_targets') -ne 0 -or
         (Get-Metric $g206 'asset_binding_workset_hash_bound') -ne $true -or
@@ -296,7 +308,8 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
-    $qualityPath, $supplementalPath, $auxiliaryReportPath, $remediationPath, $reviewPacketsPath,
+    $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxiliaryReportPath,
+    $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
     $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath, $wrapperPath)
 foreach ($path in $required) {
@@ -321,6 +334,8 @@ $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 |
 $quality = Get-Content -LiteralPath $qualityPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $supplemental = Get-Content -LiteralPath $supplementalPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$descriptorDiagnostic = Get-Content -LiteralPath $descriptorDiagnosticPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $auxiliaryReport = Get-Content -LiteralPath $auxiliaryReportPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
@@ -438,6 +453,7 @@ foreach ($index in 0..18) {
 }
 $qualityBinding = $report.input_bindings.quality
 $supplementalBinding = $report.input_bindings.supplemental
+$descriptorBinding = $report.input_bindings.descriptor_diagnostics
 $remediationBinding = $report.input_bindings.remediation
 $bindingsPassed = $bindingsPassed -and
     $supplementalBinding.task_id -eq $policy.supplemental.task_id -and
@@ -452,6 +468,18 @@ $bindingsPassed = $bindingsPassed -and
         $supplemental.completion_criteria_satisfied -and
     (Test-AuxiliaryCoreBinding $supplemental $auxiliaryReport)
 $aggregateLines.Add("SUPPLEMENTAL|$($supplementalBinding.task_id)|$($supplementalBinding.criterion_id)|$($supplementalBinding.path)|$($supplementalBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and
+    $descriptorBinding.task_id -eq $policy.descriptor_diagnostics.task_id -and
+    $descriptorBinding.criterion_id -eq $policy.descriptor_diagnostics.criterion_id -and
+    $descriptorBinding.evidence_revision -eq $policy.descriptor_diagnostics.evidence_revision -and
+    $descriptorBinding.path -eq $policy.descriptor_diagnostics.path -and
+    $descriptorBinding.sha256 -eq (Get-Sha256 $descriptorDiagnosticPath) -and
+    $descriptorDiagnostic.evidence_revision -eq 'P2-20A.4' -and
+    $descriptorDiagnostic.review_execution_result -eq 'PASS' -and
+    $descriptorDiagnostic.diagnostic_scope_complete -eq $true -and
+    $descriptorDiagnostic.result -eq 'BLOCKED' -and
+    $descriptorDiagnostic.g2_06_satisfied -eq $false
+$aggregateLines.Add("DESCRIPTOR|$($descriptorBinding.task_id)|$($descriptorBinding.criterion_id)|$($descriptorBinding.evidence_revision)|$($descriptorBinding.path)|$($descriptorBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
     $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
@@ -473,7 +501,7 @@ $bindingsPassed = $bindingsPassed -and $qualityBinding.path -eq $policy.quality_
 $aggregateLines.Add("QUALITY|$($qualityBinding.path)|$($qualityBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and $report.input_bindings.aggregate_sha256 -eq
     (Get-TextSha256 (($aggregateLines -join "`n") + "`n"))
-Add-A 'All prerequisites supplemental remediation and quality evidence are exactly SHA-256 bound' $bindingsPassed
+Add-A 'All prerequisites supplemental descriptor remediation and quality evidence are exactly SHA-256 bound' $bindingsPassed
 
 $g206 = Get-Criterion $report 'G2-06'
 Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without FK substitution' (
@@ -488,6 +516,12 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'auxiliary_semantic_approved') -eq 0 -and
     (Get-Metric $g206 'auxiliary_no_ref_approved') -eq 0 -and
     (Get-Metric $g206 'auxiliary_approved_roots') -eq 0 -and
+    (Get-Metric $g206 'descriptor_diagnostic_hash_bound') -eq $true -and
+    (Get-Metric $g206 'descriptor_diagnostic_targets') -eq 3651 -and
+    (Get-Metric $g206 'descriptor_diagnostic_candidate_edges') -eq 12764 -and
+    (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -eq 3617 -and
+    (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -eq 15 -and
+    (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -eq 19 -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolved_targets -eq 21292 -and
@@ -516,8 +550,8 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'conditional_member_set_count') -eq 29 -and
     (Get-Metric $g206 'conditional_member_set_hash_bound') -eq $true -and
     (Get-Metric $g206 'asset_binding_resolution_explicit') -eq $true -and
-    (Get-Metric $g206 'asset_binding_resolved_targets') -eq 21292 -and
-    (Get-Metric $g206 'asset_binding_ambiguous_targets') -eq 183 -and
+    (Get-Metric $g206 'asset_binding_resolved_targets') -eq 21460 -and
+    (Get-Metric $g206 'asset_binding_ambiguous_targets') -eq 15 -and
     (Get-Metric $g206 'asset_binding_unresolved_targets') -eq 19 -and
     (Get-Metric $g206 'asset_binding_unknown_targets') -eq 0 -and
     (Get-Metric $g206 'asset_binding_workset_hash_bound') -eq $true -and
@@ -527,6 +561,7 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'unknown_resolution_count') -eq 0 -and
     (Get-Metric $g206 'core_foreign_key_dangling_context') -eq 0 -and
     $g206.interpretation -match 'hash-bound monotonic core-scope closure report' -and
+    $g206.interpretation -match 'A.4 independently binds exact' -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
 $g207 = Get-Criterion $report 'G2-07'
 Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
@@ -628,7 +663,7 @@ $negativeCases.explicit_asset_binding_with_open_states_rejected =
     (Get-Metric (Get-Criterion $explicitBindingOnly 'G2-06') `
         'asset_binding_resolution_explicit') -eq $true -and
     (Get-Metric (Get-Criterion $explicitBindingOnly 'G2-06') `
-        'asset_binding_ambiguous_targets') -eq 183 -and
+        'asset_binding_ambiguous_targets') -eq 15 -and
     (Test-AgainstSchema $explicitBindingOnly) -and
     -not (Test-G2Semantics $explicitBindingOnly $policy)
 $scopeForgery = Copy-JsonObject $report
@@ -693,6 +728,15 @@ $badSupplementalSha.input_bindings.supplemental.sha256 = '0' * 64
 $negativeCases.supplemental_sha_tamper_rejected =
     (Test-AgainstSchema $badSupplementalSha) -and
     $badSupplementalSha.input_bindings.supplemental.sha256 -ne (Get-Sha256 $supplementalPath)
+$missingDescriptorSha = Copy-JsonObject $report
+[void]$missingDescriptorSha.input_bindings.descriptor_diagnostics.PSObject.Properties.Remove('sha256')
+$negativeCases.missing_descriptor_sha_rejected = -not (Test-AgainstSchema $missingDescriptorSha)
+$badDescriptorSha = Copy-JsonObject $report
+$badDescriptorSha.input_bindings.descriptor_diagnostics.sha256 = '0' * 64
+$negativeCases.descriptor_sha_tamper_rejected =
+    (Test-AgainstSchema $badDescriptorSha) -and
+    $badDescriptorSha.input_bindings.descriptor_diagnostics.sha256 -ne
+        (Get-Sha256 $descriptorDiagnosticPath)
 $badAuxMetric = Copy-JsonObject $report
 Set-Metric (Get-Criterion $badAuxMetric 'G2-06') `
     'auxiliary_reference_evidence_hash_bound' $false

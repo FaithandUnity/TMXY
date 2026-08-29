@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.3",
-  "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
+  "captured_utc": "2026-08-29T06:56:43.4049825+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -13,7 +13,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "ab9d1bf7d258b7536ae396957afcde6337f701427949a0008bfe3c09c0e1cc50",
+    "aggregate_sha256": "68613a5f44b2a7e2a9ea6ef1dc9fd6e960cd422e33e4f76d23dabf644249433b",
     "entries": [
       {
         "role": "auxiliary_config_inventory",
@@ -21,23 +21,23 @@
       },
       {
         "role": "full_asset_inventory",
-        "sha256": "88bdda4ba1629a41f4e5772729713de9cd7cd614365efaf9328440fed086d8a9"
+        "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a"
       },
       {
         "role": "reference_closure",
-        "sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633"
+        "sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef"
       },
       {
         "role": "asset_health",
-        "sha256": "cfa26d331f03f6c87bf4143ff881c7df9a0ef4906b7954410b7a2623d46fc52b"
+        "sha256": "397b8fea897dfc698c068f9f4d6d48be862e0cd054f8d047542f2fe9bd02aa81"
       },
       {
         "role": "conversion_routing",
-        "sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d"
+        "sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b"
       },
       {
         "role": "content_health",
-        "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0"
+        "sha256": "5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b"
       }
     ]
   },

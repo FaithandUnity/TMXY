@@ -8,9 +8,9 @@ This is a conditional, non-price planning baseline. It is not a delivery commitm
 
 | Input | Task | SHA-256 |
 |---|---|---|
-| conversion_routing | P2-15 | `ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d` |
-| content_health | P2-18 | `07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0` |
-| conversion_pilot | P2-19-PILOT | `725401c1032915948e28f01c380cd0b2bb821835afc83ecc0d87f2852dc18522` |
+| conversion_routing | P2-15 | `2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b` |
+| content_health | P2-18 | `5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b` |
+| conversion_pilot | P2-19-PILOT | `58cc2f580eaa39462df8e93bbae507ebcf75ac76bc572164633d1b1061be3411` |
 
 ## Human budget
 
@@ -40,13 +40,13 @@ Projection status: `PARTIALLY_PILOT_CALIBRATED`. Sequential seconds do not estab
 
 | Route | Pilot runs | Base s | Reserve s | Total s |
 |---|---:|---:|---:|---:|
-| automatic-qualified-interchange | 25 | 172.023 | 86.011 | 258.034 |
+| automatic-qualified-interchange | 25 | 157.762 | 78.881 | 236.643 |
 | automatic-standard-audio | 0 | 2,400 | 1,200 | 3,600 |
 | semi-automatic-navigation-adaptation | 0 | 8,060 | 4,030 | 12,090 |
 | manual-descriptor-recovery | 0 | 0 | 0 | 0 |
 | manual-repair-or-replace | 0 | 0 | 0 | 0 |
 
-Total: 10,632.023 base s + 5,316.011 reserve s = 15,948.034 sequential s.
+Total: 10,617.762 base s + 5,308.881 reserve s = 15,926.643 sequential s.
 
 Five interchange families use a **planning assumption** that selected-case p80 scales linearly with alias-excluded ready-job bytes. Audio/navigation retain planning coefficients. CPU time, peak RSS/temp, I/O, cache hits, and parallel scaling are missing.
 
@@ -56,7 +56,7 @@ Pilot output ratios are also **planning-assumption byte-linear extrapolations**.
 
 | Item | Bytes |
 |---|---:|
-| Existing workspace | 46,162,209,723 |
+| Existing workspace | 46,460,916,237 |
 | Source retained | 8,882,019,027 |
 | Intermediate | 15,255,215,355 |
 | UE content | 22,882,823,033 |
@@ -64,8 +64,8 @@ Pilot output ratios are also **planning-assumption byte-linear extrapolations**.
 | Two recovery copies | 186,396,029,444 |
 | Storage reserve | 94,604,899,865 |
 | Incremental required | 364,904,613,763 |
-| Current volume free | 207,498,256,384 |
-| Capacity gap | 157,406,357,379 |
+| Current volume free | 199,953,072,128 |
+| Capacity gap | 164,951,541,635 |
 
 ## Conditional P3-P8 scenarios
 

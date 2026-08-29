@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T07:36:50.2089382+00:00",
+  "captured_utc": "2026-08-29T06:54:39.9769906+00:00",
   "result": "PASS",
   "task": "P2-12",
   "task_status": "COMPLETE",
@@ -132,16 +132,16 @@
   },
   "dependencies": {
     "p2-01-package-inventory.json": "5b4ff6c7921458148a986ef02a60330ee560e1051f380b53b2a0f5be43c6c59d",
-    "p1-13-qtx-texture.json": "ac5268b9615ecdc159616eb9539fc54b7e70a3433949e69a9758ee72b3f6888b",
-    "p1-14-sm-static-mesh.json": "f1d2f42c10931cf803a2d124c5c4e5b71a0563c2cbec53b05ffe8c7000a09564",
-    "p1-15-skem-skeletal-mesh.json": "4283362732823709c21254d9092ee1987e283b845d648c0782e7ffdb052b2dbd",
-    "p1-16-anim-animation.json": "541d9c8678e46845e6f1b90237541d85ea5565a7c2f5a278422065785cabaf11",
-    "p1-17-ter-terrain.json": "9124c57c16ea132b95991b7032f118027c28fc5a262fb5a12dbbc873a6c1bbf2",
+    "p1-13-qtx-texture.json": "522295cc2aa2429e5b716ee7110a753065d9ca3b2ef4a780f2ae41c6c60d89d1",
+    "p1-14-sm-static-mesh.json": "9dd92fb17c7faa0cee78d5d61458b49193cc68256955b3fcbfaaa97d48e20157",
+    "p1-15-skem-skeletal-mesh.json": "8e3a011e24dbc473cf494f6229521c550939b99253e887f9ae935b99674ba050",
+    "p1-16-anim-animation.json": "be177e2a7c63ce7ef0b5831132e0ec288762128386b83c268bfa5418608d3f0b",
+    "p1-17-ter-terrain.json": "780d8d8926d9d7376d8d560991b489ae506003c95802eb2aed362ce65dbe8832",
     "p1-18-auxiliary-assets.json": "2059d6d0d071e1db0906cfbc2bd606be77ee57e26381a780af9a9dd644df1d12"
   },
   "implementation": {
-    "source_files": 144,
-    "source_sha256": "2b4ef35d2afb37852121b809a6aea0c04e5273fb6d261debd3f2df961c845a7a",
+    "source_files": 146,
+    "source_sha256": "54610dbe0b206271927605188537180a3f8ae5662a5c70e1b6fc1bb46286097a",
     "scanner": "Tools/TMXY.AssetInventory/apps/asset_inventory_main.cpp",
     "generator": "Tools/TMXY.AssetInventory/New-FullAssetInventory.ps1",
     "production_readers": [

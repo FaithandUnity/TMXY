@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 from typing import Any
 
+from g2_descriptor import bind_descriptor_diagnostics
 
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as stream:
@@ -17,7 +18,6 @@ def load_json(path: Path) -> dict[str, Any]:
         raise ValueError(f"JSON root must be an object: {path.name}")
     return value
 
-
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as stream:
@@ -25,21 +25,17 @@ def sha256(path: Path) -> str:
             digest.update(chunk)
     return digest.hexdigest()
 
-
 def is_sha256(value: Any) -> bool:
     return isinstance(value, str) and bool(re.fullmatch(r"[0-9a-f]{64}", value))
-
 
 def require(condition: bool, message: str) -> None:
     if not condition:
         raise ValueError(message)
 
-
 def is_safe_relative(relative: str) -> bool:
     candidate = Path(relative)
     return (bool(relative) and "\\" not in relative and not relative.startswith("/") and
             not candidate.is_absolute() and ".." not in candidate.parts)
-
 
 def resolve_inside(root: Path, relative: str) -> Path:
     require(is_safe_relative(relative), "Path is not repository-relative")
@@ -47,7 +43,6 @@ def resolve_inside(root: Path, relative: str) -> Path:
     require(candidate.is_relative_to(root), "Path escaped repository root")
     require(candidate.is_file(), f"Required input is missing: {relative}")
     return candidate
-
 
 def verify_contract_binding(root: Path, document: dict[str, Any], label: str) -> None:
     contracts = document.get("contracts", {})
@@ -60,7 +55,6 @@ def verify_contract_binding(root: Path, document: dict[str, Any], label: str) ->
         path = resolve_inside(root, relative)
         require(contracts.get(f"{kind}_sha256") == sha256(path),
                 f"{label} {kind} contract hash drifted")
-
 
 def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     bindings: list[dict[str, Any]] = []
@@ -128,6 +122,11 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         f"SUPPLEMENTAL|{supplemental_spec['task_id']}|{supplemental_spec['criterion_id']}|"
         f"{supplemental_relative}|{supplemental_digest}")
 
+    descriptor_binding, descriptor, descriptor_aggregate = bind_descriptor_diagnostics(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.4"] = descriptor
+    aggregate_lines.append(descriptor_aggregate)
+
     remediation_spec = policy["remediation"]
     remediation_relative = remediation_spec["path"]
     remediation_path = resolve_inside(root, remediation_relative)
@@ -188,6 +187,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "aggregate_sha256": hashlib.sha256(joined).hexdigest(),
         "prerequisites": bindings,
         "supplemental": supplemental_binding,
+        "descriptor_diagnostics": descriptor_binding,
         "remediation": remediation_binding,
         "quality": {
             "path": quality_relative,
@@ -301,7 +301,9 @@ def evaluate_auxiliary_binding(root: Path, report: dict[str, Any],
     return {"bound": True, "metrics": metrics, "report": auxiliary}
 
 
-def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[str, Any]) -> dict[str, Any]:
+def evaluate_core_closure(root: Path, report: dict[str, Any],
+                          descriptor: dict[str, Any],
+                          thresholds: dict[str, Any]) -> dict[str, Any]:
     scope = report["scope_definition"]
     declared_roots = scope["declared_roots"]
     resource_rules = scope["core_table_resource_rules"]
@@ -312,6 +314,26 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
     conditional = closure["conditional_required"]
     asset_structure = closure["asset_structure"]
     asset_binding = closure["asset_binding"]
+    descriptor_measured = descriptor["measured"]
+    reconciled = descriptor_measured["reconciled_full_workset"]
+    descriptor_bound = (descriptor["diagnostic_scope_complete"] is True and
+                        descriptor["review_execution_result"] == "PASS" and
+                        descriptor["scope"]["targets"] == 3651 and
+                        descriptor["scope"]["candidate_edges"] == 12764 and
+                        descriptor["scope"]["candidate_identity_exact"] is True and
+                        descriptor["scope"]["production_binder_used"] is True and
+                        descriptor["scope"]["first_candidate_selection_used"] is False and
+                        descriptor_measured["descriptor_parsed_candidates"] == 12764 and
+                        descriptor_measured["descriptor_rejected_candidates"] == 0 and
+                        reconciled["targets"] == asset_binding["reachable_assets"] and
+                        reconciled["candidate_edges"] == asset_binding["candidate_edges"] and
+                        reconciled["resolved_targets"] + reconciled["ambiguous_targets"] +
+                        reconciled["unresolved_targets"] + reconciled["unknown_targets"] ==
+                        reconciled["targets"] and
+                        reconciled["resolved_edges"] + reconciled["ambiguous_edges"] +
+                        reconciled["unresolved_edges"] + reconciled["unknown_edges"] ==
+                        reconciled["candidate_edges"] and
+                        is_sha256(descriptor["detail_export"]["sha256"]))
     integrity = closure["integrity"]
     p213_sha = sha256(resolve_inside(root, "Data/Inventory/p2-13-reference-closure.json"))
     artifacts = {item["id"]: item for item in report["input_bindings"]["artifacts"]}
@@ -342,20 +364,17 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
                        resolution["package_unresolved"] + resolution["package_ambiguous"])
     logical_gap_set_bound = (closure["logical_gap_count"] == logical_gap_sum and
                              is_sha256(closure["gap_set_sha256"]))
-    satisfied = (declared_scope_bound and auxiliary_context["bound"] and
+    satisfied = (declared_scope_bound and auxiliary_context["bound"] and descriptor_bound and
                  closure["scope_complete"] == thresholds["core_scope_complete"] and
                  auxiliary["scope_complete"] == thresholds["core_auxiliary_config_scope_complete"] and
                  closure["auxiliary_config_reference_scope_complete"] ==
                  thresholds["core_auxiliary_config_scope_complete"] and
                  closure["asset_binding_resolution_explicit"] ==
                  thresholds["core_asset_binding_resolution_explicit"] and
-                 asset_binding["ambiguous_targets"] == thresholds["core_asset_binding_ambiguous"] and
-                 asset_binding["unresolved_targets"] == thresholds["core_asset_binding_unresolved"] and
-                 asset_binding["unknown_targets"] == thresholds["core_asset_binding_unknown"] and
-                 asset_binding["reachable_assets"] == asset_binding["workset_count"] and
-                 asset_binding["resolved_targets"] + asset_binding["ambiguous_targets"] +
-                 asset_binding["unresolved_targets"] + asset_binding["unknown_targets"] ==
-                 asset_binding["reachable_assets"] and
+                 reconciled["ambiguous_targets"] == thresholds["core_asset_binding_ambiguous"] and
+                 reconciled["unresolved_targets"] == thresholds["core_asset_binding_unresolved"] and
+                 reconciled["unknown_targets"] == thresholds["core_asset_binding_unknown"] and
+                 reconciled["targets"] == asset_binding["workset_count"] and
                  is_sha256(asset_binding["workset_sha256"]) and
                  asset_binding["first_candidate_selection_used"] is False and
                  resolution["table_unresolved"] == thresholds["core_table_resource_unresolved"] and
@@ -378,14 +397,20 @@ def evaluate_core_closure(root: Path, report: dict[str, Any], thresholds: dict[s
     return {
         "satisfied": satisfied, "declared_scope_bound": declared_scope_bound,
         "auxiliary_evidence_bound": auxiliary_context["bound"],
+        "descriptor_diagnostic_bound": descriptor_bound,
+        "descriptor_diagnostic_targets": descriptor["scope"]["targets"],
+        "descriptor_diagnostic_edges": descriptor["scope"]["candidate_edges"],
+        "descriptor_diagnostic_resolved": descriptor_measured["resolved_targets"],
+        "descriptor_diagnostic_ambiguous": descriptor_measured["ambiguous_targets"],
+        "descriptor_diagnostic_unresolved": descriptor_measured["unresolved_targets"],
         "auxiliary_metrics": auxiliary_context["metrics"],
         "scope_complete": closure["scope_complete"],
         "auxiliary_complete": closure["auxiliary_config_reference_scope_complete"],
         "asset_binding_explicit": closure["asset_binding_resolution_explicit"],
-        "asset_binding_resolved": asset_binding["resolved_targets"],
-        "asset_binding_ambiguous": asset_binding["ambiguous_targets"],
-        "asset_binding_unresolved": asset_binding["unresolved_targets"],
-        "asset_binding_unknown": asset_binding["unknown_targets"],
+        "asset_binding_resolved": reconciled["resolved_targets"],
+        "asset_binding_ambiguous": reconciled["ambiguous_targets"],
+        "asset_binding_unresolved": reconciled["unresolved_targets"],
+        "asset_binding_unknown": reconciled["unknown_targets"],
         "asset_binding_workset_bound": (asset_binding["reachable_assets"] ==
                                          asset_binding["workset_count"] and
                                          is_sha256(asset_binding["workset_sha256"])),

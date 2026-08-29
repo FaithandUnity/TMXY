@@ -19,6 +19,8 @@ option(TMXY_BUILD_SKELETAL_MESH "Build the legacy skem skeletal-mesh reconstruct
 option(TMXY_BUILD_ANIMATION "Build the legacy anim skeletal-animation reconstruction module" ON)
 option(TMXY_BUILD_TERRAIN "Build the legacy ter terrain reconstruction module" ON)
 option(TMXY_BUILD_ASSET_INVENTORY "Build the full legacy asset inventory scanner" OFF)
+option(TMXY_BUILD_G2_ASSET_DESCRIPTOR_DIAGNOSTICS
+       "Build the P2-20A.4 full-semantic descriptor diagnostic probe" OFF)
 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 20)
@@ -71,4 +73,12 @@ if(TMXY_BUILD_ASSET_INVENTORY)
         message(FATAL_ERROR "TMXY.AssetInventory requires all Package and asset format modules")
     endif()
     add_subdirectory(TMXY.AssetInventory)
+endif()
+if(TMXY_BUILD_G2_ASSET_DESCRIPTOR_DIAGNOSTICS)
+    if(NOT TMXY_BUILD_PACKAGE OR NOT TMXY_BUILD_TRANSFORM OR NOT TMXY_BUILD_TEXTURE OR
+       NOT TMXY_BUILD_STATIC_MESH OR NOT TMXY_BUILD_SKELETAL_MESH OR NOT TMXY_BUILD_ANIMATION)
+        message(FATAL_ERROR
+                "TMXY.G2AssetDescriptorDiagnostics requires Package, Transform, Texture, StaticMesh, SkeletalMesh, and Animation")
+    endif()
+    add_subdirectory(TMXY.G2AssetDescriptorDiagnostics)
 endif()

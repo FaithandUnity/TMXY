@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T09:39:25.6213425+00:00",
+  "captured_utc": "2026-08-29T08:08:54.0814765+00:00",
   "result": "PASS",
   "task": "P1-16",
   "completion_criteria_satisfied": true,
   "source_file_count": 18,
-  "source_sha256": "dab24c44d510604ba05afeee1dae99f9fab0d1dd722bd9e66ad67f1a10a1d295",
+  "source_sha256": "96acbd1a0f409bc8549b5df3266efadb719450b1680139ef953e43cb4a312d82",
   "contract": {
     "descriptor_source": "ordered Package QSkelMesh references and QSkelAnim property bodies",
     "payload": "headerless bone-major then frame-major QAnim key stream",
@@ -136,6 +136,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 76,
-    "output_sha256": "f079942fd9585533dcf25f59a4b82e95ba551f1f1dae88bc954672bb4cf3a5a8"
+    "output_sha256": "fcb491176a7597291c3a7fdf69e303b0bf28e4120ad97abea5302cfab0e004fb"
   }
 }

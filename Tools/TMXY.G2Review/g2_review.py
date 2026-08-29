@@ -1,21 +1,17 @@
 #!/usr/bin/env python3
 """Generate the deterministic, fail-closed P2-20 G2 review."""
-
 from __future__ import annotations
-
 import argparse
 import hashlib
 import json
 from pathlib import Path
 from typing import Any
-
 from g2_evidence import (bind_inputs, evaluate_core_closure,
                          evaluate_migration_registry, is_safe_relative,
                          is_sha256, load_json, require, resolve_inside, sha256)
 
 def metric(name: str, value: Any, unit: str) -> dict[str, Any]:
     return {"name": name, "value": value, "unit": unit}
-
 def criterion(
     policy_item: dict[str, Any],
     satisfied: bool,
@@ -34,7 +30,6 @@ def criterion(
         "interpretation": interpretation,
         "blocker_ids": blockers or [],
     }
-
 def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], root: Path) -> list[dict[str, Any]]:
     by_id = {item["id"]: item for item in policy["criteria"]}
     p202 = evidence["P2-02"]["summary"]
@@ -121,7 +116,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("client_copy_grants_no_runtime_authority", client_copy_no_authority, "boolean"),
     ], "Ownership is complete; combat, economy, and unknown gameplay semantics remain server-authoritative and fail closed."))
 
-    core = evaluate_core_closure(root, evidence["P2-20A"], thresholds)
+    core = evaluate_core_closure(root, evidence["P2-20A"], evidence["P2-20A.4"], thresholds)
     ok = core["satisfied"]
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
@@ -129,6 +124,12 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("scope_complete", core["scope_complete"], "boolean"),
         metric("auxiliary_config_scope_complete", core["auxiliary_complete"], "boolean"),
         *(metric(name, value, unit) for name, value, unit in core["auxiliary_metrics"]),
+        metric("descriptor_diagnostic_hash_bound", core["descriptor_diagnostic_bound"], "boolean"),
+        metric("descriptor_diagnostic_targets", core["descriptor_diagnostic_targets"], "assets"),
+        metric("descriptor_diagnostic_candidate_edges", core["descriptor_diagnostic_edges"], "edges"),
+        metric("descriptor_diagnostic_resolved_targets", core["descriptor_diagnostic_resolved"], "assets"),
+        metric("descriptor_diagnostic_ambiguous_targets", core["descriptor_diagnostic_ambiguous"], "assets"),
+        metric("descriptor_diagnostic_unresolved_targets", core["descriptor_diagnostic_unresolved"], "assets"),
         metric("asset_binding_resolution_explicit", core["asset_binding_explicit"], "boolean"),
         metric("asset_binding_resolved_targets", core["asset_binding_resolved"], "assets"),
         metric("asset_binding_ambiguous_targets", core["asset_binding_ambiguous"], "assets"),
@@ -154,7 +155,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. Its separately hash-bound A.3 evidence covers all 212 auxiliary instances and measured lexical candidates, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact P2-03/P2-12/P2-13 candidate identities and production-binder full semantic signatures; its reconciled full workset supersedes coarse descriptor counts without selecting a candidate. A.3 covers all 212 auxiliary instances, but no semantic adapter, no-reference disposition, or root is approved. Explicit states do not erase remaining ambiguity, unresolved descriptors, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
 
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
@@ -214,7 +215,6 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("narrowing_forbidden", p217["summary"]["narrowing"] == "forbidden", "boolean"),
     ], "Backend and UE generated contracts bind to one schema digest and retain uint64 identity storage."))
     return reviews
-
 def validate_outcome(policy: dict[str, Any], criteria: list[dict[str, Any]]) -> tuple[list[str], list[str]]:
     required = {item["id"]: item["required_status"] for item in policy["criteria"]}
     require(set(required.values()) == {"SATISFIED"}, "Every G2 exit criterion must require SATISFIED")
@@ -247,7 +247,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         closure = evidence["P2-20A"]["closure"]
         resolution = closure["resolution"]
         conditional = closure["conditional_required"]
-        asset_binding = closure["asset_binding"]
+        asset_binding = evidence["P2-20A.4"]["measured"]["reconciled_full_workset"]
         asset_structure = closure["asset_structure"]
         auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
         blockers.append({
@@ -259,8 +259,8 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"configuration instances remain nonterminal ({auxiliary['candidate_only']} candidate-only, "
                 f"{auxiliary['editor_undecided']} editor-undecided, {auxiliary['malformed_blocked']} malformed) "
                 f"with {auxiliary['approved_roots']} approved roots. Explicit asset-binding evidence retains "
-                f"{asset_binding['ambiguous_targets']} ambiguous plus "
-                f"{asset_binding['unresolved_targets']} unresolved targets. "
+                f"{asset_binding['ambiguous_targets']} full-semantic ambiguous plus "
+                f"{asset_binding['unresolved_targets']} production-unresolved targets. "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "

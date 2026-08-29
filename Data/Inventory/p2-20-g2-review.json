@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T16:44:40.9795157+00:00",
+  "captured_utc": "2026-08-29T06:57:25.9085422+00:00",
   "task_id": "P2-20",
   "result": "BLOCKED",
   "review_execution_result": "PASS",
@@ -13,7 +13,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "7344e16a8554997839d68945d6be6b331e3a9c537cb1a547d00f0ac4c1d0175e",
+      "aggregate_sha256": "f1e3be2f589af33b936b3081d60b858773116bcd581372d46da3809afe3c7377",
       "prerequisites": [
         {
           "task_id": "P2-01",
@@ -106,7 +106,7 @@
         {
           "task_id": "P2-12",
           "path": "Data/Inventory/p2-12-full-asset-inventory.json",
-          "sha256": "88bdda4ba1629a41f4e5772729713de9cd7cd614365efaf9328440fed086d8a9",
+          "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -114,7 +114,7 @@
         {
           "task_id": "P2-13",
           "path": "Data/Inventory/p2-13-reference-closure.json",
-          "sha256": "31a877482f025c6d9cd245b407d9199d02aa199e6511d8a6fa2741e510442633",
+          "sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -122,7 +122,7 @@
         {
           "task_id": "P2-14",
           "path": "Data/Inventory/p2-14-asset-health.json",
-          "sha256": "cfa26d331f03f6c87bf4143ff881c7df9a0ef4906b7954410b7a2623d46fc52b",
+          "sha256": "397b8fea897dfc698c068f9f4d6d48be862e0cd054f8d047542f2fe9bd02aa81",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -130,7 +130,7 @@
         {
           "task_id": "P2-15",
           "path": "Data/Inventory/p2-15-conversion-routing.json",
-          "sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+          "sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -138,7 +138,7 @@
         {
           "task_id": "P2-16",
           "path": "Data/Inventory/p2-16-conversion-cache.json",
-          "sha256": "a3e12232a8dd68b27ef1de30741432df9e84fa99c75329e85fa2450901588691",
+          "sha256": "3f6baf634ac61936ae0a4845aed00d64103f0813fda63144e4b16d68e58d5f1c",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -154,7 +154,7 @@
         {
           "task_id": "P2-18",
           "path": "Data/Inventory/p2-18-content-health.json",
-          "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+          "sha256": "5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -162,7 +162,7 @@
         {
           "task_id": "P2-19",
           "path": "Data/Inventory/p2-19-resource-budget.json",
-          "sha256": "38148aba7fd510c06d16ec592b34712b90e1c0b2ae995c08654394e7e556d4ff",
+          "sha256": "4a62ea05802d1d3fd8b01ec5c9ff4f547f20e05283a1c3994aee4db242b0bf5a",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -172,17 +172,30 @@
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
         "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-        "sha256": "13aacb78334266cfe58cd3661b8afea189d849f193b7083b307a1c0cd6b573d1",
+        "sha256": "31e28d3673ba7fe8ae240c392c433c669238612d88059769c40946df4ce5e315",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
         "completion_criteria_satisfied": false
       },
+      "descriptor_diagnostics": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.4",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "sha256": "b293e13aed6092180a2dbd244924bc9e98d3bedbcf878371ed2465e7fe1d3306",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "g2_06_satisfied": false
+      },
       "remediation": {
         "task_id": "P2-20B",
         "criterion_id": "G2-07",
         "path": "Data/Governance/p2-g2-migration-decisions.json",
-        "sha256": "60e0986a6cd44e076348839b1ce89216dd5a7b9bbe344ff2142d0c64bfb81196",
+        "sha256": "e2930f87c1c18e495f772c23001cef142d548ea5af2b5c226815572ae045ff08",
         "result": "BLOCKED",
         "generation_result": "PASS",
         "task_status": "BLOCKED",
@@ -191,9 +204,9 @@
       },
       "quality": {
         "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-        "sha256": "77307ed11bd509ae90dc04336324f129851bc99c8b6e0c1cf36de2ee62232089",
+        "sha256": "811f3cc56de6185b9285b156f5a96cd0eab2c1b0dbc689ebc7825bae0b246623",
         "result": "PASS_DIAGNOSTIC",
-        "captured_utc": "2026-08-29T04:25:16.9510227+00:00"
+        "captured_utc": "2026-08-29T08:20:13.6353368+00:00"
       }
     }
   },
@@ -201,16 +214,16 @@
     "json": {
       "path": "Data/Reports/p2-20-g2-review-report.json",
       "tracked": true,
-      "bytes": 28501,
-      "lines": 934,
-      "sha256": "04fd73c01f2c85c1e50119e7ef534815fc18bf4f92d71019ab6b73747935b50f"
+      "bytes": 29977,
+      "lines": 977,
+      "sha256": "d9d43969f5f9db106f2a9fa06cf7b8dc73e98186d82ea30668c9eacc0bbd8d3a"
     },
     "markdown": {
       "path": "Data/Reports/p2-20-g2-review-report.md",
       "tracked": true,
-      "bytes": 4589,
+      "bytes": 4768,
       "lines": 52,
-      "sha256": "1bf1b05172b46452eb03be3e719ea075078ae8da4edab9ed78fa9dd5aa1e48aa"
+      "sha256": "601b63b3519104cf7f2b1ebb5348be64e17856d7b0f87e0b523936ea2c39ab4d"
     }
   },
   "summary": {
@@ -236,7 +249,7 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 183 ambiguous plus 19 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "reason": "P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 15 full-semantic ambiguous plus 19 production-unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
       "required_action": "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
@@ -256,10 +269,10 @@
     "manual_content_rate_ppm": 19955,
     "base_planning_hours": 1404.695,
     "risk_adjusted_planning_hours": 2000.37,
-    "machine_projection_seconds": 15948.034291,
-    "storage_budget_bytes": 411066823486,
+    "machine_projection_seconds": 15926.643335,
+    "storage_budget_bytes": 411365530000,
     "incremental_storage_required_bytes": 364904613763,
-    "storage_capacity_gap_bytes": 157406357379,
+    "storage_capacity_gap_bytes": 164951541635,
     "measured_schedule": false,
     "monetary_amount_available": false,
     "financial_total_cost_available": false,
@@ -282,17 +295,17 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
+    "policy_sha256": "a03cd5efcfca260d4576cfbb62da77a919c9e2e6f543405081ad0e841f9f561b",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "aae199ee8ee4a2d000e8aaa61ef84e47a63e2286c14080fec90ac62957d4bb31"
+    "schema_sha256": "89c34fb699c5b0a3af76ef3ecf3af499ad26fa4397d9eff54960c24df9f4bddf"
   },
   "implementation": {
-    "source_files": 3,
-    "source_sha256": "19d7fabbd901919d65089a2f51afa6a63b30142d63f4d46675a452a11b0127c2",
+    "source_files": 4,
+    "source_sha256": "2c2c421960a8c1ce29a9628b0827c4d4339e85462f35e06d94d5467cb7146fff",
     "generator": "Tools/TMXY.G2Review/g2_review.py",
-    "generator_sha256": "7b7283407d45354979775dce1cf5fc0b30e2ffde36df81dd348b8ed5b824b1f2",
+    "generator_sha256": "bde16ef993ef3ca129836a5c4717bcd0e2b6c5b2e0ab35340dcc2a9319f96479",
     "wrapper": "Tools/TMXY.G2Review/New-G2Review.ps1",
-    "wrapper_sha256": "b5cd6f47d62e7666bb2cf6ffc5d8174118ae840869fbb875e613ec4a05aa6264",
+    "wrapper_sha256": "faef0d1237f85d8433970cbb931ddbe0e7cb24bea809c91739b0e01d542bd0a1",
     "self_test_assertions": 11
   },
   "disclosure": {

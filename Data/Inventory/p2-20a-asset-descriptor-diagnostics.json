@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.4",
+  "captured_utc": "2026-08-29T07:23:07Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "measured": {
+    "ambiguous_targets": 15,
+    "binding_pass_candidates": 12561,
+    "binding_rejected_candidates": 203,
+    "by_family": {
+      "anim": {
+        "ambiguous": 6,
+        "candidate_edges": 222,
+        "resolved": 102,
+        "targets": 114,
+        "unresolved": 6
+      },
+      "qtx": {
+        "ambiguous": 1,
+        "candidate_edges": 11051,
+        "resolved": 2311,
+        "targets": 2324,
+        "unresolved": 12
+      },
+      "skem": {
+        "ambiguous": 6,
+        "candidate_edges": 1151,
+        "resolved": 1037,
+        "targets": 1043
+      },
+      "sm": {
+        "ambiguous": 2,
+        "candidate_edges": 340,
+        "resolved": 167,
+        "targets": 170,
+        "unresolved": 1
+      }
+    },
+    "by_prior_resolution_basis": {
+      "DESCRIPTOR_VALIDATION_FAILED": {
+        "candidate_edges": 24,
+        "targets": 19,
+        "unresolved": 19
+      },
+      "DIVERGENT_DESCRIPTOR_SET": {
+        "ambiguous": 9,
+        "candidate_edges": 534,
+        "resolved": 174,
+        "targets": 183
+      },
+      "EQUIVALENT_VALID_DESCRIPTOR_SET": {
+        "ambiguous": 6,
+        "candidate_edges": 11271,
+        "resolved": 2508,
+        "targets": 2514
+      },
+      "UNIQUE_VALID_DESCRIPTOR": {
+        "candidate_edges": 935,
+        "resolved": 935,
+        "targets": 935
+      }
+    },
+    "by_resolution_basis_edges": {
+      "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 30,
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 24,
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12710
+    },
+    "by_resolution_basis_targets": {
+      "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 15,
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 19,
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3617
+    },
+    "descriptor_parsed_candidates": 12764,
+    "descriptor_rejected_candidates": 0,
+    "reconciled_full_workset": {
+      "ambiguous_edges": 30,
+      "ambiguous_targets": 15,
+      "candidate_edges": 39351,
+      "resolved_edges": 39297,
+      "resolved_targets": 21460,
+      "targets": 21494,
+      "unknown_edges": 0,
+      "unknown_targets": 0,
+      "unresolved_edges": 24,
+      "unresolved_targets": 19
+    },
+    "resolved_targets": 3617,
+    "unresolved_targets": 19
+  },
+  "outputs": {
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+      "tracked": false,
+      "bytes": 6194145,
+      "lines": 3651,
+      "sha256": "1ac52f61b62ae723dc13d208e06530c21af927faf496aeb0cdd2d994729704d0"
+    },
+    "report_json": {
+      "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+      "tracked": true,
+      "bytes": 5076,
+      "lines": 174,
+      "sha256": "b293e13aed6092180a2dbd244924bc9e98d3bedbcf878371ed2465e7fe1d3306"
+    },
+    "report_markdown": {
+      "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.md",
+      "tracked": true,
+      "bytes": 634,
+      "lines": 14,
+      "sha256": "ee57e6796a4e3bc60a298f3e3ab5883537e437b8dc7c190c6cff2009508615ff"
+    }
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/CMakeLists.txt",
+        "tracked": true,
+        "bytes": 603,
+        "lines": 22,
+        "sha256": "fff9234823dfc30e18cfaa3b08e19f36f94b0ed18463b89cf215dc220ff3640d"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/diagnostic_common.py",
+        "tracked": true,
+        "bytes": 4663,
+        "lines": 122,
+        "sha256": "089a9c5249f47ae50e381e54e23777a9237c8a984127bbf41530e195e637c120"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/g2_asset_descriptor_diagnostics.py",
+        "tracked": true,
+        "bytes": 24973,
+        "lines": 497,
+        "sha256": "001c90914902b8000fa98ec7d1baea4eb2d439a762aaa884b9adf061325a4395"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.cpp",
+        "tracked": true,
+        "bytes": 11058,
+        "lines": 326,
+        "sha256": "ac174bbfa8a836610cfd70879a9040ed09caaddfbd0a94f8c19c4d036699e2d4"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.hpp",
+        "tracked": true,
+        "bytes": 661,
+        "lines": 22,
+        "sha256": "d3a16c780b56a684648c6017538e33f35376c85dd41ba985c97a7b377c95cc98"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/asset_descriptor_probe_main.cpp",
+        "tracked": true,
+        "bytes": 32663,
+        "lines": 954,
+        "sha256": "89d36acaa35dad857e1817349bfcbb22fae70a8c38a9008a33f52a958c0b5f74"
+      },
+      {
+        "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp",
+        "tracked": true,
+        "bytes": 28867,
+        "lines": 639,
+        "sha256": "e995eef8e5b2e8cda504e2e5ee50a5d149965e94d400f1d857da46ee962dafe7"
+      },
+      {
+        "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.hpp",
+        "tracked": true,
+        "bytes": 1248,
+        "lines": 42,
+        "sha256": "17b25df32d5934783db11d30409360556dd98947d1b8655cea29d9c9a5f09918"
+      }
+    ],
+    "generator_self_test_assertions": 4,
+    "probe_startup_self_tests": true
+  },
+  "builder": {
+    "image_reference": "tmxy-backend-builder:p0-08",
+    "image_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "network": "none",
+    "read_only_container": true,
+    "cap_drop": "ALL",
+    "no_new_privileges": true,
+    "legacy_client_mount": "read-only"
+  },
+  "disclosure": {
+    "anonymous_identities_only": true,
+    "decoded_confidential_payloads": false,
+    "exact_primary_keys": false,
+    "legacy_source_lines": false,
+    "private_source_paths": false,
+    "raw_table_rows": false
+  }
+}

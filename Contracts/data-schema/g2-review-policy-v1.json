@@ -30,6 +30,12 @@
     "criterion_id": "G2-06",
     "path": "Data/Reports/p2-20a-core-resource-closure-report.json"
   },
+  "descriptor_diagnostics": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "evidence_revision": "P2-20A.4",
+    "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json"
+  },
   "remediation": {
     "task_id": "P2-20B",
     "criterion_id": "G2-07",

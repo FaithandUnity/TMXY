@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T10:49:24.6380414+00:00",
+  "captured_utc": "2026-08-29T06:56:30.7391968+00:00",
   "task_id": "P2-16",
   "result": "PASS",
   "task_status": "COMPLETE",
@@ -17,7 +17,7 @@
     "tracked": false,
     "lines": 40090,
     "bytes": 28389045,
-    "sha256": "32130ce10d0df4db455b29d1efd69f1b9634c15fcbe8ac49e4c8afc537633487"
+    "sha256": "f910c661fb842c25ae6209c97211eb2b0ed13525816276e10b27339d584128fa"
   },
   "summary": {
     "assets": {
@@ -123,12 +123,12 @@
   },
   "key_inputs": {
     "converter_source_sha256": {
-      "anim": "dab24c44d510604ba05afeee1dae99f9fab0d1dd722bd9e66ad67f1a10a1d295",
+      "anim": "96acbd1a0f409bc8549b5df3266efadb719450b1680139ef953e43cb4a312d82",
       "mp3": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
-      "qtx": "6dfc868667ff44af46075a648602c22c17283a2ca0e478c89797791386a42d56",
-      "skem": "2f1df1671ffbeca72b11d95ca0c0e15d1ee50e6978bf1a3bb97a73ba08756bfa",
-      "sm": "1377fa8eaa9e9f7e460c5738965959f9500dba6cdeb596320bdad4b9d128d20f",
-      "ter": "da531146ef5c2b5d9db53a41a795205b8ba0f0a9b823aae8dd7d7d1fcaf99bd8",
+      "qtx": "a7f90e37c55fe23b0893e50b5179828751b59a40a080813441dbd2dee88b8a0c",
+      "skem": "c2bc89fbaba9b2b31c4c7cebe04c465fbefb209ac151278ea9e42fc4c73b496e",
+      "sm": "3b4c77bcc1f3fbb5ac2db8873d454aab6261ce8919683182aefd2f8091ca5ee4",
+      "ter": "2b291269a9eba45c1b5b6e3bbc734661009d5a8583f9ebc24040c49700da0d07",
       "wav": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
       "zif": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf"
     },

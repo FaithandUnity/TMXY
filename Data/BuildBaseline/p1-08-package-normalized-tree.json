@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-28T09:35:46.5081654+00:00",
+  "captured_utc": "2026-08-29T08:05:19.1369322+00:00",
   "result": "PASS",
   "task": "P1-08",
   "source_file_count": 26,
-  "source_sha256": "0324c76bdef74be463fcdc76f2019241e5d1934f03de6b565307d629e51ea1fb",
+  "source_sha256": "88f0288781add26b43ee32986b2d83f9772dfa7d3731b2fcffd838afe619c147",
   "json_schema": {
     "path": "Contracts/data-schema/package-tree-v1.schema.json",
     "sha256": "de461b5a52a7e363caf46136528d3a3a1a11a89dcc3e2918cbc569259c052475",
@@ -12,10 +12,10 @@
     "passed": true
   },
   "dependency_report_sha256": {
-    "p1-02-package-v1.json": "f844e18518379329e8ba79b5c593a00909dc994ca1d07198a2ff649e0ffe8fec",
-    "p1-05-package-v2.json": "225539ba27ce02f7c33150ac98a996e0c7c148bd11920f347a72af84d511597a",
-    "p1-06-package-v3.json": "23a78f80954e96796ca517dd78ea8dd17efb0b748aa45c5334bb46dc07c504c6",
-    "p1-07-package-pipeline.json": "1c0c85bfebf4a6dbba73822cf2a5c8aa1eb6fd9816290292a56f1ffbd78f89f6"
+    "p1-02-package-v1.json": "c40a9ca75a8e10371a2b5c23f7ac11e7b4dfc4159776575d8e43a32614c8cf04",
+    "p1-05-package-v2.json": "de39c89d342d26f5d5eecbe4a542e79481a082c740aa6ba97b8d1eabbe2601f0",
+    "p1-06-package-v3.json": "97b285e03594f89ef199677f7f2e63273ec87191f51677add17310ca1da85237",
+    "p1-07-package-pipeline.json": "d07ece93b0aa1d6a732a0698c16c247ea9c65c1e98d93b7537d9835362f1727d"
   },
   "semantic_states": {
     "names_and_classes": "opaque-bytes-hex",
@@ -67,6 +67,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 100,
-    "output_sha256": "c754ceb0fe6dfc901b27df060a77c3a89a366085422276d0d2d923672ad9289c"
+    "output_sha256": "8572b8b9e9b9afb659183fb65314c22097595e53fd5bcb77482378b876330a01"
   }
 }

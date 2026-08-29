@@ -28,7 +28,12 @@ No consumer may reinterpret successful review execution as a gate pass.
 ## Current blocking evidence
 
 G2-06 now has a hash-bound monotonic core-resource scope and explicit reference,
-asset-binding, conditional-required, and structure metrics. P2-20A.3 also
+asset-binding, conditional-required, and structure metrics. P2-20A.4 separately
+revalidates 3,651 high-risk targets and 12,764 exact candidate edges through full
+semantic signatures and production binders. Its reconciliation supersedes the
+coarse descriptor counts for the G2 decision: the complete 21,494-target workset
+contains 21,460 resolved, 15 ambiguous, and 19 unresolved targets. The frozen
+coarse workset remains the audit baseline, and no candidate is selected. P2-20A.3 also
 hash-binds all 212 auxiliary configuration instances and their lexical
 candidates: 171 remain candidate-only, 35 editor-undecided, and 6
 malformed-blocked; approved semantic adapters, no-reference dispositions, and

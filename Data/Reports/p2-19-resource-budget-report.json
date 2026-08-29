@@ -286,12 +286,12 @@
     ]
   },
   "input_bindings": {
-    "aggregate_sha256": "879d8174479d943a595369a8995cfd800f099601aff3a91c697179cf0dc739b4",
+    "aggregate_sha256": "a6a27ef4a9c1e0541e2003afc5b57b262876b4aa4e3b0d928144ef47590d7798",
     "content_health": {
       "completion_criteria_satisfied": true,
       "path": "Data/Inventory/p2-18-content-health.json",
       "result": "PASS",
-      "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+      "sha256": "5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b",
       "task_id": "P2-18",
       "task_status": "COMPLETE"
     },
@@ -299,7 +299,7 @@
       "completion_criteria_satisfied": true,
       "path": "Data/Performance/p2-19-conversion-pilot.json",
       "result": "PASS",
-      "sha256": "725401c1032915948e28f01c380cd0b2bb821835afc83ecc0d87f2852dc18522",
+      "sha256": "58cc2f580eaa39462df8e93bbae507ebcf75ac76bc572164633d1b1061be3411",
       "task_id": "P2-19-PILOT",
       "task_status": "COMPLETE"
     },
@@ -307,13 +307,13 @@
       "completion_criteria_satisfied": true,
       "path": "Data/Inventory/p2-15-conversion-routing.json",
       "result": "PASS",
-      "sha256": "ea51036bc49a2c2b36560b8870e3e7661dc98f3cc7630ffbed37d5183e7f574d",
+      "sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b",
       "task_id": "P2-15",
       "task_status": "COMPLETE"
     }
   },
   "machine_budget": {
-    "base_sequential_seconds": 10632.022861,
+    "base_sequential_seconds": 10617.762224,
     "basis_ids": [
       "BAS-MEASURED-PILOT",
       "BAS-PLAN-MACHINE-FALLBACK",
@@ -323,7 +323,7 @@
     ],
     "by_route": [
       {
-        "base_seconds": 172.022861,
+        "base_seconds": 157.762224,
         "basis_ids": [
           "BAS-MEASURED-PILOT",
           "BAS-MEASURED-INVENTORY",
@@ -332,9 +332,9 @@
           "BAS-MISSING-MACHINE-CAPACITY"
         ],
         "pilot_sample_count": 25,
-        "risk_reserve_seconds": 86.01143,
+        "risk_reserve_seconds": 78.881112,
         "route": "automatic-qualified-interchange",
-        "total_seconds": 258.034291
+        "total_seconds": 236.643335
       },
       {
         "base_seconds": 2400,
@@ -409,8 +409,8 @@
       }
     ],
     "risk_reserve_basis_points": 5000,
-    "risk_reserve_seconds": 5316.01143,
-    "total_sequential_seconds": 15948.034291,
+    "risk_reserve_seconds": 5308.881112,
+    "total_sequential_seconds": 15926.643335,
     "unit": "machine_seconds"
   },
   "measured_facts": {
@@ -578,9 +578,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "qtx",
-        "median_seconds": 0.024133,
+        "median_seconds": 0.021927,
         "output_ratio_basis_points": 30007,
-        "p80_seconds": 0.024365,
+        "p80_seconds": 0.022114,
         "sample_count": 5
       },
       {
@@ -588,9 +588,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "sm",
-        "median_seconds": 0.286119,
+        "median_seconds": 0.251713,
         "output_ratio_basis_points": 12197,
-        "p80_seconds": 0.288873,
+        "p80_seconds": 0.260584,
         "sample_count": 5
       },
       {
@@ -598,9 +598,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "skem",
-        "median_seconds": 1.284044,
+        "median_seconds": 1.177608,
         "output_ratio_basis_points": 298,
-        "p80_seconds": 1.309893,
+        "p80_seconds": 1.177739,
         "sample_count": 5
       },
       {
@@ -608,9 +608,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "anim",
-        "median_seconds": 0.303659,
+        "median_seconds": 0.282866,
         "output_ratio_basis_points": 1132,
-        "p80_seconds": 0.348951,
+        "p80_seconds": 0.286993,
         "sample_count": 5
       },
       {
@@ -618,9 +618,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "ter",
-        "median_seconds": 0.004741,
+        "median_seconds": 0.004791,
         "output_ratio_basis_points": 3756,
-        "p80_seconds": 0.004784,
+        "p80_seconds": 0.005048,
         "sample_count": 5
       }
     ]
@@ -1109,13 +1109,13 @@
         "projected_bytes": 186396029444
       }
     ],
-    "capacity_gap_bytes": 157406357379,
+    "capacity_gap_bytes": 164951541635,
     "capacity_sufficient": false,
     "deduplication_savings_assumed": false,
-    "disk_free_bytes": 207498256384,
+    "disk_free_bytes": 199953072128,
     "disk_total_bytes": 1073742868480,
     "duplicate_redundant_review_only_bytes": 1286887829,
-    "existing_workspace_bytes": 46162209723,
+    "existing_workspace_bytes": 46460916237,
     "incremental_required_bytes": 364904613763,
     "intermediate_estimated_bytes": 15255215355,
     "one_copy_bytes": 93198014722,
@@ -1124,7 +1124,7 @@
     "risk_reserve_basis_points": 3500,
     "risk_reserve_bytes": 94604899865,
     "source_retained_bytes": 8882019027,
-    "total_budget_bytes": 411066823486,
+    "total_budget_bytes": 411365530000,
     "ue_content_estimated_bytes": 22882823033,
     "unit": "bytes"
   },

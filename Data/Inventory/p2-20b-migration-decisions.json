@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "workflow_version": 2,
-  "captured_utc": "2026-08-28T14:47:54.9079086+00:00",
+  "captured_utc": "2026-08-29T06:56:43.4049825+00:00",
   "task_id": "P2-20B",
   "result": "BLOCKED",
   "generation_result": "PASS",
@@ -10,7 +10,7 @@
   "gate_criterion": "G2-07",
   "g2_07_satisfied": false,
   "input": {
-    "aggregate_sha256": "6982427cb9c0aa0df67b5fb047852e038b42385eedde7a9b889c021c5a1b2643",
+    "aggregate_sha256": "ee000a38f13422f701aa79343c2f1ed12e3aeb01dc9c1b6516fb7f4cef76f2ec",
     "evidence": [
       {
         "task_id": "P2-09",
@@ -47,7 +47,7 @@
       {
         "task_id": "P2-18",
         "path": "Data/Inventory/p2-18-content-health.json",
-        "sha256": "07a3a6d6b0cf94ec4e96e47fd8e8caea0257128c78fbbaf820443cbd7b3cdcc0",
+        "sha256": "5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b",
         "result": "PASS",
         "task_status": "COMPLETE",
         "completion_criteria_satisfied": true
@@ -56,7 +56,7 @@
     "derived_sources": [
       {
         "artifact_id": "G2_POLICY",
-        "sha256": "cd9aa2f3481ceb962b05cce5118fd8aa9f97ab1213aeeac86c86f278d64a68e3",
+        "sha256": "a03cd5efcfca260d4576cfbb62da77a919c9e2e6f543405081ad0e841f9f561b",
         "records": 9
       },
       {
@@ -91,7 +91,7 @@
     "tracked": true,
     "bytes": 2403442,
     "lines": 75297,
-    "sha256": "60e0986a6cd44e076348839b1ce89216dd5a7b9bbe344ff2142d0c64bfb81196"
+    "sha256": "e2930f87c1c18e495f772c23001cef142d548ea5af2b5c226815572ae045ff08"
   },
   "review_packets": {
     "path": "Data/Governance/p2-g2-migration-review-packets.json",

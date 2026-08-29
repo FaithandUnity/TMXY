@@ -32,6 +32,7 @@ to avoid a self-referential evidence hash.
 
 Before that final review, the aggregate runs
 `Test-G2AuxiliaryConfigReferences.ps1`, then
+the A.4/A.6/A.7/A.8 asset diagnostics and recovery contracts,
 `Test-G2CoreResourceClosure.ps1`, and finally `Test-G2MigrationDecisions.ps1`.
 The ordering proves the core report consumes the current auxiliary evidence
 rather than an adjacent, unbound result. Clean checkouts validate their tracked

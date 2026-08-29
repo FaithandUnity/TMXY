@@ -10,6 +10,12 @@
 namespace tmxy::animation
 {
 
+enum class FrameCountBasis : std::uint8_t
+{
+    package_descriptor = 0,
+    payload_observed_contract = 1,
+};
+
 struct UnknownProperty final
 {
     std::string name_bytes;
@@ -64,6 +70,9 @@ struct AnimationClip final
 {
     AnimationDescriptor descriptor;
     std::uint32_t track_count{0};
+    std::int32_t observed_frame_count{0};
+    std::int32_t effective_frame_count{0};
+    FrameCountBasis frame_count_basis{FrameCountBasis::package_descriptor};
     std::vector<AnimationTrack> tracks;
     double sampled_duration_seconds{0.0};
     double legacy_loop_period_seconds{0.0};

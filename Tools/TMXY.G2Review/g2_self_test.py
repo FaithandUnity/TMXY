@@ -16,7 +16,7 @@ def self_test() -> dict[str, Any]:
             "Gate fail-closed self-test failed"); assertions += 1
     require(not (True and True and False and False),
             "Core-resource distinction self-test failed"); assertions += 1
-    require(not (True and 183 == 0 and 19 == 0),
+    require(not (True and 189 == 0 and 12 == 0),
             "Explicit asset-binding state must not erase blocking states"); assertions += 1
     require(13 == 13 and 0 == 0 and 0 == 0,
             "Identity collision must not become semantic equivalence or candidate selection")

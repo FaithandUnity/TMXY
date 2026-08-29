@@ -15,7 +15,7 @@
     "candidate_count": {"type": "integer", "minimum": 1},
     "candidate_set_sha256": {"$ref": "#/$defs/sha256"},
     "prior_resolution": {"const": "UNRESOLVED"},
-    "effective_resolution": {"const": "UNRESOLVED"},
+    "effective_resolution": {"enum": ["RESOLVED", "AMBIGUOUS", "UNRESOLVED"]},
     "candidate_selected": {"const": false},
     "automatic_resolution": {"const": false},
     "authority_status": {"const": "REQUIRED_NOT_PROVIDED"},

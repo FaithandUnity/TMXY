@@ -73,7 +73,8 @@ try {
     $names = [ordered]@{
         detail = 'p2-20a-core-resource-closure.jsonl'
         workset = 'p2-20a-conditional-required-workset.jsonl'
-        asset_workset = 'p2-20a-asset-binding-workset.jsonl'
+        base_asset_workset = 'p2-20a-asset-binding-workset.jsonl'
+        asset_workset = 'p2-20a-effective-asset-binding-workset.jsonl'
         json = 'p2-20a-core-resource-closure-report.json'
         markdown = 'p2-20a-core-resource-closure-report.md'
         governance = 'p2-g2-core-resource-closure.json'
@@ -83,7 +84,8 @@ try {
     $targets = [ordered]@{
         detail = Join-Path $root 'Data\Exports\P2-20\p2-20a-core-resource-closure.jsonl'
         workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-conditional-required-workset.jsonl'
-        asset_workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-workset.jsonl'
+        base_asset_workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-workset.jsonl'
+        asset_workset = Join-Path $root 'Data\Exports\P2-20\p2-20a-effective-asset-binding-workset.jsonl'
         json = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
         markdown = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.md'
         governance = Join-Path $root 'Data\Governance\p2-g2-core-resource-closure.json'
@@ -102,6 +104,7 @@ try {
         '--detail-output', "/output/$($names.detail)",
         '--table-root', '/workspace/Data/Exports/P2-06/tables',
         '--workset-output', "/output/$($names.workset)",
+        '--base-asset-workset-output', "/output/$($names.base_asset_workset)",
         '--asset-workset-output', "/output/$($names.asset_workset)",
         '--json-output', "/output/$($names.json)",
         '--markdown-output', "/output/$($names.markdown)",

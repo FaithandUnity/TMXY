@@ -14,10 +14,12 @@ ROOT_FIELDS = {
     "asset_id", "candidate_count", "candidate_identity_exact", "candidate_selected",
     "candidate_set_sha256", "candidates", "compatible_semantic_variants", "counts",
     "family", "heuristic_selection", "prior_resolution", "prior_resolution_basis",
-    "production_binder_used", "resolution", "resolution_basis", "structure",
+    "production_binder_used", "resolution", "resolution_basis", "strict_resolution",
+    "strict_resolution_basis", "strict_compatible_semantic_variants", "structure",
 }
 CANDIDATE_FIELDS = {
     "binding", "body_sha256", "candidate_id", "descriptor", "descriptor_semantic_sha256",
+    "effective_binding", "effective_semantic_sha256", "recovery_applied", "recovery_kind",
     "identity_mirror_ascii_lower_match", "identity_normalized_descriptor_semantic_sha256",
     "identity_normalized_semantic_sha256", "semantic_sha256",
 }
@@ -153,7 +155,8 @@ def validate_sources(root: Path, report: dict[str, Any], p203: dict[str, Any],
     require(report["scope"]["targets"] == 3651 and report["scope"]["candidate_edges"] == 12764 and
             report["scope"]["candidate_identity_exact"] is True and
             report["scope"]["first_candidate_selection_used"] is False and
-            report["measured"]["ambiguous_targets"] == 15 and
+            report["measured"]["by_resolution_basis_targets"][
+                "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES"] == 15 and
             report["measured"]["by_resolution_basis_edges"][
                 "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES"] == 30,
             "A.4 ambiguous scope drifted")
@@ -180,7 +183,7 @@ def load_ambiguous(detail_path: Path) -> list[dict[str, Any]]:
     for item in iter_jsonl(detail_path):
         total += 1
         require(set(item) == ROOT_FIELDS, "A.4 detail record is not closed")
-        if item["resolution"] == "AMBIGUOUS":
+        if item["resolution_basis"] == "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES":
             ambiguous.append(item)
     require(total == 3651 and len(ambiguous) == 15, "A.4 detail population drifted")
     require(sum(int(x["candidate_count"]) for x in ambiguous) == 30,
@@ -214,9 +217,14 @@ def classify(item: dict[str, Any], nodes: dict[str, dict[str, Any]]) -> dict[str
     detail_candidates: list[dict[str, Any]] = []
     for candidate in candidates:
         require(set(candidate) == CANDIDATE_FIELDS, "A.4 candidate record is not closed")
-        require(candidate["descriptor"] == "PARSED" and candidate["binding"] == "PASS",
+        require(candidate["descriptor"] == "PARSED" and candidate["binding"] == "PASS" and
+                candidate["effective_binding"] == "PASS" and
+                candidate["effective_semantic_sha256"] == candidate["semantic_sha256"] and
+                candidate["recovery_applied"] is False and candidate["recovery_kind"] == "none",
                 "Ambiguous candidate lacks production semantics")
-        for name in CANDIDATE_FIELDS - {"binding", "descriptor", "identity_mirror_ascii_lower_match"}:
+        for name in CANDIDATE_FIELDS - {"binding", "descriptor", "effective_binding",
+                                        "identity_mirror_ascii_lower_match", "recovery_applied",
+                                        "recovery_kind"}:
             require(isinstance(candidate[name], str) and len(candidate[name]) == 64,
                     f"Candidate hash field is invalid: {name}")
         require(isinstance(candidate["identity_mirror_ascii_lower_match"], bool),

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.5",
-  "captured_utc": "2026-08-29T06:56:43.4049825+00:00",
+  "captured_utc": "2026-08-29T18:15:03.9821410+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -14,7 +14,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "dec065493be8b1de201494ff47d41772c911134dd361f66d34f52969e4430973",
+    "aggregate_sha256": "a6e9f692ce72587f4708dafea18c6f10847ca82586ed07b1dddb2901ecf752c3",
     "entries": [
       {
         "role": "auxiliary_inventory",
@@ -26,7 +26,7 @@
       },
       {
         "role": "lexical_report",
-        "sha256": "a81be00b5ca6ba2a6030f5a1a0537d361ad929ba342569a74091ccf9bfd07935"
+        "sha256": "641bc959230382e28f6dfd4c626fdb65e3aa567671473da238b6d65747328d17"
       },
       {
         "role": "package_inventory",
@@ -34,11 +34,11 @@
       },
       {
         "role": "asset_inventory",
-        "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a"
+        "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d"
       },
       {
         "role": "reference_closure",
-        "sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef"
+        "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962"
       },
       {
         "role": "policy",

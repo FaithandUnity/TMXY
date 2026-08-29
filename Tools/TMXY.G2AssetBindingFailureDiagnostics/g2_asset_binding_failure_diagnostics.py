@@ -15,10 +15,12 @@ A4_ROOT_FIELDS = {
     "asset_id", "candidate_count", "candidate_identity_exact", "candidate_selected",
     "candidate_set_sha256", "candidates", "compatible_semantic_variants", "counts",
     "family", "heuristic_selection", "prior_resolution", "prior_resolution_basis",
-    "production_binder_used", "resolution", "resolution_basis", "structure",
+    "production_binder_used", "resolution", "resolution_basis", "strict_resolution",
+    "strict_resolution_basis", "strict_compatible_semantic_variants", "structure",
 }
 A4_CANDIDATE_FIELDS = {
     "binding", "body_sha256", "candidate_id", "descriptor", "descriptor_semantic_sha256",
+    "effective_binding", "effective_semantic_sha256", "recovery_applied", "recovery_kind",
     "identity_mirror_ascii_lower_match", "identity_normalized_descriptor_semantic_sha256",
     "identity_normalized_semantic_sha256", "semantic_sha256",
 }
@@ -45,10 +47,8 @@ INPUTS = [
     ("p2_03_graph", "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl", False),
     ("p2_12_evidence", "Data/Inventory/p2-12-full-asset-inventory.json", True),
     ("p2_12_catalog", "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl", False),
-    ("core_report", "Data/Reports/p2-20a-core-resource-closure-report.json", True),
     ("a5_report", "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json", True),
     ("a6_report", "Data/Reports/p2-20a-asset-identity-normalization-report.json", True),
-    ("b1_evidence", "Data/Inventory/p2-20b-migration-decisions.json", True),
     ("policy", "Contracts/data-schema/g2-asset-binding-failure-diagnostics-policy-v1.json", True),
     ("schema", "Contracts/data-schema/g2-asset-binding-failure-diagnostics-v1.schema.json", True),
     ("detail_schema", "Contracts/data-schema/g2-asset-binding-failure-detail-v1.schema.json", True),
@@ -157,8 +157,12 @@ def validate_context(root: Path, paths: dict[str, Path], policy: dict[str, Any])
     a4 = load_json(paths["a4_report"])
     require(a4["evidence_revision"] == "P2-20A.4" and a4["result"] == "BLOCKED" and
             a4["review_execution_result"] == "PASS" and
-            a4["measured"]["unresolved_targets"] == 19 and
-            a4["measured"]["reconciled_full_workset"]["unresolved_edges"] == 24 and
+            a4["measured"]["strict_unresolved_targets"] == 19 and
+            a4["measured"]["strict_unresolved_edges"] == 24 and
+            a4["measured"]["ambiguous_targets"] == 189 and
+            a4["measured"]["reconciled_full_workset"]["ambiguous_edges"] == 546 and
+            a4["measured"]["unresolved_targets"] == 12 and
+            a4["measured"]["reconciled_full_workset"]["unresolved_edges"] == 15 and
             a4["g2_06_satisfied"] is False and a4["p3_authorized"] is False,
             "A.4 unresolved state drifted")
     advertised = a4["detail_export"]
@@ -172,21 +176,27 @@ def validate_context(root: Path, paths: dict[str, Path], policy: dict[str, Any])
     validate_bound_export(root, p203, "graph", INPUTS[5][1], 269064)
     p212 = load_json(paths["p2_12_evidence"])
     validate_bound_export(root, p212, "catalog", INPUTS[7][1], 40090)
-    core = load_json(paths["core_report"])
     a5 = load_json(paths["a5_report"])
     a6 = load_json(paths["a6_report"])
-    b1 = load_json(paths["b1_evidence"])
     preserved = policy["preserved_blockers"]
-    require(core["closure"]["conditional_required"]["conditional_required_missing"] ==
-            preserved["conditional_required_missing"], "Core conditional blocker drifted")
     require(a5["semantic_state"]["nonterminal_instances"] ==
             preserved["auxiliary_nonterminal_instances"], "A.5 blocker drifted")
     require(a6["measured"]["effective"]["ambiguous_targets"] ==
-            preserved["asset_ambiguous_targets"] and
+            preserved["identity_semantic_ambiguous_targets"] and
             a6["measured"]["effective"]["ambiguous_edges"] ==
-            preserved["asset_ambiguous_edges"], "A.6 blocker drifted")
-    require(b1["summary"]["pending"] == preserved["migration_pending"] and
-            b1["g2_07_satisfied"] is False, "B.1 blocker drifted")
+            preserved["identity_semantic_ambiguous_edges"], "A.6 blocker drifted")
+    require(a4["measured"]["ambiguous_targets"] ==
+            preserved["asset_effective_ambiguous_targets"] and
+            a4["measured"]["reconciled_full_workset"]["ambiguous_edges"] ==
+            preserved["asset_effective_ambiguous_edges"] and
+            a4["measured"]["strict_unresolved_targets"] ==
+            preserved["strict_binding_failure_targets"] and
+            a4["measured"]["strict_unresolved_edges"] ==
+            preserved["strict_binding_failure_edges"] and
+            a4["measured"]["unresolved_targets"] ==
+            preserved["asset_effective_unresolved_targets"] and
+            a4["measured"]["reconciled_full_workset"]["unresolved_edges"] ==
+            preserved["asset_effective_unresolved_edges"], "A.4 blocker drifted")
 
 
 def load_unresolved(path: Path) -> dict[str, dict[str, Any]]:
@@ -195,9 +205,9 @@ def load_unresolved(path: Path) -> dict[str, dict[str, Any]]:
     for item in iter_jsonl(path):
         total += 1
         require(set(item) == A4_ROOT_FIELDS, "A.4 detail record is not closed")
-        if item["resolution"] != "UNRESOLVED":
+        if item["strict_resolution"] != "UNRESOLVED":
             continue
-        require(item["resolution_basis"] == "NO_PRODUCTION_COMPATIBLE_CANDIDATE" and
+        require(item["strict_resolution_basis"] == "NO_PRODUCTION_COMPATIBLE_CANDIDATE" and
                 item["candidate_identity_exact"] is True and
                 item["candidate_selected"] is False and item["heuristic_selection"] is False and
                 item["production_binder_used"] is True, "A.4 unresolved controls drifted")
@@ -327,7 +337,8 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         detail = {"asset_id": asset_id, "family": probe["family"],
                   "candidate_count": len(candidates),
                   "candidate_set_sha256": probe["candidate_set_sha256"],
-                  "prior_resolution": "UNRESOLVED", "effective_resolution": "UNRESOLVED",
+                  "prior_resolution": "UNRESOLVED",
+                  "effective_resolution": prior["resolution"],
                   "candidate_selected": False, "automatic_resolution": False,
                   "authority_status": "REQUIRED_NOT_PROVIDED",
                   "candidates": sorted(candidates, key=lambda x: str(x["candidate_id"]))}
@@ -344,6 +355,11 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
                         for x in entries)
     captured = args.captured_utc or dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")
     dt.datetime.fromisoformat(captured.replace("Z", "+00:00"))
+    effective_targets = collections.Counter(str(x["effective_resolution"]).lower()
+                                            for x in detail_records)
+    effective_edges = collections.Counter()
+    for item in detail_records:
+        effective_edges[str(item["effective_resolution"]).lower()] += item["candidate_count"]
     measured = {"diagnosed_targets": 19, "diagnosed_candidate_edges": 24,
                 "typed_error_edges": 24, "unclassified_error_edges": 0,
                 "candidate_selections": 0, "automatic_resolutions": 0,
@@ -351,8 +367,12 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
                 "by_error": [{"family": family, "error_schema": schema,
                               "error_code": code, "count": count}
                              for (family, schema, code), count in sorted(by_error.items())],
-                "effective": {"resolved_targets": 0, "resolved_edges": 0,
-                              "unresolved_targets": 19, "unresolved_edges": 24}}
+                "effective": {"resolved_targets": effective_targets["resolved"],
+                              "resolved_edges": effective_edges["resolved"],
+                              "ambiguous_targets": effective_targets["ambiguous"],
+                              "ambiguous_edges": effective_edges["ambiguous"],
+                              "unresolved_targets": effective_targets["unresolved"],
+                              "unresolved_edges": effective_edges["unresolved"]}}
     require(measured["by_error"] == policy["expected_error_counts"],
             "A.7 production error distribution drifted")
     report = {"schema_version": 1, "evidence_revision": "P2-20A.7",
@@ -375,8 +395,10 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
                  "owner_records": 0, "approved_fixes": 0, "verified_resolutions": 0},
               "preserved_blockers": policy["preserved_blockers"],
               "blockers": [
-                  {"reason_code": "PRODUCTION_BINDING_REJECTIONS_DIAGNOSED_NOT_REMEDIATED", "count": 19},
-                  {"reason_code": "REMEDIATION_EVIDENCE_ABSENT", "count": 19}],
+                  {"reason_code": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN",
+                   "count": effective_targets["ambiguous"] + effective_targets["unresolved"]},
+                  {"reason_code": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN",
+                   "count": policy["preserved_blockers"]["asset_effective_ambiguous_targets"]}],
               "negative_contracts": policy["negative_contracts"],
               "g2_projection": {"criteria_total": 9, "satisfied": 7, "blocked": 2,
                                 "g2_decision": "BLOCKED"},
@@ -387,18 +409,25 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
     write_text(report_path, json.dumps(report, ensure_ascii=False, indent=2) + "\n")
     markdown_lines = ["# P2-20A.7 Production Binding Failure Diagnostics", "",
         "- Review execution: `PASS`; task result: `BLOCKED`",
-        "- Diagnosed: 19 unresolved targets / 24 rejected candidate edges",
+        "- Strict diagnostic scope: 19 unresolved targets / 24 rejected candidate edges",
         "- Typed production errors: 24; unclassified errors: 0",
         "- Candidate selections: 0; automatic resolutions: 0; owner dispositions: 0",
-        "- Effective unresolved state retained: 19 targets / 24 edges",
-        "- Preserved blockers: 15/30 ambiguous assets; 212 auxiliary instances; 1,359 migration decisions",
+        f"- Effective resolved by contract: {effective_targets['resolved']} targets / {effective_edges['resolved']} edges",
+        f"- Effective unresolved after explicit recovery: {effective_targets['unresolved']} targets / {effective_edges['unresolved']} edges",
+        f"- Full A.4 ambiguity remains {load_json(paths['a4_report'])['measured']['ambiguous_targets']} targets / {load_json(paths['a4_report'])['measured']['reconciled_full_workset']['ambiguous_edges']} edges; 212 auxiliary instances and 1,359 migration decisions remain open",
         "- G2 remains 7/9 BLOCKED; P3 remains unauthorized", "",
         "Error codes are reproducible diagnostics, not content-corruption proof or authority disposition.",
         "Raw error contexts, offsets, names, paths, payload values, and legacy source lines are not emitted.", ""]
     write_text(markdown_path, "\n".join(markdown_lines))
     return {"schema_version": 1, "result": "PASS_DIAGNOSTIC", "task_status": "BLOCKED",
             "targets": 19, "candidate_edges": 24, "typed_error_edges": 24,
-            "unclassified_error_edges": 0, "effective_unresolved_targets": 19,
+            "unclassified_error_edges": 0,
+            "effective_resolved_targets": effective_targets["resolved"],
+            "effective_resolved_edges": effective_edges["resolved"],
+            "effective_ambiguous_targets": effective_targets["ambiguous"],
+            "effective_ambiguous_edges": effective_edges["ambiguous"],
+            "effective_unresolved_targets": effective_targets["unresolved"],
+            "effective_unresolved_edges": effective_edges["unresolved"],
             "candidate_selections": 0, "g2_06_satisfied": False, "p3_authorized": False,
             "report_sha256": sha256_file(report_path), "detail_sha256": sha256_file(detail_path)}
 
@@ -418,7 +447,7 @@ def self_test() -> dict[str, Any]:
     require(first != failure_id("a" * 64, "b" * 64, "TextureError/v1", "read_failure",
                                 "out_of_bounds", "c" * 64), "Read error was omitted"); assertions += 1
     require(set(FAMILY_SCHEMA) == {"anim", "qtx", "sm"}, "Family set drifted"); assertions += 1
-    require(len(INPUTS) == 15 and len({x[0] for x in INPUTS}) == 15,
+    require(len(INPUTS) == 13 and len({x[0] for x in INPUTS}) == 13,
             "Input role set drifted"); assertions += 1
     require("descriptor_semantic_sha256" in DETAIL_CANDIDATE_FIELDS,
             "A.4 descriptor binding disappeared"); assertions += 1

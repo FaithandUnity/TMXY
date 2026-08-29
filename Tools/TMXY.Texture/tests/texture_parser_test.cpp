@@ -287,6 +287,110 @@ void test_float_formats(TestContext& test)
                 "r32f infinity rejected");
 }
 
+void test_complete_payload_mip_recovery(TestContext& test)
+{
+    const auto declared_three = make_descriptor(tmxy::texture::TextureFormat::rgba8, 4, 4, 3);
+    const auto descriptor = parse_descriptor(test, declared_three, "recovery descriptor parses");
+    std::vector<std::byte> two_complete_mips(80U, std::byte{0});
+    const auto strict = tmxy::texture::QtxReader{}.parse(descriptor, two_complete_mips);
+    test.expect(!strict.has_value() &&
+                    strict.error().code == tmxy::texture::TextureErrorCode::payload_size_mismatch,
+                "default QTX binder remains descriptor-strict");
+
+    const auto inferred =
+        tmxy::texture::infer_complete_payload_mip_count(descriptor, two_complete_mips);
+    test.expect(inferred.has_value() && inferred.value() == 2U,
+                "complete payload planner derives one explicit mip count");
+    const auto recovered = tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+        descriptor, two_complete_mips,
+        {.effective_mip_count = inferred.has_value() ? inferred.value() : 0U,
+         .basis = tmxy::texture::MipCountBasis::payload_complete_chain_contract});
+    test.expect(recovered.has_value(), "complete payload mip chain recovers explicitly");
+    if (recovered.has_value())
+    {
+        const auto& value = recovered.value();
+        test.expect(value.descriptor.mip_count == 3U && value.effective_mip_count == 2U &&
+                        value.mips.size() == 2U &&
+                        value.mip_count_basis ==
+                            tmxy::texture::MipCountBasis::payload_complete_chain_contract,
+                    "declared and effective mip counts remain distinct");
+        const auto json = tmxy::texture::build_texture_json(value, {});
+        test.expect(json.find(R"("mip_count": 3)") != std::string::npos &&
+                        json.find(R"("effective_mip_count": 2)") != std::string::npos &&
+                        json.find(R"("mip_count_basis": "payload_complete_chain_contract")") !=
+                            std::string::npos,
+                    "QTX JSON discloses recovery basis");
+        const auto dds = tmxy::texture::build_dds(value, two_complete_mips);
+        const auto load_u32 =
+            [](const std::vector<std::byte>& bytes, const std::size_t offset) noexcept
+        {
+            return static_cast<std::uint32_t>(bytes[offset]) |
+                   (static_cast<std::uint32_t>(bytes[offset + 1U]) << 8U) |
+                   (static_cast<std::uint32_t>(bytes[offset + 2U]) << 16U) |
+                   (static_cast<std::uint32_t>(bytes[offset + 3U]) << 24U);
+        };
+        test.expect(dds.has_value() && load_u32(dds.value(), 28U) == 2U &&
+                        (load_u32(dds.value(), 8U) & 0x00020000U) != 0U &&
+                        (load_u32(dds.value(), 108U) & 0x00400008U) == 0x00400008U,
+                    "DDS header count flags and caps use the effective mip count");
+    }
+
+    auto truncated = two_complete_mips;
+    truncated.pop_back();
+    test.expect(!tmxy::texture::infer_complete_payload_mip_count(descriptor, truncated).has_value(),
+                "partial mip has no recovery plan");
+    const auto truncated_result = tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+        descriptor, truncated,
+        {.effective_mip_count = 2U,
+         .basis = tmxy::texture::MipCountBasis::payload_complete_chain_contract});
+    test.expect(!truncated_result.has_value() &&
+                    truncated_result.error().code ==
+                        tmxy::texture::TextureErrorCode::payload_size_mismatch,
+                "partial mip remains rejected under recovery policy");
+
+    std::vector<std::byte> beyond_natural_chain(85U, std::byte{0});
+    const auto trailing_result = tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+        descriptor, beyond_natural_chain,
+        {.effective_mip_count = 3U,
+         .basis = tmxy::texture::MipCountBasis::payload_complete_chain_contract});
+    test.expect(!trailing_result.has_value() &&
+                    trailing_result.error().code ==
+                        tmxy::texture::TextureErrorCode::payload_size_mismatch,
+                "bytes beyond the natural mip chain remain rejected");
+
+    const auto declared_one = make_descriptor(tmxy::texture::TextureFormat::rgba8, 4, 4, 1);
+    const auto short_descriptor =
+        parse_descriptor(test, declared_one, "under-declared recovery descriptor parses");
+    const auto under_declared = tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+        short_descriptor, two_complete_mips,
+        {.effective_mip_count = 2U,
+         .basis = tmxy::texture::MipCountBasis::payload_complete_chain_contract});
+    test.expect(!under_declared.has_value() &&
+                    under_declared.error().code ==
+                        tmxy::texture::TextureErrorCode::invalid_mip_count,
+                "explicit recovery cannot add payload mips beyond the declared chain");
+
+    auto implicit_descriptor = descriptor;
+    implicit_descriptor.stored_mip_count = 0U;
+    implicit_descriptor.mip_count = 1U;
+    const auto implicit_declared = tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+        implicit_descriptor, std::span<const std::byte>(two_complete_mips).first(64U),
+        {.effective_mip_count = 1U,
+         .basis = tmxy::texture::MipCountBasis::payload_complete_chain_contract});
+    test.expect(!implicit_declared.has_value() &&
+                    implicit_declared.error().code ==
+                        tmxy::texture::TextureErrorCode::invalid_mip_count,
+                "recovery requires an explicit stored mip declaration");
+
+    const auto unknown_basis = tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+        descriptor, two_complete_mips,
+        {.effective_mip_count = 2U, .basis = tmxy::texture::MipCountBasis::unknown});
+    test.expect(!unknown_basis.has_value() &&
+                    unknown_basis.error().code ==
+                        tmxy::texture::TextureErrorCode::invalid_mip_count,
+                "unknown recovery basis remains rejected");
+}
+
 } // namespace
 
 int main()
@@ -296,5 +400,6 @@ int main()
     test_rgba_outputs(test);
     test_block_alpha(test);
     test_float_formats(test);
+    test_complete_payload_mip_recovery(test);
     return test.result();
 }

@@ -36,12 +36,12 @@
     "reconciled_full_workset": {
       "targets": 21494,
       "candidate_edges": 39351,
-      "resolved_targets": 21460,
-      "resolved_edges": 39297,
-      "ambiguous_targets": 15,
-      "ambiguous_edges": 30,
-      "unresolved_targets": 19,
-      "unresolved_edges": 24,
+      "resolved_targets": 21293,
+      "resolved_edges": 38790,
+      "ambiguous_targets": 189,
+      "ambiguous_edges": 546,
+      "unresolved_targets": 12,
+      "unresolved_edges": 15,
       "unknown_targets": 0,
       "unknown_edges": 0
     }

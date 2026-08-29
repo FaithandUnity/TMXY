@@ -29,9 +29,9 @@ Auxiliary lexical evidence is SHA-256 bound for all 212 file instances. It recor
 | Conditional-required rows | 5993 |
 | Conditional-required missing | 29 |
 | Conditional-required unresolved | 0 |
-| Asset binding targets resolved | 21292 |
-| Asset binding targets ambiguous | 183 |
-| Asset binding targets unresolved | 19 |
+| Asset binding targets resolved | 21293 |
+| Asset binding targets ambiguous | 189 |
+| Asset binding targets unresolved | 12 |
 | Asset binding targets unknown | 0 |
 | Reachable asset structure unresolved | 18 |
 | Reachable asset structure fail | 0 |
@@ -40,7 +40,7 @@ Core foreign-key dangling zero remains a distinct table-integrity fact and is no
 
 The 29-member conditional-required workset is exported only in the ignored evidence area and bound by SHA-256 `90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d`. Each record contains only an anonymous member hash, a frozen rule ID, and a closed reason. No value, primary key, source row, or source path is disclosed.
 
-The 21494-member asset binding workset is also ignored and SHA-256 bound as `fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c`. Explicit status does not mean resolved: every ambiguous or unresolved target remains a zero-threshold blocker, and no candidate is selected.
+The 21494-member asset binding workset is also ignored and SHA-256 bound as `432254a7a6160c746c03cbeb454a7833ab92e503bae299be6f1c783acbbdd753`. Explicit status does not mean resolved: every ambiguous or unresolved target remains a zero-threshold blocker, and no candidate is selected.
 
 ## Blocking work
 

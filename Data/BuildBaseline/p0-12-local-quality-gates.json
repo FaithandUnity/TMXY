@@ -1,22 +1,22 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T14:14:22.4832271+00:00",
+  "captured_utc": "2026-08-29T19:48:06.5351188+00:00",
   "result": "PASS_DIAGNOSTIC",
   "authoritative_release_gate": false,
   "authority_note": "Local gates and the locked Clang 21 builder are operational; hosted CI and release-authority supply-chain evidence remain pending.",
   "repository": {
     "result": "PASS",
-    "checked_source_files": 285,
-    "checked_size_files": 738,
-    "checked_utf8_lf_files": 817,
+    "checked_source_files": 296,
+    "checked_size_files": 756,
+    "checked_utf8_lf_files": 838,
     "failure_count": 0,
     "failures": []
   },
   "secret": {
     "result": "PASS",
-    "repository_files_scanned": 767,
+    "repository_files_scanned": 782,
     "history_mode": "all_reachable_blobs",
-    "history_blobs_scanned": 2010,
+    "history_blobs_scanned": 2042,
     "scanner_self_test": "PASS",
     "secret_store_rotation": "PASS",
     "finding_count": 0,
@@ -29,7 +29,7 @@
     "required_kind_count": 9,
     "required_role_count": 13,
     "manifest_file_verified": true,
-    "source_files_verified": 0,
+    "source_files_verified": 42,
     "copy_policy": "reference_only",
     "failure_count": 0,
     "failures": []
@@ -57,7 +57,7 @@
   },
   "format_core": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:02:16.931339+08:00",
+    "captured_utc": "2026-08-30T03:26:53.4160968+08:00",
     "result": "PASS",
     "task": "P1-01",
     "source_file_count": 6,
@@ -91,7 +91,7 @@
   },
   "package_v1": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:03:14.7003112+08:00",
+    "captured_utc": "2026-08-30T03:27:51.0648951+08:00",
     "result": "PASS",
     "task": "P1-02",
     "source_file_count": 26,
@@ -168,12 +168,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "d7d149511bd01b3aa53fa4638888cd54d04f5cfa8dc93003d24cfc94af805eb4"
+      "output_sha256": "34bee0ee1d2b8828094dfdd82c92886592a2fa67e760566247f5f097a28be025"
     }
   },
   "package_v2": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:04:13.1107394+08:00",
+    "captured_utc": "2026-08-30T03:28:49.7410804+08:00",
     "result": "PASS",
     "task": "P1-05",
     "source_file_count": 26,
@@ -334,12 +334,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "9e9d2ec392f7e20c11303ec78024e4f190a809e236204469775f57bfcc9331b2"
+      "output_sha256": "e74d4f5eb03692e0d6c459b9d2c5edb755227e32581297b1be38f42f711e5228"
     }
   },
   "package_v3": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:05:12.0966553+08:00",
+    "captured_utc": "2026-08-30T03:29:50.0731502+08:00",
     "result": "PASS",
     "task": "P1-06",
     "source_file_count": 26,
@@ -1103,19 +1103,19 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "dc7d8d1a5ab85e8012380251a4323bad55d44452266af913d3af7f9f68b40321"
+      "output_sha256": "73b4abfd36f3d4b32ba237fd02a6ee34b288a4319b78ae9625dbcc632891f611"
     }
   },
   "package_pipeline": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:06:10.1274875+08:00",
+    "captured_utc": "2026-08-30T03:30:50.3698548+08:00",
     "result": "PASS",
     "task": "P1-07",
     "source_file_count": 26,
     "source_sha256": "7e2b3413040178b9c23b71be2fe3e99d37a9098ff2798fd300e36298287d5fd3",
     "input_reports": {
-      "package_v2_sha256": "14435833506f8245aec7befb046d815ee7919c2871ca1f6c98030244b6bf9677",
-      "package_v3_sha256": "a9072035a762460142c595f06fb93eadb1dad871ed909d5f830dcd90ac809030"
+      "package_v2_sha256": "97e685d468964dfb2465282ebe90b08a5b09eb0e6edf5b031e54da8a4d7f8137",
+      "package_v3_sha256": "2ee3faa62670046c03b74a64f86fb46d3a17c103abb1413fb572ab71026ed2f7"
     },
     "pipeline": [
       "read-and-validate-outer-header",
@@ -1166,12 +1166,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "7c18fb1306f0c69c53c3b9c5da29f6510dd2c2438fc589d20692665b825460bb"
+      "output_sha256": "2cb6684a6ebb6d076e3df8b425e9438c79e695933a144daa1d0b6fe290953d7e"
     }
   },
   "package_normalized_tree": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:07:07.6160881+08:00",
+    "captured_utc": "2026-08-30T03:31:48.0729776+08:00",
     "result": "PASS",
     "task": "P1-08",
     "source_file_count": 26,
@@ -1183,10 +1183,10 @@
       "passed": true
     },
     "dependency_report_sha256": {
-      "p1-02-package-v1.json": "f46d78711d89458453728aac49f27e0903643482d6e5e4c228449b393c1a15c8",
-      "p1-05-package-v2.json": "14435833506f8245aec7befb046d815ee7919c2871ca1f6c98030244b6bf9677",
-      "p1-06-package-v3.json": "a9072035a762460142c595f06fb93eadb1dad871ed909d5f830dcd90ac809030",
-      "p1-07-package-pipeline.json": "e57e915ae8a37f1682b5f1cd13004a9b43a844959a09977b017f0507d1a38ecb"
+      "p1-02-package-v1.json": "598655a675e02e7af89c9f95d47330f36c3c9cc6fcdf6519631bb8305a9eec1f",
+      "p1-05-package-v2.json": "97e685d468964dfb2465282ebe90b08a5b09eb0e6edf5b031e54da8a4d7f8137",
+      "p1-06-package-v3.json": "2ee3faa62670046c03b74a64f86fb46d3a17c103abb1413fb572ab71026ed2f7",
+      "p1-07-package-pipeline.json": "71e292e66844b8d7427c2daf956ba99bb6bc38c87ea47bb08d03b046b6964235"
     },
     "semantic_states": {
       "names_and_classes": "opaque-bytes-hex",
@@ -1238,12 +1238,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 100,
-      "output_sha256": "0f5e237075882952ac49f1658adef120cdba7f4802d510c5f37752952583e3e0"
+      "output_sha256": "71606a73f396074922b970e7101c313d4e182b85389697c7b6a753de14f93542"
     }
   },
   "legacy_table": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:07:29.9450694+08:00",
+    "captured_utc": "2026-08-30T03:32:10.3913992+08:00",
     "result": "PASS",
     "task": "P1-03",
     "source_file_count": 7,
@@ -1350,12 +1350,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 44,
-      "output_sha256": "cb85d3bcfdb97a75b0affc4ddbb063cdfb669e948458e6a447bb4f0b9becf4df"
+      "output_sha256": "30d3b09bfe3eeb42c1e2216befb044ac06551055a86c0fcc2ab4cd7b88da94f1"
     }
   },
   "current_table_investigation": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:07:38.3352289+08:00",
+    "captured_utc": "2026-08-30T03:32:19.4357899+08:00",
     "result": "PASS_DIAGNOSTIC",
     "task": "P1-09",
     "task_status": "COMPLETE",
@@ -1660,7 +1660,7 @@
   },
   "legacy_to_ue_transform": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:07:44.5663967+08:00",
+    "captured_utc": "2026-08-30T03:32:25.6628879+08:00",
     "result": "PASS",
     "task": "P1-12",
     "completion_criteria_satisfied": true,
@@ -1744,17 +1744,17 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 27,
-      "output_sha256": "70c183bafa46ee4e14003d1f59964d9470a4613da8b3e2d1fbbb36860fb1d91f"
+      "output_sha256": "59bac81b5f21699bc6cfb80a6073b54e160969c52aac83a59b4e5a6cbe0dd60d"
     }
   },
   "qtx_texture": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:08:20.1086473+08:00",
+    "captured_utc": "2026-08-30T02:05:21.4577885+08:00",
     "result": "PASS",
     "task": "P1-13",
     "completion_criteria_satisfied": true,
     "source_file_count": 21,
-    "source_sha256": "a7f90e37c55fe23b0893e50b5179828751b59a40a080813441dbd2dee88b8a0c",
+    "source_sha256": "19d22a2616b17d7a41f7d5921388ada36dcdba34bdaccd9061fee4d2af72821c",
     "contract": {
       "descriptor_source": "Package QTexture QObject property body",
       "qtx_payload": "headerless contiguous mip bytes",
@@ -1922,12 +1922,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 76,
-      "output_sha256": "d1b8da0c932d7afc27feff3a86c40a38c8db49b2a8ceacc4a12a257dae269ee7"
+      "output_sha256": "da0977485af3b494ecb625dd0d2f78fb2c09107509dc456b259186f0f4ef88e0"
     }
   },
   "sm_static_mesh": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:08:58.9826334+08:00",
+    "captured_utc": "2026-08-30T03:33:40.482561+08:00",
     "result": "PASS",
     "task": "P1-14",
     "completion_criteria_satisfied": true,
@@ -2093,12 +2093,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 72,
-      "output_sha256": "a159cd3e4c35a91097fdc279489bdb5e50db8256b993e2865a64c585c43bc4ed"
+      "output_sha256": "60f75f0cb5ae53423dd7b81e8afda6955879b2e468fff71d86c36ca79d068bf5"
     }
   },
   "skem_skeletal_mesh": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:09:49.8646896+08:00",
+    "captured_utc": "2026-08-30T03:34:31.5019021+08:00",
     "result": "PASS",
     "task": "P1-15",
     "completion_criteria_satisfied": true,
@@ -2253,17 +2253,17 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 71,
-      "output_sha256": "97056b25a6bf2dd3920b17a2a77cbd0c118149ab89296e339fc66ba86ffbd07a"
+      "output_sha256": "ef9a390afca0817534b7fa0f87893f0eca9faf73409d3725a1c22eb641197ecc"
     }
   },
   "anim_animation": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:10:33.4575515+08:00",
+    "captured_utc": "2026-08-30T02:07:04.3659501+08:00",
     "result": "PASS",
     "task": "P1-16",
     "completion_criteria_satisfied": true,
     "source_file_count": 18,
-    "source_sha256": "96acbd1a0f409bc8549b5df3266efadb719450b1680139ef953e43cb4a312d82",
+    "source_sha256": "e5d54b753c036b9b2bc722ed89295af55eff6c5e31ddffe1f065ac95a182e6a4",
     "contract": {
       "descriptor_source": "ordered Package QSkelMesh references and QSkelAnim property bodies",
       "payload": "headerless bone-major then frame-major QAnim key stream",
@@ -2394,12 +2394,12 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 76,
-      "output_sha256": "c6109f6fe0798d4122203143b6c87ef3d44ff66abe6c38cf9b510fa038d11a76"
+      "output_sha256": "0fb28cc53b7892099e315173a720eabb8aa81216aa76801c8de5ba2d9ffff57e"
     }
   },
   "ter_terrain": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:10:54.9889441+08:00",
+    "captured_utc": "2026-08-30T03:35:41.4687309+08:00",
     "result": "PASS",
     "task": "P1-17",
     "completion_criteria_satisfied": true,
@@ -2559,19 +2559,19 @@
     "execution": {
       "exit_code": 0,
       "output_line_count": 45,
-      "output_sha256": "255a41b0ae5301f0b235337a2a0379cfa5c09e5e4437ccfbf08e81599f32e541"
+      "output_sha256": "96b845d058c603afca8d76e1848ccd119ce6cda11c38e1854127b1898825421a"
     }
   },
   "auxiliary_assets": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:10:59.1663798+08:00",
+    "captured_utc": "2026-08-30T03:35:45.8490285+08:00",
     "result": "PASS",
     "task": "P1-18",
     "completion_criteria_satisfied": true,
     "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
     "dependencies": {
-      "p1-08-package-normalized-tree.json": "c82296fa8f05d1add36e1527410d4954459d51c422c27bd9189bf5add3e51b65",
-      "p1-13-qtx-texture.json": "1582f9d4c78e2e5c10f4a467555267d511403b572c4b5571fb13b146c3a22735"
+      "p1-08-package-normalized-tree.json": "26bdfc563c7f2304bdf982a5a9ba89e65fb6c79bea1c74b40e52a6114abd5595",
+      "p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9"
     },
     "classification": {
       "zif": "BOM-less UTF-8 XML zone-navigation records",
@@ -2909,7 +2909,7 @@
   },
   "asset_interchange": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:10:59.2484857+08:00",
+    "captured_utc": "2026-08-30T03:35:45.9451827+08:00",
     "result": "PASS",
     "task": "P1-19",
     "completion_criteria_satisfied": true,
@@ -2978,20 +2978,20 @@
       "unknown_extensions_must_survive_read_write": true
     },
     "dependency_report_sha256": {
-      "p1-08-package-normalized-tree.json": "c82296fa8f05d1add36e1527410d4954459d51c422c27bd9189bf5add3e51b65",
-      "p1-13-qtx-texture.json": "1582f9d4c78e2e5c10f4a467555267d511403b572c4b5571fb13b146c3a22735",
-      "p1-14-sm-static-mesh.json": "257fd3f2d5066f7163ec5e11dad801f29a78522210e8ad794fa6b717efe9c2a7",
-      "p1-15-skem-skeletal-mesh.json": "e44ee6ba769e7e0af06d0d04c03a865cb29c5d576530e5afb25aa7bcc97a5fa7",
-      "p1-16-anim-animation.json": "1a3f45fb323048313430f16bacedbf09c3685974f243ae8bad1f8145aff02a2d",
-      "p1-17-ter-terrain.json": "99067a9b0c042c8880a769c2e29913ac3bb7a63d68b084fd8ea149366487a75a",
-      "p1-18-auxiliary-assets.json": "477b9ce10667d4f7fbd33d3a666a75ccd9c9a26f891abc442346e7239ad89b9c"
+      "p1-08-package-normalized-tree.json": "26bdfc563c7f2304bdf982a5a9ba89e65fb6c79bea1c74b40e52a6114abd5595",
+      "p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9",
+      "p1-14-sm-static-mesh.json": "fe4bc53ff8691ed8531a535278077dcc27f5053879d3061550362320a34fd41f",
+      "p1-15-skem-skeletal-mesh.json": "816e4a9dc42a98010ab2727133245c622094868707419ad9d6f06de408ed4c76",
+      "p1-16-anim-animation.json": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6",
+      "p1-17-ter-terrain.json": "fcedcf909fc153d98d570d08280c589e072fb0900ca308cae46b3d3bf1174ecc",
+      "p1-18-auxiliary-assets.json": "518dbc7b709529c576a981aaf2dd1d7720c37887e0e80d5cc8a1e30c3d80b4e6"
     },
     "exporter_source_sha256": {
       "Tools/TMXY.Package/src/package_normalized_tree.cpp": "1d9cf6cc0ea515a9ffe635d9d4a342e98f4003ead521ccdd390961a42f5c4eab",
-      "Tools/TMXY.Texture/src/texture_export.cpp": "4333f38f4d01523832711c4878dffd47f7315f769b90f9b201f4bccf2b1fa499",
+      "Tools/TMXY.Texture/src/texture_export.cpp": "4ed4db5333083b1c41be12738a34672aa00149b712cac89d7a1613173a14a98e",
       "Tools/TMXY.StaticMesh/src/static_mesh_export.cpp": "1862065c308d3c7d88f3a759f9cff3d67cc36af374179e43f58b7105315461ee",
       "Tools/TMXY.SkeletalMesh/src/skeletal_mesh_export.cpp": "efd9241e6ea1cd8a82cd16d77ac670607e1aa6c2ca5ab92c0f434c9debd00b8d",
-      "Tools/TMXY.Animation/src/animation_export.cpp": "cf93873cc98e5c4b06ba3ffc62c92156717939428d4c1b5d7bdbbba474a2e31c",
+      "Tools/TMXY.Animation/src/animation_export.cpp": "201e6a0b7bdc4a2867dd7f09bfb4b18240f4f663607e12d139fe1a74399e8e0a",
       "Tools/TMXY.Terrain/src/terrain_export.cpp": "61c8585e67ae6b12a5b95c8481a4b285d54b1f0f6507682226513736cdfd5582"
     },
     "failure_count": 0,
@@ -2999,7 +2999,7 @@
   },
   "ue_golden_host": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.579156+08:00",
+    "captured_utc": "2026-08-30T03:36:04.5694503+08:00",
     "result": "PASS",
     "task": "P1-20",
     "completion_criteria_satisfied": true,
@@ -3040,15 +3040,15 @@
       "required": true,
       "passed": true,
       "report_path": "E:\\QQXYCodeDev\\Rebuild\\Data\\BuildBaseline\\p0-10a-ue-validation.json",
-      "report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade"
+      "report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
     },
-    "dependency_report_sha256": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
+    "dependency_report_sha256": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
     "failure_count": 0,
     "failures": []
   },
   "ue_importer": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.5959662+08:00",
+    "captured_utc": "2026-08-30T03:36:04.5878566+08:00",
     "result": "PASS",
     "task": "P1-21",
     "completion_criteria_satisfied": true,
@@ -3103,21 +3103,21 @@
       "required": true,
       "passed": true,
       "test": "TMXY.Importer.ManifestBatch",
-      "ue_report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade",
+      "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3",
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-21-report.json",
       "generated_report_sha256": "5e635694f10b21c6d24dcacccb0fbf7b5f67ee0e3e2cafeeae7db75a4d1e255e",
       "generated_report_schema_passed": true
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "e2a35ad3e2a17875e0a5ff9ac8b6657123c2af859f2b56e2001fe74baa940023"
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "9f5f1aa34b61cf6aee622d361713d2abe5e602efe7ef987164f8269ad92eae30"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_texture_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.6393896+08:00",
+    "captured_utc": "2026-08-30T03:36:04.6386689+08:00",
     "result": "PASS",
     "task": "P1-22",
     "completion_criteria_satisfied": true,
@@ -3194,20 +3194,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-22-texture-report.json",
       "generated_report_sha256": "18d779b54963f9bbd3ac7f605808a9150d1a6b3c5a4a148138864a22d2698825",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade"
+      "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-13-qtx-texture.json": "1582f9d4c78e2e5c10f4a467555267d511403b572c4b5571fb13b146c3a22735",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "e2a35ad3e2a17875e0a5ff9ac8b6657123c2af859f2b56e2001fe74baa940023",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "f0ff6838e45c88ea9b03c2a8e6951aae0f2765929c3fcc6261746f9a73ec1b26"
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "9f5f1aa34b61cf6aee622d361713d2abe5e602efe7ef987164f8269ad92eae30",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_static_mesh_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.7069711+08:00",
+    "captured_utc": "2026-08-30T03:36:04.7157233+08:00",
     "result": "PASS",
     "task": "P1-23",
     "completion_criteria_satisfied": true,
@@ -3273,21 +3273,21 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-23-static-mesh-report.json",
       "generated_report_sha256": "a7ddfce428543ffd1504203c2f279100bbebbc48f950996cfd6bbd68c322bedf",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade"
+      "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "257fd3f2d5066f7163ec5e11dad801f29a78522210e8ad794fa6b717efe9c2a7",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-20-ue-golden-host.json": "e2a35ad3e2a17875e0a5ff9ac8b6657123c2af859f2b56e2001fe74baa940023",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "f0ff6838e45c88ea9b03c2a8e6951aae0f2765929c3fcc6261746f9a73ec1b26",
-      "Data/BuildBaseline/p1-22-ue-texture-import.json": "083bb7cfc14b392b6e5f3ad9dd48827974b5ff92683353f097806d03eaacc7f6"
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "fe4bc53ff8691ed8531a535278077dcc27f5053879d3061550362320a34fd41f",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-20-ue-golden-host.json": "9f5f1aa34b61cf6aee622d361713d2abe5e602efe7ef987164f8269ad92eae30",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "b969bcff4f951723a263f8beeb491f42948386a2c063f8418140461321dc958e"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_skeletal_mesh_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.7523116+08:00",
+    "captured_utc": "2026-08-30T03:36:04.7634599+08:00",
     "result": "PASS",
     "task": "P1-24",
     "completion_criteria_satisfied": true,
@@ -3355,24 +3355,24 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-24-skeletal-mesh-report.json",
       "generated_report_sha256": "5925bb0491981de448b69664ab1723738c3bdf954b9aa22c02f3623d71173b5a",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade"
+      "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "e44ee6ba769e7e0af06d0d04c03a865cb29c5d576530e5afb25aa7bcc97a5fa7",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "f0ff6838e45c88ea9b03c2a8e6951aae0f2765929c3fcc6261746f9a73ec1b26",
-      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "95a123297e1150a2d59975e42e052da8a293ed3843bdd8b180cde44d6ce37706"
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "816e4a9dc42a98010ab2727133245c622094868707419ad9d6f06de408ed4c76",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "163854bff2fe82e92184dd8f25d6d69b4187cd977d328cf8b1e45e894af82be7"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_animation_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.7854072+08:00",
+    "captured_utc": "2026-08-30T03:36:04.8018952+08:00",
     "result": "PASS",
     "task": "P1-25",
     "completion_criteria_satisfied": true,
-    "source_sha256": "3aa5f0be8567767b07e13b568c859a8ca68fbbefba5fd12d54b53adcb371f9d0",
+    "source_sha256": "5453ae419fbbff0526cf2547a750e2cee848560e3083b9b5a6bc0e6f0d6f7733",
     "handler": {
       "format_id": "khronos.gltf-json",
       "gltf_version": "2.0",
@@ -3441,20 +3441,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-25-animation-report.json",
       "generated_report_sha256": "af21d7e9917669cbf956b4cd7397cc18c4faf98205f7650c8789ac7cc1bcf39f",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade"
+      "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-16-anim-animation.json": "1a3f45fb323048313430f16bacedbf09c3685974f243ae8bad1f8145aff02a2d",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "f0ff6838e45c88ea9b03c2a8e6951aae0f2765929c3fcc6261746f9a73ec1b26",
-      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "8e9548e404fa59e037804bad489bd32ceac364f385065dc0fd5aa257e6650265"
+      "Data/BuildBaseline/p1-16-anim-animation.json": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "1ddb65707cdf6dd6a99c666b3aa5dbdc1276c7cb2dc4d314f2a93d99d7f79d9e"
     },
     "failure_count": 0,
     "failures": []
   },
   "ue_terrain_import": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.8690894+08:00",
+    "captured_utc": "2026-08-30T03:36:04.8903339+08:00",
     "result": "PASS",
     "task": "P1-26",
     "completion_criteria_satisfied": true,
@@ -3525,20 +3525,20 @@
       "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-26-terrain-report.json",
       "generated_report_sha256": "fcec353a7c50f20f665b20c1bc30b027a0e0ef7437dc717ccbd9b78d9305929b",
       "generated_report_schema_passed": true,
-      "ue_report_sha256": "1782ffea107bb62ac445f2773ac219ffc25a5541a87513a95daf9dc606b56ade"
+      "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
     },
     "dependency_report_sha256": {
-      "Data/BuildBaseline/p1-17-ter-terrain.json": "99067a9b0c042c8880a769c2e29913ac3bb7a63d68b084fd8ea149366487a75a",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "f0ff6838e45c88ea9b03c2a8e6951aae0f2765929c3fcc6261746f9a73ec1b26",
-      "Data/BuildBaseline/p1-25-ue-animation-import.json": "cefe1be56179119787a408194f13c68fe0285cf208d3bb0a9f343f54b8a91e15"
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "fcedcf909fc153d98d570d08280c589e072fb0900ca308cae46b3d3bf1174ecc",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "9e638b4bfbf212819650f2c7dca2a7197bb7424f2ee89ac180ca545759df1ffd"
     },
     "failure_count": 0,
     "failures": []
   },
   "golden_test_matrix": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.9371805+08:00",
+    "captured_utc": "2026-08-30T03:36:04.9676581+08:00",
     "result": "PASS",
     "task": "P1-27",
     "completion_criteria_satisfied": true,
@@ -3576,23 +3576,23 @@
     },
     "ci": {
       "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
-      "aggregate_sha256": "c3fcfc0121c808d9c872ea984fd137c19d67abf6f62c023b8e0fbf939956392b",
+      "aggregate_sha256": "684088907359ded3c0ce3a0053e3c14883f498dbf37f3c00b80b1e61ccf80339",
       "all_declared_gates_bound": true
     },
     "source_binding": {
       "file_count": 14,
-      "sha256": "5e35917b4d89b433c4810c3e726baa4132974d8a0ae82d8ed6335afbcfc8075c",
+      "sha256": "b282246871485f361f2e1e787f6fd9685a5c6e9534750a22c27764e109685df5",
       "files": {
         "Tools/TMXY.Package/tests/package_v1_reader_test.cpp": "013cc50b455e9069e8eb97c1a778ec3f127009a3fc4da552da0d6878207a532f",
         "Tools/TMXY.Package/tests/package_v2_reader_test.cpp": "f9bf25636b7f75062c3d57cf3df5e740cf637f9cefa86800db0c316d15cc05f1",
         "Tools/TMXY.Package/tests/package_v3_reader_test.cpp": "8d14d16e016921058b6b0bc07c3bbd5a732a6555aa5266066183f52269da317b",
         "Tools/TMXY.Package/tests/package_normalized_tree_test.cpp": "9bd50552a94ed9be13f52e7eb1eb9a1ad2cce1bcf12febe239d7c9f5bb1b35f2",
         "Tools/TMXY.Table/tests/legacy_table_reader_test.cpp": "2b94753f1c8201136dd647d9dda89c4dfab32d128acda56a6c1e1c28a38ea111",
-        "Tools/TMXY.Texture/tests/texture_parser_test.cpp": "c02380651aab85360b83577f7236601fd119e12d9af5fba10a7c9cb8872fa2d8",
+        "Tools/TMXY.Texture/tests/texture_parser_test.cpp": "ad3b85b8c37bb1e04db340270a1f1fc00c3a63a79c5ca97398658ee66cf17a83",
         "Tools/TMXY.StaticMesh/tests/static_mesh_parser_test.cpp": "e9a0351c11d9f635ca3611fca941ba83962310a03770e26b16c357021f20342e",
         "Tools/TMXY.StaticMesh/tests/sm_real_samples_test.cpp": "2b204bb328a7e24fa4a4d6acb7c6f95d3222ac1510804549bcaf808d04f7d376",
         "Tools/TMXY.SkeletalMesh/tests/skeletal_mesh_parser_test.cpp": "937e761b61e6860e9606681e9e7e3cb551ab7b598b564345e7858cd40e014858",
-        "Tools/TMXY.Animation/tests/animation_parser_test.cpp": "ffea8c7cd9adc996d98c2468f982b1acf517e18d1b1e695a8ed216affc6c1704",
+        "Tools/TMXY.Animation/tests/animation_parser_test.cpp": "362c3e3b82e1e66a2d80fec3658d0894c275ad0b5a197c35a514b17e8857344d",
         "Tools/TMXY.Terrain/tests/terrain_parser_test.cpp": "86b2d388052f6af2873ff30bf2604ad6055bba9a0c43be5b1d095c9f0e0ad776",
         "Tests/Contract/Test-AssetInterchangeContract.ps1": "34beba8ffa63bbdb2d038814d287d2fe8e0805342c090c8865614afd890d3d40",
         "Apps/UEClient/Plugins/TMXYImporter/Source/TMXYImporter/Private/Tests/TMXYImporterTest.cpp": "e23dea1ec89d6f330b57f9048dcae7c27383465e44d801d8f7462c1d14a26f0b",
@@ -3606,10 +3606,10 @@
       "Tests/Contract/Test-PackagePipelineBaseline.ps1": "405d067d6963016a7fa164f244e0294a42f49311da8386a325f1d25febf82f36",
       "Tests/Contract/Test-PackageNormalizedTree.ps1": "c883af4971038b50498d4e232ff5157934e8107cf21c25c2f778af39034d0da3",
       "Tests/Contract/Test-LegacyTableBaseline.ps1": "968d9caf005d49535735b4ead60d1c16d905cce11d923f9176ae6bb9ffb24703",
-      "Tests/Contract/Test-QtxTexture.ps1": "d6d29f4c94dae37532be847f834f82105797d792919ed7fb798e2b1f6404b77c",
+      "Tests/Contract/Test-QtxTexture.ps1": "58a55347ce585a429a1cadb133a0416d6c74d90257b9d0f73a1a5eaf01c8883d",
       "Tests/Contract/Test-SmStaticMesh.ps1": "5a83a3bcebfb8f852cac772631e3a7127637f5c666567a61af929946dfa0eb95",
       "Tests/Contract/Test-SkemSkeletalMesh.ps1": "7e3af8f5f846aa3fb70643202e4a1a27f4f40db26fdfe5cd97595b7cae2a692f",
-      "Tests/Contract/Test-AnimAnimation.ps1": "8f1114b3571230c5113fa51dfc5e1640486e74a8fda997c5276faf11c90c49d4",
+      "Tests/Contract/Test-AnimAnimation.ps1": "6035df7c6f1ad6c414f052ce8ced9fc421daba17585f87a304804a2b8743fc7a",
       "Tests/Contract/Test-TerTerrain.ps1": "a93af60596c37ada1ade7302c07f5ea319bc2c93dbb841fe3407873caa6f94f7",
       "Tests/Contract/Test-AssetInterchangeContract.ps1": "34beba8ffa63bbdb2d038814d287d2fe8e0805342c090c8865614afd890d3d40",
       "Tests/Contract/Test-UEImporterPlugin.ps1": "74c0eb0b3160887adb13fda2c0d3cccbf9547b4cf885aa1d5318ed6eaeef1f9e",
@@ -3620,24 +3620,24 @@
       "Tests/Contract/Test-UETerrainImport.ps1": "c19b54d1eea4e17ce78cc03bfb6e61579deab42d39ea107152975e69410782ea"
     },
     "evidence_report_sha256": {
-      "Data/BuildBaseline/p1-02-package-v1.json": "f46d78711d89458453728aac49f27e0903643482d6e5e4c228449b393c1a15c8",
-      "Data/BuildBaseline/p1-05-package-v2.json": "14435833506f8245aec7befb046d815ee7919c2871ca1f6c98030244b6bf9677",
-      "Data/BuildBaseline/p1-06-package-v3.json": "a9072035a762460142c595f06fb93eadb1dad871ed909d5f830dcd90ac809030",
-      "Data/BuildBaseline/p1-07-package-pipeline.json": "e57e915ae8a37f1682b5f1cd13004a9b43a844959a09977b017f0507d1a38ecb",
-      "Data/BuildBaseline/p1-08-package-normalized-tree.json": "c82296fa8f05d1add36e1527410d4954459d51c422c27bd9189bf5add3e51b65",
-      "Data/BuildBaseline/p1-03-legacy-table.json": "cae86ff48fbf11b8ede1bcc69823ec76ac314187b7525e93ab9518da547cb349",
-      "Data/BuildBaseline/p1-13-qtx-texture.json": "1582f9d4c78e2e5c10f4a467555267d511403b572c4b5571fb13b146c3a22735",
-      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "257fd3f2d5066f7163ec5e11dad801f29a78522210e8ad794fa6b717efe9c2a7",
-      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "e44ee6ba769e7e0af06d0d04c03a865cb29c5d576530e5afb25aa7bcc97a5fa7",
-      "Data/BuildBaseline/p1-16-anim-animation.json": "1a3f45fb323048313430f16bacedbf09c3685974f243ae8bad1f8145aff02a2d",
-      "Data/BuildBaseline/p1-17-ter-terrain.json": "99067a9b0c042c8880a769c2e29913ac3bb7a63d68b084fd8ea149366487a75a",
-      "Data/BuildBaseline/p1-19-asset-interchange.json": "8aeb51baee5d883891bb5462f0f7f51c3395ea81aaa57e9506d6b3e5eaeb88ea",
-      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "f0ff6838e45c88ea9b03c2a8e6951aae0f2765929c3fcc6261746f9a73ec1b26",
-      "Data/BuildBaseline/p1-22-ue-texture-import.json": "083bb7cfc14b392b6e5f3ad9dd48827974b5ff92683353f097806d03eaacc7f6",
-      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "95a123297e1150a2d59975e42e052da8a293ed3843bdd8b180cde44d6ce37706",
-      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "8e9548e404fa59e037804bad489bd32ceac364f385065dc0fd5aa257e6650265",
-      "Data/BuildBaseline/p1-25-ue-animation-import.json": "cefe1be56179119787a408194f13c68fe0285cf208d3bb0a9f343f54b8a91e15",
-      "Data/BuildBaseline/p1-26-ue-terrain-import.json": "6f74a2ad21c14c4bb8d8cb4939c4ee39407c1f0a4cf7acaf854a42786e1683c2"
+      "Data/BuildBaseline/p1-02-package-v1.json": "598655a675e02e7af89c9f95d47330f36c3c9cc6fcdf6519631bb8305a9eec1f",
+      "Data/BuildBaseline/p1-05-package-v2.json": "97e685d468964dfb2465282ebe90b08a5b09eb0e6edf5b031e54da8a4d7f8137",
+      "Data/BuildBaseline/p1-06-package-v3.json": "2ee3faa62670046c03b74a64f86fb46d3a17c103abb1413fb572ab71026ed2f7",
+      "Data/BuildBaseline/p1-07-package-pipeline.json": "71e292e66844b8d7427c2daf956ba99bb6bc38c87ea47bb08d03b046b6964235",
+      "Data/BuildBaseline/p1-08-package-normalized-tree.json": "26bdfc563c7f2304bdf982a5a9ba89e65fb6c79bea1c74b40e52a6114abd5595",
+      "Data/BuildBaseline/p1-03-legacy-table.json": "e1fcebc67c59c2b1d6dfd5a30ad7b4cc22095ad8164c2238d87179319160120f",
+      "Data/BuildBaseline/p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9",
+      "Data/BuildBaseline/p1-14-sm-static-mesh.json": "fe4bc53ff8691ed8531a535278077dcc27f5053879d3061550362320a34fd41f",
+      "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "816e4a9dc42a98010ab2727133245c622094868707419ad9d6f06de408ed4c76",
+      "Data/BuildBaseline/p1-16-anim-animation.json": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6",
+      "Data/BuildBaseline/p1-17-ter-terrain.json": "fcedcf909fc153d98d570d08280c589e072fb0900ca308cae46b3d3bf1174ecc",
+      "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+      "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+      "Data/BuildBaseline/p1-22-ue-texture-import.json": "b969bcff4f951723a263f8beeb491f42948386a2c063f8418140461321dc958e",
+      "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "163854bff2fe82e92184dd8f25d6d69b4187cd977d328cf8b1e45e894af82be7",
+      "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "1ddb65707cdf6dd6a99c666b3aa5dbdc1276c7cb2dc4d314f2a93d99d7f79d9e",
+      "Data/BuildBaseline/p1-25-ue-animation-import.json": "9e638b4bfbf212819650f2c7dca2a7197bb7424f2ee89ac180ca545759df1ffd",
+      "Data/BuildBaseline/p1-26-ue-terrain-import.json": "052b02694a62dff355bb6809831fd438071ed87f1cf0a51f2e109fec3e200d68"
     },
     "suites": [
       {
@@ -3764,7 +3764,7 @@
     "gate": "G1",
     "completion_criteria_satisfied": true,
     "assertions": 25,
-    "report_sha256": "d3cb3a25917df9eec9e86fe8e53fc985b6ad3210c596edd3d7c41f96f3f6a138",
+    "report_sha256": "050dd307a5b7b24a7c3d99c39de96ee23c1406c289a0fd8af6b416098abf7d95",
     "regenerated_semantic_match": true,
     "raw_key_required": false
   },
@@ -4415,7 +4415,7 @@
     "task_id": "P2-09",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "path": "Data/Exports/P2-09/p2-09-legacy-current-diff.jsonl",
       "tracked": false,
@@ -4460,7 +4460,103 @@
       },
       "unpaired_legacy_tables": 0
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-28T19:22:54.9484506+08:00",
+      "task_id": "P2-09",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "legacy_snapshot": "legacy-devdoc-decrypted-csv-20120318",
+        "legacy_build": "unknown-not-inferred",
+        "legacy_manifest_sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+        "current_build": "qy-3.0.0.413",
+        "p2_06_evidence_sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+        "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-09/p2-09-legacy-current-diff.jsonl",
+        "tracked": false,
+        "lines": 52,
+        "bytes": 41759,
+        "sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667"
+      },
+      "summary": {
+        "authoritative_default_claims": 0,
+        "columns": {
+          "current_only": 66,
+          "inferred_type_changes": 59,
+          "legacy_only": 18,
+          "observed_mode_hash_changes": 179,
+          "shared": 608
+        },
+        "core_primary_key_tables": 10,
+        "current_active_tables": 113,
+        "equal_headers": 40,
+        "legacy_build_known": false,
+        "legacy_bytes": 8609196,
+        "legacy_encodings": {
+          "gb18030": 33,
+          "utf-8": 19
+        },
+        "legacy_tables": 52,
+        "paired_tables": 52,
+        "references": {
+          "changed_rules": 12,
+          "comparable_rules": 12,
+          "current_active_references": 39361,
+          "current_dangling_references": 0,
+          "legacy_active_references": 19599,
+          "legacy_dangling_references": 0
+        },
+        "rows": {
+          "current": 149472,
+          "current_only": 104972,
+          "legacy": 73602,
+          "legacy_only": 29102,
+          "shared_exact": 44500
+        },
+        "unpaired_legacy_tables": 0
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/legacy-current-diff-policy-v1.json",
+        "policy_sha256": "26fcb4233e4969756b9d995ee04063b150cc7809df6a0116a41fee0a87889a4c",
+        "schema": "Contracts/data-schema/legacy-current-diff-v1.schema.json",
+        "schema_sha256": "785bb58476901149d76fa22d68d6eca5074688be438ec202dc83e4f41b77b4d3"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "5ded902682acb239d8931f136b67f031e386d0ba6d8c9e4524761ba93bd3c049",
+        "self_test_assertions": 5,
+        "generator": "Tools/TMXY.TableDiff/New-LegacyCurrentDiff.ps1",
+        "query": "Tools/TMXY.TableDiff/Find-LegacyCurrentDiff.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_headers": false,
+        "tracked_evidence_contains_row_values": false,
+        "tracked_evidence_contains_primary_keys": false,
+        "full_report_committed_to_git": false,
+        "legacy_payloads_copied": false
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "legacy_mount": "read-only",
+        "workspace_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-10",
+          "P2-11",
+          "P2-17"
+        ],
+        "detail": "Build explicit Canonical ID mappings from the comparable legacy/current key domains."
+      }
+    },
     "assertions": [
       {
         "name": "Required file legacy-current-diff-policy-v1.json",
@@ -4576,6 +4672,11 @@
         "name": "Diff query returns counts without values headers or keys",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic legacy/current regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -4584,7 +4685,7 @@
     "task_id": "P2-10",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "path": "Data/Exports/P2-10/p2-10-canonical-id-map.jsonl",
       "tracked": false,
@@ -4612,7 +4713,415 @@
       "tombstones": 284,
       "unresolved_conflicts": 0
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-28T20:00:24.3880561+08:00",
+      "task_id": "P2-10",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "legacy_snapshot": "legacy-devdoc-decrypted-csv-20120318",
+        "legacy_build": "unknown-not-inferred",
+        "legacy_manifest_sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+        "current_build": "qy-3.0.0.413",
+        "current_manifest_sha256": "6ea5cfa2dfd9104c28bb7289cc84b42791c2e3afd0ba480767f38aca85d5337d",
+        "p2_09_evidence_sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+        "p2_09_report_sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667",
+        "p2_07_evidence_sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+        "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-10/p2-10-canonical-id-map.jsonl",
+        "tracked": false,
+        "lines": 87328,
+        "bytes": 26610829,
+        "sha256": "af21fefcfdc4e6819236d53d84d7de2af59fb4b00882093598c4f51667e5d2af"
+      },
+      "summary": {
+        "active_ids": 87044,
+        "automatic_renumberings": 0,
+        "collapsed_duplicate_groups": 700,
+        "collapsed_duplicate_occurrences": 800,
+        "comparable_legacy_domains": 10,
+        "conflicts": 0,
+        "current_only_ids": 60076,
+        "current_physical_rows": 87844,
+        "current_unique_ids": 87044,
+        "domain_count": 12,
+        "explicit_remaps": 0,
+        "legacy_preserved_ids": 27252,
+        "legacy_type_exception_components": 6,
+        "legacy_unique_ids": 27252,
+        "mapping_records": 87328,
+        "shared_ids": 26968,
+        "tombstones": 284,
+        "unresolved_conflicts": 0
+      },
+      "domains": [
+        {
+          "actions": {
+            "adopt_current": 1638,
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 2401
+          },
+          "active": 4039,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 4039,
+          "current_unique_ids": 4039,
+          "domain": "CLSVShare/formula_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 2402,
+          "mappings": 4040,
+          "shared_ids": 2401,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 16575,
+            "preserve_legacy_tombstone": 238,
+            "preserve_shared": 12648
+          },
+          "active": 29223,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 29223,
+          "current_unique_ids": 29223,
+          "domain": "CLSVShare/item_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 12886,
+          "mappings": 29461,
+          "shared_ids": 12648,
+          "tombstones": 238
+        },
+        {
+          "actions": {
+            "preserve_legacy_tombstone": 21,
+            "preserve_shared": 100
+          },
+          "active": 100,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 100,
+          "current_unique_ids": 100,
+          "domain": "CLSVShare/LevelInfo",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 121,
+          "mappings": 121,
+          "shared_ids": 100,
+          "tombstones": 21
+        },
+        {
+          "actions": {
+            "adopt_current": 15200
+          },
+          "active": 15200,
+          "collapsed_duplicate_groups": 700,
+          "collapsed_duplicate_occurrences": 800,
+          "conflicts": 0,
+          "current_physical_rows": 16000,
+          "current_unique_ids": 15200,
+          "domain": "CLSVShare/Profession_lvl",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0002"
+          ],
+          "key_types": [
+            "int64",
+            "int64"
+          ],
+          "legacy_snapshot_present": false,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 0,
+          "mappings": 15200,
+          "shared_ids": 0,
+          "tombstones": 0
+        },
+        {
+          "actions": {
+            "adopt_current": 16051,
+            "preserve_legacy_tombstone": 11,
+            "preserve_shared": 7176
+          },
+          "active": 23227,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 23227,
+          "current_unique_ids": 23227,
+          "domain": "CLSVShare/skill_table",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0004"
+          ],
+          "key_types": [
+            "int64",
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 7187,
+          "mappings": 23238,
+          "shared_ids": 7176,
+          "tombstones": 11
+        },
+        {
+          "actions": {
+            "adopt_current": 4424,
+            "preserve_shared": 4260
+          },
+          "active": 8684,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 8684,
+          "current_unique_ids": 8684,
+          "domain": "CLSVShare/states",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 4260,
+          "mappings": 8684,
+          "shared_ids": 4260,
+          "tombstones": 0
+        },
+        {
+          "actions": {
+            "adopt_current": 155,
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 57
+          },
+          "active": 212,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 212,
+          "current_unique_ids": 212,
+          "domain": "CLSVShare/Suit_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 58,
+          "mappings": 213,
+          "shared_ids": 57,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 46,
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 77
+          },
+          "active": 123,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 123,
+          "current_unique_ids": 123,
+          "domain": "CLSVShare/Transpoints",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 1,
+          "legacy_unique_ids": 78,
+          "mappings": 124,
+          "shared_ids": 77,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 16
+          },
+          "active": 16,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 16,
+          "current_unique_ids": 16,
+          "domain": "CLSVShare/unit_cls",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "string"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 17,
+          "mappings": 17,
+          "shared_ids": 16,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 44,
+            "preserve_legacy_tombstone": 9,
+            "preserve_shared": 117
+          },
+          "active": 161,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 161,
+          "current_unique_ids": 161,
+          "domain": "CLSVShare/unit_prop",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0004"
+          ],
+          "key_types": [
+            "string",
+            "string"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 126,
+          "mappings": 170,
+          "shared_ids": 117,
+          "tombstones": 9
+        },
+        {
+          "actions": {
+            "preserve_legacy_tombstone": 1,
+            "preserve_shared": 116
+          },
+          "active": 116,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 116,
+          "current_unique_ids": 116,
+          "domain": "CLSVShare/waypoint",
+          "key_arity": 2,
+          "key_column_ids": [
+            "c0001",
+            "c0002"
+          ],
+          "key_types": [
+            "int64",
+            "int64"
+          ],
+          "legacy_snapshot_present": true,
+          "legacy_type_exception_components": 2,
+          "legacy_unique_ids": 117,
+          "mappings": 117,
+          "shared_ids": 116,
+          "tombstones": 1
+        },
+        {
+          "actions": {
+            "adopt_current": 5943
+          },
+          "active": 5943,
+          "collapsed_duplicate_groups": 0,
+          "collapsed_duplicate_occurrences": 0,
+          "conflicts": 0,
+          "current_physical_rows": 5943,
+          "current_unique_ids": 5943,
+          "domain": "Table/quest_table",
+          "key_arity": 1,
+          "key_column_ids": [
+            "c0001"
+          ],
+          "key_types": [
+            "int64"
+          ],
+          "legacy_snapshot_present": false,
+          "legacy_type_exception_components": 0,
+          "legacy_unique_ids": 0,
+          "mappings": 5943,
+          "shared_ids": 0,
+          "tombstones": 0
+        }
+      ],
+      "contracts": {
+        "policy": "Contracts/data-schema/canonical-id-policy-v1.json",
+        "policy_sha256": "323b2788dc2666580ee2676057d6f00d51b3c7fcc088a0651250204ecd5a7341",
+        "schema": "Contracts/data-schema/canonical-id-map-v1.schema.json",
+        "schema_sha256": "f0c797b4537536f62192242b30cda52befa2f261eec00b445005b62e6e03f050"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "58335cac03726a61a78a7a8dc8330a0468594bf608b1c7473af733dda5a43d4d",
+        "self_test_assertions": 8,
+        "generator": "Tools/TMXY.CanonicalId/New-CanonicalIdMap.ps1",
+        "query": "Tools/TMXY.CanonicalId/Find-CanonicalIdMapping.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_primary_keys": false,
+        "tracked_evidence_contains_row_values": false,
+        "full_map_contains_primary_keys": true,
+        "full_map_committed_to_git": false,
+        "query_emits_primary_keys": false,
+        "legacy_payloads_copied": false
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "legacy_mount": "read-only",
+        "workspace_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-11",
+          "P2-17"
+        ],
+        "detail": "Audit ID widths and generate shared typed ID declarations from the frozen domains."
+      }
+    },
     "assertions": [
       {
         "name": "Required file canonical-id-policy-v1.json",
@@ -4748,6 +5257,11 @@
         "name": "Query returns digest metadata without primary keys",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic Canonical ID regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -4756,7 +5270,7 @@
     "task_id": "P2-11",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "path": "Data/Exports/P2-11/p2-11-id-limit-audit.jsonl",
       "tracked": false,
@@ -4814,7 +5328,390 @@
       "total_signal_records": 1267,
       "total_source_files": 8090
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-28T20:39:45.9331056+08:00",
+      "task_id": "P2-11",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "p2_10_evidence_sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+        "p2_10_map_sha256": "af21fefcfdc4e6819236d53d84d7de2af59fb4b00882093598c4f51667e5d2af",
+        "p2_04_evidence_sha256": "9c374ad84bc2440c19ec039e3761db8d1398add7cc66544452823b5ed010892a",
+        "legacy_source_manifest_sha256": "2cae32f086d70efa858f0a0f83ead4771df484b862b328bb8a7375c85278dd51",
+        "copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-11/p2-11-id-limit-audit.jsonl",
+        "tracked": false,
+        "lines": 1283,
+        "bytes": 323496,
+        "sha256": "9839296bc39b0a40d65c78b93f76c4ee703a9a3ab939e5ddc5d19f32b48ced9e"
+      },
+      "summary": {
+        "bit_width_buckets": {
+          "lte_16": 7,
+          "lte_8": 6,
+          "non_numeric": 3
+        },
+        "component_count": 16,
+        "domain_count": 12,
+        "numeric_components": 13,
+        "risk_counts": {
+          "legacy_type_exception": 6,
+          "level_cap_saturated": 3,
+          "sparse_lt_10pct": 4,
+          "string_identifier": 3,
+          "tombstone_reserved": 7,
+          "u16_near_limit": 2,
+          "u16_overflow": 0,
+          "u16_saturated": 3,
+          "u8_overflow": 7
+        },
+        "string_components": 3
+      },
+      "components": [
+        {
+          "active_distinct": 100,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "gte-50pct",
+          "domain": "CLSVShare/LevelInfo",
+          "legacy_opaque_records": 1,
+          "required_bits": 7,
+          "required_sign": "unsigned",
+          "reserved_distinct": 120,
+          "risks": [
+            "legacy_type_exception",
+            "level_cap_saturated",
+            "tombstone_reserved"
+          ],
+          "tombstone_records": 20,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 152,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "lt-1pct",
+          "domain": "CLSVShare/Profession_lvl",
+          "legacy_opaque_records": 0,
+          "required_bits": 15,
+          "required_sign": "unsigned",
+          "reserved_distinct": 152,
+          "risks": [
+            "sparse_lt_10pct",
+            "u8_overflow"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 100,
+          "column_id": "c0002",
+          "component_index": 1,
+          "density_band": "gte-50pct",
+          "domain": "CLSVShare/Profession_lvl",
+          "legacy_opaque_records": 0,
+          "required_bits": 7,
+          "required_sign": "unsigned",
+          "reserved_distinct": 100,
+          "risks": [
+            "level_cap_saturated"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 212,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "lt-1pct",
+          "domain": "CLSVShare/Suit_table",
+          "legacy_opaque_records": 1,
+          "required_bits": 16,
+          "required_sign": "unsigned",
+          "reserved_distinct": 212,
+          "risks": [
+            "legacy_type_exception",
+            "sparse_lt_10pct",
+            "u8_overflow"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 123,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "10-to-50pct",
+          "domain": "CLSVShare/Transpoints",
+          "legacy_opaque_records": 1,
+          "required_bits": 8,
+          "required_sign": "unsigned",
+          "reserved_distinct": 123,
+          "risks": [
+            "legacy_type_exception"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 4039,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "1-to-10pct",
+          "domain": "CLSVShare/formula_table",
+          "legacy_opaque_records": 1,
+          "required_bits": 16,
+          "required_sign": "unsigned",
+          "reserved_distinct": 4039,
+          "risks": [
+            "legacy_type_exception",
+            "sparse_lt_10pct",
+            "u16_near_limit",
+            "u8_overflow"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 29223,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "10-to-50pct",
+          "domain": "CLSVShare/item_table",
+          "legacy_opaque_records": 0,
+          "required_bits": 16,
+          "required_sign": "unsigned",
+          "reserved_distinct": 29461,
+          "risks": [
+            "tombstone_reserved",
+            "u16_saturated",
+            "u8_overflow"
+          ],
+          "tombstone_records": 238,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 9278,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "10-to-50pct",
+          "domain": "CLSVShare/skill_table",
+          "legacy_opaque_records": 0,
+          "required_bits": 16,
+          "required_sign": "unsigned",
+          "reserved_distinct": 9289,
+          "risks": [
+            "tombstone_reserved",
+            "u16_saturated",
+            "u8_overflow"
+          ],
+          "tombstone_records": 11,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 100,
+          "column_id": "c0004",
+          "component_index": 1,
+          "density_band": "gte-50pct",
+          "domain": "CLSVShare/skill_table",
+          "legacy_opaque_records": 0,
+          "required_bits": 7,
+          "required_sign": "unsigned",
+          "reserved_distinct": 100,
+          "risks": [
+            "level_cap_saturated",
+            "tombstone_reserved"
+          ],
+          "tombstone_records": 11,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 8684,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "10-to-50pct",
+          "domain": "CLSVShare/states",
+          "legacy_opaque_records": 0,
+          "required_bits": 16,
+          "required_sign": "unsigned",
+          "reserved_distinct": 8684,
+          "risks": [
+            "u16_saturated",
+            "u8_overflow"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 16,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "not-numeric",
+          "domain": "CLSVShare/unit_cls",
+          "legacy_opaque_records": 0,
+          "required_bits": null,
+          "required_sign": "not-numeric",
+          "reserved_distinct": 17,
+          "risks": [
+            "string_identifier",
+            "tombstone_reserved"
+          ],
+          "tombstone_records": 1,
+          "type": "string"
+        },
+        {
+          "active_distinct": 159,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "not-numeric",
+          "domain": "CLSVShare/unit_prop",
+          "legacy_opaque_records": 0,
+          "required_bits": null,
+          "required_sign": "not-numeric",
+          "reserved_distinct": 164,
+          "risks": [
+            "string_identifier",
+            "tombstone_reserved"
+          ],
+          "tombstone_records": 9,
+          "type": "string"
+        },
+        {
+          "active_distinct": 151,
+          "column_id": "c0004",
+          "component_index": 1,
+          "density_band": "not-numeric",
+          "domain": "CLSVShare/unit_prop",
+          "legacy_opaque_records": 0,
+          "required_bits": null,
+          "required_sign": "not-numeric",
+          "reserved_distinct": 160,
+          "risks": [
+            "string_identifier",
+            "tombstone_reserved"
+          ],
+          "tombstone_records": 9,
+          "type": "string"
+        },
+        {
+          "active_distinct": 12,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "gte-50pct",
+          "domain": "CLSVShare/waypoint",
+          "legacy_opaque_records": 1,
+          "required_bits": 4,
+          "required_sign": "unsigned",
+          "reserved_distinct": 12,
+          "risks": [
+            "legacy_type_exception"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 33,
+          "column_id": "c0002",
+          "component_index": 1,
+          "density_band": "gte-50pct",
+          "domain": "CLSVShare/waypoint",
+          "legacy_opaque_records": 1,
+          "required_bits": 6,
+          "required_sign": "unsigned",
+          "reserved_distinct": 33,
+          "risks": [
+            "legacy_type_exception"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        },
+        {
+          "active_distinct": 5943,
+          "column_id": "c0001",
+          "component_index": 0,
+          "density_band": "1-to-10pct",
+          "domain": "Table/quest_table",
+          "legacy_opaque_records": 0,
+          "required_bits": 16,
+          "required_sign": "unsigned",
+          "reserved_distinct": 5943,
+          "risks": [
+            "sparse_lt_10pct",
+            "u16_near_limit",
+            "u8_overflow"
+          ],
+          "tombstone_records": 0,
+          "type": "int64"
+        }
+      ],
+      "source_signals": {
+        "rules": {
+          "level_limit_symbol": {
+            "files": 9,
+            "hits": 26
+          },
+          "slot_limit_symbol": {
+            "files": 3,
+            "hits": 7
+          },
+          "u16_boundary": {
+            "files": 299,
+            "hits": 892
+          },
+          "u8_boundary": {
+            "files": 956,
+            "hits": 4370
+          }
+        },
+        "source_files": {
+          "legacy-client": 1086,
+          "legacy-server": 1956,
+          "legacy-tool": 5048
+        },
+        "total_signal_hits": 5295,
+        "total_signal_records": 1267,
+        "total_source_files": 8090
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/id-limit-audit-policy-v1.json",
+        "policy_sha256": "515b59f6555547ddecf96fbc9ea95938dc33d305b1b3fbf53a1aa65c8ca73433",
+        "schema": "Contracts/data-schema/id-limit-audit-v1.schema.json",
+        "schema_sha256": "8caaaf58b3049b3ccff2a011450ea4fecbdd2de3e3d7f2f8c54f91984aec976c"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "4a0c9d5ba0dca5dc863197ddb9dbb5a679f3b2bfd1add21552727291ff919600",
+        "self_test_assertions": 7,
+        "generator": "Tools/TMXY.IdLimitAudit/New-IdLimitAudit.ps1",
+        "query": "Tools/TMXY.IdLimitAudit/Find-IdLimitRisk.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_primary_keys": false,
+        "tracked_evidence_contains_minimum_or_maximum_values": false,
+        "tracked_evidence_contains_legacy_source_paths": false,
+        "tracked_evidence_contains_legacy_source_lines": false,
+        "full_audit_committed_to_git": false,
+        "legacy_sources_copied": false
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "workspace_mount": "read-only",
+        "legacy_mounts": 3,
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-17"
+        ],
+        "detail": "Generate shared strongly typed ID declarations without narrowing past the audited limits."
+      }
+    },
     "assertions": [
       {
         "name": "Required file id-limit-audit-policy-v1.json",
@@ -4940,6 +5837,11 @@
         "name": "Query emits hashes and counts without restricted values",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic ID limit regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -4948,7 +5850,7 @@
     "task_id": "P2-17",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_generated": false,
+    "verify_generated": true,
     "summary": {
       "models": 12,
       "source_fields": 355,
@@ -4978,7 +5880,76 @@
         "sha256": "e9cebd395a54ba57475f2289fc273154ff7d8e6a344b0d93b78a6d73247ddd26"
       }
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T03:37:34.1023241+08:00",
+      "task_id": "P2-17",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "inputs": {
+        "core_table_registry_path": "Data/Schemas/core-table-registry-v1.json",
+        "core_table_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "id_limit_audit_path": "Data/Inventory/p2-11-id-limit-audit.json",
+        "id_limit_audit_sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+        "policy_sha256": "2d7e3fa854e50b5bc7009905c37a81c744b11dae553b2e0fb37a9cf8ca625157",
+        "contract_sha256": "4c74184aa02b0fd5d7109381c6c1bdbcd4110ce3a68af8131d6094bb10acbbeb"
+      },
+      "summary": {
+        "models": 12,
+        "source_fields": 355,
+        "identity_components": 16,
+        "nullable_fields": 263,
+        "targets": 2,
+        "numeric_identity_storage": "uint64",
+        "narrowing": "forbidden"
+      },
+      "outputs": {
+        "schema": {
+          "path": "Contracts/data-schema/core-data-model-v1.json",
+          "bytes": 76142,
+          "lines": 2952,
+          "sha256": "4176831de7fade02eedc0e445e9fe757ace5bb692b2f4fdc277b35cf6bc7078c"
+        },
+        "backend": {
+          "path": "Contracts/generated/cpp/tmxy/contracts/data/core_data_types.generated.hpp",
+          "bytes": 15313,
+          "lines": 501,
+          "sha256": "e846b1435365756d7bdb2ce16d047b44cd2585d6419598ecd13aee117822a04e"
+        },
+        "ue": {
+          "path": "Contracts/generated/ue/TMXYCoreDataTypes.generated.hpp",
+          "bytes": 12123,
+          "lines": 499,
+          "sha256": "e9cebd395a54ba57475f2289fc273154ff7d8e6a344b0d93b78a6d73247ddd26"
+        }
+      },
+      "target_contracts": {
+        "backend": "portable-cpp20-compiled-by-backend-cmake",
+        "ue": "unreal-engine-5.8-cpp20-compiled-by-tmxy-core",
+        "same_schema_sha256": "4176831de7fade02eedc0e445e9fe757ace5bb692b2f4fdc277b35cf6bc7078c"
+      },
+      "implementation": {
+        "generator": "Tools/TMXY.ProtocolGen/protocol_gen.py",
+        "generator_sha256": "8d5989b9648039b7778c46f9390d5fe1fe05d79215e777459b782f587fbc402d",
+        "wrapper": "Tools/TMXY.ProtocolGen/New-ProtocolTypes.ps1",
+        "wrapper_sha256": "a34308bea8164ed2a6e595be000352ab92bc7cb8482bce82fae17c7ff49e4782",
+        "self_test_assertions": 6
+      },
+      "reproduction": {
+        "builder_image": "mmorpg-source-builder:local",
+        "builder_user": "tmxy",
+        "repository_mount": "read-only",
+        "network": "none",
+        "check_mode": true
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-18"
+        ],
+        "detail": "Aggregate parse, integrity, reference, conversion, and capacity evidence into the content health report."
+      }
+    },
     "assertions": [
       {
         "name": "Required file protocol-codegen-policy-v1.json",
@@ -5114,6 +6085,11 @@
         "name": "Policy and implementation hashes are bound",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Byte-identical isolated regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -5122,21 +6098,21 @@
     "task_id": "P2-18",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "json": {
         "path": "Data/Reports/p2-18-content-health-report.json",
         "tracked": true,
         "bytes": 14205,
         "lines": 448,
-        "sha256": "bb894efade45bf9c8bff6410bf4fe4d058780508a72e28371860151d77730242"
+        "sha256": "9732ffbf09f99ce9fc3d47c54fa2f6dd7fc66b61fcfc104178993098280f1a32"
       },
       "markdown": {
         "path": "Data/Reports/p2-18-content-health-report.md",
         "tracked": true,
         "bytes": 2419,
         "lines": 48,
-        "sha256": "3be0972574ab2c781e53a2bb68671a315ebd3f7336e6eaf8b1dd2555fd7f0088"
+        "sha256": "419a06955fb8de4a89fd96375937d96d94d87408ededb83133e80657aed7e51c"
       }
     },
     "summary": {
@@ -5271,7 +6247,312 @@
         "report_completion_means_accounting_complete_not_content_complete": true
       }
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:15:03.982141+08:00",
+      "task_id": "P2-18",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "source_build": "qy-3.0.0.413",
+        "completed_tasks": 17,
+        "binding_sha256": "1aacbc1b04405e305ffb157ee4c3530a6767c05c99d44bb2eb74fe0fc710f413",
+        "inputs": [
+          {
+            "path": "Data/Inventory/p2-01-package-inventory.json",
+            "result": "PASS",
+            "sha256": "ac6671219c41324f1e7aac0a1cd5c08a9dc66f7c75e30cd3081610c038a26d16",
+            "task_id": "P2-01"
+          },
+          {
+            "path": "Data/Inventory/p2-02-package-boundary-completeness.json",
+            "result": "PASS",
+            "sha256": "8ecdc9b5af0b8bd3e009781452bcc68114f65fd2b7513e26b49402f76738863e",
+            "task_id": "P2-02"
+          },
+          {
+            "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+            "result": "PASS",
+            "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab",
+            "task_id": "P2-03"
+          },
+          {
+            "path": "Data/Inventory/p2-04-current-table-inventory.json",
+            "result": "PASS",
+            "sha256": "9c374ad84bc2440c19ec039e3761db8d1398add7cc66544452823b5ed010892a",
+            "task_id": "P2-04"
+          },
+          {
+            "path": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+            "result": "PASS",
+            "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
+            "task_id": "P2-05"
+          },
+          {
+            "path": "Data/Inventory/p2-06-three-layer-data.json",
+            "result": "PASS",
+            "sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+            "task_id": "P2-06"
+          },
+          {
+            "path": "Data/Inventory/p2-07-core-table-schema.json",
+            "result": "PASS",
+            "sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+            "task_id": "P2-07"
+          },
+          {
+            "path": "Data/Inventory/p2-08-table-ownership.json",
+            "result": "PASS",
+            "sha256": "423e3898c1089e140f9a8efc04a1dae8d4600512e8ba44a02fc2048487c960fc",
+            "task_id": "P2-08"
+          },
+          {
+            "path": "Data/Inventory/p2-09-legacy-current-diff.json",
+            "result": "PASS",
+            "sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+            "task_id": "P2-09"
+          },
+          {
+            "path": "Data/Inventory/p2-10-canonical-id-map.json",
+            "result": "PASS",
+            "sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+            "task_id": "P2-10"
+          },
+          {
+            "path": "Data/Inventory/p2-11-id-limit-audit.json",
+            "result": "PASS",
+            "sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+            "task_id": "P2-11"
+          },
+          {
+            "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+            "result": "PASS",
+            "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d",
+            "task_id": "P2-12"
+          },
+          {
+            "path": "Data/Inventory/p2-13-reference-closure.json",
+            "result": "PASS",
+            "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
+            "task_id": "P2-13"
+          },
+          {
+            "path": "Data/Inventory/p2-14-asset-health.json",
+            "result": "PASS",
+            "sha256": "d20e69adb8651eeb56434f1be6438dcc138e25ae9285c7de43c58ee43f6d0d79",
+            "task_id": "P2-14"
+          },
+          {
+            "path": "Data/Inventory/p2-15-conversion-routing.json",
+            "result": "PASS",
+            "sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54",
+            "task_id": "P2-15"
+          },
+          {
+            "path": "Data/Inventory/p2-16-conversion-cache.json",
+            "result": "PASS",
+            "sha256": "fe607f28d714bba7b75fb50b5390049d4b3448e640859d7bf5c878b8f9a90078",
+            "task_id": "P2-16"
+          },
+          {
+            "path": "Data/Inventory/p2-17-protocol-codegen.json",
+            "result": "PASS",
+            "sha256": "23cd1f824a3fab1c203a648df8224de6257bea96dc4aa431fcc063c74aead222",
+            "task_id": "P2-17"
+          }
+        ]
+      },
+      "report": {
+        "json": {
+          "path": "Data/Reports/p2-18-content-health-report.json",
+          "tracked": true,
+          "bytes": 14205,
+          "lines": 448,
+          "sha256": "9732ffbf09f99ce9fc3d47c54fa2f6dd7fc66b61fcfc104178993098280f1a32"
+        },
+        "markdown": {
+          "path": "Data/Reports/p2-18-content-health-report.md",
+          "tracked": true,
+          "bytes": 2419,
+          "lines": 48,
+          "sha256": "419a06955fb8de4a89fd96375937d96d94d87408ededb83133e80657aed7e51c"
+        }
+      },
+      "summary": {
+        "report_result": "PASS_WITH_OPEN_CONTENT_RISKS",
+        "executive": {
+          "content_accounting_complete": true,
+          "content_conversion_ready_assets": 39290,
+          "content_conversion_ready_ppm": 980044,
+          "core_data_integrity": true,
+          "damaged_or_isolated_source_artifacts": 20,
+          "full_content_conversion_ready": false,
+          "inventory_scope": {
+            "active_tables": 225,
+            "assets": 40090,
+            "assets_bytes": 8882019027,
+            "config_files": 212,
+            "package_files": 167
+          },
+          "open_risk_items": 13,
+          "p2_gate_ready": false,
+          "playable_experience_proven": false
+        },
+        "risk_summary": {
+          "controlled_open": 2,
+          "critical": 0,
+          "high": 6,
+          "low": 1,
+          "medium": 6,
+          "open": 7,
+          "raw_counts_are_not_additive_across_units": true,
+          "review_only": 4,
+          "risk_items": 13
+        },
+        "parsing": {
+          "assets": 40090,
+          "assets_classified": 40090,
+          "assets_classified_ppm": 1000000,
+          "assets_structurally_valid": 39290,
+          "assets_structurally_valid_ppm": 980044,
+          "config_files": 212,
+          "config_files_classified": 212,
+          "core_packages": 12,
+          "core_packages_complete": 12,
+          "core_packages_complete_ppm": 1000000,
+          "ecf_files": 64,
+          "ecf_round_trip_verified": 64,
+          "packages_recognized": 163,
+          "packages_recognized_complete": 163,
+          "packages_recognized_complete_ppm": 1000000,
+          "tables_active": 225,
+          "tables_decoded": 225,
+          "tables_decoded_ppm": 1000000,
+          "xml_files": 148,
+          "xml_strict_or_fragment": 142
+        },
+        "damage": {
+          "asset_corrupt": 14,
+          "auxiliary_xml_malformed_isolated": 6,
+          "damaged_or_isolated_source_artifacts": 20,
+          "package_recognized_parse_failures": 0,
+          "repair_or_deletion_performed": 0
+        },
+        "unknown_or_opaque": {
+          "asset_structure_unresolved": 786,
+          "package_object_payloads_opaque": 121715,
+          "package_reference_ambiguous": 21146,
+          "package_reference_unresolved": 1076,
+          "table_object_reference_ambiguous": 6945,
+          "table_object_reference_unresolved": 5161,
+          "unclassified_active_tables": 0,
+          "unsupported_assets": 0
+        },
+        "references": {
+          "asset_link_edges": 61511,
+          "assets_linked_outside_roots": 24119,
+          "assets_root_reachable": 14058,
+          "assets_unlinked_identity_rule_no_match": 1008,
+          "assets_unlinked_no_identity_rule": 905,
+          "core_foreign_key_dangling": 0,
+          "core_foreign_key_edges": 54561,
+          "heuristic_target_selections": 0,
+          "legacy_current_dangling": 0,
+          "package_ambiguous": 21146,
+          "package_edges": 147349,
+          "package_unresolved": 1076,
+          "table_object_ambiguous": 6945,
+          "table_object_edges": 113484,
+          "table_object_unresolved": 5161
+        },
+        "conversion": {
+          "alias_assignments": 5489,
+          "assets": 40090,
+          "assets_with_ready_key": 39290,
+          "blocked_manual_jobs": 800,
+          "conversion_ready_ppm": 980044,
+          "distinct_ready_keys": 33801,
+          "output_hash_verification_required": true,
+          "shared_cache_write_authorized": false
+        },
+        "effort": {
+          "automatic_planning_human_hours": 426.02,
+          "basis": "planning coefficient, not benchmark or schedule commitment",
+          "fixed_engineering_hours": 336.0,
+          "item_human_hours": 1068.695,
+          "machine_seconds": 108005,
+          "manual_assets": 800,
+          "manual_planning_human_hours": 617.0,
+          "planning_human_hours": 1404.695,
+          "semi_automatic_assets": 841,
+          "semi_automatic_planning_human_hours": 361.675
+        },
+        "capacity": {
+          "asset_bytes": 8882019027,
+          "assets": 40090,
+          "canonical_ids": 87044,
+          "conversion_jobs": 34601,
+          "exact_duplicate_redundant_bytes_review_only": 1286887829,
+          "id_components": 16,
+          "id_u16_near_limit": 2,
+          "id_u16_overflow": 0,
+          "id_u16_saturated": 3,
+          "normalized_table_bytes": 100536572,
+          "package_graph_bytes": 106382503,
+          "reference_closure_bytes": 205392166
+        },
+        "decisions": {
+          "automatic_deletion_authorized": false,
+          "automatic_repair_authorized": false,
+          "g2_approved": false,
+          "playable_experience_proven": false,
+          "release_authority": false,
+          "report_completion_means_accounting_complete_not_content_complete": true
+        }
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/content-health-policy-v1.json",
+        "policy_sha256": "f0f3af98194d5b3797279f3ce3711e3a36a16ab04c7647ce1aae17d58bcb8bc1",
+        "schema": "Contracts/data-schema/content-health-report-v1.schema.json",
+        "schema_sha256": "0a4c84ee3501284cf860a6829f613dfb156f766bcaffb292d8e04706f62df527",
+        "rate_unit": "parts-per-million"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "8d6c804e71e29ec032632b1733e1c5c9516dd4f34293689c80f978b51f34c9eb",
+        "generator": "Tools/TMXY.ContentHealth/content_health.py",
+        "generator_sha256": "8095a654116ad3fdcd89793494dbc37fb6020a871fd522c93654eb4e1d359ba4",
+        "wrapper": "Tools/TMXY.ContentHealth/New-ContentHealthReport.ps1",
+        "wrapper_sha256": "356dc0e0b977bac311ffb8abc9600d82408758847951689ee0fe023ea9cdcf07",
+        "query": "Tools/TMXY.ContentHealth/Find-ContentHealth.ps1",
+        "query_sha256": "25362a61523797642a40a84c4d892f1a2b58a71afc13929b0ec1a9fbfd9ce264",
+        "self_test_assertions": 6
+      },
+      "disclosure": {
+        "private_source_paths": false,
+        "exact_primary_keys": false,
+        "exact_observed_extrema": false,
+        "raw_table_rows": false,
+        "decoded_confidential_payloads": false,
+        "legacy_source_lines": false
+      },
+      "reproduction": {
+        "check_mode": true,
+        "repository_mount": "read-only",
+        "network": "none",
+        "builder_reference": "tmxy-backend-builder:p0-08",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-19",
+          "P2-20"
+        ],
+        "detail": "Re-estimate budget from measured inventory facts, then execute the G2 review without claiming playable or release readiness."
+      }
+    },
     "assertions": [
       {
         "name": "Required file content-health-policy-v1.json",
@@ -5512,6 +6793,11 @@
         "name": "Risk register is queryable without private values",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Byte-identical isolated report regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -5520,7 +6806,7 @@
     "task_id": "P2-19",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "negative_cases": {
       "schema_unknown_field_rejected": true,
       "basis_category_mutation_rejected": true,
@@ -5531,16 +6817,16 @@
       "json": {
         "path": "Data/Reports/p2-19-resource-budget-report.json",
         "tracked": true,
-        "bytes": 35451,
+        "bytes": 35449,
         "lines": 1179,
-        "sha256": "49eee37e908bd439c2918725ff2955d20bc8bb4a2ea26426116536222281b116"
+        "sha256": "cd46fec2d04e2b6303943de03c6cbb3954a64eec8bf7324232d4fc3be05e85db"
       },
       "markdown": {
         "path": "Data/Reports/p2-19-resource-budget-report.md",
         "tracked": true,
         "bytes": 4938,
         "lines": 98,
-        "sha256": "d675ccfe5d00f8fb7623e5e7e4f53d6754d1b02a38b458b9ac3e210a6edd7fcc"
+        "sha256": "a73e7202ae5ec6e3169fdb1af791e3c08c73bbdde227f834c3be0db713abf6f3"
       }
     },
     "summary": {
@@ -5676,7 +6962,7 @@
         ]
       },
       "machine_budget": {
-        "base_sequential_seconds": 10617.762224,
+        "base_sequential_seconds": 10611.423073,
         "basis_ids": [
           "BAS-MEASURED-PILOT",
           "BAS-PLAN-MACHINE-FALLBACK",
@@ -5686,7 +6972,7 @@
         ],
         "by_route": [
           {
-            "base_seconds": 157.762224,
+            "base_seconds": 151.423073,
             "basis_ids": [
               "BAS-MEASURED-PILOT",
               "BAS-MEASURED-INVENTORY",
@@ -5695,9 +6981,9 @@
               "BAS-MISSING-MACHINE-CAPACITY"
             ],
             "pilot_sample_count": 25,
-            "risk_reserve_seconds": 78.881112,
+            "risk_reserve_seconds": 75.711537,
             "route": "automatic-qualified-interchange",
-            "total_seconds": 236.643335
+            "total_seconds": 227.13461
           },
           {
             "base_seconds": 2400,
@@ -5772,8 +7058,8 @@
           }
         ],
         "risk_reserve_basis_points": 5000,
-        "risk_reserve_seconds": 5308.881112,
-        "total_sequential_seconds": 15926.643335,
+        "risk_reserve_seconds": 5305.711537,
+        "total_sequential_seconds": 15917.13461,
         "unit": "machine_seconds"
       },
       "storage_budget": {
@@ -5785,7 +7071,7 @@
           "BAS-ASSUME-STORAGE",
           "BAS-RISK-STORAGE"
         ],
-        "build_cache_estimated_bytes": 45765646066,
+        "build_cache_estimated_bytes": 45769105012,
         "by_component": [
           {
             "base_bytes": 8882019027,
@@ -5812,9 +7098,9 @@
               "BAS-MEASURED-PILOT",
               "BAS-ASSUME-PILOT-EXTRAPOLATION"
             ],
-            "expansion_basis_points": 30007,
+            "expansion_basis_points": 30008,
             "id": "intermediate-qtx",
-            "projected_bytes": 11327817261
+            "projected_bytes": 11328194767
           },
           {
             "base_bytes": 2271161297,
@@ -5845,9 +7131,9 @@
               "BAS-MEASURED-PILOT",
               "BAS-ASSUME-PILOT-EXTRAPOLATION"
             ],
-            "expansion_basis_points": 1132,
+            "expansion_basis_points": 1144,
             "id": "intermediate-anim",
-            "projected_bytes": 73153258
+            "projected_bytes": 73928734
           },
           {
             "base_bytes": 535720960,
@@ -5891,50 +7177,50 @@
             "projected_bytes": 656466836
           },
           {
-            "base_bytes": 15255215355,
+            "base_bytes": 15256368337,
             "basis_ids": [
               "BAS-ASSUME-STORAGE"
             ],
             "expansion_basis_points": 15000,
             "id": "ue-content",
-            "projected_bytes": 22882823033
+            "projected_bytes": 22884552506
           },
           {
-            "base_bytes": 22882823033,
+            "base_bytes": 22884552506,
             "basis_ids": [
               "BAS-ASSUME-STORAGE"
             ],
             "expansion_basis_points": 20000,
             "id": "build-cache",
-            "projected_bytes": 45765646066
+            "projected_bytes": 45769105012
           },
           {
-            "base_bytes": 93198014722,
+            "base_bytes": 93204356123,
             "basis_ids": [
               "BAS-ASSUME-STORAGE"
             ],
             "expansion_basis_points": 20000,
             "id": "durable-recovery",
-            "projected_bytes": 186396029444
+            "projected_bytes": 186408712246
           }
         ],
-        "capacity_gap_bytes": 164951541635,
+        "capacity_gap_bytes": 165106723445,
         "capacity_sufficient": false,
         "deduplication_savings_assumed": false,
-        "disk_free_bytes": 199953072128,
+        "disk_free_bytes": 199823572992,
         "disk_total_bytes": 1073742868480,
         "duplicate_redundant_review_only_bytes": 1286887829,
-        "existing_workspace_bytes": 46460916237,
-        "incremental_required_bytes": 364904613763,
-        "intermediate_estimated_bytes": 15255215355,
-        "one_copy_bytes": 93198014722,
-        "recovery_bytes": 186396029444,
+        "existing_workspace_bytes": 46581322601,
+        "incremental_required_bytes": 364930296437,
+        "intermediate_estimated_bytes": 15256368337,
+        "one_copy_bytes": 93204356123,
+        "recovery_bytes": 186408712246,
         "recovery_copy_count": 2,
         "risk_reserve_basis_points": 3500,
-        "risk_reserve_bytes": 94604899865,
+        "risk_reserve_bytes": 94611558336,
         "source_retained_bytes": 8882019027,
-        "total_budget_bytes": 411365530000,
-        "ue_content_estimated_bytes": 22882823033,
+        "total_budget_bytes": 411511619038,
+        "ue_content_estimated_bytes": 22884552506,
         "unit": "bytes"
       },
       "program_forecast": {
@@ -6134,7 +7420,697 @@
         "schedule_is_delivery_commitment": false
       }
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:15:25.6148326+08:00",
+      "task_id": "P2-19",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "source_build": "qy-3.0.0.413",
+        "bindings": {
+          "aggregate_sha256": "46dd4db957c67d45217616ee6077eaffa184c374a215a0f14308696ef88102ee",
+          "content_health": {
+            "completion_criteria_satisfied": true,
+            "path": "Data/Inventory/p2-18-content-health.json",
+            "result": "PASS",
+            "sha256": "afb00c48630ed7cc9047beb2eee73b0118bd85baba2ae8a9d6fd34c0d780d829",
+            "task_id": "P2-18",
+            "task_status": "COMPLETE"
+          },
+          "conversion_pilot": {
+            "completion_criteria_satisfied": true,
+            "path": "Data/Performance/p2-19-conversion-pilot.json",
+            "result": "PASS",
+            "sha256": "e693119bd8bb6c9200a441f73207ad4616c3cf380da0bac31de7131d7b715ff2",
+            "task_id": "P2-19-PILOT",
+            "task_status": "COMPLETE"
+          },
+          "conversion_routing": {
+            "completion_criteria_satisfied": true,
+            "path": "Data/Inventory/p2-15-conversion-routing.json",
+            "result": "PASS",
+            "sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54",
+            "task_id": "P2-15",
+            "task_status": "COMPLETE"
+          }
+        },
+        "basis_kinds": [
+          "assumption",
+          "measured_fact",
+          "missing_measurement",
+          "planning_coefficient",
+          "risk_reserve"
+        ]
+      },
+      "report": {
+        "json": {
+          "path": "Data/Reports/p2-19-resource-budget-report.json",
+          "tracked": true,
+          "bytes": 35449,
+          "lines": 1179,
+          "sha256": "cd46fec2d04e2b6303943de03c6cbb3954a64eec8bf7324232d4fc3be05e85db"
+        },
+        "markdown": {
+          "path": "Data/Reports/p2-19-resource-budget-report.md",
+          "tracked": true,
+          "bytes": 4938,
+          "lines": 98,
+          "sha256": "a73e7202ae5ec6e3169fdb1af791e3c08c73bbdde227f834c3be0db713abf6f3"
+        }
+      },
+      "summary": {
+        "report_result": "PASS_WITH_OPEN_MEASUREMENT_GAPS",
+        "budget_status": "CONDITIONAL_PLANNING_BASELINE",
+        "human_budget": {
+          "base_planning_hours": 1404.695,
+          "basis_ids": [
+            "BAS-PLAN-P2-15-HUMAN",
+            "BAS-RISK-HUMAN-ROUTES",
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-MISSING-HUMAN-TIME",
+            "BAS-MISSING-PRICE-RATES"
+          ],
+          "by_route": [
+            {
+              "base_hours": 392.25,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "risk_reserve_basis_points": 2500,
+              "risk_reserve_hours": 98.0625,
+              "route": "automatic-qualified-interchange",
+              "total_hours": 490.3125
+            },
+            {
+              "base_hours": 33.77,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "risk_reserve_basis_points": 2500,
+              "risk_reserve_hours": 8.4425,
+              "route": "automatic-standard-audio",
+              "total_hours": 42.2125
+            },
+            {
+              "base_hours": 361.675,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "risk_reserve_basis_points": 4000,
+              "risk_reserve_hours": 144.67,
+              "route": "semi-automatic-navigation-adaptation",
+              "total_hours": 506.345
+            },
+            {
+              "base_hours": 473,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "risk_reserve_basis_points": 5000,
+              "risk_reserve_hours": 236.5,
+              "route": "manual-descriptor-recovery",
+              "total_hours": 709.5
+            },
+            {
+              "base_hours": 144,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "risk_reserve_basis_points": 7500,
+              "risk_reserve_hours": 108,
+              "route": "manual-repair-or-replace",
+              "total_hours": 252
+            }
+          ],
+          "money_budget": {
+            "amount": null,
+            "currency": null,
+            "estimated": false,
+            "missing_inputs": [
+              "currency",
+              "labor_rate_by_role",
+              "machine_rate_by_profile",
+              "storage_rate_by_tier",
+              "license_and_vendor_rates"
+            ],
+            "reason": "Labor, infrastructure, storage, licensing, and regional currency rates are not supplied."
+          },
+          "risk_reserve_hours": 595.675,
+          "total_planning_hours": 2000.37,
+          "unit": "human_hours",
+          "workforce_scenarios": [
+            {
+              "base_weeks": 25.083839,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-ASSUME-WORKFORCE",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "content_specialist_fte": 2,
+              "productive_hours_per_fte_week": 28,
+              "risk_adjusted_weeks": 35.720893,
+              "risk_reserve_weeks": 10.637054
+            },
+            {
+              "base_weeks": 16.72256,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-ASSUME-WORKFORCE",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "content_specialist_fte": 3,
+              "productive_hours_per_fte_week": 28,
+              "risk_adjusted_weeks": 23.813929,
+              "risk_reserve_weeks": 7.091369
+            },
+            {
+              "base_weeks": 12.54192,
+              "basis_ids": [
+                "BAS-PLAN-P2-15-HUMAN",
+                "BAS-RISK-HUMAN-ROUTES",
+                "BAS-ASSUME-WORKFORCE",
+                "BAS-MISSING-HUMAN-TIME"
+              ],
+              "content_specialist_fte": 4,
+              "productive_hours_per_fte_week": 28,
+              "risk_adjusted_weeks": 17.860446,
+              "risk_reserve_weeks": 5.318527
+            }
+          ]
+        },
+        "machine_budget": {
+          "base_sequential_seconds": 10611.423073,
+          "basis_ids": [
+            "BAS-MEASURED-PILOT",
+            "BAS-PLAN-MACHINE-FALLBACK",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION",
+            "BAS-RISK-MACHINE",
+            "BAS-MISSING-MACHINE-CAPACITY"
+          ],
+          "by_route": [
+            {
+              "base_seconds": 151.423073,
+              "basis_ids": [
+                "BAS-MEASURED-PILOT",
+                "BAS-MEASURED-INVENTORY",
+                "BAS-ASSUME-PILOT-EXTRAPOLATION",
+                "BAS-RISK-MACHINE",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "pilot_sample_count": 25,
+              "risk_reserve_seconds": 75.711537,
+              "route": "automatic-qualified-interchange",
+              "total_seconds": 227.13461
+            },
+            {
+              "base_seconds": 2400,
+              "basis_ids": [
+                "BAS-PLAN-MACHINE-FALLBACK",
+                "BAS-RISK-MACHINE",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "pilot_sample_count": 0,
+              "risk_reserve_seconds": 1200,
+              "route": "automatic-standard-audio",
+              "total_seconds": 3600
+            },
+            {
+              "base_seconds": 8060,
+              "basis_ids": [
+                "BAS-PLAN-MACHINE-FALLBACK",
+                "BAS-RISK-MACHINE",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "pilot_sample_count": 0,
+              "risk_reserve_seconds": 4030,
+              "route": "semi-automatic-navigation-adaptation",
+              "total_seconds": 12090
+            },
+            {
+              "base_seconds": 0,
+              "basis_ids": [
+                "BAS-PLAN-MACHINE-FALLBACK",
+                "BAS-RISK-MACHINE",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "pilot_sample_count": 0,
+              "risk_reserve_seconds": 0,
+              "route": "manual-descriptor-recovery",
+              "total_seconds": 0
+            },
+            {
+              "base_seconds": 0,
+              "basis_ids": [
+                "BAS-PLAN-MACHINE-FALLBACK",
+                "BAS-RISK-MACHINE",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "pilot_sample_count": 0,
+              "risk_reserve_seconds": 0,
+              "route": "manual-repair-or-replace",
+              "total_seconds": 0
+            }
+          ],
+          "projection_status": "PARTIALLY_PILOT_CALIBRATED",
+          "requirements": [
+            {
+              "basis_ids": [
+                "BAS-MEASURED-PILOT",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "id": "pilot-reference-host",
+              "profile": "32 logical processors; 203533176832 memory bytes",
+              "purpose": "Reproduce single-process pilot; not a fleet claim.",
+              "quantity": 1
+            },
+            {
+              "basis_ids": [
+                "BAS-MEASURED-PILOT",
+                "BAS-MISSING-MACHINE-CAPACITY"
+              ],
+              "id": "locked-builder-container",
+              "profile": "32 visible processors; 99951980544 visible memory bytes",
+              "purpose": "Preserve measured toolchain visibility.",
+              "quantity": 1
+            }
+          ],
+          "risk_reserve_basis_points": 5000,
+          "risk_reserve_seconds": 5305.711537,
+          "total_sequential_seconds": 15917.13461,
+          "unit": "machine_seconds"
+        },
+        "storage_budget": {
+          "basis_ids": [
+            "BAS-MEASURED-INVENTORY",
+            "BAS-MEASURED-PILOT",
+            "BAS-MEASURED-HOST-STORAGE",
+            "BAS-ASSUME-PILOT-EXTRAPOLATION",
+            "BAS-ASSUME-STORAGE",
+            "BAS-RISK-STORAGE"
+          ],
+          "build_cache_estimated_bytes": 45769105012,
+          "by_component": [
+            {
+              "base_bytes": 8882019027,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY"
+              ],
+              "expansion_basis_points": 10000,
+              "id": "source-retained",
+              "projected_bytes": 8882019027
+            },
+            {
+              "base_bytes": 412311241,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY"
+              ],
+              "expansion_basis_points": 10000,
+              "id": "metadata-retained",
+              "projected_bytes": 412311241
+            },
+            {
+              "base_bytes": 3775058240,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-MEASURED-PILOT",
+                "BAS-ASSUME-PILOT-EXTRAPOLATION"
+              ],
+              "expansion_basis_points": 30008,
+              "id": "intermediate-qtx",
+              "projected_bytes": 11328194767
+            },
+            {
+              "base_bytes": 2271161297,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-MEASURED-PILOT",
+                "BAS-ASSUME-PILOT-EXTRAPOLATION"
+              ],
+              "expansion_basis_points": 12197,
+              "id": "intermediate-sm",
+              "projected_bytes": 2770135434
+            },
+            {
+              "base_bytes": 475806600,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-MEASURED-PILOT",
+                "BAS-ASSUME-PILOT-EXTRAPOLATION"
+              ],
+              "expansion_basis_points": 298,
+              "id": "intermediate-skem",
+              "projected_bytes": 14179037
+            },
+            {
+              "base_bytes": 646230188,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-MEASURED-PILOT",
+                "BAS-ASSUME-PILOT-EXTRAPOLATION"
+              ],
+              "expansion_basis_points": 1144,
+              "id": "intermediate-anim",
+              "projected_bytes": 73928734
+            },
+            {
+              "base_bytes": 535720960,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-MEASURED-PILOT",
+                "BAS-ASSUME-PILOT-EXTRAPOLATION"
+              ],
+              "expansion_basis_points": 3756,
+              "id": "intermediate-ter",
+              "projected_bytes": 201216793
+            },
+            {
+              "base_bytes": 169402911,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-ASSUME-STORAGE"
+              ],
+              "expansion_basis_points": 12000,
+              "id": "intermediate-audio",
+              "projected_bytes": 203283494
+            },
+            {
+              "base_bytes": 4481621,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-ASSUME-STORAGE"
+              ],
+              "expansion_basis_points": 20000,
+              "id": "intermediate-zif",
+              "projected_bytes": 8963242
+            },
+            {
+              "base_bytes": 164116709,
+              "basis_ids": [
+                "BAS-MEASURED-INVENTORY",
+                "BAS-ASSUME-STORAGE"
+              ],
+              "expansion_basis_points": 40000,
+              "id": "intermediate-manual",
+              "projected_bytes": 656466836
+            },
+            {
+              "base_bytes": 15256368337,
+              "basis_ids": [
+                "BAS-ASSUME-STORAGE"
+              ],
+              "expansion_basis_points": 15000,
+              "id": "ue-content",
+              "projected_bytes": 22884552506
+            },
+            {
+              "base_bytes": 22884552506,
+              "basis_ids": [
+                "BAS-ASSUME-STORAGE"
+              ],
+              "expansion_basis_points": 20000,
+              "id": "build-cache",
+              "projected_bytes": 45769105012
+            },
+            {
+              "base_bytes": 93204356123,
+              "basis_ids": [
+                "BAS-ASSUME-STORAGE"
+              ],
+              "expansion_basis_points": 20000,
+              "id": "durable-recovery",
+              "projected_bytes": 186408712246
+            }
+          ],
+          "capacity_gap_bytes": 165106723445,
+          "capacity_sufficient": false,
+          "deduplication_savings_assumed": false,
+          "disk_free_bytes": 199823572992,
+          "disk_total_bytes": 1073742868480,
+          "duplicate_redundant_review_only_bytes": 1286887829,
+          "existing_workspace_bytes": 46581322601,
+          "incremental_required_bytes": 364930296437,
+          "intermediate_estimated_bytes": 15256368337,
+          "one_copy_bytes": 93204356123,
+          "recovery_bytes": 186408712246,
+          "recovery_copy_count": 2,
+          "risk_reserve_basis_points": 3500,
+          "risk_reserve_bytes": 94611558336,
+          "source_retained_bytes": 8882019027,
+          "total_budget_bytes": 411511619038,
+          "ue_content_estimated_bytes": 22884552506,
+          "unit": "bytes"
+        },
+        "program_forecast": {
+          "basis_ids": [
+            "BAS-PLAN-PROGRAM-PHASES",
+            "BAS-ASSUME-PROGRAM-SCENARIOS",
+            "BAS-RISK-PROGRAM",
+            "BAS-MISSING-G2-DELAY"
+          ],
+          "delivery_commitment": false,
+          "g2_blocking_delay_weeks": null,
+          "g2_delay_status": "unbounded",
+          "phase_ranges": [
+            {
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES"
+              ],
+              "maximum_weeks": 10,
+              "minimum_weeks": 6,
+              "phase": "P3"
+            },
+            {
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES"
+              ],
+              "maximum_weeks": 12,
+              "minimum_weeks": 8,
+              "phase": "P4"
+            },
+            {
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES"
+              ],
+              "maximum_weeks": 16,
+              "minimum_weeks": 8,
+              "phase": "P5"
+            },
+            {
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES"
+              ],
+              "maximum_weeks": 28,
+              "minimum_weeks": 16,
+              "phase": "P6"
+            },
+            {
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES"
+              ],
+              "maximum_weeks": 40,
+              "minimum_weeks": 16,
+              "phase": "P7"
+            },
+            {
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES"
+              ],
+              "maximum_weeks": 16,
+              "minimum_weeks": 8,
+              "phase": "P8"
+            }
+          ],
+          "scenarios": [
+            {
+              "base_weeks": {
+                "maximum": 103.7,
+                "minimum": 52.7
+              },
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES",
+                "BAS-ASSUME-PROGRAM-SCENARIOS",
+                "BAS-RISK-PROGRAM",
+                "BAS-MISSING-G2-DELAY"
+              ],
+              "core_fte": 8,
+              "id": "constrained",
+              "phase_overlap_basis_points": 8500,
+              "risk_reserve_basis_points": 3000,
+              "risk_reserve_weeks": {
+                "maximum": 31.11,
+                "minimum": 15.81
+              },
+              "shared_fte": 1,
+              "total_weeks": {
+                "maximum": 134.81,
+                "minimum": 68.51
+              }
+            },
+            {
+              "base_weeks": {
+                "maximum": 85.4,
+                "minimum": 43.4
+              },
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES",
+                "BAS-ASSUME-PROGRAM-SCENARIOS",
+                "BAS-RISK-PROGRAM",
+                "BAS-MISSING-G2-DELAY"
+              ],
+              "core_fte": 10,
+              "id": "recommended",
+              "phase_overlap_basis_points": 7000,
+              "risk_reserve_basis_points": 2500,
+              "risk_reserve_weeks": {
+                "maximum": 21.35,
+                "minimum": 10.85
+              },
+              "shared_fte": 1.5,
+              "total_weeks": {
+                "maximum": 106.75,
+                "minimum": 54.25
+              }
+            },
+            {
+              "base_weeks": {
+                "maximum": 73.2,
+                "minimum": 37.2
+              },
+              "basis_ids": [
+                "BAS-PLAN-PROGRAM-PHASES",
+                "BAS-ASSUME-PROGRAM-SCENARIOS",
+                "BAS-RISK-PROGRAM",
+                "BAS-MISSING-G2-DELAY"
+              ],
+              "core_fte": 12,
+              "id": "accelerated",
+              "phase_overlap_basis_points": 6000,
+              "risk_reserve_basis_points": 2000,
+              "risk_reserve_weeks": {
+                "maximum": 14.64,
+                "minimum": 7.44
+              },
+              "shared_fte": 2,
+              "total_weeks": {
+                "maximum": 87.84,
+                "minimum": 44.64
+              }
+            }
+          ],
+          "scope": "P3-P8"
+        },
+        "team_plan": {
+          "basis_ids": [
+            "BAS-ASSUME-WORKFORCE",
+            "BAS-ASSUME-PROGRAM-SCENARIOS"
+          ],
+          "content_specialist_fte": {
+            "maximum": 4,
+            "minimum": 2,
+            "recommended": 3
+          },
+          "productive_hours_per_fte_week": 28,
+          "scenarios": [
+            {
+              "basis_ids": [
+                "BAS-ASSUME-WORKFORCE",
+                "BAS-ASSUME-PROGRAM-SCENARIOS"
+              ],
+              "content_specialist_fte": 2,
+              "core_fte": 8,
+              "id": "constrained",
+              "productive_hours_per_week": 28,
+              "shared_fte": 1
+            },
+            {
+              "basis_ids": [
+                "BAS-ASSUME-WORKFORCE",
+                "BAS-ASSUME-PROGRAM-SCENARIOS"
+              ],
+              "content_specialist_fte": 3,
+              "core_fte": 10,
+              "id": "recommended",
+              "productive_hours_per_week": 28,
+              "shared_fte": 1.5
+            },
+            {
+              "basis_ids": [
+                "BAS-ASSUME-WORKFORCE",
+                "BAS-ASSUME-PROGRAM-SCENARIOS"
+              ],
+              "content_specialist_fte": 4,
+              "core_fte": 12,
+              "id": "accelerated",
+              "productive_hours_per_week": 28,
+              "shared_fte": 2
+            }
+          ]
+        },
+        "risk_items": 8,
+        "missing_measurements": 11,
+        "decisions": {
+          "all_numeric_outputs_are_non_price_planning_values": true,
+          "g2_approved": false,
+          "money_budget_estimated": false,
+          "playable_experience_proven": false,
+          "release_authority": false,
+          "schedule_is_delivery_commitment": false
+        }
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/resource-budget-policy-v1.json",
+        "policy_sha256": "d5092b10984c71640d52ced7ef3d758c3b18d9d26314e2b88992cf8f47e4fe82",
+        "schema": "Contracts/data-schema/resource-budget-report-v1.schema.json",
+        "schema_sha256": "b91d5bb7c9d89339b08690cfa89cd3addf4e61fe8fb3b74e0c6bc4f733b156e5",
+        "pilot": "Data/Performance/p2-19-conversion-pilot.json",
+        "pilot_sha256": "e693119bd8bb6c9200a441f73207ad4616c3cf380da0bac31de7131d7b715ff2"
+      },
+      "implementation": {
+        "source_files": 7,
+        "source_sha256": "1b990388048d332769c590c6810c938606d6f585748eeb44c89040efe22bfd57",
+        "generator": "Tools/TMXY.ResourceBudget/resource_budget.py",
+        "generator_sha256": "663d1cb037ba0c032d90ce666cd4d393585915b539e38da0f0f953b1a612568d",
+        "wrapper": "Tools/TMXY.ResourceBudget/New-ResourceBudgetReport.ps1",
+        "wrapper_sha256": "40c9ccb0baa7630ab873f633ecf798dffb0877272a8427115a2b25b886f47798",
+        "self_test_assertions": 12
+      },
+      "disclosure": {
+        "private_source_paths": false,
+        "exact_primary_keys": false,
+        "exact_observed_extrema": false,
+        "raw_table_rows": false,
+        "decoded_confidential_payloads": false,
+        "legacy_source_lines": false
+      },
+      "reproduction": {
+        "check_mode": false,
+        "repository_mount": "read-only",
+        "network": "none",
+        "builder_reference": "tmxy-backend-builder:p0-08",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-20"
+        ],
+        "detail": "Execute the fail-closed G2 review; open measurements remain explicit and do not grant schedule, price, playable, gate, or release authority."
+      }
+    },
     "assertions": [
       {
         "name": "Required file Contracts/data-schema/resource-budget-policy-v1.json",
@@ -6300,19 +8276,24 @@
         "name": "Unknown-field basis-category alias-byte and full-evidence negative cases fail closed",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Byte-identical isolated regeneration passes wrapper check mode",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
   "g2_core_resource_closure": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T14:56:43.4049825+08:00",
+    "captured_utc": "2026-08-30T02:15:03.982141+08:00",
     "task_id": "P2-20A",
     "criterion_id": "G2-06",
     "result": "PASS",
     "review_result": "BLOCKED",
     "task_status": "BLOCKED",
     "completion_criteria_satisfied": false,
-    "assertions_passed": 57,
+    "assertions_passed": 73,
     "assertions_failed": 0,
     "negative_cases": {
       "root_narrowing_rejected": true,
@@ -6323,15 +8304,15 @@
       "false_scope_completion_rejected": true,
       "conditional_required_zero_tamper_rejected": true,
       "conditional_required_metric_deletion_rejected": true,
-      "conditional_member_omission_rejected": false,
-      "conditional_member_duplicate_rejected": false,
+      "conditional_member_omission_rejected": true,
+      "conditional_member_duplicate_rejected": true,
       "conditional_member_count_tamper_rejected": true,
       "conditional_member_sha_tamper_rejected": true,
-      "conditional_member_value_rejected": false,
-      "asset_member_omission_rejected": false,
-      "asset_member_duplicate_rejected": false,
-      "asset_member_resolution_rejected": false,
-      "asset_member_heuristic_rejected": false,
+      "conditional_member_value_rejected": true,
+      "asset_member_omission_rejected": true,
+      "asset_member_duplicate_rejected": true,
+      "asset_member_resolution_rejected": true,
+      "asset_member_heuristic_rejected": true,
       "asset_binding_implicit_rejected": true,
       "asset_binding_false_zero_rejected": true,
       "asset_binding_first_candidate_rejected": true,
@@ -6354,12 +8335,12 @@
       "logical_gaps": 21024,
       "asset_structure_unresolved": 18,
       "conditional_required_missing": 29,
-      "asset_binding_resolved": 21292,
-      "asset_binding_ambiguous": 183,
-      "asset_binding_unresolved": 19,
+      "asset_binding_resolved": 21293,
+      "asset_binding_ambiguous": 189,
+      "asset_binding_unresolved": 12,
       "scope_complete": false
     },
-    "derived_check": "NOT_REQUESTED",
+    "derived_check": "PASS",
     "assertions": [
       {
         "name": "Required file Contracts/data-schema/g2-core-resource-closure-policy-v1.json",
@@ -6423,6 +8404,26 @@
       },
       {
         "name": "Required file Docs/Formats/G2-CORE-RESOURCE-CLOSURE.md",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file Data/Exports/P2-20/p2-20a-effective-asset-binding-workset.jsonl",
         "result": "PASS",
         "detail": ""
       },
@@ -6493,6 +8494,61 @@
       },
       {
         "name": "Tracked evidence exposes only anonymous workset counts and hashes",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Conditional member workset is complete unique closed and SHA-bound",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects an omitted conditional member",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects a duplicated conditional member",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects a fabricated member value field",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Asset binding workset is complete unique closed nonheuristic and SHA-bound",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects an omitted asset binding member",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects a duplicated asset binding member",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects a contradictory asset binding state",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Negative case rejects heuristic asset candidate selection",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Detailed export independently closes start reachable and gap sets",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Ignored detailed export bytes and line count are exact when deep verification is requested",
         "result": "PASS",
         "detail": ""
       },
@@ -6602,7 +8658,7 @@
         "detail": ""
       },
       {
-        "name": "All fifteen ordered prerequisite and supplemental inputs are uniquely exact-hash bound",
+        "name": "All twenty-two ordered prerequisite and supplemental inputs are uniquely exact-hash bound",
         "result": "PASS",
         "detail": ""
       },
@@ -6645,6 +8701,11 @@
         "name": "Tracked disclosure contains no sensitive payload classes",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Byte-identical isolated regeneration passes wrapper check mode",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -6657,8 +8718,8 @@
     "completion_criteria_satisfied": false,
     "g2_approved": false,
     "p3_authorized": false,
-    "verify_derived_sources": false,
-    "assertions_passed": 15,
+    "verify_derived_sources": true,
+    "assertions_passed": 19,
     "assertions_failed": 0,
     "negative_cases": {
       "unknown_field_rejected": true,
@@ -6680,7 +8741,12 @@
       "evidence_detail_count_tamper_rejected": true,
       "ambiguous_candidate_omission_rejected": true,
       "no_match_as_no_ref_approval_rejected": true,
-      "sensitive_value_key_path_line_primary_key_extrema_leak_rejected": true
+      "sensitive_value_key_path_line_primary_key_extrema_leak_rejected": true,
+      "detail_member_omission_rejected": true,
+      "detail_member_duplicate_rejected": true,
+      "detail_record_reordering_rejected": true,
+      "detail_first_candidate_selection_rejected": true,
+      "detail_raw_value_leak_rejected": true
     },
     "assertions": [
       {
@@ -6715,6 +8781,11 @@
       },
       {
         "name": "Required file Data/Inventory/p2-20a-aux-config-reference-evidence.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file Data/Exports/P2-20/p2-20a-aux-config-reference-candidates.jsonl",
         "result": "PASS",
         "detail": ""
       },
@@ -6757,6 +8828,21 @@
         "name": "Coverage matching authority duplicate and disclosure negatives fail closed",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Ignored detail is complete anonymous canonical unique and candidate-complete",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Ignored detail omission duplicate reorder first-candidate and leak negatives fail closed",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Byte-identical isolated regeneration passes wrapper check mode",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -6768,7 +8854,7 @@
     "completion_criteria_satisfied": false,
     "g2_06_satisfied": false,
     "p3_authorized": false,
-    "assertions": 30,
+    "assertions": 31,
     "failures": 0,
     "details": [
       {
@@ -6801,6 +8887,10 @@
       },
       {
         "name": "Required artifact g2_aux_semantic_support.py",
+        "result": "PASS"
+      },
+      {
+        "name": "Isolated deterministic regeneration",
         "result": "PASS"
       },
       {
@@ -6901,7 +8991,7 @@
     "completion_criteria_satisfied": false,
     "g2_06_satisfied": false,
     "p3_authorized": false,
-    "assertions": 30,
+    "assertions": 33,
     "failures": 0,
     "details": [
       {
@@ -6936,6 +9026,11 @@
       },
       {
         "name": "Required file New-G2AssetDescriptorDiagnostics.ps1",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Deterministic isolated regeneration",
         "result": "PASS",
         "detail": ""
       },
@@ -6980,6 +9075,11 @@
         "detail": ""
       },
       {
+        "name": "Strict target and edge dispositions close",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
         "name": "Target dispositions close",
         "result": "PASS",
         "detail": ""
@@ -6990,7 +9090,7 @@
         "detail": ""
       },
       {
-        "name": "Divergent transition measured",
+        "name": "Divergent partial rejection remains fail closed",
         "result": "PASS",
         "detail": ""
       },
@@ -7000,7 +9100,7 @@
         "detail": ""
       },
       {
-        "name": "Zero-valid transition remains unresolved",
+        "name": "Strict zero-valid transition records effective recovery",
         "result": "PASS",
         "detail": ""
       },
@@ -7021,6 +9121,11 @@
       },
       {
         "name": "Identity-normalized diagnostics remain fail closed",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Partial candidate rejection cannot resolve a target",
         "result": "PASS",
         "detail": ""
       },
@@ -7318,7 +9423,7 @@
         "detail": ""
       },
       {
-        "name": "Fifteen ordered inputs are hash and aggregate bound",
+        "name": "Thirteen ordered inputs are hash and aggregate bound",
         "result": "PASS",
         "detail": ""
       },
@@ -7348,7 +9453,7 @@
         "detail": ""
       },
       {
-        "name": "Effective unresolved state remains 19/24",
+        "name": "Strict failures retain exact effective recovery state",
         "result": "PASS",
         "detail": ""
       },
@@ -7438,7 +9543,7 @@
         "detail": ""
       },
       {
-        "name": "Negative: 15-target ambiguity reduction rejected",
+        "name": "Negative: 189-target ambiguity reduction rejected",
         "result": "PASS",
         "detail": ""
       },
@@ -7474,6 +9579,136 @@
       }
     ]
   },
+  "g2_asset_binding_recovery": {
+    "schema_version": 1,
+    "evidence_revision": "P2-20A.8-contract",
+    "result": "PASS",
+    "assertions": 24,
+    "passed": 24,
+    "failed": 0,
+    "details": [
+      {
+        "name": "Required file g2_asset_binding_recovery.py",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file recovery_common.py",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file New-G2AssetBindingRecovery.ps1",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file README.md",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file g2-asset-binding-recovery-policy-v1.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file g2-asset-binding-recovery-v1.schema.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file g2-asset-binding-recovery-detail-v1.schema.json",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Required file G2-ASSET-BINDING-RECOVERY.md",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Generator self-test",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Deterministic A.7-bound preparation",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Ignored attempt and manifest outputs exist",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Headerless seven-column ordered attempt contract",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Attempt upper bound has exact rule distribution",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Prepare manifest binds A.7 report inventory and ignored detail",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Attempt is explicitly not success or authority",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Fail-closed recovery policy",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Policy fixes seven plan columns",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Closed ignored-detail schema accepts valid proof",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Closed ignored-detail schema rejects unknown disclosure field",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Tracked framework excludes private paths values and authority claims",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Implementation files respect size gates",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Tracked finalized report and inventory exist",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Final report satisfies closed schema",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "Final report preserves A.4 authority and G2 blockers",
+        "result": "PASS",
+        "detail": ""
+      }
+    ]
+  },
   "g2_migration_decisions": {
     "schema_version": 2,
     "workflow_version": 2,
@@ -7482,7 +9717,7 @@
     "contract_assertions_satisfied": true,
     "completion_criteria_satisfied": false,
     "g2_07_satisfied": false,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "negative_cases": {
       "missing_rejected": true,
       "duplicate_rejected": true,
@@ -7652,6 +9887,11 @@
         "name": "Coverage authority action plan digest role verification and supersession negatives fail closed",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Locked isolated byte-for-byte regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -7660,7 +9900,7 @@
     "task_id": "P2-12",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_legacy_sources": false,
+    "verify_legacy_sources": true,
     "summary": {
       "files": 40090,
       "bytes": 8882019027,
@@ -7762,7 +10002,195 @@
       "unresolved_policy": "retain and route; never guess a missing headerless descriptor",
       "corrupt_policy": "retain source hash and parser error; never repair or delete during inventory"
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:13:52.0366258+08:00",
+      "result": "PASS",
+      "task": "P2-12",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "client_version": "3.0.0.413",
+        "manifest": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+        "manifest_sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3",
+        "selected_set_sha256": "d24dfa7aec9552402bc29b0280749dac3dd86edcef15c745695d0b3d60279a63",
+        "files": 40090,
+        "bytes": 8882019027,
+        "source_copy_policy": "reference_only"
+      },
+      "summary": {
+        "files": 40090,
+        "bytes": 8882019027,
+        "structurally_valid": 39290,
+        "unresolved_structure": 786,
+        "corrupt": 14,
+        "unsupported": 0,
+        "families": [
+          {
+            "family": "anim",
+            "files": 1069,
+            "bytes": 655802200,
+            "pass": 1039,
+            "unresolved": 30,
+            "corrupt": 0,
+            "package_missing": 25,
+            "package_ambiguous_equivalent": 100,
+            "package_ambiguous_divergent": 8
+          },
+          {
+            "family": "mp3",
+            "files": 64,
+            "bytes": 124002521,
+            "pass": 64,
+            "unresolved": 0,
+            "corrupt": 0,
+            "package_missing": 0,
+            "package_ambiguous_equivalent": 0,
+            "package_ambiguous_divergent": 0
+          },
+          {
+            "family": "qtx",
+            "files": 24798,
+            "bytes": 3910277648,
+            "pass": 24042,
+            "unresolved": 756,
+            "corrupt": 0,
+            "package_missing": 672,
+            "package_ambiguous_equivalent": 3517,
+            "package_ambiguous_divergent": 391
+          },
+          {
+            "family": "skem",
+            "files": 1068,
+            "bytes": 515443174,
+            "pass": 1066,
+            "unresolved": 0,
+            "corrupt": 2,
+            "package_missing": 23,
+            "package_ambiguous_equivalent": 106,
+            "package_ambiguous_divergent": 2
+          },
+          {
+            "family": "sm",
+            "files": 2924,
+            "bytes": 2307762148,
+            "pass": 2912,
+            "unresolved": 0,
+            "corrupt": 12,
+            "package_missing": 112,
+            "package_ambiguous_equivalent": 506,
+            "package_ambiguous_divergent": 2
+          },
+          {
+            "family": "ter",
+            "files": 8876,
+            "bytes": 1309215704,
+            "pass": 8876,
+            "unresolved": 0,
+            "corrupt": 0,
+            "package_missing": 0,
+            "package_ambiguous_equivalent": 0,
+            "package_ambiguous_divergent": 0
+          },
+          {
+            "family": "wav",
+            "files": 450,
+            "bytes": 54949730,
+            "pass": 450,
+            "unresolved": 0,
+            "corrupt": 0,
+            "package_missing": 0,
+            "package_ambiguous_equivalent": 0,
+            "package_ambiguous_divergent": 0
+          },
+          {
+            "family": "zif",
+            "files": 841,
+            "bytes": 4565902,
+            "pass": 841,
+            "unresolved": 0,
+            "corrupt": 0,
+            "package_missing": 0,
+            "package_ambiguous_equivalent": 0,
+            "package_ambiguous_divergent": 0
+          }
+        ],
+        "package_candidate_policy": "retain all exact logical-name candidates; classify equivalent or divergent descriptors",
+        "unresolved_policy": "retain and route; never guess a missing headerless descriptor",
+        "corrupt_policy": "retain source hash and parser error; never repair or delete during inventory"
+      },
+      "catalog": {
+        "path": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+        "tracked": false,
+        "lines": 40090,
+        "bytes": 16802213,
+        "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+        "contains_payload_bytes": false,
+        "contains_decoded_assets": false
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/full-asset-inventory-policy-v1.json",
+        "policy_sha256": "9497b6cd7a537ebff684208dd037c8c92ee23c4e8e23b62ed1b3827d76049af2",
+        "schema": "Contracts/data-schema/full-asset-inventory-v1.schema.json",
+        "schema_sha256": "ddbdf5b4a56e99b159de4e097756a8d67b6d2a1a6fa0cf2440918c5c3e6699b6"
+      },
+      "dependencies": {
+        "p2-01-package-inventory.json": "5b4ff6c7921458148a986ef02a60330ee560e1051f380b53b2a0f5be43c6c59d",
+        "p1-13-qtx-texture.json": "fb2b015d558bec285c2ccaaea4354cb85f6b92608e9ff6dc41e62286181432bb",
+        "p1-14-sm-static-mesh.json": "9dd92fb17c7faa0cee78d5d61458b49193cc68256955b3fcbfaaa97d48e20157",
+        "p1-15-skem-skeletal-mesh.json": "8e3a011e24dbc473cf494f6229521c550939b99253e887f9ae935b99674ba050",
+        "p1-16-anim-animation.json": "f352dbc095b74b3a5a131a23591271872719ee6d132f960534f019ea55cd4641",
+        "p1-17-ter-terrain.json": "780d8d8926d9d7376d8d560991b489ae506003c95802eb2aed362ce65dbe8832",
+        "p1-18-auxiliary-assets.json": "2059d6d0d071e1db0906cfbc2bd606be77ee57e26381a780af9a9dd644df1d12"
+      },
+      "implementation": {
+        "source_files": 146,
+        "source_sha256": "9e630d95438a6201ee805e80e84b07f0872bcc3903feebce6d08dbefd911d636",
+        "scanner": "Tools/TMXY.AssetInventory/apps/asset_inventory_main.cpp",
+        "generator": "Tools/TMXY.AssetInventory/New-FullAssetInventory.ps1",
+        "production_readers": [
+          "TMXY.Texture",
+          "TMXY.StaticMesh",
+          "TMXY.SkeletalMesh",
+          "TMXY.Animation",
+          "TMXY.Terrain"
+        ],
+        "dependency_binding": "stable task result, completion state, and source fingerprint",
+        "package_names_emitted": false,
+        "object_names_emitted": false,
+        "payload_bytes_emitted": false
+      },
+      "builder": {
+        "reference": "tmxy-backend-builder:p0-08",
+        "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "user": "tmxy"
+      },
+      "isolation": {
+        "source_mount": "read-only",
+        "client_mount": "read-only",
+        "network": "none",
+        "root_filesystem": "read-only",
+        "capabilities": "none",
+        "no_new_privileges": true,
+        "build_storage": "ephemeral_tmpfs"
+      },
+      "execution": {
+        "exit_code": 0,
+        "custom_asset_lines": 38735,
+        "auxiliary_asset_lines": 1355,
+        "stderr_sha256": "b5ba11edfb11e7c1287c88060322c6ff5c85bf5e21376c5ca825c755ad93e806"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-13",
+          "P2-14",
+          "P2-15",
+          "P2-16"
+        ],
+        "detail": "Build reference closure, duplicate/orphan analysis, conversion routing, and content-addressed cache policy from this catalog."
+      }
+    },
     "assertions": [
       {
         "name": "Required file full-asset-inventory-policy-v1.json",
@@ -7888,6 +10316,11 @@
         "name": "Documentation preserves unresolved and corrupt evidence semantics",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic legacy-source recheck passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -7896,7 +10329,7 @@
     "task_id": "P2-13",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "graph": {
       "path": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
       "tracked": false,
@@ -7928,7 +10361,270 @@
       "package_ambiguous_edges": 21146,
       "heuristic_target_selections": 0
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:14:42.2878764+08:00",
+      "task_id": "P2-13",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "source_build": "qy-3.0.0.413",
+        "package_graph_sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57",
+        "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+        "copy_policy": "reference_only"
+      },
+      "graph": {
+        "path": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
+        "tracked": false,
+        "lines": 683355,
+        "bytes": 205392166,
+        "sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+        "records": {
+          "asset_node": 40090,
+          "package_asset_edge": 61511,
+          "package_edge": 147349,
+          "package_node": 121715,
+          "root": 24465,
+          "table_domain_edge": 23227,
+          "table_domain_node": 9278,
+          "table_fk_edge": 54561,
+          "table_node": 87044,
+          "table_package_edge": 113484,
+          "table_scoped_edge": 631
+        }
+      },
+      "roots": {
+        "character": 1096,
+        "scene": 142,
+        "skill": 23227
+      },
+      "table_closure": {
+        "canonical_rows": 87044,
+        "domain_nodes": 9278,
+        "foreign_keys": {
+          "canonical_edges": 54561,
+          "dangling": 0,
+          "physical_active_references": 55361,
+          "physical_inactive_references": 129154,
+          "rules": 14
+        },
+        "normalized_hashes_verified": 12,
+        "object_references": {
+          "by_rule": {
+            "item_effect_geometry": {
+              "unresolved": 5
+            },
+            "item_geometry": {
+              "unique": 2057,
+              "unresolved": 7
+            },
+            "item_icon": {
+              "unique": 28985,
+              "unresolved": 92
+            },
+            "item_shop_icon": {
+              "ambiguous": 6344,
+              "unique": 1316,
+              "unresolved": 235
+            },
+            "skill_action_effect": {
+              "ambiguous": 379,
+              "unique": 4993,
+              "unresolved": 72
+            },
+            "skill_explosion_effect": {
+              "ambiguous": 89,
+              "unique": 2945,
+              "unresolved": 86
+            },
+            "skill_go_action": {
+              "ambiguous": 33,
+              "unique": 14721,
+              "unresolved": 248
+            },
+            "skill_icon": {
+              "unique": 17639,
+              "unresolved": 4151
+            },
+            "skill_prepare_action": {
+              "unique": 13117
+            },
+            "skill_projectile_effect": {
+              "ambiguous": 76,
+              "unique": 1136,
+              "unresolved": 10
+            },
+            "skill_start_action": {
+              "unique": 39
+            },
+            "state_effect_0": {
+              "ambiguous": 21,
+              "unique": 5289,
+              "unresolved": 145
+            },
+            "state_effect_1": {
+              "ambiguous": 3,
+              "unique": 563
+            },
+            "state_icon": {
+              "unique": 8578,
+              "unresolved": 94
+            },
+            "unit_class_icon": {
+              "unresolved": 16
+            }
+          },
+          "canonical_edges": 113484,
+          "physical_nonempty_references": 113484,
+          "resolution": {
+            "ambiguous": 6945,
+            "unique": 101378,
+            "unresolved": 5161
+          },
+          "rules": 16,
+          "runtime_assert_missing_values": 29,
+          "runtime_assert_rows": 5993,
+          "runtime_assert_unresolved_values": 0,
+          "scoped_edges": 631,
+          "scoped_rules": 3,
+          "wrong_class_candidate_values": 9
+        },
+        "physical_rows": 87844,
+        "table_count": 12
+      },
+      "package_closure": {
+        "edges": 147349,
+        "nodes": 121715,
+        "recorded_resolution_mismatches": 0,
+        "resolution": {
+          "ambiguous": 21146,
+          "scoped-terminal": 30245,
+          "unique": 94882,
+          "unresolved": 1076
+        }
+      },
+      "asset_closure": {
+        "catalog_candidate_mismatches": 0,
+        "families": {
+          "anim": {
+            "files": 1069,
+            "linked_ambiguous": 108,
+            "linked_unique": 936,
+            "structure_pass": 1039,
+            "structure_unresolved": 30,
+            "unlinked": 25
+          },
+          "mp3": {
+            "files": 64,
+            "structure_pass": 64,
+            "unlinked": 64
+          },
+          "qtx": {
+            "files": 24798,
+            "linked_ambiguous": 3914,
+            "linked_unique": 20212,
+            "structure_pass": 24042,
+            "structure_unresolved": 756,
+            "unlinked": 672
+          },
+          "skem": {
+            "files": 1068,
+            "linked_ambiguous": 108,
+            "linked_unique": 935,
+            "structure_fail": 2,
+            "structure_pass": 1066,
+            "unlinked": 25
+          },
+          "sm": {
+            "files": 2924,
+            "linked_ambiguous": 515,
+            "linked_unique": 2286,
+            "structure_fail": 12,
+            "structure_pass": 2912,
+            "unlinked": 123
+          },
+          "ter": {
+            "files": 8876,
+            "linked_ambiguous": 8744,
+            "structure_pass": 8876,
+            "unlinked": 132
+          },
+          "wav": {
+            "files": 450,
+            "linked_unique": 419,
+            "structure_pass": 450,
+            "unlinked": 31
+          },
+          "zif": {
+            "files": 841,
+            "structure_pass": 841,
+            "unlinked": 841
+          }
+        },
+        "files": 40090,
+        "link_edges": 61511
+      },
+      "health": {
+        "core_dangling_references": 0,
+        "nullable_object_unresolved": 5161,
+        "nullable_object_ambiguous": 6945,
+        "legacy_runtime_assert_rows": 5993,
+        "legacy_runtime_assert_missing_values": 29,
+        "legacy_runtime_assert_unresolved_values": 0,
+        "package_unresolved_edges": 1076,
+        "package_ambiguous_edges": 21146,
+        "heuristic_target_selections": 0
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/reference-closure-policy-v1.json",
+        "policy_sha256": "6442a52fb357a94b3a71b0769353839795f392aad85bb9e0567f0d35ccde70c1",
+        "schema": "Contracts/data-schema/reference-closure-v1.schema.json",
+        "schema_sha256": "082592a2abaa7d50ab4c91c5687830ca4c7db9ca10c599ffc0ad90c0aefc368b",
+        "core_dangling_definition": "declared authoritative P2-07 foreign-key rows only"
+      },
+      "implementation": {
+        "source_files": 4,
+        "source_sha256": "9712bb1a0074170ba5d38cfbeb6f64beadd269291f9537bff9bc072af966d372",
+        "self_test_assertions": 9,
+        "legacy_consumer_evidence_sha256": {
+          "ClientCode/Base/Src/QDataTable.cpp": "3df15f58bf45de80aa7a8040a1f522f135e7b09487990b40b04805c78937b869",
+          "ClientCode/Game/Src/QCLItem.cpp": "22aa6cc65f60d00a4a7c7f2e24d1f78a8f45a09427199e2687e39c81e0acfb78",
+          "ClientCode/Game/Src/QCLSkill.cpp": "7d39e43751feb4acd9e13b920c8ab85933a9e3cb84251654e2bf772247bd991f",
+          "ClientCode/Game/Src/QCLState.cpp": "55950ee2e866c6447f0e91593791ed5557951cd4b382b8b73f84f5d8cef54dc6",
+          "ClientCode/Game/Src/QNetUnit.cpp": "a1daffbccaf591994833fe0e32a5bd07110ff90bb0f7caabf08e5a5335a8530a",
+          "ClientCode/Game/Src/QUnit.cpp": "2050e3c8abc93852d72598bc0d322f3b2d51b44bbdf730dac2108d37148d97cd"
+        },
+        "package_name_lookup": "ascii-case-insensitive-hash"
+      },
+      "disclosure": {
+        "raw_table_values_emitted": false,
+        "raw_primary_keys_emitted": false,
+        "raw_package_object_names_emitted": false,
+        "asset_paths_only_in_ignored_graph": true,
+        "graph_committed_to_git": false,
+        "payload_bytes_copied": false
+      },
+      "reproduction": {
+        "generator": "Tools/TMXY.ReferenceClosure/New-ReferenceClosure.ps1",
+        "query": "Tools/TMXY.ReferenceClosure/Find-ReferenceClosure.ps1",
+        "check_mode": "-Check",
+        "source_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-14",
+          "P2-15",
+          "P2-16",
+          "P2-18"
+        ],
+        "detail": "Use explicit linked, ambiguous, unresolved, and unlinked sets; do not delete assets during P2-14."
+      }
+    },
     "assertions": [
       {
         "name": "Required file reference-closure-policy-v1.json",
@@ -8079,6 +10775,11 @@
         "name": "Character scene and skill query modes traverse without raw values",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic closure regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -8087,7 +10788,7 @@
     "task_id": "P2-14",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "path": "Data/Exports/P2-14/p2-14-asset-health.jsonl",
       "tracked": false,
@@ -8235,7 +10936,203 @@
       "deletion_recommendations": 0,
       "semantic_equivalence_claims_without_digest": 0
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:14:43.1330597+08:00",
+      "task_id": "P2-14",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "source_build": "qy-3.0.0.413",
+        "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+        "reference_closure_sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+        "source_copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-14/p2-14-asset-health.jsonl",
+        "tracked": false,
+        "lines": 42356,
+        "bytes": 23686877,
+        "sha256": "9a0db19c7809da06e7225ec900864f0854c8b61af224366aac746be312880b9f",
+        "records": {
+          "asset_health": 40090,
+          "exact_duplicate_group": 1743,
+          "structural_review_group": 523
+        }
+      },
+      "summary": {
+        "assets": {
+          "by_family": {
+            "anim": {
+              "root_reachable": 1044,
+              "unlinked_identity_rule_no_match": 25
+            },
+            "mp3": {
+              "unlinked_no_identity_rule": 64
+            },
+            "qtx": {
+              "linked_outside_declared_roots": 21344,
+              "root_reachable": 2782,
+              "unlinked_identity_rule_no_match": 672
+            },
+            "skem": {
+              "root_reachable": 1043,
+              "unlinked_identity_rule_no_match": 25
+            },
+            "sm": {
+              "linked_outside_declared_roots": 2619,
+              "root_reachable": 182,
+              "unlinked_identity_rule_no_match": 123
+            },
+            "ter": {
+              "root_reachable": 8744,
+              "unlinked_identity_rule_no_match": 132
+            },
+            "wav": {
+              "linked_outside_declared_roots": 156,
+              "root_reachable": 263,
+              "unlinked_identity_rule_no_match": 31
+            },
+            "zif": {
+              "unlinked_no_identity_rule": 841
+            }
+          },
+          "bytes": 8882019027,
+          "files": 40090,
+          "reference_states": {
+            "linked_outside_declared_roots": 24119,
+            "root_reachable": 14058,
+            "unlinked_identity_rule_no_match": 1008,
+            "unlinked_no_identity_rule": 905
+          },
+          "root_count": 24465,
+          "root_reachable_graph_nodes": 60512
+        },
+        "duplicates": {
+          "by_family": {
+            "anim": {
+              "exact_files": 471,
+              "exact_groups": 155,
+              "redundant_bytes_within_family": 203970664,
+              "redundant_files_within_family": 316,
+              "structural_review_files": 268,
+              "structural_review_groups": 47
+            },
+            "mp3": {
+              "exact_files": 6,
+              "exact_groups": 3,
+              "redundant_bytes_within_family": 5726390,
+              "redundant_files_within_family": 3,
+              "structural_review_files": 0,
+              "structural_review_groups": 0
+            },
+            "qtx": {
+              "exact_files": 2880,
+              "exact_groups": 1326,
+              "redundant_bytes_within_family": 242876664,
+              "redundant_files_within_family": 1554,
+              "structural_review_files": 23905,
+              "structural_review_groups": 272
+            },
+            "skem": {
+              "exact_files": 154,
+              "exact_groups": 76,
+              "redundant_bytes_within_family": 39406874,
+              "redundant_files_within_family": 78,
+              "structural_review_files": 132,
+              "structural_review_groups": 41
+            },
+            "sm": {
+              "exact_files": 162,
+              "exact_groups": 64,
+              "redundant_bytes_within_family": 17505262,
+              "redundant_files_within_family": 98,
+              "structural_review_files": 252,
+              "structural_review_groups": 98
+            },
+            "ter": {
+              "exact_files": 5325,
+              "exact_groups": 81,
+              "redundant_bytes_within_family": 773494744,
+              "redundant_files_within_family": 5244,
+              "structural_review_files": 8876,
+              "structural_review_groups": 9
+            },
+            "wav": {
+              "exact_files": 55,
+              "exact_groups": 24,
+              "redundant_bytes_within_family": 3822950,
+              "redundant_files_within_family": 31,
+              "structural_review_files": 162,
+              "structural_review_groups": 44
+            },
+            "zif": {
+              "exact_files": 49,
+              "exact_groups": 14,
+              "redundant_bytes_within_family": 84281,
+              "redundant_files_within_family": 35,
+              "structural_review_files": 34,
+              "structural_review_groups": 12
+            }
+          },
+          "cross_family_exact_groups": 0,
+          "exact_files": 9102,
+          "exact_groups": 1743,
+          "redundant_bytes": 1286887829,
+          "redundant_files": 7359,
+          "semantic_equivalence_proven_groups": 0,
+          "structural_review_files": 33629,
+          "structural_review_groups": 523
+        },
+        "identity_rule_families": [
+          "anim",
+          "qtx",
+          "skem",
+          "sm",
+          "ter",
+          "wav"
+        ],
+        "deletion_recommendations": 0,
+        "semantic_equivalence_claims_without_digest": 0
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/asset-health-policy-v1.json",
+        "policy_sha256": "1fe5a3d8fc21e6ace93d03c669f6052ad815bf57450d35934040f33b51c276f0",
+        "schema": "Contracts/data-schema/asset-health-v1.schema.json",
+        "schema_sha256": "1d0fce185df4fe8b9ba9c4aeb533a8234b4ef5a1346bc9a8cb83217dfd17c59f",
+        "orphan_definition": "root reachability review state; never automatic deletion proof"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "18bebab571717f580aead3e39a2b38a15f2cdaaf200a8464d29795bd1ded7ca2",
+        "self_test_assertions": 8,
+        "generator": "Tools/TMXY.AssetHealth/New-AssetHealthReport.ps1",
+        "query": "Tools/TMXY.AssetHealth/Find-AssetHealth.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_asset_paths": false,
+        "tracked_evidence_contains_per_asset_hashes": false,
+        "full_report_committed_to_git": false,
+        "payload_bytes_copied": false,
+        "automatic_deletions_performed": 0
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "source_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-15",
+          "P2-16",
+          "P2-18"
+        ],
+        "detail": "Route exact duplicates and unreachable candidates for review; never delete from P2-14 evidence alone."
+      }
+    },
     "assertions": [
       {
         "name": "Required file asset-health-policy-v1.json",
@@ -8361,6 +11258,11 @@
         "name": "All review states and both group modes are queryable without payloads",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic asset health regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -8369,7 +11271,7 @@
     "task_id": "P2-15",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "path": "Data/Exports/P2-15/p2-15-conversion-routing.jsonl",
       "tracked": false,
@@ -8513,7 +11415,201 @@
       "descriptor_bound_alias_reuse": 0,
       "deletion_recommendations": 0
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:14:47.1457992+08:00",
+      "task_id": "P2-15",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "source_build": "qy-3.0.0.413",
+        "asset_health_report_sha256": "9a0db19c7809da06e7225ec900864f0854c8b61af224366aac746be312880b9f",
+        "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+        "reference_closure_sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+        "source_copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-15/p2-15-conversion-routing.jsonl",
+        "tracked": false,
+        "lines": 40090,
+        "bytes": 21021383,
+        "sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559"
+      },
+      "summary": {
+        "assets": {
+          "alias_reuse": 5489,
+          "bytes": 8882019027,
+          "conversion_jobs": 34601,
+          "files": 40090
+        },
+        "routes": {
+          "automatic-qualified-interchange": {
+            "alias_reuse": 5420,
+            "bytes": 8534384165,
+            "conversion_jobs": 32515,
+            "files": 37935,
+            "fixed_engineering_hours": 40.0,
+            "item_human_hours": 352.25,
+            "machine_seconds": 97545,
+            "planning_human_hours": 392.25
+          },
+          "automatic-standard-audio": {
+            "alias_reuse": 34,
+            "bytes": 178952251,
+            "conversion_jobs": 480,
+            "files": 514,
+            "fixed_engineering_hours": 24.0,
+            "item_human_hours": 9.77,
+            "machine_seconds": 2400,
+            "planning_human_hours": 33.77
+          },
+          "manual-descriptor-recovery": {
+            "alias_reuse": 0,
+            "bytes": 144791420,
+            "conversion_jobs": 786,
+            "files": 786,
+            "fixed_engineering_hours": 80.0,
+            "item_human_hours": 393.0,
+            "machine_seconds": 0,
+            "planning_human_hours": 473.0
+          },
+          "manual-repair-or-replace": {
+            "alias_reuse": 0,
+            "bytes": 19325289,
+            "conversion_jobs": 14,
+            "files": 14,
+            "fixed_engineering_hours": 32.0,
+            "item_human_hours": 112.0,
+            "machine_seconds": 0,
+            "planning_human_hours": 144.0
+          },
+          "semi-automatic-navigation-adaptation": {
+            "alias_reuse": 35,
+            "bytes": 4565902,
+            "conversion_jobs": 806,
+            "files": 841,
+            "fixed_engineering_hours": 160.0,
+            "item_human_hours": 201.675,
+            "machine_seconds": 8060,
+            "planning_human_hours": 361.675
+          }
+        },
+        "priorities": {
+          "P0-first-playable-slice": {
+            "alias_reuse": 5216,
+            "bytes": 2958384062,
+            "conversion_jobs": 8842,
+            "files": 14058,
+            "item_human_hours": 122.95,
+            "machine_seconds": 27004
+          },
+          "P1-linked-content": {
+            "alias_reuse": 94,
+            "bytes": 5594899826,
+            "conversion_jobs": 24025,
+            "files": 24119,
+            "item_human_hours": 288.36,
+            "machine_seconds": 72124
+          },
+          "P2-unlinked-review": {
+            "alias_reuse": 141,
+            "bytes": 200166716,
+            "conversion_jobs": 867,
+            "files": 1008,
+            "item_human_hours": 454.475,
+            "machine_seconds": 512
+          },
+          "P3-identity-rule-gap": {
+            "alias_reuse": 38,
+            "bytes": 128568423,
+            "conversion_jobs": 867,
+            "files": 905,
+            "item_human_hours": 202.91,
+            "machine_seconds": 8365
+          }
+        },
+        "tiers": {
+          "automatic": {
+            "alias_reuse": 5454,
+            "bytes": 8713336416,
+            "conversion_jobs": 32995,
+            "files": 38449,
+            "item_human_hours": 362.02,
+            "machine_seconds": 99945
+          },
+          "manual": {
+            "alias_reuse": 0,
+            "bytes": 164116709,
+            "conversion_jobs": 800,
+            "files": 800,
+            "item_human_hours": 505.0,
+            "machine_seconds": 0
+          },
+          "semi-automatic": {
+            "alias_reuse": 35,
+            "bytes": 4565902,
+            "conversion_jobs": 806,
+            "files": 841,
+            "item_human_hours": 201.675,
+            "machine_seconds": 8060
+          }
+        },
+        "duplicate_handling": {
+          "exact-duplicate-review-only": 3351,
+          "safe-reuse-alias": 5489,
+          "safe-reuse-representative": 262,
+          "unique": 30988
+        },
+        "estimates": {
+          "basis": "planning coefficient, not benchmark or schedule commitment",
+          "fixed_engineering_hours": 336.0,
+          "item_human_hours": 1068.695,
+          "machine_seconds": 108005,
+          "planning_human_hours": 1404.695
+        },
+        "unclassified_assets": 0,
+        "descriptor_bound_alias_reuse": 0,
+        "deletion_recommendations": 0
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/conversion-routing-policy-v1.json",
+        "policy_sha256": "f545654c1838aae4f2d6bc1adf9e8667b91b4e8c842ebf84ed482f33eaf94563",
+        "schema": "Contracts/data-schema/conversion-routing-v1.schema.json",
+        "schema_sha256": "a57e24917a99610cf671dfec790a9ff50b64e586f2b47d9dc3365e60ad363c32",
+        "estimate_authority": "planning coefficient only; P2-19 re-estimation required"
+      },
+      "implementation": {
+        "source_files": 3,
+        "source_sha256": "f5f0c843f810e1588f451db7c982e177b9f6facc771006d4b554b62b54f07e76",
+        "self_test_assertions": 5,
+        "generator": "Tools/TMXY.ConversionRouting/New-ConversionRouting.ps1",
+        "query": "Tools/TMXY.ConversionRouting/Find-ConversionRoute.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_asset_paths": false,
+        "tracked_evidence_contains_per_asset_hashes": false,
+        "full_report_committed_to_git": false,
+        "payload_bytes_copied": false,
+        "source_aliases_removed": 0,
+        "automatic_deletions_performed": 0
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "source_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-16",
+          "P2-18",
+          "P2-19"
+        ],
+        "detail": "Build content-addressed invalidation and then replace planning coefficients with measured pilot throughput."
+      }
+    },
     "assertions": [
       {
         "name": "Required file conversion-routing-policy-v1.json",
@@ -8634,6 +11730,11 @@
         "name": "All routes tiers priorities and safe aliases are queryable without payloads",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic conversion routing regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
@@ -8642,13 +11743,13 @@
     "task_id": "P2-16",
     "result": "PASS",
     "completion_criteria_satisfied": true,
-    "verify_derived_sources": false,
+    "verify_derived_sources": true,
     "report": {
       "path": "Data/Exports/P2-16/p2-16-conversion-cache-plan.jsonl",
       "tracked": false,
       "lines": 40090,
       "bytes": 28389045,
-      "sha256": "f910c661fb842c25ae6209c97211eb2b0ed13525816276e10b27339d584128fa"
+      "sha256": "2b150bad66f0b06caf4d49b9b96a9b7ca010d3392c2078cb8110744eb48fe7b2"
     },
     "summary": {
       "assets": {
@@ -8752,7 +11853,182 @@
       "output_hash_verification_required": true,
       "shared_cache_write_authorized": false
     },
-    "local_check": null,
+    "local_check": {
+      "schema_version": 1,
+      "captured_utc": "2026-08-30T02:14:53.4892485+08:00",
+      "task_id": "P2-16",
+      "result": "PASS",
+      "task_status": "COMPLETE",
+      "completion_criteria_satisfied": true,
+      "input": {
+        "source_build": "qy-3.0.0.413",
+        "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+        "conversion_routing_sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559",
+        "routing_policy_sha256": "f545654c1838aae4f2d6bc1adf9e8667b91b4e8c842ebf84ed482f33eaf94563",
+        "source_copy_policy": "reference_only"
+      },
+      "report": {
+        "path": "Data/Exports/P2-16/p2-16-conversion-cache-plan.jsonl",
+        "tracked": false,
+        "lines": 40090,
+        "bytes": 28389045,
+        "sha256": "2b150bad66f0b06caf4d49b9b96a9b7ca010d3392c2078cb8110744eb48fe7b2"
+      },
+      "summary": {
+        "assets": {
+          "aliases": 5489,
+          "bytes": 8882019027,
+          "conversion_jobs": 34601,
+          "files": 40090
+        },
+        "by_family": {
+          "anim": {
+            "aliases": 0,
+            "blocked_jobs": 30,
+            "bytes": 655802200,
+            "conversion_jobs": 1069,
+            "files": 1069,
+            "ready_jobs": 1039
+          },
+          "mp3": {
+            "aliases": 3,
+            "blocked_jobs": 0,
+            "bytes": 124002521,
+            "conversion_jobs": 61,
+            "files": 64,
+            "ready_jobs": 61
+          },
+          "qtx": {
+            "aliases": 0,
+            "blocked_jobs": 756,
+            "bytes": 3910277648,
+            "conversion_jobs": 24798,
+            "files": 24798,
+            "ready_jobs": 24042
+          },
+          "skem": {
+            "aliases": 78,
+            "blocked_jobs": 2,
+            "bytes": 515443174,
+            "conversion_jobs": 990,
+            "files": 1068,
+            "ready_jobs": 988
+          },
+          "sm": {
+            "aliases": 98,
+            "blocked_jobs": 12,
+            "bytes": 2307762148,
+            "conversion_jobs": 2826,
+            "files": 2924,
+            "ready_jobs": 2814
+          },
+          "ter": {
+            "aliases": 5244,
+            "blocked_jobs": 0,
+            "bytes": 1309215704,
+            "conversion_jobs": 3632,
+            "files": 8876,
+            "ready_jobs": 3632
+          },
+          "wav": {
+            "aliases": 31,
+            "blocked_jobs": 0,
+            "bytes": 54949730,
+            "conversion_jobs": 419,
+            "files": 450,
+            "ready_jobs": 419
+          },
+          "zif": {
+            "aliases": 35,
+            "blocked_jobs": 0,
+            "bytes": 4565902,
+            "conversion_jobs": 806,
+            "files": 841,
+            "ready_jobs": 806
+          }
+        },
+        "cache_keys": {
+          "absolute_paths_in_key": 0,
+          "alias_assignments": 5489,
+          "assets_with_ready_key": 39290,
+          "blocked_manual_jobs": 800,
+          "distinct_ready_keys": 33801,
+          "ready_jobs": 33801,
+          "timestamps_in_key": 0
+        },
+        "invalidation_proof": {
+          "descriptor_graph_mutation_changed_keys": 32515,
+          "identity_rebuild_stable_keys": 33801,
+          "routing_policy_mutation_changed_keys": 33801,
+          "source_mutation_changed_keys": 1,
+          "target_profile_mutation_changed_keys": 33801,
+          "tool_mutation_changed_keys_by_family": {
+            "anim": 1039,
+            "mp3": 61,
+            "qtx": 24042,
+            "skem": 988,
+            "sm": 2814,
+            "ter": 3632,
+            "wav": 419,
+            "zif": 806
+          }
+        },
+        "output_hash_verification_required": true,
+        "shared_cache_write_authorized": false
+      },
+      "key_inputs": {
+        "converter_source_sha256": {
+          "anim": "e5d54b753c036b9b2bc722ed89295af55eff6c5e31ddffe1f065ac95a182e6a4",
+          "mp3": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
+          "qtx": "19d22a2616b17d7a41f7d5921388ada36dcdba34bdaccd9061fee4d2af72821c",
+          "skem": "c2bc89fbaba9b2b31c4c7cebe04c465fbefb209ac151278ea9e42fc4c73b496e",
+          "sm": "3b4c77bcc1f3fbb5ac2db8873d454aab6261ce8919683182aefd2f8091ca5ee4",
+          "ter": "2b291269a9eba45c1b5b6e3bbc734661009d5a8583f9ebc24040c49700da0d07",
+          "wav": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
+          "zif": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf"
+        },
+        "descriptor_graph_sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57",
+        "interchange_source_sha256": "894784e708e9f66d652789d001d0f3493f75177bccfb5ac899a014fae9dcfb22",
+        "routing_policy_sha256": "f545654c1838aae4f2d6bc1adf9e8667b91b4e8c842ebf84ed482f33eaf94563",
+        "target_profile_sha256": "bb265d50613470ad8998a40f73a3d1adb2c3ac45ca91eaff3e9ac581bac212d1"
+      },
+      "contracts": {
+        "policy": "Contracts/data-schema/conversion-cache-policy-v1.json",
+        "policy_sha256": "0191ba8ffa1b3c1736a7df830201295dcc3a6a6762592a6cbf35f4f465103648",
+        "schema": "Contracts/data-schema/conversion-cache-v1.schema.json",
+        "schema_sha256": "94dc52ffd1b1ea71bc5b2dc35da837dfd5d9bf2434972ea16f71990e02695bb3"
+      },
+      "implementation": {
+        "source_files": 4,
+        "source_sha256": "dc44f3c7a6e6533d20f937f2d9b3824112c74001de7e11e9dec29e9aa628635a",
+        "self_test_assertions": 5,
+        "generator": "Tools/TMXY.ConversionCache/New-ConversionCachePlan.ps1",
+        "query": "Tools/TMXY.ConversionCache/Find-ConversionCachePlan.ps1",
+        "verifier": "Tools/TMXY.ConversionCache/Test-ConversionCacheEntry.ps1"
+      },
+      "disclosure": {
+        "tracked_evidence_contains_asset_paths": false,
+        "tracked_evidence_contains_source_hashes": false,
+        "full_plan_committed_to_git": false,
+        "cache_artifacts_committed_to_git": false,
+        "payload_bytes_copied": false
+      },
+      "reproduction": {
+        "check_mode": "-Check",
+        "source_mount": "read-only",
+        "network": "none",
+        "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+        "builder_user": "tmxy"
+      },
+      "next_scope": {
+        "tasks": [
+          "P2-17",
+          "P2-18",
+          "P2-19"
+        ],
+        "detail": "Use the cache key contract in conversion pilots and replace planning coefficients with measured throughput."
+      }
+    },
     "assertions": [
       {
         "name": "Required file conversion-cache-policy-v1.json",
@@ -8913,12 +12189,17 @@
         "name": "All plan states are queryable without hashes or payloads",
         "result": "PASS",
         "detail": ""
+      },
+      {
+        "name": "Full deterministic cache plan regeneration passes",
+        "result": "PASS",
+        "detail": ""
       }
     ]
   },
   "reference_formats": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.0011591+08:00",
+    "captured_utc": "2026-08-30T03:45:55.3786056+08:00",
     "result": "PASS",
     "task": "P1-04",
     "document_version": "0.1",
@@ -8939,8 +12220,8 @@
       "table": "67bd122bc59d2fcfd4ab0cee279944a97f1950d146253f063b0feb3f785320e9"
     },
     "input_report_sha256": {
-      "package": "f46d78711d89458453728aac49f27e0903643482d6e5e4c228449b393c1a15c8",
-      "table": "cae86ff48fbf11b8ede1bcc69823ec76ac314187b7525e93ab9518da547cb349"
+      "package": "598655a675e02e7af89c9f95d47330f36c3c9cc6fcdf6519631bb8305a9eec1f",
+      "table": "e1fcebc67c59c2b1d6dfd5a30ad7b4cc22095ad8164c2238d87179319160120f"
     },
     "secret_material_embedded": false,
     "failure_count": 0,
@@ -8948,7 +12229,7 @@
   },
   "ci_authority_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.2272721+08:00",
+    "captured_utc": "2026-08-30T03:45:55.6429882+08:00",
     "result": "PASS",
     "state": "github_workflows_prepared_pending_external_authority",
     "required_check_count": 8,
@@ -8962,7 +12243,7 @@
   },
   "hosted_workflow_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.34079+08:00",
+    "captured_utc": "2026-08-30T03:45:55.7592987+08:00",
     "result": "PASS",
     "required_check_count": 8,
     "merge_workflow": ".github/workflows/p0-required-checks.yml",
@@ -8984,7 +12265,7 @@
   },
   "postgres_refresh_preflight": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.413281+08:00",
+    "captured_utc": "2026-08-30T03:45:55.8418374+08:00",
     "result": "PASS",
     "fixture_count": 4,
     "source_mutation_performed": false,
@@ -8993,7 +12274,7 @@
   },
   "postgres_official_candidate": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.4766925+08:00",
+    "captured_utc": "2026-08-30T03:45:55.9083046+08:00",
     "result": "PASS",
     "fixture_count": 3,
     "source_mutation_performed": false,
@@ -9002,7 +12283,7 @@
   },
   "postgres_derived_image_contract": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.4847606+08:00",
+    "captured_utc": "2026-08-30T03:45:55.9167521+08:00",
     "result": "PASS",
     "assertion_count": 18,
     "source_mutation_performed": false,
@@ -9013,7 +12294,7 @@
   },
   "postgres_gosu_reachability": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.606815+08:00",
+    "captured_utc": "2026-08-30T03:45:56.0399421+08:00",
     "result": "PASS",
     "fixture_count": 3,
     "source_mutation_performed": false,
@@ -9022,7 +12303,7 @@
   },
   "postgres_gosu_waiver": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:23.7096581+08:00",
+    "captured_utc": "2026-08-30T03:45:56.1569114+08:00",
     "result": "PASS",
     "fixture_count": 5,
     "effective_fixture_count": 0,
@@ -9146,7 +12427,7 @@
   },
   "backend_static_analysis": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:29.5431726+08:00",
+    "captured_utc": "2026-08-30T03:46:02.2911603+08:00",
     "result": "PASS_DIAGNOSTIC",
     "authoritative_release_analysis": false,
     "authority_note": "Host clang-tidy proves rule cleanliness; the locked Linux Clang 21 builder remains authoritative.",
@@ -9170,7 +12451,7 @@
   },
   "supply_chain": {
     "schema_version": 10,
-    "captured_utc": "2026-08-29T22:12:30.3461104+08:00",
+    "captured_utc": "2026-08-30T03:46:03.1659646+08:00",
     "result": "PASS_WITH_PENDING_AUTHORITY",
     "release_authority": false,
     "image": {
@@ -9323,7 +12604,7 @@
   },
   "postgres_migration": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:12:33.1816677+08:00",
+    "captured_utc": "2026-08-30T03:46:06.1108149+08:00",
     "result": "PASS",
     "image": "postgres@sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
     "database_version": "18.6",
@@ -9340,15 +12621,15 @@
   },
   "backend_build": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:14:22.4794703+08:00",
+    "captured_utc": "2026-08-30T03:48:06.5310067+08:00",
     "result": "PASS_DIAGNOSTIC",
     "authoritative_release_build": false,
     "authority_note": "This proves portable C++20/CMake structure with the cached GCC image. Clang 21 remains the release authority.",
     "repository_layout": {
       "result": "PASS",
-      "checked_source_files": 285,
-      "checked_size_files": 738,
-      "checked_utf8_lf_files": 817,
+      "checked_source_files": 296,
+      "checked_size_files": 756,
+      "checked_utf8_lf_files": 838,
       "failure_count": 0,
       "failures": []
     },
@@ -9371,13 +12652,13 @@
     "build": {
       "passed": true,
       "exit_code": 0,
-      "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/11] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/11] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/11] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/11] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/11] Building CXX object modules/content/tests/CMakeFiles/tmxy_content_generated_types_test.dir/generated_types_test.cpp.o\n[6/11] Linking CXX executable modules/content/tests/tmxy_content_generated_types_test\n[7/11] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[8/11] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[9/11] Linking CXX executable apps/gateway/tmxy-gateway\n[10/11] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[11/11] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/3 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/3 Test #2: foundation.redaction .............   Passed    0.00 sec\n    Start 3: content.generated_types\n3/3 Test #3: content.generated_types ..........   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 3\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
+      "stdout": "Available configure presets:\n\n  \"linux-clang-debug\"    - Linux Clang 21 Debug\n  \"linux-clang-release\"  - Linux Clang 21 Release\n  \"ci-linux-clang\"       - CI Linux Clang 21\n  \"linux-gcc-diagnostic\" - Local Linux GCC diagnostic only\n-- The CXX compiler identification is GNU 12.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/g++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done\n-- Generating done\n-- Build files have been written to: /tmp/tmxy-build\n[1/11] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/build_info.cpp.o\n[2/11] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_build_info_test.dir/build_info_test.cpp.o\n[3/11] Building CXX object modules/foundation/tests/CMakeFiles/tmxy_foundation_redaction_test.dir/redaction_test.cpp.o\n[4/11] Building CXX object apps/gateway/CMakeFiles/tmxy_gateway.dir/src/main.cpp.o\n[5/11] Building CXX object modules/content/tests/CMakeFiles/tmxy_content_generated_types_test.dir/generated_types_test.cpp.o\n[6/11] Linking CXX executable modules/content/tests/tmxy_content_generated_types_test\n[7/11] Building CXX object modules/foundation/CMakeFiles/tmxy_foundation.dir/src/redaction.cpp.o\n[8/11] Linking CXX static library modules/foundation/libtmxy_foundation.a\n[9/11] Linking CXX executable modules/foundation/tests/tmxy_foundation_build_info_test\n[10/11] Linking CXX executable apps/gateway/tmxy-gateway\n[11/11] Linking CXX executable modules/foundation/tests/tmxy_foundation_redaction_test\nInternal ctest changing into directory: /tmp/tmxy-build\nTest project /tmp/tmxy-build\n    Start 1: foundation.build_info\n1/3 Test #1: foundation.build_info ............   Passed    0.00 sec\n    Start 2: foundation.redaction\n2/3 Test #2: foundation.redaction .............   Passed    0.00 sec\n    Start 3: content.generated_types\n3/3 Test #3: content.generated_types ..........   Passed    0.00 sec\n\n100% tests passed, 0 tests failed out of 3\n\nTotal Test time (real) =   0.01 sec\n{\"event\":\"service_starting\",\"service\":\"tmxy-gateway\",\"version\":\"0.1.0\"}",
       "stderr": ""
     }
   },
   "ue": {
     "schema_version": 1,
-    "captured_utc": "2026-08-29T22:11:20.5366027+08:00",
+    "captured_utc": "2026-08-30T03:36:04.5258107+08:00",
     "result": "PASS",
     "project": {
       "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
@@ -9421,8 +12702,8 @@
     "project_generation": {
       "passed": true,
       "exit_code": 0,
-      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.40 seconds",
-      "output_sha256": "72a7ac4c9fce509e611b74a84dca0a3e6cc4991b89ec884a83e9fa2757ac4ef7",
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.45 seconds",
+      "output_sha256": "bcb1087328780499d2e5cf58176e0cec5b628644420d05bc3c91df982a5b38f5",
       "error": ""
     },
     "editor_build": {
@@ -9430,8 +12711,8 @@
       "passed": true,
       "exit_code": 0,
       "compiler_not_preferred_warning": true,
-      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.76 seconds",
-      "output_sha256": "fa377f705e323a5541406f162882c5b58f1652d9fd2610cfb656d2a451ea60c7",
+      "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.82 seconds",
+      "output_sha256": "a20d0d8f5c4d126302c42d37ce1faa4f8023e9a1984d8306068ff403b75b2b8c",
       "error": ""
     },
     "format": {
@@ -9454,7 +12735,7 @@
       "module_loaded": true,
       "golden_module_loaded": true,
       "importer_module_loaded": true,
-      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260829-141104025.log",
+      "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260829-193550869.log",
       "process_exit_code": 0
     },
     "missing_paths": []

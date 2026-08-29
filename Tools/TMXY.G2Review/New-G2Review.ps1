@@ -145,12 +145,12 @@ try {
     if ($g206Metrics.descriptor_diagnostic_hash_bound -ne $true -or
         [int]$g206Metrics.descriptor_diagnostic_targets -ne 3651 -or
         [int]$g206Metrics.descriptor_diagnostic_candidate_edges -ne 12764 -or
-        [int]$g206Metrics.descriptor_diagnostic_resolved_targets -ne 3617 -or
-        [int]$g206Metrics.descriptor_diagnostic_ambiguous_targets -ne 15 -or
-        [int]$g206Metrics.descriptor_diagnostic_unresolved_targets -ne 19 -or
-        [int]$g206Metrics.asset_binding_resolved_targets -ne 21460 -or
-        [int]$g206Metrics.asset_binding_ambiguous_targets -ne 15 -or
-        [int]$g206Metrics.asset_binding_unresolved_targets -ne 19) {
+        [int]$g206Metrics.descriptor_diagnostic_resolved_targets -ne 3450 -or
+        [int]$g206Metrics.descriptor_diagnostic_ambiguous_targets -ne 189 -or
+        [int]$g206Metrics.descriptor_diagnostic_unresolved_targets -ne 12 -or
+        [int]$g206Metrics.asset_binding_resolved_targets -ne 21293 -or
+        [int]$g206Metrics.asset_binding_ambiguous_targets -ne 189 -or
+        [int]$g206Metrics.asset_binding_unresolved_targets -ne 12) {
         throw 'P2-20 A.4 descriptor evidence did not remain hash-bound and fail closed.'
     }
     if ($g206Metrics.aux_semantic_diagnostic_hash_bound -ne $true -or
@@ -173,8 +173,8 @@ try {
         [int]$g206Metrics.identity_automatic_selected_targets -ne 0 -or
         [int]$g206Metrics.identity_retained_ambiguous_targets -ne 15 -or
         [int]$g206Metrics.identity_retained_ambiguous_edges -ne 30 -or
-        [int]$g206Metrics.identity_retained_unresolved_targets -ne 19 -or
-        [int]$g206Metrics.identity_retained_unresolved_edges -ne 24) {
+        [int]$g206Metrics.identity_retained_unresolved_targets -ne 12 -or
+        [int]$g206Metrics.identity_retained_unresolved_edges -ne 15) {
         throw 'P2-20 A.6 identity-normalization evidence did not remain hash-bound and fail closed.'
     }
     if ($g206Metrics.binding_failure_diagnostic_hash_bound -ne $true -or
@@ -184,12 +184,21 @@ try {
         [int]$g206Metrics.binding_failure_diagnosed_edges -ne 24 -or
         [int]$g206Metrics.binding_failure_typed_error_edges -ne 24 -or
         [int]$g206Metrics.binding_failure_unclassified_error_edges -ne 0 -or
-        [int]$g206Metrics.binding_failure_effective_unresolved_targets -ne 19 -or
-        [int]$g206Metrics.binding_failure_effective_unresolved_edges -ne 24 -or
+        [int]$g206Metrics.binding_failure_effective_resolved_targets -ne 7 -or
+        [int]$g206Metrics.binding_failure_effective_resolved_edges -ne 9 -or
+        [int]$g206Metrics.binding_failure_effective_ambiguous_targets -ne 0 -or
+        [int]$g206Metrics.binding_failure_effective_ambiguous_edges -ne 0 -or
+        [int]$g206Metrics.binding_failure_effective_unresolved_targets -ne 12 -or
+        [int]$g206Metrics.binding_failure_effective_unresolved_edges -ne 15 -or
         [int]$g206Metrics.binding_failure_candidate_selections -ne 0 -or
         [int]$g206Metrics.binding_failure_automatic_resolutions -ne 0 -or
-        [int]$g206Metrics.binding_failure_owner_dispositions -ne 0) {
-        throw 'P2-20 A.7 binding-failure diagnosis did not remain hash-bound and fail closed.'
+        [int]$g206Metrics.binding_failure_owner_dispositions -ne 0 -or
+        $g206Metrics.binding_recovery_cross_proof_hash_bound -ne $true -or
+        [int]$g206Metrics.binding_recovery_attempted_targets -ne 17 -or
+        [int]$g206Metrics.binding_recovery_attempted_edges -ne 21 -or
+        [int]$g206Metrics.binding_recovery_successful_targets -ne 7 -or
+        [int]$g206Metrics.binding_recovery_successful_edges -ne 9) {
+        throw 'P2-20 A.7/A.8 binding diagnosis or recovery cross-proof drifted.'
     }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)

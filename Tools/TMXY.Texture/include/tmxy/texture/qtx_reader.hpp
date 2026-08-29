@@ -16,6 +16,16 @@ struct QtxLimits final
     std::uint64_t maximum_decoded_bytes{1024ULL * 1024ULL * 1024ULL};
 };
 
+struct QtxMipCountResolution final
+{
+    std::uint32_t effective_mip_count{0};
+    MipCountBasis basis{MipCountBasis::package_descriptor};
+};
+
+[[nodiscard]] TextureResult<std::uint32_t>
+infer_complete_payload_mip_count(const TextureDescriptor& descriptor,
+                                 std::span<const std::byte> payload);
+
 class QtxReader final
 {
   public:
@@ -23,6 +33,11 @@ class QtxReader final
 
     [[nodiscard]] TextureResult<QtxTextureView> parse(TextureDescriptor descriptor,
                                                       std::span<const std::byte> payload) const;
+
+    [[nodiscard]] TextureResult<QtxTextureView>
+    parse_with_mip_count_resolution(TextureDescriptor descriptor,
+                                    std::span<const std::byte> payload,
+                                    QtxMipCountResolution resolution) const;
 
   private:
     QtxLimits limits_;

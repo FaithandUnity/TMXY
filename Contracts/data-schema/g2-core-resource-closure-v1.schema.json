@@ -52,7 +52,7 @@
       "properties": {
         "aggregate_sha256": { "$ref": "#/$defs/sha256" },
         "artifacts": {
-          "type": "array", "minItems": 15, "maxItems": 15,
+          "type": "array", "minItems": 22, "maxItems": 22,
           "uniqueItems": true,
           "items": { "$ref": "#/$defs/binding" },
           "contains": {

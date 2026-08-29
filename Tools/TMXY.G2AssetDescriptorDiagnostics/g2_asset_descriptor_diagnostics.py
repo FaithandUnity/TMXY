@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from diagnostic_self_test import run_self_test
+from diagnostic_classification import classify_probe as classify_effective_probe
 from diagnostic_common import (ASSET_FIELDS, FAMILIES, canonical_json, iter_jsonl,
                                load_json, load_selected_workset,
                                probe_candidate_set_sha256, require, sha256_file,
@@ -21,15 +22,6 @@ from diagnostic_common import (ASSET_FIELDS, FAMILIES, canonical_json, iter_json
                                write_text)
 
 
-PROBE_FIELDS = {"asset_id", "family", "structure", "candidate_set_sha256",
-                "candidates", "counts"}
-CANDIDATE_FIELDS = {"candidate_id", "body_sha256", "descriptor", "binding",
-                    "semantic_sha256", "descriptor_semantic_sha256",
-                    "identity_normalized_descriptor_semantic_sha256",
-                    "identity_normalized_semantic_sha256",
-                    "identity_mirror_ascii_lower_match"}
-COUNT_FIELDS = {"candidates", "descriptor_parsed", "descriptor_rejected",
-                "binding_pass", "binding_rejected", "semantic_distinct"}
 CLASS_BY_FAMILY = {
     "qtx": "QTexture",
     "sm": "QStaticMesh",
@@ -146,97 +138,9 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
-def validate_candidate(candidate: dict[str, Any]) -> None:
-    require(set(candidate) == CANDIDATE_FIELDS, "Probe candidate record is not closed")
-    require(candidate["descriptor"] in {"PARSED", "REJECTED"},
-            "Unknown descriptor disposition")
-    require(candidate["binding"] in {"PASS", "REJECTED"},
-            "Unknown binding disposition")
-    for key in ("candidate_id", "body_sha256"):
-        require(isinstance(candidate[key], str) and len(candidate[key]) == 64,
-                f"Candidate {key} is not a SHA-256 identity")
-    exact_semantics = [candidate[name] for name in (
-        "semantic_sha256", "descriptor_semantic_sha256")]
-    normalized_semantics = [candidate[name] for name in (
-        "identity_normalized_descriptor_semantic_sha256",
-        "identity_normalized_semantic_sha256")]
-    semantics = exact_semantics + normalized_semantics
-    require(all(value is None or (isinstance(value, str) and len(value) == 64)
-                for value in semantics), "Candidate semantic identity is invalid")
-    require((candidate["descriptor"] == "PARSED") ==
-            all(value is not None for value in exact_semantics),
-            "Descriptor disposition and exact semantic identities disagree")
-    require(all(value is None for value in normalized_semantics) or
-            all(value is not None for value in normalized_semantics),
-            "Normalized semantic identities are partially populated")
-    require(isinstance(candidate["identity_mirror_ascii_lower_match"], bool),
-            "Candidate identity mirror flag is invalid")
-    require(not candidate["identity_mirror_ascii_lower_match"] or
-            all(value is not None for value in normalized_semantics),
-            "Matching identity mirror has no normalized semantic identities")
-    require(candidate["descriptor"] == "PARSED" or candidate["binding"] == "REJECTED",
-            "Rejected descriptor cannot pass production binding")
-
-
 def classify_probe(prior: dict[str, Any], probe: dict[str, Any]) -> dict[str, Any]:
-    require(set(probe) == PROBE_FIELDS, "Probe asset record is not closed")
-    require(probe["asset_id"] == prior["asset_id"] and
-            probe["family"] == prior["family"] and
-            probe["structure"] == prior["structure"],
-            "Probe asset identity or metadata disagrees with the prior workset")
-    candidates = probe["candidates"]
-    require(isinstance(candidates, list) and candidates, "Probe candidate set is empty")
-    for candidate in candidates:
-        validate_candidate(candidate)
-    ids = [str(item["candidate_id"]) for item in candidates]
-    require(ids == sorted(ids) and len(ids) == len(set(ids)),
-            "Probe candidate set is unordered or duplicated")
-    require(len(ids) == int(prior["candidate_count"]) and
-            sha256_lines(ids) == prior["candidate_set_sha256"],
-            "Probe candidate identity set disagrees with P2-13")
-    require(probe["candidate_set_sha256"] == probe_candidate_set_sha256(ids),
-            "Probe candidate-set canonical digest is invalid")
-    counts = probe["counts"]
-    require(set(counts) == COUNT_FIELDS, "Probe count record is not closed")
-    measured = {
-        "candidates": len(candidates),
-        "descriptor_parsed": sum(x["descriptor"] == "PARSED" for x in candidates),
-        "descriptor_rejected": sum(x["descriptor"] == "REJECTED" for x in candidates),
-        "binding_pass": sum(x["binding"] == "PASS" for x in candidates),
-        "binding_rejected": sum(x["binding"] == "REJECTED" for x in candidates),
-        "semantic_distinct": len({x["semantic_sha256"] for x in candidates
-                                  if x["semantic_sha256"] is not None}),
-    }
-    require(counts == measured, "Probe candidate aggregates disagree with detail")
-    compatible_signatures = {x["semantic_sha256"] for x in candidates
-                             if x["binding"] == "PASS"}
-    rejected_descriptor = measured["descriptor_rejected"]
-    if not compatible_signatures:
-        resolution, basis = "UNRESOLVED", "NO_PRODUCTION_COMPATIBLE_CANDIDATE"
-    elif rejected_descriptor:
-        resolution, basis = "AMBIGUOUS", "UNREADABLE_CANDIDATE_OPEN"
-    elif len(compatible_signatures) == 1:
-        resolution, basis = "RESOLVED", "SINGLE_COMPATIBLE_SEMANTIC_CLASS"
-    else:
-        resolution, basis = "AMBIGUOUS", "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES"
-    return {
-        "asset_id": prior["asset_id"],
-        "family": prior["family"],
-        "structure": prior["structure"],
-        "prior_resolution": prior["resolution"],
-        "prior_resolution_basis": prior["resolution_basis"],
-        "candidate_count": len(candidates),
-        "candidate_set_sha256": prior["candidate_set_sha256"],
-        "candidate_identity_exact": True,
-        "production_binder_used": True,
-        "heuristic_selection": False,
-        "candidate_selected": False,
-        "candidates": candidates,
-        "counts": measured,
-        "compatible_semantic_variants": len(compatible_signatures),
-        "resolution": resolution,
-        "resolution_basis": basis,
-    }
+    return classify_effective_probe(prior, probe, require, sha256_lines,
+                                    probe_candidate_set_sha256)
 
 
 def file_binding(root: Path, path: Path, tracked: bool,
@@ -273,6 +177,9 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
     aggregate = collections.Counter()
     basis_targets: collections.Counter[str] = collections.Counter()
     basis_edges: collections.Counter[str] = collections.Counter()
+    resolution_edges: collections.Counter[str] = collections.Counter()
+    strict_resolution_targets: collections.Counter[str] = collections.Counter()
+    strict_resolution_edges: collections.Counter[str] = collections.Counter()
     family_targets: dict[str, collections.Counter[str]] = collections.defaultdict(collections.Counter)
     prior_basis: dict[str, collections.Counter[str]] = collections.defaultdict(collections.Counter)
     prior_resolution_targets: collections.Counter[str] = collections.Counter()
@@ -284,9 +191,15 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         aggregate["descriptor_rejected"] += item["counts"]["descriptor_rejected"]
         aggregate["binding_pass"] += item["counts"]["binding_pass"]
         aggregate["binding_rejected"] += item["counts"]["binding_rejected"]
+        aggregate["effective_binding_pass"] += item["counts"]["effective_binding_pass"]
+        aggregate["effective_binding_rejected"] += item["counts"]["effective_binding_rejected"]
+        aggregate["recovery_applied"] += item["counts"]["recovery_applied"]
         aggregate[item["resolution"].lower()] += 1
+        strict_resolution_targets[item["strict_resolution"].lower()] += 1
+        strict_resolution_edges[item["strict_resolution"].lower()] += item["candidate_count"]
         basis_targets[item["resolution_basis"]] += 1
         basis_edges[item["resolution_basis"]] += item["candidate_count"]
+        resolution_edges[item["resolution"].lower()] += item["candidate_count"]
         family_targets[item["family"]][item["resolution"].lower()] += 1
         family_targets[item["family"]]["targets"] += 1
         family_targets[item["family"]]["candidate_edges"] += item["candidate_count"]
@@ -304,11 +217,8 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
     }
     reconciled_targets["unknown"] = int(frozen_targets["unknown"])
     reconciled_edges = {
-        state: int(frozen_edges[state]) - prior_resolution_edges[state] + basis_edges[
-            {"resolved": "SINGLE_COMPATIBLE_SEMANTIC_CLASS",
-             "ambiguous": "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES",
-             "unresolved": "NO_PRODUCTION_COMPATIBLE_CANDIDATE"}[state]
-        ] for state in ("resolved", "ambiguous", "unresolved")
+        state: int(frozen_edges[state]) - prior_resolution_edges[state] + resolution_edges[state]
+        for state in ("resolved", "ambiguous", "unresolved")
     }
     reconciled_edges["unknown"] = int(frozen_edges["unknown"])
     require(sum(reconciled_targets.values()) == int(policy["scope"]["base_workset"]["targets"]),
@@ -324,6 +234,7 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         root / "Data/Inventory/p2-12-full-asset-inventory.json",
         root / "Data/Inventory/p2-13-reference-closure.json",
         workset,
+        Path(args.recovery_plan),
         policy_path,
         root / "Contracts/data-schema/g2-asset-descriptor-diagnostics-v1.schema.json",
     ]
@@ -350,6 +261,7 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
             "candidate_edges": aggregate["candidate_edges"],
             "candidate_identity_exact": True,
             "production_binder_used": True,
+            "eligible_recovery_attempts": sum(1 for _ in Path(args.recovery_plan).open("rb")),
             "first_candidate_selection_used": False,
         },
         "measured": {
@@ -357,6 +269,15 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
             "descriptor_rejected_candidates": aggregate["descriptor_rejected"],
             "binding_pass_candidates": aggregate["binding_pass"],
             "binding_rejected_candidates": aggregate["binding_rejected"],
+            "effective_binding_pass_candidates": aggregate["effective_binding_pass"],
+            "effective_binding_rejected_candidates": aggregate["effective_binding_rejected"],
+            "recovery_applied_candidates": aggregate["recovery_applied"],
+            "strict_resolved_targets": strict_resolution_targets["resolved"],
+            "strict_ambiguous_targets": strict_resolution_targets["ambiguous"],
+            "strict_unresolved_targets": strict_resolution_targets["unresolved"],
+            "strict_resolved_edges": strict_resolution_edges["resolved"],
+            "strict_ambiguous_edges": strict_resolution_edges["ambiguous"],
+            "strict_unresolved_edges": strict_resolution_edges["unresolved"],
             "resolved_targets": aggregate["resolved"],
             "ambiguous_targets": aggregate["ambiguous"],
             "unresolved_targets": aggregate["unresolved"],
@@ -410,6 +331,8 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         f"- Diagnostic scope: {aggregate['targets']:,} targets / {aggregate['candidate_edges']:,} candidate edges",
         f"- Production-compatible candidates: {aggregate['binding_pass']:,}",
         f"- Production-rejected candidates: {aggregate['binding_rejected']:,}",
+        f"- Effective production-compatible candidates: {aggregate['effective_binding_pass']:,}",
+        f"- Verified recovery transitions: {aggregate['recovery_applied']:,}",
         f"- Resolved targets: {aggregate['resolved']:,}",
         f"- Ambiguous targets: {aggregate['ambiguous']:,}",
         f"- Unresolved targets: {aggregate['unresolved']:,}",
@@ -443,6 +366,7 @@ def parse_args() -> argparse.Namespace:
     final = sub.add_parser("finalize")
     final.add_argument("--root", required=True)
     final.add_argument("--probe-jsonl", required=True)
+    final.add_argument("--recovery-plan", required=True)
     final.add_argument("--detail-output", required=True)
     final.add_argument("--json-output", required=True)
     final.add_argument("--markdown-output", required=True)

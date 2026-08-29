@@ -59,7 +59,7 @@
       "required": ["aggregate_sha256", "entries"],
       "properties": {
         "aggregate_sha256": {"$ref": "#/$defs/sha256"},
-        "entries": {"type": "array", "minItems": 15, "maxItems": 15, "items": {"$ref": "#/$defs/binding"}}
+        "entries": {"type": "array", "minItems": 13, "maxItems": 13, "items": {"$ref": "#/$defs/binding"}}
       }
     },
     "detail_export": {
@@ -92,10 +92,11 @@
     },
     "scope": {
       "type": "object", "additionalProperties": false,
-      "required": ["source_revision", "source_resolution", "targets", "candidate_edges",
+      "required": ["source_revision", "source_resolution_axis", "source_resolution", "targets", "candidate_edges",
         "unique_candidates", "descriptor_parsed_edges", "binding_rejected_edges", "by_family"],
       "properties": {
         "source_revision": {"const": "P2-20A.4"},
+        "source_resolution_axis": {"const": "strict_resolution"},
         "source_resolution": {"const": "UNRESOLVED"},
         "targets": {"const": 19}, "candidate_edges": {"const": 24},
         "unique_candidates": {"const": 24}, "descriptor_parsed_edges": {"const": 24},
@@ -114,10 +115,11 @@
     },
     "effective": {
       "type": "object", "additionalProperties": false,
-      "required": ["resolved_targets", "resolved_edges", "unresolved_targets", "unresolved_edges"],
+      "required": ["resolved_targets", "resolved_edges", "ambiguous_targets", "ambiguous_edges", "unresolved_targets", "unresolved_edges"],
       "properties": {
-        "resolved_targets": {"const": 0}, "resolved_edges": {"const": 0},
-        "unresolved_targets": {"const": 19}, "unresolved_edges": {"const": 24}
+        "resolved_targets": {"const": 7}, "resolved_edges": {"const": 9},
+        "ambiguous_targets": {"const": 0}, "ambiguous_edges": {"const": 0},
+        "unresolved_targets": {"const": 12}, "unresolved_edges": {"const": 15}
       }
     },
     "measured": {
@@ -180,12 +182,21 @@
     },
     "preserved": {
       "type": "object", "additionalProperties": false,
-      "required": ["asset_ambiguous_targets", "asset_ambiguous_edges", "asset_unresolved_targets",
-        "asset_unresolved_edges", "auxiliary_nonterminal_instances", "conditional_required_missing",
+      "required": ["identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges",
+        "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges",
+        "strict_binding_failure_targets", "strict_binding_failure_edges",
+        "asset_effective_unresolved_targets", "asset_effective_unresolved_edges",
+        "auxiliary_nonterminal_instances", "conditional_required_missing",
         "migration_pending", "g2_satisfied", "g2_blocked"],
       "properties": {
-        "asset_ambiguous_targets": {"const": 15}, "asset_ambiguous_edges": {"const": 30},
-        "asset_unresolved_targets": {"const": 19}, "asset_unresolved_edges": {"const": 24},
+        "identity_semantic_ambiguous_targets": {"const": 15},
+        "identity_semantic_ambiguous_edges": {"const": 30},
+        "asset_effective_ambiguous_targets": {"const": 189},
+        "asset_effective_ambiguous_edges": {"const": 546},
+        "strict_binding_failure_targets": {"const": 19},
+        "strict_binding_failure_edges": {"const": 24},
+        "asset_effective_unresolved_targets": {"const": 12},
+        "asset_effective_unresolved_edges": {"const": 15},
         "auxiliary_nonterminal_instances": {"const": 212},
         "conditional_required_missing": {"const": 29}, "migration_pending": {"const": 1359},
         "g2_satisfied": {"const": 7}, "g2_blocked": {"const": 2}
@@ -195,11 +206,18 @@
       "type": "object", "additionalProperties": false,
       "required": ["reason_code", "count"],
       "properties": {
-        "reason_code": {"enum": ["PRODUCTION_BINDING_REJECTIONS_DIAGNOSED_NOT_REMEDIATED", "REMEDIATION_EVIDENCE_ABSENT"]},
-        "count": {"const": 19}
+        "reason_code": {"enum": ["PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN", "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN"]},
+        "count": {"type": "integer", "minimum": 1}
       }
     },
-    "blockers": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/blocker"}},
+    "blockers": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN"}, "count": {"const": 12}}}]},
+        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN"}, "count": {"const": 189}}}]}
+      ],
+      "items": false
+    },
     "negative": {"type": "array", "minItems": 12, "maxItems": 12, "uniqueItems": true, "items": {"type": "string"}},
     "g2": {
       "type": "object", "additionalProperties": false,

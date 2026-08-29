@@ -49,8 +49,9 @@ state, its evidence basis, candidate-set SHA-256, counts, family, structure, and
 `heuristic_selection=false`; it never publishes a selected candidate.
 
 Explicit coverage is not successful resolution. The current evidence contains
-21,292 resolved targets, 183 ambiguous targets, and 19 unresolved targets
-(38,793, 534, and 24 candidate edges respectively). Equivalent candidate sets
+21,293 resolved targets, 189 ambiguous targets, and 12 unresolved targets
+(38,790, 546, and 15 candidate edges respectively). These effective states bind the
+P2-20A.4 production diagnostic and the P2-20A.7/A.8 recovery cross-proof. Equivalent candidate sets
 retain all members, identical payloads do not prove descriptor equivalence,
 and both ambiguous and unresolved counts have independent zero thresholds.
 
@@ -70,8 +71,8 @@ measured 3,043 asset, 638 Package, and 8 configuration lexical occurrences. The
 states remain 171 candidate-only, 35 editor-undecided, and 6 malformed-blocked;
 approved semantic adapters, no-reference dispositions, and roots are all zero.
 Lexical candidates are not semantic approvals, and later approved roots may only
-enlarge the union. The asset-binding contract is also explicit, but its 183
-ambiguous and 19 unresolved targets remain fail-closed.
+enlarge the union. The asset-binding contract is also explicit, but its 189
+ambiguous and 12 unresolved targets remain fail-closed.
 
 Consequently, even a future zero logical queue would remain blocked until both
 coverage gaps close and conditionally required missing values reach their

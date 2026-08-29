@@ -114,8 +114,10 @@ def bind_identity_normalization_safety(
     a4_advertised = a4_report["detail_export"]
     require(a4_report.get("evidence_revision") == "P2-20A.4" and
             a4_report.get("diagnostic_scope_complete") is True and
-            a4_report["measured"]["ambiguous_targets"] == 15 and
-            a4_report["measured"]["unresolved_targets"] == 19 and
+            a4_report["measured"]["by_resolution_basis_targets"]
+            ["MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES"] == 15 and
+            a4_report["measured"]["by_resolution_basis_edges"]
+            ["MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES"] == 30 and
             a4_advertised.get("path") == INPUTS[1][1] and
             a4_advertised.get("tracked") is False and
             a4_advertised.get("bytes") == a4_detail.stat().st_size and
@@ -147,8 +149,10 @@ def bind_identity_normalization_safety(
             measured["effective"] == {
                 "resolved_targets": 0, "resolved_edges": 0,
                 "ambiguous_targets": 15, "ambiguous_edges": 30,
-            } and measured["reconciled_full_workset"]["unresolved_targets"] == 19 and
-            measured["reconciled_full_workset"]["unresolved_edges"] == 24,
+            } and measured["reconciled_full_workset"]["ambiguous_targets"] == 189 and
+            measured["reconciled_full_workset"]["ambiguous_edges"] == 546 and
+            measured["reconciled_full_workset"]["unresolved_targets"] == 12 and
+            measured["reconciled_full_workset"]["unresolved_edges"] == 15,
             "P2-20A.6 falsely reduced the A.4 blocking population")
     require(diagnostic.get("contracts") == {
                 "policy_sha256": sha256(a6_policy_path),

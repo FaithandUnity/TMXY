@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T06:57:24.5044025+00:00",
+  "captured_utc": "2026-08-29T18:15:23.9726000+00:00",
   "result": "PASS",
   "task_id": "P2-19-PILOT",
   "evidence_kind": "conversion-pilot",
@@ -40,36 +40,36 @@
         "family": "qtx",
         "task_id": "P1-13",
         "evidence": "Data/BuildBaseline/p1-13-qtx-texture.json",
-        "evidence_sha256": "4299426f9f863db43f2f739c39719c3e2acc7044f7f16941a896674ee433b0fb"
+        "evidence_sha256": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9"
       },
       {
         "family": "sm",
         "task_id": "P1-14",
         "evidence": "Data/BuildBaseline/p1-14-sm-static-mesh.json",
-        "evidence_sha256": "ed0f6b1cdda53ee11ba66d22a37f05b404233ff1c08f27ef21687b057b8621d6"
+        "evidence_sha256": "4c5a42556d3e3ada8a1c6190f60968fed347ada9d2a52615beeb85dbe2d34707"
       },
       {
         "family": "skem",
         "task_id": "P1-15",
         "evidence": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json",
-        "evidence_sha256": "b4add72e6aa063e2eae5eccddaddb0e8e3ddc86282b811259742399f37ed5eca"
+        "evidence_sha256": "c183530e911101092a04956de9296e7aac21399e4425575011e05edd985fd41e"
       },
       {
         "family": "anim",
         "task_id": "P1-16",
         "evidence": "Data/BuildBaseline/p1-16-anim-animation.json",
-        "evidence_sha256": "dc4112a397b25ab78deaa3d7157b35ca80cfba959d32aefb3d5ca532293a267a"
+        "evidence_sha256": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6"
       },
       {
         "family": "ter",
         "task_id": "P1-17",
         "evidence": "Data/BuildBaseline/p1-17-ter-terrain.json",
-        "evidence_sha256": "e1aad8f3acc92b4fc3c2facf095f29afcfd1f160c4b545bfade6230b36267600"
+        "evidence_sha256": "684ec33091b29595a08d5b27ce67a3828595f866861715b5b8e11583f0b701b4"
       }
     ],
     "p2_15": {
       "evidence": "Data/Inventory/p2-15-conversion-routing.json",
-      "evidence_sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b",
+      "evidence_sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54",
       "full_report_sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559",
       "full_report_bytes": 21021383,
       "full_report_lines": 40090
@@ -108,15 +108,15 @@
     "storage": {
       "workspace_volume": "E:",
       "workspace_volume_total_bytes": 1073742868480,
-      "workspace_volume_available_bytes": 199953072128,
-      "rebuild_bytes": 46460916237,
-      "git_database_bytes": 9540443,
-      "tracked_worktree_bytes": 25307235,
-      "generated_directories_bytes": 34332174576,
+      "workspace_volume_available_bytes": 199823572992,
+      "rebuild_bytes": 46581322601,
+      "git_database_bytes": 9498867,
+      "tracked_worktree_bytes": 25636659,
+      "generated_directories_bytes": 34351119723,
       "generated_breakdown": [
         {
           "scope": "data_exports",
-          "bytes": 670444320
+          "bytes": 685974868
         },
         {
           "scope": "generated_contracts",
@@ -132,11 +132,11 @@
         },
         {
           "scope": "ue_intermediate",
-          "bytes": 8092232685
+          "bytes": 8092232683
         },
         {
           "scope": "ue_saved",
-          "bytes": 24310511278
+          "bytes": 24313925879
         }
       ]
     }
@@ -256,105 +256,105 @@
       "case_id": "6e4afb3772d098e0ae31e70747e616c22878ab99bf2b09dcaff1f2f21b604142",
       "descriptor_bytes": 222,
       "elapsed_ms": [
-        21.927,
-        22.962,
-        21.849,
-        21.821,
-        22.114
+        21.37,
+        21.687,
+        21.976,
+        21.408,
+        21.646
       ],
       "family": "qtx",
       "input_bytes": 1048798,
-      "median_ms": 21.927,
-      "output_bytes": 3147065,
+      "median_ms": 21.646,
+      "output_bytes": 3147136,
       "output_file_count": 4,
       "output_hash_stable": true,
-      "output_sha256": "a5de3b19d41ae007bb93049a78753c1583558ff1c3ce5511dc47e335b8db7892",
+      "output_sha256": "b84ec2fec026c668f38ac1ac1426ba7655dab01b94e68be4079e72917428d605",
       "output_size_stable": true,
-      "p80_ms": 22.114,
+      "p80_ms": 21.687,
       "payload_bytes": 1048576
     },
     {
       "case_id": "44e65692a727695348746221cd7c2d153e995e9fbb2fccdcf93c0e11cb027d0e",
       "descriptor_bytes": 43554,
       "elapsed_ms": [
-        246.389,
-        261.005,
-        251.713,
-        247.784,
-        260.584
+        237.628,
+        234.461,
+        235.357,
+        239.662,
+        233.263
       ],
       "family": "sm",
       "input_bytes": 12229025,
-      "median_ms": 251.713,
+      "median_ms": 235.357,
       "output_bytes": 14915451,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "7a26fdf07872f7cdafc98d6b8a8e22c1275e80b46ee3d8a9ca1361dd929c0903",
       "output_size_stable": true,
-      "p80_ms": 260.584,
+      "p80_ms": 237.628,
       "payload_bytes": 12185471
     },
     {
       "case_id": "16a50c4d9edf3659cb4cd91bc214c419f11f13d49885e9f9b1611846147e06ce",
       "descriptor_bytes": 281615,
       "elapsed_ms": [
-        1185.42,
-        1177.608,
-        1177.739,
-        1169.894,
-        1163.343
+        1120.763,
+        1131.375,
+        1112.234,
+        1120.1,
+        1125.295
       ],
       "family": "skem",
       "input_bytes": 95981755,
-      "median_ms": 1177.608,
+      "median_ms": 1120.763,
       "output_bytes": 2855065,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "62e247970bf61eb3fa82b8afe4b389d136d237d73a16e8cfd2eccc2294570f6d",
       "output_size_stable": true,
-      "p80_ms": 1177.739,
+      "p80_ms": 1125.295,
       "payload_bytes": 95700140
     },
     {
       "case_id": "c6238bef27f5947a6abd18442719a4a35a2d978c7e21fae9312b295ae80dc9db",
       "descriptor_bytes": 281615,
       "elapsed_ms": [
-        286.993,
-        282.646,
-        281.386,
-        282.866,
-        291.308
+        279.703,
+        281.76,
+        279.477,
+        281.447,
+        277.819
       ],
       "family": "anim",
       "input_bytes": 33137431,
-      "median_ms": 282.866,
-      "output_bytes": 3749298,
+      "median_ms": 279.703,
+      "output_bytes": 3790759,
       "output_file_count": 2,
       "output_hash_stable": true,
-      "output_sha256": "e915847762ace459f3effc5d50a8401d328e52f586cf2f33e924ff913b35fad4",
+      "output_sha256": "01473171cf80982f17b7e5bdf606b6040564250ecd0c1ba2e02d446f323e4a1f",
       "output_size_stable": true,
-      "p80_ms": 286.993,
+      "p80_ms": 281.447,
       "payload_bytes": 32855816
     },
     {
       "case_id": "c5e0a61e15c38361460b22d4dc2aa639e9e745b7dc585394569e469f0c7d2d82",
       "descriptor_bytes": 0,
       "elapsed_ms": [
-        5.048,
-        5.071,
-        4.631,
-        4.341,
-        4.791
+        4.468,
+        4.246,
+        5.023,
+        5.001,
+        4.903
       ],
       "family": "ter",
       "input_bytes": 147501,
-      "median_ms": 4.791,
+      "median_ms": 4.903,
       "output_bytes": 55401,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "c2d50bd3363186c8e68a5dedbe64b879686f8a0b16659cb8382150e23d98025f",
       "output_size_stable": true,
-      "p80_ms": 5.048,
+      "p80_ms": 5.001,
       "payload_bytes": 147501
     }
   ],

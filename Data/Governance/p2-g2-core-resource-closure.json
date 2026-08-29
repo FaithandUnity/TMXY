@@ -14,11 +14,11 @@
   "auxiliary_malformed_blocked": 6,
   "auxiliary_approved_roots": 0,
   "asset_binding_resolution_explicit": true,
-  "asset_binding_resolved_targets": 21292,
-  "asset_binding_ambiguous_targets": 183,
-  "asset_binding_unresolved_targets": 19,
+  "asset_binding_resolved_targets": 21293,
+  "asset_binding_ambiguous_targets": 189,
+  "asset_binding_unresolved_targets": 12,
   "asset_binding_unknown_targets": 0,
-  "asset_binding_workset_sha256": "fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c",
+  "asset_binding_workset_sha256": "432254a7a6160c746c03cbeb454a7833ab92e503bae299be6f1c783acbbdd753",
   "conditional_required_missing": 29,
   "conditional_required_member_set_exported": true,
   "conditional_required_member_set_count": 29,
@@ -26,7 +26,7 @@
   "logical_gap_count": 21024,
   "report": {
     "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-    "sha256": "799a00c954e7e0635c568bda8c8712d5572f874b32548206a6f73d6b8a98fc77"
+    "sha256": "0016d4e9e2a6d0cdc22aca0dc946dedc8eac79ca3a3b6a9c7fdca102a9cd1b76"
   },
   "decisions": {
     "first_candidate_selection_authorized": false,

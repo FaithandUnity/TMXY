@@ -1,9 +1,9 @@
 {
-  "captured_utc": "2026-08-29T11:36:19Z",
+  "captured_utc": "2026-08-29T18:17:27Z",
   "completion": {
     "g2_remains_blocked_by_other_open_criteria": true,
-    "observed_ambiguous_targets": 15,
-    "observed_unresolved_targets": 19,
+    "observed_ambiguous_targets": 189,
+    "observed_unresolved_targets": 12,
     "required_ambiguous_targets": 0,
     "required_unresolved_targets": 0,
     "satisfied": false
@@ -11,10 +11,10 @@
   "completion_criteria_satisfied": false,
   "criterion_id": "G2-06",
   "detail_export": {
-    "bytes": 10776199,
+    "bytes": 13819743,
     "lines": 3651,
     "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
-    "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384",
+    "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d",
     "tracked": false
   },
   "diagnostic_scope_complete": true,
@@ -40,14 +40,14 @@
       "bytes": 6306,
       "lines": 189,
       "path": "Data/Inventory/p2-12-full-asset-inventory.json",
-      "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a",
+      "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d",
       "tracked": true
     },
     {
       "bytes": 7789,
       "lines": 264,
       "path": "Data/Inventory/p2-13-reference-closure.json",
-      "sha256": "7bf5803b5fa22e1dad39a30fb6d2e953c476b9ce214e53f8140f1e977c6535ef",
+      "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
       "tracked": true
     },
     {
@@ -58,6 +58,13 @@
       "tracked": false
     },
     {
+      "bytes": 6504,
+      "lines": 21,
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-eligible-attempts.tsv",
+      "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99",
+      "tracked": false
+    },
+    {
       "bytes": 3477,
       "lines": 86,
       "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
@@ -65,36 +72,36 @@
       "tracked": true
     },
     {
-      "bytes": 6873,
-      "lines": 160,
+      "bytes": 7584,
+      "lines": 175,
       "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-v1.schema.json",
-      "sha256": "3c85a607576a92209f422edd7e5f2a97e7c017b3d0b26f195ac82ce413158858",
+      "sha256": "0852f81ac97a2f545befa92fe12e1ca6d1f951304a5dacb8ed2c0cb5972107d6",
       "tracked": true
     }
   ],
   "measured": {
-    "ambiguous_targets": 15,
+    "ambiguous_targets": 189,
     "binding_pass_candidates": 12561,
     "binding_rejected_candidates": 203,
     "by_family": {
       "anim": {
-        "ambiguous": 6,
+        "ambiguous": 8,
         "candidate_edges": 222,
-        "resolved": 102,
+        "resolved": 105,
         "targets": 114,
-        "unresolved": 6
+        "unresolved": 1
       },
       "qtx": {
-        "ambiguous": 1,
+        "ambiguous": 171,
         "candidate_edges": 11051,
-        "resolved": 2311,
+        "resolved": 2143,
         "targets": 2324,
-        "unresolved": 12
+        "unresolved": 10
       },
       "skem": {
-        "ambiguous": 6,
+        "ambiguous": 8,
         "candidate_edges": 1151,
-        "resolved": 1037,
+        "resolved": 1035,
         "targets": 1043
       },
       "sm": {
@@ -108,13 +115,13 @@
     "by_prior_resolution_basis": {
       "DESCRIPTOR_VALIDATION_FAILED": {
         "candidate_edges": 24,
+        "resolved": 7,
         "targets": 19,
-        "unresolved": 19
+        "unresolved": 12
       },
       "DIVERGENT_DESCRIPTOR_SET": {
-        "ambiguous": 9,
+        "ambiguous": 183,
         "candidate_edges": 534,
-        "resolved": 174,
         "targets": 183
       },
       "EQUIVALENT_VALID_DESCRIPTOR_SET": {
@@ -131,30 +138,41 @@
     },
     "by_resolution_basis_edges": {
       "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 30,
-      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 24,
-      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12710
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 15,
+      "OPEN_REJECTED_CANDIDATE": 516,
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12203
     },
     "by_resolution_basis_targets": {
       "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 15,
-      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 19,
-      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3617
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 12,
+      "OPEN_REJECTED_CANDIDATE": 174,
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3450
     },
     "descriptor_parsed_candidates": 12764,
     "descriptor_rejected_candidates": 0,
+    "effective_binding_pass_candidates": 12570,
+    "effective_binding_rejected_candidates": 194,
     "reconciled_full_workset": {
-      "ambiguous_edges": 30,
-      "ambiguous_targets": 15,
+      "ambiguous_edges": 546,
+      "ambiguous_targets": 189,
       "candidate_edges": 39351,
-      "resolved_edges": 39297,
-      "resolved_targets": 21460,
+      "resolved_edges": 38790,
+      "resolved_targets": 21293,
       "targets": 21494,
       "unknown_edges": 0,
       "unknown_targets": 0,
-      "unresolved_edges": 24,
-      "unresolved_targets": 19
+      "unresolved_edges": 15,
+      "unresolved_targets": 12
     },
-    "resolved_targets": 3617,
-    "unresolved_targets": 19
+    "recovery_applied_candidates": 9,
+    "resolved_targets": 3450,
+    "strict_ambiguous_edges": 546,
+    "strict_ambiguous_targets": 189,
+    "strict_resolved_edges": 12194,
+    "strict_resolved_targets": 3443,
+    "strict_unresolved_edges": 24,
+    "strict_unresolved_targets": 19,
+    "unresolved_targets": 12
   },
   "p3_authorized": false,
   "result": "BLOCKED",
@@ -163,6 +181,7 @@
   "scope": {
     "candidate_edges": 12764,
     "candidate_identity_exact": true,
+    "eligible_recovery_attempts": 21,
     "first_candidate_selection_used": false,
     "production_binder_used": true,
     "selection": "all coarse-equivalent, divergent, zero-valid, and unique SKEM production-binding obligations",

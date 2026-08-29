@@ -209,6 +209,13 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         ("auxiliary-reference-policy", "auxiliary_reference_policy", False),
         ("auxiliary-reference-schema", "auxiliary_reference_schema", False),
         ("P2-20A.3-AUX", "auxiliary_reference_evidence", False),
+        ("P2-20A.4-REPORT", "asset_descriptor_report", False),
+        ("P2-20A.4-DETAIL", "asset_descriptor_detail", False),
+        ("P2-20A.4-EVIDENCE", "asset_descriptor_evidence", False),
+        ("P2-20A.7-REPORT", "asset_binding_failure_report", False),
+        ("P2-20A.7-EVIDENCE", "asset_binding_failure_evidence", False),
+        ("P2-20A.8-REPORT", "asset_binding_recovery_report", False),
+        ("P2-20A.8-EVIDENCE", "asset_binding_recovery_evidence", False),
         ("g2-policy", "g2_policy", False),
     ]
     documents: dict[str, Any] = {}
@@ -270,6 +277,62 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
     require(auxiliary["contracts"]["schema_sha256"] ==
             sha256_file(documents["auxiliary_reference_schema_path"]),
             "Auxiliary-reference schema hash mismatch")
+
+    a4 = documents["asset_descriptor_report"]
+    a4_evidence = documents["asset_descriptor_evidence"]
+    require(a4["evidence_revision"] == "P2-20A.4" and a4["result"] == "BLOCKED" and
+            a4["review_execution_result"] == "PASS" and
+            a4["measured"]["resolved_targets"] == 3450 and
+            a4["measured"]["ambiguous_targets"] == 189 and
+            a4["measured"]["unresolved_targets"] == 12 and
+            a4["measured"]["recovery_applied_candidates"] == 9 and
+            a4["measured"]["reconciled_full_workset"] == {
+                "targets": 21494, "candidate_edges": 39351,
+                "resolved_targets": 21293, "ambiguous_targets": 189,
+                "unresolved_targets": 12, "unknown_targets": 0,
+                "resolved_edges": 38790, "ambiguous_edges": 546,
+                "unresolved_edges": 15, "unknown_edges": 0,
+            } and a4["g2_06_satisfied"] is False and a4["p3_authorized"] is False,
+            "P2-20A.4 effective asset-binding state drifted")
+    require(a4["detail_export"]["sha256"] ==
+            sha256_file(documents["asset_descriptor_detail_path"]) and
+            a4["detail_export"]["lines"] == count_lines(
+                documents["asset_descriptor_detail_path"]) == 3651 and
+            a4_evidence["outputs"]["report_json"]["sha256"] ==
+            sha256_file(documents["asset_descriptor_report_path"]) and
+            a4_evidence["outputs"]["detail_export"]["sha256"] ==
+            sha256_file(documents["asset_descriptor_detail_path"]),
+            "P2-20A.4 report, detail, or evidence binding drifted")
+
+    a7 = documents["asset_binding_failure_report"]
+    a7_evidence = documents["asset_binding_failure_evidence"]
+    require(a7["evidence_revision"] == "P2-20A.7" and a7["result"] == "BLOCKED" and
+            a7["measured"]["diagnosed_targets"] == 19 and
+            a7["measured"]["diagnosed_candidate_edges"] == 24 and
+            a7["measured"]["effective"] == {
+                "resolved_targets": 7, "resolved_edges": 9,
+                "ambiguous_targets": 0, "ambiguous_edges": 0,
+                "unresolved_targets": 12, "unresolved_edges": 15,
+            } and a7["g2_06_satisfied"] is False and a7["p3_authorized"] is False and
+            a7_evidence["outputs"]["report_json"]["sha256"] ==
+            sha256_file(documents["asset_binding_failure_report_path"]),
+            "P2-20A.7 strict failure diagnostic binding drifted")
+
+    a8 = documents["asset_binding_recovery_report"]
+    a8_evidence = documents["asset_binding_recovery_evidence"]
+    require(a8["evidence_revision"] == "P2-20A.8" and a8["result"] == "BLOCKED" and
+            a8["measured"]["attempted"] == {"targets": 17, "candidate_edges": 21} and
+            a8["measured"]["successful"] == {"targets": 7, "candidate_edges": 9} and
+            a8["measured"]["effective_resolution"] == {
+                "resolved": {"targets": 7, "candidate_edges": 9},
+                "ambiguous": {"targets": 0, "candidate_edges": 0},
+                "unresolved": {"targets": 12, "candidate_edges": 15},
+            } and a8["authority_boundary"]["a4_is_authoritative"] is True and
+            a8["authority_boundary"]["a8_may_change_counts"] is False and
+            a8["g2_06_satisfied"] is False and a8["p3_authorized"] is False and
+            a8_evidence["report"]["sha256"] ==
+            sha256_file(documents["asset_binding_recovery_report_path"]),
+            "P2-20A.8 recovery cross-proof binding drifted")
     require(all(document.get("source", {}).get("build", policy["source_build"]) ==
                 policy["source_build"] for document in
                 (documents["p2_05"], documents["p2_08"])), "Source build mismatch")

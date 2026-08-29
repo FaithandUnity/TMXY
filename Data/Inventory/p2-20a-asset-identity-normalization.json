@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.6",
-  "captured_utc": "2026-08-29T11:36:19Z",
+  "captured_utc": "2026-08-29T18:17:27Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -13,23 +13,23 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "24500b9a061ede5a4025a9b85cdbda10f7edf4d54b21d079ace8349d8e846c9b",
+    "aggregate_sha256": "3897d45980912d028b668415509b493f2d77ac45d34c077a16dfb7b6ed56072b",
     "entries": [
       {
         "role": "a4_report",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
         "tracked": true,
-        "bytes": 5077,
-        "lines": 174,
-        "sha256": "da7c2069acc6b3ea556473b0b7e552bd6efb42f09ee983737d018a9b8db68903"
+        "bytes": 5798,
+        "lines": 193,
+        "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c"
       },
       {
         "role": "a4_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 10776199,
+        "bytes": 13819743,
         "lines": 3651,
-        "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384"
+        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
       },
       {
         "role": "a4_policy",
@@ -59,17 +59,17 @@
         "role": "policy",
         "path": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
         "tracked": true,
-        "bytes": 3380,
+        "bytes": 3382,
         "lines": 102,
-        "sha256": "0cec64ba131871618b3904156cd60766dabaab1597be0dd7961cba64a0418cb1"
+        "sha256": "4aa44dc55dcdc0185de1ee36038711d628b699d4c60d1c0b84b12233b40790f8"
       },
       {
         "role": "schema",
         "path": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
         "tracked": true,
-        "bytes": 12132,
+        "bytes": 12134,
         "lines": 238,
-        "sha256": "8fa83145d087caa930fba9e35184194bfe4eaac88ffef74e8b3e7c6b30130efd"
+        "sha256": "e739b4958345140a455401b151c0618a6761cc869a617a1930adc79c171058fe"
       }
     ]
   },
@@ -92,25 +92,25 @@
     },
     "candidate_selections": 0,
     "reconciled_full_workset": {
-      "ambiguous_edges": 30,
-      "ambiguous_targets": 15,
+      "ambiguous_edges": 546,
+      "ambiguous_targets": 189,
       "candidate_edges": 39351,
-      "resolved_edges": 39297,
-      "resolved_targets": 21460,
+      "resolved_edges": 38790,
+      "resolved_targets": 21293,
       "targets": 21494,
       "unknown_edges": 0,
       "unknown_targets": 0,
-      "unresolved_edges": 24,
-      "unresolved_targets": 19
+      "unresolved_edges": 15,
+      "unresolved_targets": 12
     }
   },
   "outputs": {
     "report_json": {
       "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
       "tracked": true,
-      "bytes": 6205,
+      "bytes": 6207,
       "lines": 191,
-      "sha256": "fe95ccda8546beadbcbbfee71f73ccdbe12637375915c2cbec07e1f759e4b579"
+      "sha256": "19155a5f3f2e3b53df6e3598f3f712656a55f948426d4ac17a2f2c2a9eafcc43"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-identity-normalization-report.md",
@@ -129,15 +129,15 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
-    "policy_sha256": "0cec64ba131871618b3904156cd60766dabaab1597be0dd7961cba64a0418cb1",
+    "policy_sha256": "4aa44dc55dcdc0185de1ee36038711d628b699d4c60d1c0b84b12233b40790f8",
     "schema": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
-    "schema_sha256": "8fa83145d087caa930fba9e35184194bfe4eaac88ffef74e8b3e7c6b30130efd"
+    "schema_sha256": "e739b4958345140a455401b151c0618a6761cc869a617a1930adc79c171058fe"
   },
   "implementation": {
     "source_files": 2,
-    "source_sha256": "b7f48032029d3444d94641f5bac3253828667895b682df9e5ba617d428c0ad91",
+    "source_sha256": "2cd179938fd59f7d957d9c90b49ce0e8f711de801e768348ad939941fc502f67",
     "generator": "Tools/TMXY.G2AssetIdentityNormalization/identity_normalization.py",
-    "generator_sha256": "bc605b62b681a2c5313acba16ebb32d72c466e8259606ea804d98c6f566d9512",
+    "generator_sha256": "4d4a1deeb0cb056cfd1d289dffe4511a4dda178b19ac13e43a23ed376b1d7aeb",
     "wrapper": "Tools/TMXY.G2AssetIdentityNormalization/New-G2AssetIdentityNormalization.ps1",
     "wrapper_sha256": "6f65bfecb73e36d24066a2dbfea8d80ad1bfbaefa10f924caf017076a9f85176",
     "self_test_assertions": 10

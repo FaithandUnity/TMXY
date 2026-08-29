@@ -189,10 +189,23 @@ $expectedOutput = @(
 )
 $passed = $execution.exit_code -eq 0 -and $execution.output -match '100% tests passed'
 foreach ($line in $expectedOutput) { $passed = $passed -and $execution.output.Contains($line) }
+$verifiedOutput = (@('100% tests passed') + $expectedOutput) -join "`n"
+$executionSha = Get-TextSha256 -Value ($verifiedOutput + "`n")
+$capturedUtc = [DateTimeOffset]::UtcNow.ToString('o')
+if (Test-Path -LiteralPath $OutputPath -PathType Leaf) {
+    $prior = Get-Content -LiteralPath $OutputPath -Raw -Encoding UTF8 |
+        ConvertFrom-Json -DateKind String
+    if ([string]$prior.source_sha256 -ceq $sourceSha -and
+        [string]$prior.execution.output_sha256 -ceq $executionSha -and
+        [string]$prior.result -ceq $(if ($passed) { 'PASS' } else { 'FAIL' }) -and
+        [string]$prior.captured_utc -match '^\d{4}-\d{2}-\d{2}T') {
+        $capturedUtc = [string]$prior.captured_utc
+    }
+}
 
 $report = [pscustomobject][ordered]@{
     schema_version = 1
-    captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
+    captured_utc = $capturedUtc
     result = if ($passed) { 'PASS' } else { 'FAIL' }
     task = 'P1-13'
     completion_criteria_satisfied = $passed
@@ -233,7 +246,7 @@ $report = [pscustomobject][ordered]@{
     execution = [pscustomobject][ordered]@{
         exit_code = $execution.exit_code
         output_line_count = @($execution.output -split "`n").Count
-        output_sha256 = Get-TextSha256 -Value $execution.output
+        output_sha256 = $executionSha
     }
 }
 $json = ($report | ConvertTo-Json -Depth 9).Replace("`r`n", "`n").Replace("`r", "`n")

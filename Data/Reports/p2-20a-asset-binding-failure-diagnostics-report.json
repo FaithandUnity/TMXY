@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.7",
-  "captured_utc": "2026-08-29T13:57:23.133576Z",
+  "captured_utc": "2026-08-29T18:18:41.399194Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -14,31 +14,31 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "af16b1784bace0ada81a3665ac1b6ef16b612e4a0b60610fc70445882f82a66c",
+    "aggregate_sha256": "a200b17c87cd5a6d3a31380e51111ec57620ab07f36f5b7906e9ce9aefa935b8",
     "entries": [
       {
         "role": "a4_report",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
         "tracked": true,
-        "bytes": 5077,
-        "lines": 174,
-        "sha256": "da7c2069acc6b3ea556473b0b7e552bd6efb42f09ee983737d018a9b8db68903"
+        "bytes": 5798,
+        "lines": 193,
+        "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c"
       },
       {
         "role": "a4_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 10776199,
+        "bytes": 13819743,
         "lines": 3651,
-        "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384"
+        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
       },
       {
         "role": "a4_evidence",
         "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
         "tracked": true,
-        "bytes": 6859,
-        "lines": 224,
-        "sha256": "7b3665623aa4f138f37bb11be4f7935b04ce3ad25e7c34fd92ac2a71b45cc173"
+        "bytes": 11011,
+        "lines": 340,
+        "sha256": "ba6b6ea42d79c9386982701eb6c420873f8375791f979b3222dc32f55706cc22"
       },
       {
         "role": "a4_policy",
@@ -70,7 +70,7 @@
         "tracked": true,
         "bytes": 6306,
         "lines": 189,
-        "sha256": "f3c2bac9fd0cf3415537011f7a2211e6cf6a603c1cde462cb93a3175fab2871a"
+        "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d"
       },
       {
         "role": "p2_12_catalog",
@@ -81,72 +81,57 @@
         "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92"
       },
       {
-        "role": "core_report",
-        "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-        "tracked": true,
-        "bytes": 13434,
-        "lines": 370,
-        "sha256": "799a00c954e7e0635c568bda8c8712d5572f874b32548206a6f73d6b8a98fc77"
-      },
-      {
         "role": "a5_report",
         "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json",
         "tracked": true,
         "bytes": 5442,
         "lines": 179,
-        "sha256": "be5c895d9214d47ba46a78cfd5890c4fd6529c43f29601d63e395b57b26dd99f"
+        "sha256": "592ed7e60bbae1f9f670e2aa5aa9796f6a9cceabd17c60d29913c359f3b79a6b"
       },
       {
         "role": "a6_report",
         "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
         "tracked": true,
-        "bytes": 6205,
+        "bytes": 6207,
         "lines": 191,
-        "sha256": "fe95ccda8546beadbcbbfee71f73ccdbe12637375915c2cbec07e1f759e4b579"
-      },
-      {
-        "role": "b1_evidence",
-        "path": "Data/Inventory/p2-20b-migration-decisions.json",
-        "tracked": true,
-        "bytes": 8169,
-        "lines": 225,
-        "sha256": "c850a4f17cc1bf597520048b1545f9d3361c634024a7b4c983537cde9f2bd99a"
+        "sha256": "19155a5f3f2e3b53df6e3598f3f712656a55f948426d4ac17a2f2c2a9eafcc43"
       },
       {
         "role": "policy",
         "path": "Contracts/data-schema/g2-asset-binding-failure-diagnostics-policy-v1.json",
         "tracked": true,
-        "bytes": 5214,
-        "lines": 118,
-        "sha256": "59b404a070fe5106eda971d257ca191bd55d73708c4e8d6ea06ef250f9b2822b"
+        "bytes": 5481,
+        "lines": 123,
+        "sha256": "3af50d219939788564d988b973aeb37fa954d628594e018118feba1300bed23e"
       },
       {
         "role": "schema",
         "path": "Contracts/data-schema/g2-asset-binding-failure-diagnostics-v1.schema.json",
         "tracked": true,
-        "bytes": 12525,
-        "lines": 229,
-        "sha256": "73c75847d3908102d91c431ba64a9d7c0accc35c4929ca3acd4974a5d3d8d84c"
+        "bytes": 13618,
+        "lines": 247,
+        "sha256": "847a033bcc90bacf2345b9af082bf16e21420661aa85f45733ebcd2770a54388"
       },
       {
         "role": "detail_schema",
         "path": "Contracts/data-schema/g2-asset-binding-failure-detail-v1.schema.json",
         "tracked": true,
-        "bytes": 2261,
+        "bytes": 2287,
         "lines": 51,
-        "sha256": "907c19bc90df367de65090e5db466a22f66529db9c32ce12720eb872feb5177f"
+        "sha256": "76e8e5a8eee05cc0e10193e3f6a17183778b1049693d1b6c2651b456ab9ebbe5"
       }
     ]
   },
   "detail_export": {
     "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
     "tracked": false,
-    "bytes": 21243,
+    "bytes": 21229,
     "lines": 19,
-    "sha256": "a9afcdeceb277a152dacf2d772a7f146afcee2784721863eec9bd504e25ec462"
+    "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
   },
   "scope": {
     "source_revision": "P2-20A.4",
+    "source_resolution_axis": "strict_resolution",
     "source_resolution": "UNRESOLVED",
     "targets": 19,
     "candidate_edges": 24,
@@ -217,10 +202,12 @@
       }
     ],
     "effective": {
-      "resolved_targets": 0,
-      "resolved_edges": 0,
-      "unresolved_targets": 19,
-      "unresolved_edges": 24
+      "resolved_targets": 7,
+      "resolved_edges": 9,
+      "ambiguous_targets": 0,
+      "ambiguous_edges": 0,
+      "unresolved_targets": 12,
+      "unresolved_edges": 15
     }
   },
   "classification_controls": {
@@ -250,10 +237,14 @@
     "verified_resolutions": 0
   },
   "preserved_blockers": {
-    "asset_ambiguous_targets": 15,
-    "asset_ambiguous_edges": 30,
-    "asset_unresolved_targets": 19,
-    "asset_unresolved_edges": 24,
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 12,
+    "asset_effective_unresolved_edges": 15,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,
@@ -262,12 +253,12 @@
   },
   "blockers": [
     {
-      "reason_code": "PRODUCTION_BINDING_REJECTIONS_DIAGNOSED_NOT_REMEDIATED",
-      "count": 19
+      "reason_code": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN",
+      "count": 12
     },
     {
-      "reason_code": "REMEDIATION_EVIDENCE_ABSENT",
-      "count": 19
+      "reason_code": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN",
+      "count": 189
     }
   ],
   "negative_contracts": [
@@ -291,9 +282,9 @@
     "g2_decision": "BLOCKED"
   },
   "contracts": {
-    "policy_sha256": "59b404a070fe5106eda971d257ca191bd55d73708c4e8d6ea06ef250f9b2822b",
-    "schema_sha256": "73c75847d3908102d91c431ba64a9d7c0accc35c4929ca3acd4974a5d3d8d84c",
-    "detail_schema_sha256": "907c19bc90df367de65090e5db466a22f66529db9c32ce12720eb872feb5177f"
+    "policy_sha256": "3af50d219939788564d988b973aeb37fa954d628594e018118feba1300bed23e",
+    "schema_sha256": "847a033bcc90bacf2345b9af082bf16e21420661aa85f45733ebcd2770a54388",
+    "detail_schema_sha256": "76e8e5a8eee05cc0e10193e3f6a17183778b1049693d1b6c2651b456ab9ebbe5"
   },
   "disclosure": {
     "anonymous_aggregate_and_hash_only": true,

@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-binding-recovery-v1.schema.json",
+  "title": "TMXY P2-20A.8 asset binding recovery cross-proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+    "g2_06_satisfied", "p3_authorized", "input_bindings", "outputs", "frozen_scope",
+    "measured", "authority_boundary", "preserved_blockers", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.8"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {"$ref": "#/$defs/bindings"},
+    "outputs": {"$ref": "#/$defs/outputs"},
+    "frozen_scope": {"$ref": "#/$defs/scope"},
+    "measured": {"$ref": "#/$defs/measured"},
+    "authority_boundary": {"$ref": "#/$defs/authority"},
+    "preserved_blockers": {"$ref": "#/$defs/blockers"},
+    "contracts": {"$ref": "#/$defs/contracts"},
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+$"},
+        "tracked": {"type": "boolean"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/binding"}}
+      }
+    },
+    "output": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+$"},
+        "tracked": {"const": false},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "outputs": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempt_tsv", "success_tsv", "detail_export"],
+      "properties": {
+        "attempt_tsv": {"$ref": "#/$defs/output"},
+        "success_tsv": {"$ref": "#/$defs/output"},
+        "detail_export": {"$ref": "#/$defs/output"}
+      }
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["targets", "candidate_edges"],
+      "properties": {"targets": {"const": 19}, "candidate_edges": {"const": 24}}
+    },
+    "counts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["targets", "candidate_edges"],
+      "properties": {
+        "targets": {"type": "integer", "minimum": 0, "maximum": 19},
+        "candidate_edges": {"type": "integer", "minimum": 0, "maximum": 24}
+      }
+    },
+    "resolution": {
+      "type": "object", "additionalProperties": false,
+      "required": ["resolved", "ambiguous", "unresolved"],
+      "properties": {
+        "resolved": {"$ref": "#/$defs/counts"},
+        "ambiguous": {"$ref": "#/$defs/counts"},
+        "unresolved": {"$ref": "#/$defs/counts"}
+      }
+    },
+    "measured": {
+      "type": "object", "additionalProperties": false,
+      "required": ["attempted", "successful", "effective_resolution"],
+      "properties": {
+        "attempted": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 17}, "candidate_edges": {"const": 21}}}]},
+        "successful": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 7}, "candidate_edges": {"const": 9}}}]},
+        "effective_resolution": {
+          "type": "object", "additionalProperties": false,
+          "required": ["resolved", "ambiguous", "unresolved"],
+          "properties": {
+            "resolved": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 7}, "candidate_edges": {"const": 9}}}]},
+            "ambiguous": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 0}, "candidate_edges": {"const": 0}}}]},
+            "unresolved": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 12}, "candidate_edges": {"const": 15}}}]}
+          }
+        }
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["a4_is_authoritative", "a8_is_cross_proof_only", "a8_may_change_counts", "attempt_is_success", "machine_can_approve_disposition"],
+      "properties": {
+        "a4_is_authoritative": {"const": true},
+        "a8_is_cross_proof_only": {"const": true},
+        "a8_may_change_counts": {"const": false},
+        "attempt_is_success": {"const": false},
+        "machine_can_approve_disposition": {"const": false}
+      }
+    },
+    "blockers": {
+      "type": "object", "additionalProperties": false,
+      "required": ["identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges", "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges", "asset_effective_unresolved_targets", "asset_effective_unresolved_edges", "auxiliary_nonterminal_instances", "conditional_required_missing", "migration_pending", "g2_satisfied", "g2_blocked"],
+      "properties": {
+        "identity_semantic_ambiguous_targets": {"const": 15},
+        "identity_semantic_ambiguous_edges": {"const": 30},
+        "asset_effective_ambiguous_targets": {"const": 189},
+        "asset_effective_ambiguous_edges": {"const": 546},
+        "asset_effective_unresolved_targets": {"const": 12},
+        "asset_effective_unresolved_edges": {"const": 15},
+        "auxiliary_nonterminal_instances": {"const": 212},
+        "conditional_required_missing": {"const": 29},
+        "migration_pending": {"const": 1359},
+        "g2_satisfied": {"const": 7},
+        "g2_blocked": {"const": 2}
+      }
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256"],
+      "properties": {
+        "policy_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "detail_schema_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tracked_aggregate_and_hash_only", "anonymous_detail_only", "raw_names", "private_source_paths", "exact_primary_keys", "declared_or_observed_values", "decoded_confidential_payloads"],
+      "properties": {
+        "tracked_aggregate_and_hash_only": {"const": true},
+        "anonymous_detail_only": {"const": true},
+        "raw_names": {"const": false},
+        "private_source_paths": {"const": false},
+        "exact_primary_keys": {"const": false},
+        "declared_or_observed_values": {"const": false},
+        "decoded_confidential_payloads": {"const": false}
+      }
+    }
+  }
+}

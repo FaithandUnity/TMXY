@@ -10,8 +10,8 @@ outputs contain aggregate counts and exact SHA-256 bindings only. A successful
 execution remains `BLOCKED` because the hash-bound auxiliary evidence keeps all
 212 file instances nonterminal (171 candidate-only, 35 editor-undecided, and 6
 malformed-blocked), with zero approved semantic adapters, no-reference
-dispositions, or roots. Explicit Package-to-asset states still include 183 ambiguous and
-19 unresolved targets, conditionally required values are missing, and measured
+dispositions, or roots. A.4/A.7/A.8-bound effective Package-to-asset states still include 189
+ambiguous and 12 unresolved targets, conditionally required values are missing, and measured
 logical gaps are open. Missing conditional values may
 emit no edge, so their P2-13-bound aggregate is independently reproduced from
 the P2-06 normalized source into an ignored three-field anonymous workset. Only

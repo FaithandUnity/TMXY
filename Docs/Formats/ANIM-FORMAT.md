@@ -58,8 +58,19 @@ tracks against an 80-bone skeleton. A smaller track count therefore leaves
 the skeleton tail uncontrolled by that animation; it is not a corrupt file.
 Track count must still be positive and no larger than the skeleton.
 
-The payload frame count must exactly equal Package `_frame`. The outer
-animation count must exactly equal `QSkelMesh._anim` count.
+The default binder requires the payload frame count to exactly equal Package
+`_frame`. The outer animation count must exactly equal `QSkelMesh._anim` count.
+
+P2-20A.8 adds a separate explicit adapter for a hash-bound A.7
+`frame_count_mismatch` edge. In that mode every clip retains the Package value
+as `declared_frame_count`, records the payload value as
+`observed_frame_count`/`effective_frame_count`, and records
+`payload_observed_contract` as the basis. Recovery is accepted only when the
+whole animation set closes: every positive count is within the existing limit,
+every track and key is present and valid, all quaternions and emitter values
+pass the original checks, and no unexplained tail remains. The default binder
+continues to reject the mismatch, and invalid track counts or later payload
+errors cannot be overridden by this adapter.
 
 After all clips, an optional emitter-point tail may appear as `int32 count`
 followed by `count` finite `float32 x,y,z` vectors. No other trailing bytes are
@@ -94,7 +105,8 @@ Motion policy. Deterministic root-track CSV retains every root key for review.
 
 ## 6. Outputs and limits
 
-Deterministic JSON contains Package metadata, frames, tracks, key counts,
+Deterministic JSON contains Package metadata, declared/observed/effective frame
+counts and their authority basis, tracks, key counts,
 duration, looping, notify references and Root Motion summaries. Root CSV
 contains every root key with legacy-meter and UE-centimeter translations plus
 the original quaternion. Final UE quaternion basis conversion and asset

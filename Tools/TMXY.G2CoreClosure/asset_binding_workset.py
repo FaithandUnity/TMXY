@@ -23,6 +23,10 @@ BASES = {
     "SELF_DESCRIBING_RULE",
     "DIVERGENT_DESCRIPTOR_SET",
     "DESCRIPTOR_VALIDATION_FAILED",
+    "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES",
+    "NO_PRODUCTION_COMPATIBLE_CANDIDATE",
+    "OPEN_REJECTED_CANDIDATE",
+    "SINGLE_COMPATIBLE_SEMANTIC_CLASS",
 }
 
 
@@ -32,7 +36,9 @@ def stable_id(namespace: str, *parts: str) -> str:
 
 
 def build_asset_binding_workset(policy: dict[str, Any], catalog_path: Path,
-                                graph: dict[str, Any], output: Path) -> dict[str, Any]:
+                                graph: dict[str, Any], effective_detail_path: Path,
+                                base_output: Path, output: Path,
+                                expected_base_sha256: str) -> dict[str, Any]:
     reachable_assets = {
         identity for identity in graph["reachable"]
         if graph["node_kind"].get(identity) == "asset_node"
@@ -49,7 +55,23 @@ def build_asset_binding_workset(policy: dict[str, Any], catalog_path: Path,
 
     require(set(catalog_assets) == reachable_assets,
             "Reachable asset set is not exactly reproduced from P2-12")
+    effective: dict[str, dict[str, Any]] = {}
+    with effective_detail_path.open("r", encoding="utf-8") as stream:
+        for line in stream:
+            item = json.loads(line)
+            identity = str(item["asset_id"])
+            require(identity not in effective and identity in reachable_assets,
+                    "P2-20A.4 effective target is duplicated or unreachable")
+            require(item["resolution"] in RESOLUTIONS and
+                    item["candidate_selected"] is False and
+                    item["heuristic_selection"] is False and
+                    item["production_binder_used"] is True,
+                    "P2-20A.4 effective target state is not fail closed")
+            effective[identity] = item
+    require(len(effective) == 3651,
+            "P2-20A.4 effective specialized target set is incomplete")
     allowed_families = set(policy["asset_binding_scope"]["families"])
+    base_records: list[dict[str, Any]] = []
     records: list[dict[str, Any]] = []
     by_family: dict[str, collections.Counter[str]] = collections.defaultdict(
         collections.Counter
@@ -83,6 +105,25 @@ def build_asset_binding_workset(policy: dict[str, Any], catalog_path: Path,
             resolution, basis = "UNRESOLVED", "DESCRIPTOR_VALIDATION_FAILED"
         else:
             raise ValueError("Reachable asset has an unclassified binding state")
+        base_records.append({
+            "asset_id": identity,
+            "candidate_count": len(candidates),
+            "candidate_set_sha256": sha256_lines(candidates),
+            "descriptor_variants": descriptor_variants,
+            "family": family,
+            "heuristic_selection": False,
+            "resolution": resolution,
+            "resolution_basis": basis,
+            "structure": structure,
+            "valid_variants": valid_variants,
+        })
+        if identity in effective:
+            observed = effective[identity]
+            require(int(observed["candidate_count"]) == len(candidates) and
+                    observed["candidate_set_sha256"] == sha256_lines(candidates),
+                    "P2-20A.4 effective candidate set drifted from core closure")
+            resolution = str(observed["resolution"])
+            basis = str(observed["resolution_basis"])
         record = {
             "asset_id": identity,
             "candidate_count": len(candidates),
@@ -103,6 +144,18 @@ def build_asset_binding_workset(policy: dict[str, Any], catalog_path: Path,
         by_family[family][resolution.lower()] += 1
         by_family[family]["candidate_edges"] += len(candidates)
 
+    base_lines = [canonical_json(item) for item in base_records]
+    base_targets = collections.Counter(item["resolution"].lower()
+                                       for item in base_records)
+    base_edges = collections.Counter()
+    for item in base_records:
+        base_edges[item["resolution"].lower()] += item["candidate_count"]
+    require(base_targets == {"resolved": 21292, "ambiguous": 183, "unresolved": 19} and
+            base_edges == {"resolved": 38793, "ambiguous": 534, "unresolved": 24} and
+            sha256_lines(base_lines) == expected_base_sha256,
+            "Strict base asset-binding workset drifted from A.4 input evidence")
+    write_text(base_output, "\n".join(base_lines) + "\n")
+
     lines = [canonical_json(item) for item in records]
     require(len(records) == len(reachable_assets) and
             len({item["asset_id"] for item in records}) == len(records),
@@ -116,8 +169,8 @@ def build_asset_binding_workset(policy: dict[str, Any], catalog_path: Path,
         edge_counts[item["resolution"].lower()] += item["candidate_count"]
         basis_targets[item["resolution_basis"]] += 1
         basis_edges[item["resolution_basis"]] += item["candidate_count"]
-    require(target_counts == {"resolved": 21292, "ambiguous": 183, "unresolved": 19} and
-            edge_counts == {"resolved": 38793, "ambiguous": 534, "unresolved": 24},
+    require(target_counts == {"resolved": 21293, "ambiguous": 189, "unresolved": 12} and
+            edge_counts == {"resolved": 38790, "ambiguous": 546, "unresolved": 15},
             "Asset binding classification drifted from the frozen evidence")
     return {
         "resolution_explicit": True,

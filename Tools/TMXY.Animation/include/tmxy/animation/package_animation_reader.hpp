@@ -24,4 +24,9 @@ bind_animation_set(std::span<const std::byte> package_bytes,
                    std::string_view skeletal_mesh_object_name,
                    std::span<const std::byte> animation_bytes);
 
+[[nodiscard]] AnimationResult<AnimationBinding>
+bind_animation_set_with_payload_frame_counts(std::span<const std::byte> package_bytes,
+                                             std::string_view skeletal_mesh_object_name,
+                                             std::span<const std::byte> animation_bytes);
+
 } // namespace tmxy::animation

@@ -7,8 +7,9 @@ Status: P1-13 frozen evidence contract, schema version 1.
 `qtx` is not a self-describing image container. A legacy `QTexture` object in a
 Package supplies the descriptor, while
 `Resource/Texture/<package>/<object>.qtx` contains only the concatenated mip
-payload. The reconstruction pipeline therefore requires both inputs and never
-infers width, height, format, or mip count from payload length alone.
+payload. The reconstruction pipeline therefore always requires both inputs.
+Its default binder never infers width, height, format, or mip count from payload
+length alone.
 
 The Package object body uses `QObject::serialize` records:
 
@@ -29,6 +30,18 @@ Unknown property records are preserved as named byte spans by the descriptor
 reader. A duplicate known property, invalid known-property size, trailing body
 bytes, invalid enum, non-positive dimensions, impossible mip chain, overflow,
 or payload-size mismatch is a hard error with a stable byte offset.
+
+P2-20A.8 adds a separate, explicit recovery contract for a descriptor/payload
+mip-count disagreement. It is disabled in the default binder and may only be
+invoked for a hash-bound A.7 failure edge. The adapter enumerates the natural
+mip chain for the declared format and dimensions and accepts only a payload
+whose entire byte length ends at exactly one shorter mip-prefix boundary. It
+never adds mips beyond the Package declaration. It preserves the
+Package value as the declared count, records the inferred count as
+`effective_mip_count`, and records `payload_complete_chain_contract` as the
+basis. A partial mip, unexplained tail, zero count, unchanged count, or count
+outside the natural chain remains rejected. DDS flags, caps, and header count
+use the effective count; the original declared value remains visible in JSON.
 
 ## 2. Texture formats
 

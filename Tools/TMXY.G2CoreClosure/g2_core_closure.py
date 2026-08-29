@@ -57,9 +57,15 @@ def build(args: argparse.Namespace) -> dict[str, object]:
     workset = build_conditional_workset(
         policy, reference_policy, documents["p2_06"], documents["p2_13"],
         core_registry, args.table_root.resolve(), args.workset_output)
+    descriptor_base_binding = next(
+        item for item in documents["asset_descriptor_report"]["input_bindings"]
+        if item["path"] == "Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl"
+    )
     asset_binding = build_asset_binding_workset(
         policy, documents["asset_catalog_path"], graph,
-        args.asset_workset_output)
+        documents["asset_descriptor_detail_path"],
+        args.base_asset_workset_output, args.asset_workset_output,
+        str(descriptor_base_binding["sha256"]))
     p213_binding = next(item for item in bindings["artifacts"] if item["id"] == "P2-13")
     p206_binding = next(item for item in bindings["artifacts"] if item["id"] == "P2-06")
     closure = summarize(graph, documents["p2_13"], detail, p213_binding,
@@ -68,8 +74,8 @@ def build(args: argparse.Namespace) -> dict[str, object]:
             closure["asset_binding_resolution_explicit"] is True and
             closure["scope_complete"] is False, "Incomplete scope was incorrectly closed")
     require(closure["asset_binding"]["reachable_assets"] == 21494 and
-            closure["asset_binding"]["ambiguous_targets"] == 183 and
-            closure["asset_binding"]["unresolved_targets"] == 19 and
+            closure["asset_binding"]["ambiguous_targets"] == 189 and
+            closure["asset_binding"]["unresolved_targets"] == 12 and
             closure["asset_binding"]["unknown_targets"] == 0 and
             closure["asset_binding"]["first_candidate_selection_used"] is False,
             "Reachable asset binding evidence is incomplete or heuristic")
@@ -161,6 +167,7 @@ def main() -> None:
     parser.add_argument("--detail-output", type=Path)
     parser.add_argument("--table-root", type=Path)
     parser.add_argument("--workset-output", type=Path)
+    parser.add_argument("--base-asset-workset-output", type=Path)
     parser.add_argument("--asset-workset-output", type=Path)
     parser.add_argument("--json-output", type=Path)
     parser.add_argument("--markdown-output", type=Path)
@@ -171,7 +178,8 @@ def main() -> None:
         print(json.dumps(self_test(), sort_keys=True, separators=(",", ":")))
         return
     require(all((args.root, args.policy, args.schema, args.detail_output, args.table_root,
-                 args.workset_output, args.asset_workset_output, args.json_output,
+                 args.workset_output, args.base_asset_workset_output,
+                 args.asset_workset_output, args.json_output,
                  args.markdown_output, args.governance_output)), "Generation arguments are required")
     print(json.dumps(build(args), sort_keys=True, separators=(",", ":")))
 

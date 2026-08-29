@@ -1,4 +1,7 @@
 #include "descriptor_semantic_signature.hpp"
+#include "probe_output.hpp"
+#include "probe_types.hpp"
+#include "recovery_plan.hpp"
 #include "semantic_hash.hpp"
 #include "sha256.hpp"
 #include "tmxy/animation/package_animation_reader.hpp"
@@ -24,6 +27,7 @@
 #include <optional>
 #include <set>
 #include <span>
+#include <stdexcept>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -33,8 +37,13 @@
 namespace
 {
 
+using tmxy::g2_asset_descriptor_diagnostics::AssetResult;
+using tmxy::g2_asset_descriptor_diagnostics::CandidateResult;
 using tmxy::g2_asset_descriptor_diagnostics::descriptor_semantic_sha256;
+using tmxy::g2_asset_descriptor_diagnostics::emit_result;
 using tmxy::g2_asset_descriptor_diagnostics::normalized_semantic_sha256;
+using tmxy::g2_asset_descriptor_diagnostics::RecoveryDirective;
+using tmxy::g2_asset_descriptor_diagnostics::RecoveryPlan;
 using tmxy::g2_asset_descriptor_diagnostics::semantic_sha256;
 using tmxy::g2_asset_descriptor_diagnostics::sha256_hex;
 constexpr std::string_view kCandidateSetDomain = "tmxy-g2-asset-descriptor-candidate-set-v1";
@@ -84,39 +93,6 @@ struct Candidate final
     std::uint64_t body_offset{0};
     std::uint64_t body_size{0};
     std::string class_name;
-};
-
-struct CandidateResult final
-{
-    std::string candidate_id;
-    std::string body_sha256;
-    bool descriptor_parsed{false};
-    bool binding_passed{false};
-    std::optional<std::string> semantic_sha256;
-    std::optional<std::string> descriptor_semantic_sha256;
-    std::optional<std::string> identity_normalized_descriptor_semantic_sha256;
-    std::optional<std::string> identity_normalized_semantic_sha256;
-    bool identity_mirror_ascii_lower_match{false};
-};
-
-struct Counts final
-{
-    std::uint64_t candidates{0};
-    std::uint64_t descriptor_parsed{0};
-    std::uint64_t descriptor_rejected{0};
-    std::uint64_t binding_pass{0};
-    std::uint64_t binding_rejected{0};
-    std::uint64_t semantic_distinct{0};
-};
-
-struct AssetResult final
-{
-    std::string asset_id;
-    std::string family;
-    std::string structure;
-    std::string candidate_set_sha256;
-    std::vector<CandidateResult> candidates;
-    Counts counts;
 };
 
 struct PackageIndex final
@@ -667,14 +643,21 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
     }
 }
 
-[[nodiscard]] CandidateResult inspect_candidate(const std::string_view family,
-                                                const std::span<const std::byte> asset_bytes,
-                                                const PackageData& package,
-                                                const Candidate& candidate)
+[[nodiscard]] CandidateResult
+inspect_candidate(const std::string_view family, const std::span<const std::byte> asset_bytes,
+                  const PackageData& package, const Candidate& candidate,
+                  const std::string_view source_sha256, const RecoveryDirective* const directive)
 {
     CandidateResult result;
     result.candidate_id = candidate.id;
     result.body_sha256 = sha256_hex(body_span(package, candidate));
+    if (directive != nullptr &&
+        (directive->asset_id.empty() || directive->candidate_id != candidate.id ||
+         directive->body_sha256 != result.body_sha256 ||
+         directive->source_sha256 != source_sha256 || directive->family != family))
+    {
+        fail("recovery_plan_binding_drift");
+    }
     if (family == "qtx")
     {
         auto descriptor = tmxy::texture::LegacyTextureDescriptorReader{}.parse(
@@ -685,8 +668,48 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
             const auto semantic = tmxy::asset_inventory::semantic_signature(descriptor.value());
             const auto signature = std::string_view(semantic.data(), semantic.size());
             set_semantic_hashes(result, candidate.object_name, signature, signature);
-            result.binding_passed =
-                tmxy::texture::QtxReader{}.parse(descriptor.value(), asset_bytes).has_value();
+            const auto strict = tmxy::texture::QtxReader{}.parse(descriptor.value(), asset_bytes);
+            result.strict_binding_passed = strict.has_value();
+            result.effective_binding_passed = strict.has_value();
+            if (strict.has_value())
+            {
+                result.effective_semantic_sha256 = result.semantic_sha256;
+            }
+            if (directive != nullptr)
+            {
+                result.recovery_kind = directive->recovery_kind;
+                if (strict.has_value() ||
+                    tmxy::texture::to_string(strict.error().code) != directive->strict_error_code)
+                {
+                    fail("recovery_plan_strict_error_drift");
+                }
+                const auto inferred = tmxy::texture::infer_complete_payload_mip_count(
+                    descriptor.value(), asset_bytes);
+                if (inferred.has_value() && inferred.value() < descriptor.value().mip_count)
+                {
+                    const auto recovered =
+                        tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
+                            descriptor.value(), asset_bytes,
+                            {.effective_mip_count = inferred.value(),
+                             .basis =
+                                 tmxy::texture::MipCountBasis::payload_complete_chain_contract});
+                    if (!recovered.has_value())
+                    {
+                        fail("recovery_plan_qtx_inference_drift");
+                    }
+                    auto effective_descriptor = descriptor.value();
+                    effective_descriptor.mip_count = inferred.value();
+                    effective_descriptor.stored_mip_count =
+                        inferred.value() == 1U ? 0U : inferred.value();
+                    const auto effective =
+                        tmxy::asset_inventory::semantic_signature(effective_descriptor);
+                    result.effective_semantic_sha256 =
+                        semantic_sha256(candidate.object_name,
+                                        std::string_view(effective.data(), effective.size()));
+                    result.effective_binding_passed = true;
+                    result.recovery_applied = true;
+                }
+            }
         }
         return result;
     }
@@ -701,9 +724,12 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
             const auto signature = std::string_view(semantic.data(), semantic.size());
             set_semantic_hashes(result, candidate.object_name, signature, signature);
         }
-        result.binding_passed =
+        result.strict_binding_passed =
             tmxy::static_mesh::bind_static_mesh(package.bytes, candidate.object_name, asset_bytes)
                 .has_value();
+        result.effective_binding_passed = result.strict_binding_passed;
+        result.effective_semantic_sha256 =
+            result.strict_binding_passed ? result.semantic_sha256 : std::nullopt;
         return result;
     }
     if (family == "skem")
@@ -717,9 +743,12 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
             const auto signature = std::string_view(semantic.data(), semantic.size());
             set_semantic_hashes(result, candidate.object_name, signature, signature);
         }
-        result.binding_passed = tmxy::skeletal_mesh::bind_skeletal_mesh(
-                                    package.bytes, candidate.object_name, asset_bytes)
-                                    .has_value();
+        result.strict_binding_passed = tmxy::skeletal_mesh::bind_skeletal_mesh(
+                                           package.bytes, candidate.object_name, asset_bytes)
+                                           .has_value();
+        result.effective_binding_passed = result.strict_binding_passed;
+        result.effective_semantic_sha256 =
+            result.strict_binding_passed ? result.semantic_sha256 : std::nullopt;
         return result;
     }
     if (family == "anim")
@@ -750,9 +779,45 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
                 set_semantic_hashes(result, candidate.object_name, signature, std::nullopt);
             }
         }
-        result.binding_passed =
-            tmxy::animation::bind_animation_set(package.bytes, candidate.object_name, asset_bytes)
-                .has_value();
+        const auto strict =
+            tmxy::animation::bind_animation_set(package.bytes, candidate.object_name, asset_bytes);
+        result.strict_binding_passed = strict.has_value();
+        result.effective_binding_passed = strict.has_value();
+        if (strict.has_value())
+        {
+            result.effective_semantic_sha256 = result.semantic_sha256;
+        }
+        if (directive != nullptr)
+        {
+            result.recovery_kind = directive->recovery_kind;
+            if (strict.has_value() ||
+                tmxy::animation::to_string(strict.error().code) != directive->strict_error_code)
+            {
+                fail("recovery_plan_strict_error_drift");
+            }
+            const auto recovered = tmxy::animation::bind_animation_set_with_payload_frame_counts(
+                package.bytes, candidate.object_name, asset_bytes);
+            if (recovered.has_value())
+            {
+                auto effective_descriptor = recovered.value().package;
+                if (effective_descriptor.animations.size() !=
+                    recovered.value().payload.clips.size())
+                {
+                    fail("recovery_plan_anim_clip_drift");
+                }
+                for (std::size_t index = 0; index < effective_descriptor.animations.size(); ++index)
+                {
+                    effective_descriptor.animations[index].frame_count =
+                        recovered.value().payload.clips[index].effective_frame_count;
+                }
+                const auto effective =
+                    tmxy::asset_inventory::semantic_signature(effective_descriptor);
+                result.effective_semantic_sha256 = semantic_sha256(
+                    candidate.object_name, std::string_view(effective.data(), effective.size()));
+                result.effective_binding_passed = true;
+                result.recovery_applied = true;
+            }
+        }
         return result;
     }
     fail("unsupported_asset_family");
@@ -760,7 +825,7 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
 
 [[nodiscard]] AssetResult inspect_asset(const AssetEntry& asset,
                                         const std::filesystem::path& client_root,
-                                        const PackageIndex& packages)
+                                        const PackageIndex& packages, RecoveryPlan& recovery_plan)
 {
     static const std::map<std::string, std::string> expected_extensions{
         {"qtx", ".qtx"}, {"sm", ".sm"}, {"skem", ".skem"}, {"anim", ".anim"}};
@@ -800,8 +865,10 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
     for (const auto index : candidate_indices)
     {
         const auto& candidate = packages.candidates[index];
-        auto inspected = inspect_candidate(asset.family, bytes,
-                                           packages.packages[candidate.package_index], candidate);
+        const auto directive = recovery_plan.find(asset.id, candidate.id);
+        auto inspected =
+            inspect_candidate(asset.family, bytes, packages.packages[candidate.package_index],
+                              candidate, asset.source_sha256, directive);
         if (inspected.descriptor_parsed)
         {
             ++result.counts.descriptor_parsed;
@@ -815,7 +882,7 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
         {
             ++result.counts.descriptor_rejected;
         }
-        if (inspected.binding_passed)
+        if (inspected.strict_binding_passed)
         {
             ++result.counts.binding_pass;
         }
@@ -823,138 +890,39 @@ void set_semantic_hashes(CandidateResult& result, const std::string_view object_
         {
             ++result.counts.binding_rejected;
         }
+        if (inspected.effective_binding_passed)
+        {
+            ++result.counts.effective_binding_pass;
+        }
+        else
+        {
+            ++result.counts.effective_binding_rejected;
+        }
+        result.counts.recovery_applied += inspected.recovery_applied ? 1U : 0U;
         result.candidates.push_back(std::move(inspected));
     }
     result.counts.candidates = result.candidates.size();
     result.counts.semantic_distinct = semantic_hashes.size();
-    return result;
-}
-
-void append_json_string(std::ostream& output, const std::string_view value)
-{
-    constexpr std::string_view digits = "0123456789abcdef";
-    output << '"';
-    for (const char character : value)
-    {
-        const auto byte = static_cast<unsigned char>(character);
-        switch (byte)
-        {
-        case '"':
-            output << "\\\"";
-            break;
-        case '\\':
-            output << "\\\\";
-            break;
-        case '\b':
-            output << "\\b";
-            break;
-        case '\f':
-            output << "\\f";
-            break;
-        case '\n':
-            output << "\\n";
-            break;
-        case '\r':
-            output << "\\r";
-            break;
-        case '\t':
-            output << "\\t";
-            break;
-        default:
-            if (byte < 0x20U)
-            {
-                output << "\\u00" << digits[byte >> 4U] << digits[byte & 0x0FU];
-            }
-            else
-            {
-                output << static_cast<char>(byte);
-            }
-        }
-    }
-    output << '"';
-}
-
-void emit_result(const AssetResult& result)
-{
-    std::cout << R"({"asset_id":)";
-    append_json_string(std::cout, result.asset_id);
-    std::cout << R"(,"family":)";
-    append_json_string(std::cout, result.family);
-    std::cout << R"(,"structure":)";
-    append_json_string(std::cout, result.structure);
-    std::cout << R"(,"candidate_set_sha256":)";
-    append_json_string(std::cout, result.candidate_set_sha256);
-    std::cout << R"(,"candidates":[)";
-    bool first = true;
+    std::set<std::string> effective_semantic_hashes;
     for (const auto& candidate : result.candidates)
     {
-        if (!std::exchange(first, false))
+        if (candidate.effective_binding_passed && candidate.effective_semantic_sha256.has_value())
         {
-            std::cout << ',';
+            effective_semantic_hashes.insert(*candidate.effective_semantic_sha256);
         }
-        std::cout << R"({"candidate_id":)";
-        append_json_string(std::cout, candidate.candidate_id);
-        std::cout << R"(,"body_sha256":)";
-        append_json_string(std::cout, candidate.body_sha256);
-        std::cout << R"(,"descriptor":")" << (candidate.descriptor_parsed ? "PARSED" : "REJECTED")
-                  << R"(","binding":")" << (candidate.binding_passed ? "PASS" : "REJECTED")
-                  << R"(","semantic_sha256":)";
-        if (candidate.semantic_sha256.has_value())
-        {
-            append_json_string(std::cout, *candidate.semantic_sha256);
-        }
-        else
-        {
-            std::cout << "null";
-        }
-        std::cout << R"(,"descriptor_semantic_sha256":)";
-        if (candidate.descriptor_semantic_sha256.has_value())
-        {
-            append_json_string(std::cout, *candidate.descriptor_semantic_sha256);
-        }
-        else
-        {
-            std::cout << "null";
-        }
-        std::cout << R"(,"identity_normalized_semantic_sha256":)";
-        if (candidate.identity_normalized_semantic_sha256.has_value())
-        {
-            append_json_string(std::cout, *candidate.identity_normalized_semantic_sha256);
-        }
-        else
-        {
-            std::cout << "null";
-        }
-        std::cout << R"(,"identity_normalized_descriptor_semantic_sha256":)";
-        if (candidate.identity_normalized_descriptor_semantic_sha256.has_value())
-        {
-            append_json_string(std::cout,
-                               *candidate.identity_normalized_descriptor_semantic_sha256);
-        }
-        else
-        {
-            std::cout << "null";
-        }
-        std::cout << R"(,"identity_mirror_ascii_lower_match":)"
-                  << (candidate.identity_mirror_ascii_lower_match ? "true" : "false");
-        std::cout << '}';
     }
-    std::cout << R"(],"counts":{"candidates":)" << result.counts.candidates
-              << R"(,"descriptor_parsed":)" << result.counts.descriptor_parsed
-              << R"(,"descriptor_rejected":)" << result.counts.descriptor_rejected
-              << R"(,"binding_pass":)" << result.counts.binding_pass << R"(,"binding_rejected":)"
-              << result.counts.binding_rejected << R"(,"semantic_distinct":)"
-              << result.counts.semantic_distinct << "}}\n";
+    result.counts.effective_semantic_distinct = effective_semantic_hashes.size();
+    return result;
 }
 
 } // namespace
 
 int main(const int argument_count, const char* const arguments[])
 {
-    if (argument_count != 4)
+    if (argument_count != 5)
     {
         std::cerr << "usage: tmxy_g2_asset_descriptor_probe <client-root> <asset-tsv> "
-                     "<candidate-map-tsv>\n";
+                     "<candidate-map-tsv> <eligible-recovery-attempts-tsv>\n";
         return 2;
     }
     try
@@ -971,23 +939,31 @@ int main(const int argument_count, const char* const arguments[])
         }
         const auto assets = read_asset_tsv(arguments[2]);
         auto candidate_map = read_candidate_map_tsv(arguments[3]);
+        auto recovery_plan = RecoveryPlan::read(arguments[4]);
         const auto packages = build_package_index(client_root, candidate_map);
 
         std::vector<AssetResult> results;
         results.reserve(assets.size());
         for (const auto& asset : assets)
         {
-            results.push_back(inspect_asset(asset, client_root, packages));
+            results.push_back(inspect_asset(asset, client_root, packages, recovery_plan));
         }
+        recovery_plan.require_complete();
         for (const auto& result : results)
         {
             emit_result(result);
         }
         std::cerr << "asset_descriptor_probe assets=" << results.size()
-                  << " candidates=" << packages.candidates.size() << " result=PASS\n";
+                  << " candidates=" << packages.candidates.size()
+                  << " recovery_attempts=" << recovery_plan.size() << " result=PASS\n";
         return 0;
     }
     catch (const ProbeFailure& error)
+    {
+        std::cerr << "asset_descriptor_probe_error=" << error.what() << '\n';
+        return 3;
+    }
+    catch (const std::runtime_error& error)
     {
         std::cerr << "asset_descriptor_probe_error=" << error.what() << '\n';
         return 3;

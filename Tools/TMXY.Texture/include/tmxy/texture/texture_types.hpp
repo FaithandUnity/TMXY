@@ -43,6 +43,13 @@ enum class AlphaCoverage : std::uint8_t
     translucent = 3,
 };
 
+enum class MipCountBasis : std::uint8_t
+{
+    package_descriptor = 0,
+    payload_complete_chain_contract = 1,
+    unknown = 255,
+};
+
 struct UnknownTextureProperty final
 {
     std::string name_bytes;
@@ -77,6 +84,8 @@ struct QtxTextureView final
     std::vector<TextureMip> mips;
     AlphaEncoding alpha_encoding{AlphaEncoding::none};
     AlphaCoverage alpha_coverage{AlphaCoverage::opaque};
+    std::uint32_t effective_mip_count{0};
+    MipCountBasis mip_count_basis{MipCountBasis::package_descriptor};
     std::uint64_t payload_size{0};
 };
 
@@ -84,5 +93,6 @@ struct QtxTextureView final
 [[nodiscard]] const char* to_string(ClampMode value) noexcept;
 [[nodiscard]] const char* to_string(AlphaEncoding value) noexcept;
 [[nodiscard]] const char* to_string(AlphaCoverage value) noexcept;
+[[nodiscard]] const char* to_string(MipCountBasis value) noexcept;
 
 } // namespace tmxy::texture

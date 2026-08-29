@@ -84,7 +84,12 @@ if (-not $SkipRegeneration) {
             [int]$check.targets -eq 19 -and [int]$check.candidate_edges -eq 24 -and
             [int]$check.typed_error_edges -eq 24 -and
             [int]$check.unclassified_error_edges -eq 0 -and
-            [int]$check.effective_unresolved_targets -eq 19 -and
+            [int]$check.effective_resolved_targets -eq 7 -and
+            [int]$check.effective_resolved_edges -eq 9 -and
+            [int]$check.effective_ambiguous_targets -eq 0 -and
+            [int]$check.effective_ambiguous_edges -eq 0 -and
+            [int]$check.effective_unresolved_targets -eq 12 -and
+            [int]$check.effective_unresolved_edges -eq 15 -and
             [int]$check.candidate_selections -eq 0 -and
             [int]$check.automatic_resolutions -eq 0 -and
             [int]$check.owner_dispositions -eq 0 -and
@@ -112,10 +117,10 @@ foreach ($line in [IO.File]::ReadLines($detailPath)) {
 Add-Assertion 'All 19 anonymous details satisfy closed schema' `
     ($detailSchemasPass -and $details.Count -eq 19 -and (Get-LineCount $detailPath) -eq 19)
 $expectedRoles = @('a4_report', 'a4_detail', 'a4_evidence', 'a4_policy', 'p2_03_evidence',
-    'p2_03_graph', 'p2_12_evidence', 'p2_12_catalog', 'core_report', 'a5_report',
-    'a6_report', 'b1_evidence', 'policy', 'schema', 'detail_schema')
-Add-Assertion 'Fifteen ordered inputs are hash and aggregate bound' `
-    (@($report.input_bindings.entries).Count -eq 15 -and
+    'p2_03_graph', 'p2_12_evidence', 'p2_12_catalog', 'a5_report',
+    'a6_report', 'policy', 'schema', 'detail_schema')
+Add-Assertion 'Thirteen ordered inputs are hash and aggregate bound' `
+    (@($report.input_bindings.entries).Count -eq 13 -and
         (@($report.input_bindings.entries.role) -join ',') -ceq ($expectedRoles -join ',') -and
         (Test-InputBindings $report))
 Add-Assertion 'Contract hashes are bound' `
@@ -153,16 +158,22 @@ Add-Assertion 'Measured production error distribution is frozen' `
             ($report.measured.by_error | ConvertTo-Json -Depth 20 -Compress)),
         [Text.Json.Nodes.JsonNode]::Parse(
             ($policy.expected_error_counts | ConvertTo-Json -Depth 20 -Compress))))
-Add-Assertion 'Effective unresolved state remains 19/24' `
-    ([int]$report.measured.effective.resolved_targets -eq 0 -and
-        [int]$report.measured.effective.resolved_edges -eq 0 -and
-        [int]$report.measured.effective.unresolved_targets -eq 19 -and
-        [int]$report.measured.effective.unresolved_edges -eq 24)
+Add-Assertion 'Strict failures retain exact effective recovery state' `
+    ([int]$report.measured.effective.resolved_targets -eq 7 -and
+        [int]$report.measured.effective.resolved_edges -eq 9 -and
+        [int]$report.measured.effective.ambiguous_targets -eq 0 -and
+        [int]$report.measured.effective.ambiguous_edges -eq 0 -and
+        [int]$report.measured.effective.unresolved_targets -eq 12 -and
+        [int]$report.measured.effective.unresolved_edges -eq 15)
 Add-Assertion 'Other blockers remain untouched' `
-    ([int]$report.preserved_blockers.asset_ambiguous_targets -eq 15 -and
-        [int]$report.preserved_blockers.asset_ambiguous_edges -eq 30 -and
-        [int]$report.preserved_blockers.asset_unresolved_targets -eq 19 -and
-        [int]$report.preserved_blockers.asset_unresolved_edges -eq 24 -and
+    ([int]$report.preserved_blockers.identity_semantic_ambiguous_targets -eq 15 -and
+        [int]$report.preserved_blockers.identity_semantic_ambiguous_edges -eq 30 -and
+        [int]$report.preserved_blockers.asset_effective_ambiguous_targets -eq 189 -and
+        [int]$report.preserved_blockers.asset_effective_ambiguous_edges -eq 546 -and
+        [int]$report.preserved_blockers.strict_binding_failure_targets -eq 19 -and
+        [int]$report.preserved_blockers.strict_binding_failure_edges -eq 24 -and
+        [int]$report.preserved_blockers.asset_effective_unresolved_targets -eq 12 -and
+        [int]$report.preserved_blockers.asset_effective_unresolved_edges -eq 15 -and
         [int]$report.preserved_blockers.auxiliary_nonterminal_instances -eq 212 -and
         [int]$report.preserved_blockers.conditional_required_missing -eq 29 -and
         [int]$report.preserved_blockers.migration_pending -eq 1359 -and
@@ -181,7 +192,7 @@ Add-Assertion 'Machine authority is explicitly absent' `
 
 $a4Unresolved = @(Get-Content -LiteralPath $a4DetailPath -Encoding UTF8 |
     ForEach-Object { $_ | ConvertFrom-Json -Depth 100 } |
-    Where-Object resolution -eq 'UNRESOLVED')
+    Where-Object strict_resolution -eq 'UNRESOLVED')
 $a4ById = @{}
 foreach ($item in $a4Unresolved) { $a4ById[[string]$item.asset_id] = $item }
 $detailReconciled = $details.Count -eq 19 -and $a4Unresolved.Count -eq 19
@@ -190,6 +201,8 @@ foreach ($item in $details) {
     $prior = $a4ById[[string]$item.asset_id]
     if ([int]$item.candidate_count -ne [int]$prior.candidate_count -or
         [string]$item.candidate_set_sha256 -cne [string]$prior.candidate_set_sha256 -or
+        [string]$item.prior_resolution -cne 'UNRESOLVED' -or
+        [string]$item.effective_resolution -cne [string]$prior.resolution -or
         (@($item.candidates.candidate_id | Sort-Object) -join ',') -cne
             (@($prior.candidates.candidate_id | Sort-Object) -join ',')) {
         $detailReconciled = $false
@@ -261,7 +274,7 @@ Add-Assertion 'Locked isolated builder evidence' `
         $evidence.isolation.legacy_client_mount -eq 'read-only')
 
 $mutated = Copy-Json $reportText
-$mutated.measured.effective.resolved_targets = 1
+$mutated.measured.effective.resolved_targets = 6
 Add-Assertion 'Negative: binder pass or automatic resolution rejected' `
     (Test-SchemaRejected $mutated $schemaPath)
 $mutated = Copy-Json $reportText
@@ -292,8 +305,8 @@ $mutated = Copy-Json $reportText
 $mutated.measured.typed_error_edges = 23
 Add-Assertion 'Negative: count reconciliation rejected' (Test-SchemaRejected $mutated $schemaPath)
 $mutated = Copy-Json $reportText
-$mutated.preserved_blockers.asset_ambiguous_targets = 14
-Add-Assertion 'Negative: 15-target ambiguity reduction rejected' (Test-SchemaRejected $mutated $schemaPath)
+$mutated.preserved_blockers.asset_effective_ambiguous_targets = 188
+Add-Assertion 'Negative: 189-target ambiguity reduction rejected' (Test-SchemaRejected $mutated $schemaPath)
 $mutated = Copy-Json $reportText
 $mutated.preserved_blockers.auxiliary_nonterminal_instances = 211
 Add-Assertion 'Negative: 212 auxiliary blocker reduction rejected' (Test-SchemaRejected $mutated $schemaPath)

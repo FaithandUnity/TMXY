@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T08:09:40.9559064+00:00",
+  "captured_utc": "2026-08-29T19:36:04.8018952+00:00",
   "result": "PASS",
   "task": "P1-25",
   "completion_criteria_satisfied": true,
-  "source_sha256": "3aa5f0be8567767b07e13b568c859a8ca68fbbefba5fd12d54b53adcb371f9d0",
+  "source_sha256": "5453ae419fbbff0526cf2547a750e2cee848560e3083b9b5a6bc0e6f0d6f7733",
   "handler": {
     "format_id": "khronos.gltf-json",
     "gltf_version": "2.0",
@@ -73,13 +73,13 @@
     "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-25-animation-report.json",
     "generated_report_sha256": "af21d7e9917669cbf956b4cd7397cc18c4faf98205f7650c8789ac7cc1bcf39f",
     "generated_report_schema_passed": true,
-    "ue_report_sha256": "9238d7e7094459836fad1715658b3ff326418b751e165ffcde553a7a2ace5936"
+    "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
   },
   "dependency_report_sha256": {
-    "Data/BuildBaseline/p1-16-anim-animation.json": "71068fe1ca37459e43f9f44cf7423f51af7e1f60368b2a5b7f8967baca067228",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "c658f8dcec6f342ffae339b595dfb5f25f3614c5226af346182533ab27b42abd",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "7f25da4e56226deb63f558f67312a5b9581c427e52790414145b98eff351304d",
-    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "cb83107b534777d5cb14ab1faeffef5e4cc7b7622fdb9cefae6df0ff6741c85e"
+    "Data/BuildBaseline/p1-16-anim-animation.json": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "1ddb65707cdf6dd6a99c666b3aa5dbdc1276c7cb2dc4d314f2a93d99d7f79d9e"
   },
   "failure_count": 0,
   "failures": []

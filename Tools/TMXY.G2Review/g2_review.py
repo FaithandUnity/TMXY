@@ -5,9 +5,10 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any
-from g2_evidence import (bind_inputs, evaluate_core_closure,
-                         evaluate_migration_registry, load_json, require,
+from g2_evidence import (bind_inputs, evaluate_core_closure, load_json, require,
                          resolve_inside, sha256)
+from g2_markdown import markdown
+from g2_migration import evaluate_migration_registry
 from g2_self_test import self_test
 def metric(name: str, value: Any, unit: str) -> dict[str, Any]:
     return {"name": name, "value": value, "unit": unit}
@@ -132,8 +133,17 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
     binding_failure = evidence["P2-20A.7"]
     failure_measured, failure_effective = (binding_failure["measured"],
                                            binding_failure["measured"]["effective"])
+    recovery = evidence["P2-20A.8"]
+    recovery_measured = recovery["measured"]
+    recovery_safe = (recovery["authority_boundary"]["a4_is_authoritative"] is True and
+                     recovery["authority_boundary"]["a8_is_cross_proof_only"] is True and
+                     recovery["authority_boundary"]["a8_may_change_counts"] is False and
+                     recovery_measured["successful"] == {"targets": 7, "candidate_edges": 9} and
+                     recovery_measured["effective_resolution"]["unresolved"] ==
+                     {"targets": 12, "candidate_edges": 15})
     binding_safe = (binding_failure["diagnostic_scope_complete"] is True and
-                    failure_measured["typed_error_edges"] == 24 and failure_measured["unclassified_error_edges"] == 0)
+                    failure_measured["typed_error_edges"] == 24 and
+                    failure_measured["unclassified_error_edges"] == 0 and recovery_safe)
     binding_ready = (binding_failure["remediation_scope_complete"] is True and
                      binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
     ok = core["satisfied"] and aux_ready and identity_safe and binding_safe and binding_ready
@@ -168,11 +178,20 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("binding_failure_diagnosed_edges", failure_measured["diagnosed_candidate_edges"], "edges"),
         metric("binding_failure_typed_error_edges", failure_measured["typed_error_edges"], "edges"),
         metric("binding_failure_unclassified_error_edges", failure_measured["unclassified_error_edges"], "edges"),
+        metric("binding_failure_effective_resolved_targets", failure_effective["resolved_targets"], "assets"),
+        metric("binding_failure_effective_resolved_edges", failure_effective["resolved_edges"], "edges"),
+        metric("binding_failure_effective_ambiguous_targets", failure_effective["ambiguous_targets"], "assets"),
+        metric("binding_failure_effective_ambiguous_edges", failure_effective["ambiguous_edges"], "edges"),
         metric("binding_failure_effective_unresolved_targets", failure_effective["unresolved_targets"], "assets"),
         metric("binding_failure_effective_unresolved_edges", failure_effective["unresolved_edges"], "edges"),
         metric("binding_failure_candidate_selections", failure_measured["candidate_selections"], "assets"),
         metric("binding_failure_automatic_resolutions", failure_measured["automatic_resolutions"], "assets"),
         metric("binding_failure_owner_dispositions", failure_measured["owner_dispositions"], "assets"),
+        metric("binding_recovery_cross_proof_hash_bound", True, "boolean"),
+        metric("binding_recovery_attempted_targets", recovery_measured["attempted"]["targets"], "assets"),
+        metric("binding_recovery_attempted_edges", recovery_measured["attempted"]["candidate_edges"], "edges"),
+        metric("binding_recovery_successful_targets", recovery_measured["successful"]["targets"], "assets"),
+        metric("binding_recovery_successful_edges", recovery_measured["successful"]["candidate_edges"], "edges"),
         metric("aux_semantic_diagnostic_hash_bound", True, "boolean"),
         metric("aux_semantic_scope_complete", aux_semantic["scope_complete"], "boolean"),
         metric("aux_semantic_g2_06_satisfied", aux_semantic["g2_06_satisfied"], "boolean"),
@@ -206,7 +225,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, identity, and production-binding diagnostics. A.7 classifies all 24 rejected candidate edges with family-typed production errors but supplies no verified remediation, candidate selection, or owner disposition, so 19 targets and 24 edges remain unresolved. Diagnostic completeness cannot substitute for remediation. Explicit states do not erase ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, identity, production-binding, and explicit recovery evidence. A.7 classifies all 24 strict rejected candidate edges; A.8 cross-proves 7 targets / 9 edges as production-valid recoveries while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full workset still has 189 ambiguous targets. Diagnostic completeness and technical recovery cannot substitute for the remaining remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -297,6 +316,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         asset_binding = evidence["P2-20A.4"]["measured"]["reconciled_full_workset"]
         identity = evidence["P2-20A.6"]["measured"]
         binding_failure = evidence["P2-20A.7"]["measured"]
+        binding_recovery = evidence["P2-20A.8"]["measured"]
         asset_structure = closure["asset_structure"]
         auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
         blockers.append({
@@ -317,8 +337,10 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"{identity['effective']['ambiguous_targets']} ambiguous targets remain blocked. "
                 f"A.7 classified {binding_failure['typed_error_edges']} of "
                 f"{binding_failure['diagnosed_candidate_edges']} rejected candidate edges, but made "
-                f"{binding_failure['automatic_resolutions']} automatic resolutions and retains "
-                f"{binding_failure['effective']['unresolved_targets']} unresolved targets. "
+                f"{binding_failure['automatic_resolutions']} automatic selections. A.8 cross-proved "
+                f"{binding_recovery['successful']['targets']} targets / "
+                f"{binding_recovery['successful']['candidate_edges']} edges as explicit production recoveries "
+                f"and retains {binding_failure['effective']['unresolved_targets']} unresolved targets. "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "
@@ -421,57 +443,6 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
             "legacy_source_lines": False,
         },
     }
-def markdown(report: dict[str, Any]) -> str:
-    lines = [
-        "# P2-20 G2 Data Review",
-        "",
-        f"- Review execution: `{report['review_execution_result']}`",
-        f"- Gate decision: `{report['gate_decision']}`",
-        f"- Task status: `{report['task_status']}`",
-        f"- G2 approved: `{str(report['g2_approved']).lower()}`",
-        f"- P3 authorized: `{str(report['p3_authorized']).lower()}`",
-        f"- Evidence snapshot: `{report['captured_utc']}`",
-        "",
-        ("The review procedure completed successfully, but the gate remains fail-closed. "
-         "A successful review execution is not a successful G2 decision."
-         if not report["g2_approved"] else
-         "The review procedure and every policy criterion completed successfully; G2 is approved."),
-        "",
-        "## Criterion outcome",
-        "",
-        "| Criterion | Status | Interpretation |",
-        "| --- | --- | --- |",
-    ]
-    for item in report["criteria"]:
-        lines.append(f"| {item['id']} | {item['observed_status']} | {item['interpretation']} |")
-    lines.extend(["", "## Blocking findings", ""])
-    for blocker in report["blockers"]:
-        lines.extend([
-            f"### {blocker['id']}: {blocker['title']}",
-            "",
-            blocker["reason"],
-            "",
-            f"Required closure: {blocker['required_action']}",
-            "",
-        ])
-    budget = report["budget_interpretation"]
-    lines.extend([
-        "## Budget interpretation",
-        "",
-        f"Manual content is {budget['manual_content_assets']} of {budget['total_content_assets']} assets ({budget['manual_content_rate_ppm']} ppm, floor-rounded). P2-19 records {budget['base_planning_hours']} base planning hours and {budget['risk_adjusted_planning_hours']} risk-adjusted planning hours.",
-        "",
-        f"The storage budget is {budget['storage_budget_bytes']} bytes, including {budget['incremental_storage_required_bytes']} incremental bytes and a {budget['storage_capacity_gap_bytes']} byte capacity gap. These are planning values, not measured delivery duration, a financial total cost, a price, or a delivery commitment.",
-        "",
-        "## Authority boundary",
-        "",
-        "This review does not prove a complete playable build, authorize P3, grant release or production authority, recover an unseen official server implementation, or authorize automatic repair/deletion of unlinked or duplicate resources.",
-        "",
-        "## Reproduction",
-        "",
-        "Run `pwsh -File Tools/TMXY.G2Review/New-G2Review.ps1`, then rerun with `-Check`. Generation uses the locked non-root builder with a read-only repository mount, no network, no Linux capabilities, and no-new-privileges.",
-        "",
-    ])
-    return "\n".join(lines)
 def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.replace("\r\n", "\n").replace("\r", "\n"), encoding="utf-8", newline="\n")

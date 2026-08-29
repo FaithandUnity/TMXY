@@ -191,7 +191,7 @@ template <typename Writer>
     }
     return {.source_index = source_index,
             .name = clip.descriptor.animation_name_bytes,
-            .frame_count = static_cast<std::uint32_t>(clip.descriptor.frame_count),
+            .frame_count = static_cast<std::uint32_t>(clip.effective_frame_count),
             .track_count = clip.track_count,
             .sampled_duration_seconds = clip.sampled_duration_seconds,
             .legacy_loop_period_seconds = clip.legacy_loop_period_seconds,
@@ -204,11 +204,11 @@ template <typename Writer>
 
 [[nodiscard]] std::size_t append_times(Layout& layout, const AnimationClip& clip)
 {
-    return append_range(layout, static_cast<std::size_t>(clip.descriptor.frame_count), "SCALAR",
+    return append_range(layout, static_cast<std::size_t>(clip.effective_frame_count), "SCALAR",
                         true, clip.sampled_duration_seconds,
                         [&]
                         {
-                            for (std::int32_t frame = 0; frame < clip.descriptor.frame_count;
+                            for (std::int32_t frame = 0; frame < clip.effective_frame_count;
                                  ++frame)
                             {
                                 append_f32(layout.bytes, static_cast<float>(frame) *
@@ -273,7 +273,7 @@ void preserve_hemisphere(std::array<float, 4>& value, const std::array<float, 4>
 [[nodiscard]] bool append_clip(Layout& layout, const AnimationClip& clip,
                                const std::size_t source_index)
 {
-    if (clip.descriptor.frame_count <= 0 || clip.tracks.empty() ||
+    if (clip.effective_frame_count <= 0 || clip.tracks.empty() ||
         clip.tracks.size() != clip.track_count)
     {
         return false;
@@ -282,7 +282,7 @@ void preserve_hemisphere(std::array<float, 4>& value, const std::array<float, 4>
     clip_layout.time_accessor = append_times(layout, clip);
     for (const auto& track : clip.tracks)
     {
-        if (track.keys.size() != static_cast<std::size_t>(clip.descriptor.frame_count))
+        if (track.keys.size() != static_cast<std::size_t>(clip.effective_frame_count))
         {
             return false;
         }

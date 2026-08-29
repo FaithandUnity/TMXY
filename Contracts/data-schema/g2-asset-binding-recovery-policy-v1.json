@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.8",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_revision": "P2-20A.7",
+  "frozen_scope": {
+    "targets": 19,
+    "candidate_edges": 24,
+    "families": {
+      "anim": {"targets": 6, "candidate_edges": 6},
+      "qtx": {"targets": 12, "candidate_edges": 16},
+      "sm": {"targets": 1, "candidate_edges": 2}
+    }
+  },
+  "attempt_rules": [
+    {
+      "family": "qtx",
+      "strict_error_code": "payload_size_mismatch",
+      "recovery_kind": "qtx_complete_mip_chain",
+      "meaning": "UPPER_BOUND_ATTEMPT_ONLY"
+    },
+    {
+      "family": "anim",
+      "strict_error_code": "frame_count_mismatch",
+      "recovery_kind": "anim_payload_frame_counts",
+      "meaning": "UPPER_BOUND_ATTEMPT_ONLY"
+    }
+  ],
+  "plan_columns": [
+    "asset_id",
+    "candidate_id",
+    "body_sha256",
+    "source_sha256",
+    "family",
+    "recovery_kind",
+    "strict_error_code"
+  ],
+  "success_requirements": {
+    "attempt_membership_required": true,
+    "strict_binding_rejected_required": true,
+    "effective_binding_pass_required": true,
+    "recovery_applied_required": true,
+    "effective_semantic_sha256_required": true,
+    "a4_a7_descriptor_semantic_sha256_match_required": true,
+    "qtx_stored_mip_must_be_explicit": true,
+    "qtx_stored_mip_must_equal_declared": true,
+    "qtx_effective_mip_must_be_less_than_declared": true,
+    "qtx_unique_complete_prefix_required": true,
+    "unknown_recovery_basis_rejected": true,
+    "a4_is_authoritative": true,
+    "a8_may_change_authoritative_counts": false
+  },
+  "controls": {
+    "attempt_is_success": false,
+    "qtx_error_alone_proves_complete_mip_chain": false,
+    "anim_error_alone_proves_full_payload_validity": false,
+    "first_candidate_selection": false,
+    "automatic_content_disposition": false,
+    "machine_approval": false,
+    "g2_06_satisfied": false,
+    "p3_authorized": false
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "asset_effective_unresolved_targets": 12,
+    "asset_effective_unresolved_edges": 15,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "outputs": {
+    "attempt_tsv": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-eligible-attempts.tsv",
+    "success_tsv": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-successes.tsv",
+    "detail_export": "Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl",
+    "report_json": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+    "report_markdown": "Data/Reports/p2-20a-asset-binding-recovery-report.md",
+    "evidence": "Data/Inventory/p2-20a-asset-binding-recovery.json",
+    "attempt_tsv_tracked": false,
+    "success_tsv_tracked": false,
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "declared_or_observed_values": false,
+    "decoded_confidential_payloads": false
+  }
+}

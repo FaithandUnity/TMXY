@@ -83,6 +83,8 @@ std::string build_texture_json(const QtxTextureView& texture, const TextureJsonN
            << "  \"height\": " << texture.descriptor.height << ",\n"
            << "  \"stored_mip_count\": " << texture.descriptor.stored_mip_count << ",\n"
            << "  \"mip_count\": " << texture.descriptor.mip_count << ",\n"
+           << "  \"effective_mip_count\": " << texture.effective_mip_count << ",\n"
+           << "  \"mip_count_basis\": " << json_string(to_string(texture.mip_count_basis)) << ",\n"
            << "  \"u_clamp\": " << json_string(to_string(texture.descriptor.u_clamp)) << ",\n"
            << "  \"v_clamp\": " << json_string(to_string(texture.descriptor.v_clamp)) << ",\n"
            << "  \"alpha_encoding\": " << json_string(to_string(texture.alpha_encoding)) << ",\n"

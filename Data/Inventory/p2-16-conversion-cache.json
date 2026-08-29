@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T06:56:30.7391968+00:00",
+  "captured_utc": "2026-08-29T18:14:53.4892485+00:00",
   "task_id": "P2-16",
   "result": "PASS",
   "task_status": "COMPLETE",
@@ -17,7 +17,7 @@
     "tracked": false,
     "lines": 40090,
     "bytes": 28389045,
-    "sha256": "f910c661fb842c25ae6209c97211eb2b0ed13525816276e10b27339d584128fa"
+    "sha256": "2b150bad66f0b06caf4d49b9b96a9b7ca010d3392c2078cb8110744eb48fe7b2"
   },
   "summary": {
     "assets": {
@@ -123,9 +123,9 @@
   },
   "key_inputs": {
     "converter_source_sha256": {
-      "anim": "96acbd1a0f409bc8549b5df3266efadb719450b1680139ef953e43cb4a312d82",
+      "anim": "e5d54b753c036b9b2bc722ed89295af55eff6c5e31ddffe1f065ac95a182e6a4",
       "mp3": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
-      "qtx": "a7f90e37c55fe23b0893e50b5179828751b59a40a080813441dbd2dee88b8a0c",
+      "qtx": "19d22a2616b17d7a41f7d5921388ada36dcdba34bdaccd9061fee4d2af72821c",
       "skem": "c2bc89fbaba9b2b31c4c7cebe04c465fbefb209ac151278ea9e42fc4c73b496e",
       "sm": "3b4c77bcc1f3fbb5ac2db8873d454aab6261ce8919683182aefd2f8091ca5ee4",
       "ter": "2b291269a9eba45c1b5b6e3bbc734661009d5a8583f9ebc24040c49700da0d07",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.7",
-  "captured_utc": "2026-08-29T13:57:23.133576Z",
+  "captured_utc": "2026-08-29T18:18:41.399194Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -61,33 +61,35 @@
       }
     ],
     "effective": {
-      "resolved_targets": 0,
-      "resolved_edges": 0,
-      "unresolved_targets": 19,
-      "unresolved_edges": 24
+      "resolved_targets": 7,
+      "resolved_edges": 9,
+      "ambiguous_targets": 0,
+      "ambiguous_edges": 0,
+      "unresolved_targets": 12,
+      "unresolved_edges": 15
     }
   },
   "outputs": {
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
       "tracked": false,
-      "bytes": 21243,
+      "bytes": 21229,
       "lines": 19,
-      "sha256": "a9afcdeceb277a152dacf2d772a7f146afcee2784721863eec9bd504e25ec462"
+      "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
     },
     "report_json": {
       "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
       "tracked": true,
-      "bytes": 9631,
-      "lines": 311,
-      "sha256": "e5620cf4369344a1e9a5d491565dd318b51e44e62648198326411c563679fc27"
+      "bytes": 9419,
+      "lines": 302,
+      "sha256": "a6d26a2fc30975fb5196e317f14d818b6225ec60a39ea279559f62aded7770af"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.md",
       "tracked": true,
-      "bytes": 702,
-      "lines": 12,
-      "sha256": "21730edd56639639b12445f5d238b676788e6300b5c8d0be72e126e9a27146be"
+      "bytes": 802,
+      "lines": 13,
+      "sha256": "414cace34bbd40c855d7c7b229a65c95dd121a2142c7b753504da3e463338f7c"
     }
   },
   "implementation": {
@@ -102,16 +104,16 @@
       {
         "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/g2_asset_binding_failure_diagnostics.py",
         "tracked": true,
-        "bytes": 25244,
-        "lines": 459,
-        "sha256": "e3c59a65588946ce63a5dec5dba9b75eafcb6d47c30d7cfc7ddb08a6d1fab7a8"
+        "bytes": 27562,
+        "lines": 488,
+        "sha256": "e553f00aaf541a620219822be3c05f56a9dd907438e068928aa76cfdcce35eb2"
       },
       {
         "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/New-G2AssetBindingFailureDiagnostics.ps1",
         "tracked": true,
-        "bytes": 15149,
-        "lines": 316,
-        "sha256": "fc430bd0990fbbc314e98cae7349fdbfff20074b83e34f0282d7f5a26aa4412c"
+        "bytes": 15597,
+        "lines": 325,
+        "sha256": "560f91557e1ec64051d1b9e4cf8bd90add83e0ef118273de16c4f60ec06e2fec"
       },
       {
         "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/README.md",
@@ -165,16 +167,16 @@
       {
         "path": "Tools/TMXY.Texture/src/qtx_reader.cpp",
         "tracked": true,
-        "bytes": 6949,
-        "lines": 198,
-        "sha256": "37d67f558dd47048b07167aa15c5fba3a42cf7259644de4276b640003ed06110"
+        "bytes": 11803,
+        "lines": 318,
+        "sha256": "a1bf561426fadfe7271cae163ecf4c0803f607add031dfef78a1b13206d985bc"
       },
       {
         "path": "Tools/TMXY.Texture/src/texture_error.cpp",
         "tracked": true,
-        "bytes": 3337,
-        "lines": 115,
-        "sha256": "60e1cf836167b0d1ca66730873a92a40ad89467c78913454fda7215919a62742"
+        "bytes": 3700,
+        "lines": 129,
+        "sha256": "25b4882067457d7cc9606aef0d6d6786ad75942f10877cef508566f99804bb59"
       },
       {
         "path": "Tools/TMXY.StaticMesh/src/package_static_mesh_reader.cpp",
@@ -200,16 +202,16 @@
       {
         "path": "Tools/TMXY.Animation/src/package_animation_reader.cpp",
         "tracked": true,
-        "bytes": 20327,
-        "lines": 528,
-        "sha256": "0856a9838f2f2c949ba64ed9e28d5f71da7eda11221131b6040357c16d61689f"
+        "bytes": 21348,
+        "lines": 549,
+        "sha256": "e38ad8fbd11bf923f6ae84b3b33b57ff11560a512dd3a94c4ab2696a1ad8d762"
       },
       {
         "path": "Tools/TMXY.Animation/src/anim_reader.cpp",
         "tracked": true,
-        "bytes": 13946,
-        "lines": 315,
-        "sha256": "453f96ecdd690f422f88dcf95902aedf64fd3ef671a3066945d4a291fe6643ff"
+        "bytes": 15647,
+        "lines": 346,
+        "sha256": "776efbacb1d9ecfcdba9b54a291d5c4357833b3af58776d2bdc2fb708fd19b31"
       },
       {
         "path": "Tools/TMXY.Animation/src/animation_error.cpp",
@@ -219,7 +221,7 @@
         "sha256": "b3fbbb60516d62eaea6170a54698842d29f13d014e5b4a4326ae60b9542b557c"
       }
     ],
-    "aggregate_sha256": "18f1ba8969651b6b2b7a85e5fdb530116281d18ec8e71a63aaab1b0033b086d5",
+    "aggregate_sha256": "4e8b86eac83c1afea4b31dee7ba08290f36ec6a920b44c096a3430ebf8488bb9",
     "generator_self_test_assertions": 10,
     "probe_startup_self_tests": true
   },
@@ -248,10 +250,14 @@
     "verified_resolutions": 0
   },
   "preserved_blockers": {
-    "asset_ambiguous_targets": 15,
-    "asset_ambiguous_edges": 30,
-    "asset_unresolved_targets": 19,
-    "asset_unresolved_edges": 24,
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 12,
+    "asset_effective_unresolved_edges": 15,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,

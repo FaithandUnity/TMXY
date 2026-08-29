@@ -76,54 +76,81 @@ Add-Assertion 'Candidate dispositions close' `
     ([int]$report.measured.descriptor_parsed_candidates -eq 12764 -and
         [int]$report.measured.descriptor_rejected_candidates -eq 0 -and
         [int]$report.measured.binding_pass_candidates -eq 12561 -and
-        [int]$report.measured.binding_rejected_candidates -eq 203)
+        [int]$report.measured.binding_rejected_candidates -eq 203 -and
+        [int]$report.measured.effective_binding_pass_candidates -eq 12570 -and
+        [int]$report.measured.effective_binding_rejected_candidates -eq 194 -and
+        [int]$report.measured.recovery_applied_candidates -eq 9)
+Add-Assertion 'Strict target and edge dispositions close' `
+    ([int]$report.measured.strict_resolved_targets -eq 3443 -and
+        [int]$report.measured.strict_ambiguous_targets -eq 189 -and
+        [int]$report.measured.strict_unresolved_targets -eq 19 -and
+        [int]$report.measured.strict_resolved_edges -eq 12194 -and
+        [int]$report.measured.strict_ambiguous_edges -eq 546 -and
+        [int]$report.measured.strict_unresolved_edges -eq 24)
 Add-Assertion 'Target dispositions close' `
-    ([int]$report.measured.resolved_targets -eq 3617 -and
-        [int]$report.measured.ambiguous_targets -eq 15 -and
-        [int]$report.measured.unresolved_targets -eq 19)
+    ([int]$report.measured.resolved_targets -eq 3450 -and
+        [int]$report.measured.ambiguous_targets -eq 189 -and
+        [int]$report.measured.unresolved_targets -eq 12)
 Add-Assertion 'Full workset reconciliation closes' `
     ([int]$report.measured.reconciled_full_workset.targets -eq 21494 -and
         [int]$report.measured.reconciled_full_workset.candidate_edges -eq 39351 -and
-        [int]$report.measured.reconciled_full_workset.resolved_targets -eq 21460 -and
-        [int]$report.measured.reconciled_full_workset.ambiguous_targets -eq 15 -and
-        [int]$report.measured.reconciled_full_workset.unresolved_targets -eq 19 -and
-        [int]$report.measured.reconciled_full_workset.unknown_targets -eq 0)
-Add-Assertion 'Divergent transition measured' `
+        [int]$report.measured.reconciled_full_workset.resolved_targets -eq 21293 -and
+        [int]$report.measured.reconciled_full_workset.ambiguous_targets -eq 189 -and
+        [int]$report.measured.reconciled_full_workset.unresolved_targets -eq 12 -and
+        [int]$report.measured.reconciled_full_workset.resolved_edges -eq 38790 -and
+        [int]$report.measured.reconciled_full_workset.ambiguous_edges -eq 546 -and
+        [int]$report.measured.reconciled_full_workset.unresolved_edges -eq 15 -and
+        [int]$report.measured.reconciled_full_workset.unknown_targets -eq 0 -and
+        [int]$report.measured.reconciled_full_workset.unknown_edges -eq 0)
+Add-Assertion 'Divergent partial rejection remains fail closed' `
     ([int]$report.measured.by_prior_resolution_basis.DIVERGENT_DESCRIPTOR_SET.targets -eq 183 -and
-        [int]$report.measured.by_prior_resolution_basis.DIVERGENT_DESCRIPTOR_SET.resolved -eq 174 -and
-        [int]$report.measured.by_prior_resolution_basis.DIVERGENT_DESCRIPTOR_SET.ambiguous -eq 9)
+        [int]$report.measured.by_prior_resolution_basis.DIVERGENT_DESCRIPTOR_SET.candidate_edges -eq 534 -and
+        [int]$report.measured.by_prior_resolution_basis.DIVERGENT_DESCRIPTOR_SET.ambiguous -eq 183 -and
+        [int]$report.measured.by_resolution_basis_targets.OPEN_REJECTED_CANDIDATE -eq 174 -and
+        [int]$report.measured.by_resolution_basis_edges.OPEN_REJECTED_CANDIDATE -eq 516)
 Add-Assertion 'Coarse-equivalent transition measured' `
     ([int]$report.measured.by_prior_resolution_basis.EQUIVALENT_VALID_DESCRIPTOR_SET.targets -eq 2514 -and
         [int]$report.measured.by_prior_resolution_basis.EQUIVALENT_VALID_DESCRIPTOR_SET.resolved -eq 2508 -and
         [int]$report.measured.by_prior_resolution_basis.EQUIVALENT_VALID_DESCRIPTOR_SET.ambiguous -eq 6)
-Add-Assertion 'Zero-valid transition remains unresolved' `
+Add-Assertion 'Strict zero-valid transition records effective recovery' `
     ([int]$report.measured.by_prior_resolution_basis.DESCRIPTOR_VALIDATION_FAILED.targets -eq 19 -and
-        [int]$report.measured.by_prior_resolution_basis.DESCRIPTOR_VALIDATION_FAILED.unresolved -eq 19)
+        [int]$report.measured.by_prior_resolution_basis.DESCRIPTOR_VALIDATION_FAILED.resolved -eq 7 -and
+        [int]$report.measured.by_prior_resolution_basis.DESCRIPTOR_VALIDATION_FAILED.unresolved -eq 12)
 Add-Assertion 'Unique SKEM production binding measured' `
     ([int]$report.measured.by_prior_resolution_basis.UNIQUE_VALID_DESCRIPTOR.targets -eq 935 -and
         [int]$report.measured.by_prior_resolution_basis.UNIQUE_VALID_DESCRIPTOR.resolved -eq 935)
 Add-Assertion 'Completion is truthfully unsatisfied' ($report.completion.satisfied -eq $false -and
-    [int]$report.completion.observed_ambiguous_targets -eq 15 -and
-    [int]$report.completion.observed_unresolved_targets -eq 19)
+    [int]$report.completion.observed_ambiguous_targets -eq 189 -and
+    [int]$report.completion.observed_unresolved_targets -eq 12)
 Add-Assertion 'Detail export hash bound' ((Get-LineCount $detailPath) -eq 3651 -and
     (Get-Sha256 $detailPath) -eq [string]$report.detail_export.sha256 -and
     [int64](Get-Item $detailPath).Length -eq [int64]$report.detail_export.bytes)
-$ambiguousDetail = @(Get-Content -LiteralPath $detailPath -Encoding UTF8 |
+$identityAmbiguousDetail = @(Get-Content -LiteralPath $detailPath -Encoding UTF8 |
     ForEach-Object { $_ | ConvertFrom-Json -Depth 100 } |
-    Where-Object resolution -eq 'AMBIGUOUS')
-$ambiguousCandidates = @($ambiguousDetail | ForEach-Object { @($_.candidates) })
-$semanticFieldsComplete = @($ambiguousCandidates | Where-Object {
+    Where-Object resolution_basis -eq 'MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES')
+$identityAmbiguousCandidates = @($identityAmbiguousDetail | ForEach-Object { @($_.candidates) })
+$semanticFieldsComplete = @($identityAmbiguousCandidates | Where-Object {
         [string]$_.semantic_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
         [string]$_.descriptor_semantic_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
         [string]$_.identity_normalized_descriptor_semantic_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
         [string]$_.identity_normalized_semantic_sha256 -cnotmatch '^[0-9a-f]{64}$'
     }).Count -eq 0
-$strictNormalizedClassesRetained = @($ambiguousDetail | Where-Object {
+$strictNormalizedClassesRetained = @($identityAmbiguousDetail | Where-Object {
         @($_.candidates.identity_normalized_semantic_sha256 | Sort-Object -Unique).Count -ne 2
     }).Count -eq 0
 Add-Assertion 'Identity-normalized diagnostics remain fail closed' `
-    ($ambiguousDetail.Count -eq 15 -and $ambiguousCandidates.Count -eq 30 -and
+    ($identityAmbiguousDetail.Count -eq 15 -and $identityAmbiguousCandidates.Count -eq 30 -and
         $semanticFieldsComplete -and $strictNormalizedClassesRetained)
+$openRejectedDetail = @(Get-Content -LiteralPath $detailPath -Encoding UTF8 |
+    ForEach-Object { $_ | ConvertFrom-Json -Depth 100 } |
+    Where-Object resolution_basis -eq 'OPEN_REJECTED_CANDIDATE')
+Add-Assertion 'Partial candidate rejection cannot resolve a target' `
+    ($openRejectedDetail.Count -eq 174 -and
+        @($openRejectedDetail | Where-Object resolution -ne 'AMBIGUOUS').Count -eq 0 -and
+        @($openRejectedDetail | Where-Object {
+                @($_.candidates | Where-Object effective_binding -eq 'REJECTED').Count -eq 0 -or
+                @($_.candidates | Where-Object effective_binding -eq 'PASS').Count -eq 0
+            }).Count -eq 0)
 Add-Assertion 'Evidence report binding' ((Get-Sha256 $reportPath) -eq
     [string]$evidence.outputs.report_json.sha256)
 Add-Assertion 'Evidence markdown binding' ((Get-Sha256 $markdownPath) -eq

@@ -218,12 +218,31 @@
         "g2_06_satisfied": {"const": false}
       }
     },
+    "binding_recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.8"},
+        "path": {"const": "Data/Reports/p2-20a-asset-binding-recovery-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
     "input_bindings": {
       "type": "object",
       "additionalProperties": false,
       "required": ["aggregate_sha256", "prerequisites", "supplemental",
         "descriptor_diagnostics", "aux_semantic_diagnostics", "identity_normalization_safety",
-        "binding_failure_diagnostics",
+        "binding_failure_diagnostics", "binding_recovery",
         "remediation", "quality"],
       "properties": {
         "aggregate_sha256": { "$ref": "#/$defs/sha256" },
@@ -238,6 +257,7 @@
         "aux_semantic_diagnostics": {"$ref": "#/$defs/aux_semantic_diagnostics"},
         "identity_normalization_safety": {"$ref": "#/$defs/identity_normalization_safety"},
         "binding_failure_diagnostics": {"$ref": "#/$defs/binding_failure_diagnostics"},
+        "binding_recovery": {"$ref": "#/$defs/binding_recovery"},
         "remediation": { "$ref": "#/$defs/remediation" },
         "quality": { "$ref": "#/$defs/quality" }
       }
@@ -341,9 +361,9 @@
         "base_planning_hours": { "type": "number", "minimum": 0 },
         "risk_adjusted_planning_hours": { "type": "number", "minimum": 0 },
         "machine_projection_seconds": { "type": "number", "minimum": 0 },
-        "storage_budget_bytes": { "const": 411365530000 },
-        "incremental_storage_required_bytes": { "const": 364904613763 },
-        "storage_capacity_gap_bytes": { "const": 164951541635 },
+        "storage_budget_bytes": { "const": 411511619038 },
+        "incremental_storage_required_bytes": { "const": 364930296437 },
+        "storage_capacity_gap_bytes": { "const": 165106723445 },
         "measured_schedule": { "const": false },
         "monetary_amount_available": { "const": false },
         "financial_total_cost_available": { "const": false },

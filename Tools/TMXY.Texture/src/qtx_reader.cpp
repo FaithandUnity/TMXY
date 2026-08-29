@@ -123,12 +123,83 @@ mip_size(const TextureFormat format, const std::uint32_t width, const std::uint3
     return AlphaCoverage::opaque;
 }
 
+[[nodiscard]] std::uint32_t maximum_natural_mips(std::uint32_t width, std::uint32_t height) noexcept
+{
+    std::uint32_t count = 1U;
+    while (width > 1U || height > 1U)
+    {
+        width = std::max(1U, width / 2U);
+        height = std::max(1U, height / 2U);
+        ++count;
+    }
+    return count;
+}
+
+[[nodiscard]] TextureResult<std::uint32_t>
+infer_complete_payload_mip_count_impl(const TextureDescriptor& descriptor,
+                                      const std::span<const std::byte> payload)
+{
+    std::uint32_t width = descriptor.width;
+    std::uint32_t height = descriptor.height;
+    std::uint64_t cumulative = 0U;
+    const auto maximum = maximum_natural_mips(width, height);
+    for (std::uint32_t level = 0U; level < maximum; ++level)
+    {
+        auto size = mip_size(descriptor.format, width, height);
+        if (!size.has_value())
+        {
+            return TextureResult<std::uint32_t>::failure(size.error());
+        }
+        if (size.value() > std::numeric_limits<std::uint64_t>::max() - cumulative)
+        {
+            return TextureResult<std::uint32_t>::failure(
+                {.code = TextureErrorCode::mip_size_overflow,
+                 .context = "qtx.mip.range",
+                 .read_error_code = std::nullopt});
+        }
+        cumulative += size.value();
+        if (cumulative == payload.size())
+        {
+            return TextureResult<std::uint32_t>::success(level + 1U);
+        }
+        if (cumulative > payload.size())
+        {
+            break;
+        }
+        width = std::max(1U, width / 2U);
+        height = std::max(1U, height / 2U);
+    }
+    return TextureResult<std::uint32_t>::failure(
+        {.code = TextureErrorCode::payload_size_mismatch,
+         .absolute_offset = std::min<std::uint64_t>(cumulative, payload.size()),
+         .context = "qtx.payload_size",
+         .read_error_code = std::nullopt});
+}
+
 } // namespace
 
 QtxReader::QtxReader(const QtxLimits limits) : limits_(limits) {}
 
 TextureResult<QtxTextureView> QtxReader::parse(TextureDescriptor descriptor,
                                                const std::span<const std::byte> payload) const
+{
+    const auto declared_mip_count = descriptor.mip_count;
+    return parse_with_mip_count_resolution(
+        std::move(descriptor), payload,
+        {.effective_mip_count = declared_mip_count, .basis = MipCountBasis::package_descriptor});
+}
+
+TextureResult<std::uint32_t>
+infer_complete_payload_mip_count(const TextureDescriptor& descriptor,
+                                 const std::span<const std::byte> payload)
+{
+    return infer_complete_payload_mip_count_impl(descriptor, payload);
+}
+
+TextureResult<QtxTextureView>
+QtxReader::parse_with_mip_count_resolution(TextureDescriptor descriptor,
+                                           const std::span<const std::byte> payload,
+                                           const QtxMipCountResolution resolution) const
 {
     if (payload.size() > limits_.maximum_payload_bytes)
     {
@@ -148,14 +219,63 @@ TextureResult<QtxTextureView> QtxReader::parse(TextureDescriptor descriptor,
              .read_error_code = std::nullopt});
     }
 
+    if (resolution.effective_mip_count == 0U)
+    {
+        return TextureResult<QtxTextureView>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                                       .context = "qtx.effective_mip_count",
+                                                       .read_error_code = std::nullopt});
+    }
+    if (resolution.basis == MipCountBasis::package_descriptor)
+    {
+        if (resolution.effective_mip_count != descriptor.mip_count)
+        {
+            return TextureResult<QtxTextureView>::failure(
+                {.code = TextureErrorCode::invalid_mip_count,
+                 .context = "qtx.effective_mip_count",
+                 .read_error_code = std::nullopt});
+        }
+    }
+    else if (resolution.basis == MipCountBasis::payload_complete_chain_contract)
+    {
+        if (descriptor.stored_mip_count == 0U ||
+            descriptor.stored_mip_count != descriptor.mip_count)
+        {
+            return TextureResult<QtxTextureView>::failure(
+                {.code = TextureErrorCode::invalid_mip_count,
+                 .context = "qtx.declared_mip_count",
+                 .read_error_code = std::nullopt});
+        }
+        auto inferred = infer_complete_payload_mip_count_impl(descriptor, payload);
+        if (!inferred.has_value())
+        {
+            return TextureResult<QtxTextureView>::failure(inferred.error());
+        }
+        if (resolution.effective_mip_count >= descriptor.mip_count ||
+            resolution.effective_mip_count != inferred.value())
+        {
+            return TextureResult<QtxTextureView>::failure(
+                {.code = TextureErrorCode::invalid_mip_count,
+                 .context = "qtx.effective_mip_count",
+                 .read_error_code = std::nullopt});
+        }
+    }
+    else
+    {
+        return TextureResult<QtxTextureView>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                                       .context = "qtx.mip_count_basis",
+                                                       .read_error_code = std::nullopt});
+    }
+
     QtxTextureView texture;
     texture.descriptor = std::move(descriptor);
     texture.alpha_encoding = alpha_encoding(texture.descriptor.format);
     texture.payload_size = payload.size();
+    texture.effective_mip_count = resolution.effective_mip_count;
+    texture.mip_count_basis = resolution.basis;
     std::uint32_t width = texture.descriptor.width;
     std::uint32_t height = texture.descriptor.height;
     std::uint64_t offset = 0;
-    for (std::uint32_t level = 0; level < texture.descriptor.mip_count; ++level)
+    for (std::uint32_t level = 0; level < texture.effective_mip_count; ++level)
     {
         auto size = mip_size(texture.descriptor.format, width, height);
         if (!size.has_value())

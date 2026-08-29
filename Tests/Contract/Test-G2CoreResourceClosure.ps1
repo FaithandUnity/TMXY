@@ -149,6 +149,13 @@ function Test-CoreInputBindings($Candidate, $Policy, $IgnoredBindings) {
         'auxiliary-reference-policy' = [string]$Policy.inputs.auxiliary_reference_policy
         'auxiliary-reference-schema' = [string]$Policy.inputs.auxiliary_reference_schema
         'P2-20A.3-AUX' = [string]$Policy.inputs.auxiliary_reference_evidence
+        'P2-20A.4-REPORT' = [string]$Policy.inputs.asset_descriptor_report
+        'P2-20A.4-DETAIL' = [string]$Policy.inputs.asset_descriptor_detail
+        'P2-20A.4-EVIDENCE' = [string]$Policy.inputs.asset_descriptor_evidence
+        'P2-20A.7-REPORT' = [string]$Policy.inputs.asset_binding_failure_report
+        'P2-20A.7-EVIDENCE' = [string]$Policy.inputs.asset_binding_failure_evidence
+        'P2-20A.8-REPORT' = [string]$Policy.inputs.asset_binding_recovery_report
+        'P2-20A.8-EVIDENCE' = [string]$Policy.inputs.asset_binding_recovery_evidence
         'g2-policy' = [string]$Policy.inputs.g2_policy
     }
     $bindings = @($Candidate.input_bindings.artifacts)
@@ -219,6 +226,10 @@ function Test-AssetWorkset($Records, [object]$Facts) {
             'SELF_DESCRIBING_RULE' { $resolution -eq 'RESOLVED' -and $family -in @('ter', 'wav') }
             'DIVERGENT_DESCRIPTOR_SET' { $resolution -eq 'AMBIGUOUS' }
             'DESCRIPTOR_VALIDATION_FAILED' { $resolution -eq 'UNRESOLVED' -and $valid -eq 0 }
+            'MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES' { $resolution -eq 'AMBIGUOUS' }
+            'OPEN_REJECTED_CANDIDATE' { $resolution -eq 'AMBIGUOUS' }
+            'NO_PRODUCTION_COMPATIBLE_CANDIDATE' { $resolution -eq 'UNRESOLVED' }
+            'SINGLE_COMPATIBLE_SEMANTIC_CLASS' { $resolution -eq 'RESOLVED' }
             default { $false }
         }
         if (@(Compare-Object $names $fields).Count -ne 0 -or
@@ -381,7 +392,8 @@ if ($VerifyDerivedSources) {
     $required += @(
         'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl',
         'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl',
-        'Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl'
+        'Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl',
+        'Data/Exports/P2-20/p2-20a-effective-asset-binding-workset.jsonl'
     )
 }
 foreach ($relative in $required) {
@@ -396,7 +408,7 @@ $governancePath = Join-Path $root 'Data/Governance/p2-g2-core-resource-closure.j
 $evidencePath = Join-Path $root 'Data/Inventory/p2-20a-core-resource-closure.json'
 $detailPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl'
 $worksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl'
-$assetWorksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl'
+$assetWorksetPath = Join-Path $root 'Data/Exports/P2-20/p2-20a-effective-asset-binding-workset.jsonl'
 $auxiliaryReportPath = Join-Path $root 'Data/Reports/p2-20a-aux-config-reference-report.json'
 $auxiliaryPolicyPath = Join-Path $root 'Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json'
 $auxiliarySchemaPath = Join-Path $root 'Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json'
@@ -408,6 +420,8 @@ $governance = Get-Content $governancePath -Raw -Encoding UTF8 | ConvertFrom-Json
 $evidence = Get-Content $evidencePath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $auxiliaryReport = Get-Content $auxiliaryReportPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
+$assetDescriptorReport = Get-Content (Join-Path $root ([string]$policy.inputs.asset_descriptor_report)) `
+    -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $p212 = Get-Content (Join-Path $root 'Data/Inventory/p2-12-full-asset-inventory.json') `
     -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
 $p213 = Get-Content $p213Path -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
@@ -509,10 +523,10 @@ Add-Assertion 'Tracked closure summary preserves the measured current blocker se
     $facts.table_ambiguous -eq 6945 -and $facts.package_unresolved -eq 407 -and
     $facts.package_ambiguous -eq 8511 -and $facts.asset_unresolved -eq 18 -and
     $facts.asset_fail -eq 0 -and $facts.start_sha256 -match '^[0-9a-f]{64}$' -and
-    $facts.binding_assets -eq 21494 -and $facts.binding_resolved -eq 21292 -and
-    $facts.binding_ambiguous -eq 183 -and $facts.binding_unresolved -eq 19 -and
-    $facts.binding_edges -eq 39351 -and $facts.binding_resolved_edges -eq 38793 -and
-    $facts.binding_ambiguous_edges -eq 534 -and $facts.binding_unresolved_edges -eq 24 -and
+    $facts.binding_assets -eq 21494 -and $facts.binding_resolved -eq 21293 -and
+    $facts.binding_ambiguous -eq 189 -and $facts.binding_unresolved -eq 12 -and
+    $facts.binding_edges -eq 39351 -and $facts.binding_resolved_edges -eq 38790 -and
+    $facts.binding_ambiguous_edges -eq 546 -and $facts.binding_unresolved_edges -eq 15 -and
     $facts.binding_workset_sha -match '^[0-9a-f]{64}$' -and
     $facts.reachable_sha256 -match '^[0-9a-f]{64}$' -and $facts.gap_sha256 -match '^[0-9a-f]{64}$')
 Add-Assertion 'P2-13 conditional-required aggregate is preserved independently of graph edges' (
@@ -735,9 +749,10 @@ Add-Assertion 'Negative case rejects weakened auxiliary disclosure' (-not (Test-
 $ignoredBindings = @{
     'asset-catalog' = $p212.catalog
     'reference-graph' = $p213.graph
+    'P2-20A.4-DETAIL' = $assetDescriptorReport.detail_export
 }
 $bindingsPass = Test-CoreInputBindings $report $policy $ignoredBindings
-Add-Assertion 'All fifteen ordered prerequisite and supplemental inputs are uniquely exact-hash bound' $bindingsPass
+Add-Assertion 'All twenty-two ordered prerequisite and supplemental inputs are uniquely exact-hash bound' $bindingsPass
 Add-Assertion 'Negative case rejects auxiliary binding SHA tampering' (-not (
         Test-CoreInputBindings $negativeAuxBindingSha $policy $ignoredBindings))
 Add-Assertion 'Negative case rejects input aggregate SHA tampering' (-not (

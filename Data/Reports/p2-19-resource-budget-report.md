@@ -8,9 +8,9 @@ This is a conditional, non-price planning baseline. It is not a delivery commitm
 
 | Input | Task | SHA-256 |
 |---|---|---|
-| conversion_routing | P2-15 | `2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b` |
-| content_health | P2-18 | `5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b` |
-| conversion_pilot | P2-19-PILOT | `58cc2f580eaa39462df8e93bbae507ebcf75ac76bc572164633d1b1061be3411` |
+| conversion_routing | P2-15 | `c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54` |
+| content_health | P2-18 | `afb00c48630ed7cc9047beb2eee73b0118bd85baba2ae8a9d6fd34c0d780d829` |
+| conversion_pilot | P2-19-PILOT | `e693119bd8bb6c9200a441f73207ad4616c3cf380da0bac31de7131d7b715ff2` |
 
 ## Human budget
 
@@ -40,13 +40,13 @@ Projection status: `PARTIALLY_PILOT_CALIBRATED`. Sequential seconds do not estab
 
 | Route | Pilot runs | Base s | Reserve s | Total s |
 |---|---:|---:|---:|---:|
-| automatic-qualified-interchange | 25 | 157.762 | 78.881 | 236.643 |
+| automatic-qualified-interchange | 25 | 151.423 | 75.712 | 227.135 |
 | automatic-standard-audio | 0 | 2,400 | 1,200 | 3,600 |
 | semi-automatic-navigation-adaptation | 0 | 8,060 | 4,030 | 12,090 |
 | manual-descriptor-recovery | 0 | 0 | 0 | 0 |
 | manual-repair-or-replace | 0 | 0 | 0 | 0 |
 
-Total: 10,617.762 base s + 5,308.881 reserve s = 15,926.643 sequential s.
+Total: 10,611.423 base s + 5,305.712 reserve s = 15,917.135 sequential s.
 
 Five interchange families use a **planning assumption** that selected-case p80 scales linearly with alias-excluded ready-job bytes. Audio/navigation retain planning coefficients. CPU time, peak RSS/temp, I/O, cache hits, and parallel scaling are missing.
 
@@ -56,16 +56,16 @@ Pilot output ratios are also **planning-assumption byte-linear extrapolations**.
 
 | Item | Bytes |
 |---|---:|
-| Existing workspace | 46,460,916,237 |
+| Existing workspace | 46,581,322,601 |
 | Source retained | 8,882,019,027 |
-| Intermediate | 15,255,215,355 |
-| UE content | 22,882,823,033 |
-| Build cache | 45,765,646,066 |
-| Two recovery copies | 186,396,029,444 |
-| Storage reserve | 94,604,899,865 |
-| Incremental required | 364,904,613,763 |
-| Current volume free | 199,953,072,128 |
-| Capacity gap | 164,951,541,635 |
+| Intermediate | 15,256,368,337 |
+| UE content | 22,884,552,506 |
+| Build cache | 45,769,105,012 |
+| Two recovery copies | 186,408,712,246 |
+| Storage reserve | 94,611,558,336 |
+| Incremental required | 364,930,296,437 |
+| Current volume free | 199,823,572,992 |
+| Capacity gap | 165,106,723,445 |
 
 ## Conditional P3-P8 scenarios
 

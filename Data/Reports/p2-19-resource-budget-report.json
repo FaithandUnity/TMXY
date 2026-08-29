@@ -286,12 +286,12 @@
     ]
   },
   "input_bindings": {
-    "aggregate_sha256": "a6a27ef4a9c1e0541e2003afc5b57b262876b4aa4e3b0d928144ef47590d7798",
+    "aggregate_sha256": "46dd4db957c67d45217616ee6077eaffa184c374a215a0f14308696ef88102ee",
     "content_health": {
       "completion_criteria_satisfied": true,
       "path": "Data/Inventory/p2-18-content-health.json",
       "result": "PASS",
-      "sha256": "5eb905a55dab41e34dd718ff2e7de35eeb8942f4771535c573a75c847eec125b",
+      "sha256": "afb00c48630ed7cc9047beb2eee73b0118bd85baba2ae8a9d6fd34c0d780d829",
       "task_id": "P2-18",
       "task_status": "COMPLETE"
     },
@@ -299,7 +299,7 @@
       "completion_criteria_satisfied": true,
       "path": "Data/Performance/p2-19-conversion-pilot.json",
       "result": "PASS",
-      "sha256": "58cc2f580eaa39462df8e93bbae507ebcf75ac76bc572164633d1b1061be3411",
+      "sha256": "e693119bd8bb6c9200a441f73207ad4616c3cf380da0bac31de7131d7b715ff2",
       "task_id": "P2-19-PILOT",
       "task_status": "COMPLETE"
     },
@@ -307,13 +307,13 @@
       "completion_criteria_satisfied": true,
       "path": "Data/Inventory/p2-15-conversion-routing.json",
       "result": "PASS",
-      "sha256": "2fcd1afa7d8338f0baacd58b60a370f88cdf7e8745c9019b0cc1f6bdf606fc9b",
+      "sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54",
       "task_id": "P2-15",
       "task_status": "COMPLETE"
     }
   },
   "machine_budget": {
-    "base_sequential_seconds": 10617.762224,
+    "base_sequential_seconds": 10611.423073,
     "basis_ids": [
       "BAS-MEASURED-PILOT",
       "BAS-PLAN-MACHINE-FALLBACK",
@@ -323,7 +323,7 @@
     ],
     "by_route": [
       {
-        "base_seconds": 157.762224,
+        "base_seconds": 151.423073,
         "basis_ids": [
           "BAS-MEASURED-PILOT",
           "BAS-MEASURED-INVENTORY",
@@ -332,9 +332,9 @@
           "BAS-MISSING-MACHINE-CAPACITY"
         ],
         "pilot_sample_count": 25,
-        "risk_reserve_seconds": 78.881112,
+        "risk_reserve_seconds": 75.711537,
         "route": "automatic-qualified-interchange",
-        "total_seconds": 236.643335
+        "total_seconds": 227.13461
       },
       {
         "base_seconds": 2400,
@@ -409,8 +409,8 @@
       }
     ],
     "risk_reserve_basis_points": 5000,
-    "risk_reserve_seconds": 5308.881112,
-    "total_sequential_seconds": 15926.643335,
+    "risk_reserve_seconds": 5305.711537,
+    "total_sequential_seconds": 15917.13461,
     "unit": "machine_seconds"
   },
   "measured_facts": {
@@ -578,9 +578,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "qtx",
-        "median_seconds": 0.021927,
-        "output_ratio_basis_points": 30007,
-        "p80_seconds": 0.022114,
+        "median_seconds": 0.021646,
+        "output_ratio_basis_points": 30008,
+        "p80_seconds": 0.021687,
         "sample_count": 5
       },
       {
@@ -588,9 +588,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "sm",
-        "median_seconds": 0.251713,
+        "median_seconds": 0.235357,
         "output_ratio_basis_points": 12197,
-        "p80_seconds": 0.260584,
+        "p80_seconds": 0.237628,
         "sample_count": 5
       },
       {
@@ -598,9 +598,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "skem",
-        "median_seconds": 1.177608,
+        "median_seconds": 1.120763,
         "output_ratio_basis_points": 298,
-        "p80_seconds": 1.177739,
+        "p80_seconds": 1.125295,
         "sample_count": 5
       },
       {
@@ -608,9 +608,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "anim",
-        "median_seconds": 0.282866,
-        "output_ratio_basis_points": 1132,
-        "p80_seconds": 0.286993,
+        "median_seconds": 0.279703,
+        "output_ratio_basis_points": 1144,
+        "p80_seconds": 0.281447,
         "sample_count": 5
       },
       {
@@ -618,9 +618,9 @@
           "BAS-MEASURED-PILOT"
         ],
         "family": "ter",
-        "median_seconds": 0.004791,
+        "median_seconds": 0.004903,
         "output_ratio_basis_points": 3756,
-        "p80_seconds": 0.005048,
+        "p80_seconds": 0.005001,
         "sample_count": 5
       }
     ]
@@ -976,7 +976,7 @@
       "BAS-ASSUME-STORAGE",
       "BAS-RISK-STORAGE"
     ],
-    "build_cache_estimated_bytes": 45765646066,
+    "build_cache_estimated_bytes": 45769105012,
     "by_component": [
       {
         "base_bytes": 8882019027,
@@ -1003,9 +1003,9 @@
           "BAS-MEASURED-PILOT",
           "BAS-ASSUME-PILOT-EXTRAPOLATION"
         ],
-        "expansion_basis_points": 30007,
+        "expansion_basis_points": 30008,
         "id": "intermediate-qtx",
-        "projected_bytes": 11327817261
+        "projected_bytes": 11328194767
       },
       {
         "base_bytes": 2271161297,
@@ -1036,9 +1036,9 @@
           "BAS-MEASURED-PILOT",
           "BAS-ASSUME-PILOT-EXTRAPOLATION"
         ],
-        "expansion_basis_points": 1132,
+        "expansion_basis_points": 1144,
         "id": "intermediate-anim",
-        "projected_bytes": 73153258
+        "projected_bytes": 73928734
       },
       {
         "base_bytes": 535720960,
@@ -1082,50 +1082,50 @@
         "projected_bytes": 656466836
       },
       {
-        "base_bytes": 15255215355,
+        "base_bytes": 15256368337,
         "basis_ids": [
           "BAS-ASSUME-STORAGE"
         ],
         "expansion_basis_points": 15000,
         "id": "ue-content",
-        "projected_bytes": 22882823033
+        "projected_bytes": 22884552506
       },
       {
-        "base_bytes": 22882823033,
+        "base_bytes": 22884552506,
         "basis_ids": [
           "BAS-ASSUME-STORAGE"
         ],
         "expansion_basis_points": 20000,
         "id": "build-cache",
-        "projected_bytes": 45765646066
+        "projected_bytes": 45769105012
       },
       {
-        "base_bytes": 93198014722,
+        "base_bytes": 93204356123,
         "basis_ids": [
           "BAS-ASSUME-STORAGE"
         ],
         "expansion_basis_points": 20000,
         "id": "durable-recovery",
-        "projected_bytes": 186396029444
+        "projected_bytes": 186408712246
       }
     ],
-    "capacity_gap_bytes": 164951541635,
+    "capacity_gap_bytes": 165106723445,
     "capacity_sufficient": false,
     "deduplication_savings_assumed": false,
-    "disk_free_bytes": 199953072128,
+    "disk_free_bytes": 199823572992,
     "disk_total_bytes": 1073742868480,
     "duplicate_redundant_review_only_bytes": 1286887829,
-    "existing_workspace_bytes": 46460916237,
-    "incremental_required_bytes": 364904613763,
-    "intermediate_estimated_bytes": 15255215355,
-    "one_copy_bytes": 93198014722,
-    "recovery_bytes": 186396029444,
+    "existing_workspace_bytes": 46581322601,
+    "incremental_required_bytes": 364930296437,
+    "intermediate_estimated_bytes": 15256368337,
+    "one_copy_bytes": 93204356123,
+    "recovery_bytes": 186408712246,
     "recovery_copy_count": 2,
     "risk_reserve_basis_points": 3500,
-    "risk_reserve_bytes": 94604899865,
+    "risk_reserve_bytes": 94611558336,
     "source_retained_bytes": 8882019027,
-    "total_budget_bytes": 411365530000,
-    "ue_content_estimated_bytes": 22882823033,
+    "total_budget_bytes": 411511619038,
+    "ue_content_estimated_bytes": 22884552506,
     "unit": "bytes"
   },
   "task_id": "P2-19",

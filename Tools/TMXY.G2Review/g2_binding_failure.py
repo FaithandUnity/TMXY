@@ -15,10 +15,8 @@ INPUTS = [
     ("p2_03_graph", "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl", False),
     ("p2_12_evidence", "Data/Inventory/p2-12-full-asset-inventory.json", True),
     ("p2_12_catalog", "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl", False),
-    ("core_report", "Data/Reports/p2-20a-core-resource-closure-report.json", True),
     ("a5_report", "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json", True),
     ("a6_report", "Data/Reports/p2-20a-asset-identity-normalization-report.json", True),
-    ("b1_evidence", "Data/Inventory/p2-20b-migration-decisions.json", True),
     ("policy", "Contracts/data-schema/g2-asset-binding-failure-diagnostics-policy-v1.json", True),
     ("schema", "Contracts/data-schema/g2-asset-binding-failure-diagnostics-v1.schema.json", True),
     ("detail_schema", "Contracts/data-schema/g2-asset-binding-failure-detail-v1.schema.json", True),
@@ -40,8 +38,8 @@ EXPECTED_AUTHORITY = {
     "owner_records": 0, "approved_fixes": 0, "verified_resolutions": 0,
 }
 EXPECTED_BLOCKERS = [
-    {"reason_code": "PRODUCTION_BINDING_REJECTIONS_DIAGNOSED_NOT_REMEDIATED", "count": 19},
-    {"reason_code": "REMEDIATION_EVIDENCE_ABSENT", "count": 19},
+    {"reason_code": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN", "count": 12},
+    {"reason_code": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN", "count": 189},
 ]
 
 
@@ -79,9 +77,9 @@ def bind_binding_failure_diagnostics(
             diagnostic.get("p3_authorized") is False,
             "P2-20A.7 diagnostic state was falsely promoted")
 
-    a7_policy_path = resolve_inside(root, INPUTS[12][1])
-    a7_schema_path = resolve_inside(root, INPUTS[13][1])
-    detail_schema_path = resolve_inside(root, INPUTS[14][1])
+    a7_policy_path = resolve_inside(root, INPUTS[10][1])
+    a7_schema_path = resolve_inside(root, INPUTS[11][1])
+    detail_schema_path = resolve_inside(root, INPUTS[12][1])
     a7_policy = load_json(a7_policy_path)
     require(a7_policy.get("task_id") == spec["task_id"] and
             a7_policy.get("criterion_id") == spec["criterion_id"] and
@@ -107,9 +105,8 @@ def bind_binding_failure_diagnostics(
     a4_advertised = a4_report["detail_export"]
     require(a4_report.get("evidence_revision") == "P2-20A.4" and
             a4_report.get("diagnostic_scope_complete") is True and
-            a4_report["measured"]["unresolved_targets"] == 19 and
-            a4_report["measured"]["by_resolution_basis_edges"]
-            ["NO_PRODUCTION_COMPATIBLE_CANDIDATE"] == 24 and
+            a4_report["measured"]["strict_unresolved_targets"] == 19 and
+            a4_report["measured"]["strict_unresolved_edges"] == 24 and
             a4_advertised.get("path") == INPUTS[1][1] and
             a4_advertised.get("bytes") == a4_detail.stat().st_size and
             a4_advertised.get("lines") == _line_count(a4_detail) and
@@ -131,8 +128,9 @@ def bind_binding_failure_diagnostics(
         "candidate_selections": 0, "automatic_resolutions": 0, "owner_dispositions": 0,
         "by_family": a7_policy["scope"]["by_family"],
         "by_error": a7_policy["expected_error_counts"],
-        "effective": {"resolved_targets": 0, "resolved_edges": 0,
-                      "unresolved_targets": 19, "unresolved_edges": 24},
+        "effective": {"resolved_targets": 7, "resolved_edges": 9,
+                      "ambiguous_targets": 0, "ambiguous_edges": 0,
+                      "unresolved_targets": 12, "unresolved_edges": 15},
     }
     require(diagnostic.get("scope") == a7_policy.get("scope") and
             measured == expected_measured and

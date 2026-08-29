@@ -46,8 +46,8 @@ P2-20A.6 independently joins all 15 A.4 ambiguous targets and 30 candidate edges
 to P2-03 identity hashes. Thirteen targets and 26 edges collide under ASCII-lower
 identity grouping, while the remaining 2/4 do not; strict descriptor and full
 semantic equivalence are both zero. A.6 therefore selects no candidate and
-retains all 15/30 ambiguous plus 19/24 unresolved states. Identity grouping is
-not runtime-selection or semantic-equivalence authority.
+retains all 15/30 identity-ambiguous states. Identity grouping is not
+runtime-selection or semantic-equivalence authority.
 
 P2-20A.7 independently reruns the production binders for all 19 unresolved
 targets and 24 candidate edges. All 24 edges receive a closed, family-typed
@@ -55,8 +55,11 @@ error classification (16 QTX payload-size mismatches, 5 Animation frame-count
 mismatches, 1 Animation invalid-track-count, and 2 StaticMesh material-slot
 mismatches), with no unclassified edge. This closes the diagnostic taxonomy,
 not remediation: candidate selections, automatic resolutions, and owner
-dispositions remain zero, so the effective unresolved population stays 19/24.
-A technical adapter must be contract-proven; a content change or explicit
+dispositions remain zero. P2-20A.8 cross-proves the separately implemented,
+explicit production recovery path: 17 targets/21 edges were attempted, 7/9
+were recovered (2/4 QTX and 5/5 Animation), and 12/15 remain unresolved. A.4
+is the sole effective-state authority; A.8 does not select a candidate. A
+technical adapter must be contract-proven; a content change or explicit
 no-reference disposition requires content/project authority.
 
 G2-07 is blocked because diff, canonical-ID, fixed-limit, and shared uint64

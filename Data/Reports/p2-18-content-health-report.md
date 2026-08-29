@@ -45,4 +45,4 @@ Result: `PASS_WITH_OPEN_CONTENT_RISKS`. This proves complete accounting, not a p
 
 P2-18 is complete because every upstream population and risk is accounted for and hash-bound. G2 remains unapproved, all-content conversion remains incomplete, automatic repair or deletion remains forbidden, and no playable experience or release authority is claimed.
 
-Input binding SHA-256: `93617e5c9455bd035a83eefcaefd9a41c895547d312ae96bdf67e6526c939b0b`.
+Input binding SHA-256: `1aacbc1b04405e305ffb157ee4c3530a6767c05c99d44bb2eb74fe0fc710f413`.

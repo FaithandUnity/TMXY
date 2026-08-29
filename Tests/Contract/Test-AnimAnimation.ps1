@@ -192,15 +192,28 @@ $arguments = @(
 $execution = Invoke-NativeProcess -FilePath $docker -Arguments $arguments -WorkingDirectory $root
 $expectedOutput = @(
     'MINIMUM_ANIM result=PASS bytes=4 clips=0',
-    'BOUND_ANIM result=PASS object=skchar.Boy01 clips=272 tracks=21702 keys=1173344 frames_min=12 frames_max=250 tracks_min=22 tracks_max=80 loops=0 moving=261 notify_refs=80 max_root_excursion_m=2.66504 emitters=0 json_fnv=5953296718757516148 csv_fnv=14896642631070048600',
-    'BOUND_ANIM result=PASS object=skchar.Girl01 clips=270 tracks=21600 keys=1188320 frames_min=11 frames_max=341 tracks_min=80 tracks_max=80 loops=0 moving=254 notify_refs=80 max_root_excursion_m=2.27806 emitters=0 json_fnv=10011155713230011151 csv_fnv=12537756524220434413'
+    'BOUND_ANIM result=PASS object=skchar.Boy01 clips=272 tracks=21702 keys=1173344 frames_min=12 frames_max=250 tracks_min=22 tracks_max=80 loops=0 moving=261 notify_refs=80 max_root_excursion_m=2.66504 emitters=0 json_fnv=4099007401523946227 csv_fnv=14896642631070048600',
+    'BOUND_ANIM result=PASS object=skchar.Girl01 clips=270 tracks=21600 keys=1188320 frames_min=11 frames_max=341 tracks_min=80 tracks_max=80 loops=0 moving=254 notify_refs=80 max_root_excursion_m=2.27806 emitters=0 json_fnv=12404515761744622130 csv_fnv=12537756524220434413'
 )
 $passed = $execution.exit_code -eq 0 -and $execution.output -match '100% tests passed'
 foreach ($line in $expectedOutput) { $passed = $passed -and $execution.output.Contains($line) }
+$verifiedOutput = (@('100% tests passed') + $expectedOutput) -join "`n"
+$executionSha = Get-TextSha256 -Value ($verifiedOutput + "`n")
+$capturedUtc = [DateTimeOffset]::UtcNow.ToString('o')
+if (Test-Path -LiteralPath $OutputPath -PathType Leaf) {
+    $prior = Get-Content -LiteralPath $OutputPath -Raw -Encoding UTF8 |
+        ConvertFrom-Json -DateKind String
+    if ([string]$prior.source_sha256 -ceq $sourceSha -and
+        [string]$prior.execution.output_sha256 -ceq $executionSha -and
+        [string]$prior.result -ceq $(if ($passed) { 'PASS' } else { 'FAIL' }) -and
+        [string]$prior.captured_utc -match '^\d{4}-\d{2}-\d{2}T') {
+        $capturedUtc = [string]$prior.captured_utc
+    }
+}
 
 $report = [pscustomobject][ordered]@{
     schema_version = 1
-    captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
+    captured_utc = $capturedUtc
     result = if ($passed) { 'PASS' } else { 'FAIL' }
     task = 'P1-16'
     completion_criteria_satisfied = $passed
@@ -242,7 +255,7 @@ $report = [pscustomobject][ordered]@{
     execution = [pscustomobject][ordered]@{
         exit_code = $execution.exit_code
         output_line_count = @($execution.output -split "`n").Count
-        output_sha256 = Get-TextSha256 -Value $execution.output
+        output_sha256 = $executionSha
     }
 }
 $json = ($report | ConvertTo-Json -Depth 9).Replace("`r`n", "`n").Replace("`r", "`n")

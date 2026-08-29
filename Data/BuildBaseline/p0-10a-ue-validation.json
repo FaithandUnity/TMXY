@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T08:09:40.6917463+00:00",
+  "captured_utc": "2026-08-29T19:36:04.5258107+00:00",
   "result": "PASS",
   "project": {
     "path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\TMXY.uproject",
@@ -44,8 +44,8 @@
   "project_generation": {
     "passed": true,
     "exit_code": 0,
-    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.38 seconds",
-    "output_sha256": "e19052930e5c96bf5d3d8313c103456b4439e316451c04ca70ba0b81a681541c",
+    "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 3.45 seconds",
+    "output_sha256": "bcb1087328780499d2e5cf58176e0cec5b628644420d05bc3c91df982a5b38f5",
     "error": ""
   },
   "editor_build": {
@@ -54,7 +54,7 @@
     "exit_code": 0,
     "compiler_not_preferred_warning": true,
     "output": "Visual Studio compiler version 14.51.36256 is newer than latest preferred version 14.50.35717. Please use caution as this compiler has not been heavily tested\nResult: Succeeded\nTotal execution time: 0.82 seconds",
-    "output_sha256": "d5696672a10193d74aa123aa052d60e763fa2e232c89ec8a9cf9374781c2ae44",
+    "output_sha256": "a20d0d8f5c4d126302c42d37ce1faa4f8023e9a1984d8306068ff403b75b2b8c",
     "error": ""
   },
   "format": {
@@ -77,7 +77,7 @@
     "module_loaded": true,
     "golden_module_loaded": true,
     "importer_module_loaded": true,
-    "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260829-080925777.log",
+    "log_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Logs\\TMXYAutomation-20260829-193550869.log",
     "process_exit_code": 0
   },
   "missing_paths": []

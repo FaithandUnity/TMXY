@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T08:09:40.9193656+00:00",
+  "captured_utc": "2026-08-29T19:36:04.7634599+00:00",
   "result": "PASS",
   "task": "P1-24",
   "completion_criteria_satisfied": true,
@@ -68,13 +68,13 @@
     "generated_report_path": "E:\\QQXYCodeDev\\Rebuild\\Apps\\UEClient\\Saved\\Automation\\TMXYImporter\\p1-24-skeletal-mesh-report.json",
     "generated_report_sha256": "5925bb0491981de448b69664ab1723738c3bdf954b9aa22c02f3623d71173b5a",
     "generated_report_schema_passed": true,
-    "ue_report_sha256": "9238d7e7094459836fad1715658b3ff326418b751e165ffcde553a7a2ace5936"
+    "ue_report_sha256": "fdabef7763c4c6e062256bf22744324fa7c2f19d8309126e377b4d70f1f49fe3"
   },
   "dependency_report_sha256": {
-    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "5141406e76568275055864ac9092dd1d61a1bb17233fb45a19c467bfa53ccb0b",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "c658f8dcec6f342ffae339b595dfb5f25f3614c5226af346182533ab27b42abd",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "7f25da4e56226deb63f558f67312a5b9581c427e52790414145b98eff351304d",
-    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "2462baed66b2aa57f8c58b75148f68f11f27f335237a79a349e8a4ce127c1b01"
+    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "816e4a9dc42a98010ab2727133245c622094868707419ad9d6f06de408ed4c76",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "e70ac254051555c5fb38edafd6cbc94a7b2ea49f58e0c13f03e86c1109ad8cb4",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "fcbd2dd18e4243f01648ec3b67b3a22f06e57c69cc019cf81f41b6939e138205",
+    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "163854bff2fe82e92184dd8f25d6d69b4187cd977d328cf8b1e45e894af82be7"
   },
   "failure_count": 0,
   "failures": []

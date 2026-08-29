@@ -20,6 +20,13 @@
     "auxiliary_reference_policy": "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json",
     "auxiliary_reference_schema": "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json",
     "auxiliary_reference_evidence": "Data/Reports/p2-20a-aux-config-reference-report.json",
+    "asset_descriptor_report": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+    "asset_descriptor_detail": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+    "asset_descriptor_evidence": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+    "asset_binding_failure_report": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+    "asset_binding_failure_evidence": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
+    "asset_binding_recovery_report": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+    "asset_binding_recovery_evidence": "Data/Inventory/p2-20a-asset-binding-recovery.json",
     "g2_policy": "Contracts/data-schema/g2-review-policy-v1.json"
   },
   "declared_root_scope": {
@@ -50,7 +57,7 @@
     "core_foreign_key_substitution": "forbidden"
   },
   "asset_binding_scope": {
-    "source": "P2-12 catalog and P2-13 package-to-asset edges, independently reconciled for every reachable asset",
+    "source": "P2-12 catalog and P2-13 package-to-asset edges, with P2-20A.4 effective production-binding diagnostics for the complete specialized subset and P2-20A.7/A.8 recovery cross-proof",
     "families": ["anim", "qtx", "skem", "sm", "ter", "wav"],
     "member_set_exported": true,
     "member_record_fields": [
@@ -139,7 +146,7 @@
   "output": {
     "detail_export": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
     "conditional_required_workset": "Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl",
-    "asset_binding_workset": "Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl",
+    "asset_binding_workset": "Data/Exports/P2-20/p2-20a-effective-asset-binding-workset.jsonl",
     "report_json": "Data/Reports/p2-20a-core-resource-closure-report.json",
     "report_markdown": "Data/Reports/p2-20a-core-resource-closure-report.md",
     "governance": "Data/Governance/p2-g2-core-resource-closure.json",

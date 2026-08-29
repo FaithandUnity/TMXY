@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.5",
-  "captured_utc": "2026-08-29T06:56:43.4049825+00:00",
+  "captured_utc": "2026-08-29T18:15:03.9821410+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -14,7 +14,7 @@
   "p3_authorized": false,
   "report_json": {
     "bytes": 5442,
-    "sha256": "be5c895d9214d47ba46a78cfd5890c4fd6529c43f29601d63e395b57b26dd99f"
+    "sha256": "592ed7e60bbae1f9f670e2aa5aa9796f6a9cceabd17c60d29913c359f3b79a6b"
   },
   "report_markdown": {
     "bytes": 1043,

@@ -2,6 +2,7 @@
 param(
     [string]$RebuildRoot = 'E:\QQXYCodeDev\Rebuild',
     [string]$LegacyClientRoot = 'E:\QQXYCodeDev\天命西游',
+    [string]$RecoveryPlanPath = '',
     [switch]$Check
 )
 
@@ -9,6 +10,15 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
 $legacyRoot = [IO.Path]::GetFullPath($LegacyClientRoot).TrimEnd([char[]]'\/')
+if ([string]::IsNullOrWhiteSpace($RecoveryPlanPath)) {
+    $RecoveryPlanPath = Join-Path $root `
+        'Data\Exports\P2-20\p2-20a-asset-binding-recovery-eligible-attempts.tsv'
+}
+$recoveryPlan = [IO.Path]::GetFullPath($RecoveryPlanPath)
+if (-not $recoveryPlan.StartsWith($root + [IO.Path]::DirectorySeparatorChar,
+        [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'P2-20A.4 recovery plan escaped Rebuild.'
+}
 $localRoot = [IO.Path]::GetFullPath((Join-Path $root 'Data\Local\P2-20A4'))
 if (-not $localRoot.StartsWith($root + [IO.Path]::DirectorySeparatorChar,
         [StringComparison]::OrdinalIgnoreCase)) {
@@ -65,6 +75,11 @@ try {
             throw "Missing P2-20A.4 input: $required"
         }
     }
+    if (-not (Test-Path -LiteralPath $recoveryPlan -PathType Leaf)) {
+        throw 'P2-20A.4 requires the A.7-bound eligible recovery-attempt plan.'
+    }
+    $recoveryPlanRelative = Get-Relative $recoveryPlan
+    $recoveryPlanContainer = '/workspace/' + $recoveryPlanRelative
 
     $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
     $builderReference = [string]$lock.backend_toolchain.container_image_reference
@@ -136,12 +151,14 @@ try {
     $probeArguments = @(
         'run', '--rm', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
         '--security-opt', 'no-new-privileges',
+        '--mount', "type=bind,src=$root,dst=/workspace,readonly",
         '--mount', "type=bind,src=$legacyRoot,dst=/legacy/client,readonly",
         '--mount', "type=bind,src=$runRoot,dst=/output",
         '--tmpfs', '/tmp:rw,nosuid,nodev,size=64m',
         $builderReference,
         '/output/build/TMXY.G2AssetDescriptorDiagnostics/tmxy_g2_asset_descriptor_probe',
-        '/legacy/client', "/output/$($names.assetTsv)", "/output/$($names.candidateTsv)"
+        '/legacy/client', "/output/$($names.assetTsv)", "/output/$($names.candidateTsv)",
+        $recoveryPlanContainer
     )
     & $docker @probeArguments 2> $generated.probeStderr |
         Out-File -LiteralPath $generated.probe -Encoding utf8 -NoNewline:$false
@@ -165,6 +182,7 @@ try {
     $finalizeArguments = $baseIsolation + @(
         'python3', '/workspace/Tools/TMXY.G2AssetDescriptorDiagnostics/g2_asset_descriptor_diagnostics.py',
         'finalize', '--root', '/workspace', '--probe-jsonl', "/output/$($names.probe)",
+        '--recovery-plan', $recoveryPlanContainer,
         '--detail-output', "/output/$($names.detail)", '--json-output', "/output/$($names.json)",
         '--markdown-output', "/output/$($names.markdown)"
     ) + $capturedArguments
@@ -180,7 +198,7 @@ try {
     $selfTest = $selfText | ConvertFrom-Json
     if ($summary.result -ne 'BLOCKED' -or $summary.review_execution_result -ne 'PASS' -or
         [int]$summary.targets -ne 3651 -or [int]$summary.candidate_edges -ne 12764 -or
-        $selfTest.result -ne 'PASS' -or [int]$selfTest.assertions -lt 4) {
+        $selfTest.result -ne 'PASS' -or [int]$selfTest.assertions -lt 6) {
         throw 'P2-20A.4 summary or self-test failed.'
     }
     if (-not (Get-Content -LiteralPath $generated.json -Raw -Encoding UTF8 |
@@ -193,6 +211,7 @@ try {
     $sourceFiles = @(
         Join-Path $moduleRoot 'CMakeLists.txt'
         Join-Path $moduleRoot 'diagnostic_common.py'
+        Join-Path $moduleRoot 'diagnostic_classification.py'
         Join-Path $moduleRoot 'diagnostic_self_test.py'
         Join-Path $moduleRoot 'g2_asset_descriptor_diagnostics.py'
         Join-Path $moduleRoot 'semantic_hash.cpp'
@@ -200,6 +219,20 @@ try {
         Join-Path $moduleRoot 'sha256.cpp'
         Join-Path $moduleRoot 'sha256.hpp'
         Join-Path $moduleRoot 'apps\asset_descriptor_probe_main.cpp'
+        Join-Path $moduleRoot 'apps\probe_output.cpp'
+        Join-Path $moduleRoot 'apps\probe_output.hpp'
+        Join-Path $moduleRoot 'apps\probe_types.hpp'
+        Join-Path $moduleRoot 'apps\recovery_plan.cpp'
+        Join-Path $moduleRoot 'apps\recovery_plan.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\qtx_reader.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\texture_types.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\qtx_reader.cpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\dds_writer.cpp'
+        Join-Path $root 'Tools\TMXY.Animation\include\tmxy\animation\anim_reader.hpp'
+        Join-Path $root 'Tools\TMXY.Animation\include\tmxy\animation\animation_types.hpp'
+        Join-Path $root 'Tools\TMXY.Animation\include\tmxy\animation\package_animation_reader.hpp'
+        Join-Path $root 'Tools\TMXY.Animation\src\anim_reader.cpp'
+        Join-Path $root 'Tools\TMXY.Animation\src\package_animation_reader.cpp'
         Join-Path $root 'Tools\TMXY.AssetInventory\apps\descriptor_semantic_signature.cpp'
         Join-Path $root 'Tools\TMXY.AssetInventory\apps\descriptor_semantic_signature.hpp'
     )

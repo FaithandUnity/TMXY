@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 from g2_descriptor import bind_descriptor_diagnostics
 from g2_aux_semantic import bind_aux_semantic_diagnostics
+from g2_identity_normalization import bind_identity_normalization_safety
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as stream:
         value = json.load(stream)
@@ -35,7 +36,6 @@ def resolve_inside(root: Path, relative: str) -> Path:
     require(candidate.is_relative_to(root), "Path escaped repository root")
     require(candidate.is_file(), f"Required input is missing: {relative}")
     return candidate
-
 def verify_contract_binding(root: Path, document: dict[str, Any], label: str) -> None:
     contracts = document.get("contracts", {})
     kinds = ["policy", "schema"]
@@ -47,7 +47,6 @@ def verify_contract_binding(root: Path, document: dict[str, Any], label: str) ->
         path = resolve_inside(root, relative)
         require(contracts.get(f"{kind}_sha256") == sha256(path),
                 f"{label} {kind} contract hash drifted")
-
 def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dict[str, dict[str, Any]]]:
     bindings: list[dict[str, Any]] = []
     evidence: dict[str, dict[str, Any]] = {}
@@ -74,7 +73,6 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         })
         evidence[task_id] = document
         aggregate_lines.append(f"{task_id}|{relative}|{digest}")
-
     supplemental_spec = policy["supplemental"]
     supplemental_relative = supplemental_spec["path"]
     supplemental_path = resolve_inside(root, supplemental_relative)
@@ -113,16 +111,19 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
     aggregate_lines.append(
         f"SUPPLEMENTAL|{supplemental_spec['task_id']}|{supplemental_spec['criterion_id']}|"
         f"{supplemental_relative}|{supplemental_digest}")
-
     descriptor_binding, descriptor, descriptor_aggregate = bind_descriptor_diagnostics(
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.4"] = descriptor
     aggregate_lines.append(descriptor_aggregate)
-
     aux_semantic_binding, aux_semantic, aux_semantic_aggregate = bind_aux_semantic_diagnostics(
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.5"] = aux_semantic
     aggregate_lines.append(aux_semantic_aggregate)
+
+    identity_binding, identity_safety, identity_aggregate = bind_identity_normalization_safety(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.6"] = identity_safety
+    aggregate_lines.append(identity_aggregate)
 
     remediation_spec = policy["remediation"]
     remediation_relative = remediation_spec["path"]
@@ -186,6 +187,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "supplemental": supplemental_binding,
         "descriptor_diagnostics": descriptor_binding,
         "aux_semantic_diagnostics": aux_semantic_binding,
+        "identity_normalization_safety": identity_binding,
         "remediation": remediation_binding,
         "quality": {
             "path": quality_relative,

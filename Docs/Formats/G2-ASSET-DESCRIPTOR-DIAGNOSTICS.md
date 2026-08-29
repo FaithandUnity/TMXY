@@ -16,6 +16,15 @@ descriptor field retained for conversion, including ordered nested values, float
 bit patterns, and unknown property name/value bytes. Storage offsets and sizes are
 excluded from semantic equality.
 
+The anonymous detail export also carries diagnostic-only descriptor hashes and an
+ASCII-lower identity projection. For animation descriptors, the projection may
+lower only the outer identity and its mirrored skeletal-mesh identity when their
+ASCII-lower values agree. All nested animation references, material references,
+unknown properties, ordering, and float bit patterns remain exact. The projection
+does not participate in A.4 classification and cannot approve or select a candidate;
+P2-20A.6 evaluates it independently and fails closed on every remaining semantic
+difference.
+
 Classification is conservative:
 
 - zero production-compatible candidates is `UNRESOLVED`;

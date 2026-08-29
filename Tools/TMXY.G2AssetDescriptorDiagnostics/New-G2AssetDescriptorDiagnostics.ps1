@@ -193,7 +193,10 @@ try {
     $sourceFiles = @(
         Join-Path $moduleRoot 'CMakeLists.txt'
         Join-Path $moduleRoot 'diagnostic_common.py'
+        Join-Path $moduleRoot 'diagnostic_self_test.py'
         Join-Path $moduleRoot 'g2_asset_descriptor_diagnostics.py'
+        Join-Path $moduleRoot 'semantic_hash.cpp'
+        Join-Path $moduleRoot 'semantic_hash.hpp'
         Join-Path $moduleRoot 'sha256.cpp'
         Join-Path $moduleRoot 'sha256.hpp'
         Join-Path $moduleRoot 'apps\asset_descriptor_probe_main.cpp'

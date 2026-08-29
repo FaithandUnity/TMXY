@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-identity-normalization-v1.schema.json",
+  "title": "TMXY P2-20A.6 identity normalization safety audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "source_build", "result", "review_execution_result", "task_status",
+    "completion_criteria_satisfied", "diagnostic_scope_complete", "scope_complete",
+    "g2_06_satisfied", "p3_authorized", "input_bindings", "detail_export", "scope",
+    "measured", "normalization_controls", "blockers", "negative_contracts",
+    "g2_projection", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.6"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "source_build": {"const": "qy-3.0.0.413"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "scope_complete": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {"$ref": "#/$defs/input_bindings"},
+    "detail_export": {"$ref": "#/$defs/file_binding"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "measured": {"$ref": "#/$defs/measured"},
+    "normalization_controls": {"$ref": "#/$defs/controls"},
+    "blockers": {"$ref": "#/$defs/blockers"},
+    "negative_contracts": {"$ref": "#/$defs/negative_contracts"},
+    "g2_projection": {"$ref": "#/$defs/g2_projection"},
+    "contracts": {"$ref": "#/$defs/contracts"},
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+$"},
+        "tracked": {"type": "boolean"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "file_binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"const": "Data/Exports/P2-20/p2-20a-asset-identity-normalization.jsonl"},
+        "tracked": {"const": false},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"const": 15},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "input_bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {
+          "type": "array", "minItems": 7, "maxItems": 7,
+          "prefixItems": [
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "a4_report"}, "tracked": {"const": true}}}]},
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "a4_detail"}, "tracked": {"const": false}}}]},
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "a4_policy"}, "tracked": {"const": true}}}]},
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "p2_03_evidence"}, "tracked": {"const": true}}}]},
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "p2_03_graph"}, "tracked": {"const": false}}}]},
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "policy"}, "tracked": {"const": true}}}]},
+            {"allOf": [{"$ref": "#/$defs/binding"}, {"properties": {"role": {"const": "schema"}, "tracked": {"const": true}}}]}
+          ],
+          "items": false
+        }
+      }
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_revision", "source_resolution", "source_ambiguous_targets",
+        "source_candidate_edges", "candidate_count_per_target", "candidate_identity_exact",
+        "production_descriptor_semantics_used", "candidate_selected",
+        "first_candidate_selection_used", "representative_candidate_selection_used"],
+      "properties": {
+        "source_revision": {"const": "P2-20A.4"},
+        "source_resolution": {"const": "AMBIGUOUS"},
+        "source_ambiguous_targets": {"const": 15},
+        "source_candidate_edges": {"const": 30},
+        "candidate_count_per_target": {"const": 2},
+        "candidate_identity_exact": {"const": true},
+        "production_descriptor_semantics_used": {"const": true},
+        "candidate_selected": {"const": false},
+        "first_candidate_selection_used": {"const": false},
+        "representative_candidate_selection_used": {"const": false}
+      }
+    },
+    "effective": {
+      "type": "object", "additionalProperties": false,
+      "required": ["resolved_targets", "resolved_edges", "ambiguous_targets", "ambiguous_edges"],
+      "properties": {
+        "resolved_targets": {"const": 0}, "resolved_edges": {"const": 0},
+        "ambiguous_targets": {"const": 15}, "ambiguous_edges": {"const": 30}
+      }
+    },
+    "reconciled": {
+      "type": "object", "additionalProperties": false,
+      "required": ["targets", "candidate_edges", "resolved_targets", "resolved_edges",
+        "ambiguous_targets", "ambiguous_edges", "unresolved_targets", "unresolved_edges",
+        "unknown_targets", "unknown_edges"],
+      "properties": {
+        "targets": {"const": 21494}, "candidate_edges": {"const": 39351},
+        "resolved_targets": {"const": 21460}, "resolved_edges": {"const": 39297},
+        "ambiguous_targets": {"const": 15}, "ambiguous_edges": {"const": 30},
+        "unresolved_targets": {"const": 19}, "unresolved_edges": {"const": 24},
+        "unknown_targets": {"const": 0}, "unknown_edges": {"const": 0}
+      }
+    },
+    "measured": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_ambiguous_targets", "source_candidate_edges",
+        "case_fold_collision_targets", "case_fold_collision_edges", "non_case_identity_targets",
+        "non_case_identity_edges", "strict_descriptor_equivalent_targets",
+        "strict_descriptor_equivalent_edges", "strict_full_semantic_equivalent_targets",
+        "strict_full_semantic_equivalent_edges", "effective", "candidate_selections",
+        "reconciled_full_workset"],
+      "properties": {
+        "source_ambiguous_targets": {"const": 15}, "source_candidate_edges": {"const": 30},
+        "case_fold_collision_targets": {"const": 13}, "case_fold_collision_edges": {"const": 26},
+        "non_case_identity_targets": {"const": 2}, "non_case_identity_edges": {"const": 4},
+        "strict_descriptor_equivalent_targets": {"const": 0},
+        "strict_descriptor_equivalent_edges": {"const": 0},
+        "strict_full_semantic_equivalent_targets": {"const": 0},
+        "strict_full_semantic_equivalent_edges": {"const": 0},
+        "effective": {"$ref": "#/$defs/effective"},
+        "candidate_selections": {"const": 0},
+        "reconciled_full_workset": {"$ref": "#/$defs/reconciled"}
+      }
+    },
+    "controls": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ascii_lower_identity_grouping_only", "unicode_casefold",
+        "locale_sensitive_mapping", "path_normalization", "descriptor_field_normalization",
+        "identity_grouping_is_semantic_equivalence", "strict_descriptor_semantics_required",
+        "strict_full_semantics_required", "nested_references_preserved",
+        "unknown_properties_preserved", "floating_point_bits_preserved", "field_order_preserved",
+        "first_candidate_selection", "representative_candidate_selection",
+        "coarse_equivalence_substitution"],
+      "properties": {
+        "ascii_lower_identity_grouping_only": {"const": true},
+        "unicode_casefold": {"const": false}, "locale_sensitive_mapping": {"const": false},
+        "path_normalization": {"const": false}, "descriptor_field_normalization": {"const": false},
+        "identity_grouping_is_semantic_equivalence": {"const": false},
+        "strict_descriptor_semantics_required": {"const": true},
+        "strict_full_semantics_required": {"const": true},
+        "nested_references_preserved": {"const": true},
+        "unknown_properties_preserved": {"const": true},
+        "floating_point_bits_preserved": {"const": true},
+        "field_order_preserved": {"const": true},
+        "first_candidate_selection": {"const": false},
+        "representative_candidate_selection": {"const": false},
+        "coarse_equivalence_substitution": {"const": false}
+      }
+    },
+    "blocker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reason_code", "count"],
+      "properties": {
+        "reason_code": {"enum": ["CASE_FOLD_COLLISION_NOT_SEMANTIC_EQUIVALENCE",
+          "NON_CASE_IDENTITY_MULTIPLICITY", "STRICT_SEMANTIC_EQUIVALENCE_ABSENT"]},
+        "count": {"type": "integer", "minimum": 0}
+      }
+    },
+    "blockers": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "prefixItems": [
+        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "CASE_FOLD_COLLISION_NOT_SEMANTIC_EQUIVALENCE"}, "count": {"const": 13}}}]},
+        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "NON_CASE_IDENTITY_MULTIPLICITY"}, "count": {"const": 2}}}]},
+        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "STRICT_SEMANTIC_EQUIVALENCE_ABSENT"}, "count": {"const": 15}}}]}
+      ],
+      "items": false
+    },
+    "negative_contracts": {
+      "type": "array", "minItems": 11, "maxItems": 11, "uniqueItems": true,
+      "prefixItems": [
+        {"const": "FIRST_CANDIDATE_SELECTION_REJECTED"},
+        {"const": "FORCED_EQUIVALENCE_REJECTED"},
+        {"const": "MISSING_FIELD_REJECTED"},
+        {"const": "INPUT_HASH_TAMPER_REJECTED"},
+        {"const": "FALSE_G2_OR_P3_REJECTED"},
+        {"const": "NON_ASCII_OR_LOCALE_FOLD_REJECTED"},
+        {"const": "NESTED_REFERENCE_CHANGE_REJECTED"},
+        {"const": "UNKNOWN_PROPERTY_CHANGE_REJECTED"},
+        {"const": "FLOAT_OR_ORDER_CHANGE_REJECTED"},
+        {"const": "COARSE_EQUIVALENCE_SUBSTITUTION_REJECTED"},
+        {"const": "UNKNOWN_FIELD_REJECTED"}
+      ],
+      "items": false
+    },
+    "g2_projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["criteria_total", "satisfied", "blocked", "g2_decision"],
+      "properties": {
+        "criteria_total": {"const": 9}, "satisfied": {"const": 7},
+        "blocked": {"const": 2}, "g2_decision": {"const": "BLOCKED"}
+      }
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256"],
+      "properties": {
+        "policy_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anonymous_aggregate_and_hash_only", "anonymous_ids_in_ignored_detail_only",
+        "raw_names", "private_source_paths", "exact_primary_keys", "raw_table_rows",
+        "legacy_source_lines", "decoded_confidential_payloads"],
+      "properties": {
+        "anonymous_aggregate_and_hash_only": {"const": true},
+        "anonymous_ids_in_ignored_detail_only": {"const": true},
+        "raw_names": {"const": false}, "private_source_paths": {"const": false},
+        "exact_primary_keys": {"const": false}, "raw_table_rows": {"const": false},
+        "legacy_source_lines": {"const": false},
+        "decoded_confidential_payloads": {"const": false}
+      }
+    }
+  }
+}

@@ -2,13 +2,13 @@
 """Generate the deterministic, fail-closed P2-20 G2 review."""
 from __future__ import annotations
 import argparse
-import hashlib
 import json
 from pathlib import Path
 from typing import Any
 from g2_evidence import (bind_inputs, evaluate_core_closure,
-                         evaluate_migration_registry, is_safe_relative,
-                         is_sha256, load_json, require, resolve_inside, sha256)
+                         evaluate_migration_registry, load_json, require,
+                         resolve_inside, sha256)
+from g2_self_test import self_test
 def metric(name: str, value: Any, unit: str) -> dict[str, Any]:
     return {"name": name, "value": value, "unit": unit}
 def criterion(
@@ -115,7 +115,21 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                            ("region_semantic_references", "ecf"))
     aux_ready = (aux_semantic["scope_complete"] is True and
                  aux_semantic["g2_06_satisfied"] is True)
-    ok = core["satisfied"] and aux_ready
+    identity_safety = evidence["P2-20A.6"]
+    identity_measured = identity_safety["measured"]
+    identity_effective = identity_measured["effective"]
+    identity_reconciled = identity_measured["reconciled_full_workset"]
+    identity_safe = (identity_safety["diagnostic_scope_complete"] is True and
+                     identity_safety["scope_complete"] is False and
+                     identity_safety["g2_06_satisfied"] is False and
+                     identity_measured["strict_descriptor_equivalent_targets"] == 0 and
+                     identity_measured["strict_full_semantic_equivalent_targets"] == 0 and
+                     identity_measured["candidate_selections"] == 0 and
+                     identity_effective["resolved_targets"] == 0 and
+                     identity_effective["ambiguous_targets"] == 15 and
+                     identity_reconciled["ambiguous_targets"] == core["asset_binding_ambiguous"] and
+                     identity_reconciled["unresolved_targets"] == core["asset_binding_unresolved"])
+    ok = core["satisfied"] and aux_ready and identity_safe
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -128,6 +142,18 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("descriptor_diagnostic_resolved_targets", core["descriptor_diagnostic_resolved"], "assets"),
         metric("descriptor_diagnostic_ambiguous_targets", core["descriptor_diagnostic_ambiguous"], "assets"),
         metric("descriptor_diagnostic_unresolved_targets", core["descriptor_diagnostic_unresolved"], "assets"),
+        metric("identity_normalization_hash_bound", True, "boolean"),
+        metric("identity_case_fold_collision_targets", identity_measured["case_fold_collision_targets"], "assets"),
+        metric("identity_case_fold_collision_edges", identity_measured["case_fold_collision_edges"], "edges"),
+        metric("identity_non_case_targets", identity_measured["non_case_identity_targets"], "assets"),
+        metric("identity_non_case_edges", identity_measured["non_case_identity_edges"], "edges"),
+        metric("identity_strict_descriptor_equivalent_targets", identity_measured["strict_descriptor_equivalent_targets"], "assets"),
+        metric("identity_strict_full_semantic_equivalent_targets", identity_measured["strict_full_semantic_equivalent_targets"], "assets"),
+        metric("identity_automatic_selected_targets", identity_measured["candidate_selections"], "assets"),
+        metric("identity_retained_ambiguous_targets", identity_effective["ambiguous_targets"], "assets"),
+        metric("identity_retained_ambiguous_edges", identity_effective["ambiguous_edges"], "edges"),
+        metric("identity_retained_unresolved_targets", identity_reconciled["unresolved_targets"], "assets"),
+        metric("identity_retained_unresolved_edges", identity_reconciled["unresolved_edges"], "edges"),
         metric("aux_semantic_diagnostic_hash_bound", True, "boolean"),
         metric("aux_semantic_scope_complete", aux_semantic["scope_complete"], "boolean"),
         metric("aux_semantic_g2_06_satisfied", aux_semantic["g2_06_satisfied"], "boolean"),
@@ -161,7 +187,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. A.6 binds every A.4 ambiguous candidate to P2-03 identity hashes and proves that ASCII-lower identity collision is not strict semantic equivalence: it performs zero automatic selections and retains all blocking states. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -250,6 +276,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         resolution = closure["resolution"]
         conditional = closure["conditional_required"]
         asset_binding = evidence["P2-20A.4"]["measured"]["reconciled_full_workset"]
+        identity = evidence["P2-20A.6"]["measured"]
         asset_structure = closure["asset_structure"]
         auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
         blockers.append({
@@ -262,7 +289,12 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"{auxiliary['editor_undecided']} editor-undecided, {auxiliary['malformed_blocked']} malformed) "
                 f"with {auxiliary['approved_roots']} approved roots. Explicit asset-binding evidence retains "
                 f"{asset_binding['ambiguous_targets']} full-semantic ambiguous plus "
-                f"{asset_binding['unresolved_targets']} production-unresolved targets. "
+                f"{asset_binding['unresolved_targets']} production-unresolved targets. A.6 measured "
+                f"{identity['case_fold_collision_targets']} ASCII-lower identity-collision targets across "
+                f"{identity['case_fold_collision_edges']} edges, but found "
+                f"{identity['strict_full_semantic_equivalent_targets']} strict full-semantic equivalences and "
+                f"made {identity['candidate_selections']} selections; all "
+                f"{identity['effective']['ambiguous_targets']} ambiguous targets remain blocked. "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "
@@ -419,62 +451,6 @@ def markdown(report: dict[str, Any]) -> str:
 def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text.replace("\r\n", "\n").replace("\r", "\n"), encoding="utf-8", newline="\n")
-def self_test() -> dict[str, Any]:
-    assertions = 0
-    require(not (True and False), "Incomplete A.5 must block G2-06"); assertions += 1
-    required = ["SATISFIED"] * 9
-    require(set(required) == {"SATISFIED"}, "Required-status self-test failed")
-    assertions += 1
-    observed = ["SATISFIED"] * 5 + ["BLOCKED", "BLOCKED"] + ["SATISFIED"] * 2
-    require(("BLOCKED" if "BLOCKED" in observed else "PASS") == "BLOCKED",
-            "Gate fail-closed self-test failed")
-    assertions += 1
-    core_fk_zero = True
-    supplemental_bound = True
-    scope_complete = False
-    reference_queues_zero = False
-    require(not (core_fk_zero and supplemental_bound and scope_complete and reference_queues_zero),
-            "Core-resource distinction self-test failed")
-    assertions += 1
-    asset_binding_explicit = True
-    asset_binding_ambiguous = 183
-    asset_binding_unresolved = 19
-    require(not (asset_binding_explicit and asset_binding_ambiguous == 0 and
-                 asset_binding_unresolved == 0),
-            "Explicit asset-binding state must not erase blocking states")
-    assertions += 1
-    registry_present = True
-    registry_coverage_complete = True
-    pending_decisions = 1359
-    approved_decisions = 0
-    require(not (registry_present and registry_coverage_complete and pending_decisions == 0 and
-                 approved_decisions == 1359), "Migration-registry fail-closed self-test failed")
-    assertions += 1
-    machine_suggestion_counts_as_decision = False
-    require(machine_suggestion_counts_as_decision is False,
-            "Machine suggestions must not count as decisions")
-    assertions += 1
-    planning_hours = 2000.37
-    money_estimated = False
-    measured_schedule = False
-    require(planning_hours > 0 and not money_estimated and not measured_schedule,
-            "Budget semantics self-test failed")
-    assertions += 1
-    require(observed.count("SATISFIED") == 7 and observed.count("BLOCKED") == 2,
-            "Observed-count self-test failed")
-    assertions += 1
-    require(hashlib.sha256(b"a\n").hexdigest() == hashlib.sha256(b"a\n").hexdigest(),
-            "Hash self-test failed")
-    assertions += 1
-    require(is_safe_relative("Data/Inventory/evidence.json") and
-            not is_safe_relative("../outside.json") and not is_safe_relative("C:\\outside.json"),
-            "Path-rejection self-test failed")
-    assertions += 1
-    require(is_sha256("a" * 64) and not is_sha256("a" * 63),
-            "SHA-256 shape self-test failed")
-    assertions += 1
-    return {"result": "PASS", "assertions": assertions}
-
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path)

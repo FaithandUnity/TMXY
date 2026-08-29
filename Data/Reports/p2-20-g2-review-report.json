@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "d0086be8cb4241daa058ae5a6db4243ad715f9240cc49eaa576a79c47564e208",
+    "aggregate_sha256": "75e2b845348f967e5978b8702b0bab430f79a51eb40a9fccc103b4a87e0d304c",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -171,7 +171,7 @@
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-      "sha256": "c8f0ba4006c1ab78ad0e712c47ed24f4b13aab34ad50a2cfde92f6ed028672d8",
+      "sha256": "8a32bda24b36d4cac932be50a4752fd3a5aabad2696100dc75c2d14ff35c977f",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -182,7 +182,7 @@
       "criterion_id": "G2-06",
       "evidence_revision": "P2-20A.4",
       "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
-      "sha256": "b293e13aed6092180a2dbd244924bc9e98d3bedbcf878371ed2465e7fe1d3306",
+      "sha256": "da7c2069acc6b3ea556473b0b7e552bd6efb42f09ee983737d018a9b8db68903",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -204,11 +204,25 @@
       "scope_complete": false,
       "g2_06_satisfied": false
     },
+    "identity_normalization_safety": {
+      "task_id": "P2-20A",
+      "criterion_id": "G2-06",
+      "evidence_revision": "P2-20A.6",
+      "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
+      "sha256": "fe95ccda8546beadbcbbfee71f73ccdbe12637375915c2cbec07e1f759e4b579",
+      "result": "BLOCKED",
+      "review_execution_result": "PASS",
+      "task_status": "BLOCKED",
+      "completion_criteria_satisfied": false,
+      "diagnostic_scope_complete": true,
+      "scope_complete": false,
+      "g2_06_satisfied": false
+    },
     "remediation": {
       "task_id": "P2-20B",
       "criterion_id": "G2-07",
       "path": "Data/Governance/p2-g2-migration-decisions.json",
-      "sha256": "d78161341333a9445b246e05b8f7e8ab22f4d3f6f81c33d9381d381ff26f2cff",
+      "sha256": "bffb76ff79eb0a87bcb1300ff3056e851fb092a3d6bc1de1a3166f5c4125e81a",
       "result": "BLOCKED",
       "generation_result": "PASS",
       "task_status": "BLOCKED",
@@ -217,9 +231,9 @@
     },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "d78a509fd7b489ce764c6224ed9d85ad811967b3c14c80ac5891189e6ce762a3",
+      "sha256": "31e978ad45e757370e31648f6f81f76d0f0040f550d925f44825343641603993",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-29T10:31:24.7028512+00:00"
+      "captured_utc": "2026-08-29T12:25:58.2168087+00:00"
     }
   },
   "summary": {
@@ -578,6 +592,66 @@
           "unit": "assets"
         },
         {
+          "name": "identity_normalization_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "identity_case_fold_collision_targets",
+          "value": 13,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_case_fold_collision_edges",
+          "value": 26,
+          "unit": "edges"
+        },
+        {
+          "name": "identity_non_case_targets",
+          "value": 2,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_non_case_edges",
+          "value": 4,
+          "unit": "edges"
+        },
+        {
+          "name": "identity_strict_descriptor_equivalent_targets",
+          "value": 0,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_strict_full_semantic_equivalent_targets",
+          "value": 0,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_automatic_selected_targets",
+          "value": 0,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_retained_ambiguous_targets",
+          "value": 15,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_retained_ambiguous_edges",
+          "value": 30,
+          "unit": "edges"
+        },
+        {
+          "name": "identity_retained_unresolved_targets",
+          "value": 19,
+          "unit": "assets"
+        },
+        {
+          "name": "identity_retained_unresolved_edges",
+          "value": 24,
+          "unit": "edges"
+        },
+        {
           "name": "aux_semantic_diagnostic_hash_bound",
           "value": true,
           "unit": "boolean"
@@ -743,7 +817,7 @@
           "unit": "references"
         }
       ],
-      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
+      "interpretation": "P2-20A supplies a hash-bound monotonic core-scope closure report plus complete anonymous conditional-required and asset-binding worksets. A.4 independently binds exact descriptor semantics. A.5 independently binds auxiliary consumer observations and parser drift while approving no adapter, no-reference disposition, root, or candidate. A.6 binds every A.4 ambiguous candidate to P2-03 identity hashes and proves that ASCII-lower identity collision is not strict semantic equivalence: it performs zero automatic selections and retains all blocking states. Explicit states do not erase remaining ambiguity, unresolved resources, parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -978,7 +1052,7 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 15 full-semantic ambiguous plus 19 production-unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "reason": "P2-20A and its A.3 auxiliary evidence are hash-bound; all 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 15 full-semantic ambiguous plus 19 production-unresolved targets. A.6 measured 13 ASCII-lower identity-collision targets across 26 edges, but found 0 strict full-semantic equivalences and made 0 selections; all 15 ambiguous targets remain blocked. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
       "required_action": "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
@@ -1016,9 +1090,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "9b9e0aeb4d046b16ce0af37031b4344b384e09edd1bf61d5831d2fca1f49f787",
+    "policy_sha256": "57747f01633e371bb70e675439da67ef106b8d4207829f102286d9b53854a722",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "a954691a8e3c39ba23baac276b787adf71ca30fafb5ebd033f68990c90824a64"
+    "schema_sha256": "adb6a5cdce4d3b91a752fb502f3de36743cc16939337c240c87f5532c4c75704"
   },
   "disclosure": {
     "private_source_paths": false,

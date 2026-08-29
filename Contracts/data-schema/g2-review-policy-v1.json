@@ -42,6 +42,12 @@
     "evidence_revision": "P2-20A.5",
     "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json"
   },
+  "identity_normalization_safety": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "evidence_revision": "P2-20A.6",
+    "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json"
+  },
   "remediation": {
     "task_id": "P2-20B",
     "criterion_id": "G2-07",
@@ -150,6 +156,7 @@
     "global_reference_queues_are_context_not_core_exit_thresholds": true,
     "first_candidate_or_heuristic_selection_never_proves_resource_closure": true,
     "explicit_asset_binding_state_does_not_substitute_for_zero_ambiguity_and_unresolved": true,
+    "ascii_lower_identity_collision_does_not_prove_semantic_equivalence_or_candidate_selection": true,
     "audit_codegen_or_uint64_policy_is_not_a_complete_migration_decision_registry": true,
     "machine_suggestions_never_count_as_migration_decisions_or_approvals": true,
     "planning_hours_are_not_measured_duration_or_money": true,

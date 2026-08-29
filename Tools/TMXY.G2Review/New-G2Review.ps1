@@ -163,6 +163,20 @@ try {
         [int]$g206Metrics.aux_semantic_ecf_missed_assignments -ne 4) {
         throw 'P2-20 A.5 auxiliary semantic evidence did not remain hash-bound and fail closed.'
     }
+    if ($g206Metrics.identity_normalization_hash_bound -ne $true -or
+        [int]$g206Metrics.identity_case_fold_collision_targets -ne 13 -or
+        [int]$g206Metrics.identity_case_fold_collision_edges -ne 26 -or
+        [int]$g206Metrics.identity_non_case_targets -ne 2 -or
+        [int]$g206Metrics.identity_non_case_edges -ne 4 -or
+        [int]$g206Metrics.identity_strict_descriptor_equivalent_targets -ne 0 -or
+        [int]$g206Metrics.identity_strict_full_semantic_equivalent_targets -ne 0 -or
+        [int]$g206Metrics.identity_automatic_selected_targets -ne 0 -or
+        [int]$g206Metrics.identity_retained_ambiguous_targets -ne 15 -or
+        [int]$g206Metrics.identity_retained_ambiguous_edges -ne 30 -or
+        [int]$g206Metrics.identity_retained_unresolved_targets -ne 19 -or
+        [int]$g206Metrics.identity_retained_unresolved_edges -ne 24) {
+        throw 'P2-20 A.6 identity-normalization evidence did not remain hash-bound and fail closed.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {

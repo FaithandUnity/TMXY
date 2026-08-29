@@ -1,6 +1,7 @@
 add_executable(
     tmxy_g2_asset_descriptor_probe
     apps/asset_descriptor_probe_main.cpp
+    semantic_hash.cpp
     sha256.cpp
     ../TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp
 )

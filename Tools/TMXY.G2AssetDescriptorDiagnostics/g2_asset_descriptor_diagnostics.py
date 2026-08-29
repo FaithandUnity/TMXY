@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from diagnostic_self_test import run_self_test
 from diagnostic_common import (ASSET_FIELDS, FAMILIES, canonical_json, iter_jsonl,
                                load_json, load_selected_workset,
                                probe_candidate_set_sha256, require, sha256_file,
@@ -23,7 +24,10 @@ from diagnostic_common import (ASSET_FIELDS, FAMILIES, canonical_json, iter_json
 PROBE_FIELDS = {"asset_id", "family", "structure", "candidate_set_sha256",
                 "candidates", "counts"}
 CANDIDATE_FIELDS = {"candidate_id", "body_sha256", "descriptor", "binding",
-                    "semantic_sha256"}
+                    "semantic_sha256", "descriptor_semantic_sha256",
+                    "identity_normalized_descriptor_semantic_sha256",
+                    "identity_normalized_semantic_sha256",
+                    "identity_mirror_ascii_lower_match"}
 COUNT_FIELDS = {"candidates", "descriptor_parsed", "descriptor_rejected",
                 "binding_pass", "binding_rejected", "semantic_distinct"}
 CLASS_BY_FAMILY = {
@@ -151,11 +155,25 @@ def validate_candidate(candidate: dict[str, Any]) -> None:
     for key in ("candidate_id", "body_sha256"):
         require(isinstance(candidate[key], str) and len(candidate[key]) == 64,
                 f"Candidate {key} is not a SHA-256 identity")
-    semantic = candidate["semantic_sha256"]
-    require(semantic is None or (isinstance(semantic, str) and len(semantic) == 64),
-            "Candidate semantic identity is invalid")
-    require((candidate["descriptor"] == "PARSED") == (semantic is not None),
-            "Descriptor disposition and semantic identity disagree")
+    exact_semantics = [candidate[name] for name in (
+        "semantic_sha256", "descriptor_semantic_sha256")]
+    normalized_semantics = [candidate[name] for name in (
+        "identity_normalized_descriptor_semantic_sha256",
+        "identity_normalized_semantic_sha256")]
+    semantics = exact_semantics + normalized_semantics
+    require(all(value is None or (isinstance(value, str) and len(value) == 64)
+                for value in semantics), "Candidate semantic identity is invalid")
+    require((candidate["descriptor"] == "PARSED") ==
+            all(value is not None for value in exact_semantics),
+            "Descriptor disposition and exact semantic identities disagree")
+    require(all(value is None for value in normalized_semantics) or
+            all(value is not None for value in normalized_semantics),
+            "Normalized semantic identities are partially populated")
+    require(isinstance(candidate["identity_mirror_ascii_lower_match"], bool),
+            "Candidate identity mirror flag is invalid")
+    require(not candidate["identity_mirror_ascii_lower_match"] or
+            all(value is not None for value in normalized_semantics),
+            "Matching identity mirror has no normalized semantic identities")
     require(candidate["descriptor"] == "PARSED" or candidate["binding"] == "REJECTED",
             "Rejected descriptor cannot pass production binding")
 
@@ -414,53 +432,6 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
     }
 
 
-def self_test() -> dict[str, Any]:
-    assertions = 0
-    prior = {
-        "asset_id": "a" * 64, "family": "qtx", "structure": "PASS",
-        "candidate_count": 2, "candidate_set_sha256": sha256_lines(["b" * 64, "c" * 64]),
-        "resolution": "AMBIGUOUS", "resolution_basis": "DIVERGENT_DESCRIPTOR_SET",
-    }
-    base = {
-        "asset_id": "a" * 64, "family": "qtx", "structure": "PASS",
-        "candidate_set_sha256": probe_candidate_set_sha256(["b" * 64, "c" * 64]),
-        "candidates": [
-            {"candidate_id": "b" * 64, "body_sha256": "1" * 64,
-             "descriptor": "PARSED", "binding": "PASS", "semantic_sha256": "2" * 64},
-            {"candidate_id": "c" * 64, "body_sha256": "3" * 64,
-             "descriptor": "PARSED", "binding": "PASS", "semantic_sha256": "2" * 64},
-        ],
-        "counts": {"candidates": 2, "descriptor_parsed": 2, "descriptor_rejected": 0,
-                   "binding_pass": 2, "binding_rejected": 0, "semantic_distinct": 1},
-    }
-    require(classify_probe(prior, base)["resolution"] == "RESOLVED", "equivalent case")
-    assertions += 1
-    divergent = json.loads(json.dumps(base))
-    divergent["candidates"][1]["semantic_sha256"] = "4" * 64
-    divergent["counts"]["semantic_distinct"] = 2
-    require(classify_probe(prior, divergent)["resolution"] == "AMBIGUOUS", "divergent case")
-    assertions += 1
-    unreadable = json.loads(json.dumps(base))
-    unreadable["candidates"][1]["descriptor"] = "REJECTED"
-    unreadable["candidates"][1]["binding"] = "REJECTED"
-    unreadable["candidates"][1]["semantic_sha256"] = None
-    unreadable["counts"] = {"candidates": 2, "descriptor_parsed": 1,
-                            "descriptor_rejected": 1, "binding_pass": 1,
-                            "binding_rejected": 1, "semantic_distinct": 1}
-    require(classify_probe(prior, unreadable)["resolution_basis"] ==
-            "UNREADABLE_CANDIDATE_OPEN", "unreadable fail-closed case")
-    assertions += 1
-    rejected = json.loads(json.dumps(base))
-    for item in rejected["candidates"]:
-        item["binding"] = "REJECTED"
-    rejected["counts"]["binding_pass"] = 0
-    rejected["counts"]["binding_rejected"] = 2
-    require(classify_probe(prior, rejected)["resolution"] == "UNRESOLVED",
-            "zero-compatible case")
-    assertions += 1
-    return {"result": "PASS", "assertions": assertions}
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--self-test", action="store_true")
@@ -482,7 +453,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     if args.self_test:
-        result = self_test()
+        result = run_self_test(classify_probe, probe_candidate_set_sha256, sha256_lines)
     elif args.command == "prepare":
         result = prepare(args)
     elif args.command == "finalize":

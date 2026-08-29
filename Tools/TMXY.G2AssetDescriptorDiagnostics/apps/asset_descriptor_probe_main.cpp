@@ -1,4 +1,5 @@
 #include "descriptor_semantic_signature.hpp"
+#include "semantic_hash.hpp"
 #include "sha256.hpp"
 #include "tmxy/animation/package_animation_reader.hpp"
 #include "tmxy/package/package_normalized_tree.hpp"
@@ -32,10 +33,11 @@
 namespace
 {
 
+using tmxy::g2_asset_descriptor_diagnostics::descriptor_semantic_sha256;
+using tmxy::g2_asset_descriptor_diagnostics::normalized_semantic_sha256;
+using tmxy::g2_asset_descriptor_diagnostics::semantic_sha256;
 using tmxy::g2_asset_descriptor_diagnostics::sha256_hex;
-
 constexpr std::string_view kCandidateSetDomain = "tmxy-g2-asset-descriptor-candidate-set-v1";
-constexpr std::string_view kSemanticDomain = "tmxy-g2-asset-descriptor-semantic-v1";
 
 struct AssetEntry final
 {
@@ -91,6 +93,10 @@ struct CandidateResult final
     bool descriptor_parsed{false};
     bool binding_passed{false};
     std::optional<std::string> semantic_sha256;
+    std::optional<std::string> descriptor_semantic_sha256;
+    std::optional<std::string> identity_normalized_descriptor_semantic_sha256;
+    std::optional<std::string> identity_normalized_semantic_sha256;
+    bool identity_mirror_ascii_lower_match{false};
 };
 
 struct Counts final
@@ -646,24 +652,19 @@ build_package_index(const std::filesystem::path& client_root,
     return sha256_hex(std::string_view(canonical.data(), canonical.size()));
 }
 
-void append_u64_le(std::string& output, const std::uint64_t value)
+void set_semantic_hashes(CandidateResult& result, const std::string_view object_name,
+                         const std::string_view exact_signature,
+                         const std::optional<std::string_view> normalized_signature)
 {
-    for (unsigned int shift = 0U; shift < 64U; shift += 8U)
+    result.semantic_sha256 = semantic_sha256(object_name, exact_signature);
+    result.descriptor_semantic_sha256 = descriptor_semantic_sha256(exact_signature);
+    if (normalized_signature.has_value())
     {
-        output.push_back(static_cast<char>((value >> shift) & 0xFFU));
+        result.identity_normalized_descriptor_semantic_sha256 =
+            descriptor_semantic_sha256(*normalized_signature);
+        result.identity_normalized_semantic_sha256 =
+            normalized_semantic_sha256(object_name, *normalized_signature);
     }
-}
-
-[[nodiscard]] std::string semantic_sha256(const std::string_view object_name,
-                                          const std::string_view signature)
-{
-    std::string canonical(kSemanticDomain);
-    canonical.push_back('\0');
-    append_u64_le(canonical, object_name.size());
-    canonical.append(object_name);
-    append_u64_le(canonical, signature.size());
-    canonical.append(signature);
-    return sha256_hex(std::string_view(canonical.data(), canonical.size()));
 }
 
 [[nodiscard]] CandidateResult inspect_candidate(const std::string_view family,
@@ -671,11 +672,9 @@ void append_u64_le(std::string& output, const std::uint64_t value)
                                                 const PackageData& package,
                                                 const Candidate& candidate)
 {
-    CandidateResult result{.candidate_id = candidate.id,
-                           .body_sha256 = sha256_hex(body_span(package, candidate)),
-                           .descriptor_parsed = false,
-                           .binding_passed = false,
-                           .semantic_sha256 = std::nullopt};
+    CandidateResult result;
+    result.candidate_id = candidate.id;
+    result.body_sha256 = sha256_hex(body_span(package, candidate));
     if (family == "qtx")
     {
         auto descriptor = tmxy::texture::LegacyTextureDescriptorReader{}.parse(
@@ -684,8 +683,8 @@ void append_u64_le(std::string& output, const std::uint64_t value)
         {
             result.descriptor_parsed = true;
             const auto semantic = tmxy::asset_inventory::semantic_signature(descriptor.value());
-            result.semantic_sha256 = semantic_sha256(
-                candidate.object_name, std::string_view(semantic.data(), semantic.size()));
+            const auto signature = std::string_view(semantic.data(), semantic.size());
+            set_semantic_hashes(result, candidate.object_name, signature, signature);
             result.binding_passed =
                 tmxy::texture::QtxReader{}.parse(descriptor.value(), asset_bytes).has_value();
         }
@@ -699,8 +698,8 @@ void append_u64_le(std::string& output, const std::uint64_t value)
         {
             result.descriptor_parsed = true;
             const auto semantic = tmxy::asset_inventory::semantic_signature(descriptor.value());
-            result.semantic_sha256 = semantic_sha256(
-                candidate.object_name, std::string_view(semantic.data(), semantic.size()));
+            const auto signature = std::string_view(semantic.data(), semantic.size());
+            set_semantic_hashes(result, candidate.object_name, signature, signature);
         }
         result.binding_passed =
             tmxy::static_mesh::bind_static_mesh(package.bytes, candidate.object_name, asset_bytes)
@@ -715,8 +714,8 @@ void append_u64_le(std::string& output, const std::uint64_t value)
         {
             result.descriptor_parsed = true;
             const auto semantic = tmxy::asset_inventory::semantic_signature(descriptor.value());
-            result.semantic_sha256 = semantic_sha256(
-                candidate.object_name, std::string_view(semantic.data(), semantic.size()));
+            const auto signature = std::string_view(semantic.data(), semantic.size());
+            set_semantic_hashes(result, candidate.object_name, signature, signature);
         }
         result.binding_passed = tmxy::skeletal_mesh::bind_skeletal_mesh(
                                     package.bytes, candidate.object_name, asset_bytes)
@@ -731,8 +730,25 @@ void append_u64_le(std::string& output, const std::uint64_t value)
         {
             result.descriptor_parsed = true;
             const auto semantic = tmxy::asset_inventory::semantic_signature(descriptor.value());
-            result.semantic_sha256 = semantic_sha256(
-                candidate.object_name, std::string_view(semantic.data(), semantic.size()));
+            const auto signature = std::string_view(semantic.data(), semantic.size());
+            auto normalized_descriptor = descriptor.value();
+            const auto outer_lower = lower_ascii(candidate.object_name);
+            const auto mirror_lower =
+                lower_ascii(normalized_descriptor.skeletal_mesh.object_name_bytes);
+            result.identity_mirror_ascii_lower_match = outer_lower == mirror_lower;
+            if (result.identity_mirror_ascii_lower_match)
+            {
+                normalized_descriptor.skeletal_mesh.object_name_bytes = mirror_lower;
+                const auto normalized =
+                    tmxy::asset_inventory::semantic_signature(normalized_descriptor);
+                const auto normalized_signature =
+                    std::string_view(normalized.data(), normalized.size());
+                set_semantic_hashes(result, candidate.object_name, signature, normalized_signature);
+            }
+            else
+            {
+                set_semantic_hashes(result, candidate.object_name, signature, std::nullopt);
+            }
         }
         result.binding_passed =
             tmxy::animation::bind_animation_set(package.bytes, candidate.object_name, asset_bytes)
@@ -891,6 +907,36 @@ void emit_result(const AssetResult& result)
         {
             std::cout << "null";
         }
+        std::cout << R"(,"descriptor_semantic_sha256":)";
+        if (candidate.descriptor_semantic_sha256.has_value())
+        {
+            append_json_string(std::cout, *candidate.descriptor_semantic_sha256);
+        }
+        else
+        {
+            std::cout << "null";
+        }
+        std::cout << R"(,"identity_normalized_semantic_sha256":)";
+        if (candidate.identity_normalized_semantic_sha256.has_value())
+        {
+            append_json_string(std::cout, *candidate.identity_normalized_semantic_sha256);
+        }
+        else
+        {
+            std::cout << "null";
+        }
+        std::cout << R"(,"identity_normalized_descriptor_semantic_sha256":)";
+        if (candidate.identity_normalized_descriptor_semantic_sha256.has_value())
+        {
+            append_json_string(std::cout,
+                               *candidate.identity_normalized_descriptor_semantic_sha256);
+        }
+        else
+        {
+            std::cout << "null";
+        }
+        std::cout << R"(,"identity_mirror_ascii_lower_match":)"
+                  << (candidate.identity_mirror_ascii_lower_match ? "true" : "false");
         std::cout << '}';
     }
     std::cout << R"(],"counts":{"candidates":)" << result.counts.candidates

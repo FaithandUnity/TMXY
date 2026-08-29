@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.4",
-  "captured_utc": "2026-08-29T07:23:07Z",
+  "captured_utc": "2026-08-29T11:36:19Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -99,16 +99,16 @@
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
       "tracked": false,
-      "bytes": 6194145,
+      "bytes": 10776199,
       "lines": 3651,
-      "sha256": "1ac52f61b62ae723dc13d208e06530c21af927faf496aeb0cdd2d994729704d0"
+      "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384"
     },
     "report_json": {
       "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
       "tracked": true,
-      "bytes": 5076,
+      "bytes": 5077,
       "lines": 174,
-      "sha256": "b293e13aed6092180a2dbd244924bc9e98d3bedbcf878371ed2465e7fe1d3306"
+      "sha256": "da7c2069acc6b3ea556473b0b7e552bd6efb42f09ee983737d018a9b8db68903"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.md",
@@ -123,9 +123,9 @@
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/CMakeLists.txt",
         "tracked": true,
-        "bytes": 603,
-        "lines": 22,
-        "sha256": "fff9234823dfc30e18cfaa3b08e19f36f94b0ed18463b89cf215dc220ff3640d"
+        "bytes": 625,
+        "lines": 23,
+        "sha256": "4e1c00071b9ea21376e9ba1ab26e72c76c0bc794e404ea1057f38f12d38d22a1"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/diagnostic_common.py",
@@ -135,11 +135,32 @@
         "sha256": "089a9c5249f47ae50e381e54e23777a9237c8a984127bbf41530e195e637c120"
       },
       {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/diagnostic_self_test.py",
+        "tracked": true,
+        "bytes": 3409,
+        "lines": 73,
+        "sha256": "c62dd19fd9c9daaa1f4fa329a233eaa528a54fd2ac52eb82db02d689643b7aa4"
+      },
+      {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/g2_asset_descriptor_diagnostics.py",
         "tracked": true,
-        "bytes": 24973,
-        "lines": 497,
-        "sha256": "001c90914902b8000fa98ec7d1baea4eb2d439a762aaa884b9adf061325a4395"
+        "bytes": 23847,
+        "lines": 468,
+        "sha256": "a76dbae9a901709a9e94847269d81ae3f96426cf1eb93f31f3bd661c1944e4b1"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/semantic_hash.cpp",
+        "tracked": true,
+        "bytes": 2263,
+        "lines": 73,
+        "sha256": "39b507e7d63b026d7b0eb9b0c378300e81c582c1cfa766a5123d8347577e2b72"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/semantic_hash.hpp",
+        "tracked": true,
+        "bytes": 509,
+        "lines": 14,
+        "sha256": "7e041b7cb0ffb17fb681190785f77219df4b42f9d7e32d975c0943f984f7f028"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.cpp",
@@ -158,9 +179,9 @@
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/asset_descriptor_probe_main.cpp",
         "tracked": true,
-        "bytes": 32663,
-        "lines": 954,
-        "sha256": "89d36acaa35dad857e1817349bfcbb22fae70a8c38a9008a33f52a958c0b5f74"
+        "bytes": 35075,
+        "lines": 1000,
+        "sha256": "27204fdf06824240a01eb3a2b0e5f38372007b9babd3b779b19117bfe074b532"
       },
       {
         "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp",
@@ -177,7 +198,7 @@
         "sha256": "17b25df32d5934783db11d30409360556dd98947d1b8655cea29d9c9a5f09918"
       }
     ],
-    "generator_self_test_assertions": 4,
+    "generator_self_test_assertions": 5,
     "probe_startup_self_tests": true
   },
   "builder": {

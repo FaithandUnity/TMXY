@@ -16,6 +16,7 @@ $qualityPath = Join-Path $root 'Data\BuildBaseline\p0-12-local-quality-gates.jso
 $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-report.json'
 $descriptorDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json'
 $auxSemanticDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-aux-semantic-diagnostics-report.json'
+$identityNormalizationPath = Join-Path $root 'Data\Reports\p2-20a-asset-identity-normalization-report.json'
 $auxiliaryReportPath = Join-Path $root 'Data\Reports\p2-20a-aux-config-reference-report.json'
 $remediationPath = Join-Path $root 'Data\Governance\p2-g2-migration-decisions.json'
 $reviewPacketsPath = Join-Path $root 'Data\Governance\p2-g2-migration-review-packets.json'
@@ -27,6 +28,7 @@ $reviewPacketSchemaPath = Join-Path $root 'Contracts\data-schema\g2-migration-re
 $generatorPath = Join-Path $root 'Tools\TMXY.G2Review\g2_review.py'
 $helperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_evidence.py'
 $auxSemanticHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_aux_semantic.py'
+$identityNormalizationHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_identity_normalization.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $assertions = [Collections.Generic.List[object]]::new()
 
@@ -172,6 +174,11 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.aux_semantic_diagnostics.evidence_revision -eq 'P2-20A.5' -and
         $Candidate.aux_semantic_diagnostics.path -eq
             'Data/Reports/p2-20a-aux-semantic-diagnostics-report.json' -and
+        $Candidate.identity_normalization_safety.task_id -eq 'P2-20A' -and
+        $Candidate.identity_normalization_safety.criterion_id -eq 'G2-06' -and
+        $Candidate.identity_normalization_safety.evidence_revision -eq 'P2-20A.6' -and
+        $Candidate.identity_normalization_safety.path -eq
+            'Data/Reports/p2-20a-asset-identity-normalization-report.json' -and
         $Candidate.remediation.task_id -eq 'P2-20B' -and
         $Candidate.remediation.criterion_id -eq 'G2-07' -and
         $Candidate.remediation.path -eq 'Data/Governance/p2-g2-migration-decisions.json' -and
@@ -182,6 +189,7 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.fail_closed_rules.core_foreign_key_zero_does_not_prove_core_resource_reference_zero -and
         $Candidate.fail_closed_rules.first_candidate_or_heuristic_selection_never_proves_resource_closure -and
         $Candidate.fail_closed_rules.explicit_asset_binding_state_does_not_substitute_for_zero_ambiguity_and_unresolved -and
+        $Candidate.fail_closed_rules.ascii_lower_identity_collision_does_not_prove_semantic_equivalence_or_candidate_selection -and
         $Candidate.thresholds.core_asset_binding_resolution_explicit -eq $true -and
         $Candidate.thresholds.core_asset_binding_ambiguous -eq 0 -and
         $Candidate.thresholds.core_asset_binding_unresolved -eq 0 -and
@@ -253,6 +261,18 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -ne 3617 -or
         (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -ne 15 -or
         (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -ne 19 -or
+        (Get-Metric $g206 'identity_normalization_hash_bound') -ne $true -or
+        (Get-Metric $g206 'identity_case_fold_collision_targets') -ne 13 -or
+        (Get-Metric $g206 'identity_case_fold_collision_edges') -ne 26 -or
+        (Get-Metric $g206 'identity_non_case_targets') -ne 2 -or
+        (Get-Metric $g206 'identity_non_case_edges') -ne 4 -or
+        (Get-Metric $g206 'identity_strict_descriptor_equivalent_targets') -ne 0 -or
+        (Get-Metric $g206 'identity_strict_full_semantic_equivalent_targets') -ne 0 -or
+        (Get-Metric $g206 'identity_automatic_selected_targets') -ne 0 -or
+        (Get-Metric $g206 'identity_retained_ambiguous_targets') -ne 15 -or
+        (Get-Metric $g206 'identity_retained_ambiguous_edges') -ne 30 -or
+        (Get-Metric $g206 'identity_retained_unresolved_targets') -ne 19 -or
+        (Get-Metric $g206 'identity_retained_unresolved_edges') -ne 24 -or
         (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -ne $true -or
         (Get-Metric $g206 'aux_semantic_scope_complete') -ne $false -or
         (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -ne $false -or
@@ -324,11 +344,12 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
     $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxSemanticDiagnosticPath,
+    $identityNormalizationPath,
     $auxiliaryReportPath,
     $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
     $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $helperPath,
-    $auxSemanticHelperPath, $wrapperPath)
+    $auxSemanticHelperPath, $identityNormalizationHelperPath, $wrapperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -355,6 +376,8 @@ $supplemental = Get-Content -LiteralPath $supplementalPath -Raw -Encoding UTF8 |
 $descriptorDiagnostic = Get-Content -LiteralPath $descriptorDiagnosticPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $auxSemanticDiagnostic = Get-Content -LiteralPath $auxSemanticDiagnosticPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$identityNormalization = Get-Content -LiteralPath $identityNormalizationPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $auxiliaryReport = Get-Content -LiteralPath $auxiliaryReportPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
@@ -474,6 +497,7 @@ $qualityBinding = $report.input_bindings.quality
 $supplementalBinding = $report.input_bindings.supplemental
 $descriptorBinding = $report.input_bindings.descriptor_diagnostics
 $auxSemanticBinding = $report.input_bindings.aux_semantic_diagnostics
+$identityNormalizationBinding = $report.input_bindings.identity_normalization_safety
 $remediationBinding = $report.input_bindings.remediation
 $bindingsPassed = $bindingsPassed -and
     $supplementalBinding.task_id -eq $policy.supplemental.task_id -and
@@ -514,6 +538,22 @@ $bindingsPassed = $bindingsPassed -and
     $auxSemanticDiagnostic.g2_06_satisfied -eq $false
 $aggregateLines.Add("AUX_SEMANTIC|$($auxSemanticBinding.task_id)|$($auxSemanticBinding.criterion_id)|$($auxSemanticBinding.evidence_revision)|$($auxSemanticBinding.path)|$($auxSemanticBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
+    $identityNormalizationBinding.task_id -eq $policy.identity_normalization_safety.task_id -and
+    $identityNormalizationBinding.criterion_id -eq $policy.identity_normalization_safety.criterion_id -and
+    $identityNormalizationBinding.evidence_revision -eq $policy.identity_normalization_safety.evidence_revision -and
+    $identityNormalizationBinding.path -eq $policy.identity_normalization_safety.path -and
+    $identityNormalizationBinding.sha256 -eq (Get-Sha256 $identityNormalizationPath) -and
+    $identityNormalization.evidence_revision -eq 'P2-20A.6' -and
+    $identityNormalization.review_execution_result -eq 'PASS' -and
+    $identityNormalization.diagnostic_scope_complete -eq $true -and
+    $identityNormalization.scope_complete -eq $false -and
+    $identityNormalization.result -eq 'BLOCKED' -and
+    $identityNormalization.g2_06_satisfied -eq $false -and
+    $identityNormalization.measured.strict_full_semantic_equivalent_targets -eq 0 -and
+    $identityNormalization.measured.candidate_selections -eq 0 -and
+    $identityNormalization.measured.effective.ambiguous_targets -eq 15
+$aggregateLines.Add("IDENTITY_NORMALIZATION|$($identityNormalizationBinding.task_id)|$($identityNormalizationBinding.criterion_id)|$($identityNormalizationBinding.evidence_revision)|$($identityNormalizationBinding.path)|$($identityNormalizationBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
     $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
     $remediationBinding.path -eq $policy.remediation.path -and
@@ -534,7 +574,7 @@ $bindingsPassed = $bindingsPassed -and $qualityBinding.path -eq $policy.quality_
 $aggregateLines.Add("QUALITY|$($qualityBinding.path)|$($qualityBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and $report.input_bindings.aggregate_sha256 -eq
     (Get-TextSha256 (($aggregateLines -join "`n") + "`n"))
-Add-A 'All prerequisites supplemental descriptor remediation and quality evidence are exactly SHA-256 bound' $bindingsPassed
+Add-A 'All prerequisites supplemental diagnostics remediation and quality evidence are exactly SHA-256 bound' $bindingsPassed
 
 $g206 = Get-Criterion $report 'G2-06'
 Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without FK substitution' (
@@ -555,6 +595,18 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -eq 3617 -and
     (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -eq 15 -and
     (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -eq 19 -and
+    (Get-Metric $g206 'identity_normalization_hash_bound') -eq $true -and
+    (Get-Metric $g206 'identity_case_fold_collision_targets') -eq 13 -and
+    (Get-Metric $g206 'identity_case_fold_collision_edges') -eq 26 -and
+    (Get-Metric $g206 'identity_non_case_targets') -eq 2 -and
+    (Get-Metric $g206 'identity_non_case_edges') -eq 4 -and
+    (Get-Metric $g206 'identity_strict_descriptor_equivalent_targets') -eq 0 -and
+    (Get-Metric $g206 'identity_strict_full_semantic_equivalent_targets') -eq 0 -and
+    (Get-Metric $g206 'identity_automatic_selected_targets') -eq 0 -and
+    (Get-Metric $g206 'identity_retained_ambiguous_targets') -eq 15 -and
+    (Get-Metric $g206 'identity_retained_ambiguous_edges') -eq 30 -and
+    (Get-Metric $g206 'identity_retained_unresolved_targets') -eq 19 -and
+    (Get-Metric $g206 'identity_retained_unresolved_edges') -eq 24 -and
     (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -eq $true -and
     (Get-Metric $g206 'aux_semantic_scope_complete') -eq $false -and
     (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -eq $false -and
@@ -603,6 +655,7 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'core_foreign_key_dangling_context') -eq 0 -and
     $g206.interpretation -match 'hash-bound monotonic core-scope closure report' -and
     $g206.interpretation -match 'A.4 independently binds exact' -and
+    $g206.interpretation -match 'A.6 binds every A.4 ambiguous candidate' -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
 $g207 = Get-Criterion $report 'G2-07'
 Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
@@ -793,6 +846,34 @@ Set-Metric (Get-Criterion $badAuxSemanticReady 'G2-06') 'aux_semantic_g2_06_sati
 $negativeCases.aux_semantic_false_readiness_rejected =
     (Test-AgainstSchema $badAuxSemanticReady) -and
     -not (Test-G2Semantics $badAuxSemanticReady $policy)
+$missingIdentitySha = Copy-JsonObject $report
+[void]$missingIdentitySha.input_bindings.identity_normalization_safety.PSObject.Properties.Remove('sha256')
+$negativeCases.missing_identity_normalization_sha_rejected =
+    -not (Test-AgainstSchema $missingIdentitySha)
+$badIdentitySha = Copy-JsonObject $report
+$badIdentitySha.input_bindings.identity_normalization_safety.sha256 = '0' * 64
+$negativeCases.identity_normalization_sha_tamper_rejected =
+    (Test-AgainstSchema $badIdentitySha) -and
+    $badIdentitySha.input_bindings.identity_normalization_safety.sha256 -ne
+        (Get-Sha256 $identityNormalizationPath)
+$falseIdentityEquivalence = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseIdentityEquivalence 'G2-06') `
+    'identity_strict_full_semantic_equivalent_targets' 1
+$negativeCases.identity_false_equivalence_rejected =
+    (Test-AgainstSchema $falseIdentityEquivalence) -and
+    -not (Test-G2Semantics $falseIdentityEquivalence $policy)
+$falseIdentitySelection = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseIdentitySelection 'G2-06') `
+    'identity_automatic_selected_targets' 1
+$negativeCases.identity_candidate_selection_rejected =
+    (Test-AgainstSchema $falseIdentitySelection) -and
+    -not (Test-G2Semantics $falseIdentitySelection $policy)
+$falseIdentityReduction = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseIdentityReduction 'G2-06') `
+    'identity_retained_ambiguous_targets' 14
+$negativeCases.identity_ambiguous_reduction_rejected =
+    (Test-AgainstSchema $falseIdentityReduction) -and
+    -not (Test-G2Semantics $falseIdentityReduction $policy)
 $badAuxMetric = Copy-JsonObject $report
 Set-Metric (Get-Criterion $badAuxMetric 'G2-06') `
     'auxiliary_reference_evidence_hash_bound' $false

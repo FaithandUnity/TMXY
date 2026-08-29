@@ -42,6 +42,13 @@ closed. Lexical candidates are not semantic approvals. Core foreign-key
 dangling count zero is a narrower integrity fact and cannot replace these
 resource-closure facts.
 
+P2-20A.6 independently joins all 15 A.4 ambiguous targets and 30 candidate edges
+to P2-03 identity hashes. Thirteen targets and 26 edges collide under ASCII-lower
+identity grouping, while the remaining 2/4 do not; strict descriptor and full
+semantic equivalence are both zero. A.6 therefore selects no candidate and
+retains all 15/30 ambiguous plus 19/24 unresolved states. Identity grouping is
+not runtime-selection or semantic-equivalence authority.
+
 G2-07 is blocked because diff, canonical-ID, fixed-limit, and shared uint64
 code-generation audits do not constitute a complete reviewed registry of
 migration decisions. The registry must cover ID, width, old-to-new Schema, and

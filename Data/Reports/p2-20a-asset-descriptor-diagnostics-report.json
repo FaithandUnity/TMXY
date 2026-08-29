@@ -1,5 +1,5 @@
 {
-  "captured_utc": "2026-08-29T07:23:07Z",
+  "captured_utc": "2026-08-29T11:36:19Z",
   "completion": {
     "g2_remains_blocked_by_other_open_criteria": true,
     "observed_ambiguous_targets": 15,
@@ -11,10 +11,10 @@
   "completion_criteria_satisfied": false,
   "criterion_id": "G2-06",
   "detail_export": {
-    "bytes": 6194145,
+    "bytes": 10776199,
     "lines": 3651,
     "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
-    "sha256": "1ac52f61b62ae723dc13d208e06530c21af927faf496aeb0cdd2d994729704d0",
+    "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384",
     "tracked": false
   },
   "diagnostic_scope_complete": true,

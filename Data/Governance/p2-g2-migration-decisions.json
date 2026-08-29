@@ -12,7 +12,7 @@
   "gate_criterion": "G2-07",
   "g2_07_satisfied": false,
   "input_bindings": {
-    "aggregate_sha256": "cf8f621a16907e7cb174a082325b4c6b55cec748044eb8173aa5e81f5afaef01",
+    "aggregate_sha256": "fd5e43f8ad827c58744e2934cf3f4e27cbf7427286ad7daee0d7e7408b3a5e67",
     "evidence": [
       {
         "task_id": "P2-09",
@@ -58,7 +58,7 @@
     "derived_sources": [
       {
         "artifact_id": "G2_POLICY",
-        "sha256": "9b9e0aeb4d046b16ce0af37031b4344b384e09edd1bf61d5831d2fca1f49f787",
+        "sha256": "57747f01633e371bb70e675439da67ef106b8d4207829f102286d9b53854a722",
         "records": 9
       },
       {

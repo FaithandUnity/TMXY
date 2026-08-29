@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.6",
+  "captured_utc": "2026-08-29T11:36:19Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "input_bindings": {
+    "aggregate_sha256": "24500b9a061ede5a4025a9b85cdbda10f7edf4d54b21d079ace8349d8e846c9b",
+    "entries": [
+      {
+        "role": "a4_report",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 5077,
+        "lines": 174,
+        "sha256": "da7c2069acc6b3ea556473b0b7e552bd6efb42f09ee983737d018a9b8db68903"
+      },
+      {
+        "role": "a4_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 10776199,
+        "lines": 3651,
+        "sha256": "5104bb44e27a1bb318720142bdae77a19205ab2d17b5a8c9e6263673503b6384"
+      },
+      {
+        "role": "a4_policy",
+        "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
+        "tracked": true,
+        "bytes": 3477,
+        "lines": 86,
+        "sha256": "461d65c4cc7e7f3ce61651362814c85c92ec4e29225ed8a2aecb5a5335a6974b"
+      },
+      {
+        "role": "p2_03_evidence",
+        "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+        "tracked": true,
+        "bytes": 5424,
+        "lines": 162,
+        "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab"
+      },
+      {
+        "role": "p2_03_graph",
+        "path": "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl",
+        "tracked": false,
+        "bytes": 106382503,
+        "lines": 269064,
+        "sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57"
+      },
+      {
+        "role": "policy",
+        "path": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
+        "tracked": true,
+        "bytes": 3380,
+        "lines": 102,
+        "sha256": "0cec64ba131871618b3904156cd60766dabaab1597be0dd7961cba64a0418cb1"
+      },
+      {
+        "role": "schema",
+        "path": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
+        "tracked": true,
+        "bytes": 12132,
+        "lines": 238,
+        "sha256": "8fa83145d087caa930fba9e35184194bfe4eaac88ffef74e8b3e7c6b30130efd"
+      }
+    ]
+  },
+  "detail_export": {
+    "path": "Data/Exports/P2-20/p2-20a-asset-identity-normalization.jsonl",
+    "tracked": false,
+    "bytes": 27392,
+    "lines": 15,
+    "sha256": "9efde9f1ee88c4df687228ff6d20cb34b3e54168591c0e6b0bbe08a82cc3f691"
+  },
+  "scope": {
+    "source_revision": "P2-20A.4",
+    "source_resolution": "AMBIGUOUS",
+    "source_ambiguous_targets": 15,
+    "source_candidate_edges": 30,
+    "candidate_count_per_target": 2,
+    "candidate_identity_exact": true,
+    "production_descriptor_semantics_used": true,
+    "candidate_selected": false,
+    "first_candidate_selection_used": false,
+    "representative_candidate_selection_used": false
+  },
+  "measured": {
+    "source_ambiguous_targets": 15,
+    "source_candidate_edges": 30,
+    "case_fold_collision_targets": 13,
+    "case_fold_collision_edges": 26,
+    "non_case_identity_targets": 2,
+    "non_case_identity_edges": 4,
+    "strict_descriptor_equivalent_targets": 0,
+    "strict_descriptor_equivalent_edges": 0,
+    "strict_full_semantic_equivalent_targets": 0,
+    "strict_full_semantic_equivalent_edges": 0,
+    "effective": {
+      "resolved_targets": 0,
+      "resolved_edges": 0,
+      "ambiguous_targets": 15,
+      "ambiguous_edges": 30
+    },
+    "candidate_selections": 0,
+    "reconciled_full_workset": {
+      "ambiguous_edges": 30,
+      "ambiguous_targets": 15,
+      "candidate_edges": 39351,
+      "resolved_edges": 39297,
+      "resolved_targets": 21460,
+      "targets": 21494,
+      "unknown_edges": 0,
+      "unknown_targets": 0,
+      "unresolved_edges": 24,
+      "unresolved_targets": 19
+    }
+  },
+  "normalization_controls": {
+    "unicode_casefold": false,
+    "locale_sensitive_mapping": false,
+    "path_normalization": false,
+    "descriptor_field_normalization": false,
+    "identity_grouping_is_semantic_equivalence": false,
+    "strict_descriptor_semantics_required": true,
+    "strict_full_semantics_required": true,
+    "nested_references_preserved": true,
+    "unknown_properties_preserved": true,
+    "floating_point_bits_preserved": true,
+    "field_order_preserved": true,
+    "first_candidate_selection": false,
+    "representative_candidate_selection": false,
+    "coarse_equivalence_substitution": false,
+    "ascii_lower_identity_grouping_only": true
+  },
+  "blockers": [
+    {
+      "reason_code": "CASE_FOLD_COLLISION_NOT_SEMANTIC_EQUIVALENCE",
+      "count": 13
+    },
+    {
+      "reason_code": "NON_CASE_IDENTITY_MULTIPLICITY",
+      "count": 2
+    },
+    {
+      "reason_code": "STRICT_SEMANTIC_EQUIVALENCE_ABSENT",
+      "count": 15
+    }
+  ],
+  "negative_contracts": [
+    "FIRST_CANDIDATE_SELECTION_REJECTED",
+    "FORCED_EQUIVALENCE_REJECTED",
+    "MISSING_FIELD_REJECTED",
+    "INPUT_HASH_TAMPER_REJECTED",
+    "FALSE_G2_OR_P3_REJECTED",
+    "NON_ASCII_OR_LOCALE_FOLD_REJECTED",
+    "NESTED_REFERENCE_CHANGE_REJECTED",
+    "UNKNOWN_PROPERTY_CHANGE_REJECTED",
+    "FLOAT_OR_ORDER_CHANGE_REJECTED",
+    "COARSE_EQUIVALENCE_SUBSTITUTION_REJECTED",
+    "UNKNOWN_FIELD_REJECTED"
+  ],
+  "g2_projection": {
+    "criteria_total": 9,
+    "satisfied": 7,
+    "blocked": 2,
+    "g2_decision": "BLOCKED"
+  },
+  "contracts": {
+    "policy_sha256": "0cec64ba131871618b3904156cd60766dabaab1597be0dd7961cba64a0418cb1",
+    "schema_sha256": "8fa83145d087caa930fba9e35184194bfe4eaac88ffef74e8b3e7c6b30130efd"
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "anonymous_ids_in_ignored_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_confidential_payloads": false
+  }
+}

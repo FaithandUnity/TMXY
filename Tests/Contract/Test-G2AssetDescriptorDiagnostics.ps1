@@ -108,6 +108,22 @@ Add-Assertion 'Completion is truthfully unsatisfied' ($report.completion.satisfi
 Add-Assertion 'Detail export hash bound' ((Get-LineCount $detailPath) -eq 3651 -and
     (Get-Sha256 $detailPath) -eq [string]$report.detail_export.sha256 -and
     [int64](Get-Item $detailPath).Length -eq [int64]$report.detail_export.bytes)
+$ambiguousDetail = @(Get-Content -LiteralPath $detailPath -Encoding UTF8 |
+    ForEach-Object { $_ | ConvertFrom-Json -Depth 100 } |
+    Where-Object resolution -eq 'AMBIGUOUS')
+$ambiguousCandidates = @($ambiguousDetail | ForEach-Object { @($_.candidates) })
+$semanticFieldsComplete = @($ambiguousCandidates | Where-Object {
+        [string]$_.semantic_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+        [string]$_.descriptor_semantic_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+        [string]$_.identity_normalized_descriptor_semantic_sha256 -cnotmatch '^[0-9a-f]{64}$' -or
+        [string]$_.identity_normalized_semantic_sha256 -cnotmatch '^[0-9a-f]{64}$'
+    }).Count -eq 0
+$strictNormalizedClassesRetained = @($ambiguousDetail | Where-Object {
+        @($_.candidates.identity_normalized_semantic_sha256 | Sort-Object -Unique).Count -ne 2
+    }).Count -eq 0
+Add-Assertion 'Identity-normalized diagnostics remain fail closed' `
+    ($ambiguousDetail.Count -eq 15 -and $ambiguousCandidates.Count -eq 30 -and
+        $semanticFieldsComplete -and $strictNormalizedClassesRetained)
 Add-Assertion 'Evidence report binding' ((Get-Sha256 $reportPath) -eq
     [string]$evidence.outputs.report_json.sha256)
 Add-Assertion 'Evidence markdown binding' ((Get-Sha256 $markdownPath) -eq

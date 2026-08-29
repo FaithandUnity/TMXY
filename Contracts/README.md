@@ -23,3 +23,9 @@ G2-07 的 V1 基线及 V2 policy/registry/authority/review-packet Schema 分别�
 并只在忽略区保存脱敏成员工作集；资产绑定“显式状态”与歧义/未决的独立零阈值不可互相
 替代，等价候选集合保留全部成员且禁止首候选选择。V2 只接受独立权威台账，把 39 个匿名审阅包、机器建议、
 正式决定、审批和决定后验证严格分开。证据覆盖完整不等于风险清零或获得批准。
+
+`g2-auxiliary-config-reference-policy-v1.json` 与
+`g2-auxiliary-config-reference-v1.schema.json` 冻结 P2-20A.3 的 212 个辅助配置文件实例、
+完整标量等值候选和五态适配器边界。候选不是语义引用批准；零匹配不是无引用批准；6 个
+malformed XML 不能自动排除；歧义 Package 候选必须全部保留。当前 0 个批准适配器、
+0 个批准根，因此成功生成仍是 `BLOCKED`，不能授权 G2、P3 或发布。

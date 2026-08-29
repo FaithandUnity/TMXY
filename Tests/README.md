@@ -140,4 +140,10 @@ Schema、引用规则、Canonical ID 域、ID 分量和固定容量信号的完�
 `-VerifyDerivedSources` 会隔离重建并逐 byte 复核；负例防止删减范围、归零真实缺口、
 伪造迁移决定或把审计冒充授权。
 
+`Contract/Test-G2AuxiliaryConfigReferences.ps1` 验证 P2-20A.3 对 212 个 XML/ECF 文件实例的
+匿名闭合覆盖、39,522 个标量位置、完整等值候选和所有输入哈希绑定。它明确冻结 39,498
+个非空标量（包括保留的 22 个空 XML 属性和 2 个空 ECF RHS 位置），拒绝 basename、
+substring、首候选选择、实例去重、伪造批准根和把零匹配冒充无引用批准。加
+`-VerifyDerivedSources` 会在断网、只读、非 root 容器中逐 byte 复核忽略区候选集及跟踪报告。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.3",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "completion_criteria_satisfied": false,
+  "scope_complete": false,
+  "report": {
+    "path": "Data/Reports/p2-20a-aux-config-reference-report.json",
+    "sha256": "cbb81593e482bb8386733a7d208a5d67ce1409988aa4fb4f7b0c640f4214cf2f"
+  },
+  "anonymous_candidate_export": {
+    "tracked": false,
+    "count": 3907,
+    "sha256": "109ba4364c8716d040528769ab33ebdc8da43ac48307c3a17822387ea644d4d5"
+  },
+  "authority": {
+    "approved_semantic_adapters": 0,
+    "approved_no_ref_files": 0,
+    "approved_roots": 0,
+    "g2_06_satisfied": false,
+    "g2_approved": false,
+    "p3_authorized": false,
+    "release_authority": false
+  }
+}

@@ -141,7 +141,7 @@ if ($terrainAdjacent.Count -lt 3) {
     Add-Failure -Message 'At least three adjacent terrain samples are required.'
 }
 
-$forbiddenPayloadExtensions = @('.anim', '.mp3', '.qtx', '.skem', '.sm', '.tbl', '.ter', '.wav', '.zif')
+$forbiddenPayloadExtensions = @('.anim', '.ecf', '.mp3', '.qtx', '.skem', '.sm', '.tbl', '.ter', '.wav', '.zif')
 $unexpectedPayloads = @(Get-ChildItem -LiteralPath (Join-Path $root 'Data\GoldenSamples') -Recurse -File |
     Where-Object { $_.Extension.ToLowerInvariant() -in $forbiddenPayloadExtensions })
 if ($unexpectedPayloads.Count -gt 0) {

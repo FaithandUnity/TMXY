@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 from g2_evidence import (bind_inputs, evaluate_core_closure, load_json, require,
                          resolve_inside, sha256)
+from g2_aux_ecf_parser_parity import aux_ecf_parser_parity_metrics, aux_ecf_parser_parity_safe
 from g2_markdown import markdown
 from g2_migration import evaluate_migration_registry
 from g2_report_model import criterion, metric
@@ -112,6 +113,8 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         aux_context_resolution["unresolved_resource"] == 1 and
         aux_context["authority_state"]["terminal_instances"] == 0 and
         aux_context["authority_state"]["nonterminal_instances"] == 212)
+    aux_ecf_parity = evidence["P2-20A.10"]
+    aux_ecf_safe = aux_ecf_parser_parity_safe(aux_ecf_parity)
     identity_safety = evidence["P2-20A.6"]
     identity_measured = identity_safety["measured"]
     identity_effective = identity_measured["effective"]
@@ -142,8 +145,8 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                     failure_measured["unclassified_error_edges"] == 0 and recovery_safe)
     binding_ready = (binding_failure["remediation_scope_complete"] is True and
                      binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
-    ok = (core["satisfied"] and aux_ready and aux_context_safe and identity_safe and
-          binding_safe and binding_ready)
+    ok = (core["satisfied"] and aux_ready and aux_context_safe and aux_ecf_safe and
+          identity_safe and binding_safe and binding_ready)
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -197,6 +200,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("aux_semantic_unresolved_resources", aux_region["unresolved_resource"], "references"),
         metric("aux_semantic_ecf_parser_differences", aux_ecf["mixed_newline_differences"], "files"),
         metric("aux_semantic_ecf_missed_assignments", aux_ecf["legacy_assignments_missed_by_a3_parser"], "assignments"),
+        *(metric(name, value, unit) for name, value, unit in aux_ecf_parser_parity_metrics(aux_ecf_parity)),
         metric("aux_package_context_hash_bound", True, "boolean"),
         metric("aux_package_context_contract_proven", aux_context["technical_state"]["package_context_contract_proven"], "boolean"),
         metric("aux_package_context_strict_ambiguous_objects", aux_context["strict_baseline"]["ambiguous_object"], "references"),
@@ -330,12 +334,15 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
         aux_context = evidence["P2-20A.9"]
         aux_context_resolution = aux_context["measured"]["effective_resolution"]
+        aux_ecf_parity = evidence["P2-20A.10"]
         blockers.append({
             "id": "G2-BLK-06",
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                f"P2-20A and its A.3/A.5/A.9 auxiliary evidence are hash-bound. A.9 deterministically "
+                f"P2-20A and its A.3/A.5/A.9/A.10 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
+                f"A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. "
+                f"It executed no legacy runtime, claims no runtime-binary parity, and grants zero semantic imports. A.9 deterministically "
                 f"resolves {aux_context_resolution['resolved_total']} consumer occurrences and leaves "
                 f"{aux_context_resolution['unresolved_resource']} unresolved without first-candidate selection; "
                 f"this technical proof grants no semantic adapter or root approval. All {auxiliary['inventory_files']} "

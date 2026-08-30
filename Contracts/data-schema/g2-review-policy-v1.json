@@ -48,6 +48,12 @@
     "evidence_revision": "P2-20A.9",
     "path": "Data/Reports/p2-20a-aux-package-context-report.json"
   },
+  "aux_ecf_parser_parity": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "evidence_revision": "P2-20A.10",
+    "path": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.json"
+  },
   "identity_normalization_safety": {
     "task_id": "P2-20A",
     "criterion_id": "G2-06",

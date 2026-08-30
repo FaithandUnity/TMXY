@@ -10,6 +10,7 @@ param(
     [Parameter(Mandatory = $true)][string]$DescriptorDiagnosticPath,
     [Parameter(Mandatory = $true)][string]$AuxSemanticDiagnosticPath,
     [Parameter(Mandatory = $true)][string]$AuxPackageContextPath,
+    [Parameter(Mandatory = $true)][string]$AuxEcfParserParityPath,
     [Parameter(Mandatory = $true)][string]$IdentityNormalizationPath,
     [Parameter(Mandatory = $true)][string]$RemediationPath
 )
@@ -147,6 +148,35 @@ Set-Metric (Get-Criterion $badAuxPackageContextAuthority 'G2-06') `
 $negativeCases.aux_package_context_false_authority_rejected =
     (Test-AgainstSchema $badAuxPackageContextAuthority) -and
     -not (Test-G2Semantics $badAuxPackageContextAuthority $policy)
+$missingAuxEcfParserParitySha = Copy-JsonObject $report
+[void]$missingAuxEcfParserParitySha.input_bindings.aux_ecf_parser_parity.PSObject.Properties.Remove(
+    'sha256')
+$negativeCases.missing_aux_ecf_parser_parity_sha_rejected =
+    -not (Test-AgainstSchema $missingAuxEcfParserParitySha)
+$badAuxEcfParserParitySha = Copy-JsonObject $report
+$badAuxEcfParserParitySha.input_bindings.aux_ecf_parser_parity.sha256 = '0' * 64
+$negativeCases.aux_ecf_parser_parity_sha_tamper_rejected =
+    (Test-AgainstSchema $badAuxEcfParserParitySha) -and
+    $badAuxEcfParserParitySha.input_bindings.aux_ecf_parser_parity.sha256 -ne
+        (Get-Sha256 $AuxEcfParserParityPath)
+$falseLegacyRuntime = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseLegacyRuntime 'G2-06') `
+    'aux_ecf_legacy_runtime_executed' $true
+$negativeCases.aux_ecf_false_legacy_runtime_rejected =
+    (Test-AgainstSchema $falseLegacyRuntime) -and
+    -not (Test-G2Semantics $falseLegacyRuntime $policy)
+$falseBinaryParity = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseBinaryParity 'G2-06') `
+    'aux_ecf_runtime_binary_parity_claimed' $true
+$negativeCases.aux_ecf_false_binary_parity_rejected =
+    (Test-AgainstSchema $falseBinaryParity) -and
+    -not (Test-G2Semantics $falseBinaryParity $policy)
+$falseSemanticImports = Copy-JsonObject $report
+Set-Metric (Get-Criterion $falseSemanticImports 'G2-06') `
+    'aux_ecf_semantic_imports_claimed' 4
+$negativeCases.aux_ecf_false_semantic_imports_rejected =
+    (Test-AgainstSchema $falseSemanticImports) -and
+    -not (Test-G2Semantics $falseSemanticImports $policy)
 $missingIdentitySha = Copy-JsonObject $report
 [void]$missingIdentitySha.input_bindings.identity_normalization_safety.PSObject.Properties.Remove('sha256')
 $negativeCases.missing_identity_normalization_sha_rejected =

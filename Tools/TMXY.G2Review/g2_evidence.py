@@ -9,6 +9,7 @@ from typing import Any
 from g2_descriptor import bind_descriptor_diagnostics
 from g2_aux_semantic import bind_aux_semantic_diagnostics
 from g2_aux_package_context import bind_aux_package_context
+from g2_aux_ecf_parser_parity import bind_aux_ecf_parser_parity
 from g2_identity_normalization import bind_identity_normalization_safety
 from g2_binding_failure import bind_binding_failure_diagnostics
 from g2_binding_recovery import bind_binding_recovery
@@ -127,6 +128,10 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.9"] = aux_context
     aggregate_lines.append(aux_context_aggregate)
+    aux_ecf_binding, aux_ecf_parity, aux_ecf_aggregate = bind_aux_ecf_parser_parity(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.10"] = aux_ecf_parity
+    aggregate_lines.append(aux_ecf_aggregate)
     identity_binding, identity_safety, identity_aggregate = bind_identity_normalization_safety(
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.6"] = identity_safety
@@ -202,6 +207,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "descriptor_diagnostics": descriptor_binding,
         "aux_semantic_diagnostics": aux_semantic_binding,
         "aux_package_context": aux_context_binding,
+        "aux_ecf_parser_parity": aux_ecf_binding,
         "identity_normalization_safety": identity_binding,
         "binding_failure_diagnostics": failure_binding,
         "binding_recovery": recovery_binding,

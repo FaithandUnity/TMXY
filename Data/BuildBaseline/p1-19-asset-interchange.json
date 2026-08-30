@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T19:35:45.9451827+00:00",
+  "captured_utc": "2026-08-30T03:08:46.3149161+00:00",
   "result": "PASS",
   "task": "P1-19",
   "completion_criteria_satisfied": true,
@@ -69,13 +69,13 @@
     "unknown_extensions_must_survive_read_write": true
   },
   "dependency_report_sha256": {
-    "p1-08-package-normalized-tree.json": "26bdfc563c7f2304bdf982a5a9ba89e65fb6c79bea1c74b40e52a6114abd5595",
+    "p1-08-package-normalized-tree.json": "978fdc3a9ff57b02bdc168cbc02066195df4ac971353093c60d5561fa7082f75",
     "p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9",
-    "p1-14-sm-static-mesh.json": "fe4bc53ff8691ed8531a535278077dcc27f5053879d3061550362320a34fd41f",
-    "p1-15-skem-skeletal-mesh.json": "816e4a9dc42a98010ab2727133245c622094868707419ad9d6f06de408ed4c76",
+    "p1-14-sm-static-mesh.json": "e77901f84bd12664d78b7780eb03144b893883420fdfbaaf0c0582f2b9886fb8",
+    "p1-15-skem-skeletal-mesh.json": "cdf819ea219346865780e4ebf99f649ec653a6e2e845b6e7976974d4f9520729",
     "p1-16-anim-animation.json": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6",
-    "p1-17-ter-terrain.json": "fcedcf909fc153d98d570d08280c589e072fb0900ca308cae46b3d3bf1174ecc",
-    "p1-18-auxiliary-assets.json": "518dbc7b709529c576a981aaf2dd1d7720c37887e0e80d5cc8a1e30c3d80b4e6"
+    "p1-17-ter-terrain.json": "e4af0b75d2a6842e44ab65c9c8e3371042b444a8eb0be5b838e260c017ed3ef0",
+    "p1-18-auxiliary-assets.json": "b405b555f56fa1f972ef88212dc5a7dd4781c5b9ea0dab63ee35a70b2d3944f5"
   },
   "exporter_source_sha256": {
     "Tools/TMXY.Package/src/package_normalized_tree.cpp": "1d9cf6cc0ea515a9ffe635d9d4a342e98f4003ead521ccdd390961a42f5c4eab",

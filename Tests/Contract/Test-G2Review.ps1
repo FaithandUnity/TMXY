@@ -16,6 +16,7 @@ $supplementalPath = Join-Path $root 'Data\Reports\p2-20a-core-resource-closure-r
 $descriptorDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json'
 $auxSemanticDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-aux-semantic-diagnostics-report.json'
 $auxPackageContextPath = Join-Path $root 'Data\Reports\p2-20a-aux-package-context-report.json'
+$auxEcfParserParityPath = Join-Path $root 'Data\Reports\p2-20a-aux-ecf-parser-parity-report.json'
 $identityNormalizationPath = Join-Path $root 'Data\Reports\p2-20a-asset-identity-normalization-report.json'
 $bindingFailurePath = Join-Path $root 'Data\Reports\p2-20a-asset-binding-failure-diagnostics-report.json'
 $bindingRecoveryPath = Join-Path $root 'Data\Reports\p2-20a-asset-binding-recovery-report.json'
@@ -172,6 +173,11 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.aux_package_context.evidence_revision -eq 'P2-20A.9' -and
         $Candidate.aux_package_context.path -eq
             'Data/Reports/p2-20a-aux-package-context-report.json' -and
+        $Candidate.aux_ecf_parser_parity.task_id -eq 'P2-20A' -and
+        $Candidate.aux_ecf_parser_parity.criterion_id -eq 'G2-06' -and
+        $Candidate.aux_ecf_parser_parity.evidence_revision -eq 'P2-20A.10' -and
+        $Candidate.aux_ecf_parser_parity.path -eq
+            'Data/Reports/p2-20a-aux-ecf-parser-parity-report.json' -and
         $Candidate.identity_normalization_safety.task_id -eq 'P2-20A' -and
         $Candidate.identity_normalization_safety.criterion_id -eq 'G2-06' -and
         $Candidate.identity_normalization_safety.evidence_revision -eq 'P2-20A.6' -and
@@ -318,6 +324,20 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'aux_package_context_consumer_clean_regions') -ne 134 -or
         (Get-Metric $g206 'aux_package_context_semantic_adapter_approved') -ne $false -or
         (Get-Metric $g206 'aux_package_context_terminal_instances') -ne 0 -or
+        (Get-Metric $g206 'aux_ecf_parser_parity_hash_bound') -ne $true -or
+        (Get-Metric $g206 'aux_ecf_historical_a5_parity_instances') -ne 61 -or
+        (Get-Metric $g206 'aux_ecf_historical_a5_difference_instances') -ne 3 -or
+        (Get-Metric $g206 'aux_ecf_historical_a5_pair_count_delta') -ne 4 -or
+        (Get-Metric $g206 'aux_ecf_a3_actual_parity_instances') -ne 51 -or
+        (Get-Metric $g206 'aux_ecf_a3_actual_difference_instances') -ne 13 -or
+        (Get-Metric $g206 'aux_ecf_correct_plain_filter_parity_instances') -ne 63 -or
+        (Get-Metric $g206 'aux_ecf_legacy_pair_records_absent_from_a3') -ne 4 -or
+        (Get-Metric $g206 'aux_ecf_reference_transform_port_differences') -ne 0 -or
+        (Get-Metric $g206 'aux_ecf_reference_pair_port_differences') -ne 0 -or
+        (Get-Metric $g206 'aux_ecf_legacy_runtime_executed') -ne $false -or
+        (Get-Metric $g206 'aux_ecf_runtime_binary_parity_claimed') -ne $false -or
+        (Get-Metric $g206 'aux_ecf_a3_outputs_modified') -ne $false -or
+        (Get-Metric $g206 'aux_ecf_semantic_imports_claimed') -ne 0 -or
         (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $true -or
         (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21293 -or
         (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 189 -or
@@ -380,7 +400,8 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
     $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxSemanticDiagnosticPath,
-    $auxPackageContextPath, $identityNormalizationPath, $bindingFailurePath, $bindingRecoveryPath,
+    $auxPackageContextPath, $auxEcfParserParityPath, $identityNormalizationPath,
+    $bindingFailurePath, $bindingRecoveryPath,
     $auxiliaryReportPath,
     $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
@@ -416,6 +437,8 @@ $descriptorDiagnostic = Get-Content -LiteralPath $descriptorDiagnosticPath -Raw 
 $auxSemanticDiagnostic = Get-Content -LiteralPath $auxSemanticDiagnosticPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $auxPackageContext = Get-Content -LiteralPath $auxPackageContextPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$auxEcfParserParity = Get-Content -LiteralPath $auxEcfParserParityPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
 $identityNormalization = Get-Content -LiteralPath $identityNormalizationPath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
@@ -539,6 +562,7 @@ $supplementalBinding = $report.input_bindings.supplemental
 $descriptorBinding = $report.input_bindings.descriptor_diagnostics
 $auxSemanticBinding = $report.input_bindings.aux_semantic_diagnostics
 $auxPackageContextBinding = $report.input_bindings.aux_package_context
+$auxEcfParserParityBinding = $report.input_bindings.aux_ecf_parser_parity
 $identityNormalizationBinding = $report.input_bindings.identity_normalization_safety
 $bindingFailureBinding = $report.input_bindings.binding_failure_diagnostics
 $bindingRecoveryBinding = $report.input_bindings.binding_recovery
@@ -614,6 +638,37 @@ $bindingsPassed = $bindingsPassed -and
     $auxPackageContextBinding.scope_complete -eq $auxPackageContext.scope_complete -and
     $auxPackageContextBinding.g2_06_satisfied -eq $auxPackageContext.g2_06_satisfied
 $aggregateLines.Add("AUX_PACKAGE_CONTEXT|$($auxPackageContextBinding.task_id)|$($auxPackageContextBinding.criterion_id)|$($auxPackageContextBinding.evidence_revision)|$($auxPackageContextBinding.path)|$($auxPackageContextBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and
+    @($auxEcfParserParityBinding.PSObject.Properties.Name).Count -eq 12 -and
+    @(Compare-Object @($auxEcfParserParityBinding.PSObject.Properties.Name) @(
+            'task_id', 'criterion_id', 'evidence_revision', 'path', 'sha256', 'result',
+            'review_execution_result', 'task_status', 'completion_criteria_satisfied',
+            'diagnostic_scope_complete', 'scope_complete', 'g2_06_satisfied')).Count -eq 0 -and
+    $auxEcfParserParityBinding.task_id -eq $policy.aux_ecf_parser_parity.task_id -and
+    $auxEcfParserParityBinding.criterion_id -eq $policy.aux_ecf_parser_parity.criterion_id -and
+    $auxEcfParserParityBinding.evidence_revision -eq
+        $policy.aux_ecf_parser_parity.evidence_revision -and
+    $auxEcfParserParityBinding.path -eq $policy.aux_ecf_parser_parity.path -and
+    $auxEcfParserParityBinding.sha256 -eq (Get-Sha256 $auxEcfParserParityPath) -and
+    $auxEcfParserParity.evidence_revision -eq 'P2-20A.10' -and
+    $auxEcfParserParity.result -eq 'BLOCKED' -and
+    $auxEcfParserParity.review_execution_result -eq 'PASS' -and
+    $auxEcfParserParity.task_status -eq 'BLOCKED' -and
+    $auxEcfParserParity.completion_criteria_satisfied -eq $false -and
+    $auxEcfParserParity.diagnostic_scope_complete -eq $true -and
+    $auxEcfParserParity.scope_complete -eq $false -and
+    $auxEcfParserParity.g2_06_satisfied -eq $false -and
+    $auxEcfParserParityBinding.result -eq $auxEcfParserParity.result -and
+    $auxEcfParserParityBinding.review_execution_result -eq
+        $auxEcfParserParity.review_execution_result -and
+    $auxEcfParserParityBinding.task_status -eq $auxEcfParserParity.task_status -and
+    $auxEcfParserParityBinding.completion_criteria_satisfied -eq
+        $auxEcfParserParity.completion_criteria_satisfied -and
+    $auxEcfParserParityBinding.diagnostic_scope_complete -eq
+        $auxEcfParserParity.diagnostic_scope_complete -and
+    $auxEcfParserParityBinding.scope_complete -eq $auxEcfParserParity.scope_complete -and
+    $auxEcfParserParityBinding.g2_06_satisfied -eq $auxEcfParserParity.g2_06_satisfied
+$aggregateLines.Add("AUX_ECF_PARSER_PARITY|$($auxEcfParserParityBinding.task_id)|$($auxEcfParserParityBinding.criterion_id)|$($auxEcfParserParityBinding.evidence_revision)|$($auxEcfParserParityBinding.path)|$($auxEcfParserParityBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $identityNormalizationBinding.task_id -eq $policy.identity_normalization_safety.task_id -and
     $identityNormalizationBinding.criterion_id -eq $policy.identity_normalization_safety.criterion_id -and
@@ -725,6 +780,20 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'aux_package_context_consumer_clean_regions') -eq 134 -and
     (Get-Metric $g206 'aux_package_context_semantic_adapter_approved') -eq $false -and
     (Get-Metric $g206 'aux_package_context_terminal_instances') -eq 0 -and
+    (Get-Metric $g206 'aux_ecf_parser_parity_hash_bound') -eq $true -and
+    (Get-Metric $g206 'aux_ecf_historical_a5_parity_instances') -eq 61 -and
+    (Get-Metric $g206 'aux_ecf_historical_a5_difference_instances') -eq 3 -and
+    (Get-Metric $g206 'aux_ecf_historical_a5_pair_count_delta') -eq 4 -and
+    (Get-Metric $g206 'aux_ecf_a3_actual_parity_instances') -eq 51 -and
+    (Get-Metric $g206 'aux_ecf_a3_actual_difference_instances') -eq 13 -and
+    (Get-Metric $g206 'aux_ecf_correct_plain_filter_parity_instances') -eq 63 -and
+    (Get-Metric $g206 'aux_ecf_legacy_pair_records_absent_from_a3') -eq 4 -and
+    (Get-Metric $g206 'aux_ecf_reference_transform_port_differences') -eq 0 -and
+    (Get-Metric $g206 'aux_ecf_reference_pair_port_differences') -eq 0 -and
+    (Get-Metric $g206 'aux_ecf_legacy_runtime_executed') -eq $false -and
+    (Get-Metric $g206 'aux_ecf_runtime_binary_parity_claimed') -eq $false -and
+    (Get-Metric $g206 'aux_ecf_a3_outputs_modified') -eq $false -and
+    (Get-Metric $g206 'aux_ecf_semantic_imports_claimed') -eq 0 -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolved_targets -eq 21293 -and
@@ -805,7 +874,10 @@ Add-A 'Both blocker records remain non-empty and mapped to their criteria' (
             [string]::IsNullOrWhiteSpace([string]$_.required_action)
         }).Count -eq 0 -and
     @(Compare-Object @($report.blockers.id) @('G2-BLK-06', 'G2-BLK-07')).Count -eq 0 -and
-    @($report.blockers | Where-Object { $_.reason -match '\babsent\b|\bmissing evidence\b' }).Count -eq 0 -and
+    @($report.blockers | Where-Object {
+            ([string]$_.reason -replace '4 legacy pair records absent from A\.3', '') -match
+                '\babsent\b|\bmissing evidence\b'
+        }).Count -eq 0 -and
     $report.blockers[0].reason -match 'measured core queues contain' -and
     $report.blockers[1].reason -match 'remain pending')
 $p215 = Get-Content -LiteralPath (Join-Path $root 'Data\Inventory\p2-15-conversion-routing.json') `
@@ -860,10 +932,11 @@ $negativeCases = & $negativeCasesHelperPath `
     -DescriptorDiagnosticPath $descriptorDiagnosticPath `
     -AuxSemanticDiagnosticPath $auxSemanticDiagnosticPath `
     -AuxPackageContextPath $auxPackageContextPath `
+    -AuxEcfParserParityPath $auxEcfParserParityPath `
     -IdentityNormalizationPath $identityNormalizationPath `
     -RemediationPath $remediationPath
 Add-A 'Policy supplemental scope FK migration approval drift and unknown-field negatives fail closed' (
-    $negativeCases.Count -eq 40 -and
+    $negativeCases.Count -eq 45 -and
     @($negativeCases.Values | Where-Object { $_ -ne $true }).Count -eq 0)
 $localCheck = $null
 if ($VerifyDerivedSources) {

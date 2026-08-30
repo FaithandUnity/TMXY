@@ -10,7 +10,7 @@
   "task_status": "BLOCKED",
   "completion_criteria_satisfied": false,
   "input_bindings": {
-    "aggregate_sha256": "9a5446f3ac8e95cd0d1313d821346a20284a895afb04401b1c203e8d083adef0",
+    "aggregate_sha256": "efcc7331760f7fb35391fcb209943131788de470c07fe34a56eae158beea4b45",
     "artifacts": [
       {
         "id": "P2-05",
@@ -144,8 +144,8 @@
       {
         "id": "g2-policy",
         "path": "Contracts/data-schema/g2-review-policy-v1.json",
-        "sha256": "cc000c149459814ef2034cc01026b6c35cd8714200b64c080ef2ce3063a55b2f",
-        "bytes": 7895
+        "sha256": "dd25c942e445f5413bdb44db390110aeb79b1be92d47b3eed6791e9bf854f626",
+        "bytes": 8089
       }
     ]
   },

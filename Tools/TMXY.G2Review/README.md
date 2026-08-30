@@ -6,7 +6,7 @@ network, Linux capabilities, or privilege escalation.
 
 `g2_review.py` assembles the gate report. `g2_evidence.py` independently binds
 the prerequisite, P2-20A supplemental/A.4/A.5/A.6/A.7/A.8/A.9 diagnostics,
-P2-20B remediation, and quality inputs, then recomputes G2-06 and G2-07 from
+the P2-20A.10 ECF parser-parity diagnostic, P2-20B remediation, and quality inputs, then recomputes G2-06 and G2-07 from
 their full machine evidence instead of trusting reported completion flags or
 machine suggestions.
 
@@ -19,6 +19,15 @@ incompatible candidate edges and performs no first-candidate selection.
 That technical disambiguation is not semantic approval. Approved adapters,
 approved roots, and terminal auxiliary instances remain zero; all 212 auxiliary
 instances remain nonterminal. G2 and P3 therefore remain blocked.
+
+P2-20A.10 preserves the immutable A.5 history (61/64 parity, three differences,
+and a net legacy-minus-A.3 pair-count delta of four) while separately binding
+the source-derived result. The frozen A.3 output differs from that reference in
+13 instances; on the same correct plaintext, the A.3 filter differs in one
+instance and omits four legacy pair records. This is candidate-only diagnostic
+evidence: no legacy runtime was executed, runtime-binary parity is not claimed,
+and no semantic import, adapter, consumer contract, root, or terminal state is
+approved.
 
 ```powershell
 pwsh -File Tools/TMXY.G2Review/New-G2Review.ps1

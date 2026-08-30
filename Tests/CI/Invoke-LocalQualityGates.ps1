@@ -181,6 +181,11 @@ $g2AuxSemanticDiagnostics = Invoke-JsonTest `
 $g2AuxPackageContext = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-G2AuxPackageContext.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$g2AuxEcfParserParityArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxEcfParserParityArguments.VerifyDerivedSources = $true }
+$g2AuxEcfParserParity = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxEcfParserParity.ps1') `
+    -Arguments $g2AuxEcfParserParityArguments
 $g2AssetDescriptorArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2AssetDescriptorArguments.VerifyDerivedSources = $true }
 $g2AssetDescriptorDiagnostics = Invoke-JsonTest `
@@ -368,6 +373,12 @@ $passed = [string]$repository.result -eq 'PASS' -and
     -not [bool]$g2AuxPackageContext.completion_criteria_satisfied -and
     -not [bool]$g2AuxPackageContext.g2_06_satisfied -and
     -not [bool]$g2AuxPackageContext.p3_authorized -and
+    [string]$g2AuxEcfParserParity.result -eq 'PASS' -and
+    [bool]$g2AuxEcfParserParity.contract_assertions_satisfied -and
+    [int]$g2AuxEcfParserParity.failures -eq 0 -and
+    -not [bool]$g2AuxEcfParserParity.completion_criteria_satisfied -and
+    -not [bool]$g2AuxEcfParserParity.g2_06_satisfied -and
+    -not [bool]$g2AuxEcfParserParity.p3_authorized -and
     [string]$g2AssetDescriptorDiagnostics.result -eq 'PASS' -and
     [bool]$g2AssetDescriptorDiagnostics.contract_assertions_satisfied -and
     -not [bool]$g2AssetDescriptorDiagnostics.completion_criteria_satisfied -and
@@ -469,6 +480,7 @@ $report = [pscustomobject][ordered]@{
     g2_auxiliary_config_references = $g2AuxConfigReferences
     g2_auxiliary_semantic_diagnostics = $g2AuxSemanticDiagnostics
     g2_auxiliary_package_context = $g2AuxPackageContext
+    g2_auxiliary_ecf_parser_parity = $g2AuxEcfParserParity
     g2_asset_descriptor_diagnostics = $g2AssetDescriptorDiagnostics
     g2_asset_identity_normalization = $g2IdentityNormalization
     g2_asset_binding_failure_diagnostics = $g2BindingFailureDiagnostics

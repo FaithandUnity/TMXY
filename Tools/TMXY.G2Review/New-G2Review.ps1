@@ -177,6 +177,37 @@ try {
         [int]$g206Metrics.aux_package_context_terminal_instances -ne 0) {
         throw 'P2-20 A.9 auxiliary package-context evidence drifted or crossed its authority boundary.'
     }
+    $auxEcfBinding = $report.input_bindings.aux_ecf_parser_parity
+    $auxEcfPath = Join-Path $root 'Data\Reports\p2-20a-aux-ecf-parser-parity-report.json'
+    if ($auxEcfBinding.task_id -ne 'P2-20A' -or
+        $auxEcfBinding.criterion_id -ne 'G2-06' -or
+        $auxEcfBinding.evidence_revision -ne 'P2-20A.10' -or
+        $auxEcfBinding.path -ne
+            'Data/Reports/p2-20a-aux-ecf-parser-parity-report.json' -or
+        $auxEcfBinding.sha256 -ne (Get-Sha256 $auxEcfPath) -or
+        $auxEcfBinding.result -ne 'BLOCKED' -or
+        $auxEcfBinding.review_execution_result -ne 'PASS' -or
+        $auxEcfBinding.task_status -ne 'BLOCKED' -or
+        $auxEcfBinding.completion_criteria_satisfied -ne $false -or
+        $auxEcfBinding.diagnostic_scope_complete -ne $true -or
+        $auxEcfBinding.scope_complete -ne $false -or
+        $auxEcfBinding.g2_06_satisfied -ne $false -or
+        $g206Metrics.aux_ecf_parser_parity_hash_bound -ne $true -or
+        [int]$g206Metrics.aux_ecf_historical_a5_parity_instances -ne 61 -or
+        [int]$g206Metrics.aux_ecf_historical_a5_difference_instances -ne 3 -or
+        [int]$g206Metrics.aux_ecf_historical_a5_pair_count_delta -ne 4 -or
+        [int]$g206Metrics.aux_ecf_a3_actual_parity_instances -ne 51 -or
+        [int]$g206Metrics.aux_ecf_a3_actual_difference_instances -ne 13 -or
+        [int]$g206Metrics.aux_ecf_correct_plain_filter_parity_instances -ne 63 -or
+        [int]$g206Metrics.aux_ecf_legacy_pair_records_absent_from_a3 -ne 4 -or
+        [int]$g206Metrics.aux_ecf_reference_transform_port_differences -ne 0 -or
+        [int]$g206Metrics.aux_ecf_reference_pair_port_differences -ne 0 -or
+        $g206Metrics.aux_ecf_legacy_runtime_executed -ne $false -or
+        $g206Metrics.aux_ecf_runtime_binary_parity_claimed -ne $false -or
+        $g206Metrics.aux_ecf_a3_outputs_modified -ne $false -or
+        [int]$g206Metrics.aux_ecf_semantic_imports_claimed -ne 0) {
+        throw 'P2-20 A.10 ECF parser-parity evidence drifted or crossed its authority boundary.'
+    }
     if ($g206Metrics.identity_normalization_hash_bound -ne $true -or
         [int]$g206Metrics.identity_case_fold_collision_targets -ne 13 -or
         [int]$g206Metrics.identity_case_fold_collision_edges -ne 26 -or

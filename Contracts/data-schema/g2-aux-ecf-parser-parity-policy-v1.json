@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.10",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "required_input_roles": [
+    "auxiliary_inventory",
+    "a3_report",
+    "a3_evidence",
+    "a3_parser_implementation",
+    "a5_report",
+    "a5_evidence",
+    "a5_policy",
+    "a5_support_implementation",
+    "a9_report",
+    "a9_evidence",
+    "asset_inventory",
+    "reference_closure",
+    "p2_05_transform_implementation",
+    "policy",
+    "schema",
+    "detail_schema",
+    "a3_detail",
+    "asset_catalog",
+    "reference_graph"
+  ],
+  "required_ignored_artifact_roles": [
+    "a3_detail",
+    "asset_catalog",
+    "reference_graph"
+  ],
+  "legacy_source_bindings": {
+    "configuration_platform_contract": "cf3fec8a4a753f1184999e168817257ca9112eb3619880085b7f8f329bc9a590",
+    "cstring_contract": "8c9b1a68411a66ca0285ee24bed96ff8f664aedc753770d4285e25b76ed136af",
+    "encrypted_config_reader": "f1bef9a8221f2e05bdf855d7038d71f9222792a349f8e29944651cbddf0c4042",
+    "line_and_pair_parser": "bab39ccce47907e06dbac0913c2edf2b43350a7efae867cb8b9c61fb56880314",
+    "reflection_config_loader": "3a4ba187ea1099706328c0b49084ad555fa3d2f68f16d8b8e7f0a53fa0b8fc57",
+    "string_contract": "e3f2856c105711d5a1f3e792c17b715419eab1a12571f8faa4b065ffcb8a37d0"
+  },
+  "implementation_baseline": {
+    "p2_05_transform_implementation_sha256": "0e4828ef6eda2f61e2b727ffe2fe2e13b26d668e8083594945cc7b589462797b",
+    "a3_parser_implementation_sha256": "cc90300cb0ffd05d71ac0ced00231ea680cd48c91817f1acb66a432eb75ab31f",
+    "a5_support_implementation_sha256": "01bc061ee355d5ece17e1630b35df27e82db2cc37b30735c19c4ac4aa14ad18e"
+  },
+  "expected_population": {
+    "instances": 64,
+    "source_bytes": 57011,
+    "length_remainders": {"mod0": 15, "mod1": 21, "mod2": 14, "mod3": 14},
+    "population_set_sha256": "4c4f307498889c10c5548e3b9b23c4ffb537f45af3385418a5b56a002e11e70a",
+    "mod3_set_sha256": "8f534fe41c9450a7b864308d60de2e6c73dc3347dee490c85e45b63f334b2150"
+  },
+  "expected_historical_a5": {
+    "instances": 64,
+    "parity_instances": 61,
+    "difference_instances": 3,
+    "legacy_pair_count_delta": 4,
+    "difference_set_sha256": "fdb734d7eaa0f03572738d15f4f6c59abbb2a8eeea767fd4ed7edffded262f8a"
+  },
+  "expected_source_derived": {
+    "reference_transform_port_parity_instances": 64,
+    "reference_transform_port_difference_instances": 0,
+    "transform_body_parity_instances": 51,
+    "transform_body_difference_instances": 13,
+    "transform_difference_set_sha256": "4e19dafaafbc02f6fb31b8509c8f3b7700017cafda7afb2dcd9edc8ae7d8328b",
+    "newline": {
+      "crlf_only_instances": 64,
+      "mixed_instances": 0,
+      "crlf_pairs": 2351,
+      "lone_lf": 0,
+      "lone_cr": 0,
+      "nul": 0,
+      "trailing_crlf_instances": 9,
+      "no_trailing_crlf_instances": 55
+    },
+    "a3_actual_vs_reference": {
+      "parity_instances": 51,
+      "difference_instances": 13,
+      "a3_pair_records": 2065,
+      "legacy_pair_records": 2069,
+      "shared_pair_records": 2052,
+      "a3_only_pair_records": 13,
+      "legacy_only_pair_records": 17
+    },
+    "correct_plain_a3_filter_vs_legacy": {
+      "parity_instances": 63,
+      "difference_instances": 1,
+      "a3_pair_records": 2065,
+      "legacy_pair_records": 2069,
+      "shared_pair_records": 2065,
+      "a3_only_pair_records": 0,
+      "legacy_only_pair_records": 4,
+      "difference_set_sha256": "1edb75d2f7fd841c2599691c23b7c259b4de4553c0814a53ccb73159f9e012e9"
+    },
+    "reference_pair_port": {
+      "parity_instances": 64,
+      "difference_instances": 0,
+      "reference_pair_records": 2069,
+      "independent_pair_records": 2069
+    }
+  },
+  "expected_ecf_candidate_projections": {
+    "frozen_a3": {
+      "pair_records": 2065,
+      "asset_occurrences": 1,
+      "asset_edges": 1,
+      "asset_unique": 1,
+      "asset_ambiguous": 0,
+      "package_occurrences": 252,
+      "package_edges": 371,
+      "package_unique": 211,
+      "package_ambiguous": 41,
+      "config_occurrences": 8,
+      "config_edges": 8,
+      "config_unique": 8,
+      "config_ambiguous": 0
+    },
+    "correct_transform_a3_filter": {
+      "pair_records": 2065,
+      "asset_occurrences": 1,
+      "asset_edges": 1,
+      "asset_unique": 1,
+      "asset_ambiguous": 0,
+      "package_occurrences": 253,
+      "package_edges": 372,
+      "package_unique": 212,
+      "package_ambiguous": 41,
+      "config_occurrences": 8,
+      "config_edges": 8,
+      "config_unique": 8,
+      "config_ambiguous": 0
+    },
+    "source_derived_legacy_pairs": {
+      "pair_records": 2069,
+      "asset_occurrences": 1,
+      "asset_edges": 1,
+      "asset_unique": 1,
+      "asset_ambiguous": 0,
+      "package_occurrences": 254,
+      "package_edges": 373,
+      "package_unique": 213,
+      "package_ambiguous": 41,
+      "config_occurrences": 8,
+      "config_edges": 8,
+      "config_unique": 8,
+      "config_ambiguous": 0
+    }
+  },
+  "expected_global_candidate_projections": {
+    "frozen_a3": {"scalar_positions": 39522, "nonempty_scalar_positions": 39498, "package_exact_occurrences": 638, "package_unique_occurrences": 218, "package_ambiguous_occurrences": 420, "package_candidate_edges": 1136, "runtime_ecf_resource_identities": 253, "predicted_detail_lines": 3907},
+    "correct_transform_a3_filter": {"scalar_positions": 39522, "nonempty_scalar_positions": 39498, "package_exact_occurrences": 639, "package_unique_occurrences": 219, "package_ambiguous_occurrences": 420, "package_candidate_edges": 1137, "runtime_ecf_resource_identities": 254, "predicted_detail_lines": 3908},
+    "source_derived_legacy_pairs": {"scalar_positions": 39526, "nonempty_scalar_positions": 39502, "package_exact_occurrences": 640, "package_unique_occurrences": 220, "package_ambiguous_occurrences": 420, "package_candidate_edges": 1138, "runtime_ecf_resource_identities": 255, "predicted_detail_lines": 3909}
+  },
+  "candidate_projection_controls": {
+    "candidate_only": true,
+    "frozen_indexes_only": true,
+    "selection_count": 0,
+    "approved_roots": 0,
+    "approved_consumer_contracts": 0,
+    "approved_semantic_adapters": 0,
+    "approved_no_reference_instances": 0,
+    "terminal_instances": 0,
+    "semantic_imports_claimed": 0
+  },
+  "authority_rules": {
+    "source_derived_port_is_runtime_execution": false,
+    "reference_port_parity_is_binary_parity": false,
+    "additional_pair_record_is_valid_assignment_approval": false,
+    "candidate_projection_is_semantic_reference": false,
+    "diagnostic_can_rewrite_a3_outputs": false,
+    "diagnostic_can_approve_consumer_contract": false,
+    "diagnostic_can_approve_adapter_or_no_ref": false,
+    "diagnostic_can_approve_root_or_terminal_state": false,
+    "this_evidence_can_approve_g2_or_p3": false
+  },
+  "negative_contracts": [
+    "THREE_BYTE_TAIL_IDENTITY_COMPLEMENT_REJECTED",
+    "TRANSFORM_LAYER_COLLAPSE_REJECTED",
+    "A5_HISTORY_REWRITE_REJECTED",
+    "REFERENCE_PORT_AS_RUNTIME_EXECUTION_REJECTED",
+    "REFERENCE_PORT_AS_BINARY_PARITY_REJECTED",
+    "COMMENT_MARKER_PAIR_AS_VALID_ASSIGNMENT_REJECTED",
+    "CANDIDATE_PROJECTION_AS_SEMANTIC_REFERENCE_REJECTED",
+    "A3_OUTPUT_REWRITE_REJECTED",
+    "ROOT_OR_APPROVAL_INJECTION_REJECTED",
+    "MISSING_OR_UNKNOWN_FIELD_REJECTED"
+  ],
+  "blockers": [
+    {"reason_code": "A3_ECF_TRANSFORM_PARITY_GAPS", "count": 13},
+    {"reason_code": "LEGACY_PAIR_RECORDS_ABSENT_FROM_A3", "count": 4},
+    {"reason_code": "LEGACY_RUNTIME_NOT_EXECUTED", "count": 1},
+    {"reason_code": "RUNTIME_BINARY_PARITY_UNPROVEN", "count": 1},
+    {"reason_code": "CONSUMER_CONTRACTS_UNAPPROVED", "count": 212}
+  ],
+  "g2_projection": {"criteria_total": 9, "satisfied": 7, "blocked": 2, "g2_decision": "BLOCKED"},
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-aux-ecf-parser-parity.jsonl",
+    "report_json": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.json",
+    "report_markdown": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.md",
+    "evidence": "Data/Inventory/p2-20a-aux-ecf-parser-parity.json",
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_payloads": false
+  }
+}

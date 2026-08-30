@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/table-schema-v1.schema.json",
+  "title": "TMXY three-layer table schema v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "logical_name",
+    "source",
+    "raw",
+    "normalized",
+    "ownership",
+    "key",
+    "columns",
+    "references",
+    "loading",
+    "old_to_new",
+    "evidence"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "logical_name": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["path", "build", "sha256", "encoding"],
+      "properties": {
+        "path": { "type": "string", "pattern": "\\.tbl$" },
+        "build": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "encoding": { "enum": ["ascii", "gbk", "utf8"] }
+      },
+      "additionalProperties": false
+    },
+    "raw": {
+      "type": "object",
+      "required": ["file", "sha256", "bytes", "fidelity"],
+      "properties": {
+        "file": { "const": "raw.csv" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "fidelity": { "const": "decoded-payload-byte-identical" }
+      },
+      "additionalProperties": true
+    },
+    "normalized": {
+      "type": "object",
+      "required": ["file", "format", "encoding", "row_count", "null_policy", "type_policy"],
+      "properties": {
+        "file": { "const": "normalized.jsonl" },
+        "format": { "const": "jsonl" },
+        "encoding": { "const": "utf-8-no-bom" },
+        "row_count": { "type": "integer", "minimum": 0 },
+        "null_policy": { "const": "empty-or-missing-source-field-to-null" },
+        "type_policy": { "const": "conservative-observed-value-inference-v1" }
+      },
+      "additionalProperties": true
+    },
+    "ownership": {
+      "type": "object",
+      "required": ["classification", "authoritative", "decision_task"],
+      "properties": {
+        "classification": { "const": "pending-p2-08" },
+        "authoritative": { "const": false },
+        "decision_task": { "const": "P2-08" }
+      },
+      "additionalProperties": true
+    },
+    "key": {
+      "type": "object",
+      "required": ["status", "normalized_columns", "authoritative", "decision_task"],
+      "properties": {
+        "status": { "const": "candidate-from-p2-04" },
+        "normalized_columns": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^c[0-9]{4}$" }
+        },
+        "authoritative": { "const": false },
+        "decision_task": { "const": "P2-07" }
+      },
+      "additionalProperties": true
+    },
+    "columns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "source_ordinal", "source_name", "type", "nullable",
+          "default", "enum", "range", "unit", "localization", "evidence_level"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^c[0-9]{4}$" },
+          "source_ordinal": { "type": "integer", "minimum": 1 },
+          "source_name": { "type": "string" },
+          "type": { "enum": ["boolean", "int64", "decimal", "string"] },
+          "nullable": { "type": "boolean" },
+          "default": { "type": "null" },
+          "enum": { "type": "array", "maxItems": 0 },
+          "range": { "type": "null" },
+          "unit": { "const": "unresolved" },
+          "localization": { "const": "unresolved" },
+          "evidence_level": { "const": "L1-observed" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "references": {
+      "type": "object",
+      "required": ["status", "foreign_keys", "decision_task"],
+      "properties": {
+        "status": { "const": "pending-p2-07" },
+        "foreign_keys": { "type": "array", "maxItems": 0 },
+        "decision_task": { "const": "P2-07" }
+      },
+      "additionalProperties": true
+    },
+    "loading": {
+      "type": "object",
+      "required": ["mode", "hot_reload", "release_group", "decision_task"],
+      "properties": {
+        "mode": { "const": "unresolved" },
+        "hot_reload": { "const": "unresolved" },
+        "release_group": { "const": "unresolved" },
+        "decision_task": { "const": "P2-08" }
+      },
+      "additionalProperties": true
+    },
+    "old_to_new": { "type": "array", "minItems": 1 },
+    "evidence": {
+      "type": "object",
+      "required": ["level", "semantic_authority", "next_tasks"],
+      "properties": {
+        "level": { "const": "L1-structural" },
+        "semantic_authority": { "const": false },
+        "next_tasks": {
+          "type": "array",
+          "contains": { "const": "P2-07" }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

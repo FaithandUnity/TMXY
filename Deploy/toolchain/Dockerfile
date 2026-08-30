@@ -74,6 +74,7 @@ COPY conan-requirements.txt /tmp/conan-requirements.txt
 RUN python3 -m venv /opt/conan \
     && /opt/conan/bin/pip install --disable-pip-version-check --no-cache-dir \
       --require-hashes --requirement /tmp/conan-requirements.txt \
+    && /opt/conan/bin/python -m pip uninstall --yes setuptools pip \
     && rm /tmp/conan-requirements.txt
 
 RUN groupadd --gid 10001 tmxy \

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/content-health-report-v1.schema.json",
+  "title": "TMXY P2-18 Content Health Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "source_build",
+    "result",
+    "scope",
+    "executive_summary",
+    "dimensions",
+    "risk_register",
+    "risk_summary",
+    "decisions",
+    "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "task_id": { "const": "P2-18" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "result": { "const": "PASS_WITH_OPEN_CONTENT_RISKS" },
+    "scope": { "$ref": "#/$defs/object" },
+    "executive_summary": { "$ref": "#/$defs/object" },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parsing",
+        "damage",
+        "unknown_or_opaque",
+        "references",
+        "conversion",
+        "effort",
+        "capacity"
+      ],
+      "properties": {
+        "parsing": { "$ref": "#/$defs/object" },
+        "damage": { "$ref": "#/$defs/object" },
+        "unknown_or_opaque": { "$ref": "#/$defs/object" },
+        "references": { "$ref": "#/$defs/object" },
+        "conversion": { "$ref": "#/$defs/object" },
+        "effort": { "$ref": "#/$defs/object" },
+        "capacity": { "$ref": "#/$defs/object" }
+      }
+    },
+    "risk_register": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/risk" }
+    },
+    "risk_summary": { "$ref": "#/$defs/object" },
+    "decisions": { "$ref": "#/$defs/object" },
+    "disclosure": { "$ref": "#/$defs/object" }
+  },
+  "$defs": {
+    "object": {
+      "type": "object"
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "state",
+        "dimension",
+        "count",
+        "unit",
+        "evidence_tasks",
+        "impact",
+        "control",
+        "next_task"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^CHR-[0-9]{3}$" },
+        "severity": { "enum": ["critical", "high", "medium", "low"] },
+        "state": { "enum": ["open", "controlled-open", "review-only"] },
+        "dimension": { "type": "string" },
+        "count": { "type": "integer", "minimum": 0 },
+        "unit": { "type": "string" },
+        "evidence_tasks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "pattern": "^P2-[0-9]{2}$" }
+        },
+        "impact": { "type": "string" },
+        "control": { "type": "string" },
+        "next_task": { "type": "string" }
+      }
+    }
+  }
+}

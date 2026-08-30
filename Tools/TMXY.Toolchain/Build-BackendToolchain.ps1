@@ -85,13 +85,28 @@ ninja --version
 conan --version
 '@
     $packageScript = 'dpkg-query -W -f=''${binary:Package}=${Version}\n'' | LC_ALL=C sort'
-    $pipScript = '/opt/conan/bin/pip freeze --all | LC_ALL=C sort'
+    $pythonInventoryScript = @'
+/opt/conan/bin/python - <<'PY'
+from importlib.metadata import distributions
+
+packages = sorted(
+    f"{distribution.metadata['Name']}=={distribution.version}"
+    for distribution in distributions()
+    if distribution.metadata.get('Name')
+)
+print("\n".join(packages))
+PY
+'@
     $tools = Invoke-DockerText -Arguments @('run', '--rm', '--network', 'none', $Image,
         'sh', '-ec', $toolsScript)
     $packages = Invoke-DockerText -Arguments @('run', '--rm', '--network', 'none', $Image,
         'sh', '-ec', $packageScript)
     $pythonPackages = Invoke-DockerText -Arguments @('run', '--rm', '--network', 'none',
-        $Image, 'sh', '-ec', $pipScript)
+        $Image, 'sh', '-ec', $pythonInventoryScript)
+    $pythonPackageLines = @($pythonPackages -split "`n" | Where-Object { $_.Trim() })
+    $bootstrapToolsRemoved = -not @($pythonPackageLines | Where-Object {
+        $_ -match '^(?i:pip|setuptools)=='
+    })
     $llvmPackages = @($packages -split "`n" | Where-Object {
         $_ -match '^(?:clang|clang-format|clang-tidy|lld)-21='
     })
@@ -119,7 +134,9 @@ conan --version
         installed_packages_sha256 = Get-TextSha256 -Text ($packages + "`n")
         llvm_packages = $llvmPackages
         llvm_revision_locked = $llvmLocked
+        python_package_count = $pythonPackageLines.Count
         python_packages_sha256 = Get-TextSha256 -Text ($pythonPackages + "`n")
+        python_bootstrap_tools_removed = $bootstrapToolsRemoved
     }
 }
 
@@ -249,6 +266,8 @@ $passed = $primary.os -eq 'linux' -and $primary.architecture -eq 'amd64' -and
     $primary.tool_versions -match 'cmake version 4\.4\.2' -and
     $primary.tool_versions -match '1\.11\.1' -and
     $primary.tool_versions -match 'Conan version 2\.31\.2' -and
+    $primary.python_bootstrap_tools_removed -and
+    $clean.python_bootstrap_tools_removed -and
     $primaryQualification.passed -and $cleanQualification.passed -and
     $comparison.base_layer_equal -and $comparison.tool_versions_equal -and
     $comparison.installed_packages_equal -and $comparison.python_packages_equal -and

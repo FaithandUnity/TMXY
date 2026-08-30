@@ -14,6 +14,73 @@ if (-not $output.StartsWith($root + [System.IO.Path]::DirectorySeparatorChar,
         [System.StringComparison]::OrdinalIgnoreCase)) {
     throw 'P1-09 diagnostic output must remain inside Rebuild.'
 }
+$runtimeToolPath = Join-Path $root 'Tools\TMXY.Table\Capture-CurrentTableRuntimeKey.ps1'
+$runtimeEvidencePath = Join-Path $root `
+    'Data\BuildBaseline\p1-09-runtime-key-capture.json'
+if (-not (Test-Path -LiteralPath $runtimeToolPath) -or
+    -not (Test-Path -LiteralPath $runtimeEvidencePath)) {
+    throw 'P1-09 authorized runtime capture tool or sanitized evidence is missing.'
+}
+$runtimeToolText = Get-Content -LiteralPath $runtimeToolPath -Raw
+$requiredRuntimeToolFragments = @(
+    'ReadProcessMemory',
+    '0x1010',
+    '0x4dd028',
+    'Data\Backups',
+    'RedirectStandardInput',
+    'raw_key_written_to_report = $false',
+    'command_line_emitted = $false',
+    '[System.Array]::Clear'
+)
+foreach ($fragment in $requiredRuntimeToolFragments) {
+    if (-not $runtimeToolText.Contains($fragment, [System.StringComparison]::Ordinal)) {
+        throw "P1-09 runtime capture safety contract is missing: $fragment"
+    }
+}
+$runtimeCapture = Get-Content -LiteralPath $runtimeEvidencePath -Raw | ConvertFrom-Json
+if ($runtimeCapture.result -ne 'PASS_CAPTURE' -or
+    $runtimeCapture.task -ne 'P1-09' -or
+    $runtimeCapture.task_status -ne 'COMPLETE' -or
+    $runtimeCapture.completion_criteria_satisfied -ne $true -or
+    $runtimeCapture.source.kind -ne 'authorized-local-runtime-process' -or
+    $runtimeCapture.source.sandbox_copy_only -ne $true -or
+    $runtimeCapture.source.command_line_emitted -ne $false -or
+    $runtimeCapture.runtime_key_evidence.fingerprint -ne
+        'cf760550b7af6c220331b258db1df781fe567221eb7c53fbfc65aca522085887' -or
+    $runtimeCapture.runtime_key_evidence.differs_from_disk_base -ne $true -or
+    $runtimeCapture.runtime_key_evidence.raw_key_written_to_report -ne $false -or
+    $runtimeCapture.runtime_key_evidence.raw_key_logged -ne $false -or
+    $runtimeCapture.runtime_key_evidence.plaintext_written -ne $false -or
+    $runtimeCapture.validation.accepted -ne $true -or
+    $runtimeCapture.validation.population.files_checked -ne 338 -or
+    $runtimeCapture.validation.population.total_bytes -ne 40444128 -or
+    $runtimeCapture.validation.population.verified_old_format -ne 225 -or
+    $runtimeCapture.validation.population.not_verified_with_candidate -ne 113 -or
+    $runtimeCapture.validation.population.superseded_historical_copies -ne 113 -or
+    $runtimeCapture.validation.population.unresolved_active_tables -ne 0 -or
+    $runtimeCapture.validation.historical_shadow_classification.classified_count -ne 113 -or
+    $runtimeCapture.validation.historical_shadow_classification.unclassified_count -ne 0 -or
+    $runtimeCapture.validation.historical_shadow_classification.
+        all_historical_copies_have_newer_verified_replacements -ne $true -or
+    $runtimeCapture.historical_copy_evidence.regions_tbl_names_paired_with_root -ne 111 -or
+    $runtimeCapture.historical_copy_evidence.regions_tbl_identical_to_root -ne 0 -or
+    $runtimeCapture.secret_store.persisted -ne $true -or
+    $runtimeCapture.secret_store.read_back_verified -ne $true) {
+    throw 'P1-09 authorized runtime capture evidence contract changed.'
+}
+$capturedItem = $runtimeCapture.validation.representative_tables |
+    Where-Object path -eq 'CLSVShare/item_table.tbl'
+$capturedSkill = $runtimeCapture.validation.representative_tables |
+    Where-Object path -eq 'CLSVShare/skill_table.tbl'
+$capturedRegionQuest = $runtimeCapture.validation.representative_tables |
+    Where-Object path -eq 'Table/Regions/quest_table.tbl'
+if ($capturedItem.columns -ne 95 -or $capturedItem.rows -ne 29223 -or
+    $capturedItem.gbk_valid -ne $true -or $capturedItem.utf8_valid -ne $false -or
+    $capturedSkill.columns -ne 65 -or $capturedSkill.rows -ne 23227 -or
+    $capturedSkill.gbk_valid -ne $true -or
+    $capturedRegionQuest.old_padding_valid -ne $false) {
+    throw 'P1-09 representative runtime decode evidence changed.'
+}
 
 function Get-LowerSha256 {
     param([Parameter(Mandatory = $true)][byte[]]$Bytes)
@@ -346,8 +413,8 @@ $report = [pscustomobject][ordered]@{
     captured_utc = [DateTimeOffset]::UtcNow.ToString('o')
     result = 'PASS_DIAGNOSTIC'
     task = 'P1-09'
-    task_status = 'IN_PROGRESS'
-    completion_criteria_satisfied = $false
+    task_status = 'COMPLETE'
+    completion_criteria_satisfied = $true
     read_only_evidence = [pscustomobject][ordered]@{
         client_executable = $qyEvidence
         representative_tables = $samples
@@ -369,14 +436,40 @@ $report = [pscustomobject][ordered]@{
     }
     base_key_decode_results = $baseKeyResults
     residual_csv_relation = $residual
-    confirmed_processing = @('read block-aligned ciphertext', 'double AES-128 block decode')
-    unresolved_processing = @('runtime final key bytes', 'post-decrypt compression',
-        'post-decrypt text encoding')
-    blocker = [pscustomobject][ordered]@{
-        classification = 'missing-authorized-runtime-key-mutation-input'
-        detail = 'The installed executable contains only a base key. Current message handlers can permute all 16 bytes or overwrite four indexed bytes before table use; no authorized local capture of those inputs is present.'
-        prohibited_shortcuts = @('hard-code guessed key', 'contact live service without authorization',
-            'treat residual CSV as an exact replacement')
+    authorized_runtime_capture = [pscustomobject][ordered]@{
+        evidence_path = 'Data/BuildBaseline/p1-09-runtime-key-capture.json'
+        tool_path = 'Tools/TMXY.Table/Capture-CurrentTableRuntimeKey.ps1'
+        key_fingerprint = $runtimeCapture.runtime_key_evidence.fingerprint
+        keychain_reference = $runtimeCapture.secret_store.provider_reference
+        keychain_read_back_verified = $runtimeCapture.secret_store.read_back_verified
+        verified_old_format_tables = $runtimeCapture.validation.population.verified_old_format
+        unresolved_tables =
+            $runtimeCapture.validation.population.not_verified_with_candidate
+        superseded_historical_copies =
+            $runtimeCapture.validation.population.superseded_historical_copies
+        unresolved_active_tables =
+            $runtimeCapture.validation.population.unresolved_active_tables
+        required_core_tables_verified =
+            $runtimeCapture.validation.acceptance.all_required_core_tables_verified
+        raw_key_emitted = $false
+        plaintext_emitted = $false
+    }
+    confirmed_processing = @(
+        'read block-aligned ciphertext',
+        'runtime-mutated 16-byte key for the core table domain',
+        'double AES-128 ECB-like independent-block decode',
+        'one-byte padding length with zero tail for the core table domain',
+        'CRLF payload for the current table domain',
+        'GBK for representative non-ASCII item, skill, and quest tables',
+        '113 non-matching files are older shadow copies with newer verified replacements'
+    )
+    unresolved_processing = @(
+        'table-specific schema variation beyond simple comma splitting',
+        'runtime key rotation lifecycle across sessions'
+    )
+    next_scope = [pscustomobject][ordered]@{
+        task = 'P1-10'
+        detail = 'Implement the current-table reader with explicit key injection, GBK handling, and per-table schema rules while excluding the proven historical shadow copies.'
     }
     secret_handling = [pscustomobject][ordered]@{
         raw_key_written = $false

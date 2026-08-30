@@ -1,0 +1,225 @@
+{
+  "schema_version": 2,
+  "workflow_version": 2,
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20B",
+  "result": "BLOCKED",
+  "generation_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "gate_criterion": "G2-07",
+  "g2_07_satisfied": false,
+  "input": {
+    "aggregate_sha256": "097a4c763cd52e17a15e452be4ac7af4028020c6382c08cb68e38e4a6cb94b0b",
+    "evidence": [
+      {
+        "task_id": "P2-09",
+        "path": "Data/Inventory/p2-09-legacy-current-diff.json",
+        "sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-10",
+        "path": "Data/Inventory/p2-10-canonical-id-map.json",
+        "sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-11",
+        "path": "Data/Inventory/p2-11-id-limit-audit.json",
+        "sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-17",
+        "path": "Data/Inventory/p2-17-protocol-codegen.json",
+        "sha256": "23cd1f824a3fab1c203a648df8224de6257bea96dc4aa431fcc063c74aead222",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      },
+      {
+        "task_id": "P2-18",
+        "path": "Data/Inventory/p2-18-content-health.json",
+        "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1",
+        "result": "PASS",
+        "task_status": "COMPLETE",
+        "completion_criteria_satisfied": true
+      }
+    ],
+    "derived_sources": [
+      {
+        "artifact_id": "G2_POLICY",
+        "sha256": "52094feeb6dc31633ac88b8e7c09c7651c3a5daa85a2787f71b5ff69b1bd59fc",
+        "records": 9
+      },
+      {
+        "artifact_id": "CORE_REGISTRY",
+        "sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+        "records": 12
+      },
+      {
+        "artifact_id": "P2_09_TABLE_DIFF_REPORT",
+        "sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667",
+        "records": 52
+      },
+      {
+        "artifact_id": "P2_11_ID_LIMIT_REPORT",
+        "sha256": "9839296bc39b0a40d65c78b93f76c4ee703a9a3ab939e5ddc5d19f32b48ced9e",
+        "records": 1283
+      },
+      {
+        "artifact_id": "LEGACY_SNAPSHOT_MANIFEST",
+        "sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+        "records": 52
+      },
+      {
+        "artifact_id": "AUTHORITY_LEDGER",
+        "sha256": "b1787699449e7e1f4e8f1f29d75e82cf845bfce0d254b4a572819ee4dbad369b",
+        "records": 0
+      }
+    ]
+  },
+  "registry": {
+    "path": "Data/Governance/p2-g2-migration-decisions.json",
+    "tracked": true,
+    "bytes": 2403442,
+    "lines": 75297,
+    "sha256": "1b66cfe1ca7c63c26d7df2af4dd113abc81228309a45a506d4ea26c38536b42a"
+  },
+  "review_packets": {
+    "path": "Data/Governance/p2-g2-migration-review-packets.json",
+    "tracked": true,
+    "bytes": 272114,
+    "lines": 6439,
+    "sha256": "9e8e6ecf67f8b47213ae633396a2ef502daa916099ffecdc15ef2cbf74b56d8d",
+    "packet_count": 39,
+    "member_count": 1359,
+    "aggregate_membership_sha256": "d6d3f247e01940c80aed8c56f6f1d6345897f22af3adb5115eac46d8bb19e48e",
+    "counts_as_decision": false
+  },
+  "report": {
+    "path": "Data/Reports/p2-20b-migration-decisions-report.md",
+    "tracked": true,
+    "bytes": 1765,
+    "lines": 38,
+    "sha256": "59b18d6d838852d567a79d34c4b7b1c59cb53053edb06065ef00cc2cfdd0211b"
+  },
+  "summary": {
+    "expected_units": 1359,
+    "enumerated_units": 1359,
+    "pending": 1359,
+    "decided": 0,
+    "approved": 0,
+    "rejected": 0,
+    "verified": 0,
+    "approval_count": 0,
+    "superseded_revisions": 0,
+    "by_subject_kind": {
+      "schema_table": 52,
+      "schema_reference": 12,
+      "canonical_id_domain": 12,
+      "id_component": 16,
+      "fixed_limit_signal": 1267
+    }
+  },
+  "completeness": {
+    "coverage_complete": true,
+    "decisions_complete": false,
+    "approvals_complete": false,
+    "verification_complete": false,
+    "missing": 0,
+    "duplicates": 0,
+    "orphans": 0,
+    "reference_membership_enumerated": true,
+    "all_inputs_hash_bound": true,
+    "review_packets_complete": true,
+    "failure_reasons": [
+      "DECISIONS_PENDING",
+      "APPROVALS_ABSENT",
+      "VERIFICATION_INCOMPLETE"
+    ]
+  },
+  "hard_invariants": {
+    "numeric_identity_narrowing_forbidden": true,
+    "string_identity_numeric_conversion_forbidden": true,
+    "observed_mode_default_forbidden": true,
+    "tombstone_reuse_without_approval_forbidden": true,
+    "automatic_renumbering_without_approved_remap_forbidden": true,
+    "fixed_limit_copy_without_classification_forbidden": true
+  },
+  "authority_boundaries": {
+    "machine_generated": true,
+    "machine_can_approve": false,
+    "authority_ledger_records": 0,
+    "approval_authority_present": false,
+    "g2_approved": false,
+    "p3_authorized": false,
+    "release_authority": false
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-migration-decision-policy-v2.json",
+    "policy_sha256": "0dd1e0becd002d845986d2665a807424ba6a521c6d9374c399a6c995e5377c40",
+    "schema": "Contracts/data-schema/g2-migration-decision-registry-v2.schema.json",
+    "schema_sha256": "d7e14655546bed5fc4451fb76d0ad5c5aab4d3b15a641f926b8861b24d8964d0",
+    "authority_schema": "Contracts/data-schema/g2-migration-decision-authority-v2.schema.json",
+    "authority_schema_sha256": "7538a4d635935c2cf8ad729086e3fc3564772e4c3015ebf2235e011d39cec602",
+    "review_packet_schema": "Contracts/data-schema/g2-migration-review-packets-v2.schema.json",
+    "review_packet_schema_sha256": "649b9b2c390e8320b21d6e567a86f859efe2ed63349e1f5644802ad1e9c9562f",
+    "authority_ledger": "Data/Governance/p2-g2-migration-decision-authority-v2.json",
+    "authority_ledger_sha256": "b1787699449e7e1f4e8f1f29d75e82cf845bfce0d254b4a572819ee4dbad369b"
+  },
+  "implementation": {
+    "source_files": 5,
+    "source_sha256": "a80a8bf8f53ff884a75ecd477e189e9e444343f4e0563d57b934e69240bf4447",
+    "generator": "Tools/TMXY.G2MigrationDecisions/migration_decisions.py",
+    "generator_sha256": "7555b8566b308ab0f7a3c3fcf6bda21b02412ffcc66f69c17958e916bc42706f",
+    "wrapper": "Tools/TMXY.G2MigrationDecisions/New-G2MigrationDecisions.ps1",
+    "wrapper_sha256": "bd9a4aa7bfb7cb930e153a81c2c18d8a4f5d3dc7a3d441e373a25de98eb1c62d",
+    "self_test_assertions": 23,
+    "workflow_negative_cases": {
+      "action_rejected": true,
+      "approval_digest_rejected": true,
+      "compatibility_rejected": true,
+      "digest_rejected": true,
+      "plan_rejected": true,
+      "rejected_without_approved_replacement_rejected": true,
+      "role_rejected": true,
+      "supersession_binding_rejected": true,
+      "verification_digest_rejected": true
+    }
+  },
+  "disclosure": {
+    "table_or_field_names": false,
+    "legacy_source_paths": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "matched_literal_values": false
+  },
+  "reproduction": {
+    "repository_mount": "read-only",
+    "legacy_mount": "read-only-authorized-input",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20B-owner-decisions",
+      "P2-20B-approved-verification",
+      "P2-20-g2-rerun"
+    ],
+    "detail": "Review 39 anonymous packets while preserving all 1359 members; import only real owner decisions and independently verified digest-bound authority. Machine suggestions and packet grouping do not close G2-07."
+  }
+}

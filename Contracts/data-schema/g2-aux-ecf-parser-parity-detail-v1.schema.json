@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tmxy:g2-aux-ecf-parser-parity-detail:v1",
+  "title": "TMXY P2-20A.10 anonymous ECF parser-parity detail",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "instance_id",
+    "source_bytes",
+    "length_remainder",
+    "transform_ports_equal",
+    "current_transform_matches_reference",
+    "current_a3_pairs_match_reference",
+    "correct_plain_a3_filter_matches_reference",
+    "reference_pair_ports_equal",
+    "current_a3_pair_count",
+    "correct_plain_a3_pair_count",
+    "legacy_pair_count",
+    "newline_profile",
+    "candidate_projections",
+    "proof_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "instance_id": {"$ref": "#/$defs/sha256"},
+    "source_bytes": {"type": "integer", "minimum": 0},
+    "length_remainder": {"type": "integer", "minimum": 0, "maximum": 3},
+    "transform_ports_equal": {"const": true},
+    "current_transform_matches_reference": {"type": "boolean"},
+    "current_a3_pairs_match_reference": {"type": "boolean"},
+    "correct_plain_a3_filter_matches_reference": {"type": "boolean"},
+    "reference_pair_ports_equal": {"const": true},
+    "current_a3_pair_count": {"type": "integer", "minimum": 0},
+    "correct_plain_a3_pair_count": {"type": "integer", "minimum": 0},
+    "legacy_pair_count": {"type": "integer", "minimum": 0},
+    "newline_profile": {"const": "CRLF_ONLY"},
+    "candidate_projections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frozen_a3", "correct_transform_a3_filter", "source_derived_legacy_pairs"],
+      "properties": {
+        "frozen_a3": {"$ref": "#/$defs/projection"},
+        "correct_transform_a3_filter": {"$ref": "#/$defs/projection"},
+        "source_derived_legacy_pairs": {"$ref": "#/$defs/projection"}
+      }
+    },
+    "proof_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "projection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pair_records", "nonempty_pair_values",
+        "asset_occurrences", "asset_edges", "asset_unique", "asset_ambiguous",
+        "package_occurrences", "package_edges", "package_unique", "package_ambiguous",
+        "config_occurrences", "config_edges", "config_unique", "config_ambiguous",
+        "candidate_multiset_sha256"
+      ],
+      "properties": {
+        "pair_records": {"type": "integer", "minimum": 0},
+        "nonempty_pair_values": {"type": "integer", "minimum": 0},
+        "asset_occurrences": {"type": "integer", "minimum": 0},
+        "asset_edges": {"type": "integer", "minimum": 0},
+        "asset_unique": {"type": "integer", "minimum": 0},
+        "asset_ambiguous": {"type": "integer", "minimum": 0},
+        "package_occurrences": {"type": "integer", "minimum": 0},
+        "package_edges": {"type": "integer", "minimum": 0},
+        "package_unique": {"type": "integer", "minimum": 0},
+        "package_ambiguous": {"type": "integer", "minimum": 0},
+        "config_occurrences": {"type": "integer", "minimum": 0},
+        "config_edges": {"type": "integer", "minimum": 0},
+        "config_unique": {"type": "integer", "minimum": 0},
+        "config_ambiguous": {"type": "integer", "minimum": 0},
+        "candidate_multiset_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

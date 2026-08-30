@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.3",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "status": "BLOCKED",
+  "scope_definition": "monotonic-union-all-declared-roots-plus-all-core-resource-fields",
+  "scope_complete": false,
+  "auxiliary_config_reference_scope_complete": false,
+  "auxiliary_reference_evidence_hash_bound": true,
+  "auxiliary_file_instances": 212,
+  "auxiliary_candidate_only": 171,
+  "auxiliary_editor_undecided": 35,
+  "auxiliary_malformed_blocked": 6,
+  "auxiliary_approved_roots": 0,
+  "asset_binding_resolution_explicit": true,
+  "asset_binding_resolved_targets": 21299,
+  "asset_binding_ambiguous_targets": 189,
+  "asset_binding_unresolved_targets": 6,
+  "asset_binding_unknown_targets": 0,
+  "asset_binding_workset_sha256": "fb21ea21f3a84f5423940d7adf25760c8e864cd8bbfe442ac56c98abb8d74f52",
+  "conditional_required_missing": 29,
+  "conditional_required_member_set_exported": true,
+  "conditional_required_member_set_count": 29,
+  "conditional_required_member_set_sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d",
+  "logical_gap_count": 21024,
+  "report": {
+    "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+    "sha256": "e93d4ad5feba31092cc93f7525cef0bedf97c15b16a288ebf21a9a361aa88104"
+  },
+  "decisions": {
+    "first_candidate_selection_authorized": false,
+    "core_foreign_key_zero_substitution_authorized": false,
+    "conditional_required_edge_absence_substitution_authorized": false,
+    "outcome_based_scope_narrowing_authorized": false,
+    "automatic_repair_or_delete_authorized": false,
+    "g2_approved": false,
+    "p3_authorized": false
+  }
+}

@@ -115,6 +115,9 @@ struct Expectation final
         {
             return clip.descriptor.frame_delta_seconds == 0.033333335F &&
                    clip.descriptor.skeleton_root_name_bytes == "Bip01" &&
+                   clip.observed_frame_count == clip.descriptor.frame_count &&
+                   clip.effective_frame_count == clip.descriptor.frame_count &&
+                   clip.frame_count_basis == tmxy::animation::FrameCountBasis::package_descriptor &&
                    clip.tracks.size() == clip.track_count &&
                    std::ranges::all_of(clip.tracks,
                                        [&clip](const tmxy::animation::AnimationTrack& track)
@@ -187,7 +190,7 @@ int main(const int argument_count, const char* const arguments[])
                                         .tracks = 21'702,
                                         .moving = 261,
                                         .notify_references = 80,
-                                        .json_fingerprint = 5'953'296'718'757'516'148ULL,
+                                        .json_fingerprint = 4'099'007'401'523'946'227ULL,
                                         .csv_fingerprint = 14'896'642'631'070'048'600ULL,
                                         .first_object = "skchar.Boy01_Action",
                                         .last_object = "skchar.Boy01_XL_zhaojia"});
@@ -203,7 +206,7 @@ int main(const int argument_count, const char* const arguments[])
                                          .tracks = 21'600,
                                          .moving = 254,
                                          .notify_references = 80,
-                                         .json_fingerprint = 10'011'155'713'230'011'151ULL,
+                                         .json_fingerprint = 12'404'515'761'744'622'130ULL,
                                          .csv_fingerprint = 12'537'756'524'220'434'413ULL,
                                          .first_object = "skchar.Girl01_Action",
                                          .last_object = "skchar.Girl01_XL_zhaojia"});

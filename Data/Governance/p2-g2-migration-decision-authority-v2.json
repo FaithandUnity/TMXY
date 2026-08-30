@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "workflow_version": 2,
+  "task_id": "P2-20B",
+  "source_build": "qy-3.0.0.413",
+  "authority_mode": "EXTERNAL_VERIFIED_RECORDS_ONLY",
+  "machine_can_assert_authority": false,
+  "records": [],
+  "disclosure": {
+    "anonymous_subjects_only": true,
+    "private_source_paths": false,
+    "primary_keys": false,
+    "observed_extrema": false,
+    "raw_rows": false,
+    "legacy_source_lines": false
+  }
+}

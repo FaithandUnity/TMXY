@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-09",
+  "legacy_snapshot_id": "legacy-devdoc-decrypted-csv-20120318",
+  "legacy_build": "unknown-not-inferred",
+  "current_build": "qy-3.0.0.413",
+  "table_pairing": "ASCII-case-insensitive CSV basename to active CLSVShare table",
+  "encoding_policy": ["strict UTF-8", "strict GBK fallback"],
+  "row_diff": "multiset of canonical UTF-8 JSON row arrays",
+  "column_identity": "ASCII-case-insensitive name plus duplicate occurrence ordinal",
+  "type_inference": ["empty", "int64", "decimal", "string"],
+  "default_candidate": "observed modal value hash and support only; not an authoritative schema default",
+  "core_key_diff": "P2-07 primary-key columns where present in both snapshots",
+  "reference_diff": "P2-07 foreign-key rules where source and target tables and columns exist in legacy snapshot",
+  "completion_policy": {
+    "requires_every_legacy_csv_paired_or_explicitly_unpaired": true,
+    "requires_schema_type_mode_and_row_diffs": true,
+    "requires_core_primary_key_diff_when_rule_applies": true,
+    "requires_reference_diff_when_rule_applies": true,
+    "forbids_guessing_legacy_build": true,
+    "forbids_treating_observed_mode_as_authoritative_default": true,
+    "forbids_copying_legacy_rows_to_tracked_evidence": true
+  },
+  "output_policy": {
+    "full_diff_tracked_in_git": false,
+    "tracked_evidence_contains_headers": false,
+    "tracked_evidence_contains_row_values": false,
+    "tracked_evidence_contains_primary_keys": false,
+    "legacy_payloads_copied": false
+  }
+}

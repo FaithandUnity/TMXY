@@ -1,0 +1,475 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.11",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "input_bindings": {
+    "aggregate_sha256": "c4b4d8c693ca3a4bd5620d481a182d5b8f219ae1c9daf2d28a83bd3e8e839b2e",
+    "entries": [
+      {
+        "role": "auxiliary_inventory",
+        "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff"
+      },
+      {
+        "role": "a3_report",
+        "sha256": "7486d70b346c8acd1695179dca06b66453850927d8f8cdc4773480ac636fbe45"
+      },
+      {
+        "role": "a3_evidence",
+        "sha256": "b9daba01ead89b13c2607044bbcc8c44c9ba23caa4396266ab95399630bc536a"
+      },
+      {
+        "role": "a5_report",
+        "sha256": "bdd8802c9f6c5304bdab3183f606923005145c87daf5f4f3208edf14b4cc7cb9"
+      },
+      {
+        "role": "a5_evidence",
+        "sha256": "53bcd36a1090618a6d3744250247382c304bbcad93a7e3fbb1ed6a7bf58442df"
+      },
+      {
+        "role": "p2_05_transform_implementation",
+        "sha256": "0e4828ef6eda2f61e2b727ffe2fe2e13b26d668e8083594945cc7b589462797b"
+      },
+      {
+        "role": "a3_extract_implementation",
+        "sha256": "4482ae73ec1dae12b8e5ea3782bcc4286f1bea21ff230bb96c0e6c2c8186c238"
+      },
+      {
+        "role": "a5_diagnostic_implementation",
+        "sha256": "2cf825f0105cc720915d6c3420cc46343f4aa1fd91233f907a7ad889525a0d16"
+      },
+      {
+        "role": "policy",
+        "sha256": "edc511c501a71a51dce526d61e2eeaad20e841bc485b653abca40997577b8759"
+      },
+      {
+        "role": "schema",
+        "sha256": "c4f3e1f7c368dc1e06be8fd2f337d8a8072cdfdf76f38d815de4c9523bb89fdc"
+      },
+      {
+        "role": "detail_schema",
+        "sha256": "72e4ff6282781819dfc82a1ef1cbaa4828976598c9137ba1c3d1ca523d7b973b"
+      },
+      {
+        "role": "generator",
+        "sha256": "8c60fed4372c62ac86685c3026a3d5f47919a7a663dce2b0e40ded58151bf392"
+      },
+      {
+        "role": "support",
+        "sha256": "decb79436b3b5137e7833d1d832dd9cf542c7a5cb3832a5d040a045219721356"
+      },
+      {
+        "role": "tinyxml_probe",
+        "sha256": "4b3e3910c719291ccbaa9b13549cd79474a2098f593e76ec8e43276070cf8e3e"
+      },
+      {
+        "role": "evidence_helper",
+        "sha256": "14b95975f4324d25a917265a361b37e85bf63ae832c0ee14262c2a612c4d7686"
+      },
+      {
+        "role": "wrapper",
+        "sha256": "8619aae715d008d5fe2ad5b05a6d5f3387195e0fb8419a04864c2a566eb11538"
+      },
+      {
+        "role": "toolchain_lock",
+        "sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b"
+      }
+    ],
+    "legacy_sources": [
+      {
+        "role": "client_tinyxml_header",
+        "sha256": "f8d69dc35242d9ba7132203f14122b29fb7b95798f35fc29dc4d63abfcad6d98"
+      },
+      {
+        "role": "client_tinyxml_loader",
+        "sha256": "30630b58cf6e4c984fa1a692b6daadf95caeb5af444ba729f57a45c89af378fc"
+      },
+      {
+        "role": "client_tinyxml_parser",
+        "sha256": "c586adaee04634fa0d8f4063f83a7f6fe510cfb70d95401724b692676bc9859b"
+      },
+      {
+        "role": "client_tinyxml_error",
+        "sha256": "d74ff9be4a320f0933d399799220d2b2f5ff0acc9c40c951aa5694b92b9871ef"
+      },
+      {
+        "role": "client_tinystr_implementation",
+        "sha256": "5c69220764ca7575abf59e062a1bf40dbc94aa20ab1989a92e5d5d0afbf86052"
+      },
+      {
+        "role": "client_tinystr_header",
+        "sha256": "9045654e46ea0f1f0fae25b89768e66723fab27754baa6090df4febd732c0412"
+      },
+      {
+        "role": "server_tinyxml_header",
+        "sha256": "e4ea963af819f872750c278912c51eb0a313895256cfde7774d3a250ce56af44"
+      },
+      {
+        "role": "server_tinyxml_loader",
+        "sha256": "bd6b363b0b43c9cb059831e04978879f9d8758197e63dd9e0562406c5db96246"
+      },
+      {
+        "role": "server_tinyxml_parser",
+        "sha256": "c586adaee04634fa0d8f4063f83a7f6fe510cfb70d95401724b692676bc9859b"
+      },
+      {
+        "role": "server_tinyxml_error",
+        "sha256": "d74ff9be4a320f0933d399799220d2b2f5ff0acc9c40c951aa5694b92b9871ef"
+      },
+      {
+        "role": "server_tinystr_implementation",
+        "sha256": "5c69220764ca7575abf59e062a1bf40dbc94aa20ab1989a92e5d5d0afbf86052"
+      },
+      {
+        "role": "server_tinystr_header",
+        "sha256": "9045654e46ea0f1f0fae25b89768e66723fab27754baa6090df4febd732c0412"
+      },
+      {
+        "role": "client_xml_load_macro",
+        "sha256": "d1478f1e2d20030cee88b11dddc62828bfa426ef58512ef49c4b17e346f7e060"
+      },
+      {
+        "role": "client_region_consumer",
+        "sha256": "a1e5d33643d633234b2eeb07c6dc9358814d9802d4a9f43c959c1a4b155f1853"
+      },
+      {
+        "role": "client_file_reader",
+        "sha256": "2541318310e369536f7c13ef1f1486dd1456b57349d703bd2b8fb4d02741ac69"
+      },
+      {
+        "role": "client_array_contract",
+        "sha256": "831485b5d3392f57c6cb9a832362eb4566111e03b3b9de8225e6f0a09788617a"
+      },
+      {
+        "role": "server_box_consumer",
+        "sha256": "1c01172da74aefd6ff602c4192e984c3a56b3d4076f80fbb84df526e995bc0e6"
+      },
+      {
+        "role": "server_character_consumer",
+        "sha256": "79b57221f3d3a976700323e447ffad441b23362e57f87fb804698619ee77cb84"
+      },
+      {
+        "role": "server_guild_consumer",
+        "sha256": "5b33d8a95c5bbec41e6545c1a708f475f38df4b27839ee0ffbddb72e7e3544c8"
+      },
+      {
+        "role": "server_profession_consumer",
+        "sha256": "559466f5bc5deb58776b0d8df4e3b0e4273ff96b658c73d1bff685cac570a9b5"
+      }
+    ]
+  },
+  "population": {
+    "instances": 6,
+    "unique_contents": 6,
+    "source_bytes": 1082028,
+    "gbk_instances": 6,
+    "crlf_only_instances": 6,
+    "crlf_pairs": 17981,
+    "lone_lf": 0,
+    "lone_cr": 0,
+    "nul_instances": 0,
+    "doctype_instances": 0,
+    "entity_instances": 0,
+    "instance_set_sha256": "effc19aa0fa8ba9cf3ac534aca8bb3e9f07999e363eee5a8c2e7f288df5ee802",
+    "content_set_sha256": "17e163f68108f9c471734e7b105415cac5aa75fbd0bd22a3be7364ce54a36268"
+  },
+  "p2_05_strict": {
+    "evidence_revision": "P2-05",
+    "frozen_baseline": true,
+    "document_rejections": 6,
+    "fragment_rejections": 6,
+    "classifications": {
+      "malformed-attribute-spacing": 3,
+      "invalid-comment": 1,
+      "invalid-attribute-character": 1,
+      "unclosed-element": 1
+    },
+    "error_distribution_sha256": "ec6debb4027aec850b8a2c5ae312df9d19ece932e1f819006430a761ae566b0c",
+    "strict_baseline_sha256": "120b52f61c97c471602658e762473379f6dcb2c130e63fe888722d81df635c69"
+  },
+  "independent_elementtree": {
+    "implementation": "python-xml.etree.ElementTree",
+    "decode_boundary": "strict-gbk-to-unicode",
+    "dtd_enabled": false,
+    "external_resolver_enabled": false,
+    "accepted": 0,
+    "rejected": 6,
+    "error_codes": {
+      "4": 5,
+      "9": 1
+    },
+    "outcome_projection": {
+      "version": "g2-a11-elementtree-outcome-v1",
+      "serialization": "utf-8-json-sort-keys-compact-lf",
+      "record_order": "member_id-ascending",
+      "fields": [
+        "projection_version",
+        "member_id",
+        "accepted",
+        "error_code",
+        "error_class_code",
+        "failure_location_sha256"
+      ],
+      "rows": 6,
+      "bytes": 1778,
+      "sha256": "cf1c56d9f99ff2c379d3ed7640c057c0ceadaa2908ed9aa3d898e591f22a52e6"
+    },
+    "outcome_sha256": "cf1c56d9f99ff2c379d3ed7640c057c0ceadaa2908ed9aa3d898e591f22a52e6"
+  },
+  "source_derived_tinyxml": {
+    "derivation_scope": "SOURCE_DERIVED_DIAGNOSTIC_ONLY",
+    "version": "2.3.4",
+    "source_families": 2,
+    "instances_per_family": 6,
+    "probe_input_nul_appended": true,
+    "api_acceptance": {
+      "client_load_file_successes": 6,
+      "server_load_file_successes": 6,
+      "client_error_false": 6,
+      "server_error_false": 6,
+      "client_roots_present": 6,
+      "server_roots_present": 6,
+      "client_server_tree_shape_equal": 6,
+      "accepted_as_terminal_disposition": false
+    },
+    "parse_completeness": {
+      "full_input_consumed": 5,
+      "direct_parse_returned_null": 1,
+      "silent_partial_instances": 1,
+      "partial_content_sha256": "10302e38d179050923d4088bbb785a658aac16d1037a6c4c6ff4caf3240730ba",
+      "partial_elements": 132,
+      "partial_attributes": 529
+    },
+    "tree_totals": {
+      "nodes": 13319,
+      "elements": 12673,
+      "attributes": 59141,
+      "texts": 28,
+      "comments": 618
+    },
+    "api_and_completeness_projection": {
+      "version": "g2-a11-tinyxml-api-completeness-outcome-v1",
+      "serialization": "utf-8-json-sort-keys-compact-lf",
+      "record_order": "member_id-ascending",
+      "fields": [
+        "projection_version",
+        "member_id",
+        "probe_input_nul_appended",
+        "client_load_file_success",
+        "server_load_file_success",
+        "client_error_flag",
+        "server_error_flag",
+        "client_root_present",
+        "server_root_present",
+        "direct_parse_returned_null",
+        "full_input_consumed",
+        "client_server_tree_shape_equal"
+      ],
+      "rows": 6,
+      "bytes": 2694,
+      "sha256": "2d0e19ea598284a59532082a495c3dd739aae10d69ca4d7be8dd35bf09f61e3f"
+    },
+    "api_and_completeness_outcome_sha256": "2d0e19ea598284a59532082a495c3dd739aae10d69ca4d7be8dd35bf09f61e3f",
+    "tree_projection": {
+      "version": "g2-a11-tinyxml-tree-outcome-v1",
+      "serialization": "utf-8-json-sort-keys-compact-lf",
+      "record_order": "member_id-ascending",
+      "fields": [
+        "projection_version",
+        "member_id",
+        "nodes",
+        "elements",
+        "attributes",
+        "texts",
+        "comments"
+      ],
+      "rows": 6,
+      "bytes": 1222,
+      "sha256": "6d1a33ecde5cc3c1de346c02671c8a421c264c1f468db5b4a722881c6a425fcd"
+    },
+    "tree_outcome_sha256": "6d1a33ecde5cc3c1de346c02671c8a421c264c1f468db5b4a722881c6a425fcd",
+    "execution_environment": {
+      "builder_image_reference": "tmxy-backend-builder:p0-08",
+      "builder_image_digest": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+      "toolchain_lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
+      "wrapper_sha256": "8619aae715d008d5fe2ad5b05a6d5f3387195e0fb8419a04864c2a566eb11538",
+      "compiler_executable": "clang++-21",
+      "compiler_major": 21,
+      "compiler_version_output_sha256": "9ded319aa70710f5d9300798de0b09f31a78129fd661a68173fb7d455eb8ef4e",
+      "client_source_set_sha256": "0f26c4e1f3630576635bffdba16b03a921ee5921896c12e386cde711d37499c2",
+      "server_source_set_sha256": "1056cbb66b3b0f429871422c2d6698f8ca8a7ca75ca379dd7e8b0e6b80e9b575",
+      "network": "none",
+      "repository_mount": "read-only",
+      "client_legacy_mount": "read-only",
+      "server_legacy_mount": "read-only",
+      "builder_user": "tmxy",
+      "capabilities": "none",
+      "no_new_privileges": true
+    },
+    "evidence_boundary": {
+      "source_derived_only": true,
+      "legacy_binary_executed": false,
+      "runtime_parity_claimed": false,
+      "windows_crt_parity_claimed": false,
+      "null_tail_parity_claimed": false,
+      "probe_input_nul_appended": true,
+      "client_input_null_termination_proven": false,
+      "runtime_memory_tail_observed": false,
+      "api_success_grants_disposition": false
+    }
+  },
+  "consumer_boundary": {
+    "source_bound": 5,
+    "dynamic_client_source_bound": 1,
+    "literal_server_source_bound": 4,
+    "unresolved_no_source_literal": 1,
+    "client_input_null_termination_proven": false,
+    "legacy_memory_tail_observed": false
+  },
+  "authority_boundaries": {
+    "legacy_runtime_executed": false,
+    "runtime_binary_parity_claimed": false,
+    "windows_crt_text_mode_runtime_parity_claimed": false,
+    "repair_applied": 0,
+    "source_writes": 0,
+    "deletions_authorized": 0,
+    "semantic_values_extracted": 0,
+    "semantic_imports_claimed": 0,
+    "approved_adapters": 0,
+    "approved_no_reference_instances": 0,
+    "approved_roots": 0,
+    "terminal_dispositions": 0
+  },
+  "blockers": [
+    {
+      "reason_code": "STRICT_XML_REJECTED",
+      "count": 6
+    },
+    {
+      "reason_code": "TINYXML_ACCEPTS_STRICT_INVALID_INPUT",
+      "count": 6
+    },
+    {
+      "reason_code": "TINYXML_SILENT_PARTIAL_PARSE",
+      "count": 1
+    },
+    {
+      "reason_code": "CONSUMER_BINDING_UNRESOLVED",
+      "count": 1
+    },
+    {
+      "reason_code": "CLIENT_XML_CSTRING_TERMINATION_UNPROVEN",
+      "count": 1
+    },
+    {
+      "reason_code": "MALFORMED_DISPOSITIONS_PENDING",
+      "count": 6
+    },
+    {
+      "reason_code": "LEGACY_RUNTIME_NOT_EXECUTED",
+      "count": 1
+    },
+    {
+      "reason_code": "RUNTIME_BINARY_PARITY_UNPROVEN",
+      "count": 1
+    }
+  ],
+  "negative_contracts": [
+    "POPULATION_COUNT_DRIFT_REJECTED",
+    "POPULATION_HASH_OR_BYTE_DRIFT_REJECTED",
+    "INSTANCE_OR_CONTENT_COLLAPSE_REJECTED",
+    "P2_05_CLASSIFICATION_MUTATION_REJECTED",
+    "STRICT_REJECTION_ERASURE_REJECTED",
+    "ELEMENTTREE_ACCEPTANCE_REJECTED",
+    "ELEMENTTREE_ERROR_DISTRIBUTION_DRIFT_REJECTED",
+    "TINYXML_API_RESULT_DRIFT_REJECTED",
+    "LOADFILE_SUCCESS_AS_DISPOSITION_REJECTED",
+    "SILENT_PARTIAL_ERASURE_REJECTED",
+    "DIRECT_PARSE_COMPLETENESS_FORGERY_REJECTED",
+    "CLIENT_SERVER_TREE_PARITY_ERASURE_REJECTED",
+    "SOURCE_PROBE_AS_RUNTIME_EXECUTION_REJECTED",
+    "SOURCE_PROBE_AS_BINARY_PARITY_REJECTED",
+    "WINDOWS_CRT_PARITY_FORGERY_REJECTED",
+    "CLIENT_NULL_TERMINATION_FORGERY_REJECTED",
+    "RAW_XML_OR_NAME_DISCLOSURE_REJECTED",
+    "SOURCE_LOCATION_DISCLOSURE_REJECTED",
+    "REPAIR_NORMALIZATION_OR_DELETION_REJECTED",
+    "A3_MALFORMED_STATE_REWRITE_REJECTED",
+    "SEMANTIC_EDGE_OR_IMPORT_INJECTION_REJECTED",
+    "APPROVAL_ROOT_OR_TERMINAL_INJECTION_REJECTED",
+    "UNRESOLVED_CONSUMER_PROMOTION_REJECTED",
+    "LEGACY_SOURCE_BINDING_DRIFT_REJECTED",
+    "DTD_OR_EXTERNAL_RESOLVER_ENABLEMENT_REJECTED",
+    "DETAIL_TRACKING_OR_PATH_ESCAPE_REJECTED",
+    "G2_OR_P3_APPROVAL_REJECTED",
+    "WRAPPER_OR_TOOLCHAIN_BINDING_DRIFT_REJECTED",
+    "BUILDER_IMAGE_ARGUMENT_DRIFT_REJECTED",
+    "COMPILER_VERSION_OUTPUT_DRIFT_REJECTED",
+    "SOURCE_SET_PROVENANCE_DRIFT_REJECTED",
+    "EVIDENCE_BOUNDARY_PROMOTION_REJECTED",
+    "OUTCOME_PROJECTION_DRIFT_REJECTED",
+    "FAILURE_DETAIL_DISCLOSURE_REJECTED",
+    "MISSING_OR_UNKNOWN_FIELD_REJECTED"
+  ],
+  "detail_export": {
+    "tracked": false,
+    "path": "Data/Exports/P2-20/p2-20a-aux-malformed-xml-diagnostics.jsonl",
+    "lines": 6,
+    "bytes": 10097,
+    "sha256": "cae0c0f2ba3a043315b683097486a0fbfd40cfa7eea210d27d4f4e7c8260dd57"
+  },
+  "g2_projection": {
+    "criteria_total": 9,
+    "satisfied": 7,
+    "blocked": 2,
+    "g2_decision": "BLOCKED",
+    "g2_06_satisfied": false,
+    "metrics": {
+      "aux_malformed_xml_diagnostic_hash_bound": true,
+      "aux_malformed_xml_instances": 6,
+      "aux_malformed_xml_strict_document_rejections": 6,
+      "aux_malformed_xml_strict_fragment_rejections": 6,
+      "aux_malformed_xml_elementtree_rejections": 6,
+      "aux_malformed_xml_tinyxml_api_successes": 6,
+      "aux_malformed_xml_tinyxml_full_consumption": 5,
+      "aux_malformed_xml_tinyxml_silent_partial": 1,
+      "aux_malformed_xml_consumer_bound": 5,
+      "aux_malformed_xml_consumer_unresolved": 1,
+      "aux_malformed_xml_client_input_termination_proven": false,
+      "aux_malformed_xml_legacy_runtime_executed": false,
+      "aux_malformed_xml_runtime_binary_parity_claimed": false,
+      "aux_malformed_xml_repairs": 0,
+      "aux_malformed_xml_deletions": 0,
+      "aux_malformed_xml_semantic_imports_claimed": 0,
+      "aux_malformed_xml_terminal_dispositions": 0
+    }
+  },
+  "contracts": {
+    "policy_sha256": "edc511c501a71a51dce526d61e2eeaad20e841bc485b653abca40997577b8759",
+    "schema_sha256": "c4f3e1f7c368dc1e06be8fd2f337d8a8072cdfdf76f38d815de4c9523bb89fdc",
+    "detail_schema_sha256": "72e4ff6282781819dfc82a1ef1cbaa4828976598c9137ba1c3d1ca523d7b973b"
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_xml": false,
+    "decoded_payloads": false,
+    "element_or_attribute_names": false,
+    "attribute_or_text_values": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "parser_line_or_column": false,
+    "legacy_source_lines": false
+  }
+}

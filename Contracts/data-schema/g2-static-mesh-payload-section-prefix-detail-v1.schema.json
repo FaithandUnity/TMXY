@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-static-mesh-payload-section-prefix-detail-v1.schema.json",
+  "title": "P2-20A.12 ignored anonymous static-mesh prefix detail",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "asset_id", "family", "candidate_count", "candidate_set_sha256", "recovery_kind",
+    "basis", "effective_resolution", "candidate_selected", "automatic_resolution",
+    "authority_state_changed", "candidates"
+  ],
+  "properties": {
+    "asset_id": {"$ref": "#/$defs/sha256"},
+    "family": {"const": "sm"},
+    "candidate_count": {"const": 2},
+    "candidate_set_sha256": {"$ref": "#/$defs/sha256"},
+    "recovery_kind": {"const": "sm_payload_section_prefix"},
+    "basis": {"const": "payload_section_prefix_contract"},
+    "effective_resolution": {"const": "UNRESOLVED"},
+    "candidate_selected": {"const": false},
+    "automatic_resolution": {"const": false},
+    "authority_state_changed": {"const": false},
+    "candidates": {
+      "type": "array", "minItems": 2, "maxItems": 2,
+      "items": {"$ref": "#/$defs/candidate"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id", "package_sha256", "body_sha256", "descriptor_semantic_sha256",
+        "strict_semantic_sha256", "strict_binding", "strict_error_code", "prefix_binding",
+        "prefix_semantic_sha256", "declared_material_slots", "payload_sections",
+        "nonempty_payload_sections", "ignored_trailing_material_slots", "slot_basis",
+        "recovery_applied", "adapter_applied", "content_disposition"
+      ],
+      "properties": {
+        "candidate_id": {"$ref": "#/$defs/sha256"},
+        "package_sha256": {"$ref": "#/$defs/sha256"},
+        "body_sha256": {"$ref": "#/$defs/sha256"},
+        "descriptor_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "strict_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "strict_binding": {"const": "REJECTED"},
+        "strict_error_code": {"const": "material_slot_mismatch"},
+        "prefix_binding": {"const": "PASS"},
+        "prefix_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "declared_material_slots": {"const": 2},
+        "payload_sections": {"const": 1},
+        "nonempty_payload_sections": {"const": 1},
+        "ignored_trailing_material_slots": {"const": 1},
+        "slot_basis": {"const": "payload_section_prefix_contract"},
+        "recovery_applied": {"const": false},
+        "adapter_applied": {"const": false},
+        "content_disposition": {"const": "NONE"}
+      }
+    }
+  }
+}

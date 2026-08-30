@@ -1,0 +1,350 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-30T18:04:37.3324992+00:00",
+  "result": "PASS",
+  "task": "P1-28",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "gate": "G1",
+  "gate_decision": "APPROVED",
+  "stage_approval": {
+    "passed": true,
+    "id": "AUTH-2026-08-28-P1-28",
+    "evidence": "Data/Governance/p1-g1-stage-authorization.json",
+    "sha256": "c018cc65ebf8b52cd07a906afa3be3973bc71c3551d27b33467bfa6753a43545"
+  },
+  "prerequisites": {
+    "passed": true,
+    "completed": 27,
+    "required": 27,
+    "tasks": [
+      {
+        "task": "P1-01",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-01-format-core.json"
+      },
+      {
+        "task": "P1-02",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-02-package-v1.json"
+      },
+      {
+        "task": "P1-03",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-03-legacy-table.json"
+      },
+      {
+        "task": "P1-04",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-04-reference-formats-v0.1.json"
+      },
+      {
+        "task": "P1-05",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-05-package-v2.json"
+      },
+      {
+        "task": "P1-06",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-06-package-v3.json"
+      },
+      {
+        "task": "P1-07",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-07-package-pipeline.json"
+      },
+      {
+        "task": "P1-08",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-08-package-normalized-tree.json"
+      },
+      {
+        "task": "P1-09",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-09-current-table-investigation.json"
+      },
+      {
+        "task": "P1-10",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-10-current-item-csv-relation.json"
+      },
+      {
+        "task": "P1-11",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-11-current-table-representatives.json"
+      },
+      {
+        "task": "P1-12",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-12-legacy-to-ue-transform.json"
+      },
+      {
+        "task": "P1-13",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-13-qtx-texture.json"
+      },
+      {
+        "task": "P1-14",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-14-sm-static-mesh.json"
+      },
+      {
+        "task": "P1-15",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json"
+      },
+      {
+        "task": "P1-16",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-16-anim-animation.json"
+      },
+      {
+        "task": "P1-17",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-17-ter-terrain.json"
+      },
+      {
+        "task": "P1-18",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-18-auxiliary-assets.json"
+      },
+      {
+        "task": "P1-19",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-19-asset-interchange.json"
+      },
+      {
+        "task": "P1-20",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-20-ue-golden-host.json"
+      },
+      {
+        "task": "P1-21",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-21-ue-importer-plugin.json"
+      },
+      {
+        "task": "P1-22",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-22-ue-texture-import.json"
+      },
+      {
+        "task": "P1-23",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-23-ue-static-mesh-import.json"
+      },
+      {
+        "task": "P1-24",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json"
+      },
+      {
+        "task": "P1-25",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-25-ue-animation-import.json"
+      },
+      {
+        "task": "P1-26",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-26-ue-terrain-import.json"
+      },
+      {
+        "task": "P1-27",
+        "passed": true,
+        "evidence": "Data/BuildBaseline/p1-27-golden-test-matrix.json"
+      }
+    ]
+  },
+  "checks": [
+    {
+      "id": "package_v1_golden",
+      "passed": true,
+      "evidence": [
+        "P1-02",
+        "P1-27"
+      ]
+    },
+    {
+      "id": "package_v2_v3_stable",
+      "passed": true,
+      "evidence": [
+        "P1-05",
+        "P1-06",
+        "P1-07",
+        "P1-08"
+      ]
+    },
+    {
+      "id": "current_table_representatives_and_secret",
+      "passed": true,
+      "evidence": [
+        "P1-09",
+        "P1-10",
+        "P1-11"
+      ]
+    },
+    {
+      "id": "five_resource_structured_outputs",
+      "passed": true,
+      "evidence": [
+        "P1-13",
+        "P1-14",
+        "P1-15",
+        "P1-16",
+        "P1-17",
+        "P1-19"
+      ]
+    },
+    {
+      "id": "five_resource_ue_imports",
+      "passed": true,
+      "evidence": [
+        "P1-22",
+        "P1-23",
+        "P1-24",
+        "P1-25",
+        "P1-26"
+      ]
+    },
+    {
+      "id": "coordinate_unit_uv_skeleton_animation",
+      "passed": true,
+      "evidence": [
+        "P1-12",
+        "P1-23",
+        "P1-24",
+        "P1-25",
+        "P1-26"
+      ]
+    },
+    {
+      "id": "corrupt_input_fail_closed",
+      "passed": true,
+      "evidence": [
+        "P1-27"
+      ]
+    },
+    {
+      "id": "evidence_levels_and_unknowns",
+      "passed": true,
+      "evidence": [
+        "P1-04",
+        "P1-19",
+        "P1-27"
+      ]
+    }
+  ],
+  "check_summary": {
+    "passed": 8,
+    "required": 8,
+    "failed_ids": []
+  },
+  "unknown_items": {
+    "total": 10,
+    "owned": 10,
+    "isolated": 10,
+    "items": [
+      {
+        "id": "PKG1-U01",
+        "owner": "package-and-table-proof",
+        "state": "contained",
+        "isolation": "Preserve name and class as bytes until a class-specific decoder declares encoding.",
+        "next_task": "P2-01"
+      },
+      {
+        "id": "PKG1-U02",
+        "owner": "resource-proof",
+        "state": "partially-resolved",
+        "isolation": "Recognized classes use bounded decoders; every unrecognized body remains an opaque source span.",
+        "next_task": "P2-01"
+      },
+      {
+        "id": "PKG1-U03",
+        "owner": "binary-foundation",
+        "state": "contained",
+        "isolation": "Reject empty names or classes in normalized production input; retain corrupt samples separately.",
+        "next_task": "P2-02"
+      },
+      {
+        "id": "PKG1-U04",
+        "owner": "binary-foundation",
+        "state": "contained",
+        "isolation": "Require contiguous normal records; classify gap or overlap variants as corrupt without guessing.",
+        "next_task": "P2-02"
+      },
+      {
+        "id": "LTBL-U01",
+        "owner": "package-and-table-proof",
+        "state": "partially-resolved",
+        "isolation": "Keep bytes authoritative and require an explicit per-table encoding declaration before normalization.",
+        "next_task": "P2-04"
+      },
+      {
+        "id": "LTBL-U02",
+        "owner": "package-and-table-proof",
+        "state": "contained",
+        "isolation": "Require an explicit separator; the frozen production baseline remains comma-only.",
+        "next_task": "P2-04"
+      },
+      {
+        "id": "LTBL-U03",
+        "owner": "binary-foundation",
+        "state": "contained",
+        "isolation": "Fail closed on empty or duplicate headers and over-limit rows instead of copying legacy tolerance.",
+        "next_task": "P2-04"
+      },
+      {
+        "id": "LTBL-U04",
+        "owner": "package-and-table-proof",
+        "state": "resolved",
+        "isolation": "Use only the authorized keychain-injected current-table path; never fall back to the legacy key.",
+        "next_task": "P2-04"
+      },
+      {
+        "id": "CTBL-U01",
+        "owner": "package-and-table-proof",
+        "state": "open",
+        "isolation": "Keep table-specific variable schemas out of fixed-column normalization until P2 inventories every active table.",
+        "next_task": "P2-04"
+      },
+      {
+        "id": "CTBL-U02",
+        "owner": "security-and-runtime",
+        "state": "open",
+        "isolation": "Bind each runtime-key capture to executable hash and session fingerprint; never persist or log raw key bytes.",
+        "next_task": "P2-04"
+      }
+    ]
+  },
+  "security": {
+    "runtime_key_reference_only": true,
+    "raw_key_emitted": false,
+    "legacy_inputs_read_only": true,
+    "legacy_asset_redistribution_authorized": false
+  },
+  "authority_boundaries": {
+    "g1_format_gate": true,
+    "g0_approved": false,
+    "p0_12_complete": false,
+    "p0_16_complete": false,
+    "release_authority": false,
+    "external_non_g1_blockers": [
+      "independent_reviewer_unavailable",
+      "two_sensitive_reviewers_unavailable",
+      "ue58_ephemeral_runner_unavailable",
+      "locked_builder_not_verified_in_ghcr",
+      "hosted_vulnerability_and_license_authority_missing",
+      "signed_provenance_and_oci_attestation_missing",
+      "minimum_365_day_immutable_retention_missing"
+    ]
+  },
+  "next_scope": {
+    "phase": "P2",
+    "ready_tasks": [
+      "P2-01",
+      "P2-04",
+      "P2-12"
+    ],
+    "rule": "Continue under task-specific rights, Secret, source-integrity, and evidence controls."
+  }
+}

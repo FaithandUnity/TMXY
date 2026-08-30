@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.4",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "scope": {
+    "source": "P2-20A.3 anonymous asset-binding workset, reconciled to P2-03, P2-12, and P2-13 exact identities",
+    "base_workset": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl",
+      "targets": 21494,
+      "sha256": "fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c",
+      "resolution_targets": {"resolved": 21292, "ambiguous": 183, "unresolved": 19, "unknown": 0},
+      "resolution_edges": {"resolved": 38793, "ambiguous": 534, "unresolved": 24, "unknown": 0}
+    },
+    "selection": {
+      "resolution_bases": [
+        "EQUIVALENT_VALID_DESCRIPTOR_SET",
+        "DIVERGENT_DESCRIPTOR_SET",
+        "DESCRIPTOR_VALIDATION_FAILED"
+      ],
+      "additional_family_basis": {
+        "family": "skem",
+        "resolution_basis": "UNIQUE_VALID_DESCRIPTOR"
+      }
+    },
+    "required_targets": 3651,
+    "required_candidate_edges": 12764,
+    "required_package_candidate_objects": 46865,
+    "effective_recovery_plan": {
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+      "attempts": 21,
+      "qtx_declared_mip_payload_prefix_attempts": 6,
+      "allowed_kinds": [
+        "qtx_complete_mip_chain",
+        "qtx_declared_mip_payload_prefix",
+        "anim_payload_frame_counts"
+      ]
+    },
+    "families": ["anim", "qtx", "skem", "sm"],
+    "candidate_identity_set_must_match_p2_13": true,
+    "asset_identity_set_must_match_p2_12": true
+  },
+  "semantic_signature": {
+    "version": 1,
+    "object_name_included": true,
+    "ordered_fields_preserved": true,
+    "unknown_property_name_and_value_bytes_included": true,
+    "floating_point_bits_preserved": true,
+    "storage_offsets_and_sizes_excluded": true,
+    "digest": "sha256"
+  },
+  "validation": {
+    "each_candidate_is_independent": true,
+    "qtx_production_path": "LegacyTextureDescriptorReader plus QtxReader",
+    "qtx_declared_mip_payload_prefix_path": "QtxReader::parse_with_declared_mip_payload_prefix",
+    "qtx_payload_prefix_preserves_descriptor_semantic": true,
+    "sm_production_path": "read_static_mesh_descriptor plus bind_static_mesh",
+    "skem_production_path": "read_skeletal_mesh_descriptor plus bind_skeletal_mesh",
+    "anim_production_path": "read_package_animation_set_descriptor plus bind_animation_set",
+    "candidate_body_sha256_bound": true,
+    "probe_startup_self_tests_required": true,
+    "locked_non_root_builder_required": true,
+    "network_disabled": true,
+    "legacy_mount_read_only": true
+  },
+  "classification": {
+    "descriptor_rejection_with_any_compatible_candidate": "AMBIGUOUS",
+    "zero_production_compatible_candidates": "UNRESOLVED",
+    "one_compatible_semantic_class_and_no_descriptor_rejection": "RESOLVED",
+    "multiple_compatible_semantic_classes": "AMBIGUOUS",
+    "first_candidate_selection": "forbidden",
+    "representative_candidate_selection": "forbidden",
+    "unknown_or_unreadable_candidate": "fail-closed"
+  },
+  "completion": {
+    "required_ambiguous_targets": 0,
+    "required_unresolved_targets": 0,
+    "reconciled_full_workset_required": true,
+    "diagnostic_pass_does_not_satisfy_other_g2_06_obligations": true,
+    "blocked_evidence_does_not_authorize_g2_or_p3": true
+  },
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+    "report_json": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+    "report_markdown": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.md",
+    "evidence": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "anonymous_identities_only": true,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  }
+}

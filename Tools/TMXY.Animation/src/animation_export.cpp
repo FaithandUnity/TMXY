@@ -14,6 +14,12 @@ namespace tmxy::animation
 namespace
 {
 
+[[nodiscard]] std::string_view frame_count_basis_name(const FrameCountBasis basis) noexcept
+{
+    return basis == FrameCountBasis::payload_observed_contract ? "payload_observed_contract"
+                                                               : "package_descriptor";
+}
+
 [[nodiscard]] std::string json_string(const std::string_view value)
 {
     std::ostringstream output;
@@ -103,6 +109,11 @@ void write_clip(std::ostringstream& output, const AnimationClip& clip, const std
            << "      \"skeleton_root_name_bytes\": "
            << json_string(descriptor.skeleton_root_name_bytes) << ",\n"
            << "      \"frame_count\": " << descriptor.frame_count << ",\n"
+           << "      \"declared_frame_count\": " << descriptor.frame_count << ",\n"
+           << "      \"observed_frame_count\": " << clip.observed_frame_count << ",\n"
+           << "      \"effective_frame_count\": " << clip.effective_frame_count << ",\n"
+           << "      \"frame_count_basis\": "
+           << json_string(frame_count_basis_name(clip.frame_count_basis)) << ",\n"
            << "      \"frame_delta_seconds\": " << descriptor.frame_delta_seconds << ",\n"
            << "      \"sampled_duration_seconds\": " << clip.sampled_duration_seconds << ",\n"
            << "      \"legacy_loop_period_seconds\": " << clip.legacy_loop_period_seconds << ",\n"
@@ -110,7 +121,7 @@ void write_clip(std::ostringstream& output, const AnimationClip& clip, const std
            << "      \"track_count\": " << clip.track_count << ",\n"
            << "      \"key_count\": "
            << static_cast<std::uint64_t>(clip.track_count) *
-                  static_cast<std::uint64_t>(descriptor.frame_count)
+                  static_cast<std::uint64_t>(clip.effective_frame_count)
            << ",\n"
            << "      \"dense_prefix_track_ids\": true,\n"
            << "      \"notify_object_names\": ";

@@ -1,0 +1,448 @@
+{
+  "decisions": {
+    "automatic_deletion_authorized": false,
+    "automatic_repair_authorized": false,
+    "g2_approved": false,
+    "playable_experience_proven": false,
+    "release_authority": false,
+    "report_completion_means_accounting_complete_not_content_complete": true
+  },
+  "dimensions": {
+    "capacity": {
+      "asset_bytes": 8882019027,
+      "assets": 40090,
+      "canonical_ids": 87044,
+      "conversion_jobs": 34601,
+      "exact_duplicate_redundant_bytes_review_only": 1286887829,
+      "id_components": 16,
+      "id_u16_near_limit": 2,
+      "id_u16_overflow": 0,
+      "id_u16_saturated": 3,
+      "normalized_table_bytes": 100536572,
+      "package_graph_bytes": 106382503,
+      "reference_closure_bytes": 205392166
+    },
+    "conversion": {
+      "alias_assignments": 5489,
+      "assets": 40090,
+      "assets_with_ready_key": 39290,
+      "blocked_manual_jobs": 800,
+      "conversion_ready_ppm": 980044,
+      "distinct_ready_keys": 33801,
+      "output_hash_verification_required": true,
+      "shared_cache_write_authorized": false
+    },
+    "damage": {
+      "asset_corrupt": 14,
+      "auxiliary_xml_malformed_isolated": 6,
+      "damaged_or_isolated_source_artifacts": 20,
+      "package_recognized_parse_failures": 0,
+      "repair_or_deletion_performed": 0
+    },
+    "effort": {
+      "automatic_planning_human_hours": 426.02,
+      "basis": "planning coefficient, not benchmark or schedule commitment",
+      "fixed_engineering_hours": 336.0,
+      "item_human_hours": 1068.695,
+      "machine_seconds": 108005,
+      "manual_assets": 800,
+      "manual_planning_human_hours": 617.0,
+      "planning_human_hours": 1404.695,
+      "semi_automatic_assets": 841,
+      "semi_automatic_planning_human_hours": 361.675
+    },
+    "parsing": {
+      "assets": 40090,
+      "assets_classified": 40090,
+      "assets_classified_ppm": 1000000,
+      "assets_structurally_valid": 39290,
+      "assets_structurally_valid_ppm": 980044,
+      "config_files": 212,
+      "config_files_classified": 212,
+      "core_packages": 12,
+      "core_packages_complete": 12,
+      "core_packages_complete_ppm": 1000000,
+      "ecf_files": 64,
+      "ecf_round_trip_verified": 64,
+      "packages_recognized": 163,
+      "packages_recognized_complete": 163,
+      "packages_recognized_complete_ppm": 1000000,
+      "tables_active": 225,
+      "tables_decoded": 225,
+      "tables_decoded_ppm": 1000000,
+      "xml_files": 148,
+      "xml_strict_or_fragment": 142
+    },
+    "references": {
+      "asset_link_edges": 61511,
+      "assets_linked_outside_roots": 24119,
+      "assets_root_reachable": 14058,
+      "assets_unlinked_identity_rule_no_match": 1008,
+      "assets_unlinked_no_identity_rule": 905,
+      "core_foreign_key_dangling": 0,
+      "core_foreign_key_edges": 54561,
+      "heuristic_target_selections": 0,
+      "legacy_current_dangling": 0,
+      "package_ambiguous": 21146,
+      "package_edges": 147349,
+      "package_unresolved": 1076,
+      "table_object_ambiguous": 6945,
+      "table_object_edges": 113484,
+      "table_object_unresolved": 5161
+    },
+    "unknown_or_opaque": {
+      "asset_structure_unresolved": 786,
+      "package_object_payloads_opaque": 121715,
+      "package_reference_ambiguous": 21146,
+      "package_reference_unresolved": 1076,
+      "table_object_reference_ambiguous": 6945,
+      "table_object_reference_unresolved": 5161,
+      "unclassified_active_tables": 0,
+      "unsupported_assets": 0
+    }
+  },
+  "disclosure": {
+    "decoded_confidential_payloads": false,
+    "exact_observed_extrema": false,
+    "exact_primary_keys": false,
+    "legacy_source_lines": false,
+    "private_source_paths": false,
+    "raw_table_rows": false,
+    "upstream_evidence_sha256_only": true
+  },
+  "executive_summary": {
+    "content_accounting_complete": true,
+    "content_conversion_ready_assets": 39290,
+    "content_conversion_ready_ppm": 980044,
+    "core_data_integrity": true,
+    "damaged_or_isolated_source_artifacts": 20,
+    "full_content_conversion_ready": false,
+    "inventory_scope": {
+      "active_tables": 225,
+      "assets": 40090,
+      "assets_bytes": 8882019027,
+      "config_files": 212,
+      "package_files": 167
+    },
+    "open_risk_items": 13,
+    "p2_gate_ready": false,
+    "playable_experience_proven": false
+  },
+  "result": "PASS_WITH_OPEN_CONTENT_RISKS",
+  "risk_register": [
+    {
+      "control": "Candidates remain unresolved; no heuristic target is selected.",
+      "count": 1076,
+      "dimension": "references",
+      "evidence_tasks": [
+        "P2-03",
+        "P2-13"
+      ],
+      "id": "CHR-001",
+      "impact": "Some Package references have no deterministic target.",
+      "next_task": "P2-20",
+      "severity": "high",
+      "state": "open",
+      "unit": "package edges"
+    },
+    {
+      "control": "All candidates are retained and classified.",
+      "count": 21146,
+      "dimension": "references",
+      "evidence_tasks": [
+        "P2-03",
+        "P2-13"
+      ],
+      "id": "CHR-002",
+      "impact": "Multiple valid Package targets prevent automatic binding.",
+      "next_task": "P2-20",
+      "severity": "high",
+      "state": "open",
+      "unit": "package edges"
+    },
+    {
+      "control": "Jobs remain blocked pending descriptor recovery evidence.",
+      "count": 786,
+      "dimension": "damage",
+      "evidence_tasks": [
+        "P2-12",
+        "P2-15",
+        "P2-16"
+      ],
+      "id": "CHR-003",
+      "impact": "Descriptor-dependent assets cannot enter automatic conversion.",
+      "next_task": "P3-04",
+      "severity": "high",
+      "state": "open",
+      "unit": "assets"
+    },
+    {
+      "control": "Source hashes and parser failures are retained; no automatic repair occurs.",
+      "count": 14,
+      "dimension": "damage",
+      "evidence_tasks": [
+        "P2-12",
+        "P2-15",
+        "P2-16"
+      ],
+      "id": "CHR-004",
+      "impact": "Structurally corrupt assets require repair or replacement.",
+      "next_task": "P3-04",
+      "severity": "high",
+      "state": "open",
+      "unit": "assets"
+    },
+    {
+      "control": "Exact byte spans are preserved and separated from parser failures.",
+      "count": 121715,
+      "dimension": "unknown_or_opaque",
+      "evidence_tasks": [
+        "P2-01",
+        "P2-02"
+      ],
+      "id": "CHR-005",
+      "impact": "Object bodies are envelope-complete but not semantically restored.",
+      "next_task": "P4-01",
+      "severity": "medium",
+      "state": "controlled-open",
+      "unit": "Package object payloads"
+    },
+    {
+      "control": "Core foreign keys remain a separate zero-dangling authority set.",
+      "count": 5161,
+      "dimension": "references",
+      "evidence_tasks": [
+        "P2-13"
+      ],
+      "id": "CHR-006",
+      "impact": "Optional presentation links are missing.",
+      "next_task": "P2-20",
+      "severity": "medium",
+      "state": "open",
+      "unit": "nullable table-object references"
+    },
+    {
+      "control": "No first-candidate shortcut or heuristic binding is allowed.",
+      "count": 6945,
+      "dimension": "references",
+      "evidence_tasks": [
+        "P2-13"
+      ],
+      "id": "CHR-007",
+      "impact": "Optional presentation links have multiple candidates.",
+      "next_task": "P2-20",
+      "severity": "medium",
+      "state": "open",
+      "unit": "nullable table-object references"
+    },
+    {
+      "control": "Unlinked status is review evidence, never deletion authority.",
+      "count": 1008,
+      "dimension": "references",
+      "evidence_tasks": [
+        "P2-14"
+      ],
+      "id": "CHR-008",
+      "impact": "Assets have an identity rule but no current graph match.",
+      "next_task": "P2-20",
+      "severity": "medium",
+      "state": "review-only",
+      "unit": "assets"
+    },
+    {
+      "control": "Assets are retained and routed to the identity-rule gap queue.",
+      "count": 905,
+      "dimension": "references",
+      "evidence_tasks": [
+        "P2-14"
+      ],
+      "id": "CHR-009",
+      "impact": "Some families lack an authoritative identity rule.",
+      "next_task": "P2-20",
+      "severity": "medium",
+      "state": "review-only",
+      "unit": "assets"
+    },
+    {
+      "control": "Cache keys remain blocked until reviewed intervention evidence exists.",
+      "count": 800,
+      "dimension": "effort",
+      "evidence_tasks": [
+        "P2-15",
+        "P2-16"
+      ],
+      "id": "CHR-010",
+      "impact": "Manual descriptor recovery or repair is required before conversion.",
+      "next_task": "P3-04",
+      "severity": "high",
+      "state": "open",
+      "unit": "assets"
+    },
+    {
+      "control": "Generated numeric IDs use uint64 and narrowing is forbidden; downstream storage must follow.",
+      "count": 5,
+      "dimension": "capacity",
+      "evidence_tasks": [
+        "P2-11",
+        "P2-17"
+      ],
+      "id": "CHR-011",
+      "impact": "Observed IDs are at or near legacy 16-bit capacity.",
+      "next_task": "P4-22",
+      "severity": "high",
+      "state": "controlled-open",
+      "unit": "ID components"
+    },
+    {
+      "control": "Files are isolated without repair or override guessing.",
+      "count": 6,
+      "dimension": "damage",
+      "evidence_tasks": [
+        "P2-05"
+      ],
+      "id": "CHR-012",
+      "impact": "Malformed auxiliary XML cannot join the strict configuration set.",
+      "next_task": "P3-03",
+      "severity": "medium",
+      "state": "review-only",
+      "unit": "XML files"
+    },
+    {
+      "control": "No semantic equivalence or deletion claim is made without digest proof.",
+      "count": 33629,
+      "dimension": "capacity",
+      "evidence_tasks": [
+        "P2-14"
+      ],
+      "id": "CHR-013",
+      "impact": "Structural similarity creates a large review surface.",
+      "next_task": "P3-04",
+      "severity": "low",
+      "state": "review-only",
+      "unit": "assets"
+    }
+  ],
+  "risk_summary": {
+    "controlled_open": 2,
+    "critical": 0,
+    "high": 6,
+    "low": 1,
+    "medium": 6,
+    "open": 7,
+    "raw_counts_are_not_additive_across_units": true,
+    "review_only": 4,
+    "risk_items": 13
+  },
+  "schema_version": 1,
+  "scope": {
+    "completed_tasks": 17,
+    "input_binding_sha256": "2ba21d70598c74e2c332635060fd9b5be3d8e66d45f103f6bd5546f19a9cfa81",
+    "inputs": [
+      {
+        "path": "Data/Inventory/p2-01-package-inventory.json",
+        "result": "PASS",
+        "sha256": "ac6671219c41324f1e7aac0a1cd5c08a9dc66f7c75e30cd3081610c038a26d16",
+        "task_id": "P2-01"
+      },
+      {
+        "path": "Data/Inventory/p2-02-package-boundary-completeness.json",
+        "result": "PASS",
+        "sha256": "8ecdc9b5af0b8bd3e009781452bcc68114f65fd2b7513e26b49402f76738863e",
+        "task_id": "P2-02"
+      },
+      {
+        "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+        "result": "PASS",
+        "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab",
+        "task_id": "P2-03"
+      },
+      {
+        "path": "Data/Inventory/p2-04-current-table-inventory.json",
+        "result": "PASS",
+        "sha256": "9c374ad84bc2440c19ec039e3761db8d1398add7cc66544452823b5ed010892a",
+        "task_id": "P2-04"
+      },
+      {
+        "path": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+        "result": "PASS",
+        "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
+        "task_id": "P2-05"
+      },
+      {
+        "path": "Data/Inventory/p2-06-three-layer-data.json",
+        "result": "PASS",
+        "sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+        "task_id": "P2-06"
+      },
+      {
+        "path": "Data/Inventory/p2-07-core-table-schema.json",
+        "result": "PASS",
+        "sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+        "task_id": "P2-07"
+      },
+      {
+        "path": "Data/Inventory/p2-08-table-ownership.json",
+        "result": "PASS",
+        "sha256": "423e3898c1089e140f9a8efc04a1dae8d4600512e8ba44a02fc2048487c960fc",
+        "task_id": "P2-08"
+      },
+      {
+        "path": "Data/Inventory/p2-09-legacy-current-diff.json",
+        "result": "PASS",
+        "sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+        "task_id": "P2-09"
+      },
+      {
+        "path": "Data/Inventory/p2-10-canonical-id-map.json",
+        "result": "PASS",
+        "sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+        "task_id": "P2-10"
+      },
+      {
+        "path": "Data/Inventory/p2-11-id-limit-audit.json",
+        "result": "PASS",
+        "sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+        "task_id": "P2-11"
+      },
+      {
+        "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+        "result": "PASS",
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c",
+        "task_id": "P2-12"
+      },
+      {
+        "path": "Data/Inventory/p2-13-reference-closure.json",
+        "result": "PASS",
+        "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
+        "task_id": "P2-13"
+      },
+      {
+        "path": "Data/Inventory/p2-14-asset-health.json",
+        "result": "PASS",
+        "sha256": "d20e69adb8651eeb56434f1be6438dcc138e25ae9285c7de43c58ee43f6d0d79",
+        "task_id": "P2-14"
+      },
+      {
+        "path": "Data/Inventory/p2-15-conversion-routing.json",
+        "result": "PASS",
+        "sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54",
+        "task_id": "P2-15"
+      },
+      {
+        "path": "Data/Inventory/p2-16-conversion-cache.json",
+        "result": "PASS",
+        "sha256": "36dd4a2d78246401f2a0ebc2618c00a7555e4a1b064cdc4c28ceb9af4c7b8e6c",
+        "task_id": "P2-16"
+      },
+      {
+        "path": "Data/Inventory/p2-17-protocol-codegen.json",
+        "result": "PASS",
+        "sha256": "23cd1f824a3fab1c203a648df8224de6257bea96dc4aa431fcc063c74aead222",
+        "task_id": "P2-17"
+      }
+    ],
+    "policy_sha256": "f0f3af98194d5b3797279f3ce3711e3a36a16ab04c7647ce1aae17d58bcb8bc1"
+  },
+  "source_build": "qy-3.0.0.413",
+  "task_id": "P2-18"
+}

@@ -204,10 +204,10 @@ $arguments = @(
 )
 $execution = Invoke-NativeProcess -FilePath $docker -Arguments $arguments -WorkingDirectory $root
 $expectedOutput = @(
-    'particle.ZFH_O_S_Tianpian100 vertices=4 indices=6 sections=1 uv_channels=1 shadow_vertices=0 shadow_indices=0 collision_vertices=0 octree_nodes=0 octree_indices=0 declared_bounds=contains bounds=-17.5672302,-17.2778435,-4.68960619:-14.7323551,14.307416,19.1825714 json_fnv=13319387547092677719 obj_fnv=7919486951111466039',
-    'newscenc.dy_bx_stl_005 vertices=157638 indices=157638 sections=1 uv_channels=2 shadow_vertices=74907 shadow_indices=366357 collision_vertices=0 octree_nodes=11 octree_indices=114924 declared_bounds=contains bounds=-100.774826,-3.03948212,2.30944395:10.8779144,317.66629,5.70774889 json_fnv=4468058848417956321 obj_fnv=0',
-    'newscenc.dy_bx_bqg_006 vertices=47964 indices=250614 sections=1 uv_channels=2 shadow_vertices=250614 shadow_indices=1002456 collision_vertices=0 octree_nodes=194 octree_indices=291201 declared_bounds=mismatch bounds=-150.552399,-173.027374,-71.6268158:289.874359,217.916229,109.383087 json_fnv=1594610625379774594 obj_fnv=0',
-    'scene09.GT_B_S_BangPai05 vertices=11847 indices=19533 sections=43 uv_channels=2 shadow_vertices=0 shadow_indices=0 collision_vertices=6416 octree_nodes=340 octree_indices=23379 declared_bounds=exact bounds=-37.4604683,-42.9401703,-8.96472454:37.3805618,42.9401779,8.96472931 json_fnv=1776525976162093810 obj_fnv=0'
+    'particle.ZFH_O_S_Tianpian100 vertices=4 indices=6 sections=1 uv_channels=1 shadow_vertices=0 shadow_indices=0 collision_vertices=0 octree_nodes=0 octree_indices=0 declared_bounds=contains bounds=-17.5672302,-17.2778435,-4.68960619:-14.7323551,14.307416,19.1825714 json_fnv=13026901066817879978 obj_fnv=7919486951111466039',
+    'newscenc.dy_bx_stl_005 vertices=157638 indices=157638 sections=1 uv_channels=2 shadow_vertices=74907 shadow_indices=366357 collision_vertices=0 octree_nodes=11 octree_indices=114924 declared_bounds=contains bounds=-100.774826,-3.03948212,2.30944395:10.8779144,317.66629,5.70774889 json_fnv=5344752217521232092 obj_fnv=0',
+    'newscenc.dy_bx_bqg_006 vertices=47964 indices=250614 sections=1 uv_channels=2 shadow_vertices=250614 shadow_indices=1002456 collision_vertices=0 octree_nodes=194 octree_indices=291201 declared_bounds=mismatch bounds=-150.552399,-173.027374,-71.6268158:289.874359,217.916229,109.383087 json_fnv=7825768401660102655 obj_fnv=0',
+    'scene09.GT_B_S_BangPai05 vertices=11847 indices=19533 sections=43 uv_channels=2 shadow_vertices=0 shadow_indices=0 collision_vertices=6416 octree_nodes=340 octree_indices=23379 declared_bounds=exact bounds=-37.4604683,-42.9401703,-8.96472454:37.3805618,42.9401779,8.96472931 json_fnv=6463187087661512439 obj_fnv=0'
 )
 $passed = $execution.exit_code -eq 0 -and $execution.output -match '100% tests passed'
 foreach ($line in $expectedOutput) { $passed = $passed -and $execution.output.Contains($line) }
@@ -227,6 +227,10 @@ $report = [pscustomobject][ordered]@{
         outputs = @('obj-ue-centimeter-preview', 'json-metadata',
             'gltf-2.0-json-authoritative', 'gltf-2.0-external-bin-authoritative')
         bounds_relations = @('absent', 'exact', 'contains', 'mismatch')
+        material_slot_bases = @('package_descriptor', 'payload_section_prefix_contract')
+        strict_material_slot_rule = 'non-zero exact Package slots to payload sections'
+        explicit_prefix_rule = 'exact or Package slots greater than non-zero payload sections'
+        material_synthesis = $false
         octree_rule = 'face ranges are authoritative for leaf nodes only'
     }
     samples = @(

@@ -103,12 +103,27 @@ enum class DeclaredBoundsRelation : std::uint8_t
     mismatch = 3,
 };
 
+enum class MaterialSlotBasis : std::uint8_t
+{
+    package_descriptor = 0,
+    payload_section_prefix_contract = 1,
+};
+
+struct MaterialSlotResolution final
+{
+    std::uint64_t declared_material_slot_count{0};
+    std::uint64_t effective_material_slot_count{0};
+    std::uint64_t ignored_material_slot_count{0};
+    MaterialSlotBasis basis{MaterialSlotBasis::package_descriptor};
+};
+
 struct StaticMeshBinding final
 {
     StaticMesh mesh;
     PackageStaticMeshDescriptor package;
     Aabb effective_bounds;
     DeclaredBoundsRelation declared_bounds_relation{DeclaredBoundsRelation::absent};
+    MaterialSlotResolution material_slot_resolution;
 };
 
 [[nodiscard]] constexpr std::string_view to_string(const DeclaredBoundsRelation relation) noexcept
@@ -123,6 +138,18 @@ struct StaticMeshBinding final
         return "contains";
     case DeclaredBoundsRelation::mismatch:
         return "mismatch";
+    }
+    return "unknown";
+}
+
+[[nodiscard]] constexpr std::string_view to_string(const MaterialSlotBasis basis) noexcept
+{
+    switch (basis)
+    {
+    case MaterialSlotBasis::package_descriptor:
+        return "package_descriptor";
+    case MaterialSlotBasis::payload_section_prefix_contract:
+        return "payload_section_prefix_contract";
     }
     return "unknown";
 }

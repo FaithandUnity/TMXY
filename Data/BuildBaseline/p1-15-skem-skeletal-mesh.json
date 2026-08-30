@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:21:29.9123316+00:00",
+  "captured_utc": "2026-08-30T18:03:06.2166086+00:00",
   "result": "PASS",
   "task": "P1-15",
   "completion_criteria_satisfied": true,
   "source_file_count": 18,
-  "source_sha256": "c357fb9d15ad6f20d0437ef061486852f2f3fe0d1f0a5e27de01143bb2511311",
+  "source_sha256": "c2bc89fbaba9b2b31c4c7cebe04c465fbefb209ac151278ea9e42fc4c73b496e",
   "contract": {
     "descriptor_source": "Package QSkelMesh QObject property body",
     "skem_payload": "headerless grouped selectable submesh arrays",
@@ -131,8 +131,8 @@
   ],
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -154,7 +154,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 70,
-    "output_sha256": "527dbac60c8e342032e26af131b9e6fa588b6e44df042c8379ed4d9fef434a4f"
+    "output_line_count": 71,
+    "output_sha256": "5347e7fa8073594672a59630bb5f0c4afd3a43e7550bea4d0e82fe7502ee71ea"
   }
 }

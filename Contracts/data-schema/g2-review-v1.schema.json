@@ -1,0 +1,535 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-review-v1.schema.json",
+  "title": "TMXY P2-20 fail-closed G2 review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "captured_utc", "task_id", "source_build", "result",
+    "review_execution_result", "task_status", "completion_criteria_satisfied",
+    "gate", "gate_decision", "g2_approved", "p3_authorized",
+    "input_bindings", "summary", "criteria", "security", "blockers",
+    "budget_interpretation", "authority_boundaries", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "captured_utc": { "type": "string", "minLength": 1 },
+    "task_id": { "const": "P2-20" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "result": { "enum": ["PASS", "BLOCKED"] },
+    "review_execution_result": { "const": "PASS" },
+    "task_status": { "enum": ["COMPLETE", "BLOCKED"] },
+    "completion_criteria_satisfied": { "type": "boolean" },
+    "gate": { "const": "G2" },
+    "gate_decision": { "enum": ["APPROVED", "BLOCKED"] },
+    "g2_approved": { "type": "boolean" },
+    "p3_authorized": { "type": "boolean" },
+    "input_bindings": { "$ref": "#/$defs/input_bindings" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "criteria": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        { "$ref": "#/$defs/g2_01" }, { "$ref": "#/$defs/g2_02" },
+        { "$ref": "#/$defs/g2_03" }, { "$ref": "#/$defs/g2_04" },
+        { "$ref": "#/$defs/g2_05" }, { "$ref": "#/$defs/g2_06" },
+        { "$ref": "#/$defs/g2_07" }, { "$ref": "#/$defs/g2_08" },
+        { "$ref": "#/$defs/g2_09" }
+      ],
+      "items": false
+    },
+    "security": { "$ref": "#/$defs/security" },
+    "blockers": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/blocker" }
+    },
+    "budget_interpretation": { "$ref": "#/$defs/budget" },
+    "authority_boundaries": { "$ref": "#/$defs/authority" },
+    "contracts": { "$ref": "#/$defs/contracts" },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "g2_approved": { "const": true } } },
+      "then": {
+        "properties": {
+          "result": { "const": "PASS" },
+          "task_status": { "const": "COMPLETE" },
+          "completion_criteria_satisfied": { "const": true },
+          "gate_decision": { "const": "APPROVED" },
+          "p3_authorized": { "const": true },
+          "blockers": { "maxItems": 0 }
+        }
+      },
+      "else": {
+        "properties": {
+          "result": { "const": "BLOCKED" },
+          "task_status": { "const": "BLOCKED" },
+          "completion_criteria_satisfied": { "const": false },
+          "gate_decision": { "const": "BLOCKED" },
+          "p3_authorized": { "const": false },
+          "blockers": { "minItems": 1 }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "path": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]*$" },
+    "prerequisite": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "path", "sha256", "result", "task_status", "completion_criteria_satisfied"],
+      "properties": {
+        "task_id": { "type": "string", "pattern": "^P2-(0[1-9]|1[0-9])$" },
+        "path": { "$ref": "#/$defs/path" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "const": "PASS" },
+        "task_status": { "const": "COMPLETE" },
+        "completion_criteria_satisfied": { "const": true }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "result", "captured_utc"],
+      "properties": {
+        "path": { "const": "Data/BuildBaseline/p0-12-local-quality-gates.json" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "const": "PASS_DIAGNOSTIC" },
+        "captured_utc": { "type": "string", "minLength": 1 }
+      }
+    },
+    "supplemental": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "path", "sha256", "result", "review_execution_result", "task_status", "completion_criteria_satisfied"],
+      "properties": {
+        "task_id": { "const": "P2-20A" },
+        "criterion_id": { "const": "G2-06" },
+        "path": { "const": "Data/Reports/p2-20a-core-resource-closure-report.json" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "enum": ["PASS", "BLOCKED"] },
+        "review_execution_result": { "const": "PASS" },
+        "task_status": { "enum": ["COMPLETE", "BLOCKED"] },
+        "completion_criteria_satisfied": { "type": "boolean" }
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "path", "sha256", "result", "generation_result", "task_status", "completion_criteria_satisfied", "g2_07_satisfied"],
+      "properties": {
+        "task_id": { "const": "P2-20B" },
+        "criterion_id": { "const": "G2-07" },
+        "path": { "const": "Data/Governance/p2-g2-migration-decisions.json" },
+        "sha256": { "$ref": "#/$defs/sha256" },
+        "result": { "enum": ["PASS", "BLOCKED"] },
+        "generation_result": { "const": "PASS" },
+        "task_status": { "enum": ["COMPLETE", "BLOCKED"] },
+        "completion_criteria_satisfied": { "type": "boolean" },
+        "g2_07_satisfied": { "type": "boolean" }
+      }
+    },
+    "descriptor_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.4"},
+        "path": {"const": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "aux_semantic_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.5"},
+        "path": {"const": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "aux_package_context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.9"},
+        "path": {"const": "Data/Reports/p2-20a-aux-package-context-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "aux_ecf_parser_parity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.10"},
+        "path": {"const": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "aux_malformed_xml_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.11"},
+        "path": {"const": "Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "identity_normalization_safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.6"},
+        "path": {"const": "Data/Reports/p2-20a-asset-identity-normalization-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "binding_failure_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "remediation_scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.7"},
+        "path": {"const": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "remediation_scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "binding_recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.8"},
+        "path": {"const": "Data/Reports/p2-20a-asset-binding-recovery-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "static_mesh_payload_section_prefix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "inventory_path", "inventory_sha256", "detail_path", "detail_sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "remediation_scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.12"},
+        "path": {"const": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "inventory_path": {"const": "Data/Inventory/p2-20a-static-mesh-payload-section-prefix.json"},
+        "inventory_sha256": {"$ref": "#/$defs/sha256"},
+        "detail_path": {"const": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl"},
+        "detail_sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS_DIAGNOSTIC"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "remediation_scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
+    "qtx_declared_mip_payload_prefix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "inventory_path", "inventory_sha256", "detail_path", "detail_sha256",
+        "effective_recovery_plan_path", "effective_recovery_plan_sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "remediation_scope_complete", "g2_06_satisfied", "p3_authorized"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.13"},
+        "path": {"const": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "inventory_path": {"const": "Data/Inventory/p2-20a-qtx-declared-mip-payload-prefix.json"},
+        "inventory_sha256": {"$ref": "#/$defs/sha256"},
+        "detail_path": {"const": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix.jsonl"},
+        "detail_sha256": {"$ref": "#/$defs/sha256"},
+        "effective_recovery_plan_path": {"const": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv"},
+        "effective_recovery_plan_sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS_DIAGNOSTIC"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "remediation_scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false},
+        "p3_authorized": {"const": false}
+      }
+    },
+    "input_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aggregate_sha256", "prerequisites", "supplemental",
+        "descriptor_diagnostics", "aux_semantic_diagnostics", "aux_package_context", "aux_ecf_parser_parity", "aux_malformed_xml_diagnostics", "identity_normalization_safety",
+        "binding_failure_diagnostics", "binding_recovery", "static_mesh_payload_section_prefix",
+        "qtx_declared_mip_payload_prefix",
+        "remediation", "quality"],
+      "properties": {
+        "aggregate_sha256": { "$ref": "#/$defs/sha256" },
+        "prerequisites": {
+          "type": "array",
+          "minItems": 19,
+          "maxItems": 19,
+          "items": { "$ref": "#/$defs/prerequisite" }
+        },
+        "supplemental": { "$ref": "#/$defs/supplemental" },
+        "descriptor_diagnostics": {"$ref": "#/$defs/descriptor_diagnostics"},
+        "aux_semantic_diagnostics": {"$ref": "#/$defs/aux_semantic_diagnostics"},
+        "aux_package_context": {"$ref": "#/$defs/aux_package_context"},
+        "aux_ecf_parser_parity": {"$ref": "#/$defs/aux_ecf_parser_parity"},
+        "aux_malformed_xml_diagnostics": {"$ref": "#/$defs/aux_malformed_xml_diagnostics"},
+        "identity_normalization_safety": {"$ref": "#/$defs/identity_normalization_safety"},
+        "binding_failure_diagnostics": {"$ref": "#/$defs/binding_failure_diagnostics"},
+        "binding_recovery": {"$ref": "#/$defs/binding_recovery"},
+        "static_mesh_payload_section_prefix": {"$ref": "#/$defs/static_mesh_payload_section_prefix"},
+        "qtx_declared_mip_payload_prefix": {"$ref": "#/$defs/qtx_declared_mip_payload_prefix"},
+        "remediation": { "$ref": "#/$defs/remediation" },
+        "quality": { "$ref": "#/$defs/quality" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criteria_total", "satisfied", "blocked", "satisfied_ids", "blocked_ids"],
+      "properties": {
+        "criteria_total": { "const": 9 },
+        "satisfied": { "type": "integer", "minimum": 7, "maximum": 9 },
+        "blocked": { "type": "integer", "minimum": 0, "maximum": 2 },
+        "satisfied_ids": {
+          "type": "array", "minItems": 7, "maxItems": 9, "uniqueItems": true,
+          "items": { "enum": ["G2-01", "G2-02", "G2-03", "G2-04", "G2-05", "G2-06", "G2-07", "G2-08", "G2-09"] }
+        },
+        "blocked_ids": {
+          "type": "array", "minItems": 0, "maxItems": 2, "uniqueItems": true,
+          "items": { "enum": ["G2-06", "G2-07"] }
+        }
+      }
+    },
+    "metric_value": { "type": ["integer", "number", "string", "boolean", "null"] },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "unit"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "value": { "$ref": "#/$defs/metric_value" },
+        "unit": { "type": "string", "minLength": 1 }
+      }
+    },
+    "criterion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "statement", "required_status", "observed_status", "satisfied", "evidence_task_ids", "metrics", "interpretation", "blocker_ids"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^G2-0[1-9]$" },
+        "statement": { "type": "string", "minLength": 1 },
+        "required_status": { "const": "SATISFIED" },
+        "observed_status": { "enum": ["SATISFIED", "BLOCKED"] },
+        "satisfied": { "type": "boolean" },
+        "evidence_task_ids": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^P2-(0[1-9]|1[0-9]|20[AB])$" } },
+        "metrics": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/metric" } },
+        "interpretation": { "type": "string", "minLength": 1 },
+        "blocker_ids": { "type": "array", "uniqueItems": true, "items": { "enum": ["G2-BLK-06", "G2-BLK-07"] } }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "satisfied": { "const": true } } },
+          "then": { "properties": { "observed_status": { "const": "SATISFIED" }, "blocker_ids": { "maxItems": 0 } } },
+          "else": { "properties": { "observed_status": { "const": "BLOCKED" }, "blocker_ids": { "minItems": 1 } } }
+        }
+      ]
+    },
+    "g2_01": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-01" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_02": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-02" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_03": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-03" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_04": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-04" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_05": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-05" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_06": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-06" } } }, { "if": { "properties": { "satisfied": { "const": false } } }, "then": { "properties": { "blocker_ids": { "const": ["G2-BLK-06"] } } } }] },
+    "g2_07": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-07" } } }, { "if": { "properties": { "satisfied": { "const": false } } }, "then": { "properties": { "blocker_ids": { "const": ["G2-BLK-07"] } } } }] },
+    "g2_08": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-08" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "g2_09": { "allOf": [{ "$ref": "#/$defs/criterion" }, { "properties": { "id": { "const": "G2-09" }, "observed_status": { "const": "SATISFIED" }, "satisfied": { "const": true }, "blocker_ids": { "maxItems": 0 } } }] },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quality_result", "repository_result", "repository_failures", "secret_result", "secret_findings", "security_review_result"],
+      "properties": {
+        "quality_result": { "const": "PASS_DIAGNOSTIC" },
+        "repository_result": { "const": "PASS" },
+        "repository_failures": { "const": 0 },
+        "secret_result": { "const": "PASS" },
+        "secret_findings": { "const": 0 },
+        "security_review_result": { "const": "PASS" }
+      }
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "criterion_id", "title", "reason", "required_action", "authority_required"],
+      "properties": {
+        "id": { "enum": ["G2-BLK-06", "G2-BLK-07"] },
+        "criterion_id": { "enum": ["G2-06", "G2-07"] },
+        "title": { "type": "string", "minLength": 1 },
+        "reason": { "type": "string", "minLength": 1 },
+        "required_action": { "type": "string", "minLength": 1 },
+        "authority_required": { "type": "boolean" }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["planning_cost_quantified", "manual_content_assets", "total_content_assets", "manual_content_rate_ppm", "base_planning_hours", "risk_adjusted_planning_hours", "machine_projection_seconds", "storage_budget_bytes", "incremental_storage_required_bytes", "storage_capacity_gap_bytes", "measured_schedule", "monetary_amount_available", "financial_total_cost_available", "delivery_commitment"],
+      "properties": {
+        "planning_cost_quantified": { "const": true },
+        "manual_content_assets": { "const": 800 },
+        "total_content_assets": { "const": 40090 },
+        "manual_content_rate_ppm": { "const": 19955 },
+        "base_planning_hours": { "type": "number", "minimum": 0 },
+        "risk_adjusted_planning_hours": { "type": "number", "minimum": 0 },
+        "machine_projection_seconds": { "type": "number", "minimum": 0 },
+        "storage_budget_bytes": { "const": 411698550803 },
+        "incremental_storage_required_bytes": { "const": 364930296437 },
+        "storage_capacity_gap_bytes": { "const": 187804318325 },
+        "measured_schedule": { "const": false },
+        "monetary_amount_available": { "const": false },
+        "financial_total_cost_available": { "const": false },
+        "delivery_commitment": { "const": false }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["playable_experience_proven", "release_authority", "production_authority", "automatic_repair_or_delete_authority", "official_server_implementation_recovered"],
+      "properties": {
+        "playable_experience_proven": { "const": false },
+        "release_authority": { "const": false },
+        "production_authority": { "const": false },
+        "automatic_repair_or_delete_authority": { "const": false },
+        "official_server_implementation_recovered": { "const": false }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "policy_sha256", "schema", "schema_sha256"],
+      "properties": {
+        "policy": { "const": "Contracts/data-schema/g2-review-policy-v1.json" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "schema": { "const": "Contracts/data-schema/g2-review-v1.schema.json" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["private_source_paths", "exact_primary_keys", "exact_observed_extrema", "raw_table_rows", "decoded_confidential_payloads", "legacy_source_lines"],
+      "properties": {
+        "private_source_paths": { "const": false },
+        "exact_primary_keys": { "const": false },
+        "exact_observed_extrema": { "const": false },
+        "raw_table_rows": { "const": false },
+        "decoded_confidential_payloads": { "const": false },
+        "legacy_source_lines": { "const": false }
+      }
+    }
+  }
+}

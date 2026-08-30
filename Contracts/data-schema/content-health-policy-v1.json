@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-18",
+  "source_build": "qy-3.0.0.413",
+  "required_tasks": [
+    "P2-01",
+    "P2-02",
+    "P2-03",
+    "P2-04",
+    "P2-05",
+    "P2-06",
+    "P2-07",
+    "P2-08",
+    "P2-09",
+    "P2-10",
+    "P2-11",
+    "P2-12",
+    "P2-13",
+    "P2-14",
+    "P2-15",
+    "P2-16",
+    "P2-17"
+  ],
+  "rate_unit": "parts-per-million",
+  "rate_formula": "floor(numerator * 1000000 / denominator)",
+  "severity_order": [
+    "critical",
+    "high",
+    "medium",
+    "low"
+  ],
+  "health_dimensions": [
+    "parsing",
+    "damage",
+    "unknown_or_opaque",
+    "references",
+    "conversion",
+    "effort",
+    "capacity"
+  ],
+  "classification_rules": {
+    "recognized_package_parse_failure_is_damage": true,
+    "opaque_package_payload_is_not_parse_failure": true,
+    "nullable_object_reference_is_not_core_foreign_key_dangling": true,
+    "unlinked_asset_is_not_delete_authority": true,
+    "structural_similarity_is_not_semantic_equivalence": true,
+    "planning_coefficient_is_not_schedule_commitment": true,
+    "current_id_range_does_not_authorize_narrowing": true
+  },
+  "completion_policy": {
+    "requires_all_upstream_tasks_complete": true,
+    "requires_exact_upstream_sha256_bindings": true,
+    "requires_all_inventory_populations_closed": true,
+    "allows_open_content_risks": true,
+    "forbids_claiming_playable_experience_without_runtime_proof": true,
+    "forbids_automatic_repair_or_deletion": true,
+    "forbids_private_paths_primary_keys_extrema_and_row_values": true
+  }
+}

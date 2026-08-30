@@ -1,0 +1,247 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T00:19:24.8274158+00:00",
+  "result": "PASS_CAPTURE",
+  "task": "P1-09",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "source": {
+    "kind": "authorized-local-runtime-process",
+    "sandbox_copy_only": true,
+    "executable": {
+      "path": "Data/Backups/p1-09-runtime-client/QY.exe",
+      "size": 5160960,
+      "sha256": "7087dfa64bedeb8c9a5dfc4518f46261d163136b5bd97f5071f2c5a12cb29a4b"
+    },
+    "process_id_recorded": true,
+    "process_id": 43928,
+    "dev_mode_verified_without_emitting_arguments": true,
+    "command_line_emitted": false,
+    "key_rva": "0x4dd028"
+  },
+  "runtime_key_evidence": {
+    "fingerprint": "cf760550b7af6c220331b258db1df781fe567221eb7c53fbfc65aca522085887",
+    "differs_from_disk_base": true,
+    "raw_key_written_to_report": false,
+    "raw_key_logged": false,
+    "plaintext_written": false,
+    "in_memory_buffers_cleared": true,
+    "observed_states": []
+  },
+  "validation": {
+    "accepted": true,
+    "acceptance": {
+      "required_core_tables": [
+        "CLSVShare/powergame.tbl",
+        "CLSVShare/skill_table.tbl",
+        "CLSVShare/item_table.tbl",
+        "Table/quest_table.tbl"
+      ],
+      "all_required_core_tables_verified": true,
+      "minimum_verified_tables": 200
+    },
+    "population": {
+      "files_checked": 338,
+      "total_bytes": 40444128,
+      "verified_old_format": 225,
+      "not_verified_with_candidate": 113,
+      "superseded_historical_copies": 113,
+      "unresolved_active_tables": 0,
+      "comma_schema_consistent": 181,
+      "utf8_valid": 166,
+      "gbk_valid": 224,
+      "ascii_only": 165
+    },
+    "groups": [
+      {
+        "group": "CLSVShare",
+        "files": 113,
+        "verified": 113,
+        "not_verified": 0
+      },
+      {
+        "group": "Table/help",
+        "files": 1,
+        "verified": 0,
+        "not_verified": 1
+      },
+      {
+        "group": "Table/local",
+        "files": 2,
+        "verified": 1,
+        "not_verified": 1
+      },
+      {
+        "group": "Table/Regions",
+        "files": 111,
+        "verified": 0,
+        "not_verified": 111
+      },
+      {
+        "group": "Table/root",
+        "files": 111,
+        "verified": 111,
+        "not_verified": 0
+      }
+    ],
+    "historical_shadow_classification": {
+      "classified_count": 113,
+      "unclassified_count": 0,
+      "groups": [
+        {
+          "group": "Table/help",
+          "historical_copies": 1,
+          "all_have_newer_verified_replacements": true,
+          "newest_historical_utc": "2023-11-14T13:46:08.0000000Z",
+          "oldest_replacement_utc": "2026-08-20T05:00:00.0000000Z"
+        },
+        {
+          "group": "Table/local",
+          "historical_copies": 1,
+          "all_have_newer_verified_replacements": true,
+          "newest_historical_utc": "2023-06-13T10:58:04.0000000Z",
+          "oldest_replacement_utc": "2026-08-20T05:00:00.0000000Z"
+        },
+        {
+          "group": "Table/Regions",
+          "historical_copies": 111,
+          "all_have_newer_verified_replacements": true,
+          "newest_historical_utc": "2022-01-04T12:33:32.0000000Z",
+          "oldest_replacement_utc": "2026-08-20T04:59:42.0000000Z"
+        }
+      ],
+      "all_historical_copies_have_newer_verified_replacements": true
+    },
+    "encoding_outliers": [
+      {
+        "path": "CLSVShare/ArenaLevel.tbl",
+        "payload_bytes": 173,
+        "ascii_only": false
+      }
+    ],
+    "representative_tables": [
+      {
+        "path": "CLSVShare/item_table.tbl",
+        "old_padding_valid": true,
+        "no_embedded_nul": true,
+        "crlf_only": true,
+        "comma_schema_consistent": true,
+        "payload_bytes": 7046695,
+        "columns": 95,
+        "rows": 29223,
+        "utf8_valid": false,
+        "gbk_valid": true,
+        "ascii_only": false
+      },
+      {
+        "path": "CLSVShare/powergame.tbl",
+        "old_padding_valid": true,
+        "no_embedded_nul": true,
+        "crlf_only": true,
+        "comma_schema_consistent": true,
+        "payload_bytes": 32,
+        "columns": 1,
+        "rows": 2,
+        "utf8_valid": true,
+        "gbk_valid": true,
+        "ascii_only": true
+      },
+      {
+        "path": "CLSVShare/skill_table.tbl",
+        "old_padding_valid": true,
+        "no_embedded_nul": true,
+        "crlf_only": true,
+        "comma_schema_consistent": true,
+        "payload_bytes": 7253247,
+        "columns": 65,
+        "rows": 23227,
+        "utf8_valid": false,
+        "gbk_valid": true,
+        "ascii_only": false
+      },
+      {
+        "path": "Table/quest_table.tbl",
+        "old_padding_valid": true,
+        "no_embedded_nul": true,
+        "crlf_only": true,
+        "comma_schema_consistent": false,
+        "payload_bytes": 4586490,
+        "columns": 1,
+        "rows": 5852,
+        "utf8_valid": false,
+        "gbk_valid": true,
+        "ascii_only": false
+      },
+      {
+        "path": "Table/Regions/quest_table.tbl",
+        "old_padding_valid": false,
+        "no_embedded_nul": false,
+        "crlf_only": false,
+        "comma_schema_consistent": false,
+        "payload_bytes": 0,
+        "columns": 0,
+        "rows": 0,
+        "utf8_valid": false,
+        "gbk_valid": false,
+        "ascii_only": false
+      },
+      {
+        "path": "Table/Regions/supplytable.tbl",
+        "old_padding_valid": false,
+        "no_embedded_nul": false,
+        "crlf_only": false,
+        "comma_schema_consistent": false,
+        "payload_bytes": 0,
+        "columns": 0,
+        "rows": 0,
+        "utf8_valid": false,
+        "gbk_valid": false,
+        "ascii_only": false
+      }
+    ]
+  },
+  "historical_copy_evidence": {
+    "regions_tbl_names_paired_with_root": 111,
+    "regions_tbl_identical_to_root": 0,
+    "runtime_regions_literal_interpretation": "The frozen code range appends .xml to Table/Regions; it is not a TBL load path.",
+    "executable_ranges": [
+      {
+        "name": "regions-xml-path-builder",
+        "file_offset": "0x280770",
+        "length": 272,
+        "sha256": "93068e861cbd04935d546f0ee435192d9eab949dcb4779e4955827e62b199f42"
+      },
+      {
+        "name": "regions-xml-string-cluster",
+        "file_offset": "0x4794e0",
+        "length": 43,
+        "sha256": "b71999eaf35a49bd99870f592c1b2931962749ba12a75e25374f8da54095a8db"
+      }
+    ]
+  },
+  "secret_store": {
+    "secret_id": "tmxy/development/table/qy-3.0.0.413/runtime-key-base64",
+    "provider_reference": "se://tmxy/development/table/qy-3.0.0.413/runtime-key-base64",
+    "provider": "Docker Pass operating-system keychain",
+    "persisted": true,
+    "created": false,
+    "read_back_verified": true,
+    "docker_runtime_resolver_required_for_capture": false
+  },
+  "confirmed_processing": [
+    "runtime-mutated 16-byte key",
+    "double AES-128 ECB-like independent-block decode",
+    "one-byte padding length with zero tail for the current table domain",
+    "CRLF payload for the current table domain",
+    "GBK for representative non-ASCII item, skill, and quest tables",
+    "113 non-matching files are older shadow copies with newer verified replacements"
+  ],
+  "unresolved_processing": [
+    "table-specific schema variation beyond simple comma splitting",
+    "runtime key rotation lifecycle across sessions"
+  ],
+  "next_scope": {
+    "task": "P1-10",
+    "detail": "Implement the current-table reader with explicit key injection and table-specific schema handling; historical shadow copies remain excluded from active inputs."
+  }
+}

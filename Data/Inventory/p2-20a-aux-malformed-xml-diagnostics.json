@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.11",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "report_json": {
+    "bytes": 16551,
+    "sha256": "42b64f380ada8cfa235b9ed2178a95ae6c489f1a33ba2aaccde3571db5a3b28c"
+  },
+  "report_markdown": {
+    "bytes": 1282,
+    "sha256": "3aea25455de417b743bb9ca96cb77d414f96f04a794b52fe43450da3d89e633f"
+  },
+  "detail_export": {
+    "tracked": false,
+    "path": "Data/Exports/P2-20/p2-20a-aux-malformed-xml-diagnostics.jsonl",
+    "lines": 6,
+    "bytes": 10097,
+    "sha256": "cae0c0f2ba3a043315b683097486a0fbfd40cfa7eea210d27d4f4e7c8260dd57"
+  },
+  "population": {
+    "instances": 6,
+    "unique_contents": 6,
+    "source_bytes": 1082028,
+    "gbk_instances": 6,
+    "crlf_only_instances": 6,
+    "crlf_pairs": 17981,
+    "lone_lf": 0,
+    "lone_cr": 0,
+    "nul_instances": 0,
+    "doctype_instances": 0,
+    "entity_instances": 0,
+    "instance_set_sha256": "effc19aa0fa8ba9cf3ac534aca8bb3e9f07999e363eee5a8c2e7f288df5ee802",
+    "content_set_sha256": "17e163f68108f9c471734e7b105415cac5aa75fbd0bd22a3be7364ce54a36268"
+  },
+  "layer_outcomes": {
+    "p2_05_document_rejections": 6,
+    "p2_05_fragment_rejections": 6,
+    "elementtree_rejections": 6,
+    "tinyxml_api_successes": 6,
+    "tinyxml_full_consumption": 5,
+    "tinyxml_silent_partial": 1
+  },
+  "consumer_boundary": {
+    "source_bound": 5,
+    "dynamic_client_source_bound": 1,
+    "literal_server_source_bound": 4,
+    "unresolved_no_source_literal": 1,
+    "client_input_null_termination_proven": false,
+    "legacy_memory_tail_observed": false
+  },
+  "authority_boundaries": {
+    "legacy_runtime_executed": false,
+    "runtime_binary_parity_claimed": false,
+    "windows_crt_text_mode_runtime_parity_claimed": false,
+    "repair_applied": 0,
+    "source_writes": 0,
+    "deletions_authorized": 0,
+    "semantic_values_extracted": 0,
+    "semantic_imports_claimed": 0,
+    "approved_adapters": 0,
+    "approved_no_reference_instances": 0,
+    "approved_roots": 0,
+    "terminal_dispositions": 0
+  },
+  "blockers": [
+    {
+      "reason_code": "STRICT_XML_REJECTED",
+      "count": 6
+    },
+    {
+      "reason_code": "TINYXML_ACCEPTS_STRICT_INVALID_INPUT",
+      "count": 6
+    },
+    {
+      "reason_code": "TINYXML_SILENT_PARTIAL_PARSE",
+      "count": 1
+    },
+    {
+      "reason_code": "CONSUMER_BINDING_UNRESOLVED",
+      "count": 1
+    },
+    {
+      "reason_code": "CLIENT_XML_CSTRING_TERMINATION_UNPROVEN",
+      "count": 1
+    },
+    {
+      "reason_code": "MALFORMED_DISPOSITIONS_PENDING",
+      "count": 6
+    },
+    {
+      "reason_code": "LEGACY_RUNTIME_NOT_EXECUTED",
+      "count": 1
+    },
+    {
+      "reason_code": "RUNTIME_BINARY_PARITY_UNPROVEN",
+      "count": 1
+    }
+  ],
+  "contracts": {
+    "policy_sha256": "edc511c501a71a51dce526d61e2eeaad20e841bc485b653abca40997577b8759",
+    "schema_sha256": "c4f3e1f7c368dc1e06be8fd2f337d8a8072cdfdf76f38d815de4c9523bb89fdc",
+    "detail_schema_sha256": "72e4ff6282781819dfc82a1ef1cbaa4828976598c9137ba1c3d1ca523d7b973b"
+  },
+  "implementation": {
+    "generator_sha256": "8c60fed4372c62ac86685c3026a3d5f47919a7a663dce2b0e40ded58151bf392",
+    "support_sha256": "decb79436b3b5137e7833d1d832dd9cf542c7a5cb3832a5d040a045219721356",
+    "probe_sha256": "4b3e3910c719291ccbaa9b13549cd79474a2098f593e76ec8e43276070cf8e3e",
+    "evidence_helper_sha256": "14b95975f4324d25a917265a361b37e85bf63ae832c0ee14262c2a612c4d7686",
+    "self_test_assertions": 6
+  },
+  "source_verification": {
+    "performed": true,
+    "source_families": 2,
+    "builder_image_reference": "tmxy-backend-builder:p0-08",
+    "builder_image_digest": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "toolchain_lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
+    "wrapper_sha256": "8619aae715d008d5fe2ad5b05a6d5f3387195e0fb8419a04864c2a566eb11538",
+    "compiler_executable": "clang++-21",
+    "compiler_major": 21,
+    "compiler_version_output_sha256": "9ded319aa70710f5d9300798de0b09f31a78129fd661a68173fb7d455eb8ef4e",
+    "client_source_set_sha256": "0f26c4e1f3630576635bffdba16b03a921ee5921896c12e386cde711d37499c2",
+    "server_source_set_sha256": "1056cbb66b3b0f429871422c2d6698f8ca8a7ca75ca379dd7e8b0e6b80e9b575",
+    "network": "none",
+    "repository_mount": "read-only",
+    "client_legacy_mount": "read-only",
+    "server_legacy_mount": "read-only",
+    "builder_user": "tmxy",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "evidence_boundary": {
+      "source_derived_only": true,
+      "legacy_binary_executed": false,
+      "runtime_parity_claimed": false,
+      "windows_crt_parity_claimed": false,
+      "null_tail_parity_claimed": false,
+      "probe_input_nul_appended": true,
+      "client_input_null_termination_proven": false,
+      "runtime_memory_tail_observed": false,
+      "api_success_grants_disposition": false
+    },
+    "elementtree_outcome_sha256": "cf1c56d9f99ff2c379d3ed7640c057c0ceadaa2908ed9aa3d898e591f22a52e6",
+    "tinyxml_api_and_completeness_outcome_sha256": "2d0e19ea598284a59532082a495c3dd739aae10d69ca4d7be8dd35bf09f61e3f",
+    "tinyxml_tree_outcome_sha256": "6d1a33ecde5cc3c1de346c02671c8a421c264c1f468db5b4a722881c6a425fcd",
+    "legacy_runtime_executed": false,
+    "runtime_binary_parity_claimed": false
+  },
+  "isolation": {
+    "network": "none",
+    "repository_mount": "read-only",
+    "client_legacy_mount": "read-only",
+    "server_legacy_mount": "read-only",
+    "builder_user": "tmxy",
+    "capabilities": "none",
+    "no_new_privileges": true
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_xml": false,
+    "decoded_payloads": false,
+    "element_or_attribute_names": false,
+    "attribute_or_text_values": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "parser_line_or_column": false,
+    "legacy_source_lines": false
+  }
+}

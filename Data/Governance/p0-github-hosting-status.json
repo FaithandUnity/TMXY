@@ -1,0 +1,114 @@
+{
+  "schema_version": 4,
+  "captured_utc": "2026-08-27T23:41:27.6219536+00:00",
+  "result": "BLOCKED_EXTERNAL_AUTHORITY",
+  "completion_criteria_satisfied": false,
+  "release_authority": false,
+  "provider": {
+    "name": "github",
+    "repository": "FaithandUnity/TMXY",
+    "visibility": "public",
+    "default_branch": "main",
+    "viewer_permission": "admin",
+    "remote_name": "origin",
+    "remote_url": "https://github.com/FaithandUnity/TMXY.git"
+  },
+  "source": {
+    "revision": "07b8e8933caf537e393d4dde354cff7fada847d3",
+    "branch": "build/p0-12-github-actions"
+  },
+  "branch_authority": {
+    "protected": true,
+    "protection_api_status": 200,
+    "protection_api_message": "",
+    "rulesets_api_status": 200,
+    "rulesets_api_message": "",
+    "contract_satisfied": true,
+    "required_checks_enforced": true,
+    "required_status_checks_strict": true,
+    "required_check_contexts": [
+      "backend/clang21",
+      "backend/postgres-migration",
+      "backend/static-analysis",
+      "client/ue58-build-automation",
+      "policy/repository",
+      "release/provenance",
+      "security/secrets",
+      "supply-chain/policy"
+    ],
+    "expected_required_check_contexts": [
+      "policy/repository",
+      "security/secrets",
+      "backend/clang21",
+      "backend/static-analysis",
+      "backend/postgres-migration",
+      "client/ue58-build-automation",
+      "supply-chain/policy",
+      "release/provenance"
+    ],
+    "pull_request_protection_enforced": true,
+    "administrator_bypass_forbidden": true,
+    "required_approvals": 1,
+    "dismiss_stale_approvals": true,
+    "require_code_owner_review": true,
+    "require_last_push_approval": true,
+    "mutation_protection_enforced": true,
+    "force_push_forbidden": true,
+    "deletion_forbidden": true,
+    "linear_history_required": true,
+    "conversation_resolution_required": true
+  },
+  "review_authority": {
+    "direct_collaborator_count": 1,
+    "one_non_author_approval_possible": false,
+    "two_non_author_approvals_possible": false,
+    "code_owner_file_present": true
+  },
+  "actions": {
+    "enabled": true,
+    "allowed_actions": "all",
+    "default_workflow_permissions": "read",
+    "fork_pr_contributor_approval_api_status": 200,
+    "fork_pr_contributor_approval_policy": "all_external_contributors",
+    "fork_pr_contributor_approval_policy_satisfied": true,
+    "public_repository_runner_registration_authorized": false,
+    "workflow_count_on_default_branch": 1,
+    "repository_secret_count": 0,
+    "repository_variable_count": 0,
+    "artifact_count": 1
+  },
+  "runners": {
+    "self_hosted_count": 0,
+    "matching_ephemeral_ue58_count": 0
+  },
+  "release_environment": {
+    "name": "p0-release",
+    "api_status": 200,
+    "present": true,
+    "protected_branch_deployments_only": true,
+    "required_reviewer_count": 0
+  },
+  "artifact_retention": {
+    "api_status": 200,
+    "configured_days": 90,
+    "maximum_allowed_days": 90,
+    "minimum_required_days": 365,
+    "requirement_satisfied": false
+  },
+  "local_workflow_binding": {
+    "required_checks_workflow_present": true,
+    "release_provenance_workflow_present": true,
+    "diagnostic_artifact_retention_days": 90,
+    "minimum_required_retention_days": 365
+  },
+  "blocker_count": 7,
+  "blockers": [
+    "independent_reviewer_unavailable",
+    "two_sensitive_reviewers_unavailable",
+    "ue58_ephemeral_runner_unavailable",
+    "locked_builder_not_verified_in_ghcr",
+    "hosted_vulnerability_and_license_authority_missing",
+    "signed_provenance_and_oci_attestation_missing",
+    "minimum_365_day_immutable_retention_missing"
+  ]
+}

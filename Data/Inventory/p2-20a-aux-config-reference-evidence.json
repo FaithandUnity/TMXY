@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.3",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "input_bindings": {
+    "aggregate_sha256": "410d5797188acb75f5f8ca85493d2b95cd62fc2f455b5f0fafd4a77651479904",
+    "entries": [
+      {
+        "role": "auxiliary_config_inventory",
+        "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff"
+      },
+      {
+        "role": "full_asset_inventory",
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c"
+      },
+      {
+        "role": "reference_closure",
+        "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962"
+      },
+      {
+        "role": "asset_health",
+        "sha256": "d20e69adb8651eeb56434f1be6438dcc138e25ae9285c7de43c58ee43f6d0d79"
+      },
+      {
+        "role": "conversion_routing",
+        "sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54"
+      },
+      {
+        "role": "content_health",
+        "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1"
+      }
+    ]
+  },
+  "outputs": {
+    "report_json": {
+      "path": "Data/Reports/p2-20a-aux-config-reference-report.json",
+      "tracked": true,
+      "bytes": 157387,
+      "lines": 4009,
+      "sha256": "7486d70b346c8acd1695179dca06b66453850927d8f8cdc4773480ac636fbe45"
+    },
+    "report_markdown": {
+      "path": "Data/Reports/p2-20a-aux-config-reference-report.md",
+      "tracked": true,
+      "bytes": 1654,
+      "lines": 38,
+      "sha256": "d145f43bfc79a458ac49e4a0fb771eeff1cf8e31558f3bd1726326d514f401eb"
+    },
+    "governance": {
+      "path": "Data/Governance/p2-g2-aux-config-reference.json",
+      "tracked": true,
+      "bytes": 800,
+      "lines": 28,
+      "sha256": "011b1f330443474cf489af2a0c4b1b58a623510b300ce54e6cda42a27f12bf6d"
+    },
+    "anonymous_candidate_export": {
+      "path": "Data/Exports/P2-20/p2-20a-aux-config-reference-candidates.jsonl",
+      "tracked": false,
+      "bytes": 3321747,
+      "lines": 3907,
+      "sha256": "109ba4364c8716d040528769ab33ebdc8da43ac48307c3a17822387ea644d4d5"
+    }
+  },
+  "measured_lexical_candidates": {
+    "measurement_authority": "LEXICAL_ONLY",
+    "file_instances": 212,
+    "unique_content_bodies": 196,
+    "parsed_file_instances": 206,
+    "malformed_file_instances": 6,
+    "scalar_positions": 39522,
+    "nonempty_scalar_positions": 39498,
+    "asset_exact_occurrences": 3043,
+    "package_exact_occurrences": 638,
+    "package_unique_occurrences": 218,
+    "package_ambiguous_occurrences": 420,
+    "package_ambiguous_candidate_edges": 1136,
+    "config_exact_edges": 8,
+    "file_instance_set_sha256": "39b4f05d3673b69cd6428a5eac74da11c3520a1df2ff953766186fb391536275",
+    "lexical_occurrence_set_sha256": "1cc993cc579788c333b128e7a512a67b5b007d0e237f45a93f4932a6f047a73f"
+  },
+  "adapter_state_summary": {
+    "file_instances": 212,
+    "terminal_file_instances": 0,
+    "nonterminal_file_instances": 212,
+    "semantic_approved": 0,
+    "no_ref_approved": 0,
+    "candidate_only": 171,
+    "malformed_blocked": 6,
+    "editor_undecided": 35,
+    "approved_roots": 0
+  },
+  "semantic_resolution": {
+    "status": "UNASSESSED",
+    "unknown_occurrences": null,
+    "ambiguous_occurrences": null,
+    "unresolved_occurrences": null,
+    "resolved_occurrences": null,
+    "first_candidate_selections": 0,
+    "heuristic_target_selections": 0,
+    "all_ambiguous_candidates_retained": true,
+    "reason_code": "SEMANTIC_ADAPTERS_NOT_APPROVED"
+  },
+  "config_closure": {
+    "lexical_edges": 8,
+    "approved_root_count": 0,
+    "approved_root_set_sha256": null,
+    "semantic_edge_set_sha256": null,
+    "closure_set_sha256": null,
+    "closure_complete": false,
+    "cycle_detection_complete": false,
+    "cycle_count": null,
+    "unresolved_cycle_count": null,
+    "reason_code": "APPROVED_ROOTS_AND_SEMANTIC_EDGES_UNAVAILABLE"
+  },
+  "blockers": [
+    {
+      "reason_code": "SEMANTIC_ADAPTERS_UNAPPROVED",
+      "count": 212,
+      "blocking": true
+    },
+    {
+      "reason_code": "APPROVED_ROOT_SET_EMPTY",
+      "count": 0,
+      "blocking": true
+    },
+    {
+      "reason_code": "MALFORMED_INPUTS_UNDISPOSED",
+      "count": 6,
+      "blocking": true
+    },
+    {
+      "reason_code": "SEMANTIC_METRICS_UNAVAILABLE",
+      "count": 3,
+      "blocking": true
+    },
+    {
+      "reason_code": "CONFIG_CLOSURE_UNAPPROVED",
+      "count": 8,
+      "blocking": true
+    },
+    {
+      "reason_code": "AUXILIARY_SCOPE_INCOMPLETE",
+      "count": 1,
+      "blocking": true
+    }
+  ],
+  "authority_boundaries": {
+    "machine_candidate_is_approval": false,
+    "approved_semantic_adapters": 0,
+    "approved_no_ref_files": 0,
+    "approved_roots": 0,
+    "g2_06_satisfied": false,
+    "g2_approved": false,
+    "p3_authorized": false,
+    "release_authority": false
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json",
+    "policy_sha256": "a829f6ffc428ec5f5e104c387d114ef2b0e33b09b0d683646a6c261a7ea354db",
+    "schema": "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json",
+    "schema_sha256": "c92032c6dd35bd243f99868d4e2747af445bc2a99c7884c66512471baf412bc0"
+  },
+  "implementation": {
+    "source_files": 6,
+    "source_sha256": "0dc490407da2031cdc96919ad72d0169c43486d01cd20c4416e26c4f62267fd4",
+    "generator": "Tools/TMXY.G2AuxConfigClosure/g2_aux_config.py",
+    "generator_sha256": "bc2af38df6cc44ead63b1eb6ace7885985140ba9a092bae749b4c363a5c523a7",
+    "wrapper": "Tools/TMXY.G2AuxConfigClosure/New-G2AuxiliaryConfigClosure.ps1",
+    "wrapper_sha256": "8244738d997c93000d8edcf841dde97f66c92f175db3921f77fbf81729959c7c",
+    "self_test_assertions": 22
+  },
+  "disclosure": {
+    "anonymous_hash_count_reason_only": true,
+    "raw_scalar_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_payloads": false
+  },
+  "reproduction": {
+    "check_mode": false,
+    "repository_mount": "read-only",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20A.4",
+      "P2-20"
+    ],
+    "detail": "Approve explicit semantic or no-reference dispositions for every file instance, safely cover malformed XML, build approved roots and config closure, then rerun G2. P3 remains unauthorized."
+  }
+}

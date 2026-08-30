@@ -1,0 +1,2315 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-08",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "source": {
+    "build": "qy-3.0.0.413",
+    "p2_05_evidence_sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
+    "p2_06_evidence_sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+    "p2_07_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+    "policy_sha256": "e67d4c415d9c4c518c4e82636547364d99cd51fb7b8b0726fef03c73458d81be",
+    "registry_contract_sha256": "aecff979da46e6ac4ad72e2e17873209414c0cb16d90ed6574123ee64bc2c9e6",
+    "generator_sha256": "0afa551d671d6e6277ff3b2aa3bff44d3fbe25c3eec7159bdedc630b1c7053c8",
+    "client_source_files_scanned": 1096,
+    "client_source_population_sha256": "b19755de94cd6f377eaaf989bf949c57c0737963cce32929af52919dd7777557",
+    "server_source_files_scanned": 1972,
+    "server_source_population_sha256": "cc7c90f03d86ea7e6d552494941524632a036b8cf9da2bb7c24e381af0175c20",
+    "client_config_sha256": "35ce22803fac775d5847fc495811a43cbaf53feadaa776c0446be930921596b1"
+  },
+  "output": {
+    "registry_path": "Data/Schemas/table-ownership-registry-v1.json",
+    "registry_sha256": "7c1999a4205bfc3da6f8f66bf6e778cb94fd9f129d896546c92e4358941c7e22"
+  },
+  "summary": {
+    "active_tables": 225,
+    "classified_tables": 225,
+    "unclassified_tables": 0,
+    "schema_owner_client": 117,
+    "schema_owner_server": 0,
+    "schema_owner_shared": 108,
+    "runtime_client_presentation": 117,
+    "runtime_server_authoritative": 108,
+    "current_client_config_referenced_tables": 127,
+    "legacy_client_source_referenced_tables": 3,
+    "legacy_server_source_referenced_tables": 45,
+    "observed_consumer_none": 98,
+    "core_tables": 12,
+    "core_columns": 355,
+    "classified_core_columns": 355,
+    "core_owner_client": 48,
+    "core_owner_server": 277,
+    "core_owner_shared": 30,
+    "core_localizable_columns": 36,
+    "security_sensitive_client_authority_violations": 0,
+    "result": "PASS"
+  },
+  "table_decisions": [
+    {
+      "source_path": "CLSVShare/18hell.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/achievement_counter.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/achievement_point_reward.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/achievement_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/active_degrees.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/active_reward.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ArenaLevel.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/BattleWeekday.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/bindingPointmax.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/camp.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/cardinfo_point_reward.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/CardInfo.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/catapult_dmgrate.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/catapult_types.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Certificate.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/char_emote.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/decompose.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ElementLightInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/emote.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/entry.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 1,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/EquipSkilledLevel.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_base_prop.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_exp.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_growth.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_hecheng_level.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_name.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_props_name.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_props_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/fabao_skill.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/face.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/FashionCard.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/FilterWord.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/formula_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/functionVIP_levelup_exp.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ghost_event.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/GoldEquipGen.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_buff.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 4,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_building.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 5,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_expend.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_mem_level.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_passive_effects.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_produce.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/guild_technology.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 5,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/hair.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Item_Enchant.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/item_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 2,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/LevelInfo.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Lottery.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MagicCard.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MagicCardCompose.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MagicCardFurnace.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MagicCardReward.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MagicGroup.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/map_icon.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/map_mark.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MeritoriousLevelInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/month.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 1,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Mount_point_reward.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Mount_table.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MountCard.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MountCardReward.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/MSlevel.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/onlineInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Pet_Change_Effect.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/pet_growth_level.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Pet_Possession.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Pet_Spawn.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/PetProfessionLvl.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/powergame.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/PracticeCheats.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/PracticeCheatsSubClass.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Profession_lvl.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/QStarHoleRate.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/QStarLevel.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/QStarMap.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/QStarStone.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/rand_eff_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/rank_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/RecruitmentTable.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ReputationLevel.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/SecondLevelInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/sheli_color_level.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/sheli_item_info.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/sheli_level.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/sheli_wing.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ShenqiBaseInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ShenqiJiban.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ShenqiLevelInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ShenqiName.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ShenqiSkill.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/skill_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/spirit_exp.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/spirit_itemlevel.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/spirit_name.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/spirit_prop.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/spirit_skill.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/states.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Suit_table.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Transpoints.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/TroopsLevelInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Turntable_reward.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/unit_cls.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/unit_disp_ids.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/unit_prop.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/VipFuncInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/VipStoreInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/waypoint.tbl",
+      "observed_consumer_scope": "shared",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 1,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/WingsCollection.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/WingsLevel.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/WingsProp.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/Wish.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ZhanLingLevelInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "CLSVShare/ZhanLingQuestInfo.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Activities.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/autoTable.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Bear_N_Lord01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Bear_N_Master01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Bear_N_Pigtail.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Bear_N_Warrior01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Boar_N_Lord01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Boar_N_Master01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Boar_N_Warrior01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Create_UEqu.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/FMDirect.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/help_docs.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Lion_N_Lord01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Lion_N_Master02.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Lion_N_Warrior02.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/local/localitem.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/merits_description.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SBBody01_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SBBody01_Cuff.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SBBody01_face.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SBBody01_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody01_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody01_Cuff.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody01_face.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody01_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody04_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody04_Cuff.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody04_face.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_SRBody04_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WCBody01_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WCBody01_face.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WCBody01_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WCBody02_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WCBody02_face.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WCBody02_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WJBody01_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WJBody01_Cuff.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WJBody01_face.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Niuzi01_N_WJBody01_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_Fback.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_Fglass.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_Fmouth.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_hat.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p01_head.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p02_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p02_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p02_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p03_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p03_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p03_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p04_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p04_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p04_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p05_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p05_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p05_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p06_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p06_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p06_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p07_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p07_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p07_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p08_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p08_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p08_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_Fback.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_Fglass.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_Fmouth.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_hair.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_hat.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p11_head.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p12_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p12_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p12_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p13_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p13_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p13_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p14_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p14_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p14_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p15_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p15_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p15_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p16_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p16_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p16_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p17_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p17_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p17_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p18_body.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p18_foot.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/p18_hand.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Pet_N_Lolihou01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Pet_N_Lolihou02.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Pet_N_Lolihou03.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/quest_direct.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/quest_table.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/ReputationName.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/submitloc.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 1,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/supplytable.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "shared",
+      "runtime_authority": "server-authoritative",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Tiger_N_Lord01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Tiger_N_Master01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/Tiger_N_Warrior01.tbl",
+      "observed_consumer_scope": "none",
+      "current_client_config": false,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/VipDesc.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    },
+    {
+      "source_path": "Table/xyhelp.tbl",
+      "observed_consumer_scope": "client",
+      "current_client_config": true,
+      "legacy_client_reference_files": 0,
+      "legacy_server_reference_files": 0,
+      "schema_owner": "client",
+      "runtime_authority": "client-presentation",
+      "result": "PASS"
+    }
+  ],
+  "guarantees": {
+    "every_active_table_classified": true,
+    "every_core_column_classified": true,
+    "combat_and_economy_default_to_server_authority": true,
+    "client_copy_does_not_grant_runtime_authority": true,
+    "display_and_localization_boundaries_are_explicit": true,
+    "unknown_gameplay_semantics_fail_to_server_authority": true,
+    "decoded_client_config_or_field_values_emitted_to_evidence": false,
+    "legacy_sources_mutated": false
+  },
+  "reproduction": {
+    "generator": "Tools/TMXY.Table/New-TableOwnershipRegistry.ps1",
+    "check_mode": "-Check",
+    "deterministic_registry_and_evidence": true
+  }
+}

@@ -83,11 +83,18 @@ std::string build_texture_json(const QtxTextureView& texture, const TextureJsonN
            << "  \"height\": " << texture.descriptor.height << ",\n"
            << "  \"stored_mip_count\": " << texture.descriptor.stored_mip_count << ",\n"
            << "  \"mip_count\": " << texture.descriptor.mip_count << ",\n"
+           << "  \"effective_mip_count\": " << texture.effective_mip_count << ",\n"
+           << "  \"mip_count_basis\": " << json_string(to_string(texture.mip_count_basis)) << ",\n"
            << "  \"u_clamp\": " << json_string(to_string(texture.descriptor.u_clamp)) << ",\n"
            << "  \"v_clamp\": " << json_string(to_string(texture.descriptor.v_clamp)) << ",\n"
            << "  \"alpha_encoding\": " << json_string(to_string(texture.alpha_encoding)) << ",\n"
            << "  \"alpha_coverage\": " << json_string(to_string(texture.alpha_coverage)) << ",\n"
            << "  \"payload_size\": " << texture.payload_size << ",\n"
+           << "  \"input_payload_bytes\": " << texture.input_payload_bytes << ",\n"
+           << "  \"consumed_payload_bytes\": " << texture.consumed_payload_bytes << ",\n"
+           << "  \"ignored_payload_bytes\": " << texture.ignored_payload_bytes << ",\n"
+           << "  \"payload_extent_basis\": " << json_string(to_string(texture.payload_extent_basis))
+           << ",\n"
            << "  \"unknown_property_count\": " << texture.descriptor.unknown_properties.size()
            << ",\n"
            << "  \"mips\": [\n";

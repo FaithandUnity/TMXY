@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T11:22:54.9484506+00:00",
+  "task_id": "P2-09",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "legacy_snapshot": "legacy-devdoc-decrypted-csv-20120318",
+    "legacy_build": "unknown-not-inferred",
+    "legacy_manifest_sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+    "current_build": "qy-3.0.0.413",
+    "p2_06_evidence_sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+    "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+    "copy_policy": "reference_only"
+  },
+  "report": {
+    "path": "Data/Exports/P2-09/p2-09-legacy-current-diff.jsonl",
+    "tracked": false,
+    "lines": 52,
+    "bytes": 41759,
+    "sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667"
+  },
+  "summary": {
+    "authoritative_default_claims": 0,
+    "columns": {
+      "current_only": 66,
+      "inferred_type_changes": 59,
+      "legacy_only": 18,
+      "observed_mode_hash_changes": 179,
+      "shared": 608
+    },
+    "core_primary_key_tables": 10,
+    "current_active_tables": 113,
+    "equal_headers": 40,
+    "legacy_build_known": false,
+    "legacy_bytes": 8609196,
+    "legacy_encodings": {
+      "gb18030": 33,
+      "utf-8": 19
+    },
+    "legacy_tables": 52,
+    "paired_tables": 52,
+    "references": {
+      "changed_rules": 12,
+      "comparable_rules": 12,
+      "current_active_references": 39361,
+      "current_dangling_references": 0,
+      "legacy_active_references": 19599,
+      "legacy_dangling_references": 0
+    },
+    "rows": {
+      "current": 149472,
+      "current_only": 104972,
+      "legacy": 73602,
+      "legacy_only": 29102,
+      "shared_exact": 44500
+    },
+    "unpaired_legacy_tables": 0
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/legacy-current-diff-policy-v1.json",
+    "policy_sha256": "26fcb4233e4969756b9d995ee04063b150cc7809df6a0116a41fee0a87889a4c",
+    "schema": "Contracts/data-schema/legacy-current-diff-v1.schema.json",
+    "schema_sha256": "785bb58476901149d76fa22d68d6eca5074688be438ec202dc83e4f41b77b4d3"
+  },
+  "implementation": {
+    "source_files": 3,
+    "source_sha256": "5ded902682acb239d8931f136b67f031e386d0ba6d8c9e4524761ba93bd3c049",
+    "self_test_assertions": 5,
+    "generator": "Tools/TMXY.TableDiff/New-LegacyCurrentDiff.ps1",
+    "query": "Tools/TMXY.TableDiff/Find-LegacyCurrentDiff.ps1"
+  },
+  "disclosure": {
+    "tracked_evidence_contains_headers": false,
+    "tracked_evidence_contains_row_values": false,
+    "tracked_evidence_contains_primary_keys": false,
+    "full_report_committed_to_git": false,
+    "legacy_payloads_copied": false
+  },
+  "reproduction": {
+    "check_mode": "-Check",
+    "legacy_mount": "read-only",
+    "workspace_mount": "read-only",
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-10",
+      "P2-11",
+      "P2-17"
+    ],
+    "detail": "Build explicit Canonical ID mappings from the comparable legacy/current key domains."
+  }
+}

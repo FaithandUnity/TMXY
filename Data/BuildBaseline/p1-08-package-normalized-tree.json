@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:18:37.9640755+00:00",
+  "captured_utc": "2026-08-30T18:00:19.1321669+00:00",
   "result": "PASS",
   "task": "P1-08",
-  "source_file_count": 22,
-  "source_sha256": "069450b215710ba83eee78ac22f51e5573a8bf5c46062a2066bd7f9e6ce3356b",
+  "source_file_count": 26,
+  "source_sha256": "88f0288781add26b43ee32986b2d83f9772dfa7d3731b2fcffd838afe619c147",
   "json_schema": {
     "path": "Contracts/data-schema/package-tree-v1.schema.json",
     "sha256": "de461b5a52a7e363caf46136528d3a3a1a11a89dcc3e2918cbc569259c052475",
@@ -12,10 +12,10 @@
     "passed": true
   },
   "dependency_report_sha256": {
-    "p1-02-package-v1.json": "c4a9eacaea3e1c6a2368a5657f852e59a6f8a1fa05ca41da80490990861fd1f8",
-    "p1-05-package-v2.json": "6c4e3a84504a746f138ad7503b587e16bc24280d595fb78f576045f3154c04fa",
-    "p1-06-package-v3.json": "56f686ffe512a0a5963cbb7f22074c56de85627898c3daf99ce1f96e9b1e0f3d",
-    "p1-07-package-pipeline.json": "e00be3314a6f8e7b1964b34a1b8ba7826ae3c92c37f3ce79ace19a92800af635"
+    "p1-02-package-v1.json": "46eba8785213dbb561f146a5a11ce9c5d39eb26ecfaeed72ac097e722a3cffd2",
+    "p1-05-package-v2.json": "41706c90583cc02b774b0f898c37608df4cd3b1e4b6057ad45d048ebfc623192",
+    "p1-06-package-v3.json": "eb5b26656f474540baf5b78f9916e0a8508f26e35bf304170e086f9eb1fb3a55",
+    "p1-07-package-pipeline.json": "f05b90e0c4ef8be863ec51541956242db96e63bc5b340a79d701be14823af648"
   },
   "semantic_states": {
     "names_and_classes": "opaque-bytes-hex",
@@ -42,8 +42,8 @@
   },
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -66,7 +66,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 87,
-    "output_sha256": "0fb0bcf5303f7743f67aab5f591ac640769f3fbce0cfba80ccbbf9a250b57840"
+    "output_line_count": 100,
+    "output_sha256": "cb2cd52a2920d52f757be3a74d13aaaadd4700b6458dcac67780c2eaac66ffe2"
   }
 }

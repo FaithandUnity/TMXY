@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.3",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "scope_authority": "monotonic union frozen from pre-existing P2-08 and P2-13 authorities; never selected from observed closure outcomes",
+  "inputs": {
+    "p2_06": "Data/Inventory/p2-06-three-layer-data.json",
+    "p2_05": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+    "p2_08": "Data/Inventory/p2-08-table-ownership.json",
+    "ownership_registry": "Data/Schemas/table-ownership-registry-v1.json",
+    "core_registry": "Data/Schemas/core-table-registry-v1.json",
+    "p2_12": "Data/Inventory/p2-12-full-asset-inventory.json",
+    "asset_catalog": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+    "reference_policy": "Contracts/data-schema/reference-closure-policy-v1.json",
+    "p2_13": "Data/Inventory/p2-13-reference-closure.json",
+    "reference_graph": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
+    "p2_18": "Data/Inventory/p2-18-content-health.json",
+    "auxiliary_reference_policy": "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json",
+    "auxiliary_reference_schema": "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json",
+    "auxiliary_reference_evidence": "Data/Reports/p2-20a-aux-config-reference-report.json",
+    "asset_descriptor_report": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+    "asset_descriptor_detail": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+    "asset_descriptor_evidence": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+    "asset_binding_failure_report": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+    "asset_binding_failure_evidence": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
+    "asset_binding_recovery_report": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+    "asset_binding_recovery_evidence": "Data/Inventory/p2-20a-asset-binding-recovery.json",
+    "g2_policy": "Contracts/data-schema/g2-review-policy-v1.json"
+  },
+  "declared_root_scope": {
+    "selection": "all P2-13 root records in all declared root kinds",
+    "root_kinds": ["character", "scene", "skill"],
+    "minimum_root_kinds": 3,
+    "allows_outcome_based_exclusion": false
+  },
+  "core_table_resource_scope": {
+    "selection": "all P2-13 table-object reference rules whose table and column_id exactly match a PASS P2-08 core column, applied to every emitted non-sentinel canonical-row reference",
+    "required_rule_count": 16,
+    "include_runtime_authorities": ["client-presentation", "server-authoritative"],
+    "owner_filtering": "forbidden",
+    "consumer_filtering": "forbidden",
+    "allows_outcome_based_exclusion": false
+  },
+  "conditional_required_scope": {
+    "source": "P2-13 runtime-assert aggregates independently reproduced from P2-06 normalized rows and the frozen P2-13 rule contract",
+    "runtime_assert_rows_required": true,
+    "missing_values_remain_in_scope_without_table_package_edges": true,
+    "required_rule_count": 1,
+    "member_set_exported": true,
+    "member_record_fields": ["member_sha256", "rule_id", "reason"],
+    "member_reason_values": ["missing-required-value"],
+    "member_identity": "sha256 over the frozen rule id and the stable anonymous canonical-row hash",
+    "member_set_must_be_complete_unique_and_hash_bound": true,
+    "member_values_forbidden": true,
+    "core_foreign_key_substitution": "forbidden"
+  },
+  "asset_binding_scope": {
+    "source": "P2-12 catalog and P2-13 package-to-asset edges, with P2-20A.4 effective production-binding diagnostics for the complete specialized subset and P2-20A.7/A.8 recovery cross-proof; the A.13 QTX plan is reflected through those acyclic authoritative inputs",
+    "families": ["anim", "qtx", "skem", "sm", "ter", "wav"],
+    "member_set_exported": true,
+    "member_record_fields": [
+      "asset_id", "candidate_count", "candidate_set_sha256", "descriptor_variants",
+      "family", "heuristic_selection", "resolution", "resolution_basis", "structure",
+      "valid_variants"
+    ],
+    "allowed_resolutions": ["RESOLVED", "AMBIGUOUS", "UNRESOLVED"],
+    "all_candidate_targets_are_preserved": true,
+    "first_candidate_selection": "forbidden",
+    "explicit_state_does_not_imply_resolved": true,
+    "ambiguous_and_unresolved_remain_blocking": true
+  },
+  "auxiliary_config_scope": {
+    "inventory_must_be_hash_bound": true,
+    "lexical_evidence_must_be_hash_bound": true,
+    "lexical_evidence_revision": "P2-20A.3",
+    "measurement_authority": "LEXICAL_ONLY",
+    "reference_adapters": [],
+    "required_coverage": "complete",
+    "current_coverage": "lexical-candidate-inventory-only",
+    "new_roots_are_union_only": true,
+    "missing_adapters_fail_closed": true,
+    "semantic_approval_required": true,
+    "zero_lexical_match_is_not_no_reference_approval": true,
+    "malformed_inputs_remain_blocking": true,
+    "machine_candidates_are_not_approvals": true
+  },
+  "traversal": {
+    "mode": "directed-fixed-point",
+    "edge_records": [
+      "table_fk_edge",
+      "table_domain_edge",
+      "table_package_edge",
+      "package_edge",
+      "package_asset_edge"
+    ],
+    "known_nontraversed_records": [
+      "package_node",
+      "table_node",
+      "table_domain_node",
+      "asset_node",
+      "table_scoped_edge",
+      "root"
+    ],
+    "logical_resolution_records": ["table_package_edge", "package_edge"],
+    "allowed_logical_resolutions": ["unique", "ambiguous", "unresolved", "scoped-terminal"],
+    "gap_resolutions": ["ambiguous", "unresolved"],
+    "scoped_terminal_policy": "only package-edge kinds already listed by P2-13 may terminate without a global target",
+    "unknown_record_fails_closed": true,
+    "unknown_resolution_fails_closed": true,
+    "first_candidate_selection": "forbidden",
+    "heuristic_target_selection": "forbidden"
+  },
+  "completion": {
+    "required_status": "SATISFIED",
+    "scope_complete": true,
+    "auxiliary_config_reference_scope_complete": true,
+    "asset_binding_resolution_explicit": true,
+    "asset_binding_ambiguous": 0,
+    "asset_binding_unresolved": 0,
+    "asset_binding_unknown": 0,
+    "table_reference_unresolved": 0,
+    "table_reference_ambiguous": 0,
+    "package_reference_unresolved": 0,
+    "package_reference_ambiguous": 0,
+    "conditional_required_missing": 0,
+    "heuristic_target_selections": 0,
+    "reachable_asset_structure_unresolved": 0,
+    "reachable_asset_structure_fail": 0,
+    "unknown_record_count": 0,
+    "unknown_resolution_count": 0
+  },
+  "fail_closed_rules": {
+    "core_foreign_key_zero_is_not_resource_closure": true,
+    "conditional_required_metric_must_be_present_and_source_bound": true,
+    "conditional_required_missing_cannot_be_inferred_from_edge_absence": true,
+    "all_candidate_targets_are_preserved": true,
+    "summary_must_match_detailed_export_and_set_hashes": true,
+    "blocked_auxiliary_evidence_must_not_be_validated_as_a_complete_prerequisite": true,
+    "missing_ignored_inputs_block_generation": true,
+    "opaque_package_bodies_are_not_parse_failures": true,
+    "unlinked_or_duplicate_assets_are_not_delete_authority": true,
+    "blocked_evidence_never_authorizes_g2_p3_playability_or_release": true
+  },
+  "output": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+    "conditional_required_workset": "Data/Exports/P2-20/p2-20a-conditional-required-workset.jsonl",
+    "asset_binding_workset": "Data/Exports/P2-20/p2-20a-effective-asset-binding-workset.jsonl",
+    "report_json": "Data/Reports/p2-20a-core-resource-closure-report.json",
+    "report_markdown": "Data/Reports/p2-20a-core-resource-closure-report.md",
+    "governance": "Data/Governance/p2-g2-core-resource-closure.json",
+    "evidence": "Data/Inventory/p2-20a-core-resource-closure.json",
+    "tracked_detail_export": false
+  },
+  "disclosure": {
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  }
+}

@@ -1,0 +1,13 @@
+# Default ownership for the TMXY Rebuild repository.
+* @FaithandUnity
+
+# Sensitive governance, CI, security, protocol, database, and release paths.
+/.github/ @FaithandUnity
+/Docs/Build/PUBLIC-SELF-HOSTED-RUNNER-SECURITY.md @FaithandUnity
+/Contracts/proto/ @FaithandUnity
+/Data/Governance/ @FaithandUnity
+/Data/Security/ @FaithandUnity
+/Deploy/ @FaithandUnity
+/Docs/Governance/ @FaithandUnity
+/Docs/Security/ @FaithandUnity
+/Backend/adapters/persistence_postgres/migrations/ @FaithandUnity

@@ -19,8 +19,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 include(cmake/TMXYProjectOptions.cmake)
 
 add_subdirectory(modules/foundation)
+add_subdirectory(modules/content)
 add_subdirectory(apps/gateway)
 
 if(BUILD_TESTING)
     add_subdirectory(modules/foundation/tests)
+    add_subdirectory(modules/content/tests)
 endif()

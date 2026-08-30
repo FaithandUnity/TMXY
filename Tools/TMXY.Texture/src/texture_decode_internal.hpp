@@ -11,6 +11,9 @@
 namespace tmxy::texture::detail
 {
 
+[[nodiscard]] bool valid_qtx_texture_view(const QtxTextureView& texture,
+                                          std::span<const std::byte> payload);
+
 [[nodiscard]] TextureResult<std::vector<std::byte>>
 decode_block_compressed(TextureFormat format, std::uint32_t width, std::uint32_t height,
                         std::span<const std::byte> payload);

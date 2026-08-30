@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.3",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "required_input_roles": [
+    "auxiliary_config_inventory",
+    "full_asset_inventory",
+    "reference_closure",
+    "asset_health",
+    "conversion_routing",
+    "content_health"
+  ],
+  "measured_lexical_candidates": {
+    "measurement_authority": "LEXICAL_ONLY",
+    "file_instances": 212,
+    "unique_content_bodies": 196,
+    "parsed_file_instances": 206,
+    "malformed_file_instances": 6,
+    "scalar_positions": 39522,
+    "nonempty_scalar_positions": 39498,
+    "asset_exact_occurrences": 3043,
+    "package_exact_occurrences": 638,
+    "package_unique_occurrences": 218,
+    "package_ambiguous_occurrences": 420,
+    "package_ambiguous_candidate_edges": 1136,
+    "config_exact_edges": 8
+  },
+  "planning_adapter_states": [
+    {
+      "state": "semantic-approved",
+      "terminal": true,
+      "authority_required": true,
+      "reason_code": "SEMANTIC_CONTRACT_AND_ROOTS_APPROVED"
+    },
+    {
+      "state": "no-ref-approved",
+      "terminal": true,
+      "authority_required": true,
+      "reason_code": "NO_REFERENCE_DISPOSITION_APPROVED"
+    },
+    {
+      "state": "candidate-only",
+      "terminal": false,
+      "authority_required": true,
+      "reason_code": "LEXICAL_CANDIDATES_NOT_SEMANTICALLY_APPROVED"
+    },
+    {
+      "state": "malformed-blocked",
+      "terminal": false,
+      "authority_required": true,
+      "reason_code": "MALFORMED_INPUT_REQUIRES_DISPOSITION"
+    },
+    {
+      "state": "editor-undecided",
+      "terminal": false,
+      "authority_required": true,
+      "reason_code": "NO_MATCH_DOES_NOT_PROVE_NO_REFERENCE"
+    }
+  ],
+  "parser_and_matching_requirements": {
+    "enumerate_every_file_instance": true,
+    "preserve_duplicate_file_instances": true,
+    "preserve_duplicate_ecf_assignment_order": true,
+    "xml_dtd_enabled": false,
+    "xml_external_resolver_enabled": false,
+    "exact_complete_scalar_matching": true,
+    "substring_matching": false,
+    "basename_matching": false,
+    "extension_only_matching": false,
+    "first_candidate_selection": false,
+    "retain_all_ambiguous_candidates": true,
+    "detect_config_reference_closure": true,
+    "detect_config_reference_cycles": true,
+    "malformed_implies_zero_references": false
+  },
+  "assumptions": [
+    "LEXICAL_CANDIDATE_IS_NOT_SEMANTIC_REFERENCE",
+    "NO_MATCH_IS_NOT_NO_REFERENCE_APPROVAL",
+    "DUPLICATE_CONTENT_DOES_NOT_COLLAPSE_FILE_INSTANCES",
+    "MALFORMED_INPUT_IS_NOT_ZERO_REFERENCE",
+    "AMBIGUOUS_CANDIDATE_HAS_NO_SELECTION_AUTHORITY"
+  ],
+  "current_blockers": [
+    { "reason_code": "SEMANTIC_ADAPTERS_UNAPPROVED", "count": 212 },
+    { "reason_code": "APPROVED_ROOT_SET_EMPTY", "count": 0 },
+    { "reason_code": "MALFORMED_INPUTS_UNDISPOSED", "count": 6 },
+    { "reason_code": "SEMANTIC_METRICS_UNAVAILABLE", "count": 3 },
+    { "reason_code": "CONFIG_CLOSURE_UNAPPROVED", "count": 8 },
+    { "reason_code": "AUXILIARY_SCOPE_INCOMPLETE", "count": 1 }
+  ],
+  "completion_requirements": {
+    "file_instances_covered": 212,
+    "terminal_adapter_file_instances": 212,
+    "candidate_only_file_instances": 0,
+    "malformed_blocked_file_instances": 0,
+    "editor_undecided_file_instances": 0,
+    "malformed_dispositions_pending": 0,
+    "semantic_unknown_occurrences": 0,
+    "semantic_ambiguous_occurrences": 0,
+    "semantic_unresolved_occurrences": 0,
+    "heuristic_target_selections": 0,
+    "first_candidate_selections": 0,
+    "config_closure_complete": true,
+    "config_cycle_detection_complete": true,
+    "all_inputs_hash_bound": true,
+    "scope_complete": true
+  },
+  "current_observation": {
+    "approved_semantic_adapters": 0,
+    "approved_no_ref_files": 0,
+    "approved_roots": 0,
+    "scope_complete": false,
+    "result": "BLOCKED",
+    "review_execution_result": "PASS",
+    "task_status": "BLOCKED",
+    "completion_criteria_satisfied": false,
+    "g2_06_satisfied": false,
+    "p3_authorized": false
+  },
+  "authority_rules": {
+    "machine_candidate_is_approval": false,
+    "absence_of_match_is_no_ref_approval": false,
+    "malformed_input_can_be_auto_excluded": false,
+    "ambiguous_first_candidate_can_be_selected": false,
+    "this_evidence_can_approve_g2": false,
+    "this_evidence_can_authorize_p3_or_release": false
+  },
+  "disclosure_rules": {
+    "anonymous_hash_count_reason_only": true,
+    "raw_scalar_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_payloads": false
+  }
+}

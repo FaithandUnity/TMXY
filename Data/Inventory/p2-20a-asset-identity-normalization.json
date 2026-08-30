@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.6",
+  "captured_utc": "2026-08-30T15:32:48Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "input_bindings": {
+    "aggregate_sha256": "e0cfb31761d5e7ca0fd8f5053970082031b4928e3c82711efc645ddac1afcc80",
+    "entries": [
+      {
+        "role": "a4_report",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 5807,
+        "lines": 193,
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
+      },
+      {
+        "role": "a4_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 13820115,
+        "lines": 3651,
+        "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
+      },
+      {
+        "role": "a4_policy",
+        "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
+        "tracked": true,
+        "bytes": 4000,
+        "lines": 98,
+        "sha256": "af3c5fb29e583c2eab1ca0bae61bfef2af19abed146a6b2bf972027ecdaf09ab"
+      },
+      {
+        "role": "p2_03_evidence",
+        "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+        "tracked": true,
+        "bytes": 5424,
+        "lines": 162,
+        "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab"
+      },
+      {
+        "role": "p2_03_graph",
+        "path": "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl",
+        "tracked": false,
+        "bytes": 106382503,
+        "lines": 269064,
+        "sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57"
+      },
+      {
+        "role": "policy",
+        "path": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
+        "tracked": true,
+        "bytes": 3380,
+        "lines": 102,
+        "sha256": "c605a80f230417536f698488c61475166b430263051dd644b4d5d2b60c9c4120"
+      },
+      {
+        "role": "schema",
+        "path": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
+        "tracked": true,
+        "bytes": 12132,
+        "lines": 238,
+        "sha256": "e19eddfd15ba501368d26899f1529f1b303d27c8e3316bdba0035becd13a7a1c"
+      }
+    ]
+  },
+  "measured": {
+    "source_ambiguous_targets": 15,
+    "source_candidate_edges": 30,
+    "case_fold_collision_targets": 13,
+    "case_fold_collision_edges": 26,
+    "non_case_identity_targets": 2,
+    "non_case_identity_edges": 4,
+    "strict_descriptor_equivalent_targets": 0,
+    "strict_descriptor_equivalent_edges": 0,
+    "strict_full_semantic_equivalent_targets": 0,
+    "strict_full_semantic_equivalent_edges": 0,
+    "effective": {
+      "resolved_targets": 0,
+      "resolved_edges": 0,
+      "ambiguous_targets": 15,
+      "ambiguous_edges": 30
+    },
+    "candidate_selections": 0,
+    "reconciled_full_workset": {
+      "ambiguous_edges": 546,
+      "ambiguous_targets": 189,
+      "candidate_edges": 39351,
+      "resolved_edges": 38796,
+      "resolved_targets": 21299,
+      "targets": 21494,
+      "unknown_edges": 0,
+      "unknown_targets": 0,
+      "unresolved_edges": 9,
+      "unresolved_targets": 6
+    }
+  },
+  "outputs": {
+    "report_json": {
+      "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
+      "tracked": true,
+      "bytes": 6205,
+      "lines": 191,
+      "sha256": "4969171ea5881e61df9c991ff91eab5c35c27bce02fad7d6e313b3dda5a57688"
+    },
+    "report_markdown": {
+      "path": "Data/Reports/p2-20a-asset-identity-normalization-report.md",
+      "tracked": true,
+      "bytes": 649,
+      "lines": 13,
+      "sha256": "0eaf6df91aacbbd209f2d4193db85da8f7eae9d3f6eaa76d57808498e1ca6b35"
+    },
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-identity-normalization.jsonl",
+      "tracked": false,
+      "bytes": 27392,
+      "lines": 15,
+      "sha256": "9efde9f1ee88c4df687228ff6d20cb34b3e54168591c0e6b0bbe08a82cc3f691"
+    }
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
+    "policy_sha256": "c605a80f230417536f698488c61475166b430263051dd644b4d5d2b60c9c4120",
+    "schema": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
+    "schema_sha256": "e19eddfd15ba501368d26899f1529f1b303d27c8e3316bdba0035becd13a7a1c"
+  },
+  "implementation": {
+    "source_files": 2,
+    "source_sha256": "8c137f42fb754b1c78be36f5f7a01b0d329dfc1681a7ae4b8f9bf9ed13ddcbe3",
+    "generator": "Tools/TMXY.G2AssetIdentityNormalization/identity_normalization.py",
+    "generator_sha256": "7ed50128967c386b5d8e60b49784665ee691396ef21d54af4b5c24f1fadf520f",
+    "wrapper": "Tools/TMXY.G2AssetIdentityNormalization/New-G2AssetIdentityNormalization.ps1",
+    "wrapper_sha256": "777c6c3c318ee76978bfa085510d9a875c9d98f6d3396408db86cf27adc7bbb1",
+    "self_test_assertions": 10
+  },
+  "builder": {
+    "image_reference": "tmxy-backend-builder:p0-08",
+    "image_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "repository_mount": "read-only",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "anonymous_ids_in_ignored_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_confidential_payloads": false
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20A-authoritative-binding-remediation",
+      "P2-20-g2-rerun"
+    ],
+    "detail": "Obtain authoritative dispositions for all 189 ambiguous and 6 unresolved targets; ASCII-lower identity collision alone cannot select a candidate."
+  }
+}

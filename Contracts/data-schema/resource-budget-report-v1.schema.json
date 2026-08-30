@@ -1,0 +1,1166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/resource-budget-report-v1.schema.json",
+  "title": "TMXY P2-19 Resource Budget Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "result",
+    "budget_status",
+    "source_build",
+    "input_bindings",
+    "basis_catalog",
+    "measured_facts",
+    "human_budget",
+    "machine_budget",
+    "storage_budget",
+    "program_forecast",
+    "team_plan",
+    "risk_register",
+    "missing_measurements",
+    "decisions",
+    "disclosure"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "task_id": {
+      "const": "P2-19"
+    },
+    "result": {
+      "const": "PASS_WITH_OPEN_MEASUREMENT_GAPS"
+    },
+    "budget_status": {
+      "const": "CONDITIONAL_PLANNING_BASELINE"
+    },
+    "source_build": {
+      "const": "qy-3.0.0.413"
+    },
+    "input_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "aggregate_sha256",
+        "conversion_routing",
+        "content_health",
+        "conversion_pilot"
+      ],
+      "properties": {
+        "aggregate_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "conversion_routing": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/input_binding"
+            },
+            {
+              "properties": {
+                "task_id": {
+                  "const": "P2-15"
+                },
+                "path": {
+                  "const": "Data/Inventory/p2-15-conversion-routing.json"
+                }
+              }
+            }
+          ]
+        },
+        "content_health": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/input_binding"
+            },
+            {
+              "properties": {
+                "task_id": {
+                  "const": "P2-18"
+                },
+                "path": {
+                  "const": "Data/Inventory/p2-18-content-health.json"
+                }
+              }
+            }
+          ]
+        },
+        "conversion_pilot": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/input_binding"
+            },
+            {
+              "properties": {
+                "task_id": {
+                  "const": "P2-19-PILOT"
+                },
+                "path": {
+                  "const": "Data/Performance/p2-19-conversion-pilot.json"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "basis_catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measured_fact",
+        "planning_coefficient",
+        "assumption",
+        "risk_reserve",
+        "missing_measurement"
+      ],
+      "properties": {
+        "measured_fact": {
+          "$ref": "#/$defs/non_empty_basis_entries"
+        },
+        "planning_coefficient": {
+          "$ref": "#/$defs/non_empty_basis_entries"
+        },
+        "assumption": {
+          "$ref": "#/$defs/non_empty_basis_entries"
+        },
+        "risk_reserve": {
+          "$ref": "#/$defs/non_empty_basis_entries"
+        },
+        "missing_measurement": {
+          "$ref": "#/$defs/non_empty_basis_entries"
+        }
+      }
+    },
+    "measured_facts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assets",
+        "conversion",
+        "content_risks",
+        "pilot"
+      ],
+      "properties": {
+        "assets": {
+          "$ref": "#/$defs/metric_group"
+        },
+        "conversion": {
+          "$ref": "#/$defs/metric_group"
+        },
+        "content_risks": {
+          "$ref": "#/$defs/metric_group"
+        },
+        "pilot": {
+          "$ref": "#/$defs/pilot_measurements"
+        }
+      }
+    },
+    "human_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "base_planning_hours",
+        "risk_reserve_hours",
+        "total_planning_hours",
+        "by_route",
+        "workforce_scenarios",
+        "money_budget",
+        "basis_ids"
+      ],
+      "properties": {
+        "unit": {
+          "const": "human_hours"
+        },
+        "base_planning_hours": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "risk_reserve_hours": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "total_planning_hours": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "by_route": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/human_route_budget"
+          }
+        },
+        "workforce_scenarios": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/workforce_scenario"
+          }
+        },
+        "money_budget": {
+          "$ref": "#/$defs/money_budget"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "machine_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "projection_status",
+        "base_sequential_seconds",
+        "risk_reserve_basis_points",
+        "risk_reserve_seconds",
+        "total_sequential_seconds",
+        "by_route",
+        "requirements",
+        "basis_ids"
+      ],
+      "properties": {
+        "unit": {
+          "const": "machine_seconds"
+        },
+        "projection_status": {
+          "enum": [
+            "PILOT_CALIBRATED",
+            "PARTIALLY_PILOT_CALIBRATED",
+            "PLANNING_COEFFICIENT_ONLY"
+          ]
+        },
+        "base_sequential_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "risk_reserve_basis_points": {
+          "const": 5000
+        },
+        "risk_reserve_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "total_sequential_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "by_route": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "$ref": "#/$defs/machine_route_budget"
+          }
+        },
+        "requirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/machine_requirement"
+          }
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "storage_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unit",
+        "existing_workspace_bytes",
+        "disk_total_bytes",
+        "disk_free_bytes",
+        "source_retained_bytes",
+        "intermediate_estimated_bytes",
+        "ue_content_estimated_bytes",
+        "build_cache_estimated_bytes",
+        "one_copy_bytes",
+        "recovery_copy_count",
+        "recovery_bytes",
+        "risk_reserve_basis_points",
+        "risk_reserve_bytes",
+        "incremental_required_bytes",
+        "capacity_gap_bytes",
+        "capacity_sufficient",
+        "total_budget_bytes",
+        "duplicate_redundant_review_only_bytes",
+        "deduplication_savings_assumed",
+        "by_component",
+        "basis_ids"
+      ],
+      "properties": {
+        "unit": {
+          "const": "bytes"
+        },
+        "existing_workspace_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "disk_total_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "disk_free_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "source_retained_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "intermediate_estimated_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "ue_content_estimated_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "build_cache_estimated_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "one_copy_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "recovery_copy_count": {
+          "const": 2
+        },
+        "recovery_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "risk_reserve_basis_points": {
+          "const": 3500
+        },
+        "risk_reserve_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "incremental_required_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "capacity_gap_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "capacity_sufficient": {
+          "type": "boolean"
+        },
+        "total_budget_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "duplicate_redundant_review_only_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "deduplication_savings_assumed": {
+          "const": false
+        },
+        "by_component": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/storage_component"
+          }
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "program_forecast": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scope",
+        "phase_ranges",
+        "scenarios",
+        "g2_blocking_delay_weeks",
+        "g2_delay_status",
+        "delivery_commitment",
+        "basis_ids"
+      ],
+      "properties": {
+        "scope": {
+          "const": "P3-P8"
+        },
+        "phase_ranges": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/$defs/phase_range"
+          }
+        },
+        "scenarios": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/program_scenario"
+          }
+        },
+        "g2_blocking_delay_weeks": {
+          "type": "null"
+        },
+        "g2_delay_status": {
+          "const": "unbounded"
+        },
+        "delivery_commitment": {
+          "const": false
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "team_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "productive_hours_per_fte_week",
+        "content_specialist_fte",
+        "scenarios",
+        "basis_ids"
+      ],
+      "properties": {
+        "productive_hours_per_fte_week": {
+          "const": 28
+        },
+        "content_specialist_fte": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "minimum",
+            "recommended",
+            "maximum"
+          ],
+          "properties": {
+            "minimum": {
+              "const": 2
+            },
+            "recommended": {
+              "const": 3
+            },
+            "maximum": {
+              "const": 4
+            }
+          }
+        },
+        "scenarios": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "$ref": "#/$defs/team_scenario"
+          }
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "risk_register": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/risk"
+      }
+    },
+    "missing_measurements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/missing_measurement"
+      }
+    },
+    "decisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "all_numeric_outputs_are_non_price_planning_values",
+        "schedule_is_delivery_commitment",
+        "money_budget_estimated",
+        "g2_approved",
+        "playable_experience_proven",
+        "release_authority"
+      ],
+      "properties": {
+        "all_numeric_outputs_are_non_price_planning_values": {
+          "const": true
+        },
+        "schedule_is_delivery_commitment": {
+          "const": false
+        },
+        "money_budget_estimated": {
+          "const": false
+        },
+        "g2_approved": {
+          "const": false
+        },
+        "playable_experience_proven": {
+          "const": false
+        },
+        "release_authority": {
+          "const": false
+        }
+      }
+    },
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "private_source_paths",
+        "exact_primary_keys",
+        "exact_observed_extrema",
+        "raw_table_rows",
+        "decoded_confidential_payloads",
+        "legacy_source_lines",
+        "prices",
+        "schedule_commitments"
+      ],
+      "properties": {
+        "private_source_paths": {
+          "const": false
+        },
+        "exact_primary_keys": {
+          "const": false
+        },
+        "exact_observed_extrema": {
+          "const": false
+        },
+        "raw_table_rows": {
+          "const": false
+        },
+        "decoded_confidential_payloads": {
+          "const": false
+        },
+        "legacy_source_lines": {
+          "const": false
+        },
+        "prices": {
+          "const": false
+        },
+        "schedule_commitments": {
+          "const": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "non_negative_number": {
+      "type": "number",
+      "minimum": 0
+    },
+    "week_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "minimum": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "maximum": {
+          "$ref": "#/$defs/non_negative_number"
+        }
+      }
+    },
+    "non_negative_integer": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "basis_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "input_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "task_id",
+        "path",
+        "result",
+        "task_status",
+        "completion_criteria_satisfied",
+        "sha256"
+      ],
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "result": {
+          "const": "PASS"
+        },
+        "task_status": {
+          "const": "COMPLETE"
+        },
+        "completion_criteria_satisfied": {
+          "const": true
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "basis_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "unit",
+        "value",
+        "source"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^BAS-[A-Z0-9-]+$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": [
+            "number",
+            "integer",
+            "string",
+            "boolean",
+            "null"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "non_empty_basis_entries": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/basis_entry"
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "value",
+        "unit",
+        "basis_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "metric_group": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/metric"
+      }
+    },
+    "pilot_measurements": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "$ref": "#/$defs/pilot_measurement"
+      }
+    },
+    "pilot_measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "sample_count",
+        "median_seconds",
+        "p80_seconds",
+        "output_ratio_basis_points",
+        "basis_ids"
+      ],
+      "properties": {
+        "family": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "median_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "p80_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "output_ratio_basis_points": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "human_route_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "base_hours",
+        "risk_reserve_basis_points",
+        "risk_reserve_hours",
+        "total_hours",
+        "basis_ids"
+      ],
+      "properties": {
+        "route": {
+          "$ref": "#/$defs/route"
+        },
+        "base_hours": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "risk_reserve_basis_points": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "risk_reserve_hours": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "total_hours": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "machine_route_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route",
+        "pilot_sample_count",
+        "base_seconds",
+        "risk_reserve_seconds",
+        "total_seconds",
+        "basis_ids"
+      ],
+      "properties": {
+        "route": {
+          "$ref": "#/$defs/route"
+        },
+        "pilot_sample_count": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "base_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "risk_reserve_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "total_seconds": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "workforce_scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "content_specialist_fte",
+        "productive_hours_per_fte_week",
+        "base_weeks",
+        "risk_reserve_weeks",
+        "risk_adjusted_weeks",
+        "basis_ids"
+      ],
+      "properties": {
+        "content_specialist_fte": {
+          "enum": [
+            2,
+            3,
+            4
+          ]
+        },
+        "productive_hours_per_fte_week": {
+          "const": 28
+        },
+        "base_weeks": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "risk_reserve_weeks": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "risk_adjusted_weeks": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "machine_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "quantity",
+        "profile",
+        "purpose",
+        "basis_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "quantity": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "profile": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "storage_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "base_bytes",
+        "expansion_basis_points",
+        "projected_bytes",
+        "basis_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "base_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "expansion_basis_points": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "projected_bytes": {
+          "$ref": "#/$defs/non_negative_integer"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "phase_range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "phase",
+        "minimum_weeks",
+        "maximum_weeks",
+        "basis_ids"
+      ],
+      "properties": {
+        "phase": {
+          "enum": [
+            "P3",
+            "P4",
+            "P5",
+            "P6",
+            "P7",
+            "P8"
+          ]
+        },
+        "minimum_weeks": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "maximum_weeks": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "program_scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "core_fte",
+        "shared_fte",
+        "phase_overlap_basis_points",
+        "risk_reserve_basis_points",
+        "base_weeks",
+        "risk_reserve_weeks",
+        "total_weeks",
+        "basis_ids"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/scenario"
+        },
+        "core_fte": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "shared_fte": {
+          "type": "number",
+          "minimum": 0
+        },
+        "phase_overlap_basis_points": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000
+        },
+        "risk_reserve_basis_points": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "base_weeks": {
+          "$ref": "#/$defs/week_range"
+        },
+        "risk_reserve_weeks": {
+          "$ref": "#/$defs/week_range"
+        },
+        "total_weeks": {
+          "$ref": "#/$defs/week_range"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "team_scenario": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "core_fte",
+        "shared_fte",
+        "content_specialist_fte",
+        "productive_hours_per_week",
+        "basis_ids"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/scenario"
+        },
+        "core_fte": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "shared_fte": {
+          "type": "number",
+          "minimum": 0
+        },
+        "content_specialist_fte": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 4
+        },
+        "productive_hours_per_week": {
+          "$ref": "#/$defs/non_negative_number"
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "money_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "estimated",
+        "currency",
+        "amount",
+        "reason",
+        "missing_inputs"
+      ],
+      "properties": {
+        "estimated": {
+          "const": false
+        },
+        "currency": {
+          "type": "null"
+        },
+        "amount": {
+          "type": "null"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "missing_inputs": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "contains": {
+            "const": "currency"
+          },
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "severity",
+        "state",
+        "category",
+        "description",
+        "impact",
+        "control",
+        "basis_ids"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^RBR-[0-9]{3}$"
+        },
+        "severity": {
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "state": {
+          "enum": [
+            "open",
+            "controlled-open",
+            "scenario-covered"
+          ]
+        },
+        "category": {
+          "enum": [
+            "human",
+            "machine",
+            "storage",
+            "schedule",
+            "scope",
+            "cost"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "impact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "control": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basis_ids": {
+          "$ref": "#/$defs/basis_ids"
+        }
+      }
+    },
+    "missing_measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "description",
+        "impact",
+        "required_for",
+        "next_measurement",
+        "blocking"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^MIS-[0-9]{3}$"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "impact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "required_for": {
+          "type": "string",
+          "minLength": 1
+        },
+        "next_measurement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "blocking": {
+          "type": "boolean"
+        }
+      }
+    },
+    "route": {
+      "enum": [
+        "automatic-qualified-interchange",
+        "automatic-standard-audio",
+        "semi-automatic-navigation-adaptation",
+        "manual-descriptor-recovery",
+        "manual-repair-or-replace"
+      ]
+    },
+    "scenario": {
+      "enum": [
+        "constrained",
+        "recommended",
+        "accelerated"
+      ]
+    }
+  }
+}

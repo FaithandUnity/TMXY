@@ -7,8 +7,10 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = [System.IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
 $contractPath = Join-Path $root 'Data\Governance\p0-hosted-ci-contract.json'
+$hostingStatusPath = Join-Path $root 'Data\Governance\p0-github-hosting-status.json'
 $lockPath = Join-Path $root 'Data\Toolchain\toolchain.lock.json'
 $postgresSbomPath = Join-Path $root 'Data\Security\postgres-18.6.sbom.cdx.json'
+$licenseEvidencePath = Join-Path $root 'Data\Security\p0-12-license-evidence.json'
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Assert-Contract {
@@ -20,25 +22,36 @@ function Assert-Contract {
 }
 
 $contract = Get-Content -LiteralPath $contractPath -Raw -Encoding UTF8 | ConvertFrom-Json
+$hostingStatus = Get-Content -LiteralPath $hostingStatusPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $lock = Get-Content -LiteralPath $lockPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $postgresSbomSha = (Get-FileHash -LiteralPath $postgresSbomPath -Algorithm SHA256).Hash.ToLowerInvariant()
+$licenseEvidenceSha = (Get-FileHash -LiteralPath $licenseEvidencePath -Algorithm SHA256).Hash.ToLowerInvariant()
 
-Assert-Contract ([int]$contract.schema_version -eq 1) 'CI authority contract schema must be 1.'
-Assert-Contract ([string]$contract.state -eq 'prepared_pending_authorization') `
-    'Local contract must remain pending until a hosted provider is authorized.'
-Assert-Contract (-not [bool]$contract.provider_binding.selected) `
-    'A hosted provider must not be selected without explicit authorization.'
-Assert-Contract ($null -eq $contract.provider_binding.provider -and $null -eq $contract.provider_binding.repository) `
-    'Provider and repository must remain null before authorization.'
+Assert-Contract ([int]$contract.schema_version -eq 3) 'CI authority contract schema must be 3.'
+Assert-Contract ([string]$contract.state -eq 'github_workflows_prepared_pending_external_authority') `
+    'The GitHub binding must remain pending until protected hosted authority exists.'
+Assert-Contract ([bool]$contract.provider_binding.selected) `
+    'The authorized GitHub provider binding must be selected.'
+Assert-Contract ([string]$contract.provider_binding.provider -eq 'github' -and
+    [string]$contract.provider_binding.repository -eq 'FaithandUnity/TMXY') `
+    'Provider binding must identify the authorized GitHub repository.'
+Assert-Contract ([string]$contract.provider_binding.remote_name -eq 'origin' -and
+    [string]$contract.provider_binding.remote_url -eq 'https://github.com/FaithandUnity/TMXY.git') `
+    'Provider binding must use the reviewed origin URL.'
 Assert-Contract ([string]$contract.protected_branch.name -eq 'main') 'Protected branch must be main.'
 Assert-Contract (-not [bool]$contract.protected_branch.allow_direct_push) 'Direct push must be forbidden.'
 Assert-Contract (-not [bool]$contract.protected_branch.allow_force_push) 'Force push must be forbidden.'
+Assert-Contract (-not [bool]$contract.protected_branch.allow_deletion) 'Branch deletion must be forbidden.'
 Assert-Contract (-not [bool]$contract.protected_branch.allow_administrator_bypass) `
     'Administrator bypass must be forbidden.'
 Assert-Contract ([int]$contract.protected_branch.required_approvals -ge 1) `
     'At least one independent approval is required.'
 Assert-Contract ([int]$contract.protected_branch.sensitive_change_required_approvals -ge 2) `
     'Sensitive changes require at least two approvals.'
+Assert-Contract ([bool]$contract.protected_branch.dismiss_stale_approvals) `
+    'New commits must dismiss stale approvals.'
+Assert-Contract ([bool]$contract.protected_branch.require_code_owner_review) `
+    'Code owner review must be required.'
 
 $requiredChecks = @(
     'policy/repository',
@@ -66,6 +79,24 @@ Assert-Contract (-not [bool]$contract.cache_contract.cache_hit_bypasses_verifica
     'Cache hits must not bypass verification.'
 Assert-Contract (-not [bool]$contract.cache_contract.secret_material_allowed) `
     'Secret material must not enter CI caches.'
+Assert-Contract (-not [bool]$contract.workflow_binding.untrusted_workflow_has_release_permissions) `
+    'Untrusted workflows must not receive release permissions.'
+Assert-Contract ([bool]$contract.workflow_binding.shared_cache_write_requires_protected_main) `
+    'Shared cache writes must require protected main authority.'
+Assert-Contract (-not [bool]$contract.workflow_binding.fork_pull_request_uses_self_hosted_runner -and
+    [bool]$contract.workflow_binding.fork_pull_request_required_check_fails_closed) `
+    'Fork pull requests must never schedule the self-hosted UE runner and must fail the required check.'
+Assert-Contract (@($contract.workflow_binding.ue_runner_labels) -contains 'tmxy-ephemeral') `
+    'UE authority must run on an ephemeral self-hosted runner.'
+Assert-Contract ([string]$contract.public_repository_runner_security.minimum_fork_workflow_approval_policy -eq
+        'all_external_contributors' -and
+    -not [bool]$contract.public_repository_runner_security.repository_runner_registration_authorized -and
+    [bool]$contract.public_repository_runner_security.disposable_vm_per_job_required -and
+    -not [bool]$contract.public_repository_runner_security.persistent_secret_material_allowed -and
+    -not [bool]$contract.public_repository_runner_security.internal_network_access_allowed -and
+    -not [bool]$contract.public_repository_runner_security.shared_writable_cache_allowed -and
+    -not [bool]$contract.public_repository_runner_security.base_workflow_fork_guard_is_registration_authority) `
+    'Public-repository self-hosted runner security must remain fail closed pending isolated authority.'
 
 Assert-Contract (
     [string]$contract.build_authority.backend_builder_digest -eq
@@ -76,6 +107,11 @@ Assert-Contract (
 Assert-Contract (
     [string]$contract.supply_chain.postgres_sbom_sha256 -eq $postgresSbomSha) `
     'PostgreSQL SBOM hash does not match the local evidence.'
+Assert-Contract (
+    [string]$contract.supply_chain.license_evidence_path -eq
+        'Data/Security/p0-12-license-evidence.json' -and
+    [string]$contract.supply_chain.license_evidence_sha256 -eq $licenseEvidenceSha) `
+    'Supplemental license evidence does not match the hosted contract.'
 Assert-Contract ([bool]$contract.supply_chain.authenticated_or_approved_offline_vulnerability_policy_required) `
     'Hosted vulnerability policy must be required.'
 Assert-Contract ([bool]$contract.supply_chain.license_policy_required) `
@@ -84,6 +120,77 @@ Assert-Contract ([bool]$contract.supply_chain.signed_provenance_required) `
     'Signed provenance must be required.'
 Assert-Contract (-not [bool]$contract.authority_evidence.local_diagnostic_report_is_authority) `
     'Local diagnostic evidence must never be release authority.'
+Assert-Contract ([int]$contract.authority_evidence.minimum_retention_days -eq 365) `
+    'Hosted authority evidence retention must remain 365 days.'
+Assert-Contract ([int]$hostingStatus.schema_version -eq 4 -and
+    [string]$hostingStatus.provider.repository -eq 'FaithandUnity/TMXY' -and
+    [string]$hostingStatus.provider.visibility -eq 'public') `
+    'GitHub hosting observation must identify the bound repository.'
+Assert-Contract (-not [bool]$hostingStatus.completion_criteria_satisfied -and
+    -not [bool]$hostingStatus.release_authority) `
+    'Current hosting observation must not claim release authority.'
+Assert-Contract ([bool]$hostingStatus.branch_authority.protected -and
+    [bool]$hostingStatus.branch_authority.contract_satisfied -and
+    [bool]$hostingStatus.branch_authority.required_checks_enforced -and
+    [bool]$hostingStatus.branch_authority.required_status_checks_strict) `
+    'Current evidence must prove the protected main required-check contract.'
+Assert-Contract ([bool]$hostingStatus.branch_authority.pull_request_protection_enforced -and
+    [bool]$hostingStatus.branch_authority.administrator_bypass_forbidden -and
+    [int]$hostingStatus.branch_authority.required_approvals -eq 1 -and
+    [bool]$hostingStatus.branch_authority.dismiss_stale_approvals -and
+    [bool]$hostingStatus.branch_authority.require_code_owner_review -and
+    [bool]$hostingStatus.branch_authority.require_last_push_approval) `
+    'Current evidence must prove the authorized pull-request review contract.'
+Assert-Contract ([bool]$hostingStatus.branch_authority.mutation_protection_enforced -and
+    [bool]$hostingStatus.branch_authority.force_push_forbidden -and
+    [bool]$hostingStatus.branch_authority.deletion_forbidden -and
+    [bool]$hostingStatus.branch_authority.linear_history_required -and
+    [bool]$hostingStatus.branch_authority.conversation_resolution_required) `
+    'Current evidence must prove the authorized branch mutation restrictions.'
+$observedRequiredChecks = @($hostingStatus.branch_authority.required_check_contexts)
+Assert-Contract ($observedRequiredChecks.Count -eq $requiredChecks.Count) `
+    'Observed protected-branch check count changed.'
+foreach ($check in $requiredChecks) {
+    Assert-Contract ($observedRequiredChecks -contains $check) `
+        "Observed protected-branch check is missing: $check"
+}
+$hostingBlockers = @($hostingStatus.blockers)
+Assert-Contract ($hostingBlockers -notcontains 'main_unprotected' -and
+    $hostingBlockers -notcontains 'branch_protection_api_unavailable' -and
+    $hostingBlockers -notcontains 'branch_protection_contract_mismatch') `
+    'Protected-main blockers must be absent after verified branch protection.'
+$forkApprovalPolicySatisfied = [bool]$hostingStatus.actions.fork_pr_contributor_approval_policy_satisfied
+Assert-Contract ([int]$hostingStatus.actions.fork_pr_contributor_approval_api_status -eq 200 -and
+    [string]$hostingStatus.actions.fork_pr_contributor_approval_policy -ne 'unknown' -and
+    -not [bool]$hostingStatus.actions.public_repository_runner_registration_authorized) `
+    'Current evidence must record the public fork approval policy and deny runner registration authority.'
+Assert-Contract (($forkApprovalPolicySatisfied -and
+        $hostingBlockers -notcontains 'public_fork_workflow_approval_not_all_external_contributors') -or
+    (-not $forkApprovalPolicySatisfied -and
+        $hostingBlockers -contains 'public_fork_workflow_approval_not_all_external_contributors')) `
+    'The public fork approval blocker must match the observed GitHub policy.'
+Assert-Contract ([int]$hostingStatus.runners.matching_ephemeral_ue58_count -eq 0) `
+    'Current evidence must retain the missing UE 5.8 ephemeral runner blocker.'
+Assert-Contract ([bool]$hostingStatus.release_environment.present -and
+    [bool]$hostingStatus.release_environment.protected_branch_deployments_only -and
+    $hostingBlockers -notcontains 'p0_release_environment_missing_or_unprotected') `
+    'The p0-release environment must accept deployments only from protected branches.'
+$retentionSatisfied = [bool]$hostingStatus.artifact_retention.requirement_satisfied
+Assert-Contract ([int]$hostingStatus.artifact_retention.api_status -eq 200 -and
+    [int]$hostingStatus.artifact_retention.minimum_required_days -eq 365 -and
+    (($retentionSatisfied -and
+            [int]$hostingStatus.artifact_retention.configured_days -ge 365 -and
+            [int]$hostingStatus.artifact_retention.maximum_allowed_days -ge 365 -and
+            $hostingBlockers -notcontains 'minimum_365_day_immutable_retention_missing') -or
+        (-not $retentionSatisfied -and
+            [int]$hostingStatus.artifact_retention.configured_days -lt 365 -and
+            $hostingBlockers -contains 'minimum_365_day_immutable_retention_missing'))) `
+    'The retention blocker must match the observed GitHub artifact-retention authority.'
+
+$workflowContract = (& (Join-Path $root 'Tests\CI\Test-HostedWorkflowContract.ps1') `
+        -RebuildRoot $root) | ConvertFrom-Json
+Assert-Contract ([string]$workflowContract.result -eq 'PASS') `
+    'Hosted workflow source contract did not pass.'
 
 $report = [pscustomobject][ordered]@{
     schema_version = 1
@@ -92,6 +199,10 @@ $report = [pscustomobject][ordered]@{
     state = [string]$contract.state
     required_check_count = $actualChecks.Count
     provider_selected = [bool]$contract.provider_binding.selected
+    provider = [string]$contract.provider_binding.provider
+    repository = [string]$contract.provider_binding.repository
+    hosted_release_authority = [bool]$hostingStatus.release_authority
+    hosted_blocker_count = [int]$hostingStatus.blocker_count
     failure_count = $failures.Count
     failures = @($failures)
 }

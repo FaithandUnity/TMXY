@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-binding-recovery-detail-v1.schema.json",
+  "title": "TMXY P2-20A.8 ignored anonymous recovery cross-proof detail",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["asset_id", "family", "attempted_edges", "successful_edges", "effective_resolution", "candidates"],
+  "properties": {
+    "asset_id": {"$ref": "#/$defs/sha256"},
+    "family": {"enum": ["anim", "qtx", "sm"]},
+    "attempted_edges": {"type": "integer", "minimum": 0},
+    "successful_edges": {"type": "integer", "minimum": 0},
+    "effective_resolution": {"enum": ["RESOLVED", "AMBIGUOUS", "UNRESOLVED"]},
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/candidate"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_id", "body_sha256", "descriptor_semantic_sha256", "attempted", "recovery_kind", "strict_error_code", "effective_binding", "recovery_applied", "effective_semantic_sha256", "qtx_recovery_contract"],
+      "properties": {
+        "candidate_id": {"$ref": "#/$defs/sha256"},
+        "body_sha256": {"$ref": "#/$defs/sha256"},
+        "descriptor_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "attempted": {"type": "boolean"},
+        "recovery_kind": {"type": ["string", "null"], "enum": [null, "qtx_complete_mip_chain", "qtx_declared_mip_payload_prefix", "anim_payload_frame_counts"]},
+        "strict_error_code": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+        "effective_binding": {"enum": ["PASS", "REJECTED"]},
+        "recovery_applied": {"type": "boolean"},
+        "effective_semantic_sha256": {"anyOf": [{"$ref": "#/$defs/sha256"}, {"type": "null"}]},
+        "qtx_recovery_contract": {
+          "anyOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["stored_explicit", "stored_equals_declared", "effective_less_than_declared", "unique_complete_prefix", "declared_payload_prefix"],
+              "properties": {
+                "stored_explicit": {"const": true},
+                "stored_equals_declared": {"const": true},
+                "effective_less_than_declared": {"type": "boolean"},
+                "unique_complete_prefix": {"const": true},
+                "declared_payload_prefix": {"type": "boolean"}
+              },
+              "oneOf": [
+                {
+                  "properties": {
+                    "effective_less_than_declared": {"const": true},
+                    "declared_payload_prefix": {"const": false}
+                  }
+                },
+                {
+                  "properties": {
+                    "effective_less_than_declared": {"const": false},
+                    "declared_payload_prefix": {"const": true}
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"recovery_kind": {"const": "qtx_complete_mip_chain"}},
+            "required": ["recovery_kind"]
+          },
+          "then": {
+            "properties": {
+              "effective_binding": {"const": "PASS"},
+              "recovery_applied": {"const": true},
+              "effective_semantic_sha256": {"$ref": "#/$defs/sha256"},
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {
+                  "effective_less_than_declared": {"const": true},
+                  "declared_payload_prefix": {"const": false}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"recovery_kind": {"const": "qtx_declared_mip_payload_prefix"}},
+            "required": ["recovery_kind"]
+          },
+          "then": {
+            "properties": {
+              "effective_binding": {"const": "PASS"},
+              "recovery_applied": {"const": true},
+              "effective_semantic_sha256": {"$ref": "#/$defs/sha256"},
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {
+                  "effective_less_than_declared": {"const": false},
+                  "declared_payload_prefix": {"const": true}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {"effective_less_than_declared": {"const": true}},
+                "required": ["effective_less_than_declared"]
+              }
+            },
+            "required": ["qtx_recovery_contract"]
+          },
+          "then": {
+            "properties": {"recovery_kind": {"const": "qtx_complete_mip_chain"}}
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {"declared_payload_prefix": {"const": true}},
+                "required": ["declared_payload_prefix"]
+              }
+            },
+            "required": ["qtx_recovery_contract"]
+          },
+          "then": {
+            "properties": {"recovery_kind": {"const": "qtx_declared_mip_payload_prefix"}}
+          }
+        }
+      ]
+    }
+  }
+}

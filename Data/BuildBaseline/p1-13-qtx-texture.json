@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:19:54.1056110+00:00",
+  "captured_utc": "2026-08-30T15:21:27.6289628+00:00",
   "result": "PASS",
   "task": "P1-13",
   "completion_criteria_satisfied": true,
   "source_file_count": 21,
-  "source_sha256": "31d19b6ccc64abe55574f90e7bc62c586d155cd34152d43014f5e578caeccb67",
+  "source_sha256": "6f78c20a8012c399bcecb33d0fe1a72ac796f3bcacbe63692ac91761e1571e9d",
   "contract": {
     "descriptor_source": "Package QTexture QObject property body",
     "qtx_payload": "headerless contiguous mip bytes",
@@ -149,8 +149,8 @@
   ],
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -172,7 +172,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 75,
-    "output_sha256": "cd9bb867d5e1c7940aaa15fc143dc54eb046d8cd2ccec2ebb735507d45b79d69"
+    "output_line_count": 76,
+    "output_sha256": "da0977485af3b494ecb625dd0d2f78fb2c09107509dc456b259186f0f4ef88e0"
   }
 }

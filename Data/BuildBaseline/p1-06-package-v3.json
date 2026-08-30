@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:16:52.8298770+00:00",
+  "captured_utc": "2026-08-30T17:58:22.2030393+00:00",
   "result": "PASS",
   "task": "P1-06",
-  "source_file_count": 22,
-  "source_sha256": "12b75110f2cf39fa542c2204c53a55619462b933f7ca981215f554dc5f88692c",
+  "source_file_count": 26,
+  "source_sha256": "507da5cadb5ee937de402031fadaef0b7b67e43ada96273da899bd4ccbe5fcfd",
   "error_schema_version": 1,
   "transform": {
     "full_group": "~E2,~E3,E0,~E1",
@@ -738,8 +738,8 @@
   },
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -763,7 +763,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 87,
-    "output_sha256": "391f7dbac6a2ac8b1a79d7ca8b10f6b6e32a72e4dd5b1283c06be55295264618"
+    "output_line_count": 100,
+    "output_sha256": "30a4bebaaef8b2bff0c53db0bb86ceee7e0d6c253b4b53ce2522afb43809a324"
   }
 }

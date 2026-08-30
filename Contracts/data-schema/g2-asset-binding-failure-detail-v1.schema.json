@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-binding-failure-detail-v1.schema.json",
+  "title": "TMXY P2-20A.7 anonymous production-binding failure detail",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "asset_id", "family", "candidate_count", "candidate_set_sha256", "prior_resolution",
+    "effective_resolution", "candidate_selected", "automatic_resolution",
+    "authority_status", "candidates"
+  ],
+  "properties": {
+    "asset_id": {"$ref": "#/$defs/sha256"},
+    "family": {"enum": ["anim", "qtx", "sm"]},
+    "candidate_count": {"type": "integer", "minimum": 1},
+    "candidate_set_sha256": {"$ref": "#/$defs/sha256"},
+    "prior_resolution": {"const": "UNRESOLVED"},
+    "effective_resolution": {"enum": ["RESOLVED", "AMBIGUOUS", "UNRESOLVED"]},
+    "candidate_selected": {"const": false},
+    "automatic_resolution": {"const": false},
+    "authority_status": {"const": "REQUIRED_NOT_PROVIDED"},
+    "candidates": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/candidate"}
+    }
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "read_error": {"type": ["string", "null"], "enum": [null, "out_of_bounds", "invalid_seek", "offset_overflow"]},
+    "candidate": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "candidate_id", "body_sha256", "descriptor_semantic_sha256", "bind_result",
+        "error_schema", "error_code", "read_error_code", "error_context_sha256",
+        "failure_id", "automatic_resolution"
+      ],
+      "properties": {
+        "candidate_id": {"$ref": "#/$defs/sha256"},
+        "body_sha256": {"$ref": "#/$defs/sha256"},
+        "descriptor_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "bind_result": {"const": "REJECTED"},
+        "error_schema": {"enum": ["TextureError/v1", "StaticMeshError/v1", "AnimationError/v1"]},
+        "error_code": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+        "read_error_code": {"$ref": "#/$defs/read_error"},
+        "error_context_sha256": {"$ref": "#/$defs/sha256"},
+        "failure_id": {"$ref": "#/$defs/sha256"},
+        "automatic_resolution": {"const": false}
+      }
+    }
+  }
+}

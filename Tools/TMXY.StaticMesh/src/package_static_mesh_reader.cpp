@@ -569,6 +569,60 @@ parse_descriptor_body(const std::span<const std::byte> body, const std::uint64_t
                                                 : DeclaredBoundsRelation::mismatch;
 }
 
+[[nodiscard]] StaticMeshResult<MaterialSlotResolution>
+resolve_material_slots(const PackageStaticMeshDescriptor& package, const StaticMesh& mesh,
+                       const bool allow_payload_section_prefix)
+{
+    const auto declared_count = package.descriptor.material_object_names.size();
+    const auto section_count = mesh.sections.size();
+    if (section_count == 0U || declared_count < section_count ||
+        (!allow_payload_section_prefix && declared_count != section_count))
+    {
+        return StaticMeshResult<MaterialSlotResolution>::failure(
+            make_error(StaticMeshErrorCode::material_slot_mismatch, package.body_offset,
+                       "static_mesh.material_section_binding"));
+    }
+
+    const bool uses_payload_prefix = declared_count > section_count;
+    return StaticMeshResult<MaterialSlotResolution>::success(
+        {.declared_material_slot_count = static_cast<std::uint64_t>(declared_count),
+         .effective_material_slot_count = static_cast<std::uint64_t>(section_count),
+         .ignored_material_slot_count = static_cast<std::uint64_t>(declared_count - section_count),
+         .basis = uses_payload_prefix ? MaterialSlotBasis::payload_section_prefix_contract
+                                      : MaterialSlotBasis::package_descriptor});
+}
+
+[[nodiscard]] StaticMeshResult<StaticMeshBinding> bind_static_mesh_with_policy(
+    const std::span<const std::byte> package_bytes, const std::string_view full_object_name,
+    const std::span<const std::byte> sm_bytes, const bool allow_payload_section_prefix)
+{
+    auto package = read_package_static_mesh_descriptor(package_bytes, full_object_name);
+    if (!package.has_value())
+    {
+        return StaticMeshResult<StaticMeshBinding>::failure(package.error());
+    }
+    auto mesh = SmReader{}.parse(sm_bytes);
+    if (!mesh.has_value())
+    {
+        return StaticMeshResult<StaticMeshBinding>::failure(mesh.error());
+    }
+    auto material_slots =
+        resolve_material_slots(package.value(), mesh.value(), allow_payload_section_prefix);
+    if (!material_slots.has_value())
+    {
+        return StaticMeshResult<StaticMeshBinding>::failure(material_slots.error());
+    }
+    const auto effective_bounds = effective_legacy_bounds(mesh.value());
+    const auto relation =
+        declared_bounds_relation(package.value().descriptor.declared_bounds, effective_bounds);
+    return StaticMeshResult<StaticMeshBinding>::success(
+        {.mesh = std::move(mesh).take_value(),
+         .package = std::move(package).take_value(),
+         .effective_bounds = effective_bounds,
+         .declared_bounds_relation = relation,
+         .material_slot_resolution = std::move(material_slots).take_value()});
+}
+
 } // namespace
 
 StaticMeshResult<StaticMeshDescriptor>
@@ -618,29 +672,15 @@ StaticMeshResult<StaticMeshBinding> bind_static_mesh(const std::span<const std::
                                                      const std::string_view full_object_name,
                                                      const std::span<const std::byte> sm_bytes)
 {
-    auto package = read_package_static_mesh_descriptor(package_bytes, full_object_name);
-    if (!package.has_value())
-    {
-        return StaticMeshResult<StaticMeshBinding>::failure(package.error());
-    }
-    auto mesh = SmReader{}.parse(sm_bytes);
-    if (!mesh.has_value())
-    {
-        return StaticMeshResult<StaticMeshBinding>::failure(mesh.error());
-    }
-    if (package.value().descriptor.material_object_names.size() != mesh.value().sections.size())
-    {
-        return StaticMeshResult<StaticMeshBinding>::failure(
-            make_error(StaticMeshErrorCode::material_slot_mismatch, package.value().body_offset,
-                       "static_mesh.material_section_binding"));
-    }
-    const auto effective_bounds = effective_legacy_bounds(mesh.value());
-    const auto relation =
-        declared_bounds_relation(package.value().descriptor.declared_bounds, effective_bounds);
-    return StaticMeshResult<StaticMeshBinding>::success({.mesh = std::move(mesh).take_value(),
-                                                         .package = std::move(package).take_value(),
-                                                         .effective_bounds = effective_bounds,
-                                                         .declared_bounds_relation = relation});
+    return bind_static_mesh_with_policy(package_bytes, full_object_name, sm_bytes, false);
+}
+
+StaticMeshResult<StaticMeshBinding>
+bind_static_mesh_with_payload_section_prefix(const std::span<const std::byte> package_bytes,
+                                             const std::string_view full_object_name,
+                                             const std::span<const std::byte> sm_bytes)
+{
+    return bind_static_mesh_with_policy(package_bytes, full_object_name, sm_bytes, true);
 }
 
 } // namespace tmxy::static_mesh

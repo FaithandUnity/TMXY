@@ -1,0 +1,249 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tmxy:g2-aux-ecf-parser-parity:v1",
+  "title": "TMXY P2-20A.10 ECF parser-parity diagnostic report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "source_build", "result", "review_execution_result", "task_status",
+    "completion_criteria_satisfied", "diagnostic_scope_complete", "scope_complete",
+    "g2_06_satisfied", "p3_authorized", "input_bindings", "historical_a5",
+    "source_derived", "candidate_projections", "runtime_boundaries", "blockers",
+    "negative_contracts", "detail_export", "g2_projection", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.10"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "source_build": {"const": "qy-3.0.0.413"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "scope_complete": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {"$ref": "#/$defs/inputBindings"},
+    "historical_a5": {"$ref": "#/$defs/historical"},
+    "source_derived": {"$ref": "#/$defs/sourceDerived"},
+    "candidate_projections": {"$ref": "#/$defs/candidateProjections"},
+    "runtime_boundaries": {"$ref": "#/$defs/runtimeBoundaries"},
+    "blockers": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": {"$ref": "#/$defs/blocker"}
+    },
+    "negative_contracts": {
+      "type": "array", "minItems": 10, "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "detail_export": {"$ref": "#/$defs/detailBinding"},
+    "g2_projection": {"$ref": "#/$defs/g2Projection"},
+    "contracts": {"$ref": "#/$defs/contracts"},
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nonnegative": {"type": "integer", "minimum": 0},
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "sha256"],
+      "properties": {"role": {"type": "string", "minLength": 1}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "ignoredBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "path", "bytes", "lines", "sha256", "tracked"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"$ref": "#/$defs/nonnegative"},
+        "lines": {"$ref": "#/$defs/nonnegative"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "tracked": {"const": false}
+      }
+    },
+    "inputBindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries", "ignored_artifacts", "legacy_sources"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {"type": "array", "minItems": 16, "maxItems": 16, "items": {"$ref": "#/$defs/binding"}},
+        "ignored_artifacts": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/ignoredBinding"}},
+        "legacy_sources": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/binding"}}
+      }
+    },
+    "historical": {
+      "type": "object", "additionalProperties": false,
+      "required": ["evidence_revision", "immutable_baseline", "instances", "parity_instances", "difference_instances", "legacy_pair_count_delta", "a3_only_pair_records", "legacy_only_pair_records", "difference_set_sha256"],
+      "properties": {
+        "evidence_revision": {"const": "P2-20A.5"},
+        "immutable_baseline": {"const": true},
+        "instances": {"const": 64},
+        "parity_instances": {"const": 61},
+        "difference_instances": {"const": 3},
+        "legacy_pair_count_delta": {"const": 4},
+        "a3_only_pair_records": {"const": 3},
+        "legacy_only_pair_records": {"const": 7},
+        "difference_set_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "population": {
+      "type": "object", "additionalProperties": false,
+      "required": ["instances", "source_bytes", "length_remainders", "population_set_sha256", "mod3_set_sha256"],
+      "properties": {
+        "instances": {"const": 64}, "source_bytes": {"const": 57011},
+        "length_remainders": {
+          "type": "object", "additionalProperties": false,
+          "required": ["mod0", "mod1", "mod2", "mod3"],
+          "properties": {"mod0": {"const": 15}, "mod1": {"const": 21}, "mod2": {"const": 14}, "mod3": {"const": 14}}
+        },
+        "population_set_sha256": {"$ref": "#/$defs/sha256"},
+        "mod3_set_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "newline": {
+      "type": "object", "additionalProperties": false,
+      "required": ["crlf_only_instances", "mixed_instances", "crlf_pairs", "lone_lf", "lone_cr", "nul", "trailing_crlf_instances", "no_trailing_crlf_instances"],
+      "properties": {
+        "crlf_only_instances": {"const": 64}, "mixed_instances": {"const": 0},
+        "crlf_pairs": {"const": 2351}, "lone_lf": {"const": 0},
+        "lone_cr": {"const": 0}, "nul": {"const": 0},
+        "trailing_crlf_instances": {"const": 9}, "no_trailing_crlf_instances": {"const": 55}
+      }
+    },
+    "comparison": {
+      "type": "object", "additionalProperties": false,
+      "required": ["parity_instances", "difference_instances", "left_pair_records", "right_pair_records", "shared_pair_records", "left_only_pair_records", "right_only_pair_records", "difference_set_sha256"],
+      "properties": {
+        "parity_instances": {"$ref": "#/$defs/nonnegative"}, "difference_instances": {"$ref": "#/$defs/nonnegative"},
+        "left_pair_records": {"$ref": "#/$defs/nonnegative"}, "right_pair_records": {"$ref": "#/$defs/nonnegative"},
+        "shared_pair_records": {"$ref": "#/$defs/nonnegative"}, "left_only_pair_records": {"$ref": "#/$defs/nonnegative"},
+        "right_only_pair_records": {"$ref": "#/$defs/nonnegative"}, "difference_set_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "portParity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["parity_instances", "difference_instances", "reference_pair_records", "independent_pair_records"],
+      "properties": {
+        "parity_instances": {"const": 64}, "difference_instances": {"const": 0},
+        "reference_pair_records": {"const": 2069}, "independent_pair_records": {"const": 2069}
+      }
+    },
+    "sourceDerived": {
+      "type": "object", "additionalProperties": false,
+      "required": ["derivation_scope", "population", "newline", "reference_transform_ports", "a3_actual_vs_reference", "correct_plain_a3_filter_vs_legacy", "reference_pair_ports"],
+      "properties": {
+        "derivation_scope": {"const": "SOURCE_DERIVED_DIAGNOSTIC_ONLY"},
+        "population": {"$ref": "#/$defs/population"},
+        "newline": {"$ref": "#/$defs/newline"},
+        "reference_transform_ports": {
+          "type": "object", "additionalProperties": false,
+          "required": ["parity_instances", "difference_instances", "frozen_a3_body_parity_instances", "frozen_a3_body_difference_instances", "difference_set_sha256"],
+          "properties": {
+            "parity_instances": {"const": 64}, "difference_instances": {"const": 0},
+            "frozen_a3_body_parity_instances": {"const": 51}, "frozen_a3_body_difference_instances": {"const": 13},
+            "difference_set_sha256": {"$ref": "#/$defs/sha256"}
+          }
+        },
+        "a3_actual_vs_reference": {"$ref": "#/$defs/comparison"},
+        "correct_plain_a3_filter_vs_legacy": {"$ref": "#/$defs/comparison"},
+        "reference_pair_ports": {"$ref": "#/$defs/portParity"}
+      }
+    },
+    "projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["pair_records", "nonempty_pair_values", "asset_occurrences", "asset_edges", "asset_unique", "asset_ambiguous", "package_occurrences", "package_edges", "package_unique", "package_ambiguous", "config_occurrences", "config_edges", "config_unique", "config_ambiguous", "candidate_multiset_sha256"],
+      "properties": {
+        "pair_records": {"$ref": "#/$defs/nonnegative"}, "nonempty_pair_values": {"$ref": "#/$defs/nonnegative"},
+        "asset_occurrences": {"$ref": "#/$defs/nonnegative"}, "asset_edges": {"$ref": "#/$defs/nonnegative"}, "asset_unique": {"$ref": "#/$defs/nonnegative"}, "asset_ambiguous": {"$ref": "#/$defs/nonnegative"},
+        "package_occurrences": {"$ref": "#/$defs/nonnegative"}, "package_edges": {"$ref": "#/$defs/nonnegative"}, "package_unique": {"$ref": "#/$defs/nonnegative"}, "package_ambiguous": {"$ref": "#/$defs/nonnegative"},
+        "config_occurrences": {"$ref": "#/$defs/nonnegative"}, "config_edges": {"$ref": "#/$defs/nonnegative"}, "config_unique": {"$ref": "#/$defs/nonnegative"}, "config_ambiguous": {"$ref": "#/$defs/nonnegative"},
+        "candidate_multiset_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "globalProjection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scalar_positions", "nonempty_scalar_positions", "package_exact_occurrences", "package_unique_occurrences", "package_ambiguous_occurrences", "package_candidate_edges", "runtime_ecf_resource_identities", "predicted_detail_lines"],
+      "properties": {
+        "scalar_positions": {"$ref": "#/$defs/nonnegative"}, "nonempty_scalar_positions": {"$ref": "#/$defs/nonnegative"},
+        "package_exact_occurrences": {"$ref": "#/$defs/nonnegative"}, "package_unique_occurrences": {"$ref": "#/$defs/nonnegative"},
+        "package_ambiguous_occurrences": {"$ref": "#/$defs/nonnegative"}, "package_candidate_edges": {"$ref": "#/$defs/nonnegative"},
+        "runtime_ecf_resource_identities": {"$ref": "#/$defs/nonnegative"}, "predicted_detail_lines": {"$ref": "#/$defs/nonnegative"}
+      }
+    },
+    "controls": {
+      "type": "object", "additionalProperties": false,
+      "required": ["candidate_only", "frozen_indexes_only", "selection_count", "approved_roots", "approved_consumer_contracts", "approved_semantic_adapters", "approved_no_reference_instances", "terminal_instances", "semantic_imports_claimed"],
+      "properties": {
+        "candidate_only": {"const": true}, "frozen_indexes_only": {"const": true},
+        "selection_count": {"const": 0}, "approved_roots": {"const": 0},
+        "approved_consumer_contracts": {"const": 0}, "approved_semantic_adapters": {"const": 0},
+        "approved_no_reference_instances": {"const": 0}, "terminal_instances": {"const": 0},
+        "semantic_imports_claimed": {"const": 0}
+      }
+    },
+    "candidateProjections": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scope", "ecf", "global", "controls"],
+      "properties": {
+        "scope": {"const": "CANDIDATE_ONLY_NON_MUTATING_PROJECTION"},
+        "ecf": {
+          "type": "object", "additionalProperties": false,
+          "required": ["frozen_a3", "correct_transform_a3_filter", "source_derived_legacy_pairs"],
+          "properties": {"frozen_a3": {"$ref": "#/$defs/projection"}, "correct_transform_a3_filter": {"$ref": "#/$defs/projection"}, "source_derived_legacy_pairs": {"$ref": "#/$defs/projection"}}
+        },
+        "global": {
+          "type": "object", "additionalProperties": false,
+          "required": ["frozen_a3", "correct_transform_a3_filter", "source_derived_legacy_pairs"],
+          "properties": {"frozen_a3": {"$ref": "#/$defs/globalProjection"}, "correct_transform_a3_filter": {"$ref": "#/$defs/globalProjection"}, "source_derived_legacy_pairs": {"$ref": "#/$defs/globalProjection"}}
+        },
+        "controls": {"$ref": "#/$defs/controls"}
+      }
+    },
+    "runtimeBoundaries": {
+      "type": "object", "additionalProperties": false,
+      "required": ["legacy_runtime_executed", "runtime_binary_parity_claimed", "a3_outputs_modified", "valid_semantic_assignments_claimed", "consumer_contract_approved", "semantic_adapter_approved", "no_reference_approved", "root_approved", "terminal_state_approved"],
+      "properties": {
+        "legacy_runtime_executed": {"const": false}, "runtime_binary_parity_claimed": {"const": false},
+        "a3_outputs_modified": {"const": false}, "valid_semantic_assignments_claimed": {"const": false},
+        "consumer_contract_approved": {"const": false}, "semantic_adapter_approved": {"const": false},
+        "no_reference_approved": {"const": false}, "root_approved": {"const": false},
+        "terminal_state_approved": {"const": false}
+      }
+    },
+    "blocker": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reason_code", "count"],
+      "properties": {"reason_code": {"type": "string", "minLength": 1}, "count": {"$ref": "#/$defs/nonnegative"}}
+    },
+    "detailBinding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tracked", "path", "lines", "bytes", "sha256"],
+      "properties": {"tracked": {"const": false}, "path": {"const": "Data/Exports/P2-20/p2-20a-aux-ecf-parser-parity.jsonl"}, "lines": {"const": 64}, "bytes": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "g2Projection": {
+      "type": "object", "additionalProperties": false,
+      "required": ["criteria_total", "satisfied", "blocked", "g2_decision"],
+      "properties": {"criteria_total": {"const": 9}, "satisfied": {"const": 7}, "blocked": {"const": 2}, "g2_decision": {"const": "BLOCKED"}}
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256"],
+      "properties": {"policy_sha256": {"$ref": "#/$defs/sha256"}, "schema_sha256": {"$ref": "#/$defs/sha256"}, "detail_schema_sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tracked_aggregate_and_hash_only", "anonymous_detail_only", "raw_values", "key_names", "file_names", "private_source_paths", "source_line_numbers", "legacy_source_lines", "exact_primary_keys", "decoded_payloads"],
+      "properties": {
+        "tracked_aggregate_and_hash_only": {"const": true}, "anonymous_detail_only": {"const": true},
+        "raw_values": {"const": false}, "key_names": {"const": false}, "file_names": {"const": false},
+        "private_source_paths": {"const": false}, "source_line_numbers": {"const": false},
+        "legacy_source_lines": {"const": false}, "exact_primary_keys": {"const": false},
+        "decoded_payloads": {"const": false}
+      }
+    }
+  }
+}

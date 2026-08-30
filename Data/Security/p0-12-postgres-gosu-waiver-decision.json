@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T14:08:09.7683810+00:00",
+  "result": "PASS_DIAGNOSTIC",
+  "decision": "DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE",
+  "evaluation_mode": "local_draft",
+  "waiver_id": "WVR-0002",
+  "request_status": "draft_not_approved",
+  "request_sha256": "5f3988faf18d48cd49dc82c7d341212bf253009bd192a8e016dc61d35acdb721",
+  "waiver_effective": false,
+  "policy_blocking": true,
+  "component_policy_exception": false,
+  "automatic_activation": false,
+  "release_authority": false,
+  "approval": {
+    "owner_login": "FaithandUnity",
+    "owner_authorization_verified": false,
+    "owner_authorization_mode": "unverified",
+    "required_unique_non_author_approvals": 2,
+    "verified_approval_count": 0,
+    "verified_approvers": [],
+    "verified_review_ids": [],
+    "pull_request_number": 0,
+    "head_sha": "",
+    "exact_request_at_head": false
+  },
+  "duration": {
+    "maximum_days": 30,
+    "effective_utc": null,
+    "expires_utc": null,
+    "remediation_deadline_utc": null
+  },
+  "component": {
+    "role": "postgres-runtime-gosu",
+    "image_digest": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "binary": "gosu",
+    "version": "v1.19.0",
+    "binary_sha256": "52c8749d0142edd234e9d6bd5237dff2d81e71f43537e2f4f66f75dd4b243dd0",
+    "go_version": "go1.24.6",
+    "platform": "linux/amd64"
+  },
+  "finding_scope": {
+    "severity_policy": "HIGH_OR_CRITICAL",
+    "count": 22,
+    "vulnerability_ids": [
+      "CVE-2025-61726",
+      "CVE-2025-61729",
+      "CVE-2025-68121",
+      "CVE-2026-25679",
+      "CVE-2026-27145",
+      "CVE-2026-32280",
+      "CVE-2026-32281",
+      "CVE-2026-32283",
+      "CVE-2026-33811",
+      "CVE-2026-33814",
+      "CVE-2026-33818",
+      "CVE-2026-39820",
+      "CVE-2026-39821",
+      "CVE-2026-39822",
+      "CVE-2026-39836",
+      "CVE-2026-42499",
+      "CVE-2026-42504",
+      "CVE-2026-56853",
+      "CVE-2026-56858",
+      "CVE-2026-56859",
+      "CVE-2026-56860",
+      "CVE-2026-56862"
+    ],
+    "reachability_counts": {
+      "symbol_reachable": 0,
+      "package_only": 1,
+      "module_only": 21
+    }
+  },
+  "bindings": {
+    "request": "Data/Security/p0-12-postgres-gosu-waiver-request.json",
+    "request_sha256": "5f3988faf18d48cd49dc82c7d341212bf253009bd192a8e016dc61d35acdb721",
+    "vulnerability_disposition_sha256": "f53f267aa2f12a3634ccd8e569a2db36ab01bf8770bfee51b73b8e797ea0d83e",
+    "reachability_review_sha256": "ce0996c503edfbfaa09db0e35d4052cb5a9a9e4b9d1d0db050009cf237ce11d4",
+    "official_candidate_sha256": "a5e1310aa4b2e0a051cc07faca65edd2fd52d843fe4b40da30a687cc439149fa",
+    "toolchain_lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
+    "compose_sha256": "0bd6f2d8f1865b3fc8d6b11e674fc613db13f055f701d89eab5d52b30f4612c6"
+  },
+  "failure_count": 0,
+  "failures": []
+}

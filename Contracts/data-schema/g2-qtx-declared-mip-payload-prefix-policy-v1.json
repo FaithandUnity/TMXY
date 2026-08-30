@@ -1,0 +1,172 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.13",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_revisions": ["P2-03", "P2-12", "P2-20A.4", "P2-20A.7", "P2-20A.8"],
+  "base_plan_contract": {
+    "path": "Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv",
+    "tracked": true,
+    "rows": 21,
+    "bytes": 6504,
+    "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+  },
+  "scope": {
+    "family": "qtx",
+    "strict_error_code": "payload_size_mismatch",
+    "targets": 6,
+    "candidate_edges": 6,
+    "unique_candidates": 6,
+    "recovery_kind": "qtx_declared_mip_payload_prefix",
+    "basis": "declared_mip_payload_prefix_contract"
+  },
+  "selected_targets": [
+    {
+      "asset_id": "16bfdc5d63b39c5ee18dfa6d36c38ee08410fb814aeed1599e978e2c59d49b60",
+      "candidate_id": "39bb472101abfd49a177b86c20c0d25349694dd9af5f5ec535e91196c40c8628",
+      "source_sha256": "3b088ca771e1eafcad17513f6a7f4e26109e41360ac115695bc3ca78cea4c790",
+      "body_sha256": "1aade2a6714ddcee4d4ea76a788c4387228710ff2911bbcdaa85edd5e024f05c",
+      "descriptor_semantic_sha256": "01621d0801feb842ec2918190e288ec9950b0f1c78a2a3061a7260335a8c504b",
+      "format": "dxt5", "width": 256, "height": 256,
+      "stored_mip_count": 1, "declared_mip_count": 1,
+      "payload_boundary_mip_count": 7, "maximum_natural_mip_count": 9,
+      "input_payload_bytes": 87376, "consumed_payload_bytes": 65536,
+      "ignored_payload_bytes": 21840
+    },
+    {
+      "asset_id": "2481112fde935c07e2dd5cd3c16e969e2b8a478cca806db87e49235ff05d3fb9",
+      "candidate_id": "16d05189092a1987438b64f73a6eab8c810e875e776b25d9d3fce18b1fccc841",
+      "source_sha256": "6237a810e294920de3b95675465fb478f737bab36223ffbaaafefbbb51acd49d",
+      "body_sha256": "1aade2a6714ddcee4d4ea76a788c4387228710ff2911bbcdaa85edd5e024f05c",
+      "descriptor_semantic_sha256": "01621d0801feb842ec2918190e288ec9950b0f1c78a2a3061a7260335a8c504b",
+      "format": "dxt5", "width": 256, "height": 256,
+      "stored_mip_count": 1, "declared_mip_count": 1,
+      "payload_boundary_mip_count": 7, "maximum_natural_mip_count": 9,
+      "input_payload_bytes": 87376, "consumed_payload_bytes": 65536,
+      "ignored_payload_bytes": 21840
+    },
+    {
+      "asset_id": "40d7d1cc62351a9d8580b7f0e6d7b4351fed178f996173eb54083bd19d344e60",
+      "candidate_id": "264aa0d415221a68786aa56c8eea7e26fb6354d72fbb8048ba55f2a85087726c",
+      "source_sha256": "adde5c50afa802d43685b8df40dc6c1fa1c60e38eb7075051dab3835c839c24b",
+      "body_sha256": "a81f2a1afde95e8cd21a036608ada62996fc4b501d18f82f8a23fce28cf48116",
+      "descriptor_semantic_sha256": "19f0ad53b42a350d8e6ef362823f1e2acc3b92222568ed0406bd5fa553d8332f",
+      "format": "dxt1", "width": 512, "height": 512,
+      "stored_mip_count": 1, "declared_mip_count": 1,
+      "payload_boundary_mip_count": 10, "maximum_natural_mip_count": 10,
+      "input_payload_bytes": 174776, "consumed_payload_bytes": 131072,
+      "ignored_payload_bytes": 43704
+    },
+    {
+      "asset_id": "78f1ae6effe7031212f8f2b0780d35f516a39b32da2c0cfe05e1047b3ef02f7e",
+      "candidate_id": "f3dd708cbf49e10204e5faa609a4a7861fb61f0f6a428cf991d0809c67185001",
+      "source_sha256": "6a914a91d14069f00eb153d80ed0ae9602300501c9f37361fcd86a54dc317bff",
+      "body_sha256": "a81f2a1afde95e8cd21a036608ada62996fc4b501d18f82f8a23fce28cf48116",
+      "descriptor_semantic_sha256": "19f0ad53b42a350d8e6ef362823f1e2acc3b92222568ed0406bd5fa553d8332f",
+      "format": "dxt1", "width": 512, "height": 512,
+      "stored_mip_count": 1, "declared_mip_count": 1,
+      "payload_boundary_mip_count": 10, "maximum_natural_mip_count": 10,
+      "input_payload_bytes": 174776, "consumed_payload_bytes": 131072,
+      "ignored_payload_bytes": 43704
+    },
+    {
+      "asset_id": "a1443c2835c8b27b55a374a019623480065540794f73593c335a6257b3073304",
+      "candidate_id": "79d18dd83a837767044395cba265b810bb5887a46313155900013845be59d802",
+      "source_sha256": "b463d59c12424659a4e53413a2835fcda045c129594a5ef92443215ec948b2e9",
+      "body_sha256": "1aade2a6714ddcee4d4ea76a788c4387228710ff2911bbcdaa85edd5e024f05c",
+      "descriptor_semantic_sha256": "01621d0801feb842ec2918190e288ec9950b0f1c78a2a3061a7260335a8c504b",
+      "format": "dxt5", "width": 256, "height": 256,
+      "stored_mip_count": 1, "declared_mip_count": 1,
+      "payload_boundary_mip_count": 7, "maximum_natural_mip_count": 9,
+      "input_payload_bytes": 87376, "consumed_payload_bytes": 65536,
+      "ignored_payload_bytes": 21840
+    },
+    {
+      "asset_id": "a1579885ef5039b233906888e09ff19a3bb278a1ffdd3d89879460690aade430",
+      "candidate_id": "2c8be4be97f5e278306d56083df75861694dc93b7e73e45997a54abe00eb64e4",
+      "source_sha256": "9d958649d802c00d5ae2da293b9a626ed03cdfb11eead4082feb30ffa18c40fd",
+      "body_sha256": "a81f2a1afde95e8cd21a036608ada62996fc4b501d18f82f8a23fce28cf48116",
+      "descriptor_semantic_sha256": "19f0ad53b42a350d8e6ef362823f1e2acc3b92222568ed0406bd5fa553d8332f",
+      "format": "dxt1", "width": 512, "height": 512,
+      "stored_mip_count": 1, "declared_mip_count": 1,
+      "payload_boundary_mip_count": 10, "maximum_natural_mip_count": 10,
+      "input_payload_bytes": 174776, "consumed_payload_bytes": 131072,
+      "ignored_payload_bytes": 43704
+    }
+  ],
+  "excluded_unresolved_targets": [
+    {"asset_id": "041b6b4fff983e5916738b72049eecfd3c5b22f0f99885e0824d808adee50dbe", "candidate_ids": ["a3516dd1da84f694166415aa910c996e5332428faddeee7d402b0eaa07e4ecd6"]},
+    {"asset_id": "5418853dcce34044df16ea9eef5f3d7742237040b2d172999369d61619a71487", "candidate_ids": ["70142a5dafb4f779c5cbee5aaafa93cdf1668ba2f0f6acb9a5db9fd7b813b4a0", "90c668609fa505c4c68737271e47d3b7bfd2af03b929c79366ac94de0e9d7a8f", "bdc0cf5c7ce4eeeff68de6776f68a7126bfe50ce98faae18f71046b20a427124"]},
+    {"asset_id": "61051d8d924fe39316547f8eb00abede8954c3cfdf3bced7f1ad2ab55b5ed4b3", "candidate_ids": ["c35eb0c19c31518015dacad1af1302b3cd69c0c4785e26cfb220653c805b77cb"]},
+    {"asset_id": "75717015327aeaeefd1c533adb9ef86bb37de392def54fe27149c0f38dfa9c84", "candidate_ids": ["ff0673d439d2bce3c90019fc247c2c80b8384fc42f7f3c45f870b5ca1401c1fa"]}
+  ],
+  "expected_patterns": [
+    {"format": "dxt1", "width": 512, "height": 512, "targets": 3, "payload_boundary_mip_count": 10, "maximum_natural_mip_count": 10, "input_payload_bytes": 174776, "consumed_payload_bytes": 131072, "ignored_payload_bytes": 43704},
+    {"format": "dxt5", "width": 256, "height": 256, "targets": 3, "payload_boundary_mip_count": 7, "maximum_natural_mip_count": 9, "input_payload_bytes": 87376, "consumed_payload_bytes": 65536, "ignored_payload_bytes": 21840}
+  ],
+  "legacy_source_roles": [
+    {"role": "legacy_qrender_mip_descriptor", "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50"},
+    {"role": "legacy_d3d9_texture_upload", "sha256": "134444b822c3bd271bcb91db4a0ac59a2b540bacbe460e35c54077f78589be87"}
+  ],
+  "expected_source_facts": {
+    "mip_level_is_serialized_with_zero_default": true,
+    "stored_zero_is_normalized_to_one_before_upload": true,
+    "texture_allocation_uses_declared_mip_count": true,
+    "copy_loop_is_bounded_by_declared_mip_count": true,
+    "copy_offset_advances_by_declared_mip_sizes": true,
+    "bytes_after_declared_copy_prefix_are_not_read_by_that_loop": true
+  },
+  "proof_requirements": {
+    "source_basis": "SOURCE_DERIVED",
+    "legacy_binary_executed": false,
+    "runtime_parity_proven": false,
+    "frozen_a7_candidate_set_exact": true,
+    "a4_source_hash_reverified": true,
+    "candidate_body_hash_reverified": true,
+    "candidate_package_hashed": true,
+    "strict_default_binding_rejected": true,
+    "explicit_prefix_api_passed": true,
+    "full_payload_ends_on_larger_mip_boundary": true,
+    "decoded_mip_zero_matches_strict_prefix_parse": true,
+    "dds_contains_declared_prefix_only": true,
+    "ignored_tail_sha256_recorded": true,
+    "excluded_scope_not_selected": true,
+    "effective_plan_changes_only_six_recovery_kind_cells": true,
+    "acyclic_prepare_uses_tracked_base_plan_contract_p2_12_p2_03": true,
+    "final_reconciliation_requires_post_application": true
+  },
+  "authority_controls": {
+    "a4_is_authoritative": true,
+    "authority_state_changed": false,
+    "adapter_applied": false,
+    "recovery_applied": false,
+    "candidate_selection": false,
+    "automatic_resolution": false,
+    "content_disposition": false,
+    "repair_or_write": false,
+    "delete_or_no_ref": false,
+    "owner_approval": false,
+    "g2_06_satisfied": false,
+    "p3_authorized": false
+  },
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix.jsonl",
+    "effective_recovery_plan": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+    "report_json": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.json",
+    "report_markdown": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.md",
+    "evidence": "Data/Inventory/p2-20a-qtx-declared-mip-payload-prefix.json",
+    "detail_export_tracked": false,
+    "effective_recovery_plan_tracked": false
+  },
+  "disclosure": {
+    "tracked_aggregate_hash_and_anonymous_contract_only": true,
+    "tracked_anonymous_base_plan_contract": true,
+    "anonymous_detail_only": true,
+    "legacy_source_roles_and_hashes_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_confidential_payloads": false
+  }
+}

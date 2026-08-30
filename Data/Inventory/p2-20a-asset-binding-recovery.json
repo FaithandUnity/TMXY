@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.8",
+  "captured_utc": "2026-08-30T15:36:56.850782Z",
+  "result": "BLOCKED",
+  "measured": {
+    "attempted": {
+      "targets": 17,
+      "candidate_edges": 21
+    },
+    "successful": {
+      "targets": 13,
+      "candidate_edges": 15
+    },
+    "effective_resolution": {
+      "resolved": {
+        "targets": 13,
+        "candidate_edges": 15
+      },
+      "ambiguous": {
+        "targets": 0,
+        "candidate_edges": 0
+      },
+      "unresolved": {
+        "targets": 6,
+        "candidate_edges": 9
+      }
+    }
+  },
+  "report": {
+    "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+    "tracked": false,
+    "bytes": 7549,
+    "lines": 224,
+    "sha256": "1e241d6c74c0a0181c792b1f0c27a5e7cdaa2d27529b95e52ee6efe0eb45d19d"
+  },
+  "report_markdown": {
+    "path": "Data/Reports/p2-20a-asset-binding-recovery-report.md",
+    "tracked": false,
+    "bytes": 754,
+    "lines": 13,
+    "sha256": "5619ef23f6c3c2b00844ccfa9b30d13393fd2174638987719ea31e800f70e651"
+  },
+  "outputs": {
+    "attempt_tsv": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-eligible-attempts.tsv",
+      "tracked": false,
+      "bytes": 6504,
+      "lines": 21,
+      "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+    },
+    "effective_plan_tsv": {
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+      "tracked": false,
+      "bytes": 6558,
+      "lines": 21,
+      "sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7"
+    },
+    "success_tsv": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-successes.tsv",
+      "tracked": false,
+      "bytes": 4704,
+      "lines": 15,
+      "sha256": "69e946090005ff0dba6589a258ab3366a6ce67f8a8675a4d48cbe20312d2f69e"
+    },
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl",
+      "tracked": false,
+      "bytes": 17298,
+      "lines": 19,
+      "sha256": "6e29f0a84fbff340c79ebe7c1c64c027f814382fdf202e3bf8b8d6d14ce4fa02"
+    }
+  },
+  "contracts": {
+    "policy_sha256": "6d995d7a820defae214a0734958a1487b039b55c0dd7c2c4c8ff5db11ca829b6",
+    "schema_sha256": "edd08aafe8334e2a428d9d20540f4e6112a7b58f3955401d8061ef2cf102cf1a",
+    "detail_schema_sha256": "636cb52574f1091e129d57a7945e282e0a9cae069321554623c51ac5df92b126",
+    "base_plan_contract_sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+  },
+  "authority_boundary": {
+    "a4_is_authoritative": true,
+    "a8_is_cross_proof_only": true,
+    "a8_may_change_counts": false,
+    "attempt_is_success": false,
+    "machine_can_approve_disposition": false
+  },
+  "disclosure": {
+    "tracked_aggregate_hash_and_anonymous_contract_only": true,
+    "tracked_anonymous_base_plan_contract": true,
+    "anonymous_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "declared_or_observed_values": false,
+    "decoded_confidential_payloads": false
+  }
+}

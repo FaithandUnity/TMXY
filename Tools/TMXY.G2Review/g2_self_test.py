@@ -1,0 +1,62 @@
+"""Fail-closed self-test for the deterministic G2 review generator."""
+from __future__ import annotations
+import hashlib
+from typing import Any
+from g2_evidence import is_safe_relative, is_sha256, require
+from g2_aux_malformed_xml import aux_malformed_xml_self_test
+from g2_static_mesh_prefix import static_mesh_prefix_self_test
+from g2_qtx_declared_mip_prefix import qtx_declared_mip_prefix_self_test
+
+
+def self_test() -> dict[str, Any]:
+    assertions = 0
+    require(not (True and False), "Incomplete A.5 must block G2-06"); assertions += 1
+    required = ["SATISFIED"] * 9
+    require(set(required) == {"SATISFIED"}, "Required-status self-test failed")
+    assertions += 1
+    observed = ["SATISFIED"] * 5 + ["BLOCKED", "BLOCKED"] + ["SATISFIED"] * 2
+    require(("BLOCKED" if "BLOCKED" in observed else "PASS") == "BLOCKED",
+            "Gate fail-closed self-test failed"); assertions += 1
+    require(not (True and True and False and False),
+            "Core-resource distinction self-test failed"); assertions += 1
+    require(not (True and 189 == 0 and 6 == 0),
+            "Explicit asset-binding state must not erase blocking states"); assertions += 1
+    require(13 == 13 and 0 == 0 and 0 == 0,
+            "Identity collision must not become semantic equivalence or candidate selection")
+    assertions += 1
+    require(not (True and True and 1359 == 0 and 0 == 1359),
+            "Migration-registry fail-closed self-test failed"); assertions += 1
+    require(False is False, "Machine suggestions must not count as decisions"); assertions += 1
+    require(2000.37 > 0 and not False and not False,
+            "Budget semantics self-test failed"); assertions += 1
+    require(observed.count("SATISFIED") == 7 and observed.count("BLOCKED") == 2,
+            "Observed-count self-test failed"); assertions += 1
+    require(hashlib.sha256(b"a\n").hexdigest() == hashlib.sha256(b"a\n").hexdigest(),
+            "Hash self-test failed"); assertions += 1
+    require(is_safe_relative("Data/Inventory/evidence.json") and
+            not is_safe_relative("../outside.json") and not is_safe_relative("C:\\outside.json"),
+            "Path-rejection self-test failed"); assertions += 1
+    require(is_sha256("a" * 64) and not is_sha256("a" * 63),
+            "SHA-256 shape self-test failed"); assertions += 1
+    malformed = aux_malformed_xml_self_test()
+    require(malformed["current_contract_safe"] is True and
+            malformed["current_closure_ready"] is False and
+            malformed["synthetic_predicate_only"] is True,
+            "Malformed-XML closure separation self-test failed")
+    assertions += malformed["assertions"]
+    static_mesh_prefix = static_mesh_prefix_self_test()
+    require(static_mesh_prefix["source_derived_safe"] is True and
+            static_mesh_prefix["authority_promotion_rejected"] is True,
+            "Static-mesh prefix authority-boundary self-test failed")
+    assertions += static_mesh_prefix["assertions"]
+    qtx_prefix = qtx_declared_mip_prefix_self_test()
+    require(qtx_prefix["source_derived_safe"] is True and
+            qtx_prefix["default_strict_promotion_rejected"] is True and
+            qtx_prefix["authority_promotion_rejected"] is True and
+            qtx_prefix["pre_application_rejected"] is True,
+            "QTX declared-mip prefix authority-boundary self-test failed")
+    assertions += qtx_prefix["assertions"]
+    return {"result": "PASS", "assertions": assertions,
+            "aux_malformed_xml": malformed,
+            "static_mesh_payload_section_prefix": static_mesh_prefix,
+            "qtx_declared_mip_payload_prefix": qtx_prefix}

@@ -1,0 +1,274 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/core-table-registry-v1.schema.json",
+  "title": "TMXY core table registry v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "registry_id",
+    "task_id",
+    "status",
+    "source_build",
+    "scope",
+    "source",
+    "summary",
+    "tables"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "registry_id": { "const": "tmxy-core-table-registry-v1" },
+    "task_id": { "const": "P2-07" },
+    "status": { "const": "authoritative-frozen-build-import-contract" },
+    "source_build": { "type": "string", "minLength": 1 },
+    "scope": {
+      "type": "object",
+      "required": ["table_count", "authority", "future_change_policy"],
+      "properties": {
+        "table_count": { "const": 12 },
+        "authority": { "const": "frozen-source-build-import-only" },
+        "future_change_policy": { "const": "schema-version-bump-and-full-revalidation" }
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "p2_06_evidence_path",
+        "p2_06_evidence_sha256",
+        "p2_06_content_set_sha256",
+        "policy_path",
+        "policy_sha256",
+        "contract_path",
+        "contract_sha256"
+      ],
+      "properties": {
+        "p2_06_evidence_path": { "const": "Data/Inventory/p2-06-three-layer-data.json" },
+        "p2_06_evidence_sha256": { "$ref": "#/$defs/sha256" },
+        "p2_06_content_set_sha256": { "$ref": "#/$defs/sha256" },
+        "policy_path": { "const": "Contracts/data-schema/core-table-policy-v1.json" },
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "contract_path": { "const": "Contracts/data-schema/core-table-registry-v1.schema.json" },
+        "contract_sha256": { "$ref": "#/$defs/sha256" }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": [
+        "tables",
+        "physical_rows",
+        "canonical_rows",
+        "columns",
+        "columns_with_type_and_rule",
+        "primary_keys",
+        "foreign_keys",
+        "duplicate_occurrences_collapsed",
+        "type_violations",
+        "range_violations",
+        "key_violations",
+        "dangling_references",
+        "result"
+      ],
+      "properties": {
+        "tables": { "const": 12 },
+        "physical_rows": { "type": "integer", "minimum": 1 },
+        "canonical_rows": { "type": "integer", "minimum": 1 },
+        "columns": { "type": "integer", "minimum": 1 },
+        "columns_with_type_and_rule": { "type": "integer", "minimum": 1 },
+        "primary_keys": { "const": 12 },
+        "foreign_keys": { "type": "integer", "minimum": 1 },
+        "duplicate_occurrences_collapsed": { "type": "integer", "minimum": 0 },
+        "type_violations": { "const": 0 },
+        "range_violations": { "const": 0 },
+        "key_violations": { "const": 0 },
+        "dangling_references": { "const": 0 },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": true
+    },
+    "tables": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": { "$ref": "#/$defs/table" }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "columnId": {
+      "type": "string",
+      "pattern": "^c[0-9]{4}$"
+    },
+    "bounds": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["kind", "minimum", "maximum"],
+          "properties": {
+            "kind": { "const": "numeric-inclusive" },
+            "minimum": { "type": "number" },
+            "maximum": { "type": "number" }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["kind", "minimum_utf8_bytes", "maximum_utf8_bytes"],
+          "properties": {
+            "kind": { "const": "utf8-byte-length-inclusive" },
+            "minimum_utf8_bytes": { "type": "integer", "minimum": 0 },
+            "maximum_utf8_bytes": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["kind"],
+          "properties": { "kind": { "const": "boolean-domain" } },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["kind"],
+          "properties": { "kind": { "const": "no-observed-non-null-values" } },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "column": {
+      "type": "object",
+      "required": [
+        "id",
+        "source_ordinal",
+        "source_name",
+        "type",
+        "nullable",
+        "null_count",
+        "non_null_count",
+        "type_violations",
+        "range_violations",
+        "bounds",
+        "change_policy"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/columnId" },
+        "source_ordinal": { "type": "integer", "minimum": 1 },
+        "source_name": { "type": "string" },
+        "type": { "enum": ["boolean", "int64", "decimal", "string"] },
+        "nullable": { "type": "boolean" },
+        "null_count": { "type": "integer", "minimum": 0 },
+        "non_null_count": { "type": "integer", "minimum": 0 },
+        "type_violations": { "const": 0 },
+        "range_violations": { "const": 0 },
+        "bounds": { "$ref": "#/$defs/bounds" },
+        "change_policy": { "const": "schema-version-bump-and-full-revalidation" }
+      },
+      "additionalProperties": false
+    },
+    "primaryKey": {
+      "type": "object",
+      "required": [
+        "column_ids",
+        "duplicate_policy",
+        "null_violations",
+        "duplicate_groups",
+        "duplicate_occurrences",
+        "divergent_duplicate_groups",
+        "result"
+      ],
+      "properties": {
+        "column_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/columnId" }
+        },
+        "duplicate_policy": { "enum": ["reject", "collapse-identical-rows"] },
+        "null_violations": { "const": 0 },
+        "duplicate_groups": { "type": "integer", "minimum": 0 },
+        "duplicate_occurrences": { "type": "integer", "minimum": 0 },
+        "divergent_duplicate_groups": { "const": 0 },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": false
+    },
+    "foreignKey": {
+      "type": "object",
+      "required": [
+        "id",
+        "source_column_ids",
+        "target_table",
+        "target_column_ids",
+        "target_key_mode",
+        "sentinel_values",
+        "active_rows",
+        "inactive_rows",
+        "dangling_rows",
+        "type_compatible",
+        "result"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "source_column_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/columnId" }
+        },
+        "target_table": { "type": "string", "pattern": "\\.tbl$" },
+        "target_column_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/columnId" }
+        },
+        "target_key_mode": { "enum": ["primary-key", "distinct-domain"] },
+        "sentinel_values": { "type": "array" },
+        "active_rows": { "type": "integer", "minimum": 0 },
+        "inactive_rows": { "type": "integer", "minimum": 0 },
+        "dangling_rows": { "const": 0 },
+        "type_compatible": { "const": true },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": false
+    },
+    "table": {
+      "type": "object",
+      "required": [
+        "source_path",
+        "logical_name",
+        "role",
+        "source_schema_sha256",
+        "normalized_sha256",
+        "physical_rows",
+        "canonical_rows",
+        "primary_key",
+        "columns",
+        "foreign_keys",
+        "result"
+      ],
+      "properties": {
+        "source_path": { "type": "string", "pattern": "\\.tbl$" },
+        "logical_name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "source_schema_sha256": { "$ref": "#/$defs/sha256" },
+        "normalized_sha256": { "$ref": "#/$defs/sha256" },
+        "physical_rows": { "type": "integer", "minimum": 0 },
+        "canonical_rows": { "type": "integer", "minimum": 0 },
+        "primary_key": { "$ref": "#/$defs/primaryKey" },
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/column" }
+        },
+        "foreign_keys": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/foreignKey" }
+        },
+        "result": { "const": "PASS" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

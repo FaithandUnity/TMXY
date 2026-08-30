@@ -36,3 +36,9 @@ While it is active, P1-01 through P1-27 may produce local source, tests, evidenc
 and verified backups when their other dependencies are satisfied. It cannot
 complete P0-12/P0-16, approve G0/G1, authorize remote operations, or create
 release authority. P1-28 remains gated by the normal start condition.
+
+On 2026-08-28 the project lead separately authorized P1-28 and the G1 technical
+format-gate decision after P1-01 through P1-27 completed. The bounded machine
+record is `Data/Governance/p1-g1-stage-authorization.json`. It supersedes
+WVR-0001 only for P1-28/G1 and does not approve G0, complete P0-12/P0-16, create
+release authority, loosen Secret handling, or permit writes to legacy inputs.

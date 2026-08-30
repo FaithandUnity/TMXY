@@ -26,6 +26,8 @@ function Get-CurrentSourceBinding {
         Get-ChildItem -LiteralPath (Join-Path $root 'Apps\UEClient\Config') -Recurse -File
         Get-ChildItem -LiteralPath (Join-Path $root 'Apps\UEClient\Source') -Recurse -File |
             Where-Object { $_.Extension -in @('.cs', '.cpp', '.h') }
+        Get-ChildItem -LiteralPath (Join-Path $root 'Contracts\generated\ue') -Recurse -File |
+            Where-Object { $_.Extension -in @('.h', '.hpp') }
         Get-ChildItem -LiteralPath (Join-Path $root 'Apps\UEClient\Plugins') -Recurse -File |
             Where-Object {
                 $_.Extension -in @('.uplugin', '.cs', '.cpp', '.h') -and

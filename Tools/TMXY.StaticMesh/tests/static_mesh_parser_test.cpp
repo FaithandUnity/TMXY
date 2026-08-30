@@ -1,7 +1,9 @@
+#include "tmxy/package/package_v1.hpp"
 #include "tmxy/static_mesh/package_static_mesh_reader.hpp"
 #include "tmxy/static_mesh/sm_reader.hpp"
 #include "tmxy/static_mesh/static_mesh_error.hpp"
 #include "tmxy/static_mesh/static_mesh_export.hpp"
+#include "tmxy/static_mesh/static_mesh_gltf.hpp"
 
 #include <bit>
 #include <cstddef>
@@ -46,6 +48,15 @@ void append_u16(std::vector<std::byte>& bytes, const std::uint16_t value)
 {
     append_u8(bytes, static_cast<std::uint8_t>(value & 0xFFU));
     append_u8(bytes, static_cast<std::uint8_t>((value >> 8U) & 0xFFU));
+}
+
+void append_string(std::vector<std::byte>& bytes, const std::string_view value)
+{
+    append_u16(bytes, static_cast<std::uint16_t>(value.size()));
+    for (const char character : value)
+    {
+        append_u8(bytes, static_cast<std::uint8_t>(character));
+    }
 }
 
 void append_i32(std::vector<std::byte>& bytes, const std::int32_t value)
@@ -137,6 +148,16 @@ struct MeshOptions final
     return bytes;
 }
 
+[[nodiscard]] std::vector<std::byte> make_zero_section_mesh()
+{
+    std::vector<std::byte> bytes;
+    for (int count = 0; count < 14; ++count)
+    {
+        append_i32(bytes, 0);
+    }
+    return bytes;
+}
+
 void append_property(std::vector<std::byte>& body, const std::string_view name,
                      const std::span<const std::byte> value)
 {
@@ -197,6 +218,39 @@ void append_property(std::vector<std::byte>& body, const std::string_view name,
     return body;
 }
 
+[[nodiscard]] std::vector<std::byte> make_material_descriptor(const std::uint16_t material_count)
+{
+    std::vector<std::byte> body;
+    append_u16(body, static_cast<std::uint16_t>(material_count + 1U));
+    append_property(body, "skins", u16_value(material_count));
+    for (std::uint16_t index = 0; index < material_count; ++index)
+    {
+        const auto slot_name = "skins[" + std::to_string(index) + "]";
+        const auto material_name = "sample.material." + std::to_string(index);
+        append_property(body, slot_name, string_value(material_name));
+    }
+    return body;
+}
+
+[[nodiscard]] std::vector<std::byte> make_static_mesh_package(const std::uint16_t material_count)
+{
+    constexpr std::string_view object_name = "sample.mesh";
+    constexpr std::string_view class_name = "QStaticMesh";
+    const auto body = make_material_descriptor(material_count);
+    const auto header_size = 2U + tmxy::package::kPackageV1Version.size() + 4U + 2U +
+                             object_name.size() + 2U + class_name.size() + 8U;
+
+    std::vector<std::byte> bytes;
+    append_string(bytes, tmxy::package::kPackageV1Version);
+    append_i32(bytes, 1);
+    append_string(bytes, object_name);
+    append_string(bytes, class_name);
+    append_i32(bytes, static_cast<std::int32_t>(header_size));
+    append_i32(bytes, static_cast<std::int32_t>(body.size()));
+    bytes.insert(bytes.end(), body.begin(), body.end());
+    return bytes;
+}
+
 void test_valid_mesh_and_export(TestContext& test)
 {
     const auto bytes = make_mesh();
@@ -227,7 +281,12 @@ void test_valid_mesh_and_export(TestContext& test)
         .mesh = parsed.value(),
         .package = {.object_name_bytes = "sample.mesh", .descriptor = descriptor.value()},
         .effective_bounds = parsed.value().render_bounds,
-        .declared_bounds_relation = tmxy::static_mesh::DeclaredBoundsRelation::exact};
+        .declared_bounds_relation = tmxy::static_mesh::DeclaredBoundsRelation::exact,
+        .material_slot_resolution = {.declared_material_slot_count = 1,
+                                     .effective_material_slot_count = 1,
+                                     .ignored_material_slot_count = 0,
+                                     .basis =
+                                         tmxy::static_mesh::MaterialSlotBasis::package_descriptor}};
     const auto first = tmxy::static_mesh::build_ue_obj(binding);
     const auto second = tmxy::static_mesh::build_ue_obj(binding);
     test.expect(first.has_value(), "UE OBJ preview builds");
@@ -238,6 +297,112 @@ void test_valid_mesh_and_export(TestContext& test)
     const auto json = tmxy::static_mesh::build_static_mesh_json(binding);
     test.expect(json.find(R"("material": "sample.material")") != std::string::npos,
                 "material slot is emitted");
+}
+
+void test_material_slot_binding_policies(TestContext& test)
+{
+    constexpr std::string_view object_name = "sample.mesh";
+    const auto mesh = make_mesh();
+    const auto exact_package = make_static_mesh_package(1U);
+    const auto strict_exact = tmxy::static_mesh::bind_static_mesh(exact_package, object_name, mesh);
+    const auto prefix_exact = tmxy::static_mesh::bind_static_mesh_with_payload_section_prefix(
+        exact_package, object_name, mesh);
+    test.expect(strict_exact.has_value() && prefix_exact.has_value(),
+                "exact material slots bind under both policies");
+    if (strict_exact.has_value() && prefix_exact.has_value())
+    {
+        for (const auto* binding : {&strict_exact.value(), &prefix_exact.value()})
+        {
+            const auto& resolution = binding->material_slot_resolution;
+            test.expect(resolution.declared_material_slot_count == 1U &&
+                            resolution.effective_material_slot_count == 1U &&
+                            resolution.ignored_material_slot_count == 0U &&
+                            resolution.basis ==
+                                tmxy::static_mesh::MaterialSlotBasis::package_descriptor,
+                        "exact slots retain package descriptor authority");
+        }
+        const auto json = tmxy::static_mesh::build_static_mesh_json(prefix_exact.value());
+        test.expect(json.find(R"("material_slot_basis": "package_descriptor")") !=
+                            std::string::npos &&
+                        json.find(R"("declared_material_slot_count": 1)") != std::string::npos &&
+                        json.find(R"("effective_material_slot_count": 1)") != std::string::npos &&
+                        json.find(R"("ignored_material_slot_count": 0)") != std::string::npos,
+                    "exact JSON discloses package material authority");
+    }
+
+    const auto extra_package = make_static_mesh_package(3U);
+    const auto strict_extra = tmxy::static_mesh::bind_static_mesh(extra_package, object_name, mesh);
+    const auto prefix_extra = tmxy::static_mesh::bind_static_mesh_with_payload_section_prefix(
+        extra_package, object_name, mesh);
+    test.expect(!strict_extra.has_value() &&
+                    strict_extra.error().code ==
+                        tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch,
+                "strict binding rejects an unused material tail");
+    test.expect(prefix_extra.has_value(),
+                "explicit prefix binding accepts an unused material tail");
+    if (prefix_extra.has_value())
+    {
+        const auto& binding = prefix_extra.value();
+        const auto& resolution = binding.material_slot_resolution;
+        test.expect(resolution.declared_material_slot_count == 3U &&
+                        resolution.effective_material_slot_count == 1U &&
+                        resolution.ignored_material_slot_count == 2U &&
+                        resolution.basis ==
+                            tmxy::static_mesh::MaterialSlotBasis::payload_section_prefix_contract,
+                    "prefix binding records declared effective and ignored slot counts");
+        test.expect(binding.package.descriptor.material_object_names.size() == 3U &&
+                        binding.mesh.sections.size() == 1U,
+                    "prefix binding preserves the descriptor without synthesizing materials");
+        const auto obj = tmxy::static_mesh::build_ue_obj(binding);
+        const auto gltf = tmxy::static_mesh::build_gltf2(binding, "prefix.bin");
+        test.expect(obj.has_value() &&
+                        obj.value().find("usemtl sample.material.0") != std::string::npos &&
+                        obj.value().find("sample.material.1") == std::string::npos,
+                    "OBJ export consumes only the effective material prefix");
+        test.expect(gltf.has_value() &&
+                        gltf.value().json.find(R"("name": "sample.material.0")") !=
+                            std::string::npos &&
+                        gltf.value().json.find("sample.material.1") == std::string::npos,
+                    "glTF export consumes only the effective material prefix");
+        const auto json = tmxy::static_mesh::build_static_mesh_json(binding);
+        test.expect(json.find(R"("material_slot_basis": "payload_section_prefix_contract")") !=
+                            std::string::npos &&
+                        json.find(R"("declared_material_slot_count": 3)") != std::string::npos &&
+                        json.find(R"("effective_material_slot_count": 1)") != std::string::npos &&
+                        json.find(R"("ignored_material_slot_count": 2)") != std::string::npos &&
+                        json.find(R"("material": "sample.material.1")") == std::string::npos,
+                    "JSON discloses prefix resolution and exports only effective materials");
+    }
+
+    const auto missing_package = make_static_mesh_package(0U);
+    const auto strict_missing =
+        tmxy::static_mesh::bind_static_mesh(missing_package, object_name, mesh);
+    const auto prefix_missing = tmxy::static_mesh::bind_static_mesh_with_payload_section_prefix(
+        missing_package, object_name, mesh);
+    test.expect(!strict_missing.has_value() && !prefix_missing.has_value() &&
+                    strict_missing.error().code ==
+                        tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch &&
+                    prefix_missing.error().code ==
+                        tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch,
+                "both policies reject fewer declared materials than payload sections");
+
+    const auto zero_mesh = make_zero_section_mesh();
+    const auto strict_zero =
+        tmxy::static_mesh::bind_static_mesh(missing_package, object_name, zero_mesh);
+    const auto prefix_zero = tmxy::static_mesh::bind_static_mesh_with_payload_section_prefix(
+        missing_package, object_name, zero_mesh);
+    const auto prefix_zero_with_tail =
+        tmxy::static_mesh::bind_static_mesh_with_payload_section_prefix(exact_package, object_name,
+                                                                        zero_mesh);
+    test.expect(!strict_zero.has_value() && !prefix_zero.has_value() &&
+                    !prefix_zero_with_tail.has_value() &&
+                    strict_zero.error().code ==
+                        tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch &&
+                    prefix_zero.error().code ==
+                        tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch &&
+                    prefix_zero_with_tail.error().code ==
+                        tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch,
+                "zero-section payloads never establish material authority");
 }
 
 void test_corrupt_meshes(TestContext& test)
@@ -320,6 +485,7 @@ int main()
 {
     TestContext test;
     test_valid_mesh_and_export(test);
+    test_material_slot_binding_policies(test);
     test_corrupt_meshes(test);
     test_corrupt_descriptor(test);
     test.expect(tmxy::static_mesh::StaticMeshError::kSchemaVersion == 1U,
@@ -328,5 +494,9 @@ int main()
                     tmxy::static_mesh::StaticMeshErrorCode::material_slot_mismatch) ==
                     "material_slot_mismatch",
                 "stable error code name");
+    test.expect(tmxy::static_mesh::to_string(
+                    tmxy::static_mesh::MaterialSlotBasis::payload_section_prefix_contract) ==
+                    "payload_section_prefix_contract",
+                "stable material slot basis name");
     return test.failures() == 0 ? 0 : 1;
 }

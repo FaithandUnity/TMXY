@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:20:36.0731791+00:00",
+  "captured_utc": "2026-08-30T18:02:14.9258326+00:00",
   "result": "PASS",
   "task": "P1-14",
   "completion_criteria_satisfied": true,
   "source_file_count": 16,
-  "source_sha256": "4b81de661b327e21a71edcaf16528ecfd668c362cd738bd7028a1c69fc6694dc",
+  "source_sha256": "75378d4f4a8dbe5f2950a77690793c335745afa12e46a01eff6b8a956d718dd6",
   "contract": {
     "descriptor_source": "Package QStaticMesh QObject property body",
     "sm_payload": "headerless ordered runtime arrays",
@@ -22,6 +22,13 @@
       "contains",
       "mismatch"
     ],
+    "material_slot_bases": [
+      "package_descriptor",
+      "payload_section_prefix_contract"
+    ],
+    "strict_material_slot_rule": "non-zero exact Package slots to payload sections",
+    "explicit_prefix_rule": "exact or Package slots greater than non-zero payload sections",
+    "material_synthesis": false,
     "octree_rule": "face ranges are authoritative for leaf nodes only"
   },
   "samples": [
@@ -142,8 +149,8 @@
   ],
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -165,7 +172,7 @@
   ],
   "execution": {
     "exit_code": 0,
-    "output_line_count": 71,
-    "output_sha256": "46cc69811b726f15703c915bc68e0abcb9652e5fcfdfa661c97b175180904018"
+    "output_line_count": 72,
+    "output_sha256": "867124a102726639667fb56fbf5f97185ff7a3e1dfa53eafdfdae6f1f0c63fa3"
   }
 }

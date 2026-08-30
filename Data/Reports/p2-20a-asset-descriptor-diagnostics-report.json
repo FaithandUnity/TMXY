@@ -1,0 +1,193 @@
+{
+  "captured_utc": "2026-08-30T15:32:48Z",
+  "completion": {
+    "g2_remains_blocked_by_other_open_criteria": true,
+    "observed_ambiguous_targets": 189,
+    "observed_unresolved_targets": 6,
+    "required_ambiguous_targets": 0,
+    "required_unresolved_targets": 0,
+    "satisfied": false
+  },
+  "completion_criteria_satisfied": false,
+  "criterion_id": "G2-06",
+  "detail_export": {
+    "bytes": 13820115,
+    "lines": 3651,
+    "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+    "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa",
+    "tracked": false
+  },
+  "diagnostic_scope_complete": true,
+  "disclosure": {
+    "anonymous_identities_only": true,
+    "decoded_confidential_payloads": false,
+    "exact_primary_keys": false,
+    "legacy_source_lines": false,
+    "private_source_paths": false,
+    "raw_table_rows": false
+  },
+  "evidence_revision": "P2-20A.4",
+  "g2_06_satisfied": false,
+  "input_bindings": [
+    {
+      "bytes": 5424,
+      "lines": 162,
+      "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+      "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab",
+      "tracked": true
+    },
+    {
+      "bytes": 6306,
+      "lines": 189,
+      "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+      "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c",
+      "tracked": true
+    },
+    {
+      "bytes": 7789,
+      "lines": 264,
+      "path": "Data/Inventory/p2-13-reference-closure.json",
+      "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
+      "tracked": true
+    },
+    {
+      "bytes": 7819075,
+      "lines": 21494,
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-workset.jsonl",
+      "sha256": "fb986a21eaa905737a05c4e0b451241135d2c7f61547aa98144e0cedd6e4537c",
+      "tracked": false
+    },
+    {
+      "bytes": 6558,
+      "lines": 21,
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+      "sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7",
+      "tracked": false
+    },
+    {
+      "bytes": 4000,
+      "lines": 98,
+      "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
+      "sha256": "af3c5fb29e583c2eab1ca0bae61bfef2af19abed146a6b2bf972027ecdaf09ab",
+      "tracked": true
+    },
+    {
+      "bytes": 8390,
+      "lines": 196,
+      "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-v1.schema.json",
+      "sha256": "1907851d3d5866bf5d99cb1d333cc62b8ade5a5208b604f613cba7616544bb05",
+      "tracked": true
+    }
+  ],
+  "measured": {
+    "ambiguous_targets": 189,
+    "binding_pass_candidates": 12561,
+    "binding_rejected_candidates": 203,
+    "by_family": {
+      "anim": {
+        "ambiguous": 8,
+        "candidate_edges": 222,
+        "resolved": 105,
+        "targets": 114,
+        "unresolved": 1
+      },
+      "qtx": {
+        "ambiguous": 171,
+        "candidate_edges": 11051,
+        "resolved": 2149,
+        "targets": 2324,
+        "unresolved": 4
+      },
+      "skem": {
+        "ambiguous": 8,
+        "candidate_edges": 1151,
+        "resolved": 1035,
+        "targets": 1043
+      },
+      "sm": {
+        "ambiguous": 2,
+        "candidate_edges": 340,
+        "resolved": 167,
+        "targets": 170,
+        "unresolved": 1
+      }
+    },
+    "by_prior_resolution_basis": {
+      "DESCRIPTOR_VALIDATION_FAILED": {
+        "candidate_edges": 24,
+        "resolved": 13,
+        "targets": 19,
+        "unresolved": 6
+      },
+      "DIVERGENT_DESCRIPTOR_SET": {
+        "ambiguous": 183,
+        "candidate_edges": 534,
+        "targets": 183
+      },
+      "EQUIVALENT_VALID_DESCRIPTOR_SET": {
+        "ambiguous": 6,
+        "candidate_edges": 11271,
+        "resolved": 2508,
+        "targets": 2514
+      },
+      "UNIQUE_VALID_DESCRIPTOR": {
+        "candidate_edges": 935,
+        "resolved": 935,
+        "targets": 935
+      }
+    },
+    "by_resolution_basis_edges": {
+      "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 30,
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 9,
+      "OPEN_REJECTED_CANDIDATE": 516,
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12209
+    },
+    "by_resolution_basis_targets": {
+      "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 15,
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 6,
+      "OPEN_REJECTED_CANDIDATE": 174,
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3456
+    },
+    "descriptor_parsed_candidates": 12764,
+    "descriptor_rejected_candidates": 0,
+    "effective_binding_pass_candidates": 12576,
+    "effective_binding_rejected_candidates": 188,
+    "reconciled_full_workset": {
+      "ambiguous_edges": 546,
+      "ambiguous_targets": 189,
+      "candidate_edges": 39351,
+      "resolved_edges": 38796,
+      "resolved_targets": 21299,
+      "targets": 21494,
+      "unknown_edges": 0,
+      "unknown_targets": 0,
+      "unresolved_edges": 9,
+      "unresolved_targets": 6
+    },
+    "recovery_applied_candidates": 15,
+    "resolved_targets": 3456,
+    "strict_ambiguous_edges": 546,
+    "strict_ambiguous_targets": 189,
+    "strict_resolved_edges": 12194,
+    "strict_resolved_targets": 3443,
+    "strict_unresolved_edges": 24,
+    "strict_unresolved_targets": 19,
+    "unresolved_targets": 6
+  },
+  "p3_authorized": false,
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "schema_version": 1,
+  "scope": {
+    "candidate_edges": 12764,
+    "candidate_identity_exact": true,
+    "eligible_recovery_attempts": 21,
+    "first_candidate_selection_used": false,
+    "production_binder_used": true,
+    "selection": "all coarse-equivalent, divergent, zero-valid, and unique SKEM production-binding obligations",
+    "targets": 3651
+  },
+  "source_build": "qy-3.0.0.413",
+  "task_id": "P2-20A",
+  "task_status": "BLOCKED"
+}

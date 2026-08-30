@@ -1,0 +1,478 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-auxiliary-config-reference-v1.schema.json",
+  "title": "TMXY P2-20A.3 auxiliary-config reference evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id",
+    "criterion_id", "source_build", "result", "review_execution_result",
+    "task_status", "completion_criteria_satisfied", "scope_complete",
+    "g2_06_satisfied", "p3_authorized", "input_bindings",
+    "measured_lexical_candidates", "parser_and_matching_controls",
+    "adapter_state_summary", "file_instances", "semantic_resolution",
+    "config_closure", "assumptions", "blockers", "completion",
+    "authority_boundaries", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "evidence_revision": { "const": "P2-20A.3" },
+    "captured_utc": { "type": "string", "format": "date-time" },
+    "task_id": { "const": "P2-20A" },
+    "criterion_id": { "const": "G2-06" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "result": { "const": "BLOCKED" },
+    "review_execution_result": { "const": "PASS" },
+    "task_status": { "const": "BLOCKED" },
+    "completion_criteria_satisfied": { "const": false },
+    "scope_complete": { "const": false },
+    "g2_06_satisfied": { "const": false },
+    "p3_authorized": { "const": false },
+    "input_bindings": { "$ref": "#/$defs/input_bindings" },
+    "measured_lexical_candidates": { "$ref": "#/$defs/measured" },
+    "parser_and_matching_controls": { "$ref": "#/$defs/controls" },
+    "adapter_state_summary": { "$ref": "#/$defs/adapter_summary" },
+    "file_instances": {
+      "type": "array",
+      "minItems": 212,
+      "maxItems": 212,
+      "items": { "$ref": "#/$defs/file_instance" },
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "required": ["adapter_state"],
+            "properties": { "adapter_state": { "const": "malformed-blocked" } }
+          },
+          "minContains": 6,
+          "maxContains": 6
+        },
+        {
+          "not": {
+            "contains": {
+              "type": "object",
+              "required": ["adapter_state"],
+              "properties": { "adapter_state": { "const": "semantic-approved" } }
+            }
+          }
+        },
+        {
+          "not": {
+            "contains": {
+              "type": "object",
+              "required": ["adapter_state"],
+              "properties": { "adapter_state": { "const": "no-ref-approved" } }
+            }
+          }
+        }
+      ]
+    },
+    "semantic_resolution": { "$ref": "#/$defs/semantic_resolution" },
+    "config_closure": { "$ref": "#/$defs/config_closure" },
+    "assumptions": { "$ref": "#/$defs/assumptions" },
+    "blockers": { "$ref": "#/$defs/blockers" },
+    "completion": { "$ref": "#/$defs/completion" },
+    "authority_boundaries": { "$ref": "#/$defs/authority" },
+    "contracts": { "$ref": "#/$defs/contracts" },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "nullable_sha256": { "type": ["string", "null"], "pattern": "^[0-9a-f]{64}$" },
+    "count": { "type": "integer", "minimum": 0 },
+    "nullable_count": { "type": ["integer", "null"], "minimum": 0 },
+    "input_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "sha256"],
+      "properties": {
+        "role": {
+          "enum": [
+            "auxiliary_config_inventory", "full_asset_inventory",
+            "reference_closure", "asset_health", "conversion_routing",
+            "content_health"
+          ]
+        },
+        "sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "input_bindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries"],
+      "properties": {
+        "aggregate_sha256": { "$ref": "#/$defs/sha256" },
+        "entries": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            { "allOf": [{ "$ref": "#/$defs/input_binding" }, { "properties": { "role": { "const": "auxiliary_config_inventory" } } }] },
+            { "allOf": [{ "$ref": "#/$defs/input_binding" }, { "properties": { "role": { "const": "full_asset_inventory" } } }] },
+            { "allOf": [{ "$ref": "#/$defs/input_binding" }, { "properties": { "role": { "const": "reference_closure" } } }] },
+            { "allOf": [{ "$ref": "#/$defs/input_binding" }, { "properties": { "role": { "const": "asset_health" } } }] },
+            { "allOf": [{ "$ref": "#/$defs/input_binding" }, { "properties": { "role": { "const": "conversion_routing" } } }] },
+            { "allOf": [{ "$ref": "#/$defs/input_binding" }, { "properties": { "role": { "const": "content_health" } } }] }
+          ],
+          "items": false
+        }
+      }
+    },
+    "measured": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "measurement_authority", "file_instances", "unique_content_bodies",
+        "parsed_file_instances", "malformed_file_instances", "scalar_positions",
+        "nonempty_scalar_positions", "asset_exact_occurrences",
+        "package_exact_occurrences", "package_unique_occurrences",
+        "package_ambiguous_occurrences", "package_ambiguous_candidate_edges",
+        "config_exact_edges", "file_instance_set_sha256",
+        "lexical_occurrence_set_sha256"
+      ],
+      "properties": {
+        "measurement_authority": { "const": "LEXICAL_ONLY" },
+        "file_instances": { "const": 212 },
+        "unique_content_bodies": { "const": 196 },
+        "parsed_file_instances": { "const": 206 },
+        "malformed_file_instances": { "const": 6 },
+        "scalar_positions": { "const": 39522 },
+        "nonempty_scalar_positions": { "const": 39498 },
+        "asset_exact_occurrences": { "const": 3043 },
+        "package_exact_occurrences": { "const": 638 },
+        "package_unique_occurrences": { "const": 218 },
+        "package_ambiguous_occurrences": { "const": 420 },
+        "package_ambiguous_candidate_edges": { "const": 1136 },
+        "config_exact_edges": { "const": 8 },
+        "file_instance_set_sha256": { "$ref": "#/$defs/sha256" },
+        "lexical_occurrence_set_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "controls": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "every_file_instance_enumerated", "duplicate_file_instances_preserved",
+        "duplicate_ecf_assignments_preserve_order", "xml_dtd_enabled",
+        "xml_external_resolver_enabled", "exact_complete_scalar_matching",
+        "substring_matching", "basename_matching", "extension_only_matching",
+        "first_candidate_selection", "ambiguous_candidates_all_retained",
+        "config_closure_detection", "config_cycle_detection",
+        "malformed_implies_zero_references"
+      ],
+      "properties": {
+        "every_file_instance_enumerated": { "const": true },
+        "duplicate_file_instances_preserved": { "const": true },
+        "duplicate_ecf_assignments_preserve_order": { "const": true },
+        "xml_dtd_enabled": { "const": false },
+        "xml_external_resolver_enabled": { "const": false },
+        "exact_complete_scalar_matching": { "const": true },
+        "substring_matching": { "const": false },
+        "basename_matching": { "const": false },
+        "extension_only_matching": { "const": false },
+        "first_candidate_selection": { "const": false },
+        "ambiguous_candidates_all_retained": { "const": true },
+        "config_closure_detection": { "const": true },
+        "config_cycle_detection": { "const": true },
+        "malformed_implies_zero_references": { "const": false }
+      }
+    },
+    "adapter_summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_instances", "terminal_file_instances", "nonterminal_file_instances",
+        "semantic_approved", "no_ref_approved", "candidate_only",
+        "malformed_blocked", "editor_undecided", "approved_roots"
+      ],
+      "properties": {
+        "file_instances": { "const": 212 },
+        "terminal_file_instances": { "const": 0 },
+        "nonterminal_file_instances": { "const": 212 },
+        "semantic_approved": { "const": 0 },
+        "no_ref_approved": { "const": 0 },
+        "candidate_only": { "type": "integer", "minimum": 0, "maximum": 206 },
+        "malformed_blocked": { "const": 6 },
+        "editor_undecided": { "type": "integer", "minimum": 0, "maximum": 206 },
+        "approved_roots": { "const": 0 }
+      }
+    },
+    "lexical_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["asset_exact", "package_exact", "config_exact", "candidate_edges"],
+      "properties": {
+        "asset_exact": { "$ref": "#/$defs/count" },
+        "package_exact": { "$ref": "#/$defs/count" },
+        "config_exact": { "$ref": "#/$defs/count" },
+        "candidate_edges": { "$ref": "#/$defs/count" }
+      }
+    },
+    "file_instance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "instance_sha256", "content_sha256", "parser_state", "adapter_state",
+        "lexical_counts", "occurrence_set_sha256", "adapter_contract_sha256",
+        "authority_record_sha256", "approved_root_count",
+        "approved_root_set_sha256", "reason_code"
+      ],
+      "properties": {
+        "instance_sha256": { "$ref": "#/$defs/sha256" },
+        "content_sha256": { "$ref": "#/$defs/sha256" },
+        "parser_state": { "enum": ["parsed", "malformed"] },
+        "adapter_state": {
+          "enum": [
+            "semantic-approved", "candidate-only", "malformed-blocked",
+            "editor-undecided", "no-ref-approved"
+          ]
+        },
+        "lexical_counts": { "$ref": "#/$defs/lexical_counts" },
+        "occurrence_set_sha256": { "$ref": "#/$defs/nullable_sha256" },
+        "adapter_contract_sha256": { "$ref": "#/$defs/nullable_sha256" },
+        "authority_record_sha256": { "$ref": "#/$defs/nullable_sha256" },
+        "approved_root_count": { "$ref": "#/$defs/count" },
+        "approved_root_set_sha256": { "$ref": "#/$defs/nullable_sha256" },
+        "reason_code": {
+          "enum": [
+            "SEMANTIC_CONTRACT_AND_ROOTS_APPROVED",
+            "NO_REFERENCE_DISPOSITION_APPROVED",
+            "LEXICAL_CANDIDATES_NOT_SEMANTICALLY_APPROVED",
+            "MALFORMED_INPUT_REQUIRES_DISPOSITION",
+            "NO_MATCH_DOES_NOT_PROVE_NO_REFERENCE"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "adapter_state": { "const": "malformed-blocked" } }, "required": ["adapter_state"] },
+          "then": {
+            "properties": {
+              "parser_state": { "const": "malformed" },
+              "adapter_contract_sha256": { "const": null },
+              "authority_record_sha256": { "const": null },
+              "approved_root_count": { "const": 0 },
+              "approved_root_set_sha256": { "const": null },
+              "reason_code": { "const": "MALFORMED_INPUT_REQUIRES_DISPOSITION" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "adapter_state": { "const": "candidate-only" } }, "required": ["adapter_state"] },
+          "then": {
+            "properties": {
+              "parser_state": { "const": "parsed" },
+              "adapter_contract_sha256": { "const": null },
+              "authority_record_sha256": { "const": null },
+              "approved_root_count": { "const": 0 },
+              "approved_root_set_sha256": { "const": null },
+              "reason_code": { "const": "LEXICAL_CANDIDATES_NOT_SEMANTICALLY_APPROVED" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "adapter_state": { "const": "editor-undecided" } }, "required": ["adapter_state"] },
+          "then": {
+            "properties": {
+              "parser_state": { "const": "parsed" },
+              "adapter_contract_sha256": { "const": null },
+              "authority_record_sha256": { "const": null },
+              "approved_root_count": { "const": 0 },
+              "approved_root_set_sha256": { "const": null },
+              "reason_code": { "const": "NO_MATCH_DOES_NOT_PROVE_NO_REFERENCE" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "adapter_state": { "const": "semantic-approved" } }, "required": ["adapter_state"] },
+          "then": {
+            "properties": {
+              "adapter_contract_sha256": { "$ref": "#/$defs/sha256" },
+              "authority_record_sha256": { "$ref": "#/$defs/sha256" },
+              "approved_root_count": { "type": "integer", "minimum": 1 },
+              "approved_root_set_sha256": { "$ref": "#/$defs/sha256" },
+              "reason_code": { "const": "SEMANTIC_CONTRACT_AND_ROOTS_APPROVED" }
+            }
+          }
+        },
+        {
+          "if": { "properties": { "adapter_state": { "const": "no-ref-approved" } }, "required": ["adapter_state"] },
+          "then": {
+            "properties": {
+              "parser_state": { "const": "parsed" },
+              "authority_record_sha256": { "$ref": "#/$defs/sha256" },
+              "approved_root_count": { "const": 0 },
+              "approved_root_set_sha256": { "const": null },
+              "reason_code": { "const": "NO_REFERENCE_DISPOSITION_APPROVED" }
+            }
+          }
+        }
+      ]
+    },
+    "semantic_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status", "unknown_occurrences", "ambiguous_occurrences",
+        "unresolved_occurrences", "resolved_occurrences",
+        "first_candidate_selections", "heuristic_target_selections",
+        "all_ambiguous_candidates_retained", "reason_code"
+      ],
+      "properties": {
+        "status": { "const": "UNASSESSED" },
+        "unknown_occurrences": { "const": null },
+        "ambiguous_occurrences": { "const": null },
+        "unresolved_occurrences": { "const": null },
+        "resolved_occurrences": { "const": null },
+        "first_candidate_selections": { "const": 0 },
+        "heuristic_target_selections": { "const": 0 },
+        "all_ambiguous_candidates_retained": { "const": true },
+        "reason_code": { "const": "SEMANTIC_ADAPTERS_NOT_APPROVED" }
+      }
+    },
+    "config_closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lexical_edges", "approved_root_count", "approved_root_set_sha256",
+        "semantic_edge_set_sha256", "closure_set_sha256", "closure_complete",
+        "cycle_detection_complete", "cycle_count", "unresolved_cycle_count",
+        "reason_code"
+      ],
+      "properties": {
+        "lexical_edges": { "const": 8 },
+        "approved_root_count": { "const": 0 },
+        "approved_root_set_sha256": { "const": null },
+        "semantic_edge_set_sha256": { "const": null },
+        "closure_set_sha256": { "const": null },
+        "closure_complete": { "const": false },
+        "cycle_detection_complete": { "const": false },
+        "cycle_count": { "const": null },
+        "unresolved_cycle_count": { "const": null },
+        "reason_code": { "const": "APPROVED_ROOTS_AND_SEMANTIC_EDGES_UNAVAILABLE" }
+      }
+    },
+    "assumptions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "uniqueItems": true,
+      "prefixItems": [
+        { "const": "LEXICAL_CANDIDATE_IS_NOT_SEMANTIC_REFERENCE" },
+        { "const": "NO_MATCH_IS_NOT_NO_REFERENCE_APPROVAL" },
+        { "const": "DUPLICATE_CONTENT_DOES_NOT_COLLAPSE_FILE_INSTANCES" },
+        { "const": "MALFORMED_INPUT_IS_NOT_ZERO_REFERENCE" },
+        { "const": "AMBIGUOUS_CANDIDATE_HAS_NO_SELECTION_AUTHORITY" }
+      ],
+      "items": false
+    },
+    "blocker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason_code", "count", "blocking"],
+      "properties": {
+        "reason_code": {
+          "enum": [
+            "SEMANTIC_ADAPTERS_UNAPPROVED", "APPROVED_ROOT_SET_EMPTY",
+            "MALFORMED_INPUTS_UNDISPOSED", "SEMANTIC_METRICS_UNAVAILABLE",
+            "CONFIG_CLOSURE_UNAPPROVED", "AUXILIARY_SCOPE_INCOMPLETE"
+          ]
+        },
+        "count": { "$ref": "#/$defs/count" },
+        "blocking": { "const": true }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/blocker" },
+      "allOf": [
+        { "contains": { "properties": { "reason_code": { "const": "SEMANTIC_ADAPTERS_UNAPPROVED" } }, "required": ["reason_code"] } },
+        { "contains": { "properties": { "reason_code": { "const": "APPROVED_ROOT_SET_EMPTY" } }, "required": ["reason_code"] } },
+        { "contains": { "properties": { "reason_code": { "const": "MALFORMED_INPUTS_UNDISPOSED" }, "count": { "const": 6 } }, "required": ["reason_code", "count"] } },
+        { "contains": { "properties": { "reason_code": { "const": "SEMANTIC_METRICS_UNAVAILABLE" } }, "required": ["reason_code"] } },
+        { "contains": { "properties": { "reason_code": { "const": "CONFIG_CLOSURE_UNAPPROVED" } }, "required": ["reason_code"] } },
+        { "contains": { "properties": { "reason_code": { "const": "AUXILIARY_SCOPE_INCOMPLETE" } }, "required": ["reason_code"] } }
+      ]
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file_coverage_complete", "duplicate_file_instances_preserved",
+        "duplicate_ecf_assignment_order_preserved", "semantic_adapters_terminal",
+        "malformed_disposition_complete", "semantic_resolution_complete",
+        "config_closure_complete", "cycle_detection_complete",
+        "all_inputs_hash_bound", "first_candidate_selection_absent",
+        "scope_complete", "satisfied"
+      ],
+      "properties": {
+        "file_coverage_complete": { "const": true },
+        "duplicate_file_instances_preserved": { "const": true },
+        "duplicate_ecf_assignment_order_preserved": { "const": true },
+        "semantic_adapters_terminal": { "const": false },
+        "malformed_disposition_complete": { "const": false },
+        "semantic_resolution_complete": { "const": false },
+        "config_closure_complete": { "const": false },
+        "cycle_detection_complete": { "const": false },
+        "all_inputs_hash_bound": { "const": true },
+        "first_candidate_selection_absent": { "const": true },
+        "scope_complete": { "const": false },
+        "satisfied": { "const": false }
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "machine_candidate_is_approval", "approved_semantic_adapters",
+        "approved_no_ref_files", "approved_roots", "g2_06_satisfied",
+        "g2_approved", "p3_authorized", "release_authority"
+      ],
+      "properties": {
+        "machine_candidate_is_approval": { "const": false },
+        "approved_semantic_adapters": { "const": 0 },
+        "approved_no_ref_files": { "const": 0 },
+        "approved_roots": { "const": 0 },
+        "g2_06_satisfied": { "const": false },
+        "g2_approved": { "const": false },
+        "p3_authorized": { "const": false },
+        "release_authority": { "const": false }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256"],
+      "properties": {
+        "policy_sha256": { "$ref": "#/$defs/sha256" },
+        "schema_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "anonymous_hash_count_reason_only", "raw_scalar_values", "key_names",
+        "file_names", "private_source_paths", "source_line_numbers",
+        "exact_primary_keys", "exact_observed_extrema", "raw_table_rows",
+        "legacy_source_lines", "decoded_payloads"
+      ],
+      "properties": {
+        "anonymous_hash_count_reason_only": { "const": true },
+        "raw_scalar_values": { "const": false },
+        "key_names": { "const": false },
+        "file_names": { "const": false },
+        "private_source_paths": { "const": false },
+        "source_line_numbers": { "const": false },
+        "exact_primary_keys": { "const": false },
+        "exact_observed_extrema": { "const": false },
+        "raw_table_rows": { "const": false },
+        "legacy_source_lines": { "const": false },
+        "decoded_payloads": { "const": false }
+      }
+    }
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-migration-review-packets-v2.schema.json",
+  "title": "TMXY G2 migration anonymous review packets V2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "workflow_version", "task_id", "source_build",
+    "generation_result", "counts_as_decision", "summary", "packets", "disclosure"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "workflow_version": { "const": 2 },
+    "task_id": { "const": "P2-20B" },
+    "source_build": { "const": "qy-3.0.0.413" },
+    "generation_result": { "const": "PASS" },
+    "counts_as_decision": { "const": false },
+    "summary": { "$ref": "#/$defs/summary" },
+    "packets": {
+      "type": "array", "minItems": 39, "maxItems": 39,
+      "items": { "$ref": "#/$defs/packet" }
+    },
+    "disclosure": { "$ref": "#/$defs/disclosure" }
+  },
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "subject_kind": {
+      "enum": [
+        "SCHEMA_TABLE", "SCHEMA_REFERENCE", "CANONICAL_ID_DOMAIN",
+        "ID_COMPONENT", "FIXED_LIMIT_SIGNAL"
+      ]
+    },
+    "unit_counts": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "schema_table", "schema_reference", "canonical_id_domain",
+        "id_component", "fixed_limit_signal"
+      ],
+      "properties": {
+        "schema_table": { "type": "integer", "minimum": 0 },
+        "schema_reference": { "type": "integer", "minimum": 0 },
+        "canonical_id_domain": { "type": "integer", "minimum": 0 },
+        "id_component": { "type": "integer", "minimum": 0 },
+        "fixed_limit_signal": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "summary": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "packet_count", "member_count", "unique_member_count",
+        "by_subject_kind_packets", "by_subject_kind_members", "aggregate_membership_sha256"
+      ],
+      "properties": {
+        "packet_count": { "const": 39 },
+        "member_count": { "const": 1359 },
+        "unique_member_count": { "const": 1359 },
+        "by_subject_kind_packets": { "$ref": "#/$defs/unit_counts" },
+        "by_subject_kind_members": { "$ref": "#/$defs/unit_counts" },
+        "aggregate_membership_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "member": {
+      "type": "object", "additionalProperties": false,
+      "required": ["decision_id", "subject_membership_sha256"],
+      "properties": {
+        "decision_id": { "type": "string", "pattern": "^MIG-[A-Z-]+-[0-9]{4}$" },
+        "subject_membership_sha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "packet": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "review_packet_id", "subject_kind", "risk_signature_sha256",
+        "suggested_action_code", "risk_codes", "suggestion_rationale_codes",
+        "required_approver_roles", "member_count", "membership_sha256",
+        "members", "counts_as_decision"
+      ],
+      "properties": {
+        "review_packet_id": { "type": "string", "pattern": "^G2R-[A-Z-]+-[0-9]{2}$" },
+        "subject_kind": { "$ref": "#/$defs/subject_kind" },
+        "risk_signature_sha256": { "$ref": "#/$defs/sha256" },
+        "suggested_action_code": { "type": "string", "pattern": "^[A-Z0-9_]+$" },
+        "risk_codes": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" }
+        },
+        "suggestion_rationale_codes": {
+          "type": "array", "minItems": 1, "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[A-Z0-9_]+$" }
+        },
+        "required_approver_roles": {
+          "type": "array", "minItems": 1, "maxItems": 2, "uniqueItems": true,
+          "items": { "enum": ["data-owner", "project-owner"] }
+        },
+        "member_count": { "type": "integer", "minimum": 1 },
+        "membership_sha256": { "$ref": "#/$defs/sha256" },
+        "members": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/member" } },
+        "counts_as_decision": { "const": false }
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "anonymous_subjects_only", "private_source_paths", "primary_keys",
+        "observed_extrema", "raw_rows", "legacy_source_lines"
+      ],
+      "properties": {
+        "anonymous_subjects_only": { "const": true },
+        "private_source_paths": { "const": false },
+        "primary_keys": { "const": false },
+        "observed_extrema": { "const": false },
+        "raw_rows": { "const": false },
+        "legacy_source_lines": { "const": false }
+      }
+    }
+  }
+}

@@ -6,9 +6,11 @@ $ErrorActionPreference = 'Stop'
 $root = [System.IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
 $path = Join-Path $root 'Data\Governance\p1-resourcing.json'
 $waiverPath = Join-Path $root 'Data\Governance\p1-local-start-waiver.json'
+$g1AuthorizationPath = Join-Path $root 'Data\Governance\p1-g1-stage-authorization.json'
 $readinessPath = Join-Path $root 'Data\BuildBaseline\p0-readiness.json'
 $charter = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
 $waiver = Get-Content -LiteralPath $waiverPath -Raw | ConvertFrom-Json
+$g1Authorization = Get-Content -LiteralPath $g1AuthorizationPath -Raw | ConvertFrom-Json
 $readiness = Get-Content -LiteralPath $readinessPath -Raw | ConvertFrom-Json
 $failures = [System.Collections.Generic.List[string]]::new()
 
@@ -73,6 +75,19 @@ if ([string]$charter.local_start_waiver.id -ne [string]$waiver.waiver_id -or
     [string]$charter.local_start_waiver.scope -ne [string]$waiver.scope.allowed_tasks) {
     Add-Failure -Message 'P1 charter and local-start waiver are not bound.'
 }
+$g1AuthorizationBound = [string]$charter.g1_stage_authorization.id -eq
+        [string]$g1Authorization.authorization_id -and
+    [string]$charter.g1_stage_authorization.scope -eq 'P1-28_and_G1_format_gate_only' -and
+    [string]$g1Authorization.status -eq 'approved' -and
+    [string]$g1Authorization.approved_by -eq 'project_lead' -and
+    [bool]$g1Authorization.scope.execute_p1_28 -and
+    [bool]$g1Authorization.scope.approve_g1_format_gate_when_all_technical_checks_pass -and
+    [bool]$g1Authorization.wvr_0001_exception.other_waiver_boundaries_unchanged -and
+    -not [bool]$g1Authorization.boundaries.approve_g0 -and
+    -not [bool]$g1Authorization.boundaries.claim_release_authority
+if (-not $g1AuthorizationBound) {
+    Add-Failure -Message 'P1-28/G1 stage authorization is missing or exceeds its boundary.'
+}
 
 $report = [pscustomobject][ordered]@{
     result = if ($failures.Count -eq 0) { 'PASS' } else { 'FAIL' }
@@ -82,6 +97,7 @@ $report = [pscustomobject][ordered]@{
     start_condition = [string]$charter.start_condition
     effective_start_mode = if ($g0Ready) { 'g0_ready' } else { 'local_time_bounded_waiver' }
     local_waiver_expires = $waiverExpires.ToString('o')
+    g1_stage_authorization = [string]$g1Authorization.authorization_id
     failure_count = $failures.Count
     failures = @($failures)
 }

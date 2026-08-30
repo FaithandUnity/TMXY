@@ -20,6 +20,7 @@ namespace
 
 constexpr std::uint64_t kMaximumTotalKeys = 50'000'000;
 constexpr std::int32_t kMaximumEmitterPoints = 1'000'000;
+constexpr std::int32_t kMaximumFrameCount = 1'000'000;
 constexpr double kQuaternionNormSquaredFloor = 1.0e-12;
 constexpr double kRootTranslationMovingThresholdMeters = 1.0e-4;
 constexpr double kRootRotationMovingThresholdDegrees = 0.01;
@@ -151,7 +152,8 @@ constexpr double kRootRotationMovingThresholdDegrees = 0.01;
 [[nodiscard]] AnimationResult<AnimationClip> read_clip(format::BinaryReader& reader,
                                                        const AnimationDescriptor& descriptor,
                                                        const std::uint32_t skeleton_bone_count,
-                                                       std::uint64_t& total_keys)
+                                                       std::uint64_t& total_keys,
+                                                       const bool allow_payload_frame_count)
 {
     const auto track_offset = reader.absolute_position();
     const auto track_count = reader.read_i32();
@@ -173,10 +175,17 @@ constexpr double kRootRotationMovingThresholdDegrees = 0.01;
         return AnimationResult<AnimationClip>::failure(
             read_error(frame_count.error(), descriptor.object_name_bytes + ".frame_count"));
     }
-    if (frame_count.value() != descriptor.frame_count)
+    const bool frame_count_recovered = frame_count.value() != descriptor.frame_count;
+    if (frame_count_recovered && !allow_payload_frame_count)
     {
         return AnimationResult<AnimationClip>::failure(
             make_error(AnimationErrorCode::frame_count_mismatch, frame_offset,
+                       descriptor.object_name_bytes + ".frame_count"));
+    }
+    if (frame_count.value() <= 0 || frame_count.value() > kMaximumFrameCount)
+    {
+        return AnimationResult<AnimationClip>::failure(
+            make_error(AnimationErrorCode::invalid_frame_count, frame_offset,
                        descriptor.object_name_bytes + ".frame_count"));
     }
     const auto clip_key_count = static_cast<std::uint64_t>(track_count.value()) *
@@ -196,6 +205,11 @@ constexpr double kRootRotationMovingThresholdDegrees = 0.01;
     }
     AnimationClip clip{.descriptor = descriptor,
                        .track_count = static_cast<std::uint32_t>(track_count.value()),
+                       .observed_frame_count = frame_count.value(),
+                       .effective_frame_count = frame_count.value(),
+                       .frame_count_basis = frame_count_recovered
+                                                ? FrameCountBasis::payload_observed_contract
+                                                : FrameCountBasis::package_descriptor,
                        .tracks = {},
                        .sampled_duration_seconds = static_cast<double>(frame_count.value() - 1) *
                                                    descriptor.frame_delta_seconds,
@@ -272,10 +286,10 @@ read_emitter_points(format::BinaryReader& reader)
 
 } // namespace
 
-AnimationResult<AnimationPayload>
-AnimReader::parse(const std::span<const std::byte> bytes,
-                  const std::span<const AnimationDescriptor> descriptors,
-                  const std::uint32_t skeleton_bone_count)
+[[nodiscard]] AnimationResult<AnimationPayload>
+parse_payload(const std::span<const std::byte> bytes,
+              const std::span<const AnimationDescriptor> descriptors,
+              const std::uint32_t skeleton_bone_count, const bool allow_payload_frame_count)
 {
     format::BinaryReader reader(bytes, format::ByteOrder::little_endian, 0, "animation.payload");
     const auto count_offset = reader.absolute_position();
@@ -295,7 +309,8 @@ AnimReader::parse(const std::span<const std::byte> bytes,
     payload.clips.reserve(descriptors.size());
     for (const auto& descriptor : descriptors)
     {
-        auto clip = read_clip(reader, descriptor, skeleton_bone_count, payload.total_key_count);
+        auto clip = read_clip(reader, descriptor, skeleton_bone_count, payload.total_key_count,
+                              allow_payload_frame_count);
         if (!clip.has_value())
         {
             return AnimationResult<AnimationPayload>::failure(clip.error());
@@ -310,6 +325,22 @@ AnimReader::parse(const std::span<const std::byte> bytes,
     }
     payload.emitter_points = std::move(emitter_points).take_value();
     return AnimationResult<AnimationPayload>::success(std::move(payload));
+}
+
+AnimationResult<AnimationPayload>
+AnimReader::parse(const std::span<const std::byte> bytes,
+                  const std::span<const AnimationDescriptor> descriptors,
+                  const std::uint32_t skeleton_bone_count)
+{
+    return parse_payload(bytes, descriptors, skeleton_bone_count, false);
+}
+
+AnimationResult<AnimationPayload>
+AnimReader::parse_with_payload_frame_counts(const std::span<const std::byte> bytes,
+                                            const std::span<const AnimationDescriptor> descriptors,
+                                            const std::uint32_t skeleton_bone_count)
+{
+    return parse_payload(bytes, descriptors, skeleton_bone_count, true);
 }
 
 } // namespace tmxy::animation

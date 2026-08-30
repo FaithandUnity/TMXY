@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.9",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "required_input_roles": [
+    "auxiliary_inventory",
+    "a3_report",
+    "a3_evidence",
+    "a5_report",
+    "a5_evidence",
+    "package_inventory",
+    "asset_inventory",
+    "reference_closure",
+    "policy",
+    "schema",
+    "detail_schema",
+    "a3_detail",
+    "asset_catalog",
+    "reference_graph"
+  ],
+  "required_ignored_artifact_roles": [
+    "a3_detail",
+    "asset_catalog",
+    "reference_graph"
+  ],
+  "legacy_source_bindings": {
+    "region_consumer": "a1e5d33643d633234b2eeb07c6dc9358814d9802d4a9f43c959c1a4b155f1853",
+    "object_and_package_resolver": "1f10ae3b06062564ac283a9396b1d232c261c669bcd6c22271b414aa6d6323e5",
+    "package_object_reader": "b4abf66d3f84f583f80f88b70c44e7c90fcac9fd380c34f08f398cf3e8ccd064",
+    "recursive_package_lookup": "2541318310e369536f7c13ef1f1486dd1456b57349d703bd2b8fb4d02741ac69"
+  },
+  "strict_baseline": {
+    "region_instances": 135,
+    "unique_total": 3180,
+    "unique_file": 3042,
+    "unique_object": 4,
+    "unique_package_root": 134,
+    "ambiguous_object": 211,
+    "ambiguous_candidate_edges": 422,
+    "divergent_ambiguous_bodies": 211,
+    "unresolved_resource": 1,
+    "first_candidate_selections": 0
+  },
+  "expected_measured": {
+    "source_instances_verified": 212,
+    "region_instance_partition": {
+      "strict_clean": 5,
+      "strict_ambiguous_only": 129,
+      "strict_ambiguous_and_unresolved": 1
+    },
+    "package_context": {
+      "preexisting_unique_verified": 4,
+      "ambiguous_attempted": 211,
+      "original_candidate_edges": 422,
+      "singleton_matches": 211,
+      "zero_matches": 0,
+      "multiple_matches": 0,
+      "selected_edges": 211,
+      "incompatible_context_edges": 211,
+      "order_invariant": 211,
+      "first_candidate_selections": 0
+    },
+    "effective_resolution": {
+      "total_occurrences": 3392,
+      "resolved_total": 3391,
+      "resolved_file": 3042,
+      "resolved_object": 215,
+      "resolved_package_root": 134,
+      "ambiguous_object": 0,
+      "ambiguous_candidate_edges": 0,
+      "unresolved_resource": 1
+    },
+    "effective_region_instances": {
+      "resolved_only": 134,
+      "unresolved_resource": 1
+    }
+  },
+  "expected_consumer_controls": {
+    "selection_basis": "PRODUCTION_PACKAGE_CONTEXT_PREFIX",
+    "strict_region_consumer_fields_only": true,
+    "frozen_strict_candidate_sets": true,
+    "package_prefix_from_observed_consumer_context": true,
+    "package_prefix_exact_complete_component": true,
+    "global_package_basename_unique_required": true,
+    "full_object_name_exact_match_required": true,
+    "ascii_case_fold_only": true,
+    "candidate_order_invariant": true,
+    "selected_candidate_must_be_frozen_member": true,
+    "all_incompatible_candidates_retained": true,
+    "first_candidate_selection": false,
+    "heuristic_path_selection": false,
+    "content_body_equivalence_selection": false,
+    "root_inference": false,
+    "shadow_instance_collapse": false,
+    "zero_reference_is_no_ref_approval": false,
+    "technical_proof_is_authority_approval": false
+  },
+  "technical_state": {
+    "package_context_contract_proven": true,
+    "ambiguous_object_targets_remaining": 0,
+    "unresolved_resources_remaining": 1,
+    "consumer_clean_region_instances": 134,
+    "semantic_adapter_approved": false
+  },
+  "authority_state": {
+    "approved_consumer_contracts": 0,
+    "approved_semantic_adapters": 0,
+    "approved_no_reference_instances": 0,
+    "approved_roots": 0,
+    "terminal_instances": 0,
+    "nonterminal_instances": 212,
+    "ordinary_development_authorization_is_semantic_approval": false,
+    "technical_resolution_is_semantic_approval": false
+  },
+  "preserved_blockers": {
+    "ecf_parser_parity_gaps": 3,
+    "ecf_assignments_missed": 4,
+    "malformed_instances": 6,
+    "approved_roots": 0,
+    "nonterminal_instances": 212,
+    "config_edges_unapproved": 8
+  },
+  "blockers": [
+    {"reason_code": "UNRESOLVED_RESOURCE_TARGETS", "count": 1},
+    {"reason_code": "LEGACY_PARSER_PARITY_GAPS", "count": 3},
+    {"reason_code": "MALFORMED_INPUTS_UNDISPOSED", "count": 6},
+    {"reason_code": "APPROVED_ROOT_SET_EMPTY", "count": 0},
+    {"reason_code": "CONSUMER_CONTRACTS_UNAPPROVED", "count": 212}
+  ],
+  "negative_contracts": [
+    "FIRST_CANDIDATE_SELECTION_REJECTED",
+    "ZERO_OR_MULTIPLE_PREFIX_MATCH_REJECTED",
+    "CANDIDATE_ORDER_DEPENDENCE_REJECTED",
+    "CANDIDATE_SET_TAMPER_REJECTED",
+    "SELECTION_OUTSIDE_FROZEN_SET_REJECTED",
+    "INCOMPATIBLE_EDGE_DROP_REJECTED",
+    "NON_PRODUCTION_PREFIX_REJECTED",
+    "STRICT_BASELINE_REDUCTION_REJECTED",
+    "UNRESOLVED_RESOURCE_ERASURE_REJECTED",
+    "ROOT_OR_APPROVAL_INJECTION_REJECTED",
+    "SHADOW_INSTANCE_COLLAPSE_REJECTED",
+    "MISSING_OR_UNKNOWN_FIELD_REJECTED"
+  ],
+  "authority_rules": {
+    "package_context_proof_is_root_approval": false,
+    "resolved_reference_is_terminal_instance_approval": false,
+    "shadow_equivalence_is_exclusion_authority": false,
+    "diagnostic_can_approve_no_ref": false,
+    "this_evidence_can_approve_g2_or_p3": false
+  },
+  "g2_projection": {
+    "criteria_total": 9,
+    "satisfied": 7,
+    "blocked": 2,
+    "g2_decision": "BLOCKED"
+  },
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-aux-package-context.jsonl",
+    "report_json": "Data/Reports/p2-20a-aux-package-context-report.json",
+    "report_markdown": "Data/Reports/p2-20a-aux-package-context-report.md",
+    "evidence": "Data/Inventory/p2-20a-aux-package-context.json",
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_payloads": false
+  }
+}

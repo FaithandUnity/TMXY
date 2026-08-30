@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.5",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "report_json": {
+    "bytes": 5442,
+    "sha256": "bdd8802c9f6c5304bdab3183f606923005145c87daf5f4f3208edf14b4cc7cb9"
+  },
+  "report_markdown": {
+    "bytes": 1043,
+    "sha256": "03c02f099878af17642fce4e284219ed9e96ba35755f3011699804f8b47ffe15"
+  },
+  "measured": {
+    "file_instances": 212,
+    "source_instances_verified": 212,
+    "region_strict_instances": 135,
+    "region_semantic_references": {
+      "unique_total": 3180,
+      "unique_file": 3042,
+      "unique_object": 4,
+      "unique_package_root": 134,
+      "ambiguous_object": 211,
+      "ambiguous_object_candidate_edges": 422,
+      "ambiguous_object_divergent_bodies": 211,
+      "unresolved_resource": 1,
+      "first_candidate_selections": 0
+    },
+    "ecf": {
+      "instances": 64,
+      "mixed_newline_differences": 3,
+      "legacy_assignments_missed_by_a3_parser": 4,
+      "runtime_with_candidates": 15,
+      "runtime_without_candidates": 21,
+      "editor_without_candidates": 28
+    },
+    "parsed_shared_help_zero_lexical": 7,
+    "malformed_instances": 6
+  },
+  "contracts": {
+    "policy_sha256": "d2f46783f3038fe5b7a802e04751d70dde83b03c740d718ca373d27d73ff328c",
+    "schema_sha256": "88fb488068887b19d68594a8dbca03580a752477c604565f5985e36ff4e1b346"
+  },
+  "implementation": {
+    "generator_sha256": "2cf825f0105cc720915d6c3420cc46343f4aa1fd91233f907a7ad889525a0d16",
+    "support_sha256": "01bc061ee355d5ece17e1630b35df27e82db2cc37b30735c19c4ac4aa14ad18e",
+    "self_test_assertions": 10
+  },
+  "isolation": {
+    "network": "none",
+    "repository_mount": "read-only",
+    "legacy_source_mount": "read-only",
+    "builder_user": "tmxy",
+    "capabilities": "none",
+    "no_new_privileges": true
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "raw_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_payloads": false
+  }
+}

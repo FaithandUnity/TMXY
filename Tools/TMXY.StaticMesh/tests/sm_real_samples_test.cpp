@@ -60,6 +60,15 @@ struct SampleArguments final
                   << " context=" << binding.error().context << '\n';
         return false;
     }
+    const auto& resolution = binding.value().material_slot_resolution;
+    if (resolution.basis != tmxy::static_mesh::MaterialSlotBasis::package_descriptor ||
+        resolution.declared_material_slot_count != binding.value().mesh.sections.size() ||
+        resolution.effective_material_slot_count != binding.value().mesh.sections.size() ||
+        resolution.ignored_material_slot_count != 0U)
+    {
+        std::cerr << "sample-material-resolution-failed: " << sample.object_name << '\n';
+        return false;
+    }
     const auto json = tmxy::static_mesh::build_static_mesh_json(binding.value());
     std::uint64_t obj_fingerprint = 0;
     if (sm.size() < 1024U)
@@ -110,7 +119,7 @@ int main(const int argument_count, const char* const arguments[])
         "octree_indices=0 declared_bounds=contains "
         "bounds=-17.5672302,-17.2778435,-4.68960619:-14.7323551,14.307416,19."
         "1825714 "
-        "json_fnv=13319387547092677719 obj_fnv=7919486951111466039",
+        "json_fnv=13026901066817879978 obj_fnv=7919486951111466039",
         "newscenc.dy_bx_stl_005 vertices=157638 indices=157638 sections=1 "
         "uv_channels=2 "
         "shadow_vertices=74907 shadow_indices=366357 collision_vertices=0 "
@@ -118,7 +127,7 @@ int main(const int argument_count, const char* const arguments[])
         "octree_indices=114924 declared_bounds=contains "
         "bounds=-100.774826,-3.03948212,2.30944395:10.8779144,317.66629,5."
         "70774889 "
-        "json_fnv=4468058848417956321 obj_fnv=0",
+        "json_fnv=5344752217521232092 obj_fnv=0",
         "newscenc.dy_bx_bqg_006 vertices=47964 indices=250614 sections=1 "
         "uv_channels=2 "
         "shadow_vertices=250614 shadow_indices=1002456 collision_vertices=0 "
@@ -126,7 +135,7 @@ int main(const int argument_count, const char* const arguments[])
         "octree_indices=291201 declared_bounds=mismatch "
         "bounds=-150.552399,-173.027374,-71.6268158:289.874359,217.916229,109."
         "383087 "
-        "json_fnv=1594610625379774594 obj_fnv=0",
+        "json_fnv=7825768401660102655 obj_fnv=0",
         "scene09.GT_B_S_BangPai05 vertices=11847 indices=19533 sections=43 "
         "uv_channels=2 "
         "shadow_vertices=0 shadow_indices=0 collision_vertices=6416 "
@@ -134,7 +143,7 @@ int main(const int argument_count, const char* const arguments[])
         "octree_indices=23379 declared_bounds=exact "
         "bounds=-37.4604683,-42.9401703,-8.96472454:37.3805618,42.9401779,8."
         "96472931 "
-        "json_fnv=1776525976162093810 obj_fnv=0"};
+        "json_fnv=6463187087661512439 obj_fnv=0"};
     if (argument_count != 13)
     {
         std::cerr << "usage: tmxy_sm_real_samples_test "

@@ -1,3 +1,4 @@
+#include "texture_decode_internal.hpp"
 #include "tmxy/texture/texture_export.hpp"
 
 #include <cstddef>
@@ -47,7 +48,7 @@ void store_u32(std::vector<std::byte>& bytes, const std::size_t offset, const st
 [[nodiscard]] std::uint32_t dds_flags(const QtxTextureView& texture) noexcept
 {
     std::uint32_t flags = is_compressed(texture.descriptor.format) ? 0x00081007U : 0x0000100FU;
-    return texture.descriptor.mip_count > 1U ? flags | 0x00020000U : flags;
+    return texture.effective_mip_count > 1U ? flags | 0x00020000U : flags;
 }
 
 [[nodiscard]] std::uint32_t pitch_or_size(const QtxTextureView& texture) noexcept
@@ -109,7 +110,7 @@ void write_dx10_header(std::vector<std::byte>& output, const TextureFormat forma
 TextureResult<std::vector<std::byte>> build_dds(const QtxTextureView& texture,
                                                 const std::span<const std::byte> payload)
 {
-    if (payload.size() != texture.payload_size || texture.mips.empty())
+    if (!detail::valid_qtx_texture_view(texture, payload))
     {
         return TextureResult<std::vector<std::byte>>::failure(
             {.code = TextureErrorCode::payload_size_mismatch,
@@ -127,19 +128,20 @@ TextureResult<std::vector<std::byte>> build_dds(const QtxTextureView& texture,
     store_u32(output, 12U, texture.descriptor.height);
     store_u32(output, 16U, texture.descriptor.width);
     store_u32(output, 20U, pitch_or_size(texture));
-    store_u32(output, 28U, texture.descriptor.mip_count);
+    store_u32(output, 28U, texture.effective_mip_count);
     store_u32(output, 76U, 32U);
 
     write_pixel_format(output, texture.descriptor.format);
 
     std::uint32_t caps = kDdsCaps;
-    if (texture.descriptor.mip_count > 1U)
+    if (texture.effective_mip_count > 1U)
     {
         caps |= kDdsCapsComplex | kDdsCapsMipmap;
     }
     store_u32(output, 108U, caps);
     write_dx10_header(output, texture.descriptor.format);
-    output.insert(output.end(), payload.begin(), payload.end());
+    const auto consumed = payload.first(static_cast<std::size_t>(texture.consumed_payload_bytes));
+    output.insert(output.end(), consumed.begin(), consumed.end());
     return TextureResult<std::vector<std::byte>>::success(std::move(output));
 }
 

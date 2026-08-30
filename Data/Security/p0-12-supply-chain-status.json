@@ -1,6 +1,6 @@
 {
-  "schema_version": 2,
-  "captured_utc": "2026-08-26T22:23:08.9871563+00:00",
+  "schema_version": 10,
+  "captured_utc": "2026-08-30T18:16:58.3821471+00:00",
   "result": "PASS_WITH_PENDING_AUTHORITY",
   "release_authority": false,
   "image": {
@@ -15,35 +15,137 @@
     "format": "CycloneDX",
     "spec_version": "1.5",
     "component_count": 77,
-    "components_with_license_evidence": 70,
+    "components_with_embedded_license_evidence": 70,
+    "components_with_license_evidence": 77,
     "locally_verified": true
   },
   "backend_builder": {
     "image": {
       "reference": "tmxy-backend-builder:p0-08",
-      "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-      "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+      "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+      "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
       "locally_verified": true
     },
     "sbom": {
       "file": "Data/Security/tmxy-backend-builder.sbom.cdx.json",
-      "sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+      "sha256": "1cf309b59aeafe35092207dac718128cae133d3d10ec785072032efd81857b91",
       "format": "CycloneDX",
       "spec_version": "1.5",
-      "component_count": 316,
-      "components_with_license_evidence": 267,
+      "component_count": 314,
+      "components_with_embedded_license_evidence": 266,
+      "components_with_license_evidence": 314,
       "locally_verified": true
     }
   },
+  "license_evidence": {
+    "file": "Data/Security/p0-12-license-evidence.json",
+    "sha256": "5ab7aa095388f74845bc5c6f3f6ab4a60e59b6fa051fe2cd8a5167a3f05bab20",
+    "result": "PASS_DIAGNOSTIC",
+    "component_complete": true,
+    "release_authority": false
+  },
   "scanner": {
     "docker_scout_version": "v1.24.0",
-    "vulnerability_status": "pending_authenticated_database_access",
-    "note": "Docker Scout CVE analysis requested authentication; no login or credential mutation was performed."
+    "vulnerability_status": "derived_candidate_locally_qualified_pending_registry_authority",
+    "hosted_scanner": "trivy",
+    "hosted_scanner_version": "0.74.0",
+    "hosted_database_updated_utc": "2026-08-27T09:58:17.2447905+00:00",
+    "postgres_high_or_critical": 22,
+    "disposition": "Data/Security/p0-12-postgres-vulnerability-disposition.json",
+    "disposition_bound": true,
+    "note": "Hosted Trivy evidence is authoritative for the recorded PostgreSQL blocker; unauthenticated local Docker Scout remains supplementary only."
+  },
+  "postgres_derived_candidate": {
+    "file": "Data/Security/p0-12-postgres-derived-image-qualification.json",
+    "sha256": "9440350afb2dbed5301097ff0e1cf492ebaefd61a1995c0ee88b305324a7e97a",
+    "result": "PASS_DIAGNOSTIC",
+    "image_id": "sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b",
+    "gosu_sha256": "dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb",
+    "previous_high_or_critical": 22,
+    "direct_image_high_or_critical": 0,
+    "sbom_high_or_critical": 0,
+    "govulncheck_result_count": 0,
+    "migration_result": "PASS",
+    "binary_reproducible": true,
+    "registry_published": false,
+    "release_authority": false,
+    "bindings_verified": true
+  },
+  "postgres_refresh_preflight": {
+    "file": "Data/Security/p0-12-postgres-refresh-preflight.json",
+    "sha256": "c5e620b49ccfb3f8d0b4d0ab64eb37bcc19a9fa879be1564117d1fb75a8146e0",
+    "result": "PASS_DIAGNOSTIC",
+    "status": "NO_REFRESH_AVAILABLE",
+    "tag_manifest_changed": false,
+    "observed_index_digest": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "lock_update_performed": false,
+    "release_authority": false,
+    "bindings_verified": true
+  },
+  "postgres_official_candidate": {
+    "file": "Data/Security/p0-12-postgres-official-candidate-evaluation.json",
+    "sha256": "a5e1310aa4b2e0a051cc07faca65edd2fd52d843fe4b40da30a687cc439149fa",
+    "result": "PASS_DIAGNOSTIC",
+    "tag": "18.6-alpine3.23",
+    "candidate_index_digest": "sha256:697c180dbf244d3ce4a8f4cbc0156cde840af055c1bf8b76aebe422a4822086f",
+    "decision": "REJECTED_IDENTICAL_BLOCKING_COMPONENT",
+    "same_gosu_binary_sha256": true,
+    "inherited_high_or_critical": 22,
+    "candidate_scan_claimed": false,
+    "lock_update_performed": false,
+    "release_authority": false,
+    "bindings_verified": true
+  },
+  "postgres_gosu_reachability": {
+    "file": "Data/Security/p0-12-postgres-gosu-reachability-review.json",
+    "sha256": "ce0996c503edfbfaa09db0e35d4052cb5a9a9e4b9d1d0db050009cf237ce11d4",
+    "result": "PASS_DIAGNOSTIC",
+    "status": "REVIEW_COMPLETE_NO_SYMBOL_REACHABILITY_STILL_BLOCKING",
+    "risk_assessment": "reduced_reachability_not_zero_risk",
+    "mapped_blocking_findings": 22,
+    "symbol_reachable": 0,
+    "package_only": 1,
+    "module_only": 21,
+    "sarif_sha256": "eae6dd97284a30e394d59eb21c0d7f076e9458ed440d3386e6555285413a9352",
+    "official_osv_sha256": "7cd0f040d0f20a62a8535191c5078a0602fe21eeb8348ca61a3115aed239bea9",
+    "policy_blocking": true,
+    "waiver_state": "none",
+    "owner_approval": false,
+    "release_authority": false,
+    "bindings_verified": true
+  },
+  "postgres_gosu_waiver_decision": {
+    "request_file": "Data/Security/p0-12-postgres-gosu-waiver-request.json",
+    "request_sha256": "5f3988faf18d48cd49dc82c7d341212bf253009bd192a8e016dc61d35acdb721",
+    "decision_file": "Data/Security/p0-12-postgres-gosu-waiver-decision.json",
+    "decision_sha256": "153667598ab97c4bbdfa333f6cfbda8c4d38271ea36690d08c11c428710eb124",
+    "waiver_id": "WVR-0002",
+    "request_status": "draft_not_approved",
+    "decision": "DRAFT_READY_FOR_OWNER_DECISION_NOT_EFFECTIVE",
+    "waiver_effective": false,
+    "policy_blocking": true,
+    "verified_approval_count": 0,
+    "maximum_days": 30,
+    "release_authority": false,
+    "bindings_verified": true
+  },
+  "hosted_ci": {
+    "provider": "github",
+    "repository": "FaithandUnity/TMXY",
+    "workflow_source_prepared": true,
+    "protected_branch": true,
+    "release_authority": false,
+    "blocker_count": 7,
+    "evidence": "Data/Governance/p0-github-hosting-status.json"
   },
   "pending": [
-    "Authenticated or approved offline vulnerability scan for the locked PostgreSQL and backend builder images",
-    "Hosted release-authority license policy evaluation of both locked image SBOMs",
-    "Signed release provenance and OCI attestations"
+    "Provider-generated passing results for all eight stable checks; GitHub main protection is active",
+    "Public fork workflow approval is all_external_contributors; prove disposable UE runner isolation before registration",
+    "Publish the locally qualified PostgreSQL candidate at sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b with packages:write authority, rerun hosted scans, and attach signed provenance before changing the lock",
+    "The newer official 18.6-alpine3.23 variant was rejected because its affected gosu binary is byte-identical to the locked image",
+    "Exact locked builder manifest verified in GHCR",
+    "Provision the labeled ephemeral UE 5.8 hosted runner",
+    "Signed release provenance, OCI attestation, and 365-day immutable retention"
   ],
   "deferred_to_p4": [
     "Create application Conan profile lockfiles when the first external C++ dependency is introduced"

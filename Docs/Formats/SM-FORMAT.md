@@ -77,18 +77,31 @@ Known properties are:
 - `bBox.min.{x,y,z}` and `bBox.max.{x,y,z}`: finite `float32` components;
 - `useLightMap`: one-byte boolean.
 
-Material indices must be unique, dense from zero, and equal the number of SM
-sections. Unknown properties are preserved as named byte spans. Some real
+Material indices must be unique and dense from zero. The default
+`bind_static_mesh` policy rejects zero SM sections and requires the Package
+material count to equal the SM section count. The explicit
+`bind_static_mesh_with_payload_section_prefix` policy accepts the same exact
+case, and may also accept a Package material list that is strictly longer than
+a non-empty SM section list. Only the leading section-sized Package prefix is
+then effective. Trailing slots remain preserved descriptor evidence and are
+not synthesized, deleted, rebound, or emitted as extra sections. Fewer Package
+slots and zero-section payloads are hard errors under both policies.
+
+A successful binding records the declared, effective, and ignored material
+slot counts. Its basis is `package_descriptor` for an exact binding and
+`payload_section_prefix_contract` only when the explicit policy consumes a
+proper prefix. Unknown properties are preserved as named byte spans. Some real
 packages have a declared box that includes the origin, matches collision
 geometry exactly, or is stale after external SM replacement. The reader
-therefore records the relation as `absent`, `exact`, `contains`, or `mismatch`;
-only an internally inverted declared box is corrupt.
+therefore records the bounds relation as `absent`, `exact`, `contains`, or
+`mismatch`; only an internally inverted declared box is corrupt.
 
 ## 4. Coordinate and intermediate policy
 
 Parsed geometry remains in legacy runtime coordinates: X forward, Y right, Z
 up, in meters. The deterministic JSON metadata preserves those bounds and also
-reports centimeter-scaled bounds. The OBJ preview applies the frozen
+reports centimeter-scaled bounds plus the material-slot basis and three count
+values. The OBJ preview applies the frozen
 `TMXY.Transform` contract: positions are converted to centimeters, normals are
 validated and normalized, UVs preserve their orientation, and triangle winding
 and section order are unchanged.

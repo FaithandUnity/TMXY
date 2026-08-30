@@ -525,4 +525,25 @@ bind_animation_set(const std::span<const std::byte> package_bytes,
         {.package = std::move(package).take_value(), .payload = std::move(payload).take_value()});
 }
 
+AnimationResult<AnimationBinding>
+bind_animation_set_with_payload_frame_counts(const std::span<const std::byte> package_bytes,
+                                             const std::string_view skeletal_mesh_object_name,
+                                             const std::span<const std::byte> animation_bytes)
+{
+    auto package = read_package_animation_set_descriptor(package_bytes, skeletal_mesh_object_name);
+    if (!package.has_value())
+    {
+        return AnimationResult<AnimationBinding>::failure(package.error());
+    }
+    auto payload = AnimReader::parse_with_payload_frame_counts(
+        animation_bytes, package.value().animations,
+        static_cast<std::uint32_t>(package.value().skeletal_mesh.descriptor.bones.size()));
+    if (!payload.has_value())
+    {
+        return AnimationResult<AnimationBinding>::failure(payload.error());
+    }
+    return AnimationResult<AnimationBinding>::success(
+        {.package = std::move(package).take_value(), .payload = std::move(payload).take_value()});
+}
+
 } // namespace tmxy::animation

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-12",
+  "source_build": "qy-3.0.0.413",
+  "target_extensions": [
+    ".anim",
+    ".mp3",
+    ".qtx",
+    ".skem",
+    ".sm",
+    ".ter",
+    ".wav",
+    ".zif"
+  ],
+  "expected_families": {
+    "anim": { "files": 1069, "bytes": 655802200 },
+    "mp3": { "files": 64, "bytes": 124002521 },
+    "qtx": { "files": 24798, "bytes": 3910277648 },
+    "skem": { "files": 1068, "bytes": 515443174 },
+    "sm": { "files": 2924, "bytes": 2307762148 },
+    "ter": { "files": 8876, "bytes": 1309215704 },
+    "wav": { "files": 450, "bytes": 54949730 },
+    "zif": { "files": 841, "bytes": 4565902 }
+  },
+  "allowed_structure_states": ["PASS", "UNRESOLVED", "FAIL"],
+  "independently_structured_families": ["sm", "skem", "ter", "zif", "wav", "mp3"],
+  "descriptor_bound_families": ["qtx", "anim"],
+  "package_candidate_states": [
+    "not_applicable",
+    "missing",
+    "no_valid_variant",
+    "unique",
+    "ambiguous_equivalent",
+    "ambiguous_divergent"
+  ],
+  "completion_policy": {
+    "requires_every_manifest_target_classified": true,
+    "requires_zero_unsupported_families": true,
+    "requires_zero_corrupt_files": false,
+    "requires_zero_unresolved_files": false,
+    "requires_preservation_of_failures": true,
+    "forbids_automatic_repair_or_deletion": true,
+    "forbids_guessing_missing_headerless_descriptors": true
+  },
+  "catalog_policy": {
+    "tracked_in_git": false,
+    "contains_payload_bytes": false,
+    "contains_decoded_assets": false,
+    "requires_path_size_source_hash_and_parser_status": true
+  }
+}

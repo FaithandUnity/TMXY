@@ -47,6 +47,12 @@ $legacyTable = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-Leg
     -Arguments @{ RebuildRoot = $root }
 $currentTable = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CurrentTableInvestigation.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$currentTableCsvRelation = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-CurrentTableCsvRelation.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$currentTableRepresentatives = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-CurrentTableRepresentatives.ps1') `
+    -Arguments @{ RebuildRoot = $root }
 $legacyToUE = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-LegacyToUETransform.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $qtxTexture = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-QtxTexture.ps1') `
@@ -105,9 +111,166 @@ $ueTerrainImport = Invoke-JsonTest `
 $goldenTestMatrix = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-GoldenTestMatrix.ps1') `
     -Arguments @{ RebuildRoot = $root }
+$g1FormatReview = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G1FormatReview.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$fullPackageInventory = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-FullPackageInventory.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$packageBoundaryCompleteness = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-PackageBoundaryCompleteness.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$packageDependencyGraph = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-PackageDependencyGraph.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$fullCurrentTableInventory = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-FullCurrentTableInventory.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$auxiliaryConfigInventory = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-AuxiliaryConfigInventory.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$threeLayerTableData = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ThreeLayerTableData.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$coreTableSchema = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-CoreTableSchema.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$tableOwnership = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-TableOwnershipRegistry.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$legacyCurrentArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $legacyCurrentArguments.VerifyDerivedSources = $true }
+$legacyCurrentDiff = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-LegacyCurrentDiff.ps1') `
+    -Arguments $legacyCurrentArguments
+$canonicalIdArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $canonicalIdArguments.VerifyDerivedSources = $true }
+$canonicalIdMap = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-CanonicalIdMap.ps1') `
+    -Arguments $canonicalIdArguments
+$idLimitArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $idLimitArguments.VerifyDerivedSources = $true }
+$idLimitAudit = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-IdLimitAudit.ps1') `
+    -Arguments $idLimitArguments
+$protocolArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $protocolArguments.VerifyGenerated = $true }
+$protocolCodegen = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ProtocolCodegen.ps1') `
+    -Arguments $protocolArguments
+$contentHealthArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $contentHealthArguments.VerifyDerivedSources = $true }
+$contentHealth = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ContentHealth.ps1') `
+    -Arguments $contentHealthArguments
+$resourceBudgetArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $resourceBudgetArguments.VerifyDerivedSources = $true }
+$resourceBudget = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ResourceBudget.ps1') `
+    -Arguments $resourceBudgetArguments
+$g2AuxConfigArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxConfigArguments.VerifyDerivedSources = $true }
+$g2AuxConfigReferences = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxiliaryConfigReferences.ps1') `
+    -Arguments $g2AuxConfigArguments
+$g2AuxSemanticArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxSemanticArguments.VerifyDerivedSources = $true }
+$g2AuxSemanticDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxSemanticDiagnostics.ps1') `
+    -Arguments $g2AuxSemanticArguments
+$g2AuxPackageContext = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxPackageContext.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$g2AuxEcfParserParityArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxEcfParserParityArguments.VerifyDerivedSources = $true }
+$g2AuxEcfParserParity = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxEcfParserParity.ps1') `
+    -Arguments $g2AuxEcfParserParityArguments
+$g2AuxMalformedXmlArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxMalformedXmlArguments.VerifyDerivedSources = $true }
+$g2AuxMalformedXmlDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxMalformedXmlDiagnostics.ps1') `
+    -Arguments $g2AuxMalformedXmlArguments
+$g2AssetDescriptorArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AssetDescriptorArguments.VerifyDerivedSources = $true }
+$g2AssetDescriptorDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AssetDescriptorDiagnostics.ps1') `
+    -Arguments $g2AssetDescriptorArguments
+$g2IdentityNormalization = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AssetIdentityNormalization.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$g2BindingFailureDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AssetBindingFailureDiagnostics.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$g2BindingRecovery = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AssetBindingRecovery.ps1') `
+    -Arguments @{ RebuildRoot = $root; FinalizeExpected = $true }
+$g2StaticMeshPrefixArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2StaticMeshPrefixArguments.VerifyDerivedSources = $true }
+$g2StaticMeshPayloadSectionPrefix = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2StaticMeshPayloadSectionPrefix.ps1') `
+    -Arguments $g2StaticMeshPrefixArguments
+$g2QtxPrefixArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2QtxPrefixArguments.VerifyDerivedSources = $true }
+$g2QtxDeclaredMipPayloadPrefix = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2QtxDeclaredMipPayloadPrefix.ps1') `
+    -Arguments $g2QtxPrefixArguments
+$g2CoreClosureArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2CoreClosureArguments.VerifyDerivedSources = $true }
+$g2CoreClosure = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2CoreResourceClosure.ps1') `
+    -Arguments $g2CoreClosureArguments
+$g2MigrationArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2MigrationArguments.VerifyDerivedSources = $true }
+$g2MigrationDecisions = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2MigrationDecisions.ps1') `
+    -Arguments $g2MigrationArguments
+$fullAssetArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $fullAssetArguments.VerifyLegacySources = $true }
+$fullAssetInventory = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-FullAssetInventory.ps1') `
+    -Arguments $fullAssetArguments
+$referenceClosureArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $referenceClosureArguments.VerifyDerivedSources = $true }
+$referenceClosure = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ReferenceClosure.ps1') `
+    -Arguments $referenceClosureArguments
+$assetHealthArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $assetHealthArguments.VerifyDerivedSources = $true }
+$assetHealth = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-AssetHealth.ps1') `
+    -Arguments $assetHealthArguments
+$conversionRoutingArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $conversionRoutingArguments.VerifyDerivedSources = $true }
+$conversionRouting = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ConversionRouting.ps1') `
+    -Arguments $conversionRoutingArguments
+$conversionCacheArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $conversionCacheArguments.VerifyDerivedSources = $true }
+$conversionCache = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-ConversionCache.ps1') `
+    -Arguments $conversionCacheArguments
 $referenceFormats = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-ReferenceFormatDocs.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $ciAuthorityContract = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-CIAuthorityContract.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$hostedWorkflowContract = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-HostedWorkflowContract.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$postgresRefreshPreflight = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresRefreshPreflight.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$postgresOfficialCandidate = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresOfficialCandidate.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$postgresDerivedImageContract = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresDerivedImageContract.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$postgresGosuReachability = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresGosuReachabilityReview.ps1') `
+    -Arguments @{ RebuildRoot = $root }
+$postgresGosuWaiver = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\CI\Test-PostgresGosuWaiverDecision.ps1') `
     -Arguments @{ RebuildRoot = $root }
 $uePackagingWaiver = Invoke-JsonTest -Script (Join-Path $root 'Tests\Contract\Test-UEPackagingWaiver.ps1') `
     -Arguments @{ RebuildRoot = $root }
@@ -138,7 +301,11 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [string]$packageTree.result -eq 'PASS' -and
     [string]$legacyTable.result -eq 'PASS' -and
     [string]$currentTable.result -eq 'PASS_DIAGNOSTIC' -and
-    -not [bool]$currentTable.completion_criteria_satisfied -and
+    [bool]$currentTable.completion_criteria_satisfied -and
+    [string]$currentTableCsvRelation.result -eq 'PASS' -and
+    [bool]$currentTableCsvRelation.completion_criteria_satisfied -and
+    [string]$currentTableRepresentatives.result -eq 'PASS' -and
+    [bool]$currentTableRepresentatives.completion_criteria_satisfied -and
     [string]$legacyToUE.result -eq 'PASS' -and
     [bool]$legacyToUE.completion_criteria_satisfied -and
     [string]$qtxTexture.result -eq 'PASS' -and
@@ -155,6 +322,7 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$auxiliaryAssets.completion_criteria_satisfied -and
     [string]$assetInterchange.result -eq 'PASS' -and
     [bool]$assetInterchange.completion_criteria_satisfied -and
+    [string]$postgresDerivedImageContract.result -eq 'PASS' -and
     [string]$ueGoldenHost.result -eq 'PASS' -and
     [bool]$ueGoldenHost.completion_criteria_satisfied -and
     [string]$ueImporter.result -eq 'PASS' -and
@@ -171,8 +339,124 @@ $passed = [string]$repository.result -eq 'PASS' -and
     [bool]$ueTerrainImport.completion_criteria_satisfied -and
     [string]$goldenTestMatrix.result -eq 'PASS' -and
     [bool]$goldenTestMatrix.completion_criteria_satisfied -and
+    [string]$g1FormatReview.result -eq 'PASS' -and
+    [bool]$g1FormatReview.completion_criteria_satisfied -and
+    [string]$fullPackageInventory.result -eq 'PASS' -and
+    [bool]$fullPackageInventory.completion_criteria_satisfied -and
+    [string]$packageBoundaryCompleteness.result -eq 'PASS' -and
+    [bool]$packageBoundaryCompleteness.completion_criteria_satisfied -and
+    [string]$packageDependencyGraph.result -eq 'PASS' -and
+    [bool]$packageDependencyGraph.completion_criteria_satisfied -and
+    [string]$fullCurrentTableInventory.result -eq 'PASS' -and
+    [bool]$fullCurrentTableInventory.completion_criteria_satisfied -and
+    [string]$auxiliaryConfigInventory.result -eq 'PASS' -and
+    [bool]$auxiliaryConfigInventory.completion_criteria_satisfied -and
+    [string]$threeLayerTableData.result -eq 'PASS' -and
+    [bool]$threeLayerTableData.completion_criteria_satisfied -and
+    [string]$coreTableSchema.result -eq 'PASS' -and
+    [bool]$coreTableSchema.completion_criteria_satisfied -and
+    [string]$tableOwnership.result -eq 'PASS' -and
+    [bool]$tableOwnership.completion_criteria_satisfied -and
+    [string]$legacyCurrentDiff.result -eq 'PASS' -and
+    [bool]$legacyCurrentDiff.completion_criteria_satisfied -and
+    [string]$canonicalIdMap.result -eq 'PASS' -and
+    [bool]$canonicalIdMap.completion_criteria_satisfied -and
+    [string]$idLimitAudit.result -eq 'PASS' -and
+    [bool]$idLimitAudit.completion_criteria_satisfied -and
+    [string]$protocolCodegen.result -eq 'PASS' -and
+    [bool]$protocolCodegen.completion_criteria_satisfied -and
+    [string]$contentHealth.result -eq 'PASS' -and
+    [bool]$contentHealth.completion_criteria_satisfied -and
+    [string]$resourceBudget.result -eq 'PASS' -and
+    [bool]$resourceBudget.completion_criteria_satisfied -and
+    [string]$g2CoreClosure.result -eq 'PASS' -and
+    [string]$g2CoreClosure.review_result -eq 'BLOCKED' -and
+    -not [bool]$g2CoreClosure.completion_criteria_satisfied -and
+    [string]$g2AuxConfigReferences.result -eq 'PASS' -and
+    [bool]$g2AuxConfigReferences.contract_assertions_satisfied -and
+    -not [bool]$g2AuxConfigReferences.completion_criteria_satisfied -and
+    -not [bool]$g2AuxConfigReferences.g2_approved -and
+    -not [bool]$g2AuxConfigReferences.p3_authorized -and
+    [string]$g2AuxSemanticDiagnostics.result -eq 'PASS' -and
+    [bool]$g2AuxSemanticDiagnostics.contract_assertions_satisfied -and
+    -not [bool]$g2AuxSemanticDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2AuxSemanticDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2AuxSemanticDiagnostics.p3_authorized -and
+    [string]$g2AuxPackageContext.result -eq 'PASS' -and
+    [bool]$g2AuxPackageContext.contract_assertions_satisfied -and
+    [int]$g2AuxPackageContext.failures -eq 0 -and
+    -not [bool]$g2AuxPackageContext.completion_criteria_satisfied -and
+    -not [bool]$g2AuxPackageContext.g2_06_satisfied -and
+    -not [bool]$g2AuxPackageContext.p3_authorized -and
+    [string]$g2AuxEcfParserParity.result -eq 'PASS' -and
+    [bool]$g2AuxEcfParserParity.contract_assertions_satisfied -and
+    [int]$g2AuxEcfParserParity.failures -eq 0 -and
+    -not [bool]$g2AuxEcfParserParity.completion_criteria_satisfied -and
+    -not [bool]$g2AuxEcfParserParity.g2_06_satisfied -and
+    -not [bool]$g2AuxEcfParserParity.p3_authorized -and
+    [string]$g2AuxMalformedXmlDiagnostics.result -eq 'PASS' -and
+    [bool]$g2AuxMalformedXmlDiagnostics.contract_assertions_satisfied -and
+    [int]$g2AuxMalformedXmlDiagnostics.failures -eq 0 -and
+    [bool]$g2AuxMalformedXmlDiagnostics.diagnostic_scope_complete -and
+    [int]$g2AuxMalformedXmlDiagnostics.malformed_instances -eq 6 -and
+    [int]$g2AuxMalformedXmlDiagnostics.tinyxml_api_successes -eq 6 -and
+    [int]$g2AuxMalformedXmlDiagnostics.tinyxml_full_consumption -eq 5 -and
+    [int]$g2AuxMalformedXmlDiagnostics.tinyxml_silent_partial -eq 1 -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.legacy_runtime_executed -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.runtime_binary_parity_claimed -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.p3_authorized -and
+    [string]$g2AssetDescriptorDiagnostics.result -eq 'PASS' -and
+    [bool]$g2AssetDescriptorDiagnostics.contract_assertions_satisfied -and
+    -not [bool]$g2AssetDescriptorDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2AssetDescriptorDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2AssetDescriptorDiagnostics.p3_authorized -and
+    [string]$g2IdentityNormalization.result -eq 'PASS' -and
+    [bool]$g2IdentityNormalization.contract_assertions_satisfied -and
+    -not [bool]$g2IdentityNormalization.completion_criteria_satisfied -and
+    -not [bool]$g2IdentityNormalization.g2_06_satisfied -and
+    -not [bool]$g2IdentityNormalization.p3_authorized -and
+    [string]$g2BindingFailureDiagnostics.result -eq 'PASS' -and
+    [bool]$g2BindingFailureDiagnostics.contract_assertions_satisfied -and
+    -not [bool]$g2BindingFailureDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2BindingFailureDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2BindingFailureDiagnostics.p3_authorized -and
+    [string]$g2BindingRecovery.result -eq 'PASS' -and
+    [int]$g2BindingRecovery.failed -eq 0 -and
+    [string]$g2StaticMeshPayloadSectionPrefix.result -eq 'PASS' -and
+    [bool]$g2StaticMeshPayloadSectionPrefix.contract_assertions_satisfied -and
+    [int]$g2StaticMeshPayloadSectionPrefix.failed -eq 0 -and
+    -not [bool]$g2StaticMeshPayloadSectionPrefix.completion_criteria_satisfied -and
+    -not [bool]$g2StaticMeshPayloadSectionPrefix.g2_06_satisfied -and
+    -not [bool]$g2StaticMeshPayloadSectionPrefix.p3_authorized -and
+    [string]$g2QtxDeclaredMipPayloadPrefix.result -eq 'PASS' -and
+    [bool]$g2QtxDeclaredMipPayloadPrefix.contract_assertions_satisfied -and
+    [int]$g2QtxDeclaredMipPayloadPrefix.failed -eq 0 -and
+    -not [bool]$g2QtxDeclaredMipPayloadPrefix.completion_criteria_satisfied -and
+    -not [bool]$g2QtxDeclaredMipPayloadPrefix.g2_06_satisfied -and
+    -not [bool]$g2QtxDeclaredMipPayloadPrefix.p3_authorized -and
+    [string]$g2MigrationDecisions.result -eq 'PASS' -and
+    [bool]$g2MigrationDecisions.contract_assertions_satisfied -and
+    -not [bool]$g2MigrationDecisions.completion_criteria_satisfied -and
+    -not [bool]$g2MigrationDecisions.g2_07_satisfied -and
+    [string]$fullAssetInventory.result -eq 'PASS' -and
+    [bool]$fullAssetInventory.completion_criteria_satisfied -and
+    [string]$referenceClosure.result -eq 'PASS' -and
+    [bool]$referenceClosure.completion_criteria_satisfied -and
+    [string]$assetHealth.result -eq 'PASS' -and
+    [bool]$assetHealth.completion_criteria_satisfied -and
+    [string]$conversionRouting.result -eq 'PASS' -and
+    [bool]$conversionRouting.completion_criteria_satisfied -and
+    [string]$conversionCache.result -eq 'PASS' -and
+    [bool]$conversionCache.completion_criteria_satisfied -and
     [string]$referenceFormats.result -eq 'PASS' -and
     [string]$ciAuthorityContract.result -eq 'PASS' -and
+    [string]$hostedWorkflowContract.result -eq 'PASS' -and
+    [string]$postgresRefreshPreflight.result -eq 'PASS' -and
+    [string]$postgresOfficialCandidate.result -eq 'PASS' -and
+    [string]$postgresGosuReachability.result -eq 'PASS' -and
+    [string]$postgresGosuWaiver.result -eq 'PASS' -and
     [string]$uePackagingWaiver.result -eq 'PASS' -and
     [string]$toolchain.result -eq 'PASS' -and
     [string]$staticAnalysis.result -eq 'PASS_DIAGNOSTIC' -and
@@ -199,6 +483,8 @@ $report = [pscustomobject][ordered]@{
     package_normalized_tree = $packageTree
     legacy_table = $legacyTable
     current_table_investigation = $currentTable
+    current_table_csv_relation = $currentTableCsvRelation
+    current_table_representatives = $currentTableRepresentatives
     legacy_to_ue_transform = $legacyToUE
     qtx_texture = $qtxTexture
     sm_static_mesh = $smStaticMesh
@@ -215,8 +501,47 @@ $report = [pscustomobject][ordered]@{
     ue_animation_import = $ueAnimationImport
     ue_terrain_import = $ueTerrainImport
     golden_test_matrix = $goldenTestMatrix
+    g1_format_review = $g1FormatReview
+    full_package_inventory = $fullPackageInventory
+    package_boundary_completeness = $packageBoundaryCompleteness
+    package_dependency_graph = $packageDependencyGraph
+    full_current_table_inventory = $fullCurrentTableInventory
+    auxiliary_config_inventory = $auxiliaryConfigInventory
+    three_layer_table_data = $threeLayerTableData
+    core_table_schema = $coreTableSchema
+    table_ownership = $tableOwnership
+    legacy_current_diff = $legacyCurrentDiff
+    canonical_id_map = $canonicalIdMap
+    id_limit_audit = $idLimitAudit
+    protocol_codegen = $protocolCodegen
+    content_health = $contentHealth
+    resource_budget = $resourceBudget
+    g2_core_resource_closure = $g2CoreClosure
+    g2_auxiliary_config_references = $g2AuxConfigReferences
+    g2_auxiliary_semantic_diagnostics = $g2AuxSemanticDiagnostics
+    g2_auxiliary_package_context = $g2AuxPackageContext
+    g2_auxiliary_ecf_parser_parity = $g2AuxEcfParserParity
+    g2_auxiliary_malformed_xml_diagnostics = $g2AuxMalformedXmlDiagnostics
+    g2_asset_descriptor_diagnostics = $g2AssetDescriptorDiagnostics
+    g2_asset_identity_normalization = $g2IdentityNormalization
+    g2_asset_binding_failure_diagnostics = $g2BindingFailureDiagnostics
+    g2_asset_binding_recovery = $g2BindingRecovery
+    g2_static_mesh_payload_section_prefix = $g2StaticMeshPayloadSectionPrefix
+    g2_qtx_declared_mip_payload_prefix = $g2QtxDeclaredMipPayloadPrefix
+    g2_migration_decisions = $g2MigrationDecisions
+    full_asset_inventory = $fullAssetInventory
+    reference_closure = $referenceClosure
+    asset_health = $assetHealth
+    conversion_routing = $conversionRouting
+    conversion_cache = $conversionCache
     reference_formats = $referenceFormats
     ci_authority_contract = $ciAuthorityContract
+    hosted_workflow_contract = $hostedWorkflowContract
+    postgres_refresh_preflight = $postgresRefreshPreflight
+    postgres_official_candidate = $postgresOfficialCandidate
+    postgres_derived_image_contract = $postgresDerivedImageContract
+    postgres_gosu_reachability = $postgresGosuReachability
+    postgres_gosu_waiver = $postgresGosuWaiver
     ue_packaging_waiver = $uePackagingWaiver
     backend_toolchain = $toolchain
     backend_static_analysis = $staticAnalysis

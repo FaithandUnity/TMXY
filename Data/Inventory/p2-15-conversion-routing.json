@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-29T18:14:47.1457992+00:00",
+  "task_id": "P2-15",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "asset_health_report_sha256": "9a0db19c7809da06e7225ec900864f0854c8b61af224366aac746be312880b9f",
+    "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+    "reference_closure_sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+    "source_copy_policy": "reference_only"
+  },
+  "report": {
+    "path": "Data/Exports/P2-15/p2-15-conversion-routing.jsonl",
+    "tracked": false,
+    "lines": 40090,
+    "bytes": 21021383,
+    "sha256": "77620c2db505d98a94f64e1bd9f7c5244fbb48fbad80900cb83d699add832559"
+  },
+  "summary": {
+    "assets": {
+      "alias_reuse": 5489,
+      "bytes": 8882019027,
+      "conversion_jobs": 34601,
+      "files": 40090
+    },
+    "routes": {
+      "automatic-qualified-interchange": {
+        "alias_reuse": 5420,
+        "bytes": 8534384165,
+        "conversion_jobs": 32515,
+        "files": 37935,
+        "fixed_engineering_hours": 40.0,
+        "item_human_hours": 352.25,
+        "machine_seconds": 97545,
+        "planning_human_hours": 392.25
+      },
+      "automatic-standard-audio": {
+        "alias_reuse": 34,
+        "bytes": 178952251,
+        "conversion_jobs": 480,
+        "files": 514,
+        "fixed_engineering_hours": 24.0,
+        "item_human_hours": 9.77,
+        "machine_seconds": 2400,
+        "planning_human_hours": 33.77
+      },
+      "manual-descriptor-recovery": {
+        "alias_reuse": 0,
+        "bytes": 144791420,
+        "conversion_jobs": 786,
+        "files": 786,
+        "fixed_engineering_hours": 80.0,
+        "item_human_hours": 393.0,
+        "machine_seconds": 0,
+        "planning_human_hours": 473.0
+      },
+      "manual-repair-or-replace": {
+        "alias_reuse": 0,
+        "bytes": 19325289,
+        "conversion_jobs": 14,
+        "files": 14,
+        "fixed_engineering_hours": 32.0,
+        "item_human_hours": 112.0,
+        "machine_seconds": 0,
+        "planning_human_hours": 144.0
+      },
+      "semi-automatic-navigation-adaptation": {
+        "alias_reuse": 35,
+        "bytes": 4565902,
+        "conversion_jobs": 806,
+        "files": 841,
+        "fixed_engineering_hours": 160.0,
+        "item_human_hours": 201.675,
+        "machine_seconds": 8060,
+        "planning_human_hours": 361.675
+      }
+    },
+    "priorities": {
+      "P0-first-playable-slice": {
+        "alias_reuse": 5216,
+        "bytes": 2958384062,
+        "conversion_jobs": 8842,
+        "files": 14058,
+        "item_human_hours": 122.95,
+        "machine_seconds": 27004
+      },
+      "P1-linked-content": {
+        "alias_reuse": 94,
+        "bytes": 5594899826,
+        "conversion_jobs": 24025,
+        "files": 24119,
+        "item_human_hours": 288.36,
+        "machine_seconds": 72124
+      },
+      "P2-unlinked-review": {
+        "alias_reuse": 141,
+        "bytes": 200166716,
+        "conversion_jobs": 867,
+        "files": 1008,
+        "item_human_hours": 454.475,
+        "machine_seconds": 512
+      },
+      "P3-identity-rule-gap": {
+        "alias_reuse": 38,
+        "bytes": 128568423,
+        "conversion_jobs": 867,
+        "files": 905,
+        "item_human_hours": 202.91,
+        "machine_seconds": 8365
+      }
+    },
+    "tiers": {
+      "automatic": {
+        "alias_reuse": 5454,
+        "bytes": 8713336416,
+        "conversion_jobs": 32995,
+        "files": 38449,
+        "item_human_hours": 362.02,
+        "machine_seconds": 99945
+      },
+      "manual": {
+        "alias_reuse": 0,
+        "bytes": 164116709,
+        "conversion_jobs": 800,
+        "files": 800,
+        "item_human_hours": 505.0,
+        "machine_seconds": 0
+      },
+      "semi-automatic": {
+        "alias_reuse": 35,
+        "bytes": 4565902,
+        "conversion_jobs": 806,
+        "files": 841,
+        "item_human_hours": 201.675,
+        "machine_seconds": 8060
+      }
+    },
+    "duplicate_handling": {
+      "exact-duplicate-review-only": 3351,
+      "safe-reuse-alias": 5489,
+      "safe-reuse-representative": 262,
+      "unique": 30988
+    },
+    "estimates": {
+      "basis": "planning coefficient, not benchmark or schedule commitment",
+      "fixed_engineering_hours": 336.0,
+      "item_human_hours": 1068.695,
+      "machine_seconds": 108005,
+      "planning_human_hours": 1404.695
+    },
+    "unclassified_assets": 0,
+    "descriptor_bound_alias_reuse": 0,
+    "deletion_recommendations": 0
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/conversion-routing-policy-v1.json",
+    "policy_sha256": "f545654c1838aae4f2d6bc1adf9e8667b91b4e8c842ebf84ed482f33eaf94563",
+    "schema": "Contracts/data-schema/conversion-routing-v1.schema.json",
+    "schema_sha256": "a57e24917a99610cf671dfec790a9ff50b64e586f2b47d9dc3365e60ad363c32",
+    "estimate_authority": "planning coefficient only; P2-19 re-estimation required"
+  },
+  "implementation": {
+    "source_files": 3,
+    "source_sha256": "f5f0c843f810e1588f451db7c982e177b9f6facc771006d4b554b62b54f07e76",
+    "self_test_assertions": 5,
+    "generator": "Tools/TMXY.ConversionRouting/New-ConversionRouting.ps1",
+    "query": "Tools/TMXY.ConversionRouting/Find-ConversionRoute.ps1"
+  },
+  "disclosure": {
+    "tracked_evidence_contains_asset_paths": false,
+    "tracked_evidence_contains_per_asset_hashes": false,
+    "full_report_committed_to_git": false,
+    "payload_bytes_copied": false,
+    "source_aliases_removed": 0,
+    "automatic_deletions_performed": 0
+  },
+  "reproduction": {
+    "check_mode": "-Check",
+    "source_mount": "read-only",
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-16",
+      "P2-18",
+      "P2-19"
+    ],
+    "detail": "Build content-addressed invalidation and then replace planning coefficients with measured pilot throughput."
+  }
+}

@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.13",
+  "captured_utc": "2026-08-30T17:48:31.217942Z",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS_DIAGNOSTIC",
+  "task_status": "BLOCKED",
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "measured": {
+    "source_assets_reverified": 6,
+    "candidate_packages_hashed": 6,
+    "candidate_bodies_reverified": 6,
+    "strict_default_rejected_edges": 6,
+    "payload_size_mismatch_edges": 6,
+    "strict_prefix_pass_edges": 6,
+    "explicit_prefix_pass_edges": 6,
+    "full_payload_boundary_edges": 6,
+    "decoded_mip_zero_match_edges": 6,
+    "dds_prefix_only_edges": 6,
+    "ignored_tail_hashes": 6,
+    "dxt1_targets": 3,
+    "dxt5_targets": 3,
+    "input_payload_bytes": 786456,
+    "consumed_payload_bytes": 589824,
+    "ignored_payload_bytes": 196632,
+    "base_recovery_plan_rows": 21,
+    "effective_recovery_plan_rows": 21,
+    "effective_plan_changed_rows": 6,
+    "effective_plan_unchanged_rows": 15,
+    "candidate_selections": 0,
+    "automatic_resolutions": 0,
+    "owner_dispositions": 0,
+    "content_dispositions": 0
+  },
+  "report": {
+    "path": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.json",
+    "tracked": true,
+    "bytes": 14406,
+    "lines": 402,
+    "sha256": "18123bb24509f546da2b5138ba51de02d93590a3b7b795a4eefa5b02bf8f8753"
+  },
+  "report_markdown": {
+    "path": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.md",
+    "tracked": true,
+    "bytes": 798,
+    "lines": 12,
+    "sha256": "e551ba5480450634e8eaa4386e44ab63edc4f9bfe34da5a4d0fb32756de900a9"
+  },
+  "outputs": {
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix.jsonl",
+      "tracked": false,
+      "bytes": 13605,
+      "lines": 6,
+      "sha256": "0a93b28ca05a1177e6f1ce19db46d2fc0af25321af7fc4c0d1baaee5660369f6"
+    },
+    "effective_recovery_plan": {
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+      "tracked": false,
+      "bytes": 6558,
+      "lines": 21,
+      "sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7"
+    }
+  },
+  "contracts": {
+    "policy_sha256": "67e2cb3f2ebf6843177df09fb086249f1c3ab4d6f81a8fa31b5af27b456123f5",
+    "schema_sha256": "56c7dc13c9af0feaf38384e344d5107fad4f15b3ca841ec07b8a01d9c852cb46",
+    "detail_schema_sha256": "911196c1f6e03cc7bf33ea84a954b404d8b7cc7a7b2533c7ebad435cab7db63f",
+    "base_plan_contract_sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+  },
+  "implementation": {
+    "files": [
+      {
+        "role": "implementation_01",
+        "path": "Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/CMakeLists.txt",
+        "tracked": true,
+        "bytes": 2057,
+        "lines": 44,
+        "sha256": "c6d1609b316744b54e332e644c323ffd804045c2c243656853ed8ee54dbbb8e5"
+      },
+      {
+        "role": "implementation_02",
+        "path": "Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/README.md",
+        "tracked": true,
+        "bytes": 3085,
+        "lines": 56,
+        "sha256": "4875a31682e028e97b4e70a1a827f8543b1ca4c7e57ac4b1ef7f41e5fb0fd55e"
+      },
+      {
+        "role": "implementation_03",
+        "path": "Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/New-G2QtxDeclaredMipPayloadPrefix.ps1",
+        "tracked": true,
+        "bytes": 15509,
+        "lines": 326,
+        "sha256": "0265baa25954c36ab2a9f49fee66044ae8edf00482105ccc2eedc25966f1df3b"
+      },
+      {
+        "role": "implementation_04",
+        "path": "Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/g2_qtx_declared_mip_payload_prefix.py",
+        "tracked": true,
+        "bytes": 26135,
+        "lines": 437,
+        "sha256": "97725033ba7816faaed9e0192056703a4ac7f03a2057fd17164621bb96544e3b"
+      },
+      {
+        "role": "implementation_05",
+        "path": "Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/qtx_declared_mip_prefix_common.py",
+        "tracked": true,
+        "bytes": 23420,
+        "lines": 410,
+        "sha256": "fc7a2e5e587334c7b9d4806aa2107f84b1c214f64071920dbbf212db901d0dd6"
+      },
+      {
+        "role": "implementation_06",
+        "path": "Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/apps/qtx_declared_mip_prefix_probe_main.cpp",
+        "tracked": true,
+        "bytes": 16044,
+        "lines": 347,
+        "sha256": "0fd54b45c10253c669cc9ccb953625d1cb8381d08c549d86e8806e706b24d9ae"
+      },
+      {
+        "role": "implementation_07",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-policy-v1.json",
+        "tracked": true,
+        "bytes": 9503,
+        "lines": 172,
+        "sha256": "67e2cb3f2ebf6843177df09fb086249f1c3ab4d6f81a8fa31b5af27b456123f5"
+      },
+      {
+        "role": "implementation_08",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-v1.schema.json",
+        "tracked": true,
+        "bytes": 14513,
+        "lines": 265,
+        "sha256": "56c7dc13c9af0feaf38384e344d5107fad4f15b3ca841ec07b8a01d9c852cb46"
+      },
+      {
+        "role": "implementation_09",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-detail-v1.schema.json",
+        "tracked": true,
+        "bytes": 5572,
+        "lines": 106,
+        "sha256": "911196c1f6e03cc7bf33ea84a954b404d8b7cc7a7b2533c7ebad435cab7db63f"
+      },
+      {
+        "role": "implementation_10",
+        "path": "Docs/Formats/G2-QTX-DECLARED-MIP-PAYLOAD-PREFIX.md",
+        "tracked": true,
+        "bytes": 4040,
+        "lines": 64,
+        "sha256": "6e420b3608443469f6a3adf6efebf31d5e4c1c3406595c5a7dcf1f865f5a5096"
+      },
+      {
+        "role": "implementation_11",
+        "path": "Tests/Contract/Test-G2QtxDeclaredMipPayloadPrefix.ps1",
+        "tracked": true,
+        "bytes": 25368,
+        "lines": 412,
+        "sha256": "c807c9643928ef2f28383949cff98ba6aa26a9f76b111074f9e863cb6a259245"
+      },
+      {
+        "role": "implementation_12",
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/probe_support.cpp",
+        "tracked": true,
+        "bytes": 13054,
+        "lines": 350,
+        "sha256": "4aa50309300054fa696205c33db7b3b0b1e8eba9c1064b6e10f492d44c621987"
+      },
+      {
+        "role": "implementation_13",
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/probe_support.hpp",
+        "tracked": true,
+        "bytes": 2447,
+        "lines": 84,
+        "sha256": "4de6150e3f21b841e7f16f966e1ecd5ea63f9676d24c357fc616bbf0743fa209"
+      },
+      {
+        "role": "implementation_14",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/semantic_hash.cpp",
+        "tracked": true,
+        "bytes": 2263,
+        "lines": 73,
+        "sha256": "39b507e7d63b026d7b0eb9b0c378300e81c582c1cfa766a5123d8347577e2b72"
+      },
+      {
+        "role": "implementation_15",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/semantic_hash.hpp",
+        "tracked": true,
+        "bytes": 509,
+        "lines": 14,
+        "sha256": "7e041b7cb0ffb17fb681190785f77219df4b42f9d7e32d975c0943f984f7f028"
+      },
+      {
+        "role": "implementation_16",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.cpp",
+        "tracked": true,
+        "bytes": 11058,
+        "lines": 326,
+        "sha256": "ac174bbfa8a836610cfd70879a9040ed09caaddfbd0a94f8c19c4d036699e2d4"
+      },
+      {
+        "role": "implementation_17",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.hpp",
+        "tracked": true,
+        "bytes": 661,
+        "lines": 22,
+        "sha256": "d3a16c780b56a684648c6017538e33f35376c85dd41ba985c97a7b377c95cc98"
+      },
+      {
+        "role": "implementation_18",
+        "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp",
+        "tracked": true,
+        "bytes": 28867,
+        "lines": 639,
+        "sha256": "e995eef8e5b2e8cda504e2e5ee50a5d149965e94d400f1d857da46ee962dafe7"
+      },
+      {
+        "role": "implementation_19",
+        "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.hpp",
+        "tracked": true,
+        "bytes": 1248,
+        "lines": 42,
+        "sha256": "17b25df32d5934783db11d30409360556dd98947d1b8655cea29d9c9a5f09918"
+      }
+    ],
+    "aggregate_sha256": "d2be41b9f508c5c2fda3bc86b844400a71a214e9d6c7ee71c66760198fd0c62a",
+    "generator_self_test_assertions": 23,
+    "probe_startup_self_tests": true
+  },
+  "builder": {
+    "image_reference": "tmxy-backend-builder:p0-08",
+    "image_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "network": "none",
+    "read_only_container": true,
+    "cap_drop": "ALL",
+    "no_new_privileges": true,
+    "repository_mount": "read-only",
+    "legacy_asset_mount": "read-only",
+    "legacy_source_mounts": "read-only-files"
+  },
+  "proof_classification": {
+    "source_basis": "SOURCE_DERIVED",
+    "legacy_binary_executed": false,
+    "runtime_parity_proven": false
+  },
+  "authority_boundary": {
+    "a4_is_authoritative": true,
+    "authority_state_changed": false,
+    "adapter_applied": false,
+    "recovery_applied": false,
+    "machine_can_select_candidate": false,
+    "machine_can_approve_disposition": false,
+    "repair_or_write": false,
+    "delete_or_no_ref": false,
+    "owner_approvals": 0,
+    "verified_resolutions": 0
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "disclosure": {
+    "tracked_aggregate_hash_and_anonymous_contract_only": true,
+    "tracked_anonymous_base_plan_contract": true,
+    "anonymous_detail_only": true,
+    "legacy_source_roles_and_hashes_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_confidential_payloads": false
+  }
+}

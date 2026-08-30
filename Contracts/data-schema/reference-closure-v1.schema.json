@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.local/contracts/reference-closure-v1.schema.json",
+  "title": "TMXY P2-13 Reference Closure Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "task_id", "result", "task_status", "completion_criteria_satisfied", "input", "graph", "roots", "table_closure", "package_closure", "asset_closure", "health", "contracts", "implementation", "disclosure", "reproduction", "next_scope"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "task_id": { "const": "P2-13" },
+    "result": { "const": "PASS" },
+    "task_status": { "const": "COMPLETE" },
+    "completion_criteria_satisfied": { "const": true },
+    "captured_utc": { "type": "string", "minLength": 1 },
+    "input": { "type": "object" },
+    "graph": {
+      "type": "object",
+      "required": ["path", "tracked", "lines", "bytes", "sha256"],
+      "properties": {
+        "path": { "const": "Data/Exports/P2-13/p2-13-reference-closure.jsonl" },
+        "tracked": { "const": false },
+        "lines": { "type": "integer", "minimum": 1 },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "roots": { "type": "object" },
+    "table_closure": { "type": "object" },
+    "package_closure": { "type": "object" },
+    "asset_closure": { "type": "object" },
+    "health": { "type": "object" },
+    "contracts": { "type": "object" },
+    "implementation": { "type": "object" },
+    "disclosure": { "type": "object" },
+    "reproduction": { "type": "object" },
+    "next_scope": { "type": "object" }
+  }
+}

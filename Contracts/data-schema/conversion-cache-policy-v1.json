@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-16",
+  "source_build": "qy-3.0.0.413",
+  "key_namespace": "tmxy.conversion.cache-key.v1",
+  "hash_algorithm": "sha256",
+  "canonical_serialization": "UTF-8 JSON with sorted keys and compact separators",
+  "ready_tiers": ["automatic", "semi-automatic"],
+  "manual_routes_require_intervention_digest": [
+    "manual-descriptor-recovery",
+    "manual-repair-or-replace"
+  ],
+  "external_descriptor_families": ["qtx", "sm", "skem", "anim", "ter"],
+  "converter_tool_evidence": {
+    "qtx": "Data/BuildBaseline/p1-13-qtx-texture.json",
+    "sm": "Data/BuildBaseline/p1-14-sm-static-mesh.json",
+    "skem": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json",
+    "anim": "Data/BuildBaseline/p1-16-anim-animation.json",
+    "ter": "Data/BuildBaseline/p1-17-ter-terrain.json",
+    "zif": "Data/BuildBaseline/p1-18-auxiliary-assets.json",
+    "wav": "Data/BuildBaseline/p1-18-auxiliary-assets.json",
+    "mp3": "Data/BuildBaseline/p1-18-auxiliary-assets.json"
+  },
+  "interchange_evidence": "Data/BuildBaseline/p1-19-asset-interchange.json",
+  "descriptor_graph_evidence": "Data/Inventory/p2-03-package-dependency-graph.json",
+  "target_profile": {
+    "engine": "Unreal Engine 5.8.2",
+    "platform": "Win64 Editor import",
+    "coordinate_system": "X-forward Y-right Z-up",
+    "linear_unit": "centimeter",
+    "interchange": "tmxy.asset.interchange/1.0.0"
+  },
+  "key_components": [
+    "namespace",
+    "asset_id",
+    "family",
+    "route",
+    "source_payload_sha256",
+    "interpreted_record_sha256",
+    "descriptor_scope_sha256",
+    "converter_source_sha256",
+    "interchange_source_sha256",
+    "routing_policy_sha256",
+    "target_profile_sha256"
+  ],
+  "invalidation_policy": {
+    "source_change_invalidates_one_planned_job_before_rerouting": true,
+    "converter_change_invalidates_its_family": true,
+    "routing_policy_change_invalidates_all_ready_jobs": true,
+    "target_profile_change_invalidates_all_ready_jobs": true,
+    "descriptor_graph_change_invalidates_external_descriptor_families": true,
+    "missing_or_hash_mismatched_output_is_cache_miss": true,
+    "timestamps_are_not_key_material": true
+  },
+  "storage_policy": {
+    "full_plan_tracked_in_git": false,
+    "tracked_evidence_contains_asset_paths": false,
+    "tracked_evidence_contains_source_hashes": false,
+    "cache_artifacts_tracked_in_git": false,
+    "cache_manifest_is_untrusted_until_artifact_hash_verification": true,
+    "shared_cache_writes_require_trusted_pipeline": true
+  },
+  "completion_policy": {
+    "requires_every_routed_asset_one_plan_state": true,
+    "requires_unchanged_ready_keys_stable": true,
+    "requires_tool_and_policy_mutation_tests": true,
+    "requires_aliases_share_their_representative_key": true,
+    "forbids_manual_cache_key_without_intervention_digest": true,
+    "forbids_mtime_or_absolute_path_in_key": true,
+    "forbids_cache_hit_without_output_sha256_verification": true
+  }
+}

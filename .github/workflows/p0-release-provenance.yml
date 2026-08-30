@@ -1,0 +1,81 @@
+name: P0 protected release provenance
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_revision:
+        description: Exact protected main commit to attest
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+  attestations: write
+  packages: write
+
+concurrency:
+  group: p0-release-provenance
+  cancel-in-progress: false
+
+env:
+  TMXY_BACKEND_BUILDER_NAME: ghcr.io/faithandunity/tmxy-backend-builder
+  TMXY_BACKEND_BUILDER_DIGEST: sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9
+
+jobs:
+  release_provenance:
+    name: release/provenance
+    runs-on: ubuntu-24.04
+    environment: p0-release
+    timeout-minutes: 30
+    steps:
+      - name: Validate the requested immutable revision
+        shell: bash
+        env:
+          REQUESTED_REVISION: ${{ inputs.source_revision }}
+          GH_API_CREDENTIAL: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          [[ "${REQUESTED_REVISION}" =~ ^[0-9a-f]{40}$ ]]
+          branch_json="$(curl --fail --silent --show-error \
+            -H "Authorization: Bearer ${GH_API_CREDENTIAL}" \
+            -H 'Accept: application/vnd.github+json' \
+            -H 'X-GitHub-Api-Version: 2022-11-28' \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/branches/main")"
+          test "$(jq -r '.protected' <<< "${branch_json}")" = true
+          test "$(jq -r '.commit.sha' <<< "${branch_json}")" = "${REQUESTED_REVISION}"
+      - name: Check out the exact protected main revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.source_revision }}
+          fetch-depth: 1
+          lfs: false
+          persist-credentials: false
+      - name: Validate release policy from the attested source
+        shell: pwsh
+        run: |
+          & "$env:GITHUB_WORKSPACE/Tests/CI/Test-HostedWorkflowContract.ps1" `
+            -RebuildRoot $env:GITHUB_WORKSPACE
+      - name: Verify the locked OCI manifest is present in GHCR
+        shell: bash
+        env:
+          GHCR_CREDENTIAL: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          echo "${GHCR_CREDENTIAL}" | docker login ghcr.io --username "${GITHUB_ACTOR}" --password-stdin
+          image="${TMXY_BACKEND_BUILDER_NAME}@${TMXY_BACKEND_BUILDER_DIGEST}"
+          docker pull "${image}"
+          repo_digests="$(docker image inspect --format '{{json .RepoDigests}}' "${image}")"
+          grep --fixed-strings --quiet "${TMXY_BACKEND_BUILDER_DIGEST}" <<< "${repo_digests}"
+      - name: Attest the locked SBOM evidence
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be
+        with:
+          subject-path: |
+            Data/Security/postgres-18.6.sbom.cdx.json
+            Data/Security/tmxy-backend-builder.sbom.cdx.json
+      - name: Attach signed provenance to the locked OCI manifest
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be
+        with:
+          subject-name: ${{ env.TMXY_BACKEND_BUILDER_NAME }}
+          subject-digest: ${{ env.TMXY_BACKEND_BUILDER_DIGEST }}
+          push-to-registry: true

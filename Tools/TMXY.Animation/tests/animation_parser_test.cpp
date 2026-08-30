@@ -138,18 +138,19 @@ void append_key(std::vector<std::byte>& bytes, const float x, const bool zero_qu
     append_f32(bytes, 0.0F);
 }
 
-[[nodiscard]] std::vector<std::byte> make_payload(const bool bad_quaternion = false)
+[[nodiscard]] std::vector<std::byte> make_payload(const bool bad_quaternion = false,
+                                                  const std::int32_t frame_count = 3)
 {
     std::vector<std::byte> bytes;
     append_i32(bytes, 1);
     append_i32(bytes, 2);
-    append_i32(bytes, 3);
+    append_i32(bytes, frame_count);
     for (std::int32_t bone = 0; bone < 2; ++bone)
     {
-        for (std::int32_t frame = 0; frame < 3; ++frame)
+        for (std::int32_t frame = 0; frame < frame_count; ++frame)
         {
             append_key(bytes, bone == 0 ? static_cast<float>(frame) : 0.0F,
-                       bad_quaternion && bone == 1 && frame == 2);
+                       bad_quaternion && bone == 1 && frame + 1 == frame_count);
         }
     }
     append_i32(bytes, 1);
@@ -200,6 +201,11 @@ void test_payload(TestContext& test, const tmxy::animation::AnimationDescriptor&
                 "clip track and key counts preserved");
     test.expect(payload.clips[0].tracks[1].bone_id == 1U,
                 "track IDs are an ordered dense skeleton prefix");
+    test.expect(payload.clips[0].observed_frame_count == 3 &&
+                    payload.clips[0].effective_frame_count == 3 &&
+                    payload.clips[0].frame_count_basis ==
+                        tmxy::animation::FrameCountBasis::package_descriptor,
+                "strict binding preserves declared observed and effective frame authority");
     test.expect(payload.clips[0].sampled_duration_seconds == 1.0,
                 "sampled duration uses frame count minus one");
     test.expect(payload.clips[0].legacy_loop_period_seconds == 1.0,
@@ -236,6 +242,12 @@ void test_corruption(TestContext& test, const tmxy::animation::AnimationDescript
                     track_result.error().code ==
                         tmxy::animation::AnimationErrorCode::invalid_track_count,
                 "track count beyond skeleton rejected");
+    const auto recovered_track_result =
+        tmxy::animation::AnimReader::parse_with_payload_frame_counts(bad_tracks, descriptors, 4U);
+    test.expect(!recovered_track_result.has_value() &&
+                    recovered_track_result.error().code ==
+                        tmxy::animation::AnimationErrorCode::invalid_track_count,
+                "frame recovery cannot override invalid track count");
 
     auto bad_frames = make_payload();
     bad_frames[8] = std::byte{0x02};
@@ -244,6 +256,47 @@ void test_corruption(TestContext& test, const tmxy::animation::AnimationDescript
                     frame_result.error().code ==
                         tmxy::animation::AnimationErrorCode::frame_count_mismatch,
                 "Package and payload frame mismatch rejected");
+
+    const auto recovered = tmxy::animation::AnimReader::parse_with_payload_frame_counts(
+        make_payload(false, 2), descriptors, 4U);
+    test.expect(recovered.has_value(), "complete payload frame count recovers explicitly");
+    if (recovered.has_value())
+    {
+        const auto& clip = recovered.value().clips[0];
+        test.expect(clip.descriptor.frame_count == 3 && clip.observed_frame_count == 2 &&
+                        clip.effective_frame_count == 2 &&
+                        clip.frame_count_basis ==
+                            tmxy::animation::FrameCountBasis::payload_observed_contract &&
+                        recovered.value().total_key_count == 4U,
+                    "declared observed and effective frame counts remain distinct");
+        tmxy::animation::AnimationBinding binding;
+        binding.package.animations = descriptors;
+        binding.payload = recovered.value();
+        const auto json = tmxy::animation::build_animation_json(binding);
+        test.expect(json.find(R"("frame_count": 3)") != std::string::npos &&
+                        json.find(R"("declared_frame_count": 3)") != std::string::npos &&
+                        json.find(R"("observed_frame_count": 2)") != std::string::npos &&
+                        json.find(R"("effective_frame_count": 2)") != std::string::npos &&
+                        json.find(R"("frame_count_basis": "payload_observed_contract")") !=
+                            std::string::npos,
+                    "animation JSON discloses recovery basis");
+    }
+
+    auto recovered_with_trailing = make_payload(false, 2);
+    recovered_with_trailing.push_back(std::byte{0xFF});
+    const auto recovery_trailing = tmxy::animation::AnimReader::parse_with_payload_frame_counts(
+        recovered_with_trailing, descriptors, 4U);
+    test.expect(!recovery_trailing.has_value() &&
+                    recovery_trailing.error().code ==
+                        tmxy::animation::AnimationErrorCode::trailing_bytes,
+                "frame recovery still rejects unexplained trailing bytes");
+
+    const auto recovery_quaternion = tmxy::animation::AnimReader::parse_with_payload_frame_counts(
+        make_payload(true, 2), descriptors, 4U);
+    test.expect(!recovery_quaternion.has_value() &&
+                    recovery_quaternion.error().code ==
+                        tmxy::animation::AnimationErrorCode::invalid_quaternion,
+                "frame recovery still rejects a zero quaternion in the recovered layout");
 
     const auto quaternion_result =
         tmxy::animation::AnimReader::parse(make_payload(true), descriptors, 4U);

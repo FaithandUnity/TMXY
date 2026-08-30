@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.7",
+  "captured_utc": "2026-08-30T15:36:04.460217Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "remediation_scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "measured": {
+    "diagnosed_targets": 19,
+    "diagnosed_candidate_edges": 24,
+    "typed_error_edges": 24,
+    "unclassified_error_edges": 0,
+    "candidate_selections": 0,
+    "automatic_resolutions": 0,
+    "owner_dispositions": 0,
+    "by_family": {
+      "anim": {
+        "targets": 6,
+        "candidate_edges": 6
+      },
+      "qtx": {
+        "targets": 12,
+        "candidate_edges": 16
+      },
+      "sm": {
+        "targets": 1,
+        "candidate_edges": 2
+      }
+    },
+    "by_error": [
+      {
+        "family": "anim",
+        "error_schema": "AnimationError/v1",
+        "error_code": "frame_count_mismatch",
+        "count": 5
+      },
+      {
+        "family": "anim",
+        "error_schema": "AnimationError/v1",
+        "error_code": "invalid_track_count",
+        "count": 1
+      },
+      {
+        "family": "qtx",
+        "error_schema": "TextureError/v1",
+        "error_code": "payload_size_mismatch",
+        "count": 16
+      },
+      {
+        "family": "sm",
+        "error_schema": "StaticMeshError/v1",
+        "error_code": "material_slot_mismatch",
+        "count": 2
+      }
+    ],
+    "effective": {
+      "resolved_targets": 13,
+      "resolved_edges": 15,
+      "ambiguous_targets": 0,
+      "ambiguous_edges": 0,
+      "unresolved_targets": 6,
+      "unresolved_edges": 9
+    }
+  },
+  "outputs": {
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
+      "tracked": false,
+      "bytes": 21217,
+      "lines": 19,
+      "sha256": "01c9cf6bcf5b9f0a224d4e91111d3947c972e6727ae348584df87b9eb8f0dc7d"
+    },
+    "report_json": {
+      "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+      "tracked": true,
+      "bytes": 9416,
+      "lines": 302,
+      "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b"
+    },
+    "report_markdown": {
+      "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.md",
+      "tracked": true,
+      "bytes": 802,
+      "lines": 13,
+      "sha256": "1f86ee20692366c09d3be0acd863c09dacc7c502d4cb0ef851e88e1d945b13c3"
+    }
+  },
+  "implementation": {
+    "files": [
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/CMakeLists.txt",
+        "tracked": true,
+        "bytes": 1765,
+        "lines": 41,
+        "sha256": "5996a6c6ece73cd245251b119179527b265d0579d6bb94b8a97fc5691d7d3b9d"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/g2_asset_binding_failure_diagnostics.py",
+        "tracked": true,
+        "bytes": 27560,
+        "lines": 488,
+        "sha256": "21b526cff016e26df0813a5487d0ebf2203b981c1c152ca763c3f2fa67b15c10"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/New-G2AssetBindingFailureDiagnostics.ps1",
+        "tracked": true,
+        "bytes": 15597,
+        "lines": 325,
+        "sha256": "f6beaa54837533256ddb2a30a751f8aafd57c1fcf1b30b2647e48c9dd66983da"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/README.md",
+        "tracked": true,
+        "bytes": 1455,
+        "lines": 31,
+        "sha256": "75dd5eaf23e2557709460ba844a7453589153047b7959b0b65e7fe1b912f40a8"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/failure_probe_main.cpp",
+        "tracked": true,
+        "bytes": 9613,
+        "lines": 237,
+        "sha256": "7f650dc42beba56f2bcd5a46c61b5be28545c2b642eb4c2771135ef8b3fe670f"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/probe_support.cpp",
+        "tracked": true,
+        "bytes": 13054,
+        "lines": 350,
+        "sha256": "4aa50309300054fa696205c33db7b3b0b1e8eba9c1064b6e10f492d44c621987"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/probe_support.hpp",
+        "tracked": true,
+        "bytes": 2447,
+        "lines": 84,
+        "sha256": "4de6150e3f21b841e7f16f966e1ecd5ea63f9676d24c357fc616bbf0743fa209"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.cpp",
+        "tracked": true,
+        "bytes": 11058,
+        "lines": 326,
+        "sha256": "ac174bbfa8a836610cfd70879a9040ed09caaddfbd0a94f8c19c4d036699e2d4"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.hpp",
+        "tracked": true,
+        "bytes": 661,
+        "lines": 22,
+        "sha256": "d3a16c780b56a684648c6017538e33f35376c85dd41ba985c97a7b377c95cc98"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/legacy_texture_descriptor_reader.cpp",
+        "tracked": true,
+        "bytes": 10955,
+        "lines": 309,
+        "sha256": "e130ca94d5a7ffcb9755ddf2a066a4ec30b8d2300cd094b502ecf274aa225997"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/qtx_reader.cpp",
+        "tracked": true,
+        "bytes": 20437,
+        "lines": 514,
+        "sha256": "adc10c8c0fb55d9e43b10641ab3c9025fcbc80128632c98370e1805439419507"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/texture_error.cpp",
+        "tracked": true,
+        "bytes": 4101,
+        "lines": 143,
+        "sha256": "6baa4733afa1f985eb3d2b7e5b502390fc3ccd2ba1f253e06ddf4dca8029671b"
+      },
+      {
+        "path": "Tools/TMXY.StaticMesh/src/package_static_mesh_reader.cpp",
+        "tracked": true,
+        "bytes": 27353,
+        "lines": 686,
+        "sha256": "b76287edbe0d965259277e498061d758f7b631bb30f0c3aba4bcd773143cdb3f"
+      },
+      {
+        "path": "Tools/TMXY.StaticMesh/src/sm_reader.cpp",
+        "tracked": true,
+        "bytes": 26204,
+        "lines": 684,
+        "sha256": "a0fdc3d62dbc65bece8ec24acea11085461bbb6aa9a959c3cc50b2d6a2d209e6"
+      },
+      {
+        "path": "Tools/TMXY.StaticMesh/src/static_mesh_error.cpp",
+        "tracked": true,
+        "bytes": 2747,
+        "lines": 68,
+        "sha256": "591557024f8123a0909448d30e0338879ea7601ad9a84195c5b7dc2cbabec40a"
+      },
+      {
+        "path": "Tools/TMXY.Animation/src/package_animation_reader.cpp",
+        "tracked": true,
+        "bytes": 21348,
+        "lines": 549,
+        "sha256": "e38ad8fbd11bf923f6ae84b3b33b57ff11560a512dd3a94c4ab2696a1ad8d762"
+      },
+      {
+        "path": "Tools/TMXY.Animation/src/anim_reader.cpp",
+        "tracked": true,
+        "bytes": 15647,
+        "lines": 346,
+        "sha256": "776efbacb1d9ecfcdba9b54a291d5c4357833b3af58776d2bdc2fb708fd19b31"
+      },
+      {
+        "path": "Tools/TMXY.Animation/src/animation_error.cpp",
+        "tracked": true,
+        "bytes": 2321,
+        "lines": 60,
+        "sha256": "b3fbbb60516d62eaea6170a54698842d29f13d014e5b4a4326ae60b9542b557c"
+      }
+    ],
+    "aggregate_sha256": "432f9ccc516c142bfc051dcd9d0f4a5b47f7318bc49019f9d204bb569343594c",
+    "generator_self_test_assertions": 10,
+    "probe_startup_self_tests": true
+  },
+  "builder": {
+    "image_reference": "tmxy-backend-builder:p0-08",
+    "image_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "network": "none",
+    "read_only_container": true,
+    "cap_drop": "ALL",
+    "no_new_privileges": true,
+    "repository_mount": "read-only",
+    "legacy_client_mount": "read-only"
+  },
+  "authority_boundary": {
+    "machine_can_reproduce": true,
+    "machine_can_classify_errors": true,
+    "machine_can_select_candidate": false,
+    "machine_can_approve_disposition": false,
+    "technical_adapter_must_be_contract_proven": true,
+    "content_change_or_no_ref_requires_owner": true,
+    "owner_records": 0,
+    "approved_fixes": 0,
+    "verified_resolutions": 0
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_confidential_payloads": false,
+    "raw_error_contexts": false,
+    "absolute_offsets": false,
+    "observed_payload_values": false
+  }
+}

@@ -5,6 +5,7 @@ target_sources(
     tmxy_package
     PRIVATE
         src/package_directory_codec.cpp
+        src/package_inventory.cpp
         src/package_normalized_tree.cpp
         src/package_v1.cpp
         src/package_v1_reader.cpp
@@ -24,6 +25,10 @@ tmxy_apply_tool_defaults(tmxy_package)
 add_executable(tmxy_package_tree_export apps/package_tree_export_main.cpp)
 target_link_libraries(tmxy_package_tree_export PRIVATE tmxy::package)
 tmxy_apply_tool_defaults(tmxy_package_tree_export)
+
+add_executable(tmxy_package_inventory apps/package_inventory_main.cpp)
+target_link_libraries(tmxy_package_inventory PRIVATE tmxy::package)
+tmxy_apply_tool_defaults(tmxy_package_inventory)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

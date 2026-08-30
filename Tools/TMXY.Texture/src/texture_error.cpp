@@ -112,4 +112,32 @@ const char* to_string(const AlphaCoverage value) noexcept
     return "unknown";
 }
 
+const char* to_string(const MipCountBasis value) noexcept
+{
+    switch (value)
+    {
+    case MipCountBasis::package_descriptor:
+        return "package_descriptor";
+    case MipCountBasis::payload_complete_chain_contract:
+        return "payload_complete_chain_contract";
+    case MipCountBasis::unknown:
+        return "unknown";
+    }
+    return "unknown";
+}
+
+const char* to_string(const PayloadExtentBasis value) noexcept
+{
+    switch (value)
+    {
+    case PayloadExtentBasis::complete_input_payload:
+        return "complete_input_payload";
+    case PayloadExtentBasis::declared_mip_payload_prefix_contract:
+        return "declared_mip_payload_prefix_contract";
+    case PayloadExtentBasis::unknown:
+        return "unknown";
+    }
+    return "unknown";
+}
+
 } // namespace tmxy::texture

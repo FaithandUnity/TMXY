@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.12",
+  "captured_utc": "2026-08-30T15:39:45.959560Z",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS_DIAGNOSTIC",
+  "task_status": "BLOCKED",
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "measured": {
+    "source_assets_reverified": 1,
+    "package_files_hashed": 2,
+    "candidate_bodies_reverified": 2,
+    "strict_rejected_edges": 2,
+    "material_slot_mismatch_edges": 2,
+    "prefix_pass_edges": 2,
+    "body_variants": 1,
+    "descriptor_semantic_variants": 1,
+    "strict_semantic_variants": 1,
+    "prefix_semantic_variants": 1,
+    "candidate_selections": 0,
+    "automatic_resolutions": 0,
+    "owner_dispositions": 0,
+    "content_dispositions": 0
+  },
+  "report": {
+    "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json",
+    "tracked": true,
+    "bytes": 10528,
+    "lines": 302,
+    "sha256": "ea9b0d47508ddd2f0c15fc788d980eb08fc6c939db320fd4479bdffec6feb482"
+  },
+  "report_markdown": {
+    "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.md",
+    "tracked": true,
+    "bytes": 737,
+    "lines": 9,
+    "sha256": "0ab9e6d9df1a62b461b87c339c4ff9ce041482d4f460a981296c317921da807d"
+  },
+  "outputs": {
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl",
+      "tracked": false,
+      "bytes": 2161,
+      "lines": 1,
+      "sha256": "ca693505b5d5e1ac07dfce2a404fd3bcaa09fea35667b86fa57108fb97383a4f"
+    }
+  },
+  "contracts": {
+    "policy_sha256": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55",
+    "schema_sha256": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a",
+    "detail_schema_sha256": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8"
+  },
+  "implementation": {
+    "files": [
+      {
+        "role": "implementation_01",
+        "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/CMakeLists.txt",
+        "tracked": true,
+        "bytes": 2023,
+        "lines": 44,
+        "sha256": "bd8560036d673d74c69f00af3b9daaa68f84bc4b521ae170fbf101e8d4894605"
+      },
+      {
+        "role": "implementation_02",
+        "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/README.md",
+        "tracked": true,
+        "bytes": 2339,
+        "lines": 41,
+        "sha256": "a86634ea92809708fdcc9e3e1a22238c12f44d9a1925eab1593bf909c04c2b0c"
+      },
+      {
+        "role": "implementation_03",
+        "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/New-G2StaticMeshPayloadSectionPrefix.ps1",
+        "tracked": true,
+        "bytes": 14397,
+        "lines": 301,
+        "sha256": "a705ce7cb92ed65c3d37653d4715294b5461c84aeb415b747cfbe4bba0735901"
+      },
+      {
+        "role": "implementation_04",
+        "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/g2_static_mesh_payload_section_prefix.py",
+        "tracked": true,
+        "bytes": 22120,
+        "lines": 391,
+        "sha256": "33ec9e36fa74975f7c22d4d00d54b13f11baac8fa89233069b948721cfc16eb1"
+      },
+      {
+        "role": "implementation_05",
+        "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/static_mesh_prefix_common.py",
+        "tracked": true,
+        "bytes": 16661,
+        "lines": 314,
+        "sha256": "9578ca8c3d95cd985ae04c47c626724659701eedd40fd6b35055bf34bac07e45"
+      },
+      {
+        "role": "implementation_06",
+        "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/apps/prefix_probe_main.cpp",
+        "tracked": true,
+        "bytes": 9826,
+        "lines": 229,
+        "sha256": "a9b0a9f7262159b302d15363ff9fc75187756e2ed7e9a802f30c3538e00ad1f8"
+      },
+      {
+        "role": "implementation_07",
+        "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-policy-v1.json",
+        "tracked": true,
+        "bytes": 3660,
+        "lines": 91,
+        "sha256": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55"
+      },
+      {
+        "role": "implementation_08",
+        "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-v1.schema.json",
+        "tracked": true,
+        "bytes": 12152,
+        "lines": 276,
+        "sha256": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a"
+      },
+      {
+        "role": "implementation_09",
+        "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-detail-v1.schema.json",
+        "tracked": true,
+        "bytes": 2703,
+        "lines": 61,
+        "sha256": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8"
+      },
+      {
+        "role": "implementation_10",
+        "path": "Docs/Formats/G2-STATIC-MESH-PAYLOAD-SECTION-PREFIX.md",
+        "tracked": true,
+        "bytes": 2810,
+        "lines": 53,
+        "sha256": "9b6c38958b2abfa1ad47a3d153d452cd30728058f60b11f40494603d91c5ff38"
+      },
+      {
+        "role": "implementation_11",
+        "path": "Tests/Contract/Test-G2StaticMeshPayloadSectionPrefix.ps1",
+        "tracked": true,
+        "bytes": 25022,
+        "lines": 432,
+        "sha256": "e7238f48a76f2ee61dcedf16b75af4ca43ff3179fd65758608b8631227b069e2"
+      },
+      {
+        "role": "implementation_12",
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/probe_support.cpp",
+        "tracked": true,
+        "bytes": 13054,
+        "lines": 350,
+        "sha256": "4aa50309300054fa696205c33db7b3b0b1e8eba9c1064b6e10f492d44c621987"
+      },
+      {
+        "role": "implementation_13",
+        "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/apps/probe_support.hpp",
+        "tracked": true,
+        "bytes": 2447,
+        "lines": 84,
+        "sha256": "4de6150e3f21b841e7f16f966e1ecd5ea63f9676d24c357fc616bbf0743fa209"
+      },
+      {
+        "role": "implementation_14",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/semantic_hash.cpp",
+        "tracked": true,
+        "bytes": 2263,
+        "lines": 73,
+        "sha256": "39b507e7d63b026d7b0eb9b0c378300e81c582c1cfa766a5123d8347577e2b72"
+      },
+      {
+        "role": "implementation_15",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/semantic_hash.hpp",
+        "tracked": true,
+        "bytes": 509,
+        "lines": 14,
+        "sha256": "7e041b7cb0ffb17fb681190785f77219df4b42f9d7e32d975c0943f984f7f028"
+      },
+      {
+        "role": "implementation_16",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.cpp",
+        "tracked": true,
+        "bytes": 11058,
+        "lines": 326,
+        "sha256": "ac174bbfa8a836610cfd70879a9040ed09caaddfbd0a94f8c19c4d036699e2d4"
+      },
+      {
+        "role": "implementation_17",
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/sha256.hpp",
+        "tracked": true,
+        "bytes": 661,
+        "lines": 22,
+        "sha256": "d3a16c780b56a684648c6017538e33f35376c85dd41ba985c97a7b377c95cc98"
+      },
+      {
+        "role": "implementation_18",
+        "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp",
+        "tracked": true,
+        "bytes": 28867,
+        "lines": 639,
+        "sha256": "e995eef8e5b2e8cda504e2e5ee50a5d149965e94d400f1d857da46ee962dafe7"
+      },
+      {
+        "role": "implementation_19",
+        "path": "Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.hpp",
+        "tracked": true,
+        "bytes": 1248,
+        "lines": 42,
+        "sha256": "17b25df32d5934783db11d30409360556dd98947d1b8655cea29d9c9a5f09918"
+      }
+    ],
+    "aggregate_sha256": "ae28108e336b4f3588a6445428e3b1db61ea74d9565bb86b9ffb761652e83f9d",
+    "generator_self_test_assertions": 20,
+    "probe_startup_self_tests": true
+  },
+  "builder": {
+    "image_reference": "tmxy-backend-builder:p0-08",
+    "image_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "network": "none",
+    "read_only_container": true,
+    "cap_drop": "ALL",
+    "no_new_privileges": true,
+    "repository_mount": "read-only",
+    "legacy_asset_mount": "read-only",
+    "legacy_source_mounts": "read-only-files"
+  },
+  "proof_classification": {
+    "source_basis": "SOURCE_DERIVED",
+    "legacy_binary_executed": false,
+    "runtime_parity_proven": false
+  },
+  "authority_boundary": {
+    "a4_is_authoritative": true,
+    "authority_state_changed": false,
+    "adapter_applied": false,
+    "recovery_applied": false,
+    "machine_can_select_candidate": false,
+    "machine_can_approve_disposition": false,
+    "repair_or_write": false,
+    "delete_or_no_ref": false,
+    "owner_approvals": 0,
+    "verified_resolutions": 0
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "legacy_source_roles_and_hashes_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_confidential_payloads": false
+  }
+}

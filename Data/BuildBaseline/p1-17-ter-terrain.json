@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-26T22:22:37.1108625+00:00",
+  "captured_utc": "2026-08-30T18:04:13.2614505+00:00",
   "result": "PASS",
   "task": "P1-17",
   "completion_criteria_satisfied": true,
   "source_file_count": 11,
-  "source_sha256": "88c396a8b694cbfe118778375efea7191e8f663537d3d9f3aecfe462b8be5a66",
+  "source_sha256": "2b291269a9eba45c1b5b6e3bbc734661009d5a8583f9ebc24040c49700da0d07",
   "contract": {
     "vertex": "height f32 + normal xyz f32 + color rgba f32 + four layer-alpha u8",
     "grid": "row-major square grid; installed files are 64x64 vertices and 63x63 cells",
@@ -135,8 +135,8 @@
   ],
   "builder": {
     "reference": "tmxy-backend-builder:p0-08",
-    "expected_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
-    "actual_id": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "user": "tmxy"
   },
   "isolation": {
@@ -160,6 +160,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 45,
-    "output_sha256": "b68798debfc6a69de6ec109ffd2237b6cd3aee02d12596fbb7911a2e797426f3"
+    "output_sha256": "b46b4394c8349588066ca8a6dfd179fd5af4ab43f44a5c9c69a274754f71ce11"
   }
 }

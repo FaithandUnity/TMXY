@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-20B",
+  "gate_criterion": "G2-07",
+  "source_build": "qy-3.0.0.413",
+  "required_inputs": [
+    { "task_id": "P2-09", "path": "Data/Inventory/p2-09-legacy-current-diff.json" },
+    { "task_id": "P2-10", "path": "Data/Inventory/p2-10-canonical-id-map.json" },
+    { "task_id": "P2-11", "path": "Data/Inventory/p2-11-id-limit-audit.json" },
+    { "task_id": "P2-17", "path": "Data/Inventory/p2-17-protocol-codegen.json" },
+    { "task_id": "P2-18", "path": "Data/Inventory/p2-18-content-health.json" }
+  ],
+  "g2_policy": "Contracts/data-schema/g2-review-policy-v1.json",
+  "auxiliary_inputs": {
+    "core_registry": "Data/Schemas/core-table-registry-v1.json",
+    "table_diff_report": "Data/Exports/P2-09/p2-09-legacy-current-diff.jsonl",
+    "id_limit_report": "Data/Exports/P2-11/p2-11-id-limit-audit.jsonl",
+    "legacy_snapshot_role": "read-only header and reference-membership verification only"
+  },
+  "expected_units": {
+    "schema_table": 52,
+    "schema_reference": 12,
+    "canonical_id_domain": 12,
+    "id_component": 16,
+    "fixed_limit_signal": 1267,
+    "total": 1359
+  },
+  "decision_policy": {
+    "machine_suggestion_counts_as_decision": false,
+    "pending_decision_has_no_chosen_action": true,
+    "pending_decision_has_no_approval": true,
+    "every_subject_has_exactly_one_active_decision": true,
+    "batch_decision_requires_exact_membership_sha256": true,
+    "rejected_candidate_requires_an_approved_replacement": true,
+    "self_asserted_approver_text_is_not_authority": true,
+    "external_approval_must_bind_the_decision_digest": true,
+    "any_pending_or_untrusted_decision_blocks_g2_07": true
+  },
+  "hard_invariants": {
+    "numeric_identity_narrowing": "forbidden",
+    "string_identity_implicit_numeric_conversion": "forbidden",
+    "observed_mode_as_authoritative_default": "forbidden",
+    "tombstone_reuse_without_explicit_approved_decision": "forbidden",
+    "automatic_renumbering_without_explicit_approved_remap": "forbidden",
+    "legacy_fixed_limit_copy_without_classification_and_rationale": "forbidden"
+  },
+  "approval_roles": {
+    "schema_table": ["data-owner"],
+    "schema_reference": ["data-owner"],
+    "canonical_id_domain": ["data-owner", "project-owner"],
+    "id_component": ["data-owner", "project-owner"],
+    "fixed_limit_signal": ["project-owner"]
+  },
+  "output_policy": {
+    "public_registry_contains_table_or_field_names": false,
+    "public_registry_contains_legacy_source_paths": false,
+    "public_registry_contains_primary_keys": false,
+    "public_registry_contains_observed_extrema": false,
+    "public_registry_contains_raw_rows": false,
+    "public_registry_contains_legacy_source_lines": false,
+    "public_registry_contains_matched_literal_values": false
+  }
+}

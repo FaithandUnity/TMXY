@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T14:07:34.8373980+00:00",
+  "result": "PASS_DIAGNOSTIC",
+  "completion_criteria_satisfied": false,
+  "release_authority": false,
+  "source_mutation_performed": false,
+  "lock_update_performed": false,
+  "candidate": {
+    "local_reference": "tmxy-postgres:18.6-gosu-go1.26.7",
+    "image_id": "sha256:cf86acb2941d1703c8b21cc51722d200b7d6b0cf01398a45b01d58f649f5ae5b",
+    "platform": "linux/amd64",
+    "base_image_id": "sha256:d3e1620b530c944afa6e887d22eb899824da68e19c52024bf98f5220c88a65b2",
+    "postgres_version": "postgres (PostgreSQL) 18.6",
+    "gosu_version": "1.19 (go1.26.7 on linux/amd64; gc)",
+    "gosu_sha256": "dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb",
+    "postgres_uid": "70",
+    "openssl_packages": [
+      "libcrypto3-3.5.8-r0 x86_64 {openssl} (Apache-2.0) [installed]",
+      "libssl3-3.5.8-r0 x86_64 {openssl} (Apache-2.0) [installed]"
+    ],
+    "registry_published": false,
+    "signed_provenance_attached": false,
+    "oci_attestation_attached": false
+  },
+  "reproducibility": {
+    "comparison_images": [
+      "tmxy-postgres:18.6-gosu-go1.26.7-repro-a3",
+      "tmxy-postgres:18.6-gosu-go1.26.7-repro-b3"
+    ],
+    "comparison_gosu_sha256": [
+      "dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb",
+      "dac0a884d5b1423d76bcf2267725047b045f49165291e3808b0052fde9010aeb"
+    ],
+    "binary_reproducible": true,
+    "oci_manifest_reproducible": false,
+    "note": "Independent no-cache builds reproduced the exact gosu bytes. BuildKit layer metadata produced different OCI manifest IDs, so manifest reproducibility is not claimed."
+  },
+  "vulnerability": {
+    "scanner": "trivy",
+    "scanner_version": "0.74.0",
+    "database_updated_utc": "2026-08-27T16:56:16.5045331+00:00",
+    "database_downloaded_utc": "2026-08-27T21:10:03.7230979+00:00",
+    "previous_high_or_critical": 22,
+    "direct_image": {
+      "total": 1,
+      "critical": 0,
+      "high": 0,
+      "high_or_critical": 0
+    },
+    "final_filesystem_sbom": {
+      "total": 1,
+      "critical": 0,
+      "high": 0,
+      "high_or_critical": 0
+    },
+    "govulncheck_result_count": 0
+  },
+  "sbom": {
+    "format": "CycloneDX",
+    "spec_version": "1.7",
+    "component_count": 59,
+    "stdlib_versions": [
+      "v1.26.7"
+    ],
+    "image_id_bound": true
+  },
+  "migration": {
+    "result": "PASS",
+    "runtime_contract": "foundation:1"
+  },
+  "decision": {
+    "status": "QUALIFIED_LOCAL_CANDIDATE_REQUIRES_REGISTRY_AUTHORITY",
+    "next_step": "Publish this exact OCI manifest with an authorized packages:write credential, rerun hosted scans, and attach signed provenance before changing the lock."
+  },
+  "bindings": {
+    "dockerfile": "Deploy/postgres/Dockerfile",
+    "dockerfile_sha256": "ca81ab27df00fce41dbb399e8c81826c7fad3d90838dbd3e09fcca842fdb65fd",
+    "toolchain_lock_sha256": "ce98f28ae229234443039ca9b0881d2e7a9316aea2c2e04b3deb8b691d85a37b",
+    "vulnerability_disposition_sha256": "f53f267aa2f12a3634ccd8e569a2db36ab01bf8770bfee51b73b8e797ea0d83e",
+    "sbom_sha256": "c2a9abab01d3c6e51009deec8bf93ed514e6aa276a70ac08cbe74cc87fb40ddb",
+    "direct_image_scan_sha256": "7a3d017cf84719e627d28c5964aa116b7c2340fe46133ab6854ae3f62c8a6bef",
+    "sbom_scan_sha256": "296d8f87a2cfd955adfac9686599c2475ef32a23f1f3a06081e5fafbd2ab3bfb",
+    "vulnerability_database_identity_sha256": "2e2390344974c2e476a4fa5290b014f7215a16d98d1d1ee6cf2a30a7c9ef6e80",
+    "govulncheck_sarif_sha256": "bb61311b771db9dd51925d903012f51f0254edea94f29efd5d31503875686eb1",
+    "migration_sha256": "482ba09c574b79add45af4b213073ab58801ccbfb98a60398140d7c1b1eaec35"
+  },
+  "failure_count": 0,
+  "failures": []
+}

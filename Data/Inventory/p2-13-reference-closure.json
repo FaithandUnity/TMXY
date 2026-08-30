@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-29T18:14:42.2878764+00:00",
+  "task_id": "P2-13",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "package_graph_sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57",
+    "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+    "asset_catalog_sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+    "copy_policy": "reference_only"
+  },
+  "graph": {
+    "path": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
+    "tracked": false,
+    "lines": 683355,
+    "bytes": 205392166,
+    "sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+    "records": {
+      "asset_node": 40090,
+      "package_asset_edge": 61511,
+      "package_edge": 147349,
+      "package_node": 121715,
+      "root": 24465,
+      "table_domain_edge": 23227,
+      "table_domain_node": 9278,
+      "table_fk_edge": 54561,
+      "table_node": 87044,
+      "table_package_edge": 113484,
+      "table_scoped_edge": 631
+    }
+  },
+  "roots": {
+    "character": 1096,
+    "scene": 142,
+    "skill": 23227
+  },
+  "table_closure": {
+    "canonical_rows": 87044,
+    "domain_nodes": 9278,
+    "foreign_keys": {
+      "canonical_edges": 54561,
+      "dangling": 0,
+      "physical_active_references": 55361,
+      "physical_inactive_references": 129154,
+      "rules": 14
+    },
+    "normalized_hashes_verified": 12,
+    "object_references": {
+      "by_rule": {
+        "item_effect_geometry": {
+          "unresolved": 5
+        },
+        "item_geometry": {
+          "unique": 2057,
+          "unresolved": 7
+        },
+        "item_icon": {
+          "unique": 28985,
+          "unresolved": 92
+        },
+        "item_shop_icon": {
+          "ambiguous": 6344,
+          "unique": 1316,
+          "unresolved": 235
+        },
+        "skill_action_effect": {
+          "ambiguous": 379,
+          "unique": 4993,
+          "unresolved": 72
+        },
+        "skill_explosion_effect": {
+          "ambiguous": 89,
+          "unique": 2945,
+          "unresolved": 86
+        },
+        "skill_go_action": {
+          "ambiguous": 33,
+          "unique": 14721,
+          "unresolved": 248
+        },
+        "skill_icon": {
+          "unique": 17639,
+          "unresolved": 4151
+        },
+        "skill_prepare_action": {
+          "unique": 13117
+        },
+        "skill_projectile_effect": {
+          "ambiguous": 76,
+          "unique": 1136,
+          "unresolved": 10
+        },
+        "skill_start_action": {
+          "unique": 39
+        },
+        "state_effect_0": {
+          "ambiguous": 21,
+          "unique": 5289,
+          "unresolved": 145
+        },
+        "state_effect_1": {
+          "ambiguous": 3,
+          "unique": 563
+        },
+        "state_icon": {
+          "unique": 8578,
+          "unresolved": 94
+        },
+        "unit_class_icon": {
+          "unresolved": 16
+        }
+      },
+      "canonical_edges": 113484,
+      "physical_nonempty_references": 113484,
+      "resolution": {
+        "ambiguous": 6945,
+        "unique": 101378,
+        "unresolved": 5161
+      },
+      "rules": 16,
+      "runtime_assert_missing_values": 29,
+      "runtime_assert_rows": 5993,
+      "runtime_assert_unresolved_values": 0,
+      "scoped_edges": 631,
+      "scoped_rules": 3,
+      "wrong_class_candidate_values": 9
+    },
+    "physical_rows": 87844,
+    "table_count": 12
+  },
+  "package_closure": {
+    "edges": 147349,
+    "nodes": 121715,
+    "recorded_resolution_mismatches": 0,
+    "resolution": {
+      "ambiguous": 21146,
+      "scoped-terminal": 30245,
+      "unique": 94882,
+      "unresolved": 1076
+    }
+  },
+  "asset_closure": {
+    "catalog_candidate_mismatches": 0,
+    "families": {
+      "anim": {
+        "files": 1069,
+        "linked_ambiguous": 108,
+        "linked_unique": 936,
+        "structure_pass": 1039,
+        "structure_unresolved": 30,
+        "unlinked": 25
+      },
+      "mp3": {
+        "files": 64,
+        "structure_pass": 64,
+        "unlinked": 64
+      },
+      "qtx": {
+        "files": 24798,
+        "linked_ambiguous": 3914,
+        "linked_unique": 20212,
+        "structure_pass": 24042,
+        "structure_unresolved": 756,
+        "unlinked": 672
+      },
+      "skem": {
+        "files": 1068,
+        "linked_ambiguous": 108,
+        "linked_unique": 935,
+        "structure_fail": 2,
+        "structure_pass": 1066,
+        "unlinked": 25
+      },
+      "sm": {
+        "files": 2924,
+        "linked_ambiguous": 515,
+        "linked_unique": 2286,
+        "structure_fail": 12,
+        "structure_pass": 2912,
+        "unlinked": 123
+      },
+      "ter": {
+        "files": 8876,
+        "linked_ambiguous": 8744,
+        "structure_pass": 8876,
+        "unlinked": 132
+      },
+      "wav": {
+        "files": 450,
+        "linked_unique": 419,
+        "structure_pass": 450,
+        "unlinked": 31
+      },
+      "zif": {
+        "files": 841,
+        "structure_pass": 841,
+        "unlinked": 841
+      }
+    },
+    "files": 40090,
+    "link_edges": 61511
+  },
+  "health": {
+    "core_dangling_references": 0,
+    "nullable_object_unresolved": 5161,
+    "nullable_object_ambiguous": 6945,
+    "legacy_runtime_assert_rows": 5993,
+    "legacy_runtime_assert_missing_values": 29,
+    "legacy_runtime_assert_unresolved_values": 0,
+    "package_unresolved_edges": 1076,
+    "package_ambiguous_edges": 21146,
+    "heuristic_target_selections": 0
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/reference-closure-policy-v1.json",
+    "policy_sha256": "6442a52fb357a94b3a71b0769353839795f392aad85bb9e0567f0d35ccde70c1",
+    "schema": "Contracts/data-schema/reference-closure-v1.schema.json",
+    "schema_sha256": "082592a2abaa7d50ab4c91c5687830ca4c7db9ca10c599ffc0ad90c0aefc368b",
+    "core_dangling_definition": "declared authoritative P2-07 foreign-key rows only"
+  },
+  "implementation": {
+    "source_files": 4,
+    "source_sha256": "9712bb1a0074170ba5d38cfbeb6f64beadd269291f9537bff9bc072af966d372",
+    "self_test_assertions": 9,
+    "legacy_consumer_evidence_sha256": {
+      "ClientCode/Base/Src/QDataTable.cpp": "3df15f58bf45de80aa7a8040a1f522f135e7b09487990b40b04805c78937b869",
+      "ClientCode/Game/Src/QCLItem.cpp": "22aa6cc65f60d00a4a7c7f2e24d1f78a8f45a09427199e2687e39c81e0acfb78",
+      "ClientCode/Game/Src/QCLSkill.cpp": "7d39e43751feb4acd9e13b920c8ab85933a9e3cb84251654e2bf772247bd991f",
+      "ClientCode/Game/Src/QCLState.cpp": "55950ee2e866c6447f0e91593791ed5557951cd4b382b8b73f84f5d8cef54dc6",
+      "ClientCode/Game/Src/QNetUnit.cpp": "a1daffbccaf591994833fe0e32a5bd07110ff90bb0f7caabf08e5a5335a8530a",
+      "ClientCode/Game/Src/QUnit.cpp": "2050e3c8abc93852d72598bc0d322f3b2d51b44bbdf730dac2108d37148d97cd"
+    },
+    "package_name_lookup": "ascii-case-insensitive-hash"
+  },
+  "disclosure": {
+    "raw_table_values_emitted": false,
+    "raw_primary_keys_emitted": false,
+    "raw_package_object_names_emitted": false,
+    "asset_paths_only_in_ignored_graph": true,
+    "graph_committed_to_git": false,
+    "payload_bytes_copied": false
+  },
+  "reproduction": {
+    "generator": "Tools/TMXY.ReferenceClosure/New-ReferenceClosure.ps1",
+    "query": "Tools/TMXY.ReferenceClosure/Find-ReferenceClosure.ps1",
+    "check_mode": "-Check",
+    "source_mount": "read-only",
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-14",
+      "P2-15",
+      "P2-16",
+      "P2-18"
+    ],
+    "detail": "Use explicit linked, ambiguous, unresolved, and unlinked sets; do not delete assets during P2-14."
+  }
+}

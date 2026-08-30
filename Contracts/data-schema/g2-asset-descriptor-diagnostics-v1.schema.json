@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-asset-descriptor-diagnostics-v1.schema.json",
+  "title": "P2-20A.4 full-semantic descriptor diagnostic report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "source_build", "task_id",
+    "criterion_id", "result", "review_execution_result", "task_status",
+    "completion_criteria_satisfied", "diagnostic_scope_complete", "g2_06_satisfied",
+    "p3_authorized", "input_bindings", "scope", "measured", "completion",
+    "detail_export", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.4"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "source_build": {"const": "qy-3.0.0.413"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "input_bindings": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {"$ref": "#/$defs/fileBinding"}
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selection", "targets", "candidate_edges", "candidate_identity_exact",
+        "production_binder_used", "eligible_recovery_attempts",
+        "first_candidate_selection_used"],
+      "properties": {
+        "selection": {"type": "string", "minLength": 1},
+        "targets": {"const": 3651},
+        "candidate_edges": {"const": 12764},
+        "candidate_identity_exact": {"const": true},
+        "production_binder_used": {"const": true},
+        "eligible_recovery_attempts": {"const": 21},
+        "first_candidate_selection_used": {"const": false}
+      }
+    },
+    "measured": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["descriptor_parsed_candidates", "descriptor_rejected_candidates",
+        "binding_pass_candidates", "binding_rejected_candidates",
+        "effective_binding_pass_candidates", "effective_binding_rejected_candidates",
+        "recovery_applied_candidates", "strict_resolved_targets",
+        "strict_ambiguous_targets", "strict_unresolved_targets", "strict_resolved_edges",
+        "strict_ambiguous_edges", "strict_unresolved_edges", "resolved_targets",
+        "ambiguous_targets", "unresolved_targets", "by_resolution_basis_targets",
+        "by_resolution_basis_edges", "by_prior_resolution_basis", "by_family",
+        "reconciled_full_workset"],
+      "properties": {
+        "descriptor_parsed_candidates": {"const": 12764},
+        "descriptor_rejected_candidates": {"const": 0},
+        "binding_pass_candidates": {"const": 12561},
+        "binding_rejected_candidates": {"const": 203},
+        "effective_binding_pass_candidates": {"const": 12576},
+        "effective_binding_rejected_candidates": {"const": 188},
+        "recovery_applied_candidates": {"const": 15},
+        "strict_resolved_targets": {"const": 3443},
+        "strict_ambiguous_targets": {"const": 189},
+        "strict_unresolved_targets": {"const": 19},
+        "strict_resolved_edges": {"const": 12194},
+        "strict_ambiguous_edges": {"const": 546},
+        "strict_unresolved_edges": {"const": 24},
+        "resolved_targets": {"const": 3456},
+        "ambiguous_targets": {"const": 189},
+        "unresolved_targets": {"const": 6},
+        "by_resolution_basis_targets": {"$ref": "#/$defs/countMap"},
+        "by_resolution_basis_edges": {"$ref": "#/$defs/countMap"},
+        "by_prior_resolution_basis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["DESCRIPTOR_VALIDATION_FAILED", "DIVERGENT_DESCRIPTOR_SET",
+            "EQUIVALENT_VALID_DESCRIPTOR_SET", "UNIQUE_VALID_DESCRIPTOR"],
+          "properties": {
+            "DESCRIPTOR_VALIDATION_FAILED": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["candidate_edges", "resolved", "targets", "unresolved"],
+              "properties": {
+                "candidate_edges": {"const": 24},
+                "resolved": {"const": 13},
+                "targets": {"const": 19},
+                "unresolved": {"const": 6}
+              }
+            },
+            "DIVERGENT_DESCRIPTOR_SET": {"$ref": "#/$defs/countMap"},
+            "EQUIVALENT_VALID_DESCRIPTOR_SET": {"$ref": "#/$defs/countMap"},
+            "UNIQUE_VALID_DESCRIPTOR": {"$ref": "#/$defs/countMap"}
+          }
+        },
+        "by_family": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["anim", "qtx", "skem", "sm"],
+          "properties": {
+            "anim": {"$ref": "#/$defs/countMap"},
+            "qtx": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["ambiguous", "candidate_edges", "resolved", "targets", "unresolved"],
+              "properties": {
+                "ambiguous": {"const": 171},
+                "candidate_edges": {"const": 11051},
+                "resolved": {"const": 2149},
+                "targets": {"const": 2324},
+                "unresolved": {"const": 4}
+              }
+            },
+            "skem": {"$ref": "#/$defs/countMap"},
+            "sm": {"$ref": "#/$defs/countMap"}
+          }
+        },
+        "reconciled_full_workset": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["targets", "candidate_edges", "resolved_targets", "ambiguous_targets",
+            "unresolved_targets", "unknown_targets", "resolved_edges", "ambiguous_edges",
+            "unresolved_edges", "unknown_edges"],
+          "properties": {
+            "targets": {"const": 21494},
+            "candidate_edges": {"const": 39351},
+            "resolved_targets": {"const": 21299},
+            "ambiguous_targets": {"const": 189},
+            "unresolved_targets": {"const": 6},
+            "unknown_targets": {"const": 0},
+            "resolved_edges": {"const": 38796},
+            "ambiguous_edges": {"const": 546},
+            "unresolved_edges": {"const": 9},
+            "unknown_edges": {"const": 0}
+          }
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_ambiguous_targets", "required_unresolved_targets",
+        "observed_ambiguous_targets", "observed_unresolved_targets", "satisfied",
+        "g2_remains_blocked_by_other_open_criteria"],
+      "properties": {
+        "required_ambiguous_targets": {"const": 0},
+        "required_unresolved_targets": {"const": 0},
+        "observed_ambiguous_targets": {"const": 189},
+        "observed_unresolved_targets": {"const": 6},
+        "satisfied": {"const": false},
+        "g2_remains_blocked_by_other_open_criteria": {"const": true}
+      }
+    },
+    "detail_export": {"$ref": "#/$defs/fileBinding"},
+    "disclosure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anonymous_identities_only", "private_source_paths", "exact_primary_keys",
+        "raw_table_rows", "decoded_confidential_payloads", "legacy_source_lines"],
+      "properties": {
+        "anonymous_identities_only": {"const": true},
+        "private_source_paths": {"const": false},
+        "exact_primary_keys": {"const": false},
+        "raw_table_rows": {"const": false},
+        "decoded_confidential_payloads": {"const": false},
+        "legacy_source_lines": {"const": false}
+      }
+    }
+  },
+  "$defs": {
+    "fileBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "tracked": {"type": "boolean"},
+        "bytes": {"type": "integer", "minimum": 0},
+        "lines": {"type": "integer", "minimum": 0},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "countMap": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    }
+  }
+}

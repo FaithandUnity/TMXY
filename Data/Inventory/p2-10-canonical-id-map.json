@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T12:00:24.3880561+00:00",
+  "task_id": "P2-10",
+  "result": "PASS",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "legacy_snapshot": "legacy-devdoc-decrypted-csv-20120318",
+    "legacy_build": "unknown-not-inferred",
+    "legacy_manifest_sha256": "64b408c5fa1b55992faf3b85f8fadea18786e8756ff5639800d3a436a817a935",
+    "current_build": "qy-3.0.0.413",
+    "current_manifest_sha256": "6ea5cfa2dfd9104c28bb7289cc84b42791c2e3afd0ba480767f38aca85d5337d",
+    "p2_09_evidence_sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+    "p2_09_report_sha256": "c6fb188d97db18e1dd87201871a36bad77229f5f53e24d2650871a032bcf2667",
+    "p2_07_evidence_sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+    "core_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+    "copy_policy": "reference_only"
+  },
+  "report": {
+    "path": "Data/Exports/P2-10/p2-10-canonical-id-map.jsonl",
+    "tracked": false,
+    "lines": 87328,
+    "bytes": 26610829,
+    "sha256": "af21fefcfdc4e6819236d53d84d7de2af59fb4b00882093598c4f51667e5d2af"
+  },
+  "summary": {
+    "active_ids": 87044,
+    "automatic_renumberings": 0,
+    "collapsed_duplicate_groups": 700,
+    "collapsed_duplicate_occurrences": 800,
+    "comparable_legacy_domains": 10,
+    "conflicts": 0,
+    "current_only_ids": 60076,
+    "current_physical_rows": 87844,
+    "current_unique_ids": 87044,
+    "domain_count": 12,
+    "explicit_remaps": 0,
+    "legacy_preserved_ids": 27252,
+    "legacy_type_exception_components": 6,
+    "legacy_unique_ids": 27252,
+    "mapping_records": 87328,
+    "shared_ids": 26968,
+    "tombstones": 284,
+    "unresolved_conflicts": 0
+  },
+  "domains": [
+    {
+      "actions": {
+        "adopt_current": 1638,
+        "preserve_legacy_tombstone": 1,
+        "preserve_shared": 2401
+      },
+      "active": 4039,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 4039,
+      "current_unique_ids": 4039,
+      "domain": "CLSVShare/formula_table",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 1,
+      "legacy_unique_ids": 2402,
+      "mappings": 4040,
+      "shared_ids": 2401,
+      "tombstones": 1
+    },
+    {
+      "actions": {
+        "adopt_current": 16575,
+        "preserve_legacy_tombstone": 238,
+        "preserve_shared": 12648
+      },
+      "active": 29223,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 29223,
+      "current_unique_ids": 29223,
+      "domain": "CLSVShare/item_table",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 12886,
+      "mappings": 29461,
+      "shared_ids": 12648,
+      "tombstones": 238
+    },
+    {
+      "actions": {
+        "preserve_legacy_tombstone": 21,
+        "preserve_shared": 100
+      },
+      "active": 100,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 100,
+      "current_unique_ids": 100,
+      "domain": "CLSVShare/LevelInfo",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 1,
+      "legacy_unique_ids": 121,
+      "mappings": 121,
+      "shared_ids": 100,
+      "tombstones": 21
+    },
+    {
+      "actions": {
+        "adopt_current": 15200
+      },
+      "active": 15200,
+      "collapsed_duplicate_groups": 700,
+      "collapsed_duplicate_occurrences": 800,
+      "conflicts": 0,
+      "current_physical_rows": 16000,
+      "current_unique_ids": 15200,
+      "domain": "CLSVShare/Profession_lvl",
+      "key_arity": 2,
+      "key_column_ids": [
+        "c0001",
+        "c0002"
+      ],
+      "key_types": [
+        "int64",
+        "int64"
+      ],
+      "legacy_snapshot_present": false,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 0,
+      "mappings": 15200,
+      "shared_ids": 0,
+      "tombstones": 0
+    },
+    {
+      "actions": {
+        "adopt_current": 16051,
+        "preserve_legacy_tombstone": 11,
+        "preserve_shared": 7176
+      },
+      "active": 23227,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 23227,
+      "current_unique_ids": 23227,
+      "domain": "CLSVShare/skill_table",
+      "key_arity": 2,
+      "key_column_ids": [
+        "c0001",
+        "c0004"
+      ],
+      "key_types": [
+        "int64",
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 7187,
+      "mappings": 23238,
+      "shared_ids": 7176,
+      "tombstones": 11
+    },
+    {
+      "actions": {
+        "adopt_current": 4424,
+        "preserve_shared": 4260
+      },
+      "active": 8684,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 8684,
+      "current_unique_ids": 8684,
+      "domain": "CLSVShare/states",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 4260,
+      "mappings": 8684,
+      "shared_ids": 4260,
+      "tombstones": 0
+    },
+    {
+      "actions": {
+        "adopt_current": 155,
+        "preserve_legacy_tombstone": 1,
+        "preserve_shared": 57
+      },
+      "active": 212,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 212,
+      "current_unique_ids": 212,
+      "domain": "CLSVShare/Suit_table",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 1,
+      "legacy_unique_ids": 58,
+      "mappings": 213,
+      "shared_ids": 57,
+      "tombstones": 1
+    },
+    {
+      "actions": {
+        "adopt_current": 46,
+        "preserve_legacy_tombstone": 1,
+        "preserve_shared": 77
+      },
+      "active": 123,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 123,
+      "current_unique_ids": 123,
+      "domain": "CLSVShare/Transpoints",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 1,
+      "legacy_unique_ids": 78,
+      "mappings": 124,
+      "shared_ids": 77,
+      "tombstones": 1
+    },
+    {
+      "actions": {
+        "preserve_legacy_tombstone": 1,
+        "preserve_shared": 16
+      },
+      "active": 16,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 16,
+      "current_unique_ids": 16,
+      "domain": "CLSVShare/unit_cls",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "string"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 17,
+      "mappings": 17,
+      "shared_ids": 16,
+      "tombstones": 1
+    },
+    {
+      "actions": {
+        "adopt_current": 44,
+        "preserve_legacy_tombstone": 9,
+        "preserve_shared": 117
+      },
+      "active": 161,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 161,
+      "current_unique_ids": 161,
+      "domain": "CLSVShare/unit_prop",
+      "key_arity": 2,
+      "key_column_ids": [
+        "c0001",
+        "c0004"
+      ],
+      "key_types": [
+        "string",
+        "string"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 126,
+      "mappings": 170,
+      "shared_ids": 117,
+      "tombstones": 9
+    },
+    {
+      "actions": {
+        "preserve_legacy_tombstone": 1,
+        "preserve_shared": 116
+      },
+      "active": 116,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 116,
+      "current_unique_ids": 116,
+      "domain": "CLSVShare/waypoint",
+      "key_arity": 2,
+      "key_column_ids": [
+        "c0001",
+        "c0002"
+      ],
+      "key_types": [
+        "int64",
+        "int64"
+      ],
+      "legacy_snapshot_present": true,
+      "legacy_type_exception_components": 2,
+      "legacy_unique_ids": 117,
+      "mappings": 117,
+      "shared_ids": 116,
+      "tombstones": 1
+    },
+    {
+      "actions": {
+        "adopt_current": 5943
+      },
+      "active": 5943,
+      "collapsed_duplicate_groups": 0,
+      "collapsed_duplicate_occurrences": 0,
+      "conflicts": 0,
+      "current_physical_rows": 5943,
+      "current_unique_ids": 5943,
+      "domain": "Table/quest_table",
+      "key_arity": 1,
+      "key_column_ids": [
+        "c0001"
+      ],
+      "key_types": [
+        "int64"
+      ],
+      "legacy_snapshot_present": false,
+      "legacy_type_exception_components": 0,
+      "legacy_unique_ids": 0,
+      "mappings": 5943,
+      "shared_ids": 0,
+      "tombstones": 0
+    }
+  ],
+  "contracts": {
+    "policy": "Contracts/data-schema/canonical-id-policy-v1.json",
+    "policy_sha256": "323b2788dc2666580ee2676057d6f00d51b3c7fcc088a0651250204ecd5a7341",
+    "schema": "Contracts/data-schema/canonical-id-map-v1.schema.json",
+    "schema_sha256": "f0c797b4537536f62192242b30cda52befa2f261eec00b445005b62e6e03f050"
+  },
+  "implementation": {
+    "source_files": 3,
+    "source_sha256": "58335cac03726a61a78a7a8dc8330a0468594bf608b1c7473af733dda5a43d4d",
+    "self_test_assertions": 8,
+    "generator": "Tools/TMXY.CanonicalId/New-CanonicalIdMap.ps1",
+    "query": "Tools/TMXY.CanonicalId/Find-CanonicalIdMapping.ps1"
+  },
+  "disclosure": {
+    "tracked_evidence_contains_primary_keys": false,
+    "tracked_evidence_contains_row_values": false,
+    "full_map_contains_primary_keys": true,
+    "full_map_committed_to_git": false,
+    "query_emits_primary_keys": false,
+    "legacy_payloads_copied": false
+  },
+  "reproduction": {
+    "check_mode": "-Check",
+    "legacy_mount": "read-only",
+    "workspace_mount": "read-only",
+    "network": "none",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-11",
+      "P2-17"
+    ],
+    "detail": "Audit ID widths and generate shared typed ID declarations from the frozen domains."
+  }
+}

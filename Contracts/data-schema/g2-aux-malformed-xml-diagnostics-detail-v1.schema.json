@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:tmxy:g2-aux-malformed-xml-diagnostics-detail:v1",
+  "title": "TMXY P2-20A.11 anonymous malformed XML diagnostic detail",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "record",
+    "closed_record",
+    "member_id",
+    "instance_sha256",
+    "content_sha256",
+    "source_bytes",
+    "source_role",
+    "p2_05_strict",
+    "elementtree",
+    "source_derived_tinyxml",
+    "consumer_binding_state",
+    "consumer_input_termination_state",
+    "authority"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "record": {"const": "malformed_xml_diagnostic"},
+    "closed_record": {"const": true},
+    "member_id": {"$ref": "#/$defs/sha256"},
+    "instance_sha256": {"$ref": "#/$defs/sha256"},
+    "content_sha256": {"$ref": "#/$defs/sha256"},
+    "source_bytes": {"type": "integer", "minimum": 1},
+    "source_role": {
+      "enum": ["shared-configuration-data", "client-region-runtime-data"]
+    },
+    "p2_05_strict": {"$ref": "#/$defs/p2_05_strict"},
+    "elementtree": {"$ref": "#/$defs/elementtree"},
+    "source_derived_tinyxml": {"$ref": "#/$defs/source_derived_tinyxml"},
+    "consumer_binding_state": {
+      "enum": [
+        "dynamic-client-source-bound",
+        "literal-server-source-bound",
+        "unresolved-no-source-literal"
+      ]
+    },
+    "consumer_input_termination_state": {
+      "enum": [
+        "unproven-client-qarray-tail",
+        "server-load-file-c-str",
+        "unresolved-consumer"
+      ]
+    },
+    "authority": {"$ref": "#/$defs/authority"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"consumer_binding_state": {"const": "dynamic-client-source-bound"}},
+        "required": ["consumer_binding_state"]
+      },
+      "then": {
+        "properties": {
+          "source_role": {"const": "client-region-runtime-data"},
+          "consumer_input_termination_state": {"const": "unproven-client-qarray-tail"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"consumer_binding_state": {"const": "literal-server-source-bound"}},
+        "required": ["consumer_binding_state"]
+      },
+      "then": {
+        "properties": {
+          "source_role": {"const": "shared-configuration-data"},
+          "consumer_input_termination_state": {"const": "server-load-file-c-str"}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"consumer_binding_state": {"const": "unresolved-no-source-literal"}},
+        "required": ["consumer_binding_state"]
+      },
+      "then": {
+        "properties": {
+          "source_role": {"const": "shared-configuration-data"},
+          "consumer_input_termination_state": {"const": "unresolved-consumer"}
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "p2_05_strict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "classification",
+        "document_conformance",
+        "fragment_conformance",
+        "error_category"
+      ],
+      "properties": {
+        "classification": {"const": "malformed-xml"},
+        "document_conformance": {"const": false},
+        "fragment_conformance": {"const": false},
+        "error_category": {
+          "enum": [
+            "malformed-attribute-spacing",
+            "invalid-comment",
+            "invalid-attribute-character",
+            "unclosed-element"
+          ]
+        }
+      }
+    },
+    "elementtree": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accepted",
+        "error_code",
+        "error_class_code",
+        "failure_location_sha256"
+      ],
+      "properties": {
+        "accepted": {"const": false},
+        "error_code": {"enum": [4, 9]},
+        "error_class_code": {
+          "enum": ["INVALID_TOKEN", "JUNK_AFTER_DOCUMENT_ELEMENT"]
+        },
+        "failure_location_sha256": {"$ref": "#/$defs/sha256"}
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "error_code": {"const": 4},
+            "error_class_code": {"const": "INVALID_TOKEN"}
+          },
+          "required": ["error_code", "error_class_code"]
+        },
+        {
+          "properties": {
+            "error_code": {"const": 9},
+            "error_class_code": {"const": "JUNK_AFTER_DOCUMENT_ELEMENT"}
+          },
+          "required": ["error_code", "error_class_code"]
+        }
+      ]
+    },
+    "tree_shape": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "elements", "attributes", "texts", "comments"],
+      "properties": {
+        "nodes": {"type": "integer", "minimum": 1},
+        "elements": {"type": "integer", "minimum": 1},
+        "attributes": {"type": "integer", "minimum": 0},
+        "texts": {"type": "integer", "minimum": 0},
+        "comments": {"type": "integer", "minimum": 0}
+      }
+    },
+    "source_derived_tinyxml": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "version",
+        "probe_input_nul_appended",
+        "client_load_file_success",
+        "server_load_file_success",
+        "client_error_flag",
+        "server_error_flag",
+        "client_root_present",
+        "server_root_present",
+        "direct_parse_returned_null",
+        "full_input_consumed",
+        "client_server_tree_shape_equal",
+        "tree_shape"
+      ],
+      "properties": {
+        "version": {"const": "2.3.4"},
+        "probe_input_nul_appended": {"const": true},
+        "client_load_file_success": {"const": true},
+        "server_load_file_success": {"const": true},
+        "client_error_flag": {"const": false},
+        "server_error_flag": {"const": false},
+        "client_root_present": {"const": true},
+        "server_root_present": {"const": true},
+        "direct_parse_returned_null": {"type": "boolean"},
+        "full_input_consumed": {"type": "boolean"},
+        "client_server_tree_shape_equal": {"const": true},
+        "tree_shape": {"$ref": "#/$defs/tree_shape"}
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "direct_parse_returned_null": {"const": false},
+            "full_input_consumed": {"const": true}
+          },
+          "required": ["direct_parse_returned_null", "full_input_consumed"]
+        },
+        {
+          "properties": {
+            "direct_parse_returned_null": {"const": true},
+            "full_input_consumed": {"const": false}
+          },
+          "required": ["direct_parse_returned_null", "full_input_consumed"]
+        }
+      ]
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_derived_probe_is_runtime_execution",
+        "legacy_runtime_executed",
+        "runtime_binary_parity_claimed",
+        "windows_crt_text_mode_runtime_parity_claimed",
+        "runtime_input_tail_observed",
+        "semantic_values_extracted",
+        "semantic_imports_claimed",
+        "repair_applied",
+        "deletion_authorized",
+        "approved_adapter",
+        "no_ref_approved",
+        "approved_root",
+        "terminal_disposition_approved"
+      ],
+      "properties": {
+        "source_derived_probe_is_runtime_execution": {"const": false},
+        "legacy_runtime_executed": {"const": false},
+        "runtime_binary_parity_claimed": {"const": false},
+        "windows_crt_text_mode_runtime_parity_claimed": {"const": false},
+        "runtime_input_tail_observed": {"const": false},
+        "semantic_values_extracted": {"const": 0},
+        "semantic_imports_claimed": {"const": 0},
+        "repair_applied": {"const": 0},
+        "deletion_authorized": {"const": 0},
+        "approved_adapter": {"const": 0},
+        "no_ref_approved": {"const": 0},
+        "approved_root": {"const": 0},
+        "terminal_disposition_approved": {"const": 0}
+      }
+    }
+  }
+}

@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-28T08:24:30.3387559+00:00",
+  "result": "PASS",
+  "task": "P2-03",
+  "task_status": "COMPLETE",
+  "completion_criteria_satisfied": true,
+  "input": {
+    "client_version": "3.0.0.413",
+    "manifest": "Data/RawManifests/client-3.0.0.413.files.jsonl",
+    "manifest_sha256": "b80cde6fbb736c9a6b85fd5e4528554f4e6e9bf950b1ac12a036b4c54d5d60c3",
+    "p2_02_evidence": "Data/Inventory/p2-02-package-boundary-completeness.json",
+    "p2_02_evidence_sha256": "8ecdc9b5af0b8bd3e009781452bcc68114f65fd2b7513e26b49402f76738863e",
+    "package_files": 167,
+    "integrity_failures": 0,
+    "copy_policy": "reference_only"
+  },
+  "graph": {
+    "local_path": "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl",
+    "git_tracked": false,
+    "regeneration_required_for_query": true,
+    "bytes": 106382503,
+    "lines": 269064,
+    "sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57",
+    "nodes": 121715,
+    "edges": 147349,
+    "properties": 1639860,
+    "unique_logical_names": 92641,
+    "duplicate_logical_names": 13177,
+    "maximum_logical_name_multiplicity": 6,
+    "unique_ascii_lower_logical_names": 92485,
+    "duplicate_ascii_lower_logical_names": 13258,
+    "maximum_ascii_lower_logical_name_multiplicity": 12,
+    "classes": {
+      "QANSound": 803,
+      "QActor": 14684,
+      "QAntiPortal": 114,
+      "QEmitter": 8268,
+      "QFogVolume": 1,
+      "QGeomEffectShader": 1033,
+      "QLevel": 71,
+      "QParticleSys": 1601,
+      "QPhongShader": 33731,
+      "QProjector": 4,
+      "QSkelAnim": 13528,
+      "QSkelMesh": 1096,
+      "QSound": 520,
+      "QStaticMesh": 3404,
+      "QTerrainInfo": 71,
+      "QTexture": 42365,
+      "QToolAction": 61,
+      "QToolSwitchAction": 1,
+      "QUnitAction": 359
+    },
+    "categories": {
+      "action": 421,
+      "animation": 13528,
+      "material": 34764,
+      "mesh": 4500,
+      "particle": 9869,
+      "scene": 14945,
+      "sound": 1323,
+      "texture": 42365
+    },
+    "edge_kinds": {
+      "animation": 9944,
+      "animation-name": 1619,
+      "bone-name": 476,
+      "logical-name": 28150,
+      "material": 20905,
+      "mesh": 17419,
+      "notify": 894,
+      "particle": 7155,
+      "scene": 82,
+      "sound": 893,
+      "texture": 59812
+    },
+    "resolution": {
+      "ambiguous": 21146,
+      "logical": 30245,
+      "unique": 94882,
+      "unresolved": 1076
+    }
+  },
+  "coverage": {
+    "object_envelopes": 121715,
+    "envelope_failures": 0,
+    "reference_values": 147349,
+    "reference_value_failures": 0,
+    "evidence_backed_rule_families": 11,
+    "heuristic_string_edges": 0
+  },
+  "query_contract": {
+    "tool": "Tools/TMXY.DependencyGraph/Find-PackageDependency.ps1",
+    "accepts": [
+      "UTF-8 logical name",
+      "opaque name hex",
+      "node SHA-256 ID"
+    ],
+    "probe_node_id": "00020b33631447f3d5636860f51c3cc4e06deb4227c5c864f5ac168b6f5299dd",
+    "probe_matched_nodes": 1,
+    "probe_incoming": 0,
+    "probe_outgoing": 1,
+    "raw_name_emitted": false
+  },
+  "implementation": {
+    "source_file_count": 3,
+    "source_sha256": "5b41b50086f80f963dd3741780ddab314b0b0a150c68a2e71ea3e14c9584d439",
+    "self_test_assertions": 9,
+    "name_hash_modes": [
+      "exact-bytes-sha256",
+      "ascii-lower-bytes-sha256"
+    ],
+    "ctest_count": 7
+  },
+  "legacy_registration_evidence_sha256": {
+    "ClientCode/QRender/Src/QRenderTypes.cpp": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50",
+    "ClientCode/QRender/Src/QSkelMesh.cpp": "d4d00eb79f7c30123df02e9105f7335fac4533c146957a429ba9ad84c108e5f7",
+    "ClientCode/QRender/Src/QEmitter.cpp": "719911e51573e81ea65488c2c6eb7bd0041f2a30dbe2a8f37407412a2f58f3db",
+    "ClientCode/QRender/Src/QParticle.cpp": "7a7463ac3e34b1364f21d24eb05bfadd6c198bf76d0c0f6367aed6d356c771c3",
+    "ClientCode/QRender/Src/QAnimNotify.cpp": "ee1f2f1f0b4ca8f2b1f15df235d7d5eabbeeb0d1d8dd0cde44fc4d562222f5e4",
+    "ClientCode/QRender/Src/QProjector.cpp": "3e3c94e3734f00555b3d319ab05bc7fb95d8945fd95fe6e0f9175c46c0d53a8b",
+    "ClientCode/Game/Src/QUnitAction.cpp": "d19d78075a93b01df0dc27e1836a93ebe58585a3b946e591e3b552126bc4f656"
+  },
+  "builder": {
+    "reference": "tmxy-backend-builder:p0-08",
+    "expected_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "actual_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "user": "tmxy"
+  },
+  "isolation": {
+    "source_mount": "read-only",
+    "client_mount": "read-only",
+    "network": "none",
+    "root_filesystem": "read-only",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "build_storage": "ephemeral_tmpfs",
+    "output_mount": "scoped Data/Exports/P2-03 only"
+  },
+  "disclosure": {
+    "object_names_emitted": false,
+    "logical_names_stored_as": "sha256",
+    "ascii_case_insensitive_lookup_preserved": true,
+    "class_names_emitted": true,
+    "object_bodies_copied": false,
+    "full_graph_committed_to_git": false
+  },
+  "execution": {
+    "exit_code": 0,
+    "stdout_sha256": "63711d4b7fbe013a333c4f4a7f2e1809c710863d0ac874880e50f421862f1781",
+    "stderr_sha256": "6e6dedb3314209e24ab536feef4a10ad799a17aa128906200c30513cf8191831"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-04",
+      "P2-11",
+      "P2-18"
+    ],
+    "detail": "Use explicit unresolved and ambiguous edges as owned work queues; never select a target silently."
+  }
+}

@@ -1,0 +1,483 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.3",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "bindings": {
+      "aggregate_sha256": "e20fbc8098ccae90e2453c918c43f2c3b1bc9efcc5c585eb54380fe777b815b1",
+      "artifacts": [
+        {
+          "id": "P2-05",
+          "path": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+          "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
+          "bytes": 252227
+        },
+        {
+          "id": "P2-06",
+          "path": "Data/Inventory/p2-06-three-layer-data.json",
+          "sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+          "bytes": 355622
+        },
+        {
+          "id": "P2-08",
+          "path": "Data/Inventory/p2-08-table-ownership.json",
+          "sha256": "423e3898c1089e140f9a8efc04a1dae8d4600512e8ba44a02fc2048487c960fc",
+          "bytes": 77304
+        },
+        {
+          "id": "ownership-registry",
+          "path": "Data/Schemas/table-ownership-registry-v1.json",
+          "sha256": "7c1999a4205bfc3da6f8f66bf6e778cb94fd9f129d896546c92e4358941c7e22",
+          "bytes": 326027
+        },
+        {
+          "id": "core-registry",
+          "path": "Data/Schemas/core-table-registry-v1.json",
+          "sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+          "bytes": 199609
+        },
+        {
+          "id": "P2-12",
+          "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+          "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c",
+          "bytes": 6306
+        },
+        {
+          "id": "asset-catalog",
+          "path": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+          "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92",
+          "bytes": 16802213,
+          "lines": 40090
+        },
+        {
+          "id": "reference-policy",
+          "path": "Contracts/data-schema/reference-closure-policy-v1.json",
+          "sha256": "6442a52fb357a94b3a71b0769353839795f392aad85bb9e0567f0d35ccde70c1",
+          "bytes": 5360
+        },
+        {
+          "id": "P2-13",
+          "path": "Data/Inventory/p2-13-reference-closure.json",
+          "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
+          "bytes": 7789
+        },
+        {
+          "id": "reference-graph",
+          "path": "Data/Exports/P2-13/p2-13-reference-closure.jsonl",
+          "sha256": "6d895d722d8a547c8c1c560a8c68750ae98b83b458e27836befac18cf496c9ed",
+          "bytes": 205392166,
+          "lines": 683355
+        },
+        {
+          "id": "P2-18",
+          "path": "Data/Inventory/p2-18-content-health.json",
+          "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1",
+          "bytes": 10740
+        },
+        {
+          "id": "auxiliary-reference-policy",
+          "path": "Contracts/data-schema/g2-auxiliary-config-reference-policy-v1.json",
+          "sha256": "a829f6ffc428ec5f5e104c387d114ef2b0e33b09b0d683646a6c261a7ea354db",
+          "bytes": 4735
+        },
+        {
+          "id": "auxiliary-reference-schema",
+          "path": "Contracts/data-schema/g2-auxiliary-config-reference-v1.schema.json",
+          "sha256": "c92032c6dd35bd243f99868d4e2747af445bc2a99c7884c66512471baf412bc0",
+          "bytes": 20676
+        },
+        {
+          "id": "P2-20A.3-AUX",
+          "path": "Data/Reports/p2-20a-aux-config-reference-report.json",
+          "sha256": "7486d70b346c8acd1695179dca06b66453850927d8f8cdc4773480ac636fbe45",
+          "bytes": 157387
+        },
+        {
+          "id": "P2-20A.4-REPORT",
+          "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+          "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e",
+          "bytes": 5807
+        },
+        {
+          "id": "P2-20A.4-DETAIL",
+          "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+          "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa",
+          "bytes": 13820115,
+          "lines": 3651
+        },
+        {
+          "id": "P2-20A.4-EVIDENCE",
+          "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+          "sha256": "0ae236c4ea5e8c96fc2ce3b23b8fbbc26da93859ab3c97adc0118fe2f23be671",
+          "bytes": 13467
+        },
+        {
+          "id": "P2-20A.7-REPORT",
+          "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+          "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b",
+          "bytes": 9416
+        },
+        {
+          "id": "P2-20A.7-EVIDENCE",
+          "path": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
+          "sha256": "daa0e9babecbaafa0f97599102bb9cfb52e80e7a517857a00a3ad8abeca90f5e",
+          "bytes": 8940
+        },
+        {
+          "id": "P2-20A.8-REPORT",
+          "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+          "sha256": "1e241d6c74c0a0181c792b1f0c27a5e7cdaa2d27529b95e52ee6efe0eb45d19d",
+          "bytes": 7549
+        },
+        {
+          "id": "P2-20A.8-EVIDENCE",
+          "path": "Data/Inventory/p2-20a-asset-binding-recovery.json",
+          "sha256": "f3222dfda796305192a3a3919d7024b0edc8477afce7a7150c55d6ca65ec0701",
+          "bytes": 3078
+        },
+        {
+          "id": "g2-policy",
+          "path": "Contracts/data-schema/g2-review-policy-v1.json",
+          "sha256": "52094feeb6dc31633ac88b8e7c09c7651c3a5daa85a2787f71b5ff69b1bd59fc",
+          "bytes": 9490
+        }
+      ]
+    }
+  },
+  "outputs": {
+    "report_json": {
+      "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+      "tracked": true,
+      "bytes": 15228,
+      "lines": 415,
+      "sha256": "e93d4ad5feba31092cc93f7525cef0bedf97c15b16a288ebf21a9a361aa88104"
+    },
+    "report_markdown": {
+      "path": "Data/Reports/p2-20a-core-resource-closure-report.md",
+      "tracked": true,
+      "bytes": 4498,
+      "lines": 57,
+      "sha256": "cae2611728a0b6b505129ec77a358d2e46add3453de335ce2eba370588b59153"
+    },
+    "governance": {
+      "path": "Data/Governance/p2-g2-core-resource-closure.json",
+      "tracked": true,
+      "bytes": 1655,
+      "lines": 40,
+      "sha256": "dc9ee38c74d66609cce09832b5c7be08eb1037983e001832b4916dfd7dbea4fd"
+    },
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+      "tracked": false,
+      "bytes": 33232029,
+      "lines": 210313,
+      "sha256": "f8657fcaf7983419f187769e9092f11cab95d5efc53790fb16965f86bc62080c"
+    },
+    "conditional_required_workset": {
+      "tracked": false,
+      "count": 29,
+      "sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d"
+    },
+    "asset_binding_workset": {
+      "tracked": false,
+      "count": 21494,
+      "sha256": "fb21ea21f3a84f5423940d7adf25760c8e864cd8bbfe442ac56c98abb8d74f52"
+    }
+  },
+  "scope_definition": {
+    "mode": "monotonic-union",
+    "outcome_based_exclusion": false,
+    "declared_roots": {
+      "selection": "all-declared-roots",
+      "root_kinds": [
+        "character",
+        "scene",
+        "skill"
+      ],
+      "count": 24465,
+      "by_kind": {
+        "character": 1096,
+        "scene": 142,
+        "skill": 23227
+      },
+      "set_sha256": "6a259a6caacfd08e5088a40770818465f2b695b5b7c3e4083ceca0ffd3473bc8"
+    },
+    "core_table_resource_rules": {
+      "selection": "all-matching-core-resource-rules",
+      "declared_rules": 16,
+      "selected_rules": 16,
+      "client_presentation_rules": 10,
+      "server_authoritative_rules": 6,
+      "owner_filtering": "forbidden",
+      "selection_sha256": "bdaf794b40248ba6126550eb4b3a7293b6c411e98ee2624ae1a510895318b173",
+      "rules_with_edges": 15,
+      "source_rows": 60884
+    },
+    "auxiliary_config": {
+      "evidence_revision": "P2-20A.3",
+      "evidence_hash_bound": true,
+      "measurement_authority": "LEXICAL_ONLY",
+      "inventory_files": 212,
+      "unique_content_bodies": 196,
+      "parsed_file_instances": 206,
+      "malformed_isolated": 6,
+      "scalar_positions": 39522,
+      "nonempty_scalar_positions": 39498,
+      "asset_exact_occurrences": 3043,
+      "package_exact_occurrences": 638,
+      "config_exact_edges": 8,
+      "reference_adapters": 0,
+      "reference_adapter_coverage": "lexical-candidate-inventory-only",
+      "terminal_file_instances": 0,
+      "candidate_only": 171,
+      "editor_undecided": 35,
+      "malformed_blocked": 6,
+      "semantic_approved": 0,
+      "no_ref_approved": 0,
+      "approved_roots": 0,
+      "exact_complete_scalar_matching": true,
+      "first_candidate_selection_used": false,
+      "new_roots_are_union_only": true,
+      "scope_complete": false
+    }
+  },
+  "closure": {
+    "scope_complete": false,
+    "auxiliary_config_reference_scope_complete": false,
+    "asset_binding_resolution_explicit": true,
+    "start_nodes": 62256,
+    "start_set_sha256": "417cd126187ccac5af9430685ff920995bcedc6c312d50a5a22f9aa5a761b018",
+    "reachable_nodes": 127015,
+    "reachable_set_sha256": "2d529785ef93530ecd92d4b6a69eaaa5521d3252a8570aa044610d51007311ad",
+    "reachable_nodes_by_kind": {
+      "asset_node": 21494,
+      "package_node": 39631,
+      "table_domain_node": 4636,
+      "table_node": 61254
+    },
+    "traversed_edges_by_kind": {
+      "package_asset_edge": 39351,
+      "package_edge": 49245,
+      "table_domain_edge": 4636,
+      "table_fk_edge": 18594,
+      "table_package_edge": 113484
+    },
+    "resolution": {
+      "table_unique": 101378,
+      "table_unresolved": 5161,
+      "table_ambiguous": 6945,
+      "package_unique": 18287,
+      "package_unresolved": 407,
+      "package_ambiguous": 8511,
+      "package_scoped_terminal": 22040,
+      "heuristic_target_selections": 0
+    },
+    "conditional_required": {
+      "runtime_assert_rows": 5993,
+      "conditional_required_missing": 29,
+      "conditional_required_unresolved": 0,
+      "source_inventory_id": "P2-13",
+      "source_inventory_sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
+      "member_source_inventory_id": "P2-06",
+      "member_source_inventory_sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+      "member_source_file_count": 1,
+      "member_source_file_set_sha256": "04363e93bd623edad9d23c70912e7795bb33e68e93ebbc84ad34827ee4af68ce",
+      "member_set_exported": true,
+      "member_set_count": 29,
+      "member_set_sha256": "90bf56294f616036d1f238e445f62ffce58e17c3f9aba6008750939246389b9d",
+      "zero_threshold_satisfied": false
+    },
+    "asset_binding": {
+      "resolution_explicit": true,
+      "reachable_assets": 21494,
+      "resolved_targets": 21299,
+      "ambiguous_targets": 189,
+      "unresolved_targets": 6,
+      "unknown_targets": 0,
+      "candidate_edges": 39351,
+      "resolved_edges": 38796,
+      "ambiguous_edges": 546,
+      "unresolved_edges": 9,
+      "unknown_edges": 0,
+      "by_resolution_basis_targets": {
+        "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 15,
+        "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 6,
+        "OPEN_REJECTED_CANDIDATE": 174,
+        "SELF_DESCRIBING_RULE": 9007,
+        "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3456,
+        "UNIQUE_VALID_DESCRIPTOR": 8836
+      },
+      "by_resolution_basis_edges": {
+        "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 30,
+        "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 9,
+        "OPEN_REJECTED_CANDIDATE": 516,
+        "SELF_DESCRIBING_RULE": 17751,
+        "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12209,
+        "UNIQUE_VALID_DESCRIPTOR": 8836
+      },
+      "workset_exported": true,
+      "workset_count": 21494,
+      "workset_sha256": "fb21ea21f3a84f5423940d7adf25760c8e864cd8bbfe442ac56c98abb8d74f52",
+      "by_family": {
+        "anim": {
+          "ambiguous": 8,
+          "assets": 1044,
+          "candidate_edges": 1152,
+          "resolved": 1035,
+          "unresolved": 1
+        },
+        "qtx": {
+          "ambiguous": 171,
+          "assets": 9874,
+          "candidate_edges": 18601,
+          "resolved": 9699,
+          "unresolved": 4
+        },
+        "skem": {
+          "ambiguous": 8,
+          "assets": 1043,
+          "candidate_edges": 1151,
+          "resolved": 1035
+        },
+        "sm": {
+          "ambiguous": 2,
+          "assets": 526,
+          "candidate_edges": 696,
+          "resolved": 523,
+          "unresolved": 1
+        },
+        "ter": {
+          "assets": 8744,
+          "candidate_edges": 17488,
+          "resolved": 8744
+        },
+        "wav": {
+          "assets": 263,
+          "candidate_edges": 263,
+          "resolved": 263
+        }
+      },
+      "first_candidate_selection_used": false
+    },
+    "asset_structure": {
+      "pass": 21476,
+      "unresolved": 18,
+      "fail": 0
+    },
+    "integrity": {
+      "unknown_record_count": 0,
+      "unknown_resolution_count": 0,
+      "recorded_resolution_mismatches": 0,
+      "catalog_candidate_mismatches": 0,
+      "core_foreign_key_dangling": 0
+    },
+    "logical_gap_count": 21024,
+    "gap_set_sha256": "298b2f39e19ef442545fa376507b5cac919589910ca80f4102e0d8be9aa4e285",
+    "detail_export": {
+      "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+      "tracked": false,
+      "bytes": 33232029,
+      "lines": 210313,
+      "sha256": "f8657fcaf7983419f187769e9092f11cab95d5efc53790fb16965f86bc62080c"
+    }
+  },
+  "decision": {
+    "required_status": "SATISFIED",
+    "observed_status": "BLOCKED",
+    "satisfied": false,
+    "thresholds": {
+      "scope_complete": true,
+      "unresolved": 0,
+      "ambiguous": 0,
+      "conditional_required_missing": 0,
+      "asset_binding_ambiguous": 0,
+      "asset_binding_unresolved": 0,
+      "asset_binding_unknown": 0,
+      "heuristic": 0,
+      "asset_structure_gaps": 0,
+      "unknown": 0
+    },
+    "g2_approved": false,
+    "p3_authorized": false
+  },
+  "blockers": [
+    {
+      "id": "G2-06-CONFIG-SCOPE",
+      "reason": "Auxiliary configuration lexical candidates are measured and hash-bound, but all 212 file instances remain nonterminal and no semantic adapter, no-reference disposition, or root is approved.",
+      "required_action": "Define reviewed semantic adapters or explicit no-reference dispositions for all file instances, dispose every malformed XML input, and add only approved roots by union."
+    },
+    {
+      "id": "G2-06-ASSET-BINDING",
+      "reason": "All reachable Package-to-asset bindings now have explicit evidence states, but divergent or invalid descriptor sets remain ambiguous or unresolved.",
+      "required_action": "Resolve every divergent descriptor set and failed descriptor validation through qualified evidence while preserving all candidates and without first-candidate selection."
+    },
+    {
+      "id": "G2-06-CONDITIONAL-REQUIRED",
+      "reason": "P2-13 reports conditionally required resource fields with missing values; such rows may emit no table-to-Package edge and cannot disappear from review.",
+      "required_action": "Use the complete hashed member workset for authorized remediation, resolve every missing required value, retain the P2-06 and P2-13 source bindings, and reach the independent zero threshold."
+    },
+    {
+      "id": "G2-06-LOGICAL-GAPS",
+      "reason": "The monotonic core closure contains unresolved and ambiguous table or Package references.",
+      "required_action": "Resolve each hashed work item through reviewed aliases, equivalent-candidate proof, source recovery, or an explicit versioned scope decision."
+    },
+    {
+      "id": "G2-06-ASSET-STRUCTURE",
+      "reason": "Some reachable assets remain structurally unresolved.",
+      "required_action": "Recover qualified descriptors or provide reviewed replacements while retaining source hashes and audit history."
+    }
+  ],
+  "authority_boundaries": {
+    "g2_approved": false,
+    "p3_authorized": false,
+    "playable_experience_proven": false,
+    "release_authority": false,
+    "automatic_repair_or_delete_authority": false
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-core-resource-closure-policy-v1.json",
+    "policy_sha256": "eca56ae5740407a347676557621c9e6f0b292b0ccf91aee667de30b2271daf6b",
+    "schema": "Contracts/data-schema/g2-core-resource-closure-v1.schema.json",
+    "schema_sha256": "d210290b1900512fcca01b055476668e535fde282cc6f2092afdf771c7358513"
+  },
+  "implementation": {
+    "source_files": 7,
+    "source_sha256": "e810b467722491a137b7663e1b6fa349342792a728c5a5c79c89c36c42f8880e",
+    "generator": "Tools/TMXY.G2CoreClosure/g2_core_closure.py",
+    "generator_sha256": "b2d9dc3bb56358e6c69f490d4ca9f8dc8ddee6a338a8b6a8a751eceb1492a8c4",
+    "wrapper": "Tools/TMXY.G2CoreClosure/New-G2CoreResourceClosure.ps1",
+    "wrapper_sha256": "4afc095ed0ee24b4793db292a9372ca142360daf353d9fce6466c3f193a1cdce",
+    "self_test_assertions": 13
+  },
+  "disclosure": {
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  },
+  "reproduction": {
+    "check_mode": false,
+    "repository_mount": "read-only",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20A-remediation",
+      "P2-20"
+    ],
+    "detail": "Close configuration scope, asset-binding ambiguity and unresolved states, conditional-required missing values, logical queues, and reachable structural gaps; then regenerate P2-13/P2-18 and rerun G2. P3 remains unauthorized."
+  }
+}

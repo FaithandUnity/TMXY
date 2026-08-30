@@ -1,0 +1,2952 @@
+{
+  "models": [
+    {
+      "domain": "CLSVShare/item_table",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0011",
+          "name": "C0011",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0012",
+          "name": "C0012",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0013",
+          "name": "C0013",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0014",
+          "name": "C0014",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0015",
+          "name": "C0015",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0016",
+          "name": "C0016",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0017",
+          "name": "C0017",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0018",
+          "name": "C0018",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0019",
+          "name": "C0019",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0020",
+          "name": "C0020",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0021",
+          "name": "C0021",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0022",
+          "name": "C0022",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0023",
+          "name": "C0023",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0024",
+          "name": "C0024",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0025",
+          "name": "C0025",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0026",
+          "name": "C0026",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0027",
+          "name": "C0027",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0028",
+          "name": "C0028",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0029",
+          "name": "C0029",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0030",
+          "name": "C0030",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0031",
+          "name": "C0031",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0032",
+          "name": "C0032",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0033",
+          "name": "C0033",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0034",
+          "name": "C0034",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0035",
+          "name": "C0035",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0036",
+          "name": "C0036",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0037",
+          "name": "C0037",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0038",
+          "name": "C0038",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0039",
+          "name": "C0039",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0040",
+          "name": "C0040",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0041",
+          "name": "C0041",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0042",
+          "name": "C0042",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0043",
+          "name": "C0043",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0044",
+          "name": "C0044",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0045",
+          "name": "C0045",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0046",
+          "name": "C0046",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0047",
+          "name": "C0047",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0048",
+          "name": "C0048",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0049",
+          "name": "C0049",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0050",
+          "name": "C0050",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0051",
+          "name": "C0051",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0052",
+          "name": "C0052",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0053",
+          "name": "C0053",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0054",
+          "name": "C0054",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0055",
+          "name": "C0055",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0056",
+          "name": "C0056",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0057",
+          "name": "C0057",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0058",
+          "name": "C0058",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0059",
+          "name": "C0059",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0060",
+          "name": "C0060",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0061",
+          "name": "C0061",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0062",
+          "name": "C0062",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0063",
+          "name": "C0063",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0064",
+          "name": "C0064",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0065",
+          "name": "C0065",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0066",
+          "name": "C0066",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0067",
+          "name": "C0067",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0068",
+          "name": "C0068",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0069",
+          "name": "C0069",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0070",
+          "name": "C0070",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0071",
+          "name": "C0071",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0072",
+          "name": "C0072",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0073",
+          "name": "C0073",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0074",
+          "name": "C0074",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0075",
+          "name": "C0075",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0076",
+          "name": "C0076",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0077",
+          "name": "C0077",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0078",
+          "name": "C0078",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0079",
+          "name": "C0079",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0080",
+          "name": "C0080",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0081",
+          "name": "C0081",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0082",
+          "name": "C0082",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0083",
+          "name": "C0083",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0084",
+          "name": "C0084",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0085",
+          "name": "C0085",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0086",
+          "name": "C0086",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0087",
+          "name": "C0087",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0088",
+          "name": "C0088",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0089",
+          "name": "C0089",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0090",
+          "name": "C0090",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0091",
+          "name": "C0091",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0092",
+          "name": "C0092",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0093",
+          "name": "C0093",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0094",
+          "name": "C0094",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0095",
+          "name": "C0095",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "ItemTableId",
+      "name": "ItemTable",
+      "record_type": "ItemTableRecord"
+    },
+    {
+      "domain": "CLSVShare/skill_table",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0011",
+          "name": "C0011",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0012",
+          "name": "C0012",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0013",
+          "name": "C0013",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0014",
+          "name": "C0014",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0015",
+          "name": "C0015",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0016",
+          "name": "C0016",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0017",
+          "name": "C0017",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0018",
+          "name": "C0018",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0019",
+          "name": "C0019",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0020",
+          "name": "C0020",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0021",
+          "name": "C0021",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0022",
+          "name": "C0022",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0023",
+          "name": "C0023",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0024",
+          "name": "C0024",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0025",
+          "name": "C0025",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0026",
+          "name": "C0026",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0027",
+          "name": "C0027",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0028",
+          "name": "C0028",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0029",
+          "name": "C0029",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0030",
+          "name": "C0030",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0031",
+          "name": "C0031",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0032",
+          "name": "C0032",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0033",
+          "name": "C0033",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0034",
+          "name": "C0034",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0035",
+          "name": "C0035",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0036",
+          "name": "C0036",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0037",
+          "name": "C0037",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0038",
+          "name": "C0038",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0039",
+          "name": "C0039",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0040",
+          "name": "C0040",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0041",
+          "name": "C0041",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0042",
+          "name": "C0042",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0043",
+          "name": "C0043",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0044",
+          "name": "C0044",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0045",
+          "name": "C0045",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0046",
+          "name": "C0046",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0047",
+          "name": "C0047",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0048",
+          "name": "C0048",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0049",
+          "name": "C0049",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0050",
+          "name": "C0050",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0051",
+          "name": "C0051",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0052",
+          "name": "C0052",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0053",
+          "name": "C0053",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0054",
+          "name": "C0054",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0055",
+          "name": "C0055",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0056",
+          "name": "C0056",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0057",
+          "name": "C0057",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0058",
+          "name": "C0058",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0059",
+          "name": "C0059",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0060",
+          "name": "C0060",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0061",
+          "name": "C0061",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0062",
+          "name": "C0062",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0063",
+          "name": "C0063",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0064",
+          "name": "C0064",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0065",
+          "name": "C0065",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "SkillTableId",
+      "name": "SkillTable",
+      "record_type": "SkillTableRecord"
+    },
+    {
+      "domain": "CLSVShare/LevelInfo",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        }
+      ],
+      "id_type": "LevelInfoId",
+      "name": "LevelInfo",
+      "record_type": "LevelInfoRecord"
+    },
+    {
+      "domain": "CLSVShare/Profession_lvl",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0011",
+          "name": "C0011",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0012",
+          "name": "C0012",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0013",
+          "name": "C0013",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0014",
+          "name": "C0014",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0015",
+          "name": "C0015",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0016",
+          "name": "C0016",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0017",
+          "name": "C0017",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0018",
+          "name": "C0018",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0019",
+          "name": "C0019",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        }
+      ],
+      "id_type": "ProfessionLvlId",
+      "name": "ProfessionLvl",
+      "record_type": "ProfessionLvlRecord"
+    },
+    {
+      "domain": "CLSVShare/unit_cls",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "UnitClsId",
+      "name": "UnitCls",
+      "record_type": "UnitClsRecord"
+    },
+    {
+      "domain": "CLSVShare/unit_prop",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "UnitPropId",
+      "name": "UnitProp",
+      "record_type": "UnitPropRecord"
+    },
+    {
+      "domain": "CLSVShare/states",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0011",
+          "name": "C0011",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0012",
+          "name": "C0012",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0013",
+          "name": "C0013",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0014",
+          "name": "C0014",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0015",
+          "name": "C0015",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0016",
+          "name": "C0016",
+          "nullable": true,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0017",
+          "name": "C0017",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0018",
+          "name": "C0018",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0019",
+          "name": "C0019",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0020",
+          "name": "C0020",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0021",
+          "name": "C0021",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0022",
+          "name": "C0022",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0023",
+          "name": "C0023",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0024",
+          "name": "C0024",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0025",
+          "name": "C0025",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0026",
+          "name": "C0026",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0027",
+          "name": "C0027",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0028",
+          "name": "C0028",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0029",
+          "name": "C0029",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0030",
+          "name": "C0030",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0031",
+          "name": "C0031",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0032",
+          "name": "C0032",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "StatesId",
+      "name": "States",
+      "record_type": "StatesRecord"
+    },
+    {
+      "domain": "CLSVShare/Suit_table",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "SuitTableId",
+      "name": "SuitTable",
+      "record_type": "SuitTableRecord"
+    },
+    {
+      "domain": "Table/quest_table",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0011",
+          "name": "C0011",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0012",
+          "name": "C0012",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0013",
+          "name": "C0013",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0014",
+          "name": "C0014",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0015",
+          "name": "C0015",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0016",
+          "name": "C0016",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0017",
+          "name": "C0017",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0018",
+          "name": "C0018",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0019",
+          "name": "C0019",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0020",
+          "name": "C0020",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0021",
+          "name": "C0021",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0022",
+          "name": "C0022",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0023",
+          "name": "C0023",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0024",
+          "name": "C0024",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0025",
+          "name": "C0025",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0026",
+          "name": "C0026",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0027",
+          "name": "C0027",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0028",
+          "name": "C0028",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0029",
+          "name": "C0029",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0030",
+          "name": "C0030",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0031",
+          "name": "C0031",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0032",
+          "name": "C0032",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0033",
+          "name": "C0033",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0034",
+          "name": "C0034",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0035",
+          "name": "C0035",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0036",
+          "name": "C0036",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0037",
+          "name": "C0037",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0038",
+          "name": "C0038",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0039",
+          "name": "C0039",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0040",
+          "name": "C0040",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0041",
+          "name": "C0041",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0042",
+          "name": "C0042",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0043",
+          "name": "C0043",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0044",
+          "name": "C0044",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0045",
+          "name": "C0045",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0046",
+          "name": "C0046",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0047",
+          "name": "C0047",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0048",
+          "name": "C0048",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0049",
+          "name": "C0049",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0050",
+          "name": "C0050",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0051",
+          "name": "C0051",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0052",
+          "name": "C0052",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0053",
+          "name": "C0053",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0054",
+          "name": "C0054",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0055",
+          "name": "C0055",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0056",
+          "name": "C0056",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0057",
+          "name": "C0057",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0058",
+          "name": "C0058",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0059",
+          "name": "C0059",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0060",
+          "name": "C0060",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0061",
+          "name": "C0061",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0062",
+          "name": "C0062",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0063",
+          "name": "C0063",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0064",
+          "name": "C0064",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0065",
+          "name": "C0065",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0066",
+          "name": "C0066",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0067",
+          "name": "C0067",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0068",
+          "name": "C0068",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0069",
+          "name": "C0069",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0070",
+          "name": "C0070",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0071",
+          "name": "C0071",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0072",
+          "name": "C0072",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0073",
+          "name": "C0073",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0074",
+          "name": "C0074",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0075",
+          "name": "C0075",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0076",
+          "name": "C0076",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0077",
+          "name": "C0077",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0078",
+          "name": "C0078",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0079",
+          "name": "C0079",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        }
+      ],
+      "id_type": "QuestTableId",
+      "name": "QuestTable",
+      "record_type": "QuestTableRecord"
+    },
+    {
+      "domain": "CLSVShare/formula_table",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0011",
+          "name": "C0011",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0012",
+          "name": "C0012",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0013",
+          "name": "C0013",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0014",
+          "name": "C0014",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0015",
+          "name": "C0015",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0016",
+          "name": "C0016",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0017",
+          "name": "C0017",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0018",
+          "name": "C0018",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0019",
+          "name": "C0019",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0020",
+          "name": "C0020",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0021",
+          "name": "C0021",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        }
+      ],
+      "id_type": "FormulaTableId",
+      "name": "FormulaTable",
+      "record_type": "FormulaTableRecord"
+    },
+    {
+      "domain": "CLSVShare/waypoint",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "decimal",
+          "storage_type": "double"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": true,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        }
+      ],
+      "id_type": "WaypointId",
+      "name": "Waypoint",
+      "record_type": "WaypointRecord"
+    },
+    {
+      "domain": "CLSVShare/Transpoints",
+      "fields": [
+        {
+          "column_id": "c0001",
+          "name": "C0001",
+          "nullable": false,
+          "role": "identity-component",
+          "source_type": "int64",
+          "storage_type": "uint64"
+        },
+        {
+          "column_id": "c0002",
+          "name": "C0002",
+          "nullable": false,
+          "role": "value",
+          "source_type": "string",
+          "storage_type": "utf8-string"
+        },
+        {
+          "column_id": "c0003",
+          "name": "C0003",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0004",
+          "name": "C0004",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0005",
+          "name": "C0005",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0006",
+          "name": "C0006",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0007",
+          "name": "C0007",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0008",
+          "name": "C0008",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0009",
+          "name": "C0009",
+          "nullable": true,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        },
+        {
+          "column_id": "c0010",
+          "name": "C0010",
+          "nullable": false,
+          "role": "value",
+          "source_type": "int64",
+          "storage_type": "int64"
+        }
+      ],
+      "id_type": "TranspointsId",
+      "name": "Transpoints",
+      "record_type": "TranspointsRecord"
+    }
+  ],
+  "policy": {
+    "narrowing": "forbidden",
+    "numeric_identity_storage": "uint64",
+    "sha256": "2d7e3fa854e50b5bc7009905c37a81c744b11dae553b2e0fb37a9cf8ca625157"
+  },
+  "schema_id": "tmxy-core-data-model-v1",
+  "schema_version": 1,
+  "source": {
+    "core_table_registry_sha256": "f248bb5a88cfbabc34b6c4b75d0c1407231d82751c2202044e1bff0a301acaa6",
+    "id_limit_audit_sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b"
+  },
+  "task_id": "P2-17"
+}

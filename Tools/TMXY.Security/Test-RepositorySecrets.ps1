@@ -98,9 +98,11 @@ function Test-ContentForSecrets {
         $entropyPattern = '(?<![A-Za-z0-9])([A-Za-z0-9+/_=-]{32,})(?![A-Za-z0-9])'
         foreach ($match in [regex]::Matches($line, $entropyPattern)) {
             $value = $match.Groups[1].Value
-            $isDigest = $value -match '^[a-fA-F0-9]{40,128}$'
-            $isPathContext = $line -match '(?i)"(?:path|file|directory|source|target|cache_path|log_path|generated_log|archive)"\s*:' -or
-                $line -match '^\s*["''][^"'']*[\/][^"'']*["'']\s*,?\s*$'
+            $isDigest = $value -match '^[a-fA-F0-9]{40,128}$' -or
+                $value -match '(?i)^(?:[a-z0-9_.-]*(?:commit|revision|sha256))=[a-f0-9]{40,128}$'
+            $isPathContext = $line -match '(?i)"(?:path|file|directory|source|target|cache_path|log_path|generated_log|archive|[a-z0-9_-]+_(?:path|source))"\s*:' -or
+                $line -match '^\s*["''][^"'']*[\/][^"'']*["'']\s*,?\s*$' -or
+                $line -match '(?i)^\s*(?:path|source|[a-z][a-z0-9_]*(?:path|source))\s*=\s*["''][^"'']*[\/][^"'']*["'']\s*$'
             $isSbomComponentPathName = $Path -match '(?i)\.sbom\.cdx\.json$' -and
                 $line -match '^\s*"name"\s*:\s*"[^"\r\n]*[\/][^"\r\n]*"\s*,?\s*$'
             $hasClasses = $value -cmatch '[A-Z]' -and $value -cmatch '[a-z]' -and $value -match '[0-9]'

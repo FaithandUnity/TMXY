@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.9",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "report_json": {
+    "bytes": 8499,
+    "sha256": "0514d9c2f4537ebf49e3384cd19661e90d1282eaf99f4c76b2d25ccbcfef1c00"
+  },
+  "report_markdown": {
+    "bytes": 1022,
+    "sha256": "547f38dbd6b5a7b889cfd76ec466945946e70348618c2ee338b4c5562115229f"
+  },
+  "detail_export": {
+    "tracked": false,
+    "path": "Data/Exports/P2-20/p2-20a-aux-package-context.jsonl",
+    "lines": 135,
+    "bytes": 161055,
+    "sha256": "fc2bcf49e2868d1c3a3770da351ed1432fabcd2433d1df53f8c9c071ecc17f8e"
+  },
+  "strict_baseline": {
+    "region_instances": 135,
+    "unique_total": 3180,
+    "unique_file": 3042,
+    "unique_object": 4,
+    "unique_package_root": 134,
+    "ambiguous_object": 211,
+    "ambiguous_candidate_edges": 422,
+    "divergent_ambiguous_bodies": 211,
+    "unresolved_resource": 1,
+    "first_candidate_selections": 0
+  },
+  "measured": {
+    "source_instances_verified": 212,
+    "region_instance_partition": {
+      "strict_clean": 5,
+      "strict_ambiguous_only": 129,
+      "strict_ambiguous_and_unresolved": 1
+    },
+    "package_context": {
+      "preexisting_unique_verified": 4,
+      "ambiguous_attempted": 211,
+      "original_candidate_edges": 422,
+      "singleton_matches": 211,
+      "zero_matches": 0,
+      "multiple_matches": 0,
+      "selected_edges": 211,
+      "incompatible_context_edges": 211,
+      "order_invariant": 211,
+      "first_candidate_selections": 0
+    },
+    "effective_resolution": {
+      "total_occurrences": 3392,
+      "resolved_total": 3391,
+      "resolved_file": 3042,
+      "resolved_object": 215,
+      "resolved_package_root": 134,
+      "ambiguous_object": 0,
+      "ambiguous_candidate_edges": 0,
+      "unresolved_resource": 1
+    },
+    "effective_region_instances": {
+      "resolved_only": 134,
+      "unresolved_resource": 1
+    }
+  },
+  "contracts": {
+    "policy_sha256": "0592d2c84883a06442f7056063b9d222550ce0b78f445685b3e7e78d3459a024",
+    "schema_sha256": "0027701728f3fceefc0d8e786a99fd0712d9823d758082e33c4a8313fd963faa",
+    "detail_schema_sha256": "2e1d9330119f074dfa93191e35e7182dc40fba77820a5ebd18478ddf1b362897"
+  },
+  "implementation": {
+    "generator_sha256": "65dde062cb0188ee35155dce77e3418ae0e724e61c71f8868978ab4ab3cd11fc",
+    "support_sha256": "9d43b3551c52467829f5ecb1659a923ce4f45988fe9d8e4f003d1291ab52d30f",
+    "self_test_assertions": 17
+  },
+  "isolation": {
+    "network": "none",
+    "repository_mount": "read-only",
+    "legacy_source_mount": "read-only",
+    "builder_user": "tmxy",
+    "capabilities": "none",
+    "no_new_privileges": true
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "raw_values": false,
+    "key_names": false,
+    "file_names": false,
+    "private_source_paths": false,
+    "source_line_numbers": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_payloads": false
+  }
+}

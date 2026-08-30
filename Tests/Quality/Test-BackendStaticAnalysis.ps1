@@ -71,7 +71,11 @@ $formatArguments = @('--dry-run', '--Werror') + @($allSourceFiles.FullName)
 $format = Invoke-NativeProcess -FilePath $formatTool -ArgumentList $formatArguments -WorkingDirectory $root
 
 $tidyArguments = @("--config-file=$(Join-Path $root '.clang-tidy')") +
-    @($translationUnits.FullName) + @('--', '-std=c++20', "-I$(Join-Path $backendRoot 'modules\foundation\include')")
+    @($translationUnits.FullName) + @(
+        '--', '-std=c++20',
+        "-I$(Join-Path $backendRoot 'modules\foundation\include')",
+        "-I$(Join-Path $root 'Contracts\generated\cpp')"
+    )
 $tidy = Invoke-NativeProcess -FilePath $tidyTool -ArgumentList $tidyArguments -WorkingDirectory $root
 $tidyVersion = Invoke-NativeProcess -FilePath $tidyTool -ArgumentList @('--version') -WorkingDirectory $root
 

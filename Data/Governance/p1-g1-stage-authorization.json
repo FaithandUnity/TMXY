@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "authorization_id": "AUTH-2026-08-28-P1-28",
+  "status": "approved",
+  "approved_local": "2026-08-28T08:49:35.6280659+08:00",
+  "approved_by": "project_lead",
+  "execution_owner": "Codex",
+  "authorization_basis": "The project lead explicitly granted every authorization needed to continue development after P1-09 through P1-11 were completed.",
+  "scope": {
+    "execute_p1_28": true,
+    "approve_g1_format_gate_when_all_technical_checks_pass": true,
+    "continue_into_g1_dependent_development": true,
+    "github_checkpoint_push": true,
+    "verified_local_backups": true
+  },
+  "wvr_0001_exception": {
+    "applies_only_to": "P1-28_and_G1_format_gate",
+    "supersedes_g1_prohibition": true,
+    "other_waiver_boundaries_unchanged": true
+  },
+  "boundaries": {
+    "approve_g0": false,
+    "mark_p0_12_or_p0_16_complete": false,
+    "claim_release_authority": false,
+    "write_legacy_directories": false,
+    "emit_runtime_table_key": false,
+    "redistribute_legacy_assets": false
+  }
+}

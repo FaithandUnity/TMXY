@@ -1,0 +1,26 @@
+add_executable(
+    tmxy_g2_asset_descriptor_probe
+    apps/asset_descriptor_probe_main.cpp
+    apps/probe_output.cpp
+    apps/qtx_recovery.cpp
+    apps/recovery_plan.cpp
+    semantic_hash.cpp
+    sha256.cpp
+    ../TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp
+)
+target_include_directories(
+    tmxy_g2_asset_descriptor_probe
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../TMXY.AssetInventory/apps
+)
+target_link_libraries(
+    tmxy_g2_asset_descriptor_probe
+    PRIVATE
+        tmxy::package
+        tmxy::texture
+        tmxy::static_mesh
+        tmxy::skeletal_mesh
+        tmxy::animation
+)
+tmxy_apply_tool_defaults(tmxy_g2_asset_descriptor_probe)

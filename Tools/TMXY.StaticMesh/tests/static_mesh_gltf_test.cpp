@@ -81,6 +81,10 @@ class TestContext final
     };
     binding.package.object_name_bytes = "fixture.mesh";
     binding.package.descriptor.material_object_names = {"material.slot0", "material.slot1"};
+    binding.material_slot_resolution = {.declared_material_slot_count = 2,
+                                        .effective_material_slot_count = 2,
+                                        .ignored_material_slot_count = 0,
+                                        .basis = MaterialSlotBasis::package_descriptor};
     return binding;
 }
 

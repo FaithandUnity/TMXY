@@ -53,18 +53,17 @@ if ($imageInspectResult.exit_code -eq 0) {
     if ($imageRecords.Count -gt 0) { $imageRecord = $imageRecords[0] }
 }
 
-$backendRoot = Join-Path $root 'Backend'
 $buildCommands = @'
 set -e
-cmake -S /workspace --list-presets
-cmake -S /workspace -B /tmp/tmxy-build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=g++ -DTMXY_WARNINGS_AS_ERRORS=ON
+cmake -S /workspace/Backend --list-presets
+cmake -S /workspace/Backend -B /tmp/tmxy-build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=g++ -DTMXY_WARNINGS_AS_ERRORS=ON
 cmake --build /tmp/tmxy-build --parallel
 ctest --test-dir /tmp/tmxy-build --output-on-failure
 /tmp/tmxy-build/apps/gateway/tmxy-gateway
 '@
 $build = Invoke-NativeProcess -FilePath $dockerPath -ArgumentList @(
     'run', '--rm', '--network', 'none',
-    '--mount', "type=bind,src=$backendRoot,dst=/workspace,readonly",
+    '--mount', "type=bind,src=$root,dst=/workspace,readonly",
     $BuilderImage, 'bash', '-lc', $buildCommands
 )
 

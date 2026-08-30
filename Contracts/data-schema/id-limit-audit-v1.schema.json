@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/schema/id-limit-audit-v1.schema.json",
+  "title": "TMXY P2-11 ID width and fixed-limit audit evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "captured_utc", "task_id", "result", "task_status", "completion_criteria_satisfied", "input", "report", "summary", "components", "source_signals", "contracts", "implementation", "disclosure", "reproduction", "next_scope"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "captured_utc": {"type": "string", "minLength": 1},
+    "task_id": {"const": "P2-11"},
+    "result": {"enum": ["PASS", "FAIL"]},
+    "task_status": {"enum": ["COMPLETE", "IN_PROGRESS"]},
+    "completion_criteria_satisfied": {"type": "boolean"},
+    "input": {"type": "object"},
+    "report": {"type": "object"},
+    "summary": {"type": "object"},
+    "components": {"type": "array", "minItems": 1, "items": {"type": "object"}},
+    "source_signals": {"type": "object"},
+    "contracts": {"type": "object"},
+    "implementation": {"type": "object"},
+    "disclosure": {"type": "object"},
+    "reproduction": {"type": "object"},
+    "next_scope": {"type": "object"}
+  }
+}

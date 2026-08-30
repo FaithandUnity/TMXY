@@ -43,6 +43,20 @@ enum class AlphaCoverage : std::uint8_t
     translucent = 3,
 };
 
+enum class MipCountBasis : std::uint8_t
+{
+    package_descriptor = 0,
+    payload_complete_chain_contract = 1,
+    unknown = 255,
+};
+
+enum class PayloadExtentBasis : std::uint8_t
+{
+    complete_input_payload = 0,
+    declared_mip_payload_prefix_contract = 1,
+    unknown = 255,
+};
+
 struct UnknownTextureProperty final
 {
     std::string name_bytes;
@@ -77,12 +91,20 @@ struct QtxTextureView final
     std::vector<TextureMip> mips;
     AlphaEncoding alpha_encoding{AlphaEncoding::none};
     AlphaCoverage alpha_coverage{AlphaCoverage::opaque};
+    std::uint32_t effective_mip_count{0};
+    MipCountBasis mip_count_basis{MipCountBasis::package_descriptor};
     std::uint64_t payload_size{0};
+    std::uint64_t input_payload_bytes{0};
+    std::uint64_t consumed_payload_bytes{0};
+    std::uint64_t ignored_payload_bytes{0};
+    PayloadExtentBasis payload_extent_basis{PayloadExtentBasis::complete_input_payload};
 };
 
 [[nodiscard]] const char* to_string(TextureFormat value) noexcept;
 [[nodiscard]] const char* to_string(ClampMode value) noexcept;
 [[nodiscard]] const char* to_string(AlphaEncoding value) noexcept;
 [[nodiscard]] const char* to_string(AlphaCoverage value) noexcept;
+[[nodiscard]] const char* to_string(MipCountBasis value) noexcept;
+[[nodiscard]] const char* to_string(PayloadExtentBasis value) noexcept;
 
 } // namespace tmxy::texture

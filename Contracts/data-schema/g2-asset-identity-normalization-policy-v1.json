@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.6",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_build": "qy-3.0.0.413",
+  "scope": {
+    "source_revision": "P2-20A.4",
+    "source_resolution": "AMBIGUOUS",
+    "ambiguous_targets": 15,
+    "candidate_edges": 30,
+    "candidate_count_per_target": 2,
+    "p2_03_identity_fields": [
+      "logical_name_sha256",
+      "logical_name_ascii_lower_sha256"
+    ]
+  },
+  "expected_measured": {
+    "source_ambiguous_targets": 15,
+    "source_candidate_edges": 30,
+    "case_fold_collision_targets": 13,
+    "case_fold_collision_edges": 26,
+    "non_case_identity_targets": 2,
+    "non_case_identity_edges": 4,
+    "strict_descriptor_equivalent_targets": 0,
+    "strict_descriptor_equivalent_edges": 0,
+    "strict_full_semantic_equivalent_targets": 0,
+    "strict_full_semantic_equivalent_edges": 0,
+    "effective": {
+      "resolved_targets": 0,
+      "resolved_edges": 0,
+      "ambiguous_targets": 15,
+      "ambiguous_edges": 30
+    },
+    "candidate_selections": 0,
+    "reconciled_full_workset": {
+      "targets": 21494,
+      "candidate_edges": 39351,
+      "resolved_targets": 21299,
+      "resolved_edges": 38796,
+      "ambiguous_targets": 189,
+      "ambiguous_edges": 546,
+      "unresolved_targets": 6,
+      "unresolved_edges": 9,
+      "unknown_targets": 0,
+      "unknown_edges": 0
+    }
+  },
+  "normalization_rules": {
+    "identity_grouping": "P2-03 ASCII-lower identity hash only",
+    "ascii_bytes_only": true,
+    "unicode_casefold": false,
+    "locale_sensitive_mapping": false,
+    "path_normalization": false,
+    "descriptor_field_normalization": false,
+    "identity_grouping_is_semantic_equivalence": false,
+    "strict_descriptor_semantics_required": true,
+    "strict_full_semantics_required": true,
+    "nested_references_preserved": true,
+    "unknown_properties_preserved": true,
+    "floating_point_bits_preserved": true,
+    "field_order_preserved": true,
+    "first_candidate_selection": false,
+    "representative_candidate_selection": false,
+    "coarse_equivalence_substitution": false
+  },
+  "negative_contracts": [
+    "FIRST_CANDIDATE_SELECTION_REJECTED",
+    "FORCED_EQUIVALENCE_REJECTED",
+    "MISSING_FIELD_REJECTED",
+    "INPUT_HASH_TAMPER_REJECTED",
+    "FALSE_G2_OR_P3_REJECTED",
+    "NON_ASCII_OR_LOCALE_FOLD_REJECTED",
+    "NESTED_REFERENCE_CHANGE_REJECTED",
+    "UNKNOWN_PROPERTY_CHANGE_REJECTED",
+    "FLOAT_OR_ORDER_CHANGE_REJECTED",
+    "COARSE_EQUIVALENCE_SUBSTITUTION_REJECTED",
+    "UNKNOWN_FIELD_REJECTED"
+  ],
+  "authority_rules": {
+    "audit_is_candidate_selection": false,
+    "case_fold_collision_is_semantic_equivalence": false,
+    "diagnostic_pass_is_g2_approval": false,
+    "this_evidence_can_authorize_p3": false
+  },
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-asset-identity-normalization.jsonl",
+    "report_json": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
+    "report_markdown": "Data/Reports/p2-20a-asset-identity-normalization-report.md",
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "anonymous_aggregate_and_hash_only": true,
+    "anonymous_ids_in_ignored_detail_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "raw_table_rows": false,
+    "legacy_source_lines": false,
+    "decoded_confidential_payloads": false
+  }
+}

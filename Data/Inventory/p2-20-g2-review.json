@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "captured_utc": "2026-08-30T15:29:07.3062420+00:00",
+  "task_id": "P2-20",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "gate": "G2",
+  "gate_decision": "BLOCKED",
+  "g2_approved": false,
+  "p3_authorized": false,
+  "input": {
+    "source_build": "qy-3.0.0.413",
+    "bindings": {
+      "aggregate_sha256": "2a19f11a3c2452c5ee987a137da7c1b2f49811b99525be38c48b58f1a76cea9c",
+      "prerequisites": [
+        {
+          "task_id": "P2-01",
+          "path": "Data/Inventory/p2-01-package-inventory.json",
+          "sha256": "ac6671219c41324f1e7aac0a1cd5c08a9dc66f7c75e30cd3081610c038a26d16",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-02",
+          "path": "Data/Inventory/p2-02-package-boundary-completeness.json",
+          "sha256": "8ecdc9b5af0b8bd3e009781452bcc68114f65fd2b7513e26b49402f76738863e",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-03",
+          "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+          "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-04",
+          "path": "Data/Inventory/p2-04-current-table-inventory.json",
+          "sha256": "9c374ad84bc2440c19ec039e3761db8d1398add7cc66544452823b5ed010892a",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-05",
+          "path": "Data/Inventory/p2-05-auxiliary-config-inventory.json",
+          "sha256": "ce440d346053144eae53dead5c2e8fef97c674db211ee8b861baedd17a9daaff",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-06",
+          "path": "Data/Inventory/p2-06-three-layer-data.json",
+          "sha256": "c399bfc3db6c516be3165750de96f705452c631e14c6ae10530325ea576ef876",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-07",
+          "path": "Data/Inventory/p2-07-core-table-schema.json",
+          "sha256": "370a247b931a5975955a6a6932b1fdfaebb79be7090d47f8f61504bd3fd16592",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-08",
+          "path": "Data/Inventory/p2-08-table-ownership.json",
+          "sha256": "423e3898c1089e140f9a8efc04a1dae8d4600512e8ba44a02fc2048487c960fc",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-09",
+          "path": "Data/Inventory/p2-09-legacy-current-diff.json",
+          "sha256": "712eb593d6267121e7386437aabcfa41a9b15a8d71db3e470507bd86d5a3bbc2",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-10",
+          "path": "Data/Inventory/p2-10-canonical-id-map.json",
+          "sha256": "76a1c0cf4dd22614d6b81e31a905ca437fd3b8787c2ce6f0aa54594f94afc4f7",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-11",
+          "path": "Data/Inventory/p2-11-id-limit-audit.json",
+          "sha256": "955d0a3b87012df40657a0c599952aad97ddc25cb26519623622c431e7ebb11b",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-12",
+          "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+          "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-13",
+          "path": "Data/Inventory/p2-13-reference-closure.json",
+          "sha256": "3d69c8a7a8f96bce8d51687baf5862e924562211c7b803518b6fb4d1623d9962",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-14",
+          "path": "Data/Inventory/p2-14-asset-health.json",
+          "sha256": "d20e69adb8651eeb56434f1be6438dcc138e25ae9285c7de43c58ee43f6d0d79",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-15",
+          "path": "Data/Inventory/p2-15-conversion-routing.json",
+          "sha256": "c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-16",
+          "path": "Data/Inventory/p2-16-conversion-cache.json",
+          "sha256": "36dd4a2d78246401f2a0ebc2618c00a7555e4a1b064cdc4c28ceb9af4c7b8e6c",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-17",
+          "path": "Data/Inventory/p2-17-protocol-codegen.json",
+          "sha256": "23cd1f824a3fab1c203a648df8224de6257bea96dc4aa431fcc063c74aead222",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-18",
+          "path": "Data/Inventory/p2-18-content-health.json",
+          "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        },
+        {
+          "task_id": "P2-19",
+          "path": "Data/Inventory/p2-19-resource-budget.json",
+          "sha256": "18a6189935d14e77d971bde977f0406ec77ca1e238c8cf32d010017cb00e4444",
+          "result": "PASS",
+          "task_status": "COMPLETE",
+          "completion_criteria_satisfied": true
+        }
+      ],
+      "supplemental": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+        "sha256": "e93d4ad5feba31092cc93f7525cef0bedf97c15b16a288ebf21a9a361aa88104",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false
+      },
+      "descriptor_diagnostics": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.4",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "g2_06_satisfied": false
+      },
+      "aux_semantic_diagnostics": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.5",
+        "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json",
+        "sha256": "bdd8802c9f6c5304bdab3183f606923005145c87daf5f4f3208edf14b4cc7cb9",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "aux_package_context": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.9",
+        "path": "Data/Reports/p2-20a-aux-package-context-report.json",
+        "sha256": "0514d9c2f4537ebf49e3384cd19661e90d1282eaf99f4c76b2d25ccbcfef1c00",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "aux_ecf_parser_parity": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.10",
+        "path": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.json",
+        "sha256": "b1ece2fe26ed5f8749a269f07c03f64917fc1672c28443ecbc08fe00c0ca18c8",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "aux_malformed_xml_diagnostics": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.11",
+        "path": "Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json",
+        "sha256": "42b64f380ada8cfa235b9ed2178a95ae6c489f1a33ba2aaccde3571db5a3b28c",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "identity_normalization_safety": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.6",
+        "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
+        "sha256": "4969171ea5881e61df9c991ff91eab5c35c27bce02fad7d6e313b3dda5a57688",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "binding_failure_diagnostics": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.7",
+        "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+        "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "remediation_scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "binding_recovery": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.8",
+        "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+        "sha256": "1e241d6c74c0a0181c792b1f0c27a5e7cdaa2d27529b95e52ee6efe0eb45d19d",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "g2_06_satisfied": false
+      },
+      "static_mesh_payload_section_prefix": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.12",
+        "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json",
+        "sha256": "ea9b0d47508ddd2f0c15fc788d980eb08fc6c939db320fd4479bdffec6feb482",
+        "inventory_path": "Data/Inventory/p2-20a-static-mesh-payload-section-prefix.json",
+        "inventory_sha256": "c0b27ed7fe502232f4f6caf542af95b87e0de135c6e1ac58eb6582525cf50fc7",
+        "detail_path": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl",
+        "detail_sha256": "ca693505b5d5e1ac07dfce2a404fd3bcaa09fea35667b86fa57108fb97383a4f",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS_DIAGNOSTIC",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "remediation_scope_complete": false,
+        "g2_06_satisfied": false
+      },
+      "qtx_declared_mip_payload_prefix": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.13",
+        "path": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.json",
+        "sha256": "18123bb24509f546da2b5138ba51de02d93590a3b7b795a4eefa5b02bf8f8753",
+        "inventory_path": "Data/Inventory/p2-20a-qtx-declared-mip-payload-prefix.json",
+        "inventory_sha256": "690a84ae93b33403b29831316e0d0b46c78ebb563bbb175e29dd9156c2bc21c5",
+        "detail_path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix.jsonl",
+        "detail_sha256": "0a93b28ca05a1177e6f1ce19db46d2fc0af25321af7fc4c0d1baaee5660369f6",
+        "effective_recovery_plan_path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+        "effective_recovery_plan_sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS_DIAGNOSTIC",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "remediation_scope_complete": false,
+        "g2_06_satisfied": false,
+        "p3_authorized": false
+      },
+      "remediation": {
+        "task_id": "P2-20B",
+        "criterion_id": "G2-07",
+        "path": "Data/Governance/p2-g2-migration-decisions.json",
+        "sha256": "1b66cfe1ca7c63c26d7df2af4dd113abc81228309a45a506d4ea26c38536b42a",
+        "result": "BLOCKED",
+        "generation_result": "PASS",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "g2_07_satisfied": false
+      },
+      "quality": {
+        "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
+        "sha256": "99d24ab9feced1666f6358af98be37d2cfb9ccb652545db101ddfaf0bfde43b8",
+        "result": "PASS_DIAGNOSTIC",
+        "captured_utc": "2026-08-30T18:19:33.9619308+00:00"
+      }
+    }
+  },
+  "report": {
+    "json": {
+      "path": "Data/Reports/p2-20-g2-review-report.json",
+      "tracked": true,
+      "bytes": 58091,
+      "lines": 1827,
+      "sha256": "f7cecc49a50422adb6292eaed2126bf559fe17f22cd5566b1d528678ffc5fb66"
+    },
+    "markdown": {
+      "path": "Data/Reports/p2-20-g2-review-report.md",
+      "tracked": true,
+      "bytes": 7961,
+      "lines": 52,
+      "sha256": "c812d1018bc77885c45c71e5b0ba4b35d82cc81ddd18d8e7c3c51d5becf30f99"
+    }
+  },
+  "summary": {
+    "criteria_total": 9,
+    "satisfied": 7,
+    "blocked": 2,
+    "satisfied_ids": [
+      "G2-01",
+      "G2-02",
+      "G2-03",
+      "G2-04",
+      "G2-05",
+      "G2-08",
+      "G2-09"
+    ],
+    "blocked_ids": [
+      "G2-06",
+      "G2-07"
+    ]
+  },
+  "blockers": [
+    {
+      "id": "G2-BLK-06",
+      "criterion_id": "G2-06",
+      "title": "Core resource-reference closure has quantified open gaps",
+      "reason": "P2-20A and its A.3/A.5/A.9/A.10/A.11/A.12/A.13 diagnostic evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. A.11 retains strict rejection of all 6 malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically resolves 3391 consumer occurrences and leaves 1 unresolved without first-candidate selection; this technical proof grants no semantic adapter or root approval. All 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 189 full-semantic ambiguous plus 6 production-unresolved targets. A.6 measured 13 ASCII-lower identity-collision targets across 26 edges, but found 0 strict full-semantic equivalences and made 0 selections; all 15 ambiguous targets remain blocked. A.7 classified 24 of 24 rejected candidate edges, but made 0 automatic selections. A.8 cross-proved 13 targets / 15 edges as explicit production recoveries and retains 6 unresolved targets. A.12 source-derives an explicit payload-section-prefix PASS for 1 static-mesh target / 2 edges, where 2 declared material slots map to 1 nonempty payload section with 1 ignored trailing slot. It changes no A.4/A.8 authority state, selects no candidate, applies no adapter or recovery, and proves no runtime parity; the full asset workset remains 189 targets / 546 edges ambiguous and 6 targets / 9 edges unresolved. A.13 source-derives an explicit declared-mip payload-prefix PASS for 6 QTX targets / 6 unique edges while default strict parsing rejects all six; ignored tail bytes are hash-recorded and excluded from effective mips and DDS output. A.13 itself selects no candidate and changes no authority state. Its upstream phase is POST_APPLICATION; current A.4/A.7/A.8/Core authority retains 189 targets / 546 edges ambiguous and 6 targets / 9 edges unresolved. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Resolve the TinyXML silent-partial and client memory-tail/CRT boundary with runtime evidence or an explicit safe malformed disposition; approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
+      "authority_required": false
+    },
+    {
+      "id": "G2-BLK-07",
+      "criterion_id": "G2-07",
+      "title": "Migration registry is complete in coverage but decisions remain pending",
+      "reason": "P2-20B enumerates 1359 of 1359 required units, but 1359 remain pending, only 0 are decided, 0 are approved, and the verified approval count is 0. Machine suggestions are not decisions.",
+      "required_action": "Import explicit reviewed migration decisions into the V2 authority ledger, bind independently verifiable approvals and post-decision verification to each decision digest; machine-generated suggestions and the 39 review packets remain advisory.",
+      "authority_required": true
+    }
+  ],
+  "budget_interpretation": {
+    "planning_cost_quantified": true,
+    "manual_content_assets": 800,
+    "total_content_assets": 40090,
+    "manual_content_rate_ppm": 19955,
+    "base_planning_hours": 1404.695,
+    "risk_adjusted_planning_hours": 2000.37,
+    "machine_projection_seconds": 15908.4401,
+    "storage_budget_bytes": 411698550803,
+    "incremental_storage_required_bytes": 364930296437,
+    "storage_capacity_gap_bytes": 187804318325,
+    "measured_schedule": false,
+    "monetary_amount_available": false,
+    "financial_total_cost_available": false,
+    "delivery_commitment": false
+  },
+  "authority_boundaries": {
+    "playable_experience_proven": false,
+    "release_authority": false,
+    "production_authority": false,
+    "automatic_repair_or_delete_authority": false,
+    "official_server_implementation_recovered": false
+  },
+  "security": {
+    "quality_result": "PASS_DIAGNOSTIC",
+    "repository_result": "PASS",
+    "repository_failures": 0,
+    "secret_result": "PASS",
+    "secret_findings": 0,
+    "security_review_result": "PASS"
+  },
+  "contracts": {
+    "policy": "Contracts/data-schema/g2-review-policy-v1.json",
+    "policy_sha256": "52094feeb6dc31633ac88b8e7c09c7651c3a5daa85a2787f71b5ff69b1bd59fc",
+    "schema": "Contracts/data-schema/g2-review-v1.schema.json",
+    "schema_sha256": "8c1b2f761d15f5fb57890d16d62e97607fa99bb529e9b2dd13aa537a44c15489"
+  },
+  "implementation": {
+    "source_files": 17,
+    "source_sha256": "730f32bf6b36a2a38d8efba1e2bdf0a8eac503141982cb9f6ff0bfe59ee4b139",
+    "generator": "Tools/TMXY.G2Review/g2_review.py",
+    "generator_sha256": "1318f6570d2f9da394342a597306e42c73ed816efd3bf0bb45f41c36d1a134ba",
+    "wrapper": "Tools/TMXY.G2Review/New-G2Review.ps1",
+    "wrapper_sha256": "2e5f0d8ebfcd081fe75fb3533bceb73ffd9e8bb8e2a8c9f46e66bfaef2eae8df",
+    "self_test_assertions": 24
+  },
+  "disclosure": {
+    "private_source_paths": false,
+    "exact_primary_keys": false,
+    "exact_observed_extrema": false,
+    "raw_table_rows": false,
+    "decoded_confidential_payloads": false,
+    "legacy_source_lines": false
+  },
+  "reproduction": {
+    "check_mode": false,
+    "repository_mount": "read-only",
+    "network": "none",
+    "capabilities": "none",
+    "no_new_privileges": true,
+    "builder_reference": "tmxy-backend-builder:p0-08",
+    "builder_id": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
+    "builder_user": "tmxy"
+  },
+  "next_scope": {
+    "tasks": [
+      "P2-20A-remediation",
+      "P2-20B-owner-decisions",
+      "P2-20-g2-rerun"
+    ],
+    "detail": "Close the quantified G2-06 resource gaps and obtain explicit approved G2-07 decisions, then rerun the fail-closed G2 review. P3 remains unauthorized."
+  }
+}

@@ -1,11 +1,29 @@
 {
-  "schema_version": 1,
-  "state": "prepared_pending_authorization",
+  "schema_version": 3,
+  "state": "github_workflows_prepared_pending_external_authority",
   "provider_binding": {
-    "selected": false,
-    "provider": null,
-    "repository": null,
-    "remote_name": "origin"
+    "selected": true,
+    "provider": "github",
+    "repository": "FaithandUnity/TMXY",
+    "remote_name": "origin",
+    "remote_url": "https://github.com/FaithandUnity/TMXY.git"
+  },
+  "workflow_binding": {
+    "required_checks_workflow": ".github/workflows/p0-required-checks.yml",
+    "release_provenance_workflow": ".github/workflows/p0-release-provenance.yml",
+    "code_owners": ".github/CODEOWNERS",
+    "public_runner_security_runbook": "Docs/Build/PUBLIC-SELF-HOSTED-RUNNER-SECURITY.md",
+    "untrusted_workflow_has_release_permissions": false,
+    "shared_cache_write_requires_protected_main": true,
+    "fork_pull_request_uses_self_hosted_runner": false,
+    "fork_pull_request_required_check_fails_closed": true,
+    "ue_runner_labels": [
+      "self-hosted",
+      "Windows",
+      "X64",
+      "tmxy-ue58",
+      "tmxy-ephemeral"
+    ]
   },
   "protected_branch": {
     "name": "main",
@@ -35,6 +53,15 @@
     "release_job_requires_protected_branch": true,
     "release_job_requires_immutable_source_revision": true
   },
+  "public_repository_runner_security": {
+    "minimum_fork_workflow_approval_policy": "all_external_contributors",
+    "repository_runner_registration_authorized": false,
+    "disposable_vm_per_job_required": true,
+    "persistent_secret_material_allowed": false,
+    "internal_network_access_allowed": false,
+    "shared_writable_cache_allowed": false,
+    "base_workflow_fork_guard_is_registration_authority": false
+  },
   "cache_contract": {
     "key_includes_toolchain_lock_sha256": true,
     "key_includes_dependency_lock_sha256_when_present": true,
@@ -44,13 +71,18 @@
   },
   "build_authority": {
     "backend_target": "linux/amd64",
-    "backend_builder_digest": "sha256:a0313a1469a233fd220abbcb695db8e53e9fc3a60f91218fe3f8633602f37559",
+    "backend_builder_digest": "sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9",
     "client_engine": "5.8.2",
     "client_platform": "Win64"
   },
   "supply_chain": {
-    "backend_builder_sbom_sha256": "c05c6b67809f294bcba4bd223c6fef348bf2dc6faae084d6d48306ac0b441ef6",
+    "backend_builder_sbom_sha256": "1cf309b59aeafe35092207dac718128cae133d3d10ec785072032efd81857b91",
     "postgres_sbom_sha256": "880bb2df9d3036addef531e49f6ce2e4ae8e92dcfbe13d1a4097980294893b37",
+    "vulnerability_scanner": "trivy",
+    "vulnerability_scanner_version": "0.74.0",
+    "vulnerability_database_max_age_hours": 48,
+    "license_evidence_path": "Data/Security/p0-12-license-evidence.json",
+    "license_evidence_sha256": "5ab7aa095388f74845bc5c6f3f6ab4a60e59b6fa051fe2cd8a5167a3f05bab20",
     "authenticated_or_approved_offline_vulnerability_policy_required": true,
     "license_policy_required": true,
     "signed_provenance_required": true,
@@ -71,5 +103,10 @@
     ],
     "minimum_retention_days": 365,
     "local_diagnostic_report_is_authority": false
+  },
+  "current_observation": {
+    "evidence": "Data/Governance/p0-github-hosting-status.json",
+    "completion_criteria_satisfied": false,
+    "release_authority": false
   }
 }

@@ -42,6 +42,12 @@
     "evidence_revision": "P2-20A.5",
     "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json"
   },
+  "aux_package_context": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "evidence_revision": "P2-20A.9",
+    "path": "Data/Reports/p2-20a-aux-package-context-report.json"
+  },
   "identity_normalization_safety": {
     "task_id": "P2-20A",
     "criterion_id": "G2-06",

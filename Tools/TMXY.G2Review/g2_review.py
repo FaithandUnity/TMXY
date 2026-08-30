@@ -9,27 +9,8 @@ from g2_evidence import (bind_inputs, evaluate_core_closure, load_json, require,
                          resolve_inside, sha256)
 from g2_markdown import markdown
 from g2_migration import evaluate_migration_registry
+from g2_report_model import criterion, metric
 from g2_self_test import self_test
-def metric(name: str, value: Any, unit: str) -> dict[str, Any]:
-    return {"name": name, "value": value, "unit": unit}
-def criterion(
-    policy_item: dict[str, Any],
-    satisfied: bool,
-    metrics: list[dict[str, Any]],
-    interpretation: str,
-    blockers: list[str] | None = None,
-) -> dict[str, Any]:
-    return {
-        "id": policy_item["id"],
-        "statement": policy_item["statement"],
-        "required_status": policy_item["required_status"],
-        "observed_status": "SATISFIED" if satisfied else "BLOCKED",
-        "satisfied": satisfied,
-        "evidence_task_ids": policy_item["evidence_task_ids"],
-        "metrics": metrics,
-        "interpretation": interpretation,
-        "blocker_ids": blockers or [],
-    }
 def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], root: Path) -> list[dict[str, Any]]:
     by_id = {item["id"]: item for item in policy["criteria"]}
     p202 = evidence["P2-02"]["summary"]
@@ -116,6 +97,21 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                            ("region_semantic_references", "ecf"))
     aux_ready = (aux_semantic["scope_complete"] is True and
                  aux_semantic["g2_06_satisfied"] is True)
+    aux_context = evidence["P2-20A.9"]
+    aux_context_measured = aux_context["measured"]
+    aux_context_resolution = aux_context_measured["effective_resolution"]
+    aux_context_safe = (
+        aux_context["diagnostic_scope_complete"] is True and
+        aux_context["scope_complete"] is False and
+        aux_context["g2_06_satisfied"] is False and
+        aux_context["technical_state"]["package_context_contract_proven"] is True and
+        aux_context_measured["package_context"]["singleton_matches"] == 211 and
+        aux_context_measured["package_context"]["first_candidate_selections"] == 0 and
+        aux_context_resolution["resolved_total"] == 3391 and
+        aux_context_resolution["ambiguous_object"] == 0 and
+        aux_context_resolution["unresolved_resource"] == 1 and
+        aux_context["authority_state"]["terminal_instances"] == 0 and
+        aux_context["authority_state"]["nonterminal_instances"] == 212)
     identity_safety = evidence["P2-20A.6"]
     identity_measured = identity_safety["measured"]
     identity_effective = identity_measured["effective"]
@@ -146,7 +142,8 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                     failure_measured["unclassified_error_edges"] == 0 and recovery_safe)
     binding_ready = (binding_failure["remediation_scope_complete"] is True and
                      binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
-    ok = core["satisfied"] and aux_ready and identity_safe and binding_safe and binding_ready
+    ok = (core["satisfied"] and aux_ready and aux_context_safe and identity_safe and
+          binding_safe and binding_ready)
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -200,6 +197,18 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("aux_semantic_unresolved_resources", aux_region["unresolved_resource"], "references"),
         metric("aux_semantic_ecf_parser_differences", aux_ecf["mixed_newline_differences"], "files"),
         metric("aux_semantic_ecf_missed_assignments", aux_ecf["legacy_assignments_missed_by_a3_parser"], "assignments"),
+        metric("aux_package_context_hash_bound", True, "boolean"),
+        metric("aux_package_context_contract_proven", aux_context["technical_state"]["package_context_contract_proven"], "boolean"),
+        metric("aux_package_context_strict_ambiguous_objects", aux_context["strict_baseline"]["ambiguous_object"], "references"),
+        metric("aux_package_context_original_candidate_edges", aux_context["measured"]["package_context"]["original_candidate_edges"], "edges"),
+        metric("aux_package_context_singleton_matches", aux_context["measured"]["package_context"]["singleton_matches"], "references"),
+        metric("aux_package_context_first_candidate_selections", aux_context["measured"]["package_context"]["first_candidate_selections"], "references"),
+        metric("aux_package_context_effective_resolved", aux_context_resolution["resolved_total"], "references"),
+        metric("aux_package_context_effective_ambiguous", aux_context_resolution["ambiguous_object"], "references"),
+        metric("aux_package_context_effective_unresolved", aux_context_resolution["unresolved_resource"], "references"),
+        metric("aux_package_context_consumer_clean_regions", aux_context["technical_state"]["consumer_clean_region_instances"], "files"),
+        metric("aux_package_context_semantic_adapter_approved", aux_context["technical_state"]["semantic_adapter_approved"], "boolean"),
+        metric("aux_package_context_terminal_instances", aux_context["authority_state"]["terminal_instances"], "files"),
         metric("asset_binding_resolution_explicit", core["asset_binding_explicit"], "boolean"),
         metric("asset_binding_resolved_targets", core["asset_binding_resolved"], "assets"),
         metric("asset_binding_ambiguous_targets", core["asset_binding_ambiguous"], "assets"),
@@ -225,7 +234,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, identity, production-binding, and explicit recovery evidence. A.7 classifies all 24 strict rejected candidate edges; A.8 cross-proves 7 targets / 9 edges as production-valid recoveries while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full workset still has 189 ambiguous targets. Diagnostic completeness and technical recovery cannot substitute for the remaining remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, identity, production-binding, and explicit recovery evidence. A.9 proves a deterministic package-context singleton for all 211 formerly ambiguous region-object occurrences, yielding 3,391 resolved and one unresolved consumer occurrence without first-candidate selection. All 212 auxiliary instances nevertheless remain nonterminal because the proof is not semantic-adapter, no-reference, or root approval. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges as production-valid recoveries while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full asset workset still has 189 ambiguous targets. Diagnostic completeness and technical recovery cannot substitute for the remaining remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -319,12 +328,17 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         binding_recovery = evidence["P2-20A.8"]["measured"]
         asset_structure = closure["asset_structure"]
         auxiliary = evidence["P2-20A"]["scope_definition"]["auxiliary_config"]
+        aux_context = evidence["P2-20A.9"]
+        aux_context_resolution = aux_context["measured"]["effective_resolution"]
         blockers.append({
             "id": "G2-BLK-06",
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                f"P2-20A and its A.3 auxiliary evidence are hash-bound; all {auxiliary['inventory_files']} "
+                f"P2-20A and its A.3/A.5/A.9 auxiliary evidence are hash-bound. A.9 deterministically "
+                f"resolves {aux_context_resolution['resolved_total']} consumer occurrences and leaves "
+                f"{aux_context_resolution['unresolved_resource']} unresolved without first-candidate selection; "
+                f"this technical proof grants no semantic adapter or root approval. All {auxiliary['inventory_files']} "
                 f"configuration instances remain nonterminal ({auxiliary['candidate_only']} candidate-only, "
                 f"{auxiliary['editor_undecided']} editor-undecided, {auxiliary['malformed_blocked']} malformed) "
                 f"with {auxiliary['approved_roots']} approved roots. Explicit asset-binding evidence retains "

@@ -163,6 +163,20 @@ try {
         [int]$g206Metrics.aux_semantic_ecf_missed_assignments -ne 4) {
         throw 'P2-20 A.5 auxiliary semantic evidence did not remain hash-bound and fail closed.'
     }
+    if ($g206Metrics.aux_package_context_hash_bound -ne $true -or
+        $g206Metrics.aux_package_context_contract_proven -ne $true -or
+        [int]$g206Metrics.aux_package_context_strict_ambiguous_objects -ne 211 -or
+        [int]$g206Metrics.aux_package_context_original_candidate_edges -ne 422 -or
+        [int]$g206Metrics.aux_package_context_singleton_matches -ne 211 -or
+        [int]$g206Metrics.aux_package_context_first_candidate_selections -ne 0 -or
+        [int]$g206Metrics.aux_package_context_effective_resolved -ne 3391 -or
+        [int]$g206Metrics.aux_package_context_effective_ambiguous -ne 0 -or
+        [int]$g206Metrics.aux_package_context_effective_unresolved -ne 1 -or
+        [int]$g206Metrics.aux_package_context_consumer_clean_regions -ne 134 -or
+        $g206Metrics.aux_package_context_semantic_adapter_approved -ne $false -or
+        [int]$g206Metrics.aux_package_context_terminal_instances -ne 0) {
+        throw 'P2-20 A.9 auxiliary package-context evidence drifted or crossed its authority boundary.'
+    }
     if ($g206Metrics.identity_normalization_hash_bound -ne $true -or
         [int]$g206Metrics.identity_case_fold_collision_targets -ne 13 -or
         [int]$g206Metrics.identity_case_fold_collision_edges -ne 26 -or

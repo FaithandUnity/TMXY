@@ -10,7 +10,7 @@
   "gate_criterion": "G2-07",
   "g2_07_satisfied": false,
   "input": {
-    "aggregate_sha256": "16b6181c4dc2c44df278bc24e4c56430ab874330462fdc710be499a25ec74789",
+    "aggregate_sha256": "9c7b5698cda465e80704a0b2072196d3d85ae5aad9cfa04946aa2d7b1c4fa6da",
     "evidence": [
       {
         "task_id": "P2-09",
@@ -56,7 +56,7 @@
     "derived_sources": [
       {
         "artifact_id": "G2_POLICY",
-        "sha256": "27ebebf3a2d6000d70df8005b790637380c86091aaf3ced187b872c84fcc0f61",
+        "sha256": "cc000c149459814ef2034cc01026b6c35cd8714200b64c080ef2ce3063a55b2f",
         "records": 9
       },
       {
@@ -91,7 +91,7 @@
     "tracked": true,
     "bytes": 2403442,
     "lines": 75297,
-    "sha256": "8988ffa230bf5cca1735595e90e107fa03952d577b424574dbbb1a72f96c2770"
+    "sha256": "09ccfe288b4388131b336bde3de4310e07b7e91a46403864556d975fd5b6533f"
   },
   "review_packets": {
     "path": "Data/Governance/p2-g2-migration-review-packets.json",

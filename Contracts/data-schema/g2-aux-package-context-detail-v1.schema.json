@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-aux-package-context-detail-v1.schema.json",
+  "title": "TMXY P2-20A.9 ignored anonymous per-instance package-context proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "instance_id", "technical_state", "strict_counts",
+    "effective_counts", "object_proofs", "proof_set_sha256"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "instance_id": {"$ref": "#/$defs/sha256"},
+    "technical_state": {"enum": ["RESOLVED_ONLY", "UNRESOLVED"]},
+    "strict_counts": {"$ref": "#/$defs/resolution_counts"},
+    "effective_counts": {"$ref": "#/$defs/resolution_counts"},
+    "object_proofs": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/object_proof"}
+    },
+    "proof_set_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "resolution_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["resolved", "ambiguous", "unresolved"],
+      "properties": {
+        "resolved": {"type": "integer", "minimum": 0},
+        "ambiguous": {"type": "integer", "minimum": 0},
+        "unresolved": {"type": "integer", "minimum": 0}
+      }
+    },
+    "object_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "occurrence_id", "strict_state", "candidate_count", "candidate_set_sha256",
+        "package_context_sha256", "compatible_count", "selected_candidate_id",
+        "order_invariant", "proof_sha256"
+      ],
+      "properties": {
+        "occurrence_id": {"$ref": "#/$defs/sha256"},
+        "strict_state": {"const": "AMBIGUOUS"},
+        "candidate_count": {"const": 2},
+        "candidate_set_sha256": {"$ref": "#/$defs/sha256"},
+        "package_context_sha256": {"$ref": "#/$defs/sha256"},
+        "compatible_count": {"const": 1},
+        "selected_candidate_id": {"$ref": "#/$defs/sha256"},
+        "order_invariant": {"const": true},
+        "proof_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 - Status: Accepted
 - Date: 2026-08-26
+- Last amended: 2026-08-30
 - Decision owner: P1 format proof workstream
 
 ## Context
@@ -19,9 +20,15 @@ replacement.
 Create the platform-neutral C++20 `TMXY.StaticMesh` module. It parses all
 documented render, shadow, collision, section, octree, emitter, and UV arrays
 with explicit limits and stable errors. It independently reads the Package
-descriptor, requires a one-to-one material-slot/section binding, calculates
-render and collision bounds, and reports the declared/effective bounds relation
-without silently rewriting evidence.
+descriptor and keeps `bind_static_mesh` as the strict, non-zero one-to-one
+material-slot/section policy. A separately named
+`bind_static_mesh_with_payload_section_prefix` policy may consume only the
+leading Package material prefix when a non-empty SM payload has fewer sections
+than declared slots. It never accepts fewer Package slots, invents materials,
+or removes the ignored descriptor tail. Each success records declared,
+effective, and ignored counts plus the exact resolution basis. The module also
+calculates render and collision bounds and reports the declared/effective
+bounds relation without silently rewriting evidence.
 
 Keep the in-memory mesh in legacy runtime coordinates. Emit deterministic JSON
 metadata plus an OBJ review preview transformed through the frozen
@@ -34,6 +41,10 @@ remains a diagnostic intermediate.
 ## Consequences
 
 - Static-mesh conversion requires the matching Package object and SM payload.
+- The strict API remains exact-by-default; prefix recovery requires the
+  explicit API, a non-zero section count, and sufficient declared slots.
+- JSON discloses material-slot resolution counts and basis; OBJ and glTF emit
+  only the effective section prefix while preserving the full descriptor.
 - Corrupt counts, indices, sections, booleans, octree references, non-finite
   values, and trailing bytes fail before outputs are committed.
 - Internal octree face values are preserved without misclassifying them as leaf

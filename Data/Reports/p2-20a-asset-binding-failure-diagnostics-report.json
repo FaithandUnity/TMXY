@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.7",
-  "captured_utc": "2026-08-29T18:18:41.399194Z",
+  "captured_utc": "2026-08-30T09:14:47.237472Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -14,7 +14,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "a200b17c87cd5a6d3a31380e51111ec57620ab07f36f5b7906e9ce9aefa935b8",
+    "aggregate_sha256": "ae79050e558db5719a081dc0b4811876f53a666bbf1a501814806e6f89bb88d6",
     "entries": [
       {
         "role": "a4_report",
@@ -22,7 +22,7 @@
         "tracked": true,
         "bytes": 5798,
         "lines": 193,
-        "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c"
+        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
       },
       {
         "role": "a4_detail",
@@ -38,7 +38,7 @@
         "tracked": true,
         "bytes": 11011,
         "lines": 340,
-        "sha256": "ba6b6ea42d79c9386982701eb6c420873f8375791f979b3222dc32f55706cc22"
+        "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c"
       },
       {
         "role": "a4_policy",
@@ -70,7 +70,7 @@
         "tracked": true,
         "bytes": 6306,
         "lines": 189,
-        "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d"
+        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244"
       },
       {
         "role": "p2_12_catalog",
@@ -86,7 +86,7 @@
         "tracked": true,
         "bytes": 5442,
         "lines": 179,
-        "sha256": "592ed7e60bbae1f9f670e2aa5aa9796f6a9cceabd17c60d29913c359f3b79a6b"
+        "sha256": "41354fd69bea8898c56da7a1fbe045026c250749c60b2987510905ba4215db5d"
       },
       {
         "role": "a6_report",
@@ -94,7 +94,7 @@
         "tracked": true,
         "bytes": 6207,
         "lines": 191,
-        "sha256": "19155a5f3f2e3b53df6e3598f3f712656a55f948426d4ac17a2f2c2a9eafcc43"
+        "sha256": "4742d3211763b4b02a3ceafdf92ee2c7367398e27b5048e6a6e28ed13be4ae68"
       },
       {
         "role": "policy",

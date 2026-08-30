@@ -300,12 +300,38 @@
         "g2_06_satisfied": {"const": false}
       }
     },
+    "static_mesh_payload_section_prefix": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "inventory_path", "inventory_sha256", "detail_path", "detail_sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "remediation_scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.12"},
+        "path": {"const": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "inventory_path": {"const": "Data/Inventory/p2-20a-static-mesh-payload-section-prefix.json"},
+        "inventory_sha256": {"$ref": "#/$defs/sha256"},
+        "detail_path": {"const": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl"},
+        "detail_sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS_DIAGNOSTIC"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "remediation_scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
     "input_bindings": {
       "type": "object",
       "additionalProperties": false,
       "required": ["aggregate_sha256", "prerequisites", "supplemental",
         "descriptor_diagnostics", "aux_semantic_diagnostics", "aux_package_context", "aux_ecf_parser_parity", "aux_malformed_xml_diagnostics", "identity_normalization_safety",
-        "binding_failure_diagnostics", "binding_recovery",
+        "binding_failure_diagnostics", "binding_recovery", "static_mesh_payload_section_prefix",
         "remediation", "quality"],
       "properties": {
         "aggregate_sha256": { "$ref": "#/$defs/sha256" },
@@ -324,6 +350,7 @@
         "identity_normalization_safety": {"$ref": "#/$defs/identity_normalization_safety"},
         "binding_failure_diagnostics": {"$ref": "#/$defs/binding_failure_diagnostics"},
         "binding_recovery": {"$ref": "#/$defs/binding_recovery"},
+        "static_mesh_payload_section_prefix": {"$ref": "#/$defs/static_mesh_payload_section_prefix"},
         "remediation": { "$ref": "#/$defs/remediation" },
         "quality": { "$ref": "#/$defs/quality" }
       }
@@ -427,9 +454,9 @@
         "base_planning_hours": { "type": "number", "minimum": 0 },
         "risk_adjusted_planning_hours": { "type": "number", "minimum": 0 },
         "machine_projection_seconds": { "type": "number", "minimum": 0 },
-        "storage_budget_bytes": { "const": 411511619038 },
+        "storage_budget_bytes": { "const": 411698550803 },
         "incremental_storage_required_bytes": { "const": 364930296437 },
-        "storage_capacity_gap_bytes": { "const": 165106723445 },
+        "storage_capacity_gap_bytes": { "const": 187804318325 },
         "measured_schedule": { "const": false },
         "monetary_amount_available": { "const": false },
         "financial_total_cost_available": { "const": false },

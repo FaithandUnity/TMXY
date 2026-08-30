@@ -6,7 +6,8 @@ network, Linux capabilities, or privilege escalation.
 
 `g2_review.py` assembles the gate report. `g2_evidence.py` independently binds
 the prerequisite, P2-20A supplemental/A.4/A.5/A.6/A.7/A.8/A.9 diagnostics,
-the P2-20A.10 ECF parser-parity and P2-20A.11 malformed-XML diagnostics,
+the P2-20A.10 ECF parser-parity, P2-20A.11 malformed-XML, and P2-20A.12
+static-mesh payload-section-prefix diagnostics,
 P2-20B remediation, and quality inputs, then recomputes G2-06 and G2-07 from
 their full machine evidence instead of trusting reported completion flags or
 machine suggestions.
@@ -45,6 +46,16 @@ revision. The positive closure predicate is exercised only with synthetic unit
 data to prove its logic is not contradictory; P2-20A.11 cannot be promoted in
 place. Real dispositions require a new evidence revision, policy, schema, and
 binder before G2-06 may consume them.
+
+P2-20A.12 hash-binds its aggregate report, tracked inventory, and ignored
+anonymous detail. It proves a source-derived prefix contract for one static-mesh
+target and two candidate edges: strict binding rejects both, while the explicit
+prefix API passes both with two declared material slots, one nonempty payload
+section, and one ignored trailing slot. This diagnostic selects no candidate,
+applies no adapter or recovery, changes no A.4/A.8 authority state, and proves no
+legacy runtime parity. A.8 therefore remains 17 targets / 21 edges attempted,
+7 / 9 successful, and 12 / 15 unresolved; the full workset remains 189 / 546
+ambiguous and 12 / 15 unresolved. G2 remains 7/9 `BLOCKED`, and P3 is false.
 
 ```powershell
 pwsh -File Tools/TMXY.G2Review/New-G2Review.ps1

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.8",
-  "captured_utc": "2026-08-29T18:18:56.127679Z",
+  "captured_utc": "2026-08-30T09:15:50.452122Z",
   "result": "BLOCKED",
   "measured": {
     "attempted": {
@@ -32,7 +32,7 @@
     "tracked": false,
     "bytes": 6183,
     "lines": 191,
-    "sha256": "258328eebb658baf8fbeba72f20eca4f39e0f9b2149d8c6adb7d45581c503f08"
+    "sha256": "5ff822b4d7862420059fb9e61a7cb1413fd9a80902e536befdf9db7f76468669"
   },
   "report_markdown": {
     "path": "Data/Reports/p2-20a-asset-binding-recovery-report.md",

@@ -1,5 +1,5 @@
 {
-  "captured_utc": "2026-08-29T18:17:27Z",
+  "captured_utc": "2026-08-30T09:04:37Z",
   "completion": {
     "g2_remains_blocked_by_other_open_criteria": true,
     "observed_ambiguous_targets": 189,
@@ -40,7 +40,7 @@
       "bytes": 6306,
       "lines": 189,
       "path": "Data/Inventory/p2-12-full-asset-inventory.json",
-      "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d",
+      "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244",
       "tracked": true
     },
     {

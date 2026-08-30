@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T18:15:23.9726000+00:00",
+  "captured_utc": "2026-08-30T10:07:20.3298227+00:00",
   "result": "PASS",
   "task_id": "P2-19-PILOT",
   "evidence_kind": "conversion-pilot",
@@ -46,13 +46,13 @@
         "family": "sm",
         "task_id": "P1-14",
         "evidence": "Data/BuildBaseline/p1-14-sm-static-mesh.json",
-        "evidence_sha256": "4c5a42556d3e3ada8a1c6190f60968fed347ada9d2a52615beeb85dbe2d34707"
+        "evidence_sha256": "e4fe61a498ada5e729cbfc13db68885149202cb580adbe2f7f93f3e72362400e"
       },
       {
         "family": "skem",
         "task_id": "P1-15",
         "evidence": "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json",
-        "evidence_sha256": "c183530e911101092a04956de9296e7aac21399e4425575011e05edd985fd41e"
+        "evidence_sha256": "3b647929a11b82f9c5f78bc095522e73cd42b0992b14aa0aeeed00d4f2d109e9"
       },
       {
         "family": "anim",
@@ -64,7 +64,7 @@
         "family": "ter",
         "task_id": "P1-17",
         "evidence": "Data/BuildBaseline/p1-17-ter-terrain.json",
-        "evidence_sha256": "684ec33091b29595a08d5b27ce67a3828595f866861715b5b8e11583f0b701b4"
+        "evidence_sha256": "dcfcc56501d66bc06ebf6a3ba542acce827ff9d6feffc60643ef9908e20743e4"
       }
     ],
     "p2_15": {
@@ -103,20 +103,20 @@
       "cgroup_cpu_max": "max 100000",
       "cgroup_memory_max": "max",
       "visible_logical_processors": 32,
-      "visible_memory_bytes": 99951980544
+      "visible_memory_bytes": 99951992832
     },
     "storage": {
       "workspace_volume": "E:",
       "workspace_volume_total_bytes": 1073742868480,
-      "workspace_volume_available_bytes": 199823572992,
-      "rebuild_bytes": 46581322601,
-      "git_database_bytes": 9498867,
-      "tracked_worktree_bytes": 25636659,
-      "generated_directories_bytes": 34351119723,
+      "workspace_volume_available_bytes": 177125978112,
+      "rebuild_bytes": 46768254366,
+      "git_database_bytes": 11707679,
+      "tracked_worktree_bytes": 26654138,
+      "generated_directories_bytes": 34354289853,
       "generated_breakdown": [
         {
           "scope": "data_exports",
-          "bytes": 685974868
+          "bytes": 686260736
         },
         {
           "scope": "generated_contracts",
@@ -132,11 +132,11 @@
         },
         {
           "scope": "ue_intermediate",
-          "bytes": 8092232683
+          "bytes": 8092232682
         },
         {
           "scope": "ue_saved",
-          "bytes": 24313925879
+          "bytes": 24316810142
         }
       ]
     }
@@ -256,105 +256,105 @@
       "case_id": "6e4afb3772d098e0ae31e70747e616c22878ab99bf2b09dcaff1f2f21b604142",
       "descriptor_bytes": 222,
       "elapsed_ms": [
-        21.37,
-        21.687,
-        21.976,
-        21.408,
-        21.646
+        20.768,
+        20.736,
+        20.6,
+        20.635,
+        20.835
       ],
       "family": "qtx",
       "input_bytes": 1048798,
-      "median_ms": 21.646,
+      "median_ms": 20.736,
       "output_bytes": 3147136,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "b84ec2fec026c668f38ac1ac1426ba7655dab01b94e68be4079e72917428d605",
       "output_size_stable": true,
-      "p80_ms": 21.687,
+      "p80_ms": 20.768,
       "payload_bytes": 1048576
     },
     {
       "case_id": "44e65692a727695348746221cd7c2d153e995e9fbb2fccdcf93c0e11cb027d0e",
       "descriptor_bytes": 43554,
       "elapsed_ms": [
-        237.628,
-        234.461,
-        235.357,
-        239.662,
-        233.263
+        236.212,
+        236.108,
+        233.566,
+        233.057,
+        241.113
       ],
       "family": "sm",
       "input_bytes": 12229025,
-      "median_ms": 235.357,
-      "output_bytes": 14915451,
+      "median_ms": 236.108,
+      "output_bytes": 14915609,
       "output_file_count": 4,
       "output_hash_stable": true,
-      "output_sha256": "7a26fdf07872f7cdafc98d6b8a8e22c1275e80b46ee3d8a9ca1361dd929c0903",
+      "output_sha256": "12b4e0feb093f2066a477da7077cc1399abaab7254ec7185b15084beda2aa185",
       "output_size_stable": true,
-      "p80_ms": 237.628,
+      "p80_ms": 236.212,
       "payload_bytes": 12185471
     },
     {
       "case_id": "16a50c4d9edf3659cb4cd91bc214c419f11f13d49885e9f9b1611846147e06ce",
       "descriptor_bytes": 281615,
       "elapsed_ms": [
-        1120.763,
-        1131.375,
-        1112.234,
-        1120.1,
-        1125.295
+        1099.853,
+        1099.074,
+        1114.013,
+        1105.824,
+        1138.623
       ],
       "family": "skem",
       "input_bytes": 95981755,
-      "median_ms": 1120.763,
+      "median_ms": 1105.824,
       "output_bytes": 2855065,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "62e247970bf61eb3fa82b8afe4b389d136d237d73a16e8cfd2eccc2294570f6d",
       "output_size_stable": true,
-      "p80_ms": 1125.295,
+      "p80_ms": 1114.013,
       "payload_bytes": 95700140
     },
     {
       "case_id": "c6238bef27f5947a6abd18442719a4a35a2d978c7e21fae9312b295ae80dc9db",
       "descriptor_bytes": 281615,
       "elapsed_ms": [
-        279.703,
-        281.76,
-        279.477,
-        281.447,
-        277.819
+        278.197,
+        277.845,
+        276.991,
+        289.576,
+        294.773
       ],
       "family": "anim",
       "input_bytes": 33137431,
-      "median_ms": 279.703,
+      "median_ms": 278.197,
       "output_bytes": 3790759,
       "output_file_count": 2,
       "output_hash_stable": true,
       "output_sha256": "01473171cf80982f17b7e5bdf606b6040564250ecd0c1ba2e02d446f323e4a1f",
       "output_size_stable": true,
-      "p80_ms": 281.447,
+      "p80_ms": 289.576,
       "payload_bytes": 32855816
     },
     {
       "case_id": "c5e0a61e15c38361460b22d4dc2aa639e9e745b7dc585394569e469f0c7d2d82",
       "descriptor_bytes": 0,
       "elapsed_ms": [
-        4.468,
-        4.246,
-        5.023,
-        5.001,
-        4.903
+        4.384,
+        4.325,
+        4.285,
+        4.36,
+        4.273
       ],
       "family": "ter",
       "input_bytes": 147501,
-      "median_ms": 4.903,
+      "median_ms": 4.325,
       "output_bytes": 55401,
       "output_file_count": 4,
       "output_hash_stable": true,
       "output_sha256": "c2d50bd3363186c8e68a5dedbe64b879686f8a0b16659cb8382150e23d98025f",
       "output_size_stable": true,
-      "p80_ms": 5.001,
+      "p80_ms": 4.36,
       "payload_bytes": 147501
     }
   ],

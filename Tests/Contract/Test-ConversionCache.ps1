@@ -78,7 +78,7 @@ Add-Assertion 'Ignored plan is deterministic and complete' (
     $evidence.report.path -eq 'Data/Exports/P2-16/p2-16-conversion-cache-plan.jsonl' -and
     -not $evidence.report.tracked -and $evidence.report.lines -eq 40090 -and
     $evidence.report.bytes -eq 28389045 -and
-    $evidence.report.sha256 -eq '2b150bad66f0b06caf4d49b9b96a9b7ca010d3392c2078cb8110744eb48fe7b2')
+    $evidence.report.sha256 -eq 'eb7991ca638edbb0029fb20b34b2f794380d6ff202413734e7abd46e78ff4afb')
 if (Test-Path $reportPath -PathType Leaf) {
     Add-Assertion 'Local plan hash size and lines match evidence' ((Get-Sha256 $reportPath) -eq
         $evidence.report.sha256 -and (Get-Item $reportPath).Length -eq $evidence.report.bytes -and

@@ -9,6 +9,7 @@ from g2_evidence import (bind_inputs, evaluate_core_closure, load_json, require,
                          resolve_inside, sha256)
 from g2_aux_ecf_parser_parity import aux_ecf_parser_parity_metrics, aux_ecf_parser_parity_safe
 from g2_aux_malformed_xml import aux_malformed_xml_closure_ready, aux_malformed_xml_metrics
+from g2_static_mesh_prefix import static_mesh_prefix_blocker_text, static_mesh_prefix_metrics, static_mesh_prefix_safe
 from g2_markdown import markdown
 from g2_migration import evaluate_migration_registry
 from g2_report_model import criterion, metric
@@ -150,7 +151,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                      binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
     ok = (core["satisfied"] and aux_ready and aux_context_safe and aux_ecf_safe and
           aux_malformed_ready and
-          identity_safe and binding_safe and binding_ready)
+          identity_safe and binding_safe and static_mesh_prefix_safe(evidence["P2-20A.12"]) and binding_ready)
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -196,6 +197,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("binding_recovery_attempted_edges", recovery_measured["attempted"]["candidate_edges"], "edges"),
         metric("binding_recovery_successful_targets", recovery_measured["successful"]["targets"], "assets"),
         metric("binding_recovery_successful_edges", recovery_measured["successful"]["candidate_edges"], "edges"),
+        *(metric(name, value, unit) for name, value, unit in static_mesh_prefix_metrics(evidence["P2-20A.12"])),
         metric("aux_semantic_diagnostic_hash_bound", True, "boolean"),
         metric("aux_semantic_scope_complete", aux_semantic["scope_complete"], "boolean"),
         metric("aux_semantic_g2_06_satisfied", aux_semantic["g2_06_satisfied"], "boolean"),
@@ -243,7 +245,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, parser, identity, production-binding, and recovery evidence. A.11 keeps strict rejection, independent ElementTree rejection, source-derived TinyXML API success, and consumer/runtime authority as four separate layers: TinyXML accepts 6/6 but fully consumes only 5/6, so its silent partial parse and unproved client memory-tail/CRT behavior cannot approve a disposition. A.9 resolves 3,391 consumer occurrences and leaves one unresolved without first-candidate selection, yet all 212 auxiliary instances remain nonterminal. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full asset workset still has 189 ambiguous targets. Diagnostic completeness cannot substitute for semantic adapters, no-reference decisions, approved roots, or verified remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, parser, identity, production-binding, recovery, and static-mesh prefix evidence. A.11 keeps strict rejection, independent ElementTree rejection, source-derived TinyXML API success, and consumer/runtime authority as four separate layers: TinyXML accepts 6/6 but fully consumes only 5/6, so its silent partial parse and unproved client memory-tail/CRT behavior cannot approve a disposition. A.9 resolves 3,391 consumer occurrences and leaves one unresolved without first-candidate selection, yet all 212 auxiliary instances remain nonterminal. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. A.12 proves the source-derived payload-section-prefix contract for one static-mesh target / two edges (two material slots, one payload section, one ignored trailing slot) but performs no selection, resolution, adapter, recovery, authority change, or runtime-parity claim. The full asset workset therefore remains 189 targets / 546 edges ambiguous and 12 targets / 15 edges unresolved. Diagnostic completeness cannot substitute for semantic adapters, no-reference decisions, approved roots, or verified remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -269,9 +271,8 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("pending_entries_have_no_chosen_decision", migration["pending_empty"], "boolean"),
         metric("g2_07_registry_satisfied", migration["registry_satisfied"], "boolean"),
     ], "P2-20B V2 provides a fail-closed decision workflow and anonymous review packets that preserve all independent units, but every unit remains pending with no externally authorized decision, approval, or bound verification. Machine suggestions and review packets are non-authoritative and do not satisfy G2-07.", ["G2-BLK-07"] if not ok else []))
-    human = p219["summary"]["human_budget"]
-    machine = p219["summary"]["machine_budget"]
-    storage = p219["summary"]["storage_budget"]
+    human, machine, storage = (p219["summary"][name] for name in
+                               ("human_budget", "machine_budget", "storage_budget"))
     money = human["money_budget"]
     p218_effort = evidence["P2-18"]["summary"]["effort"]
     manual_assets = int(p218_effort["manual_assets"])
@@ -346,7 +347,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                f"P2-20A and its A.3/A.5/A.9/A.10/A.11 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
+                f"P2-20A and its A.3/A.5/A.9/A.10/A.11/A.12 diagnostic evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
                 f"A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. "
                 f"A.11 retains strict rejection of all {aux_malformed['population']['instances']} malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically "
                 f"resolves {aux_context_resolution['resolved_total']} consumer occurrences and leaves "
@@ -368,6 +369,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"{binding_recovery['successful']['targets']} targets / "
                 f"{binding_recovery['successful']['candidate_edges']} edges as explicit production recoveries "
                 f"and retains {binding_failure['effective']['unresolved_targets']} unresolved targets. "
+                f"{static_mesh_prefix_blocker_text(evidence['P2-20A.12'], asset_binding)} "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "

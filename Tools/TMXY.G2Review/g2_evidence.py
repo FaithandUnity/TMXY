@@ -14,6 +14,7 @@ from g2_aux_malformed_xml import bind_aux_malformed_xml
 from g2_identity_normalization import bind_identity_normalization_safety
 from g2_binding_failure import bind_binding_failure_diagnostics
 from g2_binding_recovery import bind_binding_recovery
+from g2_static_mesh_prefix import bind_static_mesh_payload_section_prefix
 from g2_migration import evaluate_migration_registry
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as stream:
@@ -149,6 +150,10 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.8"] = recovery
     aggregate_lines.append(recovery_aggregate)
+    prefix_binding, prefix_report, prefix_aggregate = bind_static_mesh_payload_section_prefix(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.12"] = prefix_report
+    aggregate_lines.append(prefix_aggregate)
     remediation_spec = policy["remediation"]
     remediation_relative = remediation_spec["path"]
     remediation_path = resolve_inside(root, remediation_relative)
@@ -217,6 +222,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "identity_normalization_safety": identity_binding,
         "binding_failure_diagnostics": failure_binding,
         "binding_recovery": recovery_binding,
+        "static_mesh_payload_section_prefix": prefix_binding,
         "remediation": remediation_binding,
         "quality": {
             "path": quality_relative,

@@ -1,0 +1,300 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.12",
+  "captured_utc": "2026-08-30T09:17:32.968557Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS_DIAGNOSTIC",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "remediation_scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "proof_classification": {
+    "source_basis": "SOURCE_DERIVED",
+    "legacy_binary_executed": false,
+    "runtime_parity_proven": false
+  },
+  "input_bindings": {
+    "aggregate_sha256": "785c19ba3be20474d27b8c2c1dd960ec89d7c53c69a294d73899e79667081081",
+    "entries": [
+      {
+        "role": "a4_report",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 5798,
+        "lines": 193,
+        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
+      },
+      {
+        "role": "a4_inventory",
+        "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+        "tracked": true,
+        "bytes": 11011,
+        "lines": 340,
+        "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c"
+      },
+      {
+        "role": "a4_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 13819743,
+        "lines": 3651,
+        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
+      },
+      {
+        "role": "a7_report",
+        "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 9419,
+        "lines": 302,
+        "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20"
+      },
+      {
+        "role": "a7_inventory",
+        "path": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
+        "tracked": true,
+        "bytes": 8942,
+        "lines": 280,
+        "sha256": "a69acd632feb9f412cba5088f82daec1d9c951d1de551fe116559246659b822f"
+      },
+      {
+        "role": "a7_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 21229,
+        "lines": 19,
+        "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
+      },
+      {
+        "role": "a8_report",
+        "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+        "tracked": true,
+        "bytes": 6183,
+        "lines": 191,
+        "sha256": "5ff822b4d7862420059fb9e61a7cb1413fd9a80902e536befdf9db7f76468669"
+      },
+      {
+        "role": "a8_inventory",
+        "path": "Data/Inventory/p2-20a-asset-binding-recovery.json",
+        "tracked": true,
+        "bytes": 2620,
+        "lines": 88,
+        "sha256": "112afa054866d030dcbed24fc70ed3760160002df832547fd2eaced8ccadf441"
+      },
+      {
+        "role": "a8_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl",
+        "tracked": false,
+        "bytes": 15778,
+        "lines": 19,
+        "sha256": "858d1a6a98a2aa727d589d99f0a9a6eda02dc867234e07167fa6cd8d5563f938"
+      },
+      {
+        "role": "p2_12_catalog",
+        "path": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+        "tracked": false,
+        "bytes": 16802213,
+        "lines": 40090,
+        "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92"
+      },
+      {
+        "role": "policy",
+        "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-policy-v1.json",
+        "tracked": true,
+        "bytes": 4072,
+        "lines": 103,
+        "sha256": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e"
+      },
+      {
+        "role": "schema",
+        "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-v1.schema.json",
+        "tracked": true,
+        "bytes": 11681,
+        "lines": 272,
+        "sha256": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e"
+      },
+      {
+        "role": "detail_schema",
+        "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-detail-v1.schema.json",
+        "tracked": true,
+        "bytes": 2703,
+        "lines": 61,
+        "sha256": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8"
+      }
+    ]
+  },
+  "detail_export": {
+    "path": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl",
+    "tracked": false,
+    "bytes": 2161,
+    "lines": 1,
+    "sha256": "ca693505b5d5e1ac07dfce2a404fd3bcaa09fea35667b86fa57108fb97383a4f"
+  },
+  "legacy_source_provenance": {
+    "aggregate_sha256": "c62be3d6c7786ff492a93834cb6dfbd500f0d46f54422d0412b020045fc72af7",
+    "roles": [
+      {
+        "role": "legacy_exporter_v1",
+        "sha256": "8133ea9e6326da55e1d542bfcfb44731a4a48cabf5984bedcbba7dfb97bdcaea"
+      },
+      {
+        "role": "legacy_exporter_v2010",
+        "sha256": "89c720b8fab565eecf94323b66cfec3eca4b599aa299418f35da834c56d76116"
+      },
+      {
+        "role": "legacy_factory_zero_face_filter",
+        "sha256": "1f89ae1a50462aed98c04c5c65cd55743e64a685884c1fc27f356b8ad4a46407"
+      },
+      {
+        "role": "legacy_payload_reader_writer",
+        "sha256": "5462960f3c022539d00738f0a8c24bc43dcd955e2bf45018e0bba5a8a23648f4"
+      },
+      {
+        "role": "legacy_renderer_fixed_loop",
+        "sha256": "a4ce314687a375d54fec70d7b138799e5fbca2e1c68ea83f1366b3abca70120f"
+      },
+      {
+        "role": "legacy_renderer_material_lookup",
+        "sha256": "134444b822c3bd271bcb91db4a0ac59a2b540bacbe460e35c54077f78589be87"
+      },
+      {
+        "role": "legacy_renderer_programmable_loop",
+        "sha256": "b66631100212dfeda498e3788296b87d00929a98e8476a3d4c00811a42f7f9de"
+      }
+    ]
+  },
+  "source_facts": {
+    "exporter_material_section_ordinal_alignment": true,
+    "factory_zero_face_section_omission": true,
+    "renderer_iteration_bounded_by_payload_sections": true,
+    "same_index_material_lookup": true,
+    "trailing_material_slot_not_consumed": true,
+    "payload_section_order_preserved": true
+  },
+  "production_contract": {
+    "api": "bind_static_mesh_with_payload_section_prefix",
+    "implementation_bindings": {
+      "aggregate_sha256": "1e4a55cbb089489438a70c0f89ca770917c0e979617517ae71f8835df91a0c3b",
+      "entries": [
+        {
+          "role": "static_mesh_types_header",
+          "path": "Tools/TMXY.StaticMesh/include/tmxy/static_mesh/static_mesh_types.hpp",
+          "tracked": true,
+          "bytes": 3704,
+          "lines": 157,
+          "sha256": "1e7590172564a09742a4fdbfc75dda2f73d61e8e3036dda137276a612a51895a"
+        },
+        {
+          "role": "static_mesh_api_header",
+          "path": "Tools/TMXY.StaticMesh/include/tmxy/static_mesh/package_static_mesh_reader.hpp",
+          "tracked": true,
+          "bytes": 1124,
+          "lines": 30,
+          "sha256": "6655189e886c15b6931c6e0142a682beb1e2b4619fa3939c87e61d3748b6fc8f"
+        },
+        {
+          "role": "static_mesh_binding_implementation",
+          "path": "Tools/TMXY.StaticMesh/src/package_static_mesh_reader.cpp",
+          "tracked": true,
+          "bytes": 27353,
+          "lines": 686,
+          "sha256": "b76287edbe0d965259277e498061d758f7b631bb30f0c3aba4bcd773143cdb3f"
+        },
+        {
+          "role": "static_mesh_payload_parser",
+          "path": "Tools/TMXY.StaticMesh/src/sm_reader.cpp",
+          "tracked": true,
+          "bytes": 26204,
+          "lines": 684,
+          "sha256": "a0fdc3d62dbc65bece8ec24acea11085461bbb6aa9a959c3cc50b2d6a2d209e6"
+        },
+        {
+          "role": "static_mesh_error_source",
+          "path": "Tools/TMXY.StaticMesh/src/static_mesh_error.cpp",
+          "tracked": true,
+          "bytes": 2747,
+          "lines": 68,
+          "sha256": "591557024f8123a0909448d30e0338879ea7601ad9a84195c5b7dc2cbabec40a"
+        }
+      ]
+    }
+  },
+  "scope": {
+    "source_revision": "P2-20A.7",
+    "family": "sm",
+    "targets": 1,
+    "candidate_edges": 2,
+    "unique_candidates": 2,
+    "candidate_ids_distinct": true,
+    "candidate_set_exact": true
+  },
+  "measured": {
+    "source_assets_reverified": 1,
+    "package_files_hashed": 2,
+    "candidate_bodies_reverified": 2,
+    "strict_rejected_edges": 2,
+    "material_slot_mismatch_edges": 2,
+    "prefix_pass_edges": 2,
+    "body_variants": 1,
+    "descriptor_semantic_variants": 1,
+    "strict_semantic_variants": 1,
+    "prefix_semantic_variants": 1,
+    "candidate_selections": 0,
+    "automatic_resolutions": 0,
+    "owner_dispositions": 0,
+    "content_dispositions": 0
+  },
+  "observed_relation": {
+    "recovery_kind": "sm_payload_section_prefix",
+    "basis": "payload_section_prefix_contract",
+    "descriptor_material_slots": 2,
+    "payload_sections": 1,
+    "nonempty_payload_sections": 1,
+    "ignored_trailing_material_slots": 1,
+    "dense_material_slots": true,
+    "observed_edges": 2
+  },
+  "authority_boundary": {
+    "a4_is_authoritative": true,
+    "authority_state_changed": false,
+    "adapter_applied": false,
+    "recovery_applied": false,
+    "machine_can_select_candidate": false,
+    "machine_can_approve_disposition": false,
+    "repair_or_write": false,
+    "delete_or_no_ref": false,
+    "owner_approvals": 0,
+    "verified_resolutions": 0
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "asset_effective_unresolved_targets": 12,
+    "asset_effective_unresolved_edges": 15,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "contracts": {
+    "policy_sha256": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e",
+    "schema_sha256": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e",
+    "detail_schema_sha256": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8"
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "legacy_source_roles_and_hashes_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_confidential_payloads": false
+  }
+}

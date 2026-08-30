@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.12",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "source_revisions": ["P2-20A.4", "P2-20A.7", "P2-20A.8"],
+  "scope": {
+    "family": "sm",
+    "strict_error_code": "material_slot_mismatch",
+    "targets": 1,
+    "candidate_edges": 2,
+    "recovery_kind": "sm_payload_section_prefix",
+    "basis": "payload_section_prefix_contract"
+  },
+  "expected_relation": {
+    "descriptor_material_slots": 2,
+    "payload_sections": 1,
+    "nonempty_payload_sections": 1,
+    "ignored_trailing_material_slots": 1,
+    "dense_material_slots_required": true,
+    "observed_edges": 2
+  },
+  "expected_variants": {
+    "body": 1,
+    "descriptor_semantic": 1,
+    "strict_semantic": 1,
+    "prefix_semantic": 1
+  },
+  "legacy_source_roles": [
+    {"role": "legacy_exporter_v1", "sha256": "8133ea9e6326da55e1d542bfcfb44731a4a48cabf5984bedcbba7dfb97bdcaea"},
+    {"role": "legacy_exporter_v2010", "sha256": "89c720b8fab565eecf94323b66cfec3eca4b599aa299418f35da834c56d76116"},
+    {"role": "legacy_factory_zero_face_filter", "sha256": "1f89ae1a50462aed98c04c5c65cd55743e64a685884c1fc27f356b8ad4a46407"},
+    {"role": "legacy_renderer_material_lookup", "sha256": "134444b822c3bd271bcb91db4a0ac59a2b540bacbe460e35c54077f78589be87"},
+    {"role": "legacy_renderer_programmable_loop", "sha256": "b66631100212dfeda498e3788296b87d00929a98e8476a3d4c00811a42f7f9de"},
+    {"role": "legacy_renderer_fixed_loop", "sha256": "a4ce314687a375d54fec70d7b138799e5fbca2e1c68ea83f1366b3abca70120f"},
+    {"role": "legacy_payload_reader_writer", "sha256": "5462960f3c022539d00738f0a8c24bc43dcd955e2bf45018e0bba5a8a23648f4"}
+  ],
+  "expected_source_facts": {
+    "exporter_material_section_ordinal_alignment": true,
+    "factory_zero_face_section_omission": true,
+    "renderer_iteration_bounded_by_payload_sections": true,
+    "same_index_material_lookup": true,
+    "trailing_material_slot_not_consumed": true,
+    "payload_section_order_preserved": true
+  },
+  "proof_requirements": {
+    "source_basis": "SOURCE_DERIVED",
+    "legacy_binary_executed": false,
+    "runtime_parity_proven": false,
+    "frozen_a7_sm_candidate_set_exact": true,
+    "a4_source_hash_reverified": true,
+    "candidate_body_hash_reverified": true,
+    "candidate_package_hashed": true,
+    "strict_production_binding_rejected": true,
+    "strict_error_code_exact": true,
+    "explicit_prefix_api_passed": true,
+    "all_legacy_source_roles_hash_bound": true
+  },
+  "authority_controls": {
+    "a4_is_authoritative": true,
+    "authority_state_changed": false,
+    "adapter_applied": false,
+    "recovery_applied": false,
+    "candidate_selection": false,
+    "automatic_resolution": false,
+    "content_disposition": false,
+    "repair_or_write": false,
+    "delete_or_no_ref": false,
+    "owner_approval": false,
+    "g2_06_satisfied": false,
+    "p3_authorized": false
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "asset_effective_unresolved_targets": 12,
+    "asset_effective_unresolved_edges": 15,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "outputs": {
+    "detail_export": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl",
+    "report_json": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json",
+    "report_markdown": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.md",
+    "evidence": "Data/Inventory/p2-20a-static-mesh-payload-section-prefix.json",
+    "detail_export_tracked": false
+  },
+  "disclosure": {
+    "tracked_aggregate_and_hash_only": true,
+    "anonymous_detail_only": true,
+    "legacy_source_roles_and_hashes_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_confidential_payloads": false
+  }
+}

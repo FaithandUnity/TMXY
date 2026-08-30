@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-29T18:15:25.6148326+00:00",
+  "captured_utc": "2026-08-30T10:07:28.9440224+00:00",
   "task_id": "P2-20",
   "result": "BLOCKED",
   "review_execution_result": "PASS",
@@ -13,7 +13,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "57dd33425b496188b2ce591e1f8b7327ad8046a0c339f68c6a766d004f32aec5",
+      "aggregate_sha256": "8622ca18dc00bc18bcaed5e8e75fe74175cdd5546d391fde04d88c409478e75f",
       "prerequisites": [
         {
           "task_id": "P2-01",
@@ -106,7 +106,7 @@
         {
           "task_id": "P2-12",
           "path": "Data/Inventory/p2-12-full-asset-inventory.json",
-          "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d",
+          "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -138,7 +138,7 @@
         {
           "task_id": "P2-16",
           "path": "Data/Inventory/p2-16-conversion-cache.json",
-          "sha256": "fe607f28d714bba7b75fb50b5390049d4b3448e640859d7bf5c878b8f9a90078",
+          "sha256": "8535cdc601cb542376807a35230b75b9e1c098a28a8b41da6e915cfac5ab97e4",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -154,7 +154,7 @@
         {
           "task_id": "P2-18",
           "path": "Data/Inventory/p2-18-content-health.json",
-          "sha256": "afb00c48630ed7cc9047beb2eee73b0118bd85baba2ae8a9d6fd34c0d780d829",
+          "sha256": "3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -162,7 +162,7 @@
         {
           "task_id": "P2-19",
           "path": "Data/Inventory/p2-19-resource-budget.json",
-          "sha256": "6138bdc1fdada4047c03e1c43a1c66471ed8142a33a038e68d9fd58faad958b0",
+          "sha256": "faa521220fd595563b144b75932a72169f378e29d01d246b47c3a48a2d40b009",
           "result": "PASS",
           "task_status": "COMPLETE",
           "completion_criteria_satisfied": true
@@ -172,7 +172,7 @@
         "task_id": "P2-20A",
         "criterion_id": "G2-06",
         "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-        "sha256": "b19121ccf29673c86728c2e4d0252488a97cd192ec17a8327c436c3f22273ce5",
+        "sha256": "937e17185d30d614f77cb1a06dece320190c6937442ea32a5d847b14b59d1103",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -183,7 +183,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.4",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
-        "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c",
+        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -196,7 +196,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.5",
         "path": "Data/Reports/p2-20a-aux-semantic-diagnostics-report.json",
-        "sha256": "592ed7e60bbae1f9f670e2aa5aa9796f6a9cceabd17c60d29913c359f3b79a6b",
+        "sha256": "41354fd69bea8898c56da7a1fbe045026c250749c60b2987510905ba4215db5d",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -210,7 +210,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.9",
         "path": "Data/Reports/p2-20a-aux-package-context-report.json",
-        "sha256": "f35bd6cd243036c930ddb50e5dd3835a82289815cd62aea0a59167307add21eb",
+        "sha256": "1c3254b08c6fe7014e891d52ed7ee1d28b6bc7f463b4bcd855bcf2ac57d9f467",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -224,7 +224,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.10",
         "path": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.json",
-        "sha256": "4033e3d27d07e9f165f26dbf9fb34613e65d6330878472df88ca8c2836be1ef4",
+        "sha256": "ddc300dc75d69b6f98f0a37c9e52673b7c01d940d05ebcb4e039c23c853403d5",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -238,7 +238,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.11",
         "path": "Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json",
-        "sha256": "b7d0d3a959a41efae43893f8034dfe2d3ef8d3f111105a79abe8df7db94263f2",
+        "sha256": "8c1833a6985bd623fc7a31b56ead578af6cea3d8dac93428602b379c14e563d2",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -252,7 +252,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.6",
         "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
-        "sha256": "19155a5f3f2e3b53df6e3598f3f712656a55f948426d4ac17a2f2c2a9eafcc43",
+        "sha256": "4742d3211763b4b02a3ceafdf92ee2c7367398e27b5048e6a6e28ed13be4ae68",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -266,7 +266,7 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.7",
         "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
-        "sha256": "a6d26a2fc30975fb5196e317f14d818b6225ec60a39ea279559f62aded7770af",
+        "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
@@ -280,18 +280,36 @@
         "criterion_id": "G2-06",
         "evidence_revision": "P2-20A.8",
         "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
-        "sha256": "258328eebb658baf8fbeba72f20eca4f39e0f9b2149d8c6adb7d45581c503f08",
+        "sha256": "5ff822b4d7862420059fb9e61a7cb1413fd9a80902e536befdf9db7f76468669",
         "result": "BLOCKED",
         "review_execution_result": "PASS",
         "task_status": "BLOCKED",
         "completion_criteria_satisfied": false,
         "g2_06_satisfied": false
       },
+      "static_mesh_payload_section_prefix": {
+        "task_id": "P2-20A",
+        "criterion_id": "G2-06",
+        "evidence_revision": "P2-20A.12",
+        "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json",
+        "sha256": "25759767741372f2921c1cfa5b2c2d73f5290a7aa34668a69ee5fc5273b92aaa",
+        "inventory_path": "Data/Inventory/p2-20a-static-mesh-payload-section-prefix.json",
+        "inventory_sha256": "7acb4b82222b0f4627cc92251f025953ed709cd188e88efbf4b6b78bb701f1ee",
+        "detail_path": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl",
+        "detail_sha256": "ca693505b5d5e1ac07dfce2a404fd3bcaa09fea35667b86fa57108fb97383a4f",
+        "result": "BLOCKED",
+        "review_execution_result": "PASS_DIAGNOSTIC",
+        "task_status": "BLOCKED",
+        "completion_criteria_satisfied": false,
+        "diagnostic_scope_complete": true,
+        "remediation_scope_complete": false,
+        "g2_06_satisfied": false
+      },
       "remediation": {
         "task_id": "P2-20B",
         "criterion_id": "G2-07",
         "path": "Data/Governance/p2-g2-migration-decisions.json",
-        "sha256": "adbbeef52eaa08c3ee5f0115ca965bd4b20153bb9440c9e8532b675085187301",
+        "sha256": "c15f821144208215a2973c60d481032b2ed290ae662153b548076234bed8e4e2",
         "result": "BLOCKED",
         "generation_result": "PASS",
         "task_status": "BLOCKED",
@@ -300,9 +318,9 @@
       },
       "quality": {
         "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-        "sha256": "c731d9186c9fd7551b9ed2e3787efe5d2f7aa45be0f798124247ad5544b42e8d",
+        "sha256": "5ab5f77b7f1bd4319ad791c0977ea2a279a8c16c1344bd5df09c5b7c0d275d58",
         "result": "PASS_DIAGNOSTIC",
-        "captured_utc": "2026-08-30T05:55:16.9865480+00:00"
+        "captured_utc": "2026-08-30T10:05:41.0138547+00:00"
       }
     }
   },
@@ -310,16 +328,16 @@
     "json": {
       "path": "Data/Reports/p2-20-g2-review-report.json",
       "tracked": true,
-      "bytes": 47808,
-      "lines": 1543,
-      "sha256": "47f3610ac00f2da05e4114f95d2b283321bb77b294c45a27043c07304cdb56bb"
+      "bytes": 52341,
+      "lines": 1666,
+      "sha256": "2bcbe9570002fce4147a276353f8ff489f65e0fce00ec386f664072091e9879c"
     },
     "markdown": {
       "path": "Data/Reports/p2-20-g2-review-report.md",
       "tracked": true,
-      "bytes": 6584,
+      "bytes": 7357,
       "lines": 52,
-      "sha256": "88a472ee0215f94a95698e540406967b5aa0ad353b22f6a692b8f58ec4e08b26"
+      "sha256": "463da7182163bc5aa50ee82f5947177a8d641cd72d042e8ff77465e08dde64a9"
     }
   },
   "summary": {
@@ -345,7 +363,7 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A and its A.3/A.5/A.9/A.10/A.11 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. A.11 retains strict rejection of all 6 malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically resolves 3391 consumer occurrences and leaves 1 unresolved without first-candidate selection; this technical proof grants no semantic adapter or root approval. All 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 189 full-semantic ambiguous plus 12 production-unresolved targets. A.6 measured 13 ASCII-lower identity-collision targets across 26 edges, but found 0 strict full-semantic equivalences and made 0 selections; all 15 ambiguous targets remain blocked. A.7 classified 24 of 24 rejected candidate edges, but made 0 automatic selections. A.8 cross-proved 7 targets / 9 edges as explicit production recoveries and retains 12 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "reason": "P2-20A and its A.3/A.5/A.9/A.10/A.11/A.12 diagnostic evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. A.11 retains strict rejection of all 6 malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically resolves 3391 consumer occurrences and leaves 1 unresolved without first-candidate selection; this technical proof grants no semantic adapter or root approval. All 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 189 full-semantic ambiguous plus 12 production-unresolved targets. A.6 measured 13 ASCII-lower identity-collision targets across 26 edges, but found 0 strict full-semantic equivalences and made 0 selections; all 15 ambiguous targets remain blocked. A.7 classified 24 of 24 rejected candidate edges, but made 0 automatic selections. A.8 cross-proved 7 targets / 9 edges as explicit production recoveries and retains 12 unresolved targets. A.12 source-derives an explicit payload-section-prefix PASS for 1 static-mesh target / 2 edges, where 2 declared material slots map to 1 nonempty payload section with 1 ignored trailing slot. It changes no A.4/A.8 authority state, selects no candidate, applies no adapter or recovery, and proves no runtime parity; the full asset workset remains 189 targets / 546 edges ambiguous and 12 targets / 15 edges unresolved. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
       "required_action": "Resolve the TinyXML silent-partial and client memory-tail/CRT boundary with runtime evidence or an explicit safe malformed disposition; approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
@@ -365,10 +383,10 @@
     "manual_content_rate_ppm": 19955,
     "base_planning_hours": 1404.695,
     "risk_adjusted_planning_hours": 2000.37,
-    "machine_projection_seconds": 15917.13461,
-    "storage_budget_bytes": 411511619038,
+    "machine_projection_seconds": 15908.4401,
+    "storage_budget_bytes": 411698550803,
     "incremental_storage_required_bytes": 364930296437,
-    "storage_capacity_gap_bytes": 165106723445,
+    "storage_capacity_gap_bytes": 187804318325,
     "measured_schedule": false,
     "monetary_amount_available": false,
     "financial_total_cost_available": false,
@@ -391,18 +409,18 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "10a9b0143cc5c7abd93d8c3948ad33f7b7db3adc35104beeb6c5039df552735c",
+    "policy_sha256": "64b2d98ee0a7573e9b9d7306387834c43bca7a4d45979c269b8f70a19a810e97",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "c490da51ede488c51921622fc9c8656ff8e7dd0a0b85986f80d0c0fedfb16d14"
+    "schema_sha256": "c7d7065025bb0c83ba94e4ac56cbdc5dbc4d54c84c9cb66fce6888f1799ac46f"
   },
   "implementation": {
-    "source_files": 15,
-    "source_sha256": "e94df073ce4ec9ccd575fea6212031172297524c87900d2d25cbf108308661b2",
+    "source_files": 16,
+    "source_sha256": "78f8bba0e0e8d985cbf4816d1f3326e310c87ba8c72173c3eb42b90ce3e7413e",
     "generator": "Tools/TMXY.G2Review/g2_review.py",
-    "generator_sha256": "c89bdbfe2ecf4c924f1ea1d6df60f7d47d38de3293ac030954b0e457c1d684ac",
+    "generator_sha256": "fcb6438afc96cb3ec9f6f59dd8acd5b72a6bf92e752feff4f1130572b812647d",
     "wrapper": "Tools/TMXY.G2Review/New-G2Review.ps1",
-    "wrapper_sha256": "4c4b2a717d05feb970211f7738d72351d8670a315cc0957967dcd7e98f35fef2",
-    "self_test_assertions": 17
+    "wrapper_sha256": "71ffa0d93f7fce928e80de4b0c7d216e769c73641c94bc737ca1247703157681",
+    "self_test_assertions": 19
   },
   "disclosure": {
     "private_source_paths": false,

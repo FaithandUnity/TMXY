@@ -163,4 +163,10 @@ P2-20A.11 malformed XML 合同验证四层诊断：
 但底层 `Parse` 只有 5/6 完整并保留 1 个无错误标志的部分树。合同拒绝隐藏该部分解析、伪造
 客户端 NUL 终止、把源码探针冒充旧二进制运行时，或注入修复、处置、语义引用、根和终态。
 
+`Contract/Test-G2StaticMeshPayloadSectionPrefix.ps1` 验证 P2-20A.12 的源码派生静态网格前缀
+合同：冻结的 1 个目标／2 条候选边仍被严格绑定以 `material_slot_mismatch` 拒绝，而显式前缀
+API 对两条边均证明 2 个材质槽、1 个非空 payload section 和 1 个尾随未消费材质槽。报告、
+跟踪清单和忽略区匿名明细均作哈希绑定；负例拒绝候选选择、自动解决、adapter/recovery、权威
+变更、运行时等价与未知嵌套字段。A.4/A.8 权威计数保持不变，G2 仍为 7/9 `BLOCKED`。
+
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

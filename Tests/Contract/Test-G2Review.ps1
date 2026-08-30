@@ -1,8 +1,5 @@
 [CmdletBinding()]
-param(
-    [string]$RebuildRoot = 'E:\QQXYCodeDev\Rebuild',
-    [switch]$VerifyDerivedSources
-)
+param([string]$RebuildRoot = 'E:\QQXYCodeDev\Rebuild', [switch]$VerifyDerivedSources)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
@@ -40,15 +37,11 @@ $bindingFailureHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_binding_fail
 $bindingRecoveryHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_binding_recovery.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $negativeCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-NegativeCases.ps1'
-$malformedCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-MalformedXmlCases.ps1'
-. $malformedCasesHelperPath
+$malformedCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-MalformedXmlCases.ps1'; . $malformedCasesHelperPath
+$staticMeshPrefixCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-StaticMeshPrefixCases.ps1'; . $staticMeshPrefixCasesHelperPath
 $assertions = [Collections.Generic.List[object]]::new()
 function Add-A([string]$Name, [bool]$Passed, [string]$Detail = '') {
-    $assertions.Add([pscustomobject][ordered]@{
-            name = $Name
-            result = if ($Passed) { 'PASS' } else { 'FAIL' }
-            detail = $Detail
-        })
+    $assertions.Add([pscustomobject][ordered]@{ name = $Name; result = if ($Passed) { 'PASS' } else { 'FAIL' }; detail = $Detail })
 }
 function Get-Sha256([string]$Path) {
     return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -56,8 +49,8 @@ function Get-Sha256([string]$Path) {
 function Get-TextSha256([string]$Value) {
     $bytes = [Text.Encoding]::UTF8.GetBytes($Value)
     try {
-        return [Convert]::ToHexString(
-            [Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
+        return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData(
+                $bytes)).ToLowerInvariant()
     }
     finally { [Array]::Clear($bytes, 0, $bytes.Length) }
 }
@@ -183,6 +176,7 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.aux_ecf_parser_parity.path -eq
             'Data/Reports/p2-20a-aux-ecf-parser-parity-report.json' -and
         (Test-G2MalformedXmlPolicy $Candidate) -and
+        (Test-G2StaticMeshPrefixPolicy $Candidate) -and
         $Candidate.identity_normalization_safety.task_id -eq 'P2-20A' -and
         $Candidate.identity_normalization_safety.criterion_id -eq 'G2-06' -and
         $Candidate.identity_normalization_safety.evidence_revision -eq 'P2-20A.6' -and
@@ -248,6 +242,7 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
     }
     $g206 = Get-Criterion $Candidate 'G2-06'
     if (-not (Test-G2MalformedXmlMetrics $g206)) { return $false }
+    if (-not (Test-G2StaticMeshPrefixMetrics $g206)) { return $false }
     if ((Get-Metric $g206 'supplemental_report_present') -ne $true -or
         (Get-Metric $g206 'declared_scope_hash_bound') -ne $true -or
         (Get-Metric $g206 'scope_complete') -ne $false -or
@@ -416,7 +411,7 @@ $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePat
     $auxSemanticHelperPath, $auxPackageContextHelperPath, $auxMalformedPythonPath, $identityNormalizationHelperPath,
     $bindingFailureHelperPath,
     $bindingRecoveryHelperPath, $wrapperPath, $negativeCasesHelperPath,
-    $malformedCasesHelperPath)
+    $malformedCasesHelperPath, $staticMeshPrefixCasesHelperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -721,6 +716,8 @@ $bindingsPassed = $bindingsPassed -and
     $bindingRecovery.measured.successful.targets -eq 7 -and
     $bindingRecovery.measured.successful.candidate_edges -eq 9
 $aggregateLines.Add("BINDING_RECOVERY|$($bindingRecoveryBinding.task_id)|$($bindingRecoveryBinding.criterion_id)|$($bindingRecoveryBinding.evidence_revision)|$($bindingRecoveryBinding.path)|$($bindingRecoveryBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and (Test-G2StaticMeshPrefixBinding $report $policy $root)
+$aggregateLines.Add((Get-G2StaticMeshPrefixAggregateLine $report.input_bindings.static_mesh_payload_section_prefix))
 $bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
     $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
@@ -824,6 +821,7 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'aux_malformed_xml_tinyxml_silent_partial') -eq 1 -and
     (Get-Metric $g206 'aux_malformed_xml_client_input_termination_proven') -eq $false -and
     (Get-Metric $g206 'aux_malformed_xml_legacy_runtime_executed') -eq $false -and
+    (Test-G2StaticMeshPrefixMetrics $g206) -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolved_targets -eq 21293 -and
@@ -866,6 +864,8 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     $g206.interpretation -match 'A\.9 resolves 3,391 consumer occurrences' -and
     $g206.interpretation -match 'A.7 classifies all 24 strict rejected asset candidate edges' -and
     $g206.interpretation -match 'A.8 cross-proves 7 targets / 9 edges' -and
+    $g206.interpretation -match 'A.12 proves the source-derived payload-section-prefix contract' -and
+    $g206.interpretation -match '189 targets / 546 edges ambiguous' -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
 $g207 = Get-Criterion $report 'G2-07'
 Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
@@ -966,8 +966,10 @@ $negativeCases = & $negativeCasesHelperPath `
     -AuxMalformedXmlPath $auxMalformedXmlPath `
     -IdentityNormalizationPath $identityNormalizationPath `
     -RemediationPath $remediationPath
+$prefixNegativeCases = Get-G2StaticMeshPrefixNegativeCases $report $policy $root
+foreach ($name in $prefixNegativeCases.Keys) { $negativeCases[$name] = $prefixNegativeCases[$name] }
 Add-A 'Policy supplemental scope FK migration approval drift and unknown-field negatives fail closed' (
-    $negativeCases.Count -eq 71 -and
+    $negativeCases.Count -eq 74 -and
     @($negativeCases.Values | Where-Object { $_ -ne $true }).Count -eq 0)
 $localCheck = $null
 if ($VerifyDerivedSources) {

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.8",
-  "captured_utc": "2026-08-29T18:18:56.127679Z",
+  "captured_utc": "2026-08-30T09:15:50.452122Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -11,7 +11,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "bf9e69a9999b0e581a0ed9f3098cac549c3986da2c40e43f0a4676d2b541423e",
+    "aggregate_sha256": "53d5858eba21620188c2db4dcacb202f817233d0a49e1e02946b3d9cd6d9c2ca",
     "entries": [
       {
         "role": "a7_report",
@@ -19,7 +19,7 @@
         "tracked": true,
         "bytes": 9419,
         "lines": 302,
-        "sha256": "a6d26a2fc30975fb5196e317f14d818b6225ec60a39ea279559f62aded7770af"
+        "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20"
       },
       {
         "role": "a7_inventory",
@@ -27,7 +27,7 @@
         "tracked": true,
         "bytes": 8942,
         "lines": 280,
-        "sha256": "e0c5f21a59221dad89e22b3ee2a9c7a6b9a82bae05b0ce8d0c352fdc17d7f21c"
+        "sha256": "a69acd632feb9f412cba5088f82daec1d9c951d1de551fe116559246659b822f"
       },
       {
         "role": "a7_detail",
@@ -59,7 +59,7 @@
         "tracked": true,
         "bytes": 5798,
         "lines": 193,
-        "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c"
+        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
       },
       {
         "role": "a4_inventory",
@@ -67,7 +67,7 @@
         "tracked": true,
         "bytes": 11011,
         "lines": 340,
-        "sha256": "ba6b6ea42d79c9386982701eb6c420873f8375791f979b3222dc32f55706cc22"
+        "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c"
       },
       {
         "role": "a4_effective_detail",

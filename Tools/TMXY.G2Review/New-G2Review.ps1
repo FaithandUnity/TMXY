@@ -290,6 +290,55 @@ try {
         [int]$g206Metrics.binding_recovery_successful_edges -ne 9) {
         throw 'P2-20 A.7/A.8 binding diagnosis or recovery cross-proof drifted.'
     }
+    $staticMeshPrefixBinding = $report.input_bindings.static_mesh_payload_section_prefix
+    $staticMeshPrefixReport = Join-Path $root `
+        'Data\Reports\p2-20a-static-mesh-payload-section-prefix-report.json'
+    $staticMeshPrefixInventory = Join-Path $root `
+        'Data\Inventory\p2-20a-static-mesh-payload-section-prefix.json'
+    $staticMeshPrefixDetail = Join-Path $root `
+        'Data\Exports\P2-20\p2-20a-static-mesh-payload-section-prefix.jsonl'
+    if ($staticMeshPrefixBinding.task_id -ne 'P2-20A' -or
+        $staticMeshPrefixBinding.criterion_id -ne 'G2-06' -or
+        $staticMeshPrefixBinding.evidence_revision -ne 'P2-20A.12' -or
+        $staticMeshPrefixBinding.path -ne
+            'Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json' -or
+        $staticMeshPrefixBinding.sha256 -ne (Get-Sha256 $staticMeshPrefixReport) -or
+        $staticMeshPrefixBinding.inventory_path -ne
+            'Data/Inventory/p2-20a-static-mesh-payload-section-prefix.json' -or
+        $staticMeshPrefixBinding.inventory_sha256 -ne (Get-Sha256 $staticMeshPrefixInventory) -or
+        $staticMeshPrefixBinding.detail_path -ne
+            'Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl' -or
+        $staticMeshPrefixBinding.detail_sha256 -ne (Get-Sha256 $staticMeshPrefixDetail) -or
+        $staticMeshPrefixBinding.result -ne 'BLOCKED' -or
+        $staticMeshPrefixBinding.review_execution_result -ne 'PASS_DIAGNOSTIC' -or
+        $staticMeshPrefixBinding.task_status -ne 'BLOCKED' -or
+        $staticMeshPrefixBinding.completion_criteria_satisfied -ne $false -or
+        $staticMeshPrefixBinding.diagnostic_scope_complete -ne $true -or
+        $staticMeshPrefixBinding.remediation_scope_complete -ne $false -or
+        $staticMeshPrefixBinding.g2_06_satisfied -ne $false -or
+        $g206Metrics.static_mesh_prefix_diagnostic_hash_bound -ne $true -or
+        $g206Metrics.static_mesh_prefix_inventory_hash_bound -ne $true -or
+        $g206Metrics.static_mesh_prefix_detail_hash_bound -ne $true -or
+        $g206Metrics.static_mesh_prefix_source_derived_contract_proven -ne $true -or
+        $g206Metrics.static_mesh_prefix_runtime_parity_proven -ne $false -or
+        [int]$g206Metrics.static_mesh_prefix_targets -ne 1 -or
+        [int]$g206Metrics.static_mesh_prefix_candidate_edges -ne 2 -or
+        [int]$g206Metrics.static_mesh_prefix_strict_rejected_edges -ne 2 -or
+        [int]$g206Metrics.static_mesh_prefix_explicit_prefix_pass_edges -ne 2 -or
+        [int]$g206Metrics.static_mesh_prefix_payload_sections -ne 1 -or
+        [int]$g206Metrics.static_mesh_prefix_material_slots -ne 2 -or
+        [int]$g206Metrics.static_mesh_prefix_ignored_trailing_material_slots -ne 1 -or
+        [int]$g206Metrics.static_mesh_prefix_candidate_selections -ne 0 -or
+        [int]$g206Metrics.static_mesh_prefix_automatic_resolutions -ne 0 -or
+        $g206Metrics.static_mesh_prefix_adapter_applied -ne $false -or
+        $g206Metrics.static_mesh_prefix_authority_state_changed -ne $false -or
+        $g206Metrics.static_mesh_prefix_recovery_applied -ne $false -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_ambiguous_targets -ne 189 -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_ambiguous_edges -ne 546 -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_unresolved_targets -ne 12 -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_unresolved_edges -ne 15) {
+        throw 'P2-20 A.12 prefix proof drifted or crossed its authority boundary.'
+    }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)
     $sourceLines = @($sourceFiles | ForEach-Object {

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.3",
-  "captured_utc": "2026-08-29T18:15:03.9821410+00:00",
+  "captured_utc": "2026-08-30T09:03:50.1833793+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -11,7 +11,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "c4cecc98505a64f479f7fba6f853a0ae3814e3fcf94152034e396f5f256f23b3",
+      "aggregate_sha256": "5cb2b569fa644d0f8c4be5ae37605d88270c3384a7d32bbed0d5ff397a6438a5",
       "artifacts": [
         {
           "id": "P2-05",
@@ -46,7 +46,7 @@
         {
           "id": "P2-12",
           "path": "Data/Inventory/p2-12-full-asset-inventory.json",
-          "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d",
+          "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244",
           "bytes": 6306
         },
         {
@@ -78,7 +78,7 @@
         {
           "id": "P2-18",
           "path": "Data/Inventory/p2-18-content-health.json",
-          "sha256": "afb00c48630ed7cc9047beb2eee73b0118bd85baba2ae8a9d6fd34c0d780d829",
+          "sha256": "3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5",
           "bytes": 10740
         },
         {
@@ -96,13 +96,13 @@
         {
           "id": "P2-20A.3-AUX",
           "path": "Data/Reports/p2-20a-aux-config-reference-report.json",
-          "sha256": "641bc959230382e28f6dfd4c626fdb65e3aa567671473da238b6d65747328d17",
+          "sha256": "c90d5e5e731a406bdc82a4a8a111da9a8330c7a04f7c9940afa6b8497c44bf1e",
           "bytes": 157387
         },
         {
           "id": "P2-20A.4-REPORT",
           "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
-          "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c",
+          "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2",
           "bytes": 5798
         },
         {
@@ -115,38 +115,38 @@
         {
           "id": "P2-20A.4-EVIDENCE",
           "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
-          "sha256": "ba6b6ea42d79c9386982701eb6c420873f8375791f979b3222dc32f55706cc22",
+          "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c",
           "bytes": 11011
         },
         {
           "id": "P2-20A.7-REPORT",
           "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
-          "sha256": "a6d26a2fc30975fb5196e317f14d818b6225ec60a39ea279559f62aded7770af",
+          "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20",
           "bytes": 9419
         },
         {
           "id": "P2-20A.7-EVIDENCE",
           "path": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
-          "sha256": "e0c5f21a59221dad89e22b3ee2a9c7a6b9a82bae05b0ce8d0c352fdc17d7f21c",
+          "sha256": "a69acd632feb9f412cba5088f82daec1d9c951d1de551fe116559246659b822f",
           "bytes": 8942
         },
         {
           "id": "P2-20A.8-REPORT",
           "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
-          "sha256": "258328eebb658baf8fbeba72f20eca4f39e0f9b2149d8c6adb7d45581c503f08",
+          "sha256": "5ff822b4d7862420059fb9e61a7cb1413fd9a80902e536befdf9db7f76468669",
           "bytes": 6183
         },
         {
           "id": "P2-20A.8-EVIDENCE",
           "path": "Data/Inventory/p2-20a-asset-binding-recovery.json",
-          "sha256": "441959941356dd0774a8ba7e887dc03bd9586a84be17708d0541e673ea9a3239",
+          "sha256": "112afa054866d030dcbed24fc70ed3760160002df832547fd2eaced8ccadf441",
           "bytes": 2620
         },
         {
           "id": "g2-policy",
           "path": "Contracts/data-schema/g2-review-policy-v1.json",
-          "sha256": "10a9b0143cc5c7abd93d8c3948ad33f7b7db3adc35104beeb6c5039df552735c",
-          "bytes": 8666
+          "sha256": "64b2d98ee0a7573e9b9d7306387834c43bca7a4d45979c269b8f70a19a810e97",
+          "bytes": 9078
         }
       ]
     }
@@ -157,7 +157,7 @@
       "tracked": true,
       "bytes": 15233,
       "lines": 415,
-      "sha256": "b19121ccf29673c86728c2e4d0252488a97cd192ec17a8327c436c3f22273ce5"
+      "sha256": "937e17185d30d614f77cb1a06dece320190c6937442ea32a5d847b14b59d1103"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-core-resource-closure-report.md",
@@ -171,7 +171,7 @@
       "tracked": true,
       "bytes": 1656,
       "lines": 40,
-      "sha256": "829b276c4f5f327a40fb52ad9067ef3978f0e5299b132091175879cc453261c2"
+      "sha256": "4a36ab3a1187b96c73d41ec2bc953b1e7a7c9d97bae1893c1bc4cd7507155aa9"
     },
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",

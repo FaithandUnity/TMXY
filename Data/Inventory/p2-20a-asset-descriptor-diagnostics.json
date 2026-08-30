@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.4",
-  "captured_utc": "2026-08-29T18:17:27Z",
+  "captured_utc": "2026-08-30T09:04:37Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -119,7 +119,7 @@
       "tracked": true,
       "bytes": 5798,
       "lines": 193,
-      "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c"
+      "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.md",

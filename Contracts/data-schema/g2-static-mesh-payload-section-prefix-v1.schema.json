@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.example/contracts/g2-static-mesh-payload-section-prefix-v1.schema.json",
+  "title": "P2-20A.12 static-mesh payload-section-prefix source proof",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+    "diagnostic_scope_complete", "remediation_scope_complete", "g2_06_satisfied",
+    "p3_authorized", "proof_classification", "input_bindings", "detail_export",
+    "legacy_source_provenance", "source_facts", "production_contract", "scope", "measured",
+    "observed_relation", "authority_boundary", "preserved_blockers", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.12"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS_DIAGNOSTIC"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "remediation_scope_complete": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "proof_classification": {"$ref": "#/$defs/proofClassification"},
+    "input_bindings": {"$ref": "#/$defs/bindings"},
+    "detail_export": {"$ref": "#/$defs/detailOutput"},
+    "legacy_source_provenance": {"$ref": "#/$defs/legacySources"},
+    "source_facts": {"$ref": "#/$defs/sourceFacts"},
+    "production_contract": {"$ref": "#/$defs/productionContract"},
+    "scope": {"$ref": "#/$defs/scope"},
+    "measured": {"$ref": "#/$defs/measured"},
+    "observed_relation": {"$ref": "#/$defs/relation"},
+    "authority_boundary": {"$ref": "#/$defs/authority"},
+    "preserved_blockers": {"$ref": "#/$defs/blockers"},
+    "contracts": {"$ref": "#/$defs/contracts"},
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "proofClassification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_basis", "legacy_binary_executed", "runtime_parity_proven"],
+      "properties": {
+        "source_basis": {"const": "SOURCE_DERIVED"},
+        "legacy_binary_executed": {"const": false},
+        "runtime_parity_proven": {"const": false}
+      }
+    },
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "role": {"type": "string", "pattern": "^[a-z0-9_]+$"},
+        "path": {"type": "string", "pattern": "^[A-Za-z0-9._/-]+$"},
+        "tracked": {"type": "boolean"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "bindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {
+          "type": "array", "minItems": 13, "maxItems": 13,
+          "items": {"$ref": "#/$defs/binding"}
+        }
+      }
+    },
+    "detailOutput": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"const": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl"},
+        "tracked": {"const": false},
+        "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"const": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "legacyRole": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "sha256"],
+      "properties": {
+        "role": {"type": "string", "pattern": "^legacy_[a-z0-9_]+$"},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "legacySources": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "roles"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "roles": {
+          "type": "array", "minItems": 7, "maxItems": 7,
+          "items": {"$ref": "#/$defs/legacyRole"}
+        }
+      }
+    },
+    "sourceFacts": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "exporter_material_section_ordinal_alignment", "factory_zero_face_section_omission",
+        "renderer_iteration_bounded_by_payload_sections", "same_index_material_lookup",
+        "trailing_material_slot_not_consumed", "payload_section_order_preserved"
+      ],
+      "properties": {
+        "exporter_material_section_ordinal_alignment": {"const": true},
+        "factory_zero_face_section_omission": {"const": true},
+        "renderer_iteration_bounded_by_payload_sections": {"const": true},
+        "same_index_material_lookup": {"const": true},
+        "trailing_material_slot_not_consumed": {"const": true},
+        "payload_section_order_preserved": {"const": true}
+      }
+    },
+    "productionContract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["api", "implementation_bindings"],
+      "properties": {
+        "api": {"const": "bind_static_mesh_with_payload_section_prefix"},
+        "implementation_bindings": {
+          "type": "object", "additionalProperties": false,
+          "required": ["aggregate_sha256", "entries"],
+          "properties": {
+            "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+            "entries": {
+              "type": "array", "minItems": 5, "maxItems": 5,
+              "items": {"$ref": "#/$defs/binding"}
+            }
+          }
+        }
+      }
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "source_revision", "family", "targets", "candidate_edges", "unique_candidates",
+        "candidate_ids_distinct", "candidate_set_exact"
+      ],
+      "properties": {
+        "source_revision": {"const": "P2-20A.7"},
+        "family": {"const": "sm"},
+        "targets": {"const": 1},
+        "candidate_edges": {"const": 2},
+        "unique_candidates": {"const": 2},
+        "candidate_ids_distinct": {"const": true},
+        "candidate_set_exact": {"const": true}
+      }
+    },
+    "measured": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "source_assets_reverified", "package_files_hashed", "candidate_bodies_reverified",
+        "strict_rejected_edges", "material_slot_mismatch_edges", "prefix_pass_edges",
+        "body_variants", "descriptor_semantic_variants", "strict_semantic_variants",
+        "prefix_semantic_variants", "candidate_selections", "automatic_resolutions",
+        "owner_dispositions", "content_dispositions"
+      ],
+      "properties": {
+        "source_assets_reverified": {"const": 1},
+        "package_files_hashed": {"const": 2},
+        "candidate_bodies_reverified": {"const": 2},
+        "strict_rejected_edges": {"const": 2},
+        "material_slot_mismatch_edges": {"const": 2},
+        "prefix_pass_edges": {"const": 2},
+        "body_variants": {"const": 1},
+        "descriptor_semantic_variants": {"const": 1},
+        "strict_semantic_variants": {"const": 1},
+        "prefix_semantic_variants": {"const": 1},
+        "candidate_selections": {"const": 0},
+        "automatic_resolutions": {"const": 0},
+        "owner_dispositions": {"const": 0},
+        "content_dispositions": {"const": 0}
+      }
+    },
+    "relation": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "recovery_kind", "basis", "descriptor_material_slots", "payload_sections",
+        "nonempty_payload_sections", "ignored_trailing_material_slots", "dense_material_slots",
+        "observed_edges"
+      ],
+      "properties": {
+        "recovery_kind": {"const": "sm_payload_section_prefix"},
+        "basis": {"const": "payload_section_prefix_contract"},
+        "descriptor_material_slots": {"const": 2},
+        "payload_sections": {"const": 1},
+        "nonempty_payload_sections": {"const": 1},
+        "ignored_trailing_material_slots": {"const": 1},
+        "dense_material_slots": {"const": true},
+        "observed_edges": {"const": 2}
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "a4_is_authoritative", "authority_state_changed", "adapter_applied",
+        "recovery_applied", "machine_can_select_candidate", "machine_can_approve_disposition",
+        "repair_or_write", "delete_or_no_ref", "owner_approvals", "verified_resolutions"
+      ],
+      "properties": {
+        "a4_is_authoritative": {"const": true},
+        "authority_state_changed": {"const": false},
+        "adapter_applied": {"const": false},
+        "recovery_applied": {"const": false},
+        "machine_can_select_candidate": {"const": false},
+        "machine_can_approve_disposition": {"const": false},
+        "repair_or_write": {"const": false},
+        "delete_or_no_ref": {"const": false},
+        "owner_approvals": {"const": 0},
+        "verified_resolutions": {"const": 0}
+      }
+    },
+    "blockers": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges",
+        "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges",
+        "asset_effective_unresolved_targets", "asset_effective_unresolved_edges",
+        "auxiliary_nonterminal_instances", "conditional_required_missing",
+        "migration_pending", "g2_satisfied", "g2_blocked"
+      ],
+      "properties": {
+        "identity_semantic_ambiguous_targets": {"const": 15},
+        "identity_semantic_ambiguous_edges": {"const": 30},
+        "asset_effective_ambiguous_targets": {"const": 189},
+        "asset_effective_ambiguous_edges": {"const": 546},
+        "asset_effective_unresolved_targets": {"const": 12},
+        "asset_effective_unresolved_edges": {"const": 15},
+        "auxiliary_nonterminal_instances": {"const": 212},
+        "conditional_required_missing": {"const": 29},
+        "migration_pending": {"const": 1359},
+        "g2_satisfied": {"const": 7},
+        "g2_blocked": {"const": 2}
+      }
+    },
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256"],
+      "properties": {
+        "policy_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "detail_schema_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "tracked_aggregate_and_hash_only", "anonymous_detail_only",
+        "legacy_source_roles_and_hashes_only", "raw_names", "private_source_paths",
+        "legacy_source_lines", "exact_primary_keys", "decoded_confidential_payloads"
+      ],
+      "properties": {
+        "tracked_aggregate_and_hash_only": {"const": true},
+        "anonymous_detail_only": {"const": true},
+        "legacy_source_roles_and_hashes_only": {"const": true},
+        "raw_names": {"const": false},
+        "private_source_paths": {"const": false},
+        "legacy_source_lines": {"const": false},
+        "exact_primary_keys": {"const": false},
+        "decoded_confidential_payloads": {"const": false}
+      }
+    }
+  }
+}

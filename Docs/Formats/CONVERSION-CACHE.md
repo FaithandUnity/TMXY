@@ -8,7 +8,7 @@ locally verified output byte length and SHA-256.
 The full local plan is
 `Data/Exports/P2-16/p2-16-conversion-cache-plan.jsonl`. It contains 40,090
 records, is 28,389,045 bytes, and has SHA-256
-`32130ce10d0df4db455b29d1efd69f1b9634c15fcbe8ac49e4c8afc537633487`.
+`eb7991ca638edbb0029fb20b34b2f794380d6ff202413734e7abd46e78ff4afb`.
 It remains Git-ignored because rows contain paths, source hashes, descriptor
 scope hashes, and content keys. Tracked evidence contains only aggregates and
 input hashes.

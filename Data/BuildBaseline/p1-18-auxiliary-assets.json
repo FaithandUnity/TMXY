@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-30T05:40:02.1039888+00:00",
+  "captured_utc": "2026-08-30T09:52:04.3404530+00:00",
   "result": "PASS",
   "task": "P1-18",
   "completion_criteria_satisfied": true,
   "source_sha256": "ee66624e4ec8472c1ccb80a82d3fb34c2641c092cccf564be52c35db862a10cf",
   "dependencies": {
-    "p1-08-package-normalized-tree.json": "6a4f233e60e75ae2b98cae5f2badc20591aeee81a8e36a98462b16f92a3cebbb",
+    "p1-08-package-normalized-tree.json": "2dbc6abcc7e8941aea4d95afd534bff73e91be13426f87888f5179601308f386",
     "p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9"
   },
   "classification": {

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.6",
-  "captured_utc": "2026-08-29T18:17:27Z",
+  "captured_utc": "2026-08-30T09:04:37Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -13,7 +13,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "3897d45980912d028b668415509b493f2d77ac45d34c077a16dfb7b6ed56072b",
+    "aggregate_sha256": "1feab6ba57b3ea608c3a5afbdb2ffc5b8a62a5bc237dc45b0e3bad041fc24645",
     "entries": [
       {
         "role": "a4_report",
@@ -21,7 +21,7 @@
         "tracked": true,
         "bytes": 5798,
         "lines": 193,
-        "sha256": "fed9e098f75485f6dcf783296e570e288ebeaa24b6ccdc2a33e63b6b1d65ad9c"
+        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
       },
       {
         "role": "a4_detail",
@@ -110,7 +110,7 @@
       "tracked": true,
       "bytes": 6207,
       "lines": 191,
-      "sha256": "19155a5f3f2e3b53df6e3598f3f712656a55f948426d4ac17a2f2c2a9eafcc43"
+      "sha256": "4742d3211763b4b02a3ceafdf92ee2c7367398e27b5048e6a6e28ed13be4ae68"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-identity-normalization-report.md",

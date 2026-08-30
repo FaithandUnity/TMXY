@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-30T05:35:45.4098777+00:00",
+  "captured_utc": "2026-08-30T09:48:11.0960781+00:00",
   "result": "PASS",
   "task": "P1-08",
   "source_file_count": 26,
@@ -12,10 +12,10 @@
     "passed": true
   },
   "dependency_report_sha256": {
-    "p1-02-package-v1.json": "18ecdb3530e3d7bdd628f8d56ff5f03e63d6889897587507df80f958f925531d",
-    "p1-05-package-v2.json": "54a790b9842a95d7e51bae76115f969e81f3ce83c27f08795c494b8a7ccfaed5",
-    "p1-06-package-v3.json": "ff32a9a4c54364bc54967bfac9856d8b120fdff12b9ca0bb82b989289e45b53b",
-    "p1-07-package-pipeline.json": "0377f7c075eda8061b3e2c31cf83439a7367466d9563b62ef475d46067699dfa"
+    "p1-02-package-v1.json": "cd929fa84003abaf418da40c9c80552abf401f6b5b4d83ff75a2585ff638ec7f",
+    "p1-05-package-v2.json": "f66172c3e0d892e0a79db5bbaf69869643f101ee2c5fb349253488202654a53c",
+    "p1-06-package-v3.json": "d555e8e55a9cb945aa6bb792b734670ddd22fed79c1a5e7566f215bafcf59c9b",
+    "p1-07-package-pipeline.json": "ac2b415d6a4026f4904f435a14729a41d8fcbbda6d0f7a26c863b55e9ffe5ff2"
   },
   "semantic_states": {
     "names_and_classes": "opaque-bytes-hex",
@@ -67,6 +67,6 @@
   "execution": {
     "exit_code": 0,
     "output_line_count": 100,
-    "output_sha256": "c3680508339a7448ed0a34a19ea8318857ab6ee7d2dda7b8b2c176a7e1f7ad66"
+    "output_sha256": "658e4a108a5a41aba77bc3c67eae823e93b802a1527b870da6f32ff2a16698b0"
   }
 }

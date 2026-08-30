@@ -4,6 +4,7 @@ import hashlib
 from typing import Any
 from g2_evidence import is_safe_relative, is_sha256, require
 from g2_aux_malformed_xml import aux_malformed_xml_self_test
+from g2_static_mesh_prefix import static_mesh_prefix_self_test
 
 
 def self_test() -> dict[str, Any]:
@@ -42,5 +43,11 @@ def self_test() -> dict[str, Any]:
             malformed["synthetic_predicate_only"] is True,
             "Malformed-XML closure separation self-test failed")
     assertions += malformed["assertions"]
+    static_mesh_prefix = static_mesh_prefix_self_test()
+    require(static_mesh_prefix["source_derived_safe"] is True and
+            static_mesh_prefix["authority_promotion_rejected"] is True,
+            "Static-mesh prefix authority-boundary self-test failed")
+    assertions += static_mesh_prefix["assertions"]
     return {"result": "PASS", "assertions": assertions,
-            "aux_malformed_xml": malformed}
+            "aux_malformed_xml": malformed,
+            "static_mesh_payload_section_prefix": static_mesh_prefix}

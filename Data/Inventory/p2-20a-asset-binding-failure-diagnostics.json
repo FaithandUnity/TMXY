@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.7",
-  "captured_utc": "2026-08-29T18:18:41.399194Z",
+  "captured_utc": "2026-08-30T09:14:47.237472Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -82,7 +82,7 @@
       "tracked": true,
       "bytes": 9419,
       "lines": 302,
-      "sha256": "a6d26a2fc30975fb5196e317f14d818b6225ec60a39ea279559f62aded7770af"
+      "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.md",
@@ -181,9 +181,9 @@
       {
         "path": "Tools/TMXY.StaticMesh/src/package_static_mesh_reader.cpp",
         "tracked": true,
-        "bytes": 25439,
-        "lines": 646,
-        "sha256": "aee6faf68a886e9606582a67ec11343f9c10377b9a6fff4f67a02a60290154a5"
+        "bytes": 27353,
+        "lines": 686,
+        "sha256": "b76287edbe0d965259277e498061d758f7b631bb30f0c3aba4bcd773143cdb3f"
       },
       {
         "path": "Tools/TMXY.StaticMesh/src/sm_reader.cpp",
@@ -221,7 +221,7 @@
         "sha256": "b3fbbb60516d62eaea6170a54698842d29f13d014e5b4a4326ae60b9542b557c"
       }
     ],
-    "aggregate_sha256": "4e8b86eac83c1afea4b31dee7ba08290f36ec6a920b44c096a3430ebf8488bb9",
+    "aggregate_sha256": "437302610af7f02bf9a0917b2c3ff151d81c0ccd6e67cd74c1c1fb9c2a54acde",
     "generator_self_test_assertions": 10,
     "probe_startup_self_tests": true
   },

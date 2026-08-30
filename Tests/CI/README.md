@@ -4,7 +4,8 @@
 It executes repository, Secret, golden-metadata, backend format/tidy, diagnostic
 Linux build/CTest, the offline PostgreSQL refresh-preflight regression, the
 derived PostgreSQL source/evidence contract, and optional UE Automation checks,
-the fail-closed P2-20A.8 recovery cross-proof contract, then emits one JSON
+the fail-closed P2-20A.8 recovery cross-proof and P2-20A.12 source-derived
+static-mesh payload-section-prefix contracts, then emits one JSON
 report. The refresh fixtures prove unchanged, changed, and
 malformed Docker Hub observations never modify the locked image.
 

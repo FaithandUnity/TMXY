@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.3",
-  "captured_utc": "2026-08-29T18:15:03.9821410+00:00",
+  "captured_utc": "2026-08-30T09:03:50.1833793+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -13,7 +13,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "9b23fd7fcb0832325b194ebec24c3e92b6ca69bdb71c8061b67f093e695ab82a",
+    "aggregate_sha256": "b96704630221ea8f1871dfaddb17bb1b21e292938e29c35bec8a137b1feed5b6",
     "entries": [
       {
         "role": "auxiliary_config_inventory",
@@ -21,7 +21,7 @@
       },
       {
         "role": "full_asset_inventory",
-        "sha256": "2691db3f7580752d1474cce497e07e8725c8ab4d9722a07cf8863a7c310fa41d"
+        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244"
       },
       {
         "role": "reference_closure",
@@ -37,7 +37,7 @@
       },
       {
         "role": "content_health",
-        "sha256": "afb00c48630ed7cc9047beb2eee73b0118bd85baba2ae8a9d6fd34c0d780d829"
+        "sha256": "3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5"
       }
     ]
   },

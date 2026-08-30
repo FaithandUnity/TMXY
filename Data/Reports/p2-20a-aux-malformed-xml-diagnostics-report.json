@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.11",
-  "captured_utc": "2026-08-29T18:15:03.9821410+00:00",
+  "captured_utc": "2026-08-30T09:03:50.1833793+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -14,7 +14,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "10edcf5fc8bd6b72fe96455b5982d0f6dcba4096592467f380a380107d1236e5",
+    "aggregate_sha256": "cbc8016989dacab62362afb8674441b3da9bfe41d1331d2b3ca23aa626689e38",
     "entries": [
       {
         "role": "auxiliary_inventory",
@@ -22,19 +22,19 @@
       },
       {
         "role": "a3_report",
-        "sha256": "641bc959230382e28f6dfd4c626fdb65e3aa567671473da238b6d65747328d17"
+        "sha256": "c90d5e5e731a406bdc82a4a8a111da9a8330c7a04f7c9940afa6b8497c44bf1e"
       },
       {
         "role": "a3_evidence",
-        "sha256": "ad0887e6a1eeb9c10fa3aafc7b633b63c5cb11e2d0c2fc8203ee44bf0fc62ace"
+        "sha256": "c60907f9f36c81d737a412948cc87161f858dc3d181f9c9346ba730c3ddb7742"
       },
       {
         "role": "a5_report",
-        "sha256": "592ed7e60bbae1f9f670e2aa5aa9796f6a9cceabd17c60d29913c359f3b79a6b"
+        "sha256": "41354fd69bea8898c56da7a1fbe045026c250749c60b2987510905ba4215db5d"
       },
       {
         "role": "a5_evidence",
-        "sha256": "84101a1235833a8d03b186036d5b26b348327cf7497ebb1cb1ce695410374f4e"
+        "sha256": "4a21cb4c0fed43f2ecced94dae4ad5167bdb750a16223987318b5c9919a78f7e"
       },
       {
         "role": "p2_05_transform_implementation",

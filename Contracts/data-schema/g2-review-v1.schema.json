@@ -218,6 +218,27 @@
         "g2_06_satisfied": {"const": false}
       }
     },
+    "aux_malformed_xml_diagnostics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["task_id", "criterion_id", "evidence_revision", "path", "sha256",
+        "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+        "diagnostic_scope_complete", "scope_complete", "g2_06_satisfied"],
+      "properties": {
+        "task_id": {"const": "P2-20A"},
+        "criterion_id": {"const": "G2-06"},
+        "evidence_revision": {"const": "P2-20A.11"},
+        "path": {"const": "Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json"},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "result": {"const": "BLOCKED"},
+        "review_execution_result": {"const": "PASS"},
+        "task_status": {"const": "BLOCKED"},
+        "completion_criteria_satisfied": {"const": false},
+        "diagnostic_scope_complete": {"const": true},
+        "scope_complete": {"const": false},
+        "g2_06_satisfied": {"const": false}
+      }
+    },
     "identity_normalization_safety": {
       "type": "object",
       "additionalProperties": false,
@@ -283,7 +304,7 @@
       "type": "object",
       "additionalProperties": false,
       "required": ["aggregate_sha256", "prerequisites", "supplemental",
-        "descriptor_diagnostics", "aux_semantic_diagnostics", "aux_package_context", "aux_ecf_parser_parity", "identity_normalization_safety",
+        "descriptor_diagnostics", "aux_semantic_diagnostics", "aux_package_context", "aux_ecf_parser_parity", "aux_malformed_xml_diagnostics", "identity_normalization_safety",
         "binding_failure_diagnostics", "binding_recovery",
         "remediation", "quality"],
       "properties": {
@@ -299,6 +320,7 @@
         "aux_semantic_diagnostics": {"$ref": "#/$defs/aux_semantic_diagnostics"},
         "aux_package_context": {"$ref": "#/$defs/aux_package_context"},
         "aux_ecf_parser_parity": {"$ref": "#/$defs/aux_ecf_parser_parity"},
+        "aux_malformed_xml_diagnostics": {"$ref": "#/$defs/aux_malformed_xml_diagnostics"},
         "identity_normalization_safety": {"$ref": "#/$defs/identity_normalization_safety"},
         "binding_failure_diagnostics": {"$ref": "#/$defs/binding_failure_diagnostics"},
         "binding_recovery": {"$ref": "#/$defs/binding_recovery"},

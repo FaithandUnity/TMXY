@@ -39,3 +39,8 @@ malformed XML 不能自动排除；歧义 Package 候选必须全部保留。当
 的三层 ECF 复算。A.5 历史证据、冻结 A.3 实际输出、正确明文上的解析器差异分别记录，
 不得互相覆盖；两个独立源码派生端口一致不表示执行过旧版运行时或证明二进制等价。
 候选投影只能是非改写诊断，不能批准赋值、语义引用、适配器、根、G2 或 P3。
+
+`g2-aux-malformed-xml-diagnostics-policy-v1.json`、报告 Schema 与匿名明细 Schema 冻结
+P2-20A.11 的 malformed XML 四层诊断。P2-05/.NET 与独立严格解析器的拒绝结果、TinyXML
+2.3.4 源码派生 `LoadFile` 结果和底层 `Parse` 完整性必须分开；API 返回成功不能掩盖部分树，
+也不能证明旧二进制、Windows CRT、客户端 C 字符串终止、语义有效性或处置完成。

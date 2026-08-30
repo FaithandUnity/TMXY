@@ -54,6 +54,12 @@
     "evidence_revision": "P2-20A.10",
     "path": "Data/Reports/p2-20a-aux-ecf-parser-parity-report.json"
   },
+  "aux_malformed_xml_diagnostics": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "evidence_revision": "P2-20A.11",
+    "path": "Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json"
+  },
   "identity_normalization_safety": {
     "task_id": "P2-20A",
     "criterion_id": "G2-06",
@@ -182,6 +188,10 @@
     "explicit_asset_binding_state_does_not_substitute_for_zero_ambiguity_and_unresolved": true,
     "ascii_lower_identity_collision_does_not_prove_semantic_equivalence_or_candidate_selection": true,
     "binding_error_diagnosis_does_not_reduce_unresolved_without_verified_remediation": true,
+    "source_derived_tinyxml_api_success_is_not_legacy_runtime_or_binary_parity": true,
+    "tinyxml_api_success_or_tree_shape_agreement_is_not_a_malformed_disposition": true,
+    "silent_partial_parse_and_unproved_client_memory_tail_or_crt_behavior_block_closure": true,
+    "fixed_blocked_aux_diagnostic_revision_requires_new_revision_and_binder_for_closure": true,
     "audit_codegen_or_uint64_policy_is_not_a_complete_migration_decision_registry": true,
     "machine_suggestions_never_count_as_migration_decisions_or_approvals": true,
     "planning_hours_are_not_measured_duration_or_money": true,

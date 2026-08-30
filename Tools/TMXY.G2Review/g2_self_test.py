@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 from typing import Any
 from g2_evidence import is_safe_relative, is_sha256, require
+from g2_aux_malformed_xml import aux_malformed_xml_self_test
 
 
 def self_test() -> dict[str, Any]:
@@ -35,4 +36,11 @@ def self_test() -> dict[str, Any]:
             "Path-rejection self-test failed"); assertions += 1
     require(is_sha256("a" * 64) and not is_sha256("a" * 63),
             "SHA-256 shape self-test failed"); assertions += 1
-    return {"result": "PASS", "assertions": assertions}
+    malformed = aux_malformed_xml_self_test()
+    require(malformed["current_contract_safe"] is True and
+            malformed["current_closure_ready"] is False and
+            malformed["synthetic_predicate_only"] is True,
+            "Malformed-XML closure separation self-test failed")
+    assertions += malformed["assertions"]
+    return {"result": "PASS", "assertions": assertions,
+            "aux_malformed_xml": malformed}

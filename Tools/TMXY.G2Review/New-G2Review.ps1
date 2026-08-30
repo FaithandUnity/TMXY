@@ -208,6 +208,51 @@ try {
         [int]$g206Metrics.aux_ecf_semantic_imports_claimed -ne 0) {
         throw 'P2-20 A.10 ECF parser-parity evidence drifted or crossed its authority boundary.'
     }
+    $auxMalformedBinding = $report.input_bindings.aux_malformed_xml_diagnostics
+    $auxMalformedPath = Join-Path $root `
+        'Data\Reports\p2-20a-aux-malformed-xml-diagnostics-report.json'
+    if ($auxMalformedBinding.task_id -ne 'P2-20A' -or
+        $auxMalformedBinding.criterion_id -ne 'G2-06' -or
+        $auxMalformedBinding.evidence_revision -ne 'P2-20A.11' -or
+        $auxMalformedBinding.path -ne
+            'Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json' -or
+        $auxMalformedBinding.sha256 -ne (Get-Sha256 $auxMalformedPath) -or
+        $auxMalformedBinding.result -ne 'BLOCKED' -or
+        $auxMalformedBinding.review_execution_result -ne 'PASS' -or
+        $auxMalformedBinding.task_status -ne 'BLOCKED' -or
+        $auxMalformedBinding.completion_criteria_satisfied -ne $false -or
+        $auxMalformedBinding.diagnostic_scope_complete -ne $true -or
+        $auxMalformedBinding.scope_complete -ne $false -or
+        $auxMalformedBinding.g2_06_satisfied -ne $false -or
+        $g206Metrics.aux_malformed_xml_diagnostic_hash_bound -ne $true -or
+        $g206Metrics.aux_malformed_xml_contract_safe -ne $true -or
+        $g206Metrics.aux_malformed_xml_closure_ready -ne $false -or
+        [int]$g206Metrics.aux_malformed_xml_instances -ne 6 -or
+        [int64]$g206Metrics.aux_malformed_xml_source_bytes -ne 1082028 -or
+        [int]$g206Metrics.aux_malformed_xml_strict_document_rejections -ne 6 -or
+        [int]$g206Metrics.aux_malformed_xml_strict_fragment_rejections -ne 6 -or
+        [int]$g206Metrics.aux_malformed_xml_elementtree_rejections -ne 6 -or
+        [int]$g206Metrics.aux_malformed_xml_tinyxml_api_successes -ne 6 -or
+        [int]$g206Metrics.aux_malformed_xml_tinyxml_full_consumption -ne 5 -or
+        [int]$g206Metrics.aux_malformed_xml_tinyxml_silent_partial -ne 1 -or
+        [int]$g206Metrics.aux_malformed_xml_client_server_agreement -ne 6 -or
+        [int]$g206Metrics.aux_malformed_xml_consumer_bound -ne 5 -or
+        [int]$g206Metrics.aux_malformed_xml_consumer_unresolved -ne 1 -or
+        $g206Metrics.aux_malformed_xml_client_input_termination_proven -ne $false -or
+        $g206Metrics.aux_malformed_xml_legacy_runtime_executed -ne $false -or
+        $g206Metrics.aux_malformed_xml_runtime_binary_parity_claimed -ne $false -or
+        $g206Metrics.aux_malformed_xml_windows_crt_parity_claimed -ne $false -or
+        [int]$g206Metrics.aux_malformed_xml_repairs -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_deletions -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_dispositions -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_approved_adapters -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_approved_no_reference -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_approved_roots -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_semantic_imports_claimed -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_terminal_dispositions -ne 0 -or
+        [int]$g206Metrics.aux_malformed_xml_malformed_blocked -ne 6) {
+        throw 'P2-20 A.11 malformed-XML diagnostic drifted or crossed its authority boundary.'
+    }
     if ($g206Metrics.identity_normalization_hash_bound -ne $true -or
         [int]$g206Metrics.identity_case_fold_collision_targets -ne 13 -or
         [int]$g206Metrics.identity_case_fold_collision_edges -ne 26 -or

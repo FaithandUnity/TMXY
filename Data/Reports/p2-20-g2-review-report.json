@@ -12,7 +12,7 @@
   "g2_approved": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "9ed05cae32ed8d2002de7bf5fb508cdc815f909811679734220e8ee5c36c1f8b",
+    "aggregate_sha256": "57dd33425b496188b2ce591e1f8b7327ad8046a0c339f68c6a766d004f32aec5",
     "prerequisites": [
       {
         "task_id": "P2-01",
@@ -171,7 +171,7 @@
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
       "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
-      "sha256": "3740c357718db616418953027507430195c1575648dbe002bcd96e8d59f858d3",
+      "sha256": "b19121ccf29673c86728c2e4d0252488a97cd192ec17a8327c436c3f22273ce5",
       "result": "BLOCKED",
       "review_execution_result": "PASS",
       "task_status": "BLOCKED",
@@ -232,6 +232,20 @@
       "scope_complete": false,
       "g2_06_satisfied": false
     },
+    "aux_malformed_xml_diagnostics": {
+      "task_id": "P2-20A",
+      "criterion_id": "G2-06",
+      "evidence_revision": "P2-20A.11",
+      "path": "Data/Reports/p2-20a-aux-malformed-xml-diagnostics-report.json",
+      "sha256": "b7d0d3a959a41efae43893f8034dfe2d3ef8d3f111105a79abe8df7db94263f2",
+      "result": "BLOCKED",
+      "review_execution_result": "PASS",
+      "task_status": "BLOCKED",
+      "completion_criteria_satisfied": false,
+      "diagnostic_scope_complete": true,
+      "scope_complete": false,
+      "g2_06_satisfied": false
+    },
     "identity_normalization_safety": {
       "task_id": "P2-20A",
       "criterion_id": "G2-06",
@@ -276,7 +290,7 @@
       "task_id": "P2-20B",
       "criterion_id": "G2-07",
       "path": "Data/Governance/p2-g2-migration-decisions.json",
-      "sha256": "b469d99b3e9b8c09e6a206cc9f4f6ef8feb6dad628a5ec1013efb6b30b340beb",
+      "sha256": "adbbeef52eaa08c3ee5f0115ca965bd4b20153bb9440c9e8532b675085187301",
       "result": "BLOCKED",
       "generation_result": "PASS",
       "task_status": "BLOCKED",
@@ -285,9 +299,9 @@
     },
     "quality": {
       "path": "Data/BuildBaseline/p0-12-local-quality-gates.json",
-      "sha256": "e6b00314c60c322cc5999d8b3ec91ea9fa2c50906617f03e52aa57b14cb48ffc",
+      "sha256": "c731d9186c9fd7551b9ed2e3787efe5d2f7aa45be0f798124247ad5544b42e8d",
       "result": "PASS_DIAGNOSTIC",
-      "captured_utc": "2026-08-30T03:21:47.5270140+00:00"
+      "captured_utc": "2026-08-30T05:55:16.9865480+00:00"
     }
   },
   "summary": {
@@ -921,6 +935,141 @@
           "unit": "count"
         },
         {
+          "name": "aux_malformed_xml_diagnostic_hash_bound",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_contract_safe",
+          "value": true,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_closure_ready",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_instances",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_source_bytes",
+          "value": 1082028,
+          "unit": "bytes"
+        },
+        {
+          "name": "aux_malformed_xml_strict_document_rejections",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_strict_fragment_rejections",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_elementtree_rejections",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_tinyxml_api_successes",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_tinyxml_full_consumption",
+          "value": 5,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_tinyxml_silent_partial",
+          "value": 1,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_client_server_agreement",
+          "value": 6,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_consumer_bound",
+          "value": 5,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_consumer_unresolved",
+          "value": 1,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_client_input_termination_proven",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_legacy_runtime_executed",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_runtime_binary_parity_claimed",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_windows_crt_parity_claimed",
+          "value": false,
+          "unit": "boolean"
+        },
+        {
+          "name": "aux_malformed_xml_repairs",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_deletions",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_dispositions",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_approved_adapters",
+          "value": 0,
+          "unit": "count"
+        },
+        {
+          "name": "aux_malformed_xml_approved_no_reference",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_approved_roots",
+          "value": 0,
+          "unit": "roots"
+        },
+        {
+          "name": "aux_malformed_xml_semantic_imports_claimed",
+          "value": 0,
+          "unit": "count"
+        },
+        {
+          "name": "aux_malformed_xml_terminal_dispositions",
+          "value": 0,
+          "unit": "files"
+        },
+        {
+          "name": "aux_malformed_xml_malformed_blocked",
+          "value": 6,
+          "unit": "files"
+        },
+        {
           "name": "aux_package_context_hash_bound",
           "value": true,
           "unit": "boolean"
@@ -1106,7 +1255,7 @@
           "unit": "references"
         }
       ],
-      "interpretation": "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, identity, production-binding, and explicit recovery evidence. A.9 proves a deterministic package-context singleton for all 211 formerly ambiguous region-object occurrences, yielding 3,391 resolved and one unresolved consumer occurrence without first-candidate selection. All 212 auxiliary instances nevertheless remain nonterminal because the proof is not semantic-adapter, no-reference, or root approval. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges as production-valid recoveries while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full asset workset still has 189 ambiguous targets. Diagnostic completeness and technical recovery cannot substitute for the remaining remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
+      "interpretation": "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, parser, identity, production-binding, and recovery evidence. A.11 keeps strict rejection, independent ElementTree rejection, source-derived TinyXML API success, and consumer/runtime authority as four separate layers: TinyXML accepts 6/6 but fully consumes only 5/6, so its silent partial parse and unproved client memory-tail/CRT behavior cannot approve a disposition. A.9 resolves 3,391 consumer occurrences and leaves one unresolved without first-candidate selection, yet all 212 auxiliary instances remain nonterminal. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full asset workset still has 189 ambiguous targets. Diagnostic completeness cannot substitute for semantic adapters, no-reference decisions, approved roots, or verified remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.",
       "blocker_ids": [
         "G2-BLK-06"
       ]
@@ -1341,8 +1490,8 @@
       "id": "G2-BLK-06",
       "criterion_id": "G2-06",
       "title": "Core resource-reference closure has quantified open gaps",
-      "reason": "P2-20A and its A.3/A.5/A.9/A.10 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. It executed no legacy runtime, claims no runtime-binary parity, and grants zero semantic imports. A.9 deterministically resolves 3391 consumer occurrences and leaves 1 unresolved without first-candidate selection; this technical proof grants no semantic adapter or root approval. All 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 189 full-semantic ambiguous plus 12 production-unresolved targets. A.6 measured 13 ASCII-lower identity-collision targets across 26 edges, but found 0 strict full-semantic equivalences and made 0 selections; all 15 ambiguous targets remain blocked. A.7 classified 24 of 24 rejected candidate edges, but made 0 automatic selections. A.8 cross-proved 7 targets / 9 edges as explicit production recoveries and retains 12 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
-      "required_action": "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
+      "reason": "P2-20A and its A.3/A.5/A.9/A.10/A.11 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. A.11 retains strict rejection of all 6 malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically resolves 3391 consumer occurrences and leaves 1 unresolved without first-candidate selection; this technical proof grants no semantic adapter or root approval. All 212 configuration instances remain nonterminal (171 candidate-only, 35 editor-undecided, 6 malformed) with 0 approved roots. Explicit asset-binding evidence retains 189 full-semantic ambiguous plus 12 production-unresolved targets. A.6 measured 13 ASCII-lower identity-collision targets across 26 edges, but found 0 strict full-semantic equivalences and made 0 selections; all 15 ambiguous targets remain blocked. A.7 classified 24 of 24 rejected candidate edges, but made 0 automatic selections. A.8 cross-proved 7 targets / 9 edges as explicit production recoveries and retains 12 unresolved targets. The measured core queues contain 5161 unresolved and 6945 ambiguous table references, 407 unresolved and 8511 ambiguous Package references, 29 conditionally required missing values, and 18 structurally unresolved reachable assets.",
+      "required_action": "Resolve the TinyXML silent-partial and client memory-tail/CRT boundary with runtime evidence or an explicit safe malformed disposition; approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection.",
       "authority_required": false
     },
     {
@@ -1379,9 +1528,9 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-review-policy-v1.json",
-    "policy_sha256": "dd25c942e445f5413bdb44db390110aeb79b1be92d47b3eed6791e9bf854f626",
+    "policy_sha256": "10a9b0143cc5c7abd93d8c3948ad33f7b7db3adc35104beeb6c5039df552735c",
     "schema": "Contracts/data-schema/g2-review-v1.schema.json",
-    "schema_sha256": "fae814d0fe6f2dd659908b0bf67ff8450f04125ce8cfd0f63b842630df384932"
+    "schema_sha256": "c490da51ede488c51921622fc9c8656ff8e7dd0a0b85986f80d0c0fedfb16d14"
   },
   "disclosure": {
     "private_source_paths": false,

@@ -11,6 +11,7 @@ param(
     [Parameter(Mandatory = $true)][string]$AuxSemanticDiagnosticPath,
     [Parameter(Mandatory = $true)][string]$AuxPackageContextPath,
     [Parameter(Mandatory = $true)][string]$AuxEcfParserParityPath,
+    [Parameter(Mandatory = $true)][string]$AuxMalformedXmlPath,
     [Parameter(Mandatory = $true)][string]$IdentityNormalizationPath,
     [Parameter(Mandatory = $true)][string]$RemediationPath
 )
@@ -177,6 +178,111 @@ Set-Metric (Get-Criterion $falseSemanticImports 'G2-06') `
 $negativeCases.aux_ecf_false_semantic_imports_rejected =
     (Test-AgainstSchema $falseSemanticImports) -and
     -not (Test-G2Semantics $falseSemanticImports $policy)
+$missingMalformedSha = Copy-JsonObject $report
+[void]$missingMalformedSha.input_bindings.aux_malformed_xml_diagnostics.PSObject.Properties.Remove('sha256')
+$negativeCases.malformed_xml_missing_sha_rejected = -not (Test-AgainstSchema $missingMalformedSha)
+$badMalformedSha = Copy-JsonObject $report
+$badMalformedSha.input_bindings.aux_malformed_xml_diagnostics.sha256 = '0' * 64
+$negativeCases.malformed_xml_sha_drift_rejected =
+    (Test-AgainstSchema $badMalformedSha) -and
+    -not (Test-G2MalformedXmlBinding $badMalformedSha $Policy $Root)
+$malformedRuntime = Copy-JsonObject $report
+Set-Metric (Get-Criterion $malformedRuntime 'G2-06') `
+    'aux_malformed_xml_legacy_runtime_executed' $true
+$negativeCases.malformed_xml_runtime_promotion_rejected =
+    -not (Test-G2Semantics $malformedRuntime $policy)
+$malformedBinary = Copy-JsonObject $report
+Set-Metric (Get-Criterion $malformedBinary 'G2-06') `
+    'aux_malformed_xml_runtime_binary_parity_claimed' $true
+$negativeCases.malformed_xml_binary_promotion_rejected =
+    -not (Test-G2Semantics $malformedBinary $policy)
+$malformedPartial = Copy-JsonObject $report
+Set-Metric (Get-Criterion $malformedPartial 'G2-06') `
+    'aux_malformed_xml_tinyxml_silent_partial' 0
+$negativeCases.malformed_xml_partial_hiding_rejected =
+    -not (Test-G2Semantics $malformedPartial $policy)
+$malformedClosure = Copy-JsonObject $report
+Set-Metric (Get-Criterion $malformedClosure 'G2-06') `
+    'aux_malformed_xml_closure_ready' $true
+$negativeCases.malformed_xml_contract_safe_as_closure_rejected =
+    -not (Test-G2Semantics $malformedClosure $policy)
+$malformedExtraMetric = Copy-JsonObject $report
+$extraMetric = [pscustomobject][ordered]@{
+    name = 'aux_malformed_xml_optimistic_extension'; value = 0; unit = 'count'
+}
+$malformedExtraMetric.criteria[5].metrics += $extraMetric
+$negativeCases.malformed_xml_extra_metric_rejected =
+    -not (Test-G2Semantics $malformedExtraMetric $policy)
+$malformedGenericMetric = Copy-JsonObject $report
+$malformedGenericMetric.criteria[5].metrics += [pscustomobject][ordered]@{
+    name = 'malformed_xml_runtime_parity_proven'; value = $true; unit = 'boolean'
+}
+$negativeCases.malformed_xml_generic_metric_injection_rejected =
+    -not (Test-G2Semantics $malformedGenericMetric $policy)
+$malformedWrongUnit = Copy-JsonObject $report
+@($malformedWrongUnit.criteria[5].metrics |
+    Where-Object name -eq 'aux_malformed_xml_semantic_imports_claimed')[0].unit = 'boolean'
+$negativeCases.malformed_xml_numeric_claim_unit_rejected =
+    -not (Test-G2Semantics $malformedWrongUnit $policy)
+$malformedNul = Copy-JsonObject $report
+Set-Metric (Get-Criterion $malformedNul 'G2-06') `
+    'aux_malformed_xml_client_input_termination_proven' $true
+$negativeCases.malformed_xml_nul_forgery_rejected =
+    -not (Test-G2Semantics $malformedNul $policy)
+foreach ($case in @(
+        @('repair_injection', 'aux_malformed_xml_repairs'),
+        @('disposition_injection', 'aux_malformed_xml_dispositions'),
+        @('semantic_import_injection', 'aux_malformed_xml_semantic_imports_claimed'),
+        @('root_injection', 'aux_malformed_xml_approved_roots'))) {
+    $candidate = Copy-JsonObject $report
+    Set-Metric (Get-Criterion $candidate 'G2-06') $case[1] 1
+    $negativeCases["malformed_xml_$($case[0])_rejected"] =
+        -not (Test-G2Semantics $candidate $policy)
+}
+$malformedDocument = Get-Content -LiteralPath $AuxMalformedXmlPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$detailDrift = Copy-JsonObject $malformedDocument
+$detailDrift.detail_export.sha256 = '0' * 64
+$negativeCases.malformed_xml_detail_hash_drift_rejected =
+    -not (Test-G2MalformedXmlDocument $detailDrift $Root)
+$sourceDrift = Copy-JsonObject $malformedDocument
+$sourceDrift.input_bindings.entries[0].sha256 = '0' * 64
+$negativeCases.malformed_xml_source_hash_drift_rejected =
+    -not (Test-G2MalformedXmlDocument $sourceDrift $Root)
+$legacyDrift = Copy-JsonObject $malformedDocument
+$legacyDrift.input_bindings.legacy_sources[0].sha256 = '0' * 64
+$negativeCases.malformed_xml_legacy_hash_drift_rejected =
+    -not (Test-G2MalformedXmlDocument $legacyDrift $Root)
+$a11AggregateDrift = Copy-JsonObject $malformedDocument
+$a11AggregateDrift.input_bindings.aggregate_sha256 = '0' * 64
+$negativeCases.malformed_xml_input_aggregate_drift_rejected =
+    -not (Test-G2MalformedXmlDocument $a11AggregateDrift $Root)
+$legacyDuplicate = Copy-JsonObject $malformedDocument
+$legacyDuplicate.input_bindings.legacy_sources[1].role =
+    $legacyDuplicate.input_bindings.legacy_sources[0].role
+$negativeCases.malformed_xml_legacy_role_duplicate_rejected =
+    -not (Test-G2MalformedXmlDocument $legacyDuplicate $Root)
+$boundaryPromotion = Copy-JsonObject $malformedDocument
+$boundaryPromotion.source_derived_tinyxml.evidence_boundary.runtime_parity_claimed = $true
+$negativeCases.malformed_xml_boundary_promotion_rejected =
+    -not (Test-G2MalformedXmlDocument $boundaryPromotion $Root)
+$environmentDrift = Copy-JsonObject $malformedDocument
+$environmentDrift.source_derived_tinyxml.execution_environment.toolchain_lock_sha256 = '0' * 64
+$negativeCases.malformed_xml_environment_drift_rejected =
+    -not (Test-G2MalformedXmlDocument $environmentDrift $Root)
+$coordinatedEnvironmentForgery = Copy-JsonObject $malformedDocument
+$forgedEnvironment = $coordinatedEnvironmentForgery.source_derived_tinyxml.execution_environment
+$forgedEnvironment.builder_image_reference = 'tmxy-backend-builder:forged'
+$forgedEnvironment.compiler_version_output_sha256 = '0' * 64
+$forgedEnvironment.client_source_set_sha256 = '1' * 64
+$forgedEnvironment.server_source_set_sha256 = '2' * 64
+$negativeCases.malformed_xml_coordinated_environment_forgery_rejected =
+    -not (Test-G2MalformedXmlDocument $coordinatedEnvironmentForgery $Root)
+$unknownMalformed = Copy-JsonObject $malformedDocument
+$unknownMalformed.source_derived_tinyxml.execution_environment |
+    Add-Member -NotePropertyName runtime_safe -NotePropertyValue $true
+$negativeCases.malformed_xml_unknown_field_rejected =
+    -not (Test-G2MalformedXmlDocument $unknownMalformed $Root)
 $missingIdentitySha = Copy-JsonObject $report
 [void]$missingIdentitySha.input_bindings.identity_normalization_safety.PSObject.Properties.Remove('sha256')
 $negativeCases.missing_identity_normalization_sha_rejected =
@@ -263,5 +369,18 @@ $negativeCases.aggregate_input_drift_rejected =
 $badEvidence = Copy-JsonObject $evidence
 $badEvidence.implementation.source_sha256 = '0' * 64
 $negativeCases.full_evidence_tamper_rejected = -not (Test-EvidenceSemantics $badEvidence)
+$badBuilderReference = Copy-JsonObject $evidence
+$badBuilderReference.reproduction.builder_reference = 'tmxy-backend-builder:unbound'
+$negativeCases.evidence_builder_reference_drift_rejected =
+    -not (Test-EvidenceSemantics $badBuilderReference)
+$badBuilderId = Copy-JsonObject $evidence
+$badBuilderId.reproduction.builder_id = 'sha256:' + ('0' * 64)
+$negativeCases.evidence_builder_id_drift_rejected =
+    -not (Test-EvidenceSemantics $badBuilderId)
+$unknownReproduction = Copy-JsonObject $evidence
+$unknownReproduction.reproduction |
+    Add-Member -NotePropertyName runtime_safe -NotePropertyValue $true
+$negativeCases.evidence_reproduction_unknown_field_rejected =
+    -not (Test-EvidenceSemantics $unknownReproduction)
 
 return ,$negativeCases

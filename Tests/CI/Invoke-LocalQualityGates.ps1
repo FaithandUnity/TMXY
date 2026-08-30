@@ -186,6 +186,11 @@ if ($VerifyLegacyGoldenSources) { $g2AuxEcfParserParityArguments.VerifyDerivedSo
 $g2AuxEcfParserParity = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-G2AuxEcfParserParity.ps1') `
     -Arguments $g2AuxEcfParserParityArguments
+$g2AuxMalformedXmlArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2AuxMalformedXmlArguments.VerifyDerivedSources = $true }
+$g2AuxMalformedXmlDiagnostics = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2AuxMalformedXmlDiagnostics.ps1') `
+    -Arguments $g2AuxMalformedXmlArguments
 $g2AssetDescriptorArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2AssetDescriptorArguments.VerifyDerivedSources = $true }
 $g2AssetDescriptorDiagnostics = Invoke-JsonTest `
@@ -379,6 +384,19 @@ $passed = [string]$repository.result -eq 'PASS' -and
     -not [bool]$g2AuxEcfParserParity.completion_criteria_satisfied -and
     -not [bool]$g2AuxEcfParserParity.g2_06_satisfied -and
     -not [bool]$g2AuxEcfParserParity.p3_authorized -and
+    [string]$g2AuxMalformedXmlDiagnostics.result -eq 'PASS' -and
+    [bool]$g2AuxMalformedXmlDiagnostics.contract_assertions_satisfied -and
+    [int]$g2AuxMalformedXmlDiagnostics.failures -eq 0 -and
+    [bool]$g2AuxMalformedXmlDiagnostics.diagnostic_scope_complete -and
+    [int]$g2AuxMalformedXmlDiagnostics.malformed_instances -eq 6 -and
+    [int]$g2AuxMalformedXmlDiagnostics.tinyxml_api_successes -eq 6 -and
+    [int]$g2AuxMalformedXmlDiagnostics.tinyxml_full_consumption -eq 5 -and
+    [int]$g2AuxMalformedXmlDiagnostics.tinyxml_silent_partial -eq 1 -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.legacy_runtime_executed -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.runtime_binary_parity_claimed -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.completion_criteria_satisfied -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.g2_06_satisfied -and
+    -not [bool]$g2AuxMalformedXmlDiagnostics.p3_authorized -and
     [string]$g2AssetDescriptorDiagnostics.result -eq 'PASS' -and
     [bool]$g2AssetDescriptorDiagnostics.contract_assertions_satisfied -and
     -not [bool]$g2AssetDescriptorDiagnostics.completion_criteria_satisfied -and
@@ -481,6 +499,7 @@ $report = [pscustomobject][ordered]@{
     g2_auxiliary_semantic_diagnostics = $g2AuxSemanticDiagnostics
     g2_auxiliary_package_context = $g2AuxPackageContext
     g2_auxiliary_ecf_parser_parity = $g2AuxEcfParserParity
+    g2_auxiliary_malformed_xml_diagnostics = $g2AuxMalformedXmlDiagnostics
     g2_asset_descriptor_diagnostics = $g2AssetDescriptorDiagnostics
     g2_asset_identity_normalization = $g2IdentityNormalization
     g2_asset_binding_failure_diagnostics = $g2BindingFailureDiagnostics

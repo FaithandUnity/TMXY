@@ -8,6 +8,7 @@ from typing import Any
 from g2_evidence import (bind_inputs, evaluate_core_closure, load_json, require,
                          resolve_inside, sha256)
 from g2_aux_ecf_parser_parity import aux_ecf_parser_parity_metrics, aux_ecf_parser_parity_safe
+from g2_aux_malformed_xml import aux_malformed_xml_closure_ready, aux_malformed_xml_metrics
 from g2_markdown import markdown
 from g2_migration import evaluate_migration_registry
 from g2_report_model import criterion, metric
@@ -115,6 +116,8 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         aux_context["authority_state"]["nonterminal_instances"] == 212)
     aux_ecf_parity = evidence["P2-20A.10"]
     aux_ecf_safe = aux_ecf_parser_parity_safe(aux_ecf_parity)
+    aux_malformed = evidence["P2-20A.11"]
+    aux_malformed_ready = aux_malformed_xml_closure_ready(aux_malformed)
     identity_safety = evidence["P2-20A.6"]
     identity_measured = identity_safety["measured"]
     identity_effective = identity_measured["effective"]
@@ -146,6 +149,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
     binding_ready = (binding_failure["remediation_scope_complete"] is True and
                      binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
     ok = (core["satisfied"] and aux_ready and aux_context_safe and aux_ecf_safe and
+          aux_malformed_ready and
           identity_safe and binding_safe and binding_ready)
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
@@ -201,6 +205,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("aux_semantic_ecf_parser_differences", aux_ecf["mixed_newline_differences"], "files"),
         metric("aux_semantic_ecf_missed_assignments", aux_ecf["legacy_assignments_missed_by_a3_parser"], "assignments"),
         *(metric(name, value, unit) for name, value, unit in aux_ecf_parser_parity_metrics(aux_ecf_parity)),
+        *(metric(name, value, unit) for name, value, unit in aux_malformed_xml_metrics(aux_malformed)),
         metric("aux_package_context_hash_bound", True, "boolean"),
         metric("aux_package_context_contract_proven", aux_context["technical_state"]["package_context_contract_proven"], "boolean"),
         metric("aux_package_context_strict_ambiguous_objects", aux_context["strict_baseline"]["ambiguous_object"], "references"),
@@ -238,7 +243,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, identity, production-binding, and explicit recovery evidence. A.9 proves a deterministic package-context singleton for all 211 formerly ambiguous region-object occurrences, yielding 3,391 resolved and one unresolved consumer occurrence without first-candidate selection. All 212 auxiliary instances nevertheless remain nonterminal because the proof is not semantic-adapter, no-reference, or root approval. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges as production-valid recoveries while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full asset workset still has 189 ambiguous targets. Diagnostic completeness and technical recovery cannot substitute for the remaining remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, parser, identity, production-binding, and recovery evidence. A.11 keeps strict rejection, independent ElementTree rejection, source-derived TinyXML API success, and consumer/runtime authority as four separate layers: TinyXML accepts 6/6 but fully consumes only 5/6, so its silent partial parse and unproved client memory-tail/CRT behavior cannot approve a disposition. A.9 resolves 3,391 consumer occurrences and leaves one unresolved without first-candidate selection, yet all 212 auxiliary instances remain nonterminal. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. The full asset workset still has 189 ambiguous targets. Diagnostic completeness cannot substitute for semantic adapters, no-reference decisions, approved roots, or verified remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -335,14 +340,15 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         aux_context = evidence["P2-20A.9"]
         aux_context_resolution = aux_context["measured"]["effective_resolution"]
         aux_ecf_parity = evidence["P2-20A.10"]
+        aux_malformed = evidence["P2-20A.11"]
         blockers.append({
             "id": "G2-BLK-06",
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                f"P2-20A and its A.3/A.5/A.9/A.10 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
+                f"P2-20A and its A.3/A.5/A.9/A.10/A.11 auxiliary evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
                 f"A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. "
-                f"It executed no legacy runtime, claims no runtime-binary parity, and grants zero semantic imports. A.9 deterministically "
+                f"A.11 retains strict rejection of all {aux_malformed['population']['instances']} malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically "
                 f"resolves {aux_context_resolution['resolved_total']} consumer occurrences and leaves "
                 f"{aux_context_resolution['unresolved_resource']} unresolved without first-candidate selection; "
                 f"this technical proof grants no semantic adapter or root approval. All {auxiliary['inventory_files']} "
@@ -370,7 +376,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"and {asset_structure['unresolved']} structurally unresolved reachable assets."
             ),
             "required_action": (
-                "Approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound "
+                "Resolve the TinyXML silent-partial and client memory-tail/CRT boundary with runtime evidence or an explicit safe malformed disposition; approve semantic adapters or explicit no-reference dispositions for all auxiliary instances, close every ambiguous or unresolved asset-binding state, use the hash-bound "
                 "conditional member workset for authorized remediation, and reduce every scoped unresolved, ambiguous, structural, "
                 "unknown, integrity, and heuristic metric to its policy threshold without first-candidate selection."
             ),

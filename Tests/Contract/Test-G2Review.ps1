@@ -17,6 +17,7 @@ $descriptorDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-asset-descripto
 $auxSemanticDiagnosticPath = Join-Path $root 'Data\Reports\p2-20a-aux-semantic-diagnostics-report.json'
 $auxPackageContextPath = Join-Path $root 'Data\Reports\p2-20a-aux-package-context-report.json'
 $auxEcfParserParityPath = Join-Path $root 'Data\Reports\p2-20a-aux-ecf-parser-parity-report.json'
+$auxMalformedXmlPath = Join-Path $root 'Data\Reports\p2-20a-aux-malformed-xml-diagnostics-report.json'
 $identityNormalizationPath = Join-Path $root 'Data\Reports\p2-20a-asset-identity-normalization-report.json'
 $bindingFailurePath = Join-Path $root 'Data\Reports\p2-20a-asset-binding-failure-diagnostics-report.json'
 $bindingRecoveryPath = Join-Path $root 'Data\Reports\p2-20a-asset-binding-recovery-report.json'
@@ -33,11 +34,14 @@ $reportModelHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_report_model.py
 $helperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_evidence.py'
 $auxSemanticHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_aux_semantic.py'
 $auxPackageContextHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_aux_package_context.py'
+$auxMalformedPythonPath = Join-Path $root 'Tools\TMXY.G2Review\g2_aux_malformed_xml.py'
 $identityNormalizationHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_identity_normalization.py'
 $bindingFailureHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_binding_failure.py'
 $bindingRecoveryHelperPath = Join-Path $root 'Tools\TMXY.G2Review\g2_binding_recovery.py'
 $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $negativeCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-NegativeCases.ps1'
+$malformedCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-MalformedXmlCases.ps1'
+. $malformedCasesHelperPath
 $assertions = [Collections.Generic.List[object]]::new()
 function Add-A([string]$Name, [bool]$Passed, [string]$Detail = '') {
     $assertions.Add([pscustomobject][ordered]@{
@@ -178,6 +182,7 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.aux_ecf_parser_parity.evidence_revision -eq 'P2-20A.10' -and
         $Candidate.aux_ecf_parser_parity.path -eq
             'Data/Reports/p2-20a-aux-ecf-parser-parity-report.json' -and
+        (Test-G2MalformedXmlPolicy $Candidate) -and
         $Candidate.identity_normalization_safety.task_id -eq 'P2-20A' -and
         $Candidate.identity_normalization_safety.criterion_id -eq 'G2-06' -and
         $Candidate.identity_normalization_safety.evidence_revision -eq 'P2-20A.6' -and
@@ -242,6 +247,7 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         }
     }
     $g206 = Get-Criterion $Candidate 'G2-06'
+    if (-not (Test-G2MalformedXmlMetrics $g206)) { return $false }
     if ((Get-Metric $g206 'supplemental_report_present') -ne $true -or
         (Get-Metric $g206 'declared_scope_hash_bound') -ne $true -or
         (Get-Metric $g206 'scope_complete') -ne $false -or
@@ -400,16 +406,17 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
 }
 $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePath,
     $qualityPath, $supplementalPath, $descriptorDiagnosticPath, $auxSemanticDiagnosticPath,
-    $auxPackageContextPath, $auxEcfParserParityPath, $identityNormalizationPath,
+    $auxPackageContextPath, $auxEcfParserParityPath, $auxMalformedXmlPath, $identityNormalizationPath,
     $bindingFailurePath, $bindingRecoveryPath,
     $auxiliaryReportPath,
     $remediationPath, $reviewPacketsPath,
     $authorityLedgerPath, $migrationPolicyPath, $migrationSchemaPath,
     $authoritySchemaPath, $reviewPacketSchemaPath, $generatorPath, $reportModelHelperPath,
     $helperPath,
-    $auxSemanticHelperPath, $auxPackageContextHelperPath, $identityNormalizationHelperPath,
+    $auxSemanticHelperPath, $auxPackageContextHelperPath, $auxMalformedPythonPath, $identityNormalizationHelperPath,
     $bindingFailureHelperPath,
-    $bindingRecoveryHelperPath, $wrapperPath, $negativeCasesHelperPath)
+    $bindingRecoveryHelperPath, $wrapperPath, $negativeCasesHelperPath,
+    $malformedCasesHelperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -506,10 +513,19 @@ function Test-EvidenceSemantics([object]$Candidate) {
     if ($Candidate.disclosure.private_source_paths -or $Candidate.disclosure.exact_primary_keys -or
         $Candidate.disclosure.exact_observed_extrema -or $Candidate.disclosure.raw_table_rows -or
         $Candidate.disclosure.decoded_confidential_payloads -or
-        $Candidate.disclosure.legacy_source_lines -or $Candidate.reproduction.check_mode -or
+        $Candidate.disclosure.legacy_source_lines) { return $false }
+    $expectedReproduction = @('check_mode', 'repository_mount', 'network', 'capabilities',
+        'no_new_privileges', 'builder_reference', 'builder_id', 'builder_user')
+    $actualReproduction = @($Candidate.reproduction.PSObject.Properties.Name)
+    if ($actualReproduction.Count -ne 8 -or
+        @(Compare-Object $actualReproduction $expectedReproduction -CaseSensitive).Count -ne 0 -or
+        $Candidate.reproduction.check_mode -or
         $Candidate.reproduction.repository_mount -ne 'read-only' -or
         $Candidate.reproduction.network -ne 'none' -or $Candidate.reproduction.capabilities -ne 'none' -or
         -not $Candidate.reproduction.no_new_privileges -or
+        $Candidate.reproduction.builder_reference -cne 'tmxy-backend-builder:p0-08' -or
+        $Candidate.reproduction.builder_id -cne
+            'sha256:95f30cbb0f406f387a8aa0d4d56323105610ad6fc0629196bc5074847cac90a9' -or
         $Candidate.reproduction.builder_user -ne 'tmxy' -or
         @(Compare-Object @($Candidate.next_scope.tasks) @(
                     'P2-20A-remediation', 'P2-20B-owner-decisions', 'P2-20-g2-rerun')).Count -ne 0) {
@@ -563,6 +579,7 @@ $descriptorBinding = $report.input_bindings.descriptor_diagnostics
 $auxSemanticBinding = $report.input_bindings.aux_semantic_diagnostics
 $auxPackageContextBinding = $report.input_bindings.aux_package_context
 $auxEcfParserParityBinding = $report.input_bindings.aux_ecf_parser_parity
+$auxMalformedXmlBinding = $report.input_bindings.aux_malformed_xml_diagnostics
 $identityNormalizationBinding = $report.input_bindings.identity_normalization_safety
 $bindingFailureBinding = $report.input_bindings.binding_failure_diagnostics
 $bindingRecoveryBinding = $report.input_bindings.binding_recovery
@@ -669,6 +686,8 @@ $bindingsPassed = $bindingsPassed -and
     $auxEcfParserParityBinding.scope_complete -eq $auxEcfParserParity.scope_complete -and
     $auxEcfParserParityBinding.g2_06_satisfied -eq $auxEcfParserParity.g2_06_satisfied
 $aggregateLines.Add("AUX_ECF_PARSER_PARITY|$($auxEcfParserParityBinding.task_id)|$($auxEcfParserParityBinding.criterion_id)|$($auxEcfParserParityBinding.evidence_revision)|$($auxEcfParserParityBinding.path)|$($auxEcfParserParityBinding.sha256)")
+$bindingsPassed = $bindingsPassed -and (Test-G2MalformedXmlBinding $report $policy $root)
+$aggregateLines.Add("AUX_MALFORMED_XML|P2-20A.11|$($auxMalformedXmlBinding.path)|$($auxMalformedXmlBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $identityNormalizationBinding.task_id -eq $policy.identity_normalization_safety.task_id -and
     $identityNormalizationBinding.criterion_id -eq $policy.identity_normalization_safety.criterion_id -and
@@ -794,6 +813,17 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'aux_ecf_runtime_binary_parity_claimed') -eq $false -and
     (Get-Metric $g206 'aux_ecf_a3_outputs_modified') -eq $false -and
     (Get-Metric $g206 'aux_ecf_semantic_imports_claimed') -eq 0 -and
+    (Get-Metric $g206 'aux_malformed_xml_diagnostic_hash_bound') -eq $true -and
+    (Get-Metric $g206 'aux_malformed_xml_contract_safe') -eq $true -and
+    (Get-Metric $g206 'aux_malformed_xml_closure_ready') -eq $false -and
+    (Get-Metric $g206 'aux_malformed_xml_instances') -eq 6 -and
+    (Get-Metric $g206 'aux_malformed_xml_strict_document_rejections') -eq 6 -and
+    (Get-Metric $g206 'aux_malformed_xml_elementtree_rejections') -eq 6 -and
+    (Get-Metric $g206 'aux_malformed_xml_tinyxml_api_successes') -eq 6 -and
+    (Get-Metric $g206 'aux_malformed_xml_tinyxml_full_consumption') -eq 5 -and
+    (Get-Metric $g206 'aux_malformed_xml_tinyxml_silent_partial') -eq 1 -and
+    (Get-Metric $g206 'aux_malformed_xml_client_input_termination_proven') -eq $false -and
+    (Get-Metric $g206 'aux_malformed_xml_legacy_runtime_executed') -eq $false -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolved_targets -eq 21293 -and
@@ -833,7 +863,7 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'unknown_resolution_count') -eq 0 -and
     (Get-Metric $g206 'core_foreign_key_dangling_context') -eq 0 -and
     $g206.interpretation -match 'hash-bound core, descriptor' -and
-    $g206.interpretation -match 'A\.9 proves a deterministic package-context singleton' -and
+    $g206.interpretation -match 'A\.9 resolves 3,391 consumer occurrences' -and
     $g206.interpretation -match 'A.7 classifies all 24 strict rejected asset candidate edges' -and
     $g206.interpretation -match 'A.8 cross-proves 7 targets / 9 edges' -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
@@ -933,10 +963,11 @@ $negativeCases = & $negativeCasesHelperPath `
     -AuxSemanticDiagnosticPath $auxSemanticDiagnosticPath `
     -AuxPackageContextPath $auxPackageContextPath `
     -AuxEcfParserParityPath $auxEcfParserParityPath `
+    -AuxMalformedXmlPath $auxMalformedXmlPath `
     -IdentityNormalizationPath $identityNormalizationPath `
     -RemediationPath $remediationPath
 Add-A 'Policy supplemental scope FK migration approval drift and unknown-field negatives fail closed' (
-    $negativeCases.Count -eq 45 -and
+    $negativeCases.Count -eq 71 -and
     @($negativeCases.Values | Where-Object { $_ -ne $true }).Count -eq 0)
 $localCheck = $null
 if ($VerifyDerivedSources) {

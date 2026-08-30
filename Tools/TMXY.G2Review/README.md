@@ -6,7 +6,8 @@ network, Linux capabilities, or privilege escalation.
 
 `g2_review.py` assembles the gate report. `g2_evidence.py` independently binds
 the prerequisite, P2-20A supplemental/A.4/A.5/A.6/A.7/A.8/A.9 diagnostics,
-the P2-20A.10 ECF parser-parity diagnostic, P2-20B remediation, and quality inputs, then recomputes G2-06 and G2-07 from
+the P2-20A.10 ECF parser-parity and P2-20A.11 malformed-XML diagnostics,
+P2-20B remediation, and quality inputs, then recomputes G2-06 and G2-07 from
 their full machine evidence instead of trusting reported completion flags or
 machine suggestions.
 
@@ -28,6 +29,22 @@ instance and omits four legacy pair records. This is candidate-only diagnostic
 evidence: no legacy runtime was executed, runtime-binary parity is not claimed,
 and no semantic import, adapter, consumer contract, root, or terminal state is
 approved.
+
+P2-20A.11 keeps four evidence layers separate: frozen P2-05 strict rejection,
+independent ElementTree rejection, source-derived TinyXML 2.3.4 behavior, and
+the consumer/runtime authority boundary. TinyXML reports API success and equal
+Client/Server tree shapes for all six malformed inputs, but consumes only five
+completely; one success silently retains a partial tree. The source probe is not
+legacy runtime or binary parity, and client NUL termination, memory-tail and
+Windows CRT text-mode behavior remain unproved. Repairs, semantic imports,
+approved dispositions, adapters, roots, and terminal instances remain zero.
+Accordingly, `aux_malformed_xml_contract_safe=true` means only that the blocked
+diagnostic is conservative and hash-bindable. It is never closure:
+`aux_malformed_xml_closure_ready=false` is mandatory for this fixed BLOCKED
+revision. The positive closure predicate is exercised only with synthetic unit
+data to prove its logic is not contradictory; P2-20A.11 cannot be promoted in
+place. Real dispositions require a new evidence revision, policy, schema, and
+binder before G2-06 may consume them.
 
 ```powershell
 pwsh -File Tools/TMXY.G2Review/New-G2Review.ps1

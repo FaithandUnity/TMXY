@@ -84,12 +84,12 @@ if (-not $SkipRegeneration) {
             [int]$check.targets -eq 19 -and [int]$check.candidate_edges -eq 24 -and
             [int]$check.typed_error_edges -eq 24 -and
             [int]$check.unclassified_error_edges -eq 0 -and
-            [int]$check.effective_resolved_targets -eq 7 -and
-            [int]$check.effective_resolved_edges -eq 9 -and
+            [int]$check.effective_resolved_targets -eq 13 -and
+            [int]$check.effective_resolved_edges -eq 15 -and
             [int]$check.effective_ambiguous_targets -eq 0 -and
             [int]$check.effective_ambiguous_edges -eq 0 -and
-            [int]$check.effective_unresolved_targets -eq 12 -and
-            [int]$check.effective_unresolved_edges -eq 15 -and
+            [int]$check.effective_unresolved_targets -eq 6 -and
+            [int]$check.effective_unresolved_edges -eq 9 -and
             [int]$check.candidate_selections -eq 0 -and
             [int]$check.automatic_resolutions -eq 0 -and
             [int]$check.owner_dispositions -eq 0 -and
@@ -159,12 +159,12 @@ Add-Assertion 'Measured production error distribution is frozen' `
         [Text.Json.Nodes.JsonNode]::Parse(
             ($policy.expected_error_counts | ConvertTo-Json -Depth 20 -Compress))))
 Add-Assertion 'Strict failures retain exact effective recovery state' `
-    ([int]$report.measured.effective.resolved_targets -eq 7 -and
-        [int]$report.measured.effective.resolved_edges -eq 9 -and
+    ([int]$report.measured.effective.resolved_targets -eq 13 -and
+        [int]$report.measured.effective.resolved_edges -eq 15 -and
         [int]$report.measured.effective.ambiguous_targets -eq 0 -and
         [int]$report.measured.effective.ambiguous_edges -eq 0 -and
-        [int]$report.measured.effective.unresolved_targets -eq 12 -and
-        [int]$report.measured.effective.unresolved_edges -eq 15)
+        [int]$report.measured.effective.unresolved_targets -eq 6 -and
+        [int]$report.measured.effective.unresolved_edges -eq 9)
 Add-Assertion 'Other blockers remain untouched' `
     ([int]$report.preserved_blockers.identity_semantic_ambiguous_targets -eq 15 -and
         [int]$report.preserved_blockers.identity_semantic_ambiguous_edges -eq 30 -and
@@ -172,8 +172,8 @@ Add-Assertion 'Other blockers remain untouched' `
         [int]$report.preserved_blockers.asset_effective_ambiguous_edges -eq 546 -and
         [int]$report.preserved_blockers.strict_binding_failure_targets -eq 19 -and
         [int]$report.preserved_blockers.strict_binding_failure_edges -eq 24 -and
-        [int]$report.preserved_blockers.asset_effective_unresolved_targets -eq 12 -and
-        [int]$report.preserved_blockers.asset_effective_unresolved_edges -eq 15 -and
+        [int]$report.preserved_blockers.asset_effective_unresolved_targets -eq 6 -and
+        [int]$report.preserved_blockers.asset_effective_unresolved_edges -eq 9 -and
         [int]$report.preserved_blockers.auxiliary_nonterminal_instances -eq 212 -and
         [int]$report.preserved_blockers.conditional_required_missing -eq 29 -and
         [int]$report.preserved_blockers.migration_pending -eq 1359 -and
@@ -274,7 +274,7 @@ Add-Assertion 'Locked isolated builder evidence' `
         $evidence.isolation.legacy_client_mount -eq 'read-only')
 
 $mutated = Copy-Json $reportText
-$mutated.measured.effective.resolved_targets = 6
+$mutated.measured.effective.resolved_targets = 12
 Add-Assertion 'Negative: binder pass or automatic resolution rejected' `
     (Test-SchemaRejected $mutated $schemaPath)
 $mutated = Copy-Json $reportText

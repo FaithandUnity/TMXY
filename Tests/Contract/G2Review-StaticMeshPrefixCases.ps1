@@ -9,7 +9,11 @@ function Test-G2StaticMeshPrefixPolicy([object]$Policy) {
         $Policy.fail_closed_rules.static_mesh_prefix_proof_does_not_select_candidates_apply_adapters_or_prove_runtime_parity -eq $true
 }
 
-function Test-G2StaticMeshPrefixMetrics([object]$Criterion) {
+function Test-G2StaticMeshPrefixMetrics([object]$Criterion, [string]$Root) {
+    $document = Get-Content -LiteralPath (Join-Path $Root `
+        'Data\Reports\p2-20a-static-mesh-payload-section-prefix-report.json') `
+        -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $blockers = $document.preserved_blockers
     $expected = [ordered]@{
         static_mesh_prefix_diagnostic_hash_bound = @($true, 'boolean')
         static_mesh_prefix_inventory_hash_bound = @($true, 'boolean')
@@ -28,10 +32,14 @@ function Test-G2StaticMeshPrefixMetrics([object]$Criterion) {
         static_mesh_prefix_adapter_applied = @($false, 'boolean')
         static_mesh_prefix_authority_state_changed = @($false, 'boolean')
         static_mesh_prefix_recovery_applied = @($false, 'boolean')
-        static_mesh_prefix_preserved_ambiguous_targets = @(189, 'assets')
-        static_mesh_prefix_preserved_ambiguous_edges = @(546, 'edges')
-        static_mesh_prefix_preserved_unresolved_targets = @(12, 'assets')
-        static_mesh_prefix_preserved_unresolved_edges = @(15, 'edges')
+        static_mesh_prefix_preserved_ambiguous_targets = @(
+            [int]$blockers.asset_effective_ambiguous_targets, 'assets')
+        static_mesh_prefix_preserved_ambiguous_edges = @(
+            [int]$blockers.asset_effective_ambiguous_edges, 'edges')
+        static_mesh_prefix_preserved_unresolved_targets = @(
+            [int]$blockers.asset_effective_unresolved_targets, 'assets')
+        static_mesh_prefix_preserved_unresolved_edges = @(
+            [int]$blockers.asset_effective_unresolved_edges, 'edges')
     }
     foreach ($name in $expected.Keys) {
         $matches = @($Criterion.metrics | Where-Object name -eq $name)
@@ -58,6 +66,29 @@ function Test-G2StaticMeshPrefixDocument([object]$Document, [string]$Root) {
         'Contracts\data-schema\g2-static-mesh-payload-section-prefix-policy-v1.json'
     $policy = Get-Content -LiteralPath $policyPath -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
+    $a4 = Get-Content -LiteralPath (Join-Path $Root `
+        'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json') `
+        -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $a7 = Get-Content -LiteralPath (Join-Path $Root `
+        'Data\Reports\p2-20a-asset-binding-failure-diagnostics-report.json') `
+        -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $a8 = Get-Content -LiteralPath (Join-Path $Root `
+        'Data\Reports\p2-20a-asset-binding-recovery-report.json') `
+        -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $a4Effective = $a4.measured.reconciled_full_workset
+    $a7Effective = $a7.measured.effective
+    $a8Effective = $a8.measured.effective_resolution
+    $blockersReconciled = (Test-JsonEqual $blockers $a7.preserved_blockers) -and
+        [int]$blockers.asset_effective_ambiguous_targets -eq [int]$a4Effective.ambiguous_targets -and
+        [int]$blockers.asset_effective_ambiguous_edges -eq [int]$a4Effective.ambiguous_edges -and
+        [int]$blockers.asset_effective_unresolved_targets -eq [int]$a4Effective.unresolved_targets -and
+        [int]$blockers.asset_effective_unresolved_edges -eq [int]$a4Effective.unresolved_edges -and
+        [int]$a7Effective.unresolved_targets -eq [int]$a4Effective.unresolved_targets -and
+        [int]$a7Effective.unresolved_edges -eq [int]$a4Effective.unresolved_edges -and
+        [int]$a8Effective.resolved.targets -eq [int]$a7Effective.resolved_targets -and
+        [int]$a8Effective.resolved.candidate_edges -eq [int]$a7Effective.resolved_edges -and
+        [int]$a8Effective.unresolved.targets -eq [int]$a7Effective.unresolved_targets -and
+        [int]$a8Effective.unresolved.candidate_edges -eq [int]$a7Effective.unresolved_edges
     $expectedLegacy = @($policy.legacy_source_roles | Sort-Object role)
     $legacy = @($Document.legacy_source_provenance.roles)
     $legacyText = (@($expectedLegacy | ForEach-Object { "$($_.role)`t$($_.sha256)" }) -join "`n") + "`n"
@@ -108,17 +139,27 @@ function Test-G2StaticMeshPrefixDocument([object]$Document, [string]$Root) {
         $authority.a4_is_authoritative -eq $true -and
         $authority.authority_state_changed -eq $false -and
         $authority.adapter_applied -eq $false -and $authority.recovery_applied -eq $false -and
-        $legacyPassed -and $productionPassed -and
-        $blockers.asset_effective_ambiguous_targets -eq 189 -and
-        $blockers.asset_effective_ambiguous_edges -eq 546 -and
-        $blockers.asset_effective_unresolved_targets -eq 12 -and
-        $blockers.asset_effective_unresolved_edges -eq 15 -and
-        $blockers.g2_satisfied -eq 7 -and $blockers.g2_blocked -eq 2
+        $legacyPassed -and $productionPassed -and $blockersReconciled -and
+        [int]$blockers.asset_effective_unresolved_targets -ge 1 -and
+        [int]$blockers.asset_effective_unresolved_edges -ge 2 -and
+        [int]$blockers.g2_blocked -ge 1
 }
 
 function Test-G2StaticMeshPrefixBinding(
     [object]$G2Report, [object]$Policy, [string]$Root) {
     if (-not (Test-G2StaticMeshPrefixPolicy $Policy)) { return $false }
+    $g2Schema = Get-Content -LiteralPath (Join-Path $Root `
+        'Contracts\data-schema\g2-review-v1.schema.json') -Raw -Encoding UTF8 |
+        ConvertFrom-Json -Depth 100 -DateKind String
+    $a12Required = @($g2Schema.'$defs'.static_mesh_payload_section_prefix.required)
+    $expectedA12Required = @('task_id', 'criterion_id', 'evidence_revision', 'path', 'sha256',
+        'inventory_path', 'inventory_sha256', 'detail_path', 'detail_sha256', 'result',
+        'review_execution_result', 'task_status', 'completion_criteria_satisfied',
+        'diagnostic_scope_complete', 'remediation_scope_complete', 'g2_06_satisfied')
+    $a13Required = @($g2Schema.'$defs'.qtx_declared_mip_payload_prefix.required)
+    $schemaFieldOwnership = ($a12Required -join ',') -ceq ($expectedA12Required -join ',') -and
+        @($a13Required | Where-Object { $_ -in @('effective_recovery_plan_path',
+            'effective_recovery_plan_sha256', 'p3_authorized') }).Count -eq 3
     $binding = $G2Report.input_bindings.static_mesh_payload_section_prefix
     $reportPath = Join-Path $Root `
         'Data\Reports\p2-20a-static-mesh-payload-section-prefix-report.json'
@@ -145,12 +186,12 @@ function Test-G2StaticMeshPrefixBinding(
         ConvertFrom-Json -Depth 100 -DateKind String
     $inventory = Get-Content -LiteralPath $inventoryPath -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
-    return (Test-G2StaticMeshPrefixDocument $document $Root) -and
+    return $schemaFieldOwnership -and (Test-G2StaticMeshPrefixDocument $document $Root) -and
         $inventory.report.path -ceq 'Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json' -and
         $inventory.report.sha256 -ceq (Get-Sha256 $reportPath) -and
         $inventory.outputs.detail_export.path -ceq 'Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl' -and
         $inventory.outputs.detail_export.sha256 -ceq (Get-Sha256 $detailPath) -and
-        (Test-G2StaticMeshPrefixMetrics (Get-Criterion $G2Report 'G2-06'))
+        (Test-G2StaticMeshPrefixMetrics (Get-Criterion $G2Report 'G2-06') $Root)
 }
 
 function Get-G2StaticMeshPrefixAggregateLine([object]$Binding) {
@@ -164,7 +205,7 @@ function Get-G2StaticMeshPrefixNegativeCases(
     Set-Metric (Get-Criterion $promotion 'G2-06') `
         'static_mesh_prefix_authority_state_changed' $true
     $cases.static_mesh_prefix_false_promotion_rejected =
-        -not (Test-G2StaticMeshPrefixMetrics (Get-Criterion $promotion 'G2-06'))
+        -not (Test-G2StaticMeshPrefixMetrics (Get-Criterion $promotion 'G2-06') $Root)
     $reportPath = Join-Path $Root `
         'Data\Reports\p2-20a-static-mesh-payload-section-prefix-report.json'
     $document = Get-Content -LiteralPath $reportPath -Raw -Encoding UTF8 |
@@ -178,5 +219,13 @@ function Get-G2StaticMeshPrefixNegativeCases(
     $forgery.input_bindings.static_mesh_payload_section_prefix.detail_sha256 = '0' * 64
     $cases.static_mesh_prefix_hash_forgery_rejected =
         -not (Test-G2StaticMeshPrefixBinding $forgery $Policy $Root)
+    $misplaced = Copy-JsonObject $Report
+    $misplaced.input_bindings.static_mesh_payload_section_prefix |
+        Add-Member -NotePropertyName effective_recovery_plan_path `
+            -NotePropertyValue 'Data/Exports/P2-20/forged.tsv'
+    $cases.static_mesh_prefix_a13_only_field_rejected = -not [bool](
+        ($misplaced | ConvertTo-Json -Depth 100 -Compress) | Test-Json -SchemaFile (
+            Join-Path $Root 'Contracts\data-schema\g2-review-v1.schema.json') `
+            -ErrorAction SilentlyContinue)
     return ,$cases
 }

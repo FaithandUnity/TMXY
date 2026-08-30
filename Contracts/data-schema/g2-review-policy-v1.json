@@ -84,6 +84,12 @@
     "evidence_revision": "P2-20A.12",
     "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json"
   },
+  "qtx_declared_mip_payload_prefix": {
+    "task_id": "P2-20A",
+    "criterion_id": "G2-06",
+    "evidence_revision": "P2-20A.13",
+    "path": "Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.json"
+  },
   "remediation": {
     "task_id": "P2-20B",
     "criterion_id": "G2-07",
@@ -196,6 +202,8 @@
     "binding_error_diagnosis_does_not_reduce_unresolved_without_verified_remediation": true,
     "source_derived_static_mesh_prefix_proof_does_not_change_a4_or_a8_authority": true,
     "static_mesh_prefix_proof_does_not_select_candidates_apply_adapters_or_prove_runtime_parity": true,
+    "source_derived_qtx_declared_mip_prefix_proof_does_not_change_a4_or_a8_authority": true,
+    "qtx_declared_mip_prefix_requires_default_strict_rejection_and_does_not_promote_ignored_tail": true,
     "source_derived_tinyxml_api_success_is_not_legacy_runtime_or_binary_parity": true,
     "tinyxml_api_success_or_tree_shape_agreement_is_not_a_malformed_disposition": true,
     "silent_partial_parse_and_unproved_client_memory_tail_or_crt_behavior_block_closure": true,

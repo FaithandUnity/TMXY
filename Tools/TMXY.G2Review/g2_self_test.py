@@ -5,6 +5,7 @@ from typing import Any
 from g2_evidence import is_safe_relative, is_sha256, require
 from g2_aux_malformed_xml import aux_malformed_xml_self_test
 from g2_static_mesh_prefix import static_mesh_prefix_self_test
+from g2_qtx_declared_mip_prefix import qtx_declared_mip_prefix_self_test
 
 
 def self_test() -> dict[str, Any]:
@@ -18,7 +19,7 @@ def self_test() -> dict[str, Any]:
             "Gate fail-closed self-test failed"); assertions += 1
     require(not (True and True and False and False),
             "Core-resource distinction self-test failed"); assertions += 1
-    require(not (True and 189 == 0 and 12 == 0),
+    require(not (True and 189 == 0 and 6 == 0),
             "Explicit asset-binding state must not erase blocking states"); assertions += 1
     require(13 == 13 and 0 == 0 and 0 == 0,
             "Identity collision must not become semantic equivalence or candidate selection")
@@ -48,6 +49,14 @@ def self_test() -> dict[str, Any]:
             static_mesh_prefix["authority_promotion_rejected"] is True,
             "Static-mesh prefix authority-boundary self-test failed")
     assertions += static_mesh_prefix["assertions"]
+    qtx_prefix = qtx_declared_mip_prefix_self_test()
+    require(qtx_prefix["source_derived_safe"] is True and
+            qtx_prefix["default_strict_promotion_rejected"] is True and
+            qtx_prefix["authority_promotion_rejected"] is True and
+            qtx_prefix["pre_application_rejected"] is True,
+            "QTX declared-mip prefix authority-boundary self-test failed")
+    assertions += qtx_prefix["assertions"]
     return {"result": "PASS", "assertions": assertions,
             "aux_malformed_xml": malformed,
-            "static_mesh_payload_section_prefix": static_mesh_prefix}
+            "static_mesh_payload_section_prefix": static_mesh_prefix,
+            "qtx_declared_mip_payload_prefix": qtx_prefix}

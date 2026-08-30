@@ -298,6 +298,27 @@ def aggregate(records: list[dict[str, Any]], source: dict[str, Any]) -> dict[str
     return measured
 
 
+def validate_reconciled_full_workset(source: dict[str, Any]) -> None:
+    expected_fields = {
+        "targets", "candidate_edges", "resolved_targets", "resolved_edges",
+        "ambiguous_targets", "ambiguous_edges", "unresolved_targets", "unresolved_edges",
+        "unknown_targets", "unknown_edges",
+    }
+    require(set(source) == expected_fields and
+            all(isinstance(source[field], int) and source[field] >= 0
+                for field in expected_fields),
+            "A.4 reconciled full workset is not a closed non-negative count set")
+    require(source["targets"] == (source["resolved_targets"] +
+                                  source["ambiguous_targets"] +
+                                  source["unresolved_targets"] +
+                                  source["unknown_targets"]) and
+            source["candidate_edges"] == (source["resolved_edges"] +
+                                           source["ambiguous_edges"] +
+                                           source["unresolved_edges"] +
+                                           source["unknown_edges"]),
+            "A.4 reconciled full workset does not close")
+
+
 def markdown(report: dict[str, Any]) -> str:
     m = report["measured"]
     return "\n".join([
@@ -330,6 +351,7 @@ def generate(args: argparse.Namespace) -> dict[str, Any]:
     nodes = load_nodes(paths["p2_03_graph"], candidate_ids)
     records = [classify(item, nodes) for item in sorted(ambiguous, key=lambda x: x["asset_id"])]
     source_full = report["measured"]["reconciled_full_workset"]
+    validate_reconciled_full_workset(source_full)
     measured = aggregate(records, source_full)
     require(measured == policy["expected_measured"], "Measured A.6 facts drifted")
     detail_path = Path(args.detail_output).resolve()

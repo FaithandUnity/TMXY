@@ -54,7 +54,8 @@
     "strict_production_binding_rejected": true,
     "strict_error_code_exact": true,
     "explicit_prefix_api_passed": true,
-    "all_legacy_source_roles_hash_bound": true
+    "all_legacy_source_roles_hash_bound": true,
+    "a4_a7_a8_effective_state_reconciled": true
   },
   "authority_controls": {
     "a4_is_authoritative": true,
@@ -69,19 +70,6 @@
     "owner_approval": false,
     "g2_06_satisfied": false,
     "p3_authorized": false
-  },
-  "preserved_blockers": {
-    "identity_semantic_ambiguous_targets": 15,
-    "identity_semantic_ambiguous_edges": 30,
-    "asset_effective_ambiguous_targets": 189,
-    "asset_effective_ambiguous_edges": 546,
-    "asset_effective_unresolved_targets": 12,
-    "asset_effective_unresolved_edges": 15,
-    "auxiliary_nonterminal_instances": 212,
-    "conditional_required_missing": 29,
-    "migration_pending": 1359,
-    "g2_satisfied": 7,
-    "g2_blocked": 2
   },
   "outputs": {
     "detail_export": "Data/Exports/P2-20/p2-20a-static-mesh-payload-section-prefix.jsonl",

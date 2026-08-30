@@ -27,6 +27,16 @@
     "required_targets": 3651,
     "required_candidate_edges": 12764,
     "required_package_candidate_objects": 46865,
+    "effective_recovery_plan": {
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+      "attempts": 21,
+      "qtx_declared_mip_payload_prefix_attempts": 6,
+      "allowed_kinds": [
+        "qtx_complete_mip_chain",
+        "qtx_declared_mip_payload_prefix",
+        "anim_payload_frame_counts"
+      ]
+    },
     "families": ["anim", "qtx", "skem", "sm"],
     "candidate_identity_set_must_match_p2_13": true,
     "asset_identity_set_must_match_p2_12": true
@@ -43,6 +53,8 @@
   "validation": {
     "each_candidate_is_independent": true,
     "qtx_production_path": "LegacyTextureDescriptorReader plus QtxReader",
+    "qtx_declared_mip_payload_prefix_path": "QtxReader::parse_with_declared_mip_payload_prefix",
+    "qtx_payload_prefix_preserves_descriptor_semantic": true,
     "sm_production_path": "read_static_mesh_descriptor plus bind_static_mesh",
     "skem_production_path": "read_skeletal_mesh_descriptor plus bind_skeletal_mesh",
     "anim_production_path": "read_package_animation_set_descriptor plus bind_animation_set",

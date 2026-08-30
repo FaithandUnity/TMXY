@@ -79,8 +79,9 @@ def run_self_test(classify_probe: Callable[[dict[str, Any], dict[str, Any]], dic
     recovered = copy.deepcopy(base)
     for item in recovered["candidates"]:
         item.update({"binding": "REJECTED", "effective_binding": "PASS",
-                     "recovery_applied": True, "recovery_kind": "qtx_complete_mip_chain",
-                     "effective_semantic_sha256": "9" * 64})
+                     "recovery_applied": True,
+                     "recovery_kind": "qtx_declared_mip_payload_prefix",
+                     "effective_semantic_sha256": item["semantic_sha256"]})
     recovered["counts"] = counts(recovered["candidates"])
     classified = classify_probe(prior, recovered)
     if classified["strict_resolution"] != "UNRESOLVED" or classified["resolution"] != "RESOLVED":

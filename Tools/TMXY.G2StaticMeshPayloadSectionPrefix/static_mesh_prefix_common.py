@@ -40,6 +40,14 @@ DETAIL_CANDIDATE_FIELDS = {
     "nonempty_payload_sections", "ignored_trailing_material_slots", "slot_basis",
     "recovery_applied", "adapter_applied", "content_disposition",
 }
+BLOCKER_FIELDS = {
+    "identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges",
+    "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges",
+    "strict_binding_failure_targets", "strict_binding_failure_edges",
+    "asset_effective_unresolved_targets", "asset_effective_unresolved_edges",
+    "auxiliary_nonterminal_instances", "conditional_required_missing", "migration_pending",
+    "g2_satisfied", "g2_blocked",
+}
 INPUTS = [
     ("a4_report", "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json", True),
     ("a4_inventory", "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json", True),
@@ -56,8 +64,8 @@ INPUTS = [
     ("detail_schema", "Contracts/data-schema/g2-static-mesh-payload-section-prefix-detail-v1.schema.json", True),
 ]
 FROZEN_CONTRACT_SHA256 = {
-    "policy": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e",
-    "schema": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e",
+    "policy": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55",
+    "schema": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a",
     "detail_schema": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8",
 }
 
@@ -178,9 +186,43 @@ def validate_frozen(root: Path) -> dict[str, Any]:
             a8_report["evidence_revision"] == "P2-20A.8", "Upstream revision drifted")
     require(a4_report["result"] == a7_report["result"] == a8_report["result"] == "BLOCKED",
             "Upstream blocked state drifted")
-    require(a4_report["measured"]["unresolved_targets"] == 12 and
-            a4_report["measured"]["reconciled_full_workset"]["unresolved_edges"] == 15,
-            "A.4 effective unresolved state drifted")
+    blockers = a7_report.get("preserved_blockers", {})
+    require(set(blockers) == BLOCKER_FIELDS and
+            all(isinstance(value, int) and value >= 0 for value in blockers.values()),
+            "A.7 dynamic preserved blockers drifted")
+    a4_measured = a4_report["measured"]
+    a4_effective = a4_measured["reconciled_full_workset"]
+    a7_effective = a7_report["measured"]["effective"]
+    a8_measured = a8_report["measured"]
+    a8_effective = a8_measured["effective_resolution"]
+    require((blockers["asset_effective_ambiguous_targets"],
+             blockers["asset_effective_ambiguous_edges"],
+             blockers["asset_effective_unresolved_targets"],
+             blockers["asset_effective_unresolved_edges"]) ==
+            (a4_effective["ambiguous_targets"], a4_effective["ambiguous_edges"],
+             a4_effective["unresolved_targets"], a4_effective["unresolved_edges"]),
+            "A.4 full-workset blockers differ from A.7")
+    require((a7_effective["unresolved_targets"], a7_effective["unresolved_edges"]) ==
+            (a4_effective["unresolved_targets"], a4_effective["unresolved_edges"]) and
+            a8_effective == {
+                "resolved": {"targets": a7_effective["resolved_targets"],
+                             "candidate_edges": a7_effective["resolved_edges"]},
+                "ambiguous": {"targets": a7_effective["ambiguous_targets"],
+                              "candidate_edges": a7_effective["ambiguous_edges"]},
+                "unresolved": {"targets": a7_effective["unresolved_targets"],
+                               "candidate_edges": a7_effective["unresolved_edges"]}},
+            "A.4/A.7/A.8 effective states do not reconcile")
+    strict = a4_measured["by_prior_resolution_basis"]["DESCRIPTOR_VALIDATION_FAILED"]
+    require((blockers["strict_binding_failure_targets"],
+             blockers["strict_binding_failure_edges"]) ==
+            (a7_report["measured"]["diagnosed_targets"],
+             a7_report["measured"]["diagnosed_candidate_edges"]) ==
+            (strict["targets"], strict["candidate_edges"]) and
+            (a7_effective["resolved_targets"], a7_effective["unresolved_targets"]) ==
+            (strict["resolved"], strict["unresolved"]) and
+            a4_measured["recovery_applied_candidates"] ==
+            a8_measured["successful"]["candidate_edges"],
+            "Strict failure and effective recovery counts do not reconcile")
     require(a4_report["detail_export"] == output_binding(
                 paths["a4_detail"], "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl", False) and
             a7_report["detail_export"] == output_binding(
@@ -244,7 +286,7 @@ def validate_frozen(root: Path) -> dict[str, Any]:
             catalog_matches.append(item)
     require(len(catalog_matches) == 1 and catalog_matches[0]["family"] == "sm",
             "P2-12 frozen SM asset coverage drifted")
-    return {"policy": policy, "frozen": frozen, "a4": a4,
+    return {"policy": policy, "frozen": frozen, "a4": a4, "blockers": blockers,
             "a4_candidates": a4_candidates, "catalog": catalog_matches[0], "paths": paths}
 
 

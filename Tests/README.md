@@ -167,6 +167,16 @@ P2-20A.11 malformed XML 合同验证四层诊断：
 合同：冻结的 1 个目标／2 条候选边仍被严格绑定以 `material_slot_mismatch` 拒绝，而显式前缀
 API 对两条边均证明 2 个材质槽、1 个非空 payload section 和 1 个尾随未消费材质槽。报告、
 跟踪清单和忽略区匿名明细均作哈希绑定；负例拒绝候选选择、自动解决、adapter/recovery、权威
-变更、运行时等价与未知嵌套字段。A.4/A.8 权威计数保持不变，G2 仍为 7/9 `BLOCKED`。
+变更、运行时等价与未知嵌套字段。A.12 还要求当前 A.4/A.7/A.8 有效计数相互闭合，并从绑定
+的 A.7 证据携带 6 个目标／9 条边的最终未解决状态；同一 SM 目标／2 条边仍未解决，G2 仍为
+7/9 `BLOCKED`。
+
+`Contract/Test-G2QtxDeclaredMipPayloadPrefix.ps1` 验证 P2-20A.13 的源码派生 QTX 显式前缀
+合同：冻结的 6 个唯一目标／6 条边继续被默认严格解析拒绝，只有 hash-bound 显式 API 接受声明
+mip payload 前缀；DDS 仅导出声明前缀，额外完整 mip 尾部只记录字节数和哈希，不会升级为有效
+mip。A13 报告自身不选择候选或改变权威状态，也不宣称旧二进制／运行时等价；其 effective plan
+由冻结 policy、A.8 base plan、P2-12 与 P2-03 独立准备，不读取 A.4/A.7/A.8/Core 当前有效
+状态；最终报告只接受并绑定完整 POST 重跑后的 13/15 成功与 6/9 未解决结果。G2 保持
+`BLOCKED`，P3 仍未授权。
 
 `Contract/Test-LegacyToUETransform.ps1` 复核只读旧源码与 UE 5.8.2 矩阵证据哈希，并在锁定的非 root Clang 21 容器中验证米到厘米、欧拉角符号、行向量矩阵、UV、法线、负缩放绕序和非法数值边界。

@@ -10,6 +10,7 @@ from g2_evidence import (bind_inputs, evaluate_core_closure, load_json, require,
 from g2_aux_ecf_parser_parity import aux_ecf_parser_parity_metrics, aux_ecf_parser_parity_safe
 from g2_aux_malformed_xml import aux_malformed_xml_closure_ready, aux_malformed_xml_metrics
 from g2_static_mesh_prefix import static_mesh_prefix_blocker_text, static_mesh_prefix_metrics, static_mesh_prefix_safe
+from g2_qtx_declared_mip_prefix import qtx_declared_mip_prefix_blocker_text, qtx_declared_mip_prefix_metrics, qtx_declared_mip_prefix_safe
 from g2_markdown import markdown
 from g2_migration import evaluate_migration_registry
 from g2_report_model import criterion, metric
@@ -132,26 +133,25 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
                      identity_effective["resolved_targets"] == 0 and
                      identity_effective["ambiguous_targets"] == 15 and
                      identity_reconciled["ambiguous_targets"] == core["asset_binding_ambiguous"] and
-                     identity_reconciled["unresolved_targets"] == core["asset_binding_unresolved"])
+                     identity_reconciled["unresolved_targets"] >= core["asset_binding_unresolved"])
     binding_failure = evidence["P2-20A.7"]
-    failure_measured, failure_effective = (binding_failure["measured"],
-                                           binding_failure["measured"]["effective"])
+    failure_measured, failure_effective = binding_failure["measured"], binding_failure["measured"]["effective"]
     recovery = evidence["P2-20A.8"]
     recovery_measured = recovery["measured"]
     recovery_safe = (recovery["authority_boundary"]["a4_is_authoritative"] is True and
                      recovery["authority_boundary"]["a8_is_cross_proof_only"] is True and
                      recovery["authority_boundary"]["a8_may_change_counts"] is False and
-                     recovery_measured["successful"] == {"targets": 7, "candidate_edges": 9} and
-                     recovery_measured["effective_resolution"]["unresolved"] ==
-                     {"targets": 12, "candidate_edges": 15})
+                     recovery_measured["successful"] == {"targets": failure_effective["resolved_targets"], "candidate_edges": failure_effective["resolved_edges"]} and
+                     recovery_measured["effective_resolution"]["unresolved"] == {"targets": failure_effective["unresolved_targets"], "candidate_edges": failure_effective["unresolved_edges"]} and
+                     failure_effective["unresolved_targets"] == core["asset_binding_unresolved"])
     binding_safe = (binding_failure["diagnostic_scope_complete"] is True and
                     failure_measured["typed_error_edges"] == 24 and
                     failure_measured["unclassified_error_edges"] == 0 and recovery_safe)
     binding_ready = (binding_failure["remediation_scope_complete"] is True and
                      binding_failure["g2_06_satisfied"] is True and failure_effective["unresolved_targets"] == 0)
     ok = (core["satisfied"] and aux_ready and aux_context_safe and aux_ecf_safe and
-          aux_malformed_ready and
-          identity_safe and binding_safe and static_mesh_prefix_safe(evidence["P2-20A.12"]) and binding_ready)
+          aux_malformed_ready and identity_safe and binding_safe and
+          static_mesh_prefix_safe(evidence["P2-20A.12"]) and qtx_declared_mip_prefix_safe(evidence["P2-20A.13"]) and binding_ready)
     reviews.append(criterion(by_id["G2-06"], ok, [
         metric("supplemental_report_present", True, "boolean"),
         metric("declared_scope_hash_bound", core["declared_scope_bound"], "boolean"),
@@ -198,6 +198,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("binding_recovery_successful_targets", recovery_measured["successful"]["targets"], "assets"),
         metric("binding_recovery_successful_edges", recovery_measured["successful"]["candidate_edges"], "edges"),
         *(metric(name, value, unit) for name, value, unit in static_mesh_prefix_metrics(evidence["P2-20A.12"])),
+        *(metric(name, value, unit) for name, value, unit in qtx_declared_mip_prefix_metrics(evidence["P2-20A.13"])),
         metric("aux_semantic_diagnostic_hash_bound", True, "boolean"),
         metric("aux_semantic_scope_complete", aux_semantic["scope_complete"], "boolean"),
         metric("aux_semantic_g2_06_satisfied", aux_semantic["g2_06_satisfied"], "boolean"),
@@ -245,7 +246,7 @@ def build_criteria(policy: dict[str, Any], evidence: dict[str, dict[str, Any]], 
         metric("logical_gap_count", core["logical_gap_count"], "references"),
         metric("logical_gap_set_hash_bound", core["logical_gap_set_bound"], "boolean"),
         metric("core_foreign_key_dangling_context", core["core_fk_dangling"], "references"),
-    ], "P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, parser, identity, production-binding, recovery, and static-mesh prefix evidence. A.11 keeps strict rejection, independent ElementTree rejection, source-derived TinyXML API success, and consumer/runtime authority as four separate layers: TinyXML accepts 6/6 but fully consumes only 5/6, so its silent partial parse and unproved client memory-tail/CRT behavior cannot approve a disposition. A.9 resolves 3,391 consumer occurrences and leaves one unresolved without first-candidate selection, yet all 212 auxiliary instances remain nonterminal. A.7 classifies all 24 strict rejected asset candidate edges; A.8 cross-proves 7 targets / 9 edges while preserving A.4 authority, leaving 12 targets / 15 edges unresolved. A.12 proves the source-derived payload-section-prefix contract for one static-mesh target / two edges (two material slots, one payload section, one ignored trailing slot) but performs no selection, resolution, adapter, recovery, authority change, or runtime-parity claim. The full asset workset therefore remains 189 targets / 546 edges ambiguous and 12 targets / 15 edges unresolved. Diagnostic completeness cannot substitute for semantic adapters, no-reference decisions, approved roots, or verified remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
+    ], f"P2-20A supplies hash-bound core, descriptor, auxiliary-semantic, package-context, parser, identity, production-binding, recovery, static-mesh-prefix, and QTX declared-mip-prefix evidence. A.11 keeps strict rejection, independent ElementTree rejection, source-derived TinyXML API success, and consumer/runtime authority as separate layers: TinyXML accepts 6/6 but fully consumes only 5/6, so partial parse and unproved client memory-tail/CRT behavior cannot approve a disposition. A.9 resolves 3,391 consumer occurrences and leaves one unresolved without first-candidate selection, yet all 212 auxiliary instances remain nonterminal. A.7 classifies all {failure_measured['typed_error_edges']} strict rejected asset candidate edges; A.8 cross-proves {recovery_measured['successful']['targets']} targets / {recovery_measured['successful']['candidate_edges']} edges while preserving A.4 authority, leaving {failure_effective['unresolved_targets']} targets / {failure_effective['unresolved_edges']} edges unresolved. A.12 proves the source-derived payload-section-prefix contract for one static-mesh target / two edges without selecting or resolving it. A.13 proves a hash-bound explicit declared-mip payload-prefix API for six QTX targets / six edges while default strict parsing rejects all six and ignored tail bytes never become effective mips; A.13 itself changes no authority, while the regenerated A.4/A.7/A.8/Core chain supplies current effective counts. The full asset workset currently retains {core['asset_binding_ambiguous']} ambiguous and {core['asset_binding_unresolved']} unresolved targets. Diagnostic completeness cannot substitute for semantic adapters, no-reference decisions, approved roots, or verified remediation. Explicit states do not erase parser gaps, malformed inputs, conditional gaps, logical queues, or reachable structure. Core foreign-key zero cannot replace these facts.", ["G2-BLK-06"] if not ok else []))
     migration = evaluate_migration_registry(evidence["P2-20B"], thresholds)
     ok = migration["satisfied"]
     reviews.append(criterion(by_id["G2-07"], ok, [
@@ -347,7 +348,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
             "criterion_id": "G2-06",
             "title": "Core resource-reference closure has quantified open gaps",
             "reason": (
-                f"P2-20A and its A.3/A.5/A.9/A.10/A.11/A.12 diagnostic evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
+                f"P2-20A and its A.3/A.5/A.9/A.10/A.11/A.12/A.13 diagnostic evidence are hash-bound. A.5's immutable history retains 3 differences and a net pair-count delta of 4; "
                 f"A.10 separately measures 13 frozen-A.3/source-derived differences and, on correct plaintext, 1 filter difference with 4 legacy pair records absent from A.3. "
                 f"A.11 retains strict rejection of all {aux_malformed['population']['instances']} malformed inputs even though source-derived TinyXML reports API success for all six: only 5 consume the full input and one silently retains a partial tree. Legacy runtime, binary parity, Windows CRT text-mode behavior, and the client input's NUL-terminated memory tail remain unproved; no repair, disposition, semantic import, or root is granted. A.9 deterministically "
                 f"resolves {aux_context_resolution['resolved_total']} consumer occurrences and leaves "
@@ -369,7 +370,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
                 f"{binding_recovery['successful']['targets']} targets / "
                 f"{binding_recovery['successful']['candidate_edges']} edges as explicit production recoveries "
                 f"and retains {binding_failure['effective']['unresolved_targets']} unresolved targets. "
-                f"{static_mesh_prefix_blocker_text(evidence['P2-20A.12'], asset_binding)} "
+                f"{static_mesh_prefix_blocker_text(evidence['P2-20A.12'], asset_binding)} {qtx_declared_mip_prefix_blocker_text(evidence['P2-20A.13'], asset_binding)} "
                 f"The measured core queues contain {resolution['table_unresolved']} unresolved and "
                 f"{resolution['table_ambiguous']} ambiguous table references, "
                 f"{resolution['package_unresolved']} unresolved and "
@@ -473,8 +474,7 @@ def build_report(root: Path, policy_path: Path, schema_path: Path) -> dict[str, 
         },
     }
 def write_text(path: Path, text: str) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(text.replace("\r\n", "\n").replace("\r", "\n"), encoding="utf-8", newline="\n")
+    path.parent.mkdir(parents=True, exist_ok=True); path.write_text(text.replace("\r\n", "\n").replace("\r", "\n"), encoding="utf-8", newline="\n")
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path)

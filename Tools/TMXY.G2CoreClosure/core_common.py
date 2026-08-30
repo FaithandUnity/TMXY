@@ -282,16 +282,16 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
     a4_evidence = documents["asset_descriptor_evidence"]
     require(a4["evidence_revision"] == "P2-20A.4" and a4["result"] == "BLOCKED" and
             a4["review_execution_result"] == "PASS" and
-            a4["measured"]["resolved_targets"] == 3450 and
+            a4["measured"]["resolved_targets"] == 3456 and
             a4["measured"]["ambiguous_targets"] == 189 and
-            a4["measured"]["unresolved_targets"] == 12 and
-            a4["measured"]["recovery_applied_candidates"] == 9 and
+            a4["measured"]["unresolved_targets"] == 6 and
+            a4["measured"]["recovery_applied_candidates"] == 15 and
             a4["measured"]["reconciled_full_workset"] == {
                 "targets": 21494, "candidate_edges": 39351,
-                "resolved_targets": 21293, "ambiguous_targets": 189,
-                "unresolved_targets": 12, "unknown_targets": 0,
-                "resolved_edges": 38790, "ambiguous_edges": 546,
-                "unresolved_edges": 15, "unknown_edges": 0,
+                "resolved_targets": 21299, "ambiguous_targets": 189,
+                "unresolved_targets": 6, "unknown_targets": 0,
+                "resolved_edges": 38796, "ambiguous_edges": 546,
+                "unresolved_edges": 9, "unknown_edges": 0,
             } and a4["g2_06_satisfied"] is False and a4["p3_authorized"] is False,
             "P2-20A.4 effective asset-binding state drifted")
     require(a4["detail_export"]["sha256"] ==
@@ -310,9 +310,9 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
             a7["measured"]["diagnosed_targets"] == 19 and
             a7["measured"]["diagnosed_candidate_edges"] == 24 and
             a7["measured"]["effective"] == {
-                "resolved_targets": 7, "resolved_edges": 9,
+                "resolved_targets": 13, "resolved_edges": 15,
                 "ambiguous_targets": 0, "ambiguous_edges": 0,
-                "unresolved_targets": 12, "unresolved_edges": 15,
+                "unresolved_targets": 6, "unresolved_edges": 9,
             } and a7["g2_06_satisfied"] is False and a7["p3_authorized"] is False and
             a7_evidence["outputs"]["report_json"]["sha256"] ==
             sha256_file(documents["asset_binding_failure_report_path"]),
@@ -322,11 +322,11 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
     a8_evidence = documents["asset_binding_recovery_evidence"]
     require(a8["evidence_revision"] == "P2-20A.8" and a8["result"] == "BLOCKED" and
             a8["measured"]["attempted"] == {"targets": 17, "candidate_edges": 21} and
-            a8["measured"]["successful"] == {"targets": 7, "candidate_edges": 9} and
+            a8["measured"]["successful"] == {"targets": 13, "candidate_edges": 15} and
             a8["measured"]["effective_resolution"] == {
-                "resolved": {"targets": 7, "candidate_edges": 9},
+                "resolved": {"targets": 13, "candidate_edges": 15},
                 "ambiguous": {"targets": 0, "candidate_edges": 0},
-                "unresolved": {"targets": 12, "candidate_edges": 15},
+                "unresolved": {"targets": 6, "candidate_edges": 9},
             } and a8["authority_boundary"]["a4_is_authoritative"] is True and
             a8["authority_boundary"]["a8_may_change_counts"] is False and
             a8["g2_06_satisfied"] is False and a8["p3_authorized"] is False and

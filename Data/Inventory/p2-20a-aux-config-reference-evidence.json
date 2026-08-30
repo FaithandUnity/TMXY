@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.3",
-  "captured_utc": "2026-08-30T09:03:50.1833793+00:00",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -12,7 +12,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "b96704630221ea8f1871dfaddb17bb1b21e292938e29c35bec8a137b1feed5b6",
+    "aggregate_sha256": "410d5797188acb75f5f8ca85493d2b95cd62fc2f455b5f0fafd4a77651479904",
     "entries": [
       {
         "role": "auxiliary_config_inventory",
@@ -20,7 +20,7 @@
       },
       {
         "role": "full_asset_inventory",
-        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244"
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c"
       },
       {
         "role": "reference_closure",
@@ -36,7 +36,7 @@
       },
       {
         "role": "content_health",
-        "sha256": "3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5"
+        "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1"
       }
     ]
   },
@@ -46,7 +46,7 @@
       "tracked": true,
       "bytes": 157387,
       "lines": 4009,
-      "sha256": "c90d5e5e731a406bdc82a4a8a111da9a8330c7a04f7c9940afa6b8497c44bf1e"
+      "sha256": "7486d70b346c8acd1695179dca06b66453850927d8f8cdc4773480ac636fbe45"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-aux-config-reference-report.md",
@@ -60,7 +60,7 @@
       "tracked": true,
       "bytes": 800,
       "lines": 28,
-      "sha256": "28854c49ea138b85b6a895bb794ed6487fc51ac32039e7e90c20cfee26b735aa"
+      "sha256": "011b1f330443474cf489af2a0c4b1b58a623510b300ce54e6cda42a27f12bf6d"
     },
     "anonymous_candidate_export": {
       "path": "Data/Exports/P2-20/p2-20a-aux-config-reference-candidates.jsonl",

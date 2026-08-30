@@ -210,6 +210,11 @@ if ($VerifyLegacyGoldenSources) { $g2StaticMeshPrefixArguments.VerifyDerivedSour
 $g2StaticMeshPayloadSectionPrefix = Invoke-JsonTest `
     -Script (Join-Path $root 'Tests\Contract\Test-G2StaticMeshPayloadSectionPrefix.ps1') `
     -Arguments $g2StaticMeshPrefixArguments
+$g2QtxPrefixArguments = @{ RebuildRoot = $root }
+if ($VerifyLegacyGoldenSources) { $g2QtxPrefixArguments.VerifyDerivedSources = $true }
+$g2QtxDeclaredMipPayloadPrefix = Invoke-JsonTest `
+    -Script (Join-Path $root 'Tests\Contract\Test-G2QtxDeclaredMipPayloadPrefix.ps1') `
+    -Arguments $g2QtxPrefixArguments
 $g2CoreClosureArguments = @{ RebuildRoot = $root }
 if ($VerifyLegacyGoldenSources) { $g2CoreClosureArguments.VerifyDerivedSources = $true }
 $g2CoreClosure = Invoke-JsonTest `
@@ -425,6 +430,12 @@ $passed = [string]$repository.result -eq 'PASS' -and
     -not [bool]$g2StaticMeshPayloadSectionPrefix.completion_criteria_satisfied -and
     -not [bool]$g2StaticMeshPayloadSectionPrefix.g2_06_satisfied -and
     -not [bool]$g2StaticMeshPayloadSectionPrefix.p3_authorized -and
+    [string]$g2QtxDeclaredMipPayloadPrefix.result -eq 'PASS' -and
+    [bool]$g2QtxDeclaredMipPayloadPrefix.contract_assertions_satisfied -and
+    [int]$g2QtxDeclaredMipPayloadPrefix.failed -eq 0 -and
+    -not [bool]$g2QtxDeclaredMipPayloadPrefix.completion_criteria_satisfied -and
+    -not [bool]$g2QtxDeclaredMipPayloadPrefix.g2_06_satisfied -and
+    -not [bool]$g2QtxDeclaredMipPayloadPrefix.p3_authorized -and
     [string]$g2MigrationDecisions.result -eq 'PASS' -and
     [bool]$g2MigrationDecisions.contract_assertions_satisfied -and
     -not [bool]$g2MigrationDecisions.completion_criteria_satisfied -and
@@ -516,6 +527,7 @@ $report = [pscustomobject][ordered]@{
     g2_asset_binding_failure_diagnostics = $g2BindingFailureDiagnostics
     g2_asset_binding_recovery = $g2BindingRecovery
     g2_static_mesh_payload_section_prefix = $g2StaticMeshPayloadSectionPrefix
+    g2_qtx_declared_mip_payload_prefix = $g2QtxDeclaredMipPayloadPrefix
     g2_migration_decisions = $g2MigrationDecisions
     full_asset_inventory = $fullAssetInventory
     reference_closure = $referenceClosure

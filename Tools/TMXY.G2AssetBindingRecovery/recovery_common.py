@@ -17,6 +17,12 @@ ATTEMPT_RULES = {
     ("qtx", "payload_size_mismatch"): "qtx_complete_mip_chain",
     ("anim", "frame_count_mismatch"): "anim_payload_frame_counts",
 }
+ALLOWED_RECOVERY_KINDS = {
+    ("qtx", "payload_size_mismatch"): {
+        "qtx_complete_mip_chain", "qtx_declared_mip_payload_prefix",
+    },
+    ("anim", "frame_count_mismatch"): {"anim_payload_frame_counts"},
+}
 A7_ROOT_FIELDS = {
     "asset_id", "family", "candidate_count", "candidate_set_sha256",
     "prior_resolution", "effective_resolution", "candidate_selected",
@@ -212,8 +218,8 @@ def read_plan(path: Path) -> list[tuple[str, ...]]:
             require(len(row) == len(PLAN_COLUMNS), f"Plan row {number} width drifted")
             require(all(len(row[index]) == 64 for index in range(4)),
                     f"Plan row {number} identity width drifted")
-            require((row[4], row[6]) in ATTEMPT_RULES and
-                    ATTEMPT_RULES[(row[4], row[6])] == row[5],
+            require((row[4], row[6]) in ALLOWED_RECOVERY_KINDS and
+                    row[5] in ALLOWED_RECOVERY_KINDS[(row[4], row[6])],
                     f"Plan row {number} recovery rule drifted")
             rows.append(row)
     require(rows == sorted(rows, key=lambda x: (x[0], x[1])), "Plan is not ordered")

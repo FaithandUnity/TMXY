@@ -126,4 +126,18 @@ const char* to_string(const MipCountBasis value) noexcept
     return "unknown";
 }
 
+const char* to_string(const PayloadExtentBasis value) noexcept
+{
+    switch (value)
+    {
+    case PayloadExtentBasis::complete_input_payload:
+        return "complete_input_payload";
+    case PayloadExtentBasis::declared_mip_payload_prefix_contract:
+        return "declared_mip_payload_prefix_contract";
+    case PayloadExtentBasis::unknown:
+        return "unknown";
+    }
+    return "unknown";
+}
+
 } // namespace tmxy::texture

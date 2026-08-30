@@ -50,7 +50,8 @@
       "required": ["aggregate_sha256", "entries"],
       "properties": {
         "aggregate_sha256": {"$ref": "#/$defs/sha256"},
-        "entries": {"type": "array", "minItems": 8, "items": {"$ref": "#/$defs/binding"}}
+        "entries": {"type": "array", "minItems": 14, "maxItems": 14,
+          "items": {"$ref": "#/$defs/binding"}}
       }
     },
     "output": {
@@ -66,9 +67,10 @@
     },
     "outputs": {
       "type": "object", "additionalProperties": false,
-      "required": ["attempt_tsv", "success_tsv", "detail_export"],
+      "required": ["attempt_tsv", "effective_plan_tsv", "success_tsv", "detail_export"],
       "properties": {
         "attempt_tsv": {"$ref": "#/$defs/output"},
+        "effective_plan_tsv": {"$ref": "#/$defs/output"},
         "success_tsv": {"$ref": "#/$defs/output"},
         "detail_export": {"$ref": "#/$defs/output"}
       }
@@ -100,14 +102,14 @@
       "required": ["attempted", "successful", "effective_resolution"],
       "properties": {
         "attempted": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 17}, "candidate_edges": {"const": 21}}}]},
-        "successful": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 7}, "candidate_edges": {"const": 9}}}]},
+        "successful": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 13}, "candidate_edges": {"const": 15}}}]},
         "effective_resolution": {
           "type": "object", "additionalProperties": false,
           "required": ["resolved", "ambiguous", "unresolved"],
           "properties": {
-            "resolved": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 7}, "candidate_edges": {"const": 9}}}]},
+            "resolved": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 13}, "candidate_edges": {"const": 15}}}]},
             "ambiguous": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 0}, "candidate_edges": {"const": 0}}}]},
-            "unresolved": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 12}, "candidate_edges": {"const": 15}}}]}
+            "unresolved": {"allOf": [{"$ref": "#/$defs/counts"}, {"properties": {"targets": {"const": 6}, "candidate_edges": {"const": 9}}}]}
           }
         }
       }
@@ -131,8 +133,8 @@
         "identity_semantic_ambiguous_edges": {"const": 30},
         "asset_effective_ambiguous_targets": {"const": 189},
         "asset_effective_ambiguous_edges": {"const": 546},
-        "asset_effective_unresolved_targets": {"const": 12},
-        "asset_effective_unresolved_edges": {"const": 15},
+        "asset_effective_unresolved_targets": {"const": 6},
+        "asset_effective_unresolved_edges": {"const": 9},
         "auxiliary_nonterminal_instances": {"const": 212},
         "conditional_required_missing": {"const": 29},
         "migration_pending": {"const": 1359},
@@ -142,18 +144,24 @@
     },
     "contracts": {
       "type": "object", "additionalProperties": false,
-      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256"],
+      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256",
+        "base_plan_contract_sha256"],
       "properties": {
         "policy_sha256": {"$ref": "#/$defs/sha256"},
         "schema_sha256": {"$ref": "#/$defs/sha256"},
-        "detail_schema_sha256": {"$ref": "#/$defs/sha256"}
+        "detail_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "base_plan_contract_sha256": {"$ref": "#/$defs/sha256"}
       }
     },
     "disclosure": {
       "type": "object", "additionalProperties": false,
-      "required": ["tracked_aggregate_and_hash_only", "anonymous_detail_only", "raw_names", "private_source_paths", "exact_primary_keys", "declared_or_observed_values", "decoded_confidential_payloads"],
+      "required": ["tracked_aggregate_hash_and_anonymous_contract_only",
+        "tracked_anonymous_base_plan_contract", "anonymous_detail_only", "raw_names",
+        "private_source_paths", "exact_primary_keys", "declared_or_observed_values",
+        "decoded_confidential_payloads"],
       "properties": {
-        "tracked_aggregate_and_hash_only": {"const": true},
+        "tracked_aggregate_hash_and_anonymous_contract_only": {"const": true},
+        "tracked_anonymous_base_plan_contract": {"const": true},
         "anonymous_detail_only": {"const": true},
         "raw_names": {"const": false},
         "private_source_paths": {"const": false},

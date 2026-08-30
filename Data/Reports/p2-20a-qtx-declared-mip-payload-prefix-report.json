@@ -1,0 +1,402 @@
+{
+  "schema_version": 1,
+  "evidence_revision": "P2-20A.13",
+  "captured_utc": "2026-08-30T17:48:31.217942Z",
+  "task_id": "P2-20A",
+  "criterion_id": "G2-06",
+  "result": "BLOCKED",
+  "review_execution_result": "PASS_DIAGNOSTIC",
+  "task_status": "BLOCKED",
+  "completion_criteria_satisfied": false,
+  "diagnostic_scope_complete": true,
+  "remediation_scope_complete": false,
+  "g2_06_satisfied": false,
+  "p3_authorized": false,
+  "proof_classification": {
+    "source_basis": "SOURCE_DERIVED",
+    "legacy_binary_executed": false,
+    "runtime_parity_proven": false
+  },
+  "input_bindings": {
+    "aggregate_sha256": "e2943b78cb72b89a4e291677438529562ef53e0d795cdfc28ff37d7b580163f0",
+    "entries": [
+      {
+        "role": "a4_report",
+        "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 5807,
+        "lines": 193,
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
+      },
+      {
+        "role": "a4_inventory",
+        "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
+        "tracked": true,
+        "bytes": 13467,
+        "lines": 410,
+        "sha256": "0ae236c4ea5e8c96fc2ce3b23b8fbbc26da93859ab3c97adc0118fe2f23be671"
+      },
+      {
+        "role": "a4_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 13820115,
+        "lines": 3651,
+        "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
+      },
+      {
+        "role": "a7_report",
+        "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
+        "tracked": true,
+        "bytes": 9416,
+        "lines": 302,
+        "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b"
+      },
+      {
+        "role": "a7_inventory",
+        "path": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
+        "tracked": true,
+        "bytes": 8940,
+        "lines": 280,
+        "sha256": "daa0e9babecbaafa0f97599102bb9cfb52e80e7a517857a00a3ad8abeca90f5e"
+      },
+      {
+        "role": "a7_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
+        "tracked": false,
+        "bytes": 21217,
+        "lines": 19,
+        "sha256": "01c9cf6bcf5b9f0a224d4e91111d3947c972e6727ae348584df87b9eb8f0dc7d"
+      },
+      {
+        "role": "a8_report",
+        "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
+        "tracked": true,
+        "bytes": 7549,
+        "lines": 224,
+        "sha256": "1e241d6c74c0a0181c792b1f0c27a5e7cdaa2d27529b95e52ee6efe0eb45d19d"
+      },
+      {
+        "role": "a8_inventory",
+        "path": "Data/Inventory/p2-20a-asset-binding-recovery.json",
+        "tracked": true,
+        "bytes": 3078,
+        "lines": 97,
+        "sha256": "f3222dfda796305192a3a3919d7024b0edc8477afce7a7150c55d6ca65ec0701"
+      },
+      {
+        "role": "a8_detail",
+        "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl",
+        "tracked": false,
+        "bytes": 17298,
+        "lines": 19,
+        "sha256": "6e29f0a84fbff340c79ebe7c1c64c027f814382fdf202e3bf8b8d6d14ce4fa02"
+      },
+      {
+        "role": "core_report",
+        "path": "Data/Reports/p2-20a-core-resource-closure-report.json",
+        "tracked": true,
+        "bytes": 15228,
+        "lines": 415,
+        "sha256": "e93d4ad5feba31092cc93f7525cef0bedf97c15b16a288ebf21a9a361aa88104"
+      },
+      {
+        "role": "core_inventory",
+        "path": "Data/Inventory/p2-20a-core-resource-closure.json",
+        "tracked": true,
+        "bytes": 18028,
+        "lines": 483,
+        "sha256": "28284acbd838619567cbca4cd816b6fdb089fdeeee174b038947b8c2079927cd"
+      },
+      {
+        "role": "core_detail",
+        "path": "Data/Exports/P2-20/p2-20a-core-resource-closure.jsonl",
+        "tracked": false,
+        "bytes": 33232029,
+        "lines": 210313,
+        "sha256": "f8657fcaf7983419f187769e9092f11cab95d5efc53790fb16965f86bc62080c"
+      },
+      {
+        "role": "base_plan_contract",
+        "path": "Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv",
+        "tracked": true,
+        "bytes": 6504,
+        "lines": 21,
+        "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+      },
+      {
+        "role": "p2_03_inventory",
+        "path": "Data/Inventory/p2-03-package-dependency-graph.json",
+        "tracked": true,
+        "bytes": 5424,
+        "lines": 162,
+        "sha256": "29ebc990b178bad4a99f4b09cc34731bba7dd43d37a288e7bdbe1a1ef284b3ab"
+      },
+      {
+        "role": "p2_03_graph",
+        "path": "Data/Exports/P2-03/p2-03-package-dependency-graph.jsonl",
+        "tracked": false,
+        "bytes": 106382503,
+        "lines": 269064,
+        "sha256": "7a2fc8751bda61306c7abb6a4796ddc7eb90e921aaf758e68c22a68e8e466c57"
+      },
+      {
+        "role": "p2_12_inventory",
+        "path": "Data/Inventory/p2-12-full-asset-inventory.json",
+        "tracked": true,
+        "bytes": 6306,
+        "lines": 189,
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c"
+      },
+      {
+        "role": "p2_12_catalog",
+        "path": "Data/Exports/P2-12/p2-12-full-asset-inventory.jsonl",
+        "tracked": false,
+        "bytes": 16802213,
+        "lines": 40090,
+        "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92"
+      },
+      {
+        "role": "policy",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-policy-v1.json",
+        "tracked": true,
+        "bytes": 9503,
+        "lines": 172,
+        "sha256": "67e2cb3f2ebf6843177df09fb086249f1c3ab4d6f81a8fa31b5af27b456123f5"
+      },
+      {
+        "role": "schema",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-v1.schema.json",
+        "tracked": true,
+        "bytes": 14513,
+        "lines": 265,
+        "sha256": "56c7dc13c9af0feaf38384e344d5107fad4f15b3ca841ec07b8a01d9c852cb46"
+      },
+      {
+        "role": "detail_schema",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-detail-v1.schema.json",
+        "tracked": true,
+        "bytes": 5572,
+        "lines": 106,
+        "sha256": "911196c1f6e03cc7bf33ea84a954b404d8b7cc7a7b2533c7ebad435cab7db63f"
+      }
+    ]
+  },
+  "detail_export": {
+    "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix.jsonl",
+    "tracked": false,
+    "bytes": 13605,
+    "lines": 6,
+    "sha256": "0a93b28ca05a1177e6f1ce19db46d2fc0af25321af7fc4c0d1baaee5660369f6"
+  },
+  "effective_recovery_plan": {
+    "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+    "tracked": false,
+    "bytes": 6558,
+    "lines": 21,
+    "sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7"
+  },
+  "legacy_source_provenance": {
+    "aggregate_sha256": "1397729f0cad56e59f76caf692e06b406ec6a4432a87273521adc4508d826155",
+    "roles": [
+      {
+        "role": "legacy_d3d9_texture_upload",
+        "sha256": "134444b822c3bd271bcb91db4a0ac59a2b540bacbe460e35c54077f78589be87"
+      },
+      {
+        "role": "legacy_qrender_mip_descriptor",
+        "sha256": "b276b91ba85256a91d38a894c786e9ebd2a4f4035a812b333fb4405f0bebff50"
+      }
+    ]
+  },
+  "source_facts": {
+    "mip_level_is_serialized_with_zero_default": true,
+    "stored_zero_is_normalized_to_one_before_upload": true,
+    "texture_allocation_uses_declared_mip_count": true,
+    "copy_loop_is_bounded_by_declared_mip_count": true,
+    "copy_offset_advances_by_declared_mip_sizes": true,
+    "bytes_after_declared_copy_prefix_are_not_read_by_that_loop": true
+  },
+  "production_contract": {
+    "api": "tmxy::texture::QtxReader::parse_with_declared_mip_payload_prefix",
+    "default_api_remains_strict": true,
+    "implementation_bindings": {
+      "aggregate_sha256": "f3222f097baa0d272e7cf31e2b3d050524afa41393ba610f5b4c5ada347b0ea3",
+      "entries": [
+        {
+          "role": "texture_types_header",
+          "path": "Tools/TMXY.Texture/include/tmxy/texture/texture_types.hpp",
+          "tracked": true,
+          "bytes": 2593,
+          "lines": 110,
+          "sha256": "3dbe0037964e82adec695d147e575fb2e2557dbe095d422b5f0e681b87d6b17b"
+        },
+        {
+          "role": "qtx_reader_header",
+          "path": "Tools/TMXY.Texture/include/tmxy/texture/qtx_reader.hpp",
+          "tracked": true,
+          "bytes": 1905,
+          "lines": 58,
+          "sha256": "8086416f0b3430d02da04f7543964471f10aaa53ee3d384cfff960535181be63"
+        },
+        {
+          "role": "qtx_reader_implementation",
+          "path": "Tools/TMXY.Texture/src/qtx_reader.cpp",
+          "tracked": true,
+          "bytes": 20437,
+          "lines": 514,
+          "sha256": "adc10c8c0fb55d9e43b10641ab3c9025fcbc80128632c98370e1805439419507"
+        },
+        {
+          "role": "texture_decode_internal_header",
+          "path": "Tools/TMXY.Texture/src/texture_decode_internal.hpp",
+          "tracked": true,
+          "bytes": 796,
+          "lines": 25,
+          "sha256": "6a01100246884cb39ee5a249f52a274d16e6028dc9c2e9b6d286e3aac621d498"
+        },
+        {
+          "role": "texture_decode_implementation",
+          "path": "Tools/TMXY.Texture/src/texture_decode.cpp",
+          "tracked": true,
+          "bytes": 5793,
+          "lines": 146,
+          "sha256": "2a98e20dec8dd888127b6db2e932e908d525b80632be8a4231927240ef225c70"
+        },
+        {
+          "role": "dds_writer_implementation",
+          "path": "Tools/TMXY.Texture/src/dds_writer.cpp",
+          "tracked": true,
+          "bytes": 5253,
+          "lines": 148,
+          "sha256": "d34455b896c61d322e1b18335bebd0dfb3758db78689fe9a64615a932a65be24"
+        },
+        {
+          "role": "texture_export_implementation",
+          "path": "Tools/TMXY.Texture/src/texture_export.cpp",
+          "tracked": true,
+          "bytes": 4307,
+          "lines": 117,
+          "sha256": "7c3a55cf2e7fe6e39f309a0d90a5969192d082309c25eeab823958fac15beee4"
+        },
+        {
+          "role": "texture_error_implementation",
+          "path": "Tools/TMXY.Texture/src/texture_error.cpp",
+          "tracked": true,
+          "bytes": 4101,
+          "lines": 143,
+          "sha256": "6baa4733afa1f985eb3d2b7e5b502390fc3ccd2ba1f253e06ddf4dca8029671b"
+        }
+      ]
+    }
+  },
+  "scope": {
+    "source_revision": "P2-20A.7",
+    "family": "qtx",
+    "targets": 6,
+    "candidate_edges": 6,
+    "unique_candidates": 6,
+    "candidate_ids_distinct": true,
+    "candidate_set_exact": true,
+    "excluded_unresolved_targets": 4,
+    "excluded_unresolved_edges": 6,
+    "excluded_scope_selected": false,
+    "current_upstream_effective_state": {
+      "phase": "POST_APPLICATION",
+      "selected_targets_resolved": 6,
+      "selected_edges_pass": 6,
+      "selected_recovery_applied_edges": 6
+    }
+  },
+  "measured": {
+    "source_assets_reverified": 6,
+    "candidate_packages_hashed": 6,
+    "candidate_bodies_reverified": 6,
+    "strict_default_rejected_edges": 6,
+    "payload_size_mismatch_edges": 6,
+    "strict_prefix_pass_edges": 6,
+    "explicit_prefix_pass_edges": 6,
+    "full_payload_boundary_edges": 6,
+    "decoded_mip_zero_match_edges": 6,
+    "dds_prefix_only_edges": 6,
+    "ignored_tail_hashes": 6,
+    "dxt1_targets": 3,
+    "dxt5_targets": 3,
+    "input_payload_bytes": 786456,
+    "consumed_payload_bytes": 589824,
+    "ignored_payload_bytes": 196632,
+    "base_recovery_plan_rows": 21,
+    "effective_recovery_plan_rows": 21,
+    "effective_plan_changed_rows": 6,
+    "effective_plan_unchanged_rows": 15,
+    "candidate_selections": 0,
+    "automatic_resolutions": 0,
+    "owner_dispositions": 0,
+    "content_dispositions": 0
+  },
+  "observed_relation": {
+    "recovery_kind": "qtx_declared_mip_payload_prefix",
+    "basis": "declared_mip_payload_prefix_contract",
+    "default_strict_binding": "REJECTED",
+    "default_strict_error_code": "payload_size_mismatch",
+    "explicit_api_binding": "PASS",
+    "stored_mip_count": 1,
+    "declared_mip_count": 1,
+    "full_payload_boundary_exact_edges": 6,
+    "consumed_plus_ignored_equals_input_edges": 6,
+    "decoded_mip_zero_matches_strict_prefix_edges": 6,
+    "dds_payload_prefix_only_edges": 6,
+    "ignored_tail_excluded_from_dds_edges": 6,
+    "ignored_tail_sha256_edges": 6,
+    "dxt1_512_boundary_10_max_10_targets": 3,
+    "dxt5_256_boundary_7_max_9_targets": 3,
+    "base_plan_recovery_kind": "qtx_complete_mip_chain",
+    "effective_plan_recovery_kind": "qtx_declared_mip_payload_prefix",
+    "effective_plan_row_set_preserved": true,
+    "effective_plan_only_recovery_kind_changed": true
+  },
+  "authority_boundary": {
+    "a4_is_authoritative": true,
+    "authority_state_changed": false,
+    "adapter_applied": false,
+    "recovery_applied": false,
+    "machine_can_select_candidate": false,
+    "machine_can_approve_disposition": false,
+    "repair_or_write": false,
+    "delete_or_no_ref": false,
+    "owner_approvals": 0,
+    "verified_resolutions": 0
+  },
+  "preserved_blockers": {
+    "identity_semantic_ambiguous_targets": 15,
+    "identity_semantic_ambiguous_edges": 30,
+    "asset_effective_ambiguous_targets": 189,
+    "asset_effective_ambiguous_edges": 546,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
+    "auxiliary_nonterminal_instances": 212,
+    "conditional_required_missing": 29,
+    "migration_pending": 1359,
+    "g2_satisfied": 7,
+    "g2_blocked": 2
+  },
+  "contracts": {
+    "policy_sha256": "67e2cb3f2ebf6843177df09fb086249f1c3ab4d6f81a8fa31b5af27b456123f5",
+    "schema_sha256": "56c7dc13c9af0feaf38384e344d5107fad4f15b3ca841ec07b8a01d9c852cb46",
+    "detail_schema_sha256": "911196c1f6e03cc7bf33ea84a954b404d8b7cc7a7b2533c7ebad435cab7db63f",
+    "base_plan_contract_sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+  },
+  "disclosure": {
+    "tracked_aggregate_hash_and_anonymous_contract_only": true,
+    "tracked_anonymous_base_plan_contract": true,
+    "anonymous_detail_only": true,
+    "legacy_source_roles_and_hashes_only": true,
+    "raw_names": false,
+    "private_source_paths": false,
+    "legacy_source_lines": false,
+    "exact_primary_keys": false,
+    "decoded_confidential_payloads": false
+  }
+}

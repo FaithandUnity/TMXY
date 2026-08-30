@@ -64,8 +64,8 @@ function Test-G2MalformedXmlMetrics([object]$Criterion) {
         aux_malformed_xml_malformed_blocked = 6
     }
     $allNames = @($Criterion.metrics | ForEach-Object { [string]$_.name })
-    if ($allNames.Count -ne 169 -or
-        @($allNames | Sort-Object -Unique).Count -ne 169) { return $false }
+    if ($allNames.Count -ne 197 -or
+        @($allNames | Sort-Object -Unique).Count -ne 197) { return $false }
     $observed = @($Criterion.metrics | Where-Object {
             [string]$_.name -clike 'aux_malformed_xml_*'
         } | ForEach-Object { [string]$_.name })

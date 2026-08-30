@@ -9,7 +9,7 @@ This is a conditional, non-price planning baseline. It is not a delivery commitm
 | Input | Task | SHA-256 |
 |---|---|---|
 | conversion_routing | P2-15 | `c0cf266aff9c043f91839f1540500dcf0e23b82fffb13ea5f6d2f13c0030be54` |
-| content_health | P2-18 | `3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5` |
+| content_health | P2-18 | `898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1` |
 | conversion_pilot | P2-19-PILOT | `d1c7d989988532d3a2918288c5f393099f6a0cc93f26ccff6e2535a0f94eafd7` |
 
 ## Human budget

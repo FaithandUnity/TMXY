@@ -1,5 +1,7 @@
 #include "tmxy/texture/qtx_reader.hpp"
 
+#include "texture_decode_internal.hpp"
+
 #include <algorithm>
 #include <cstddef>
 #include <cstdint>
@@ -92,6 +94,22 @@ mip_size(const TextureFormat format, const std::uint32_t width, const std::uint3
     return AlphaEncoding::none;
 }
 
+[[nodiscard]] bool is_known_format(const TextureFormat format) noexcept
+{
+    switch (format)
+    {
+    case TextureFormat::rgba8:
+    case TextureFormat::rgba16f:
+    case TextureFormat::r32f:
+    case TextureFormat::dxt1:
+    case TextureFormat::dxt1a:
+    case TextureFormat::dxt3:
+    case TextureFormat::dxt5:
+        return true;
+    }
+    return false;
+}
+
 [[nodiscard]] AlphaCoverage classify_alpha(const std::span<const std::byte> rgba) noexcept
 {
     bool has_zero = false;
@@ -176,7 +194,195 @@ infer_complete_payload_mip_count_impl(const TextureDescriptor& descriptor,
          .read_error_code = std::nullopt});
 }
 
+[[nodiscard]] TextureResult<bool>
+validate_mip_count_resolution(const TextureDescriptor& descriptor,
+                              const std::span<const std::byte> payload,
+                              const QtxMipCountResolution resolution)
+{
+    if (resolution.effective_mip_count == 0U)
+    {
+        return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                             .context = "qtx.effective_mip_count",
+                                             .read_error_code = std::nullopt});
+    }
+    if (resolution.basis == MipCountBasis::package_descriptor)
+    {
+        if (resolution.effective_mip_count != descriptor.mip_count)
+        {
+            return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                                 .context = "qtx.effective_mip_count",
+                                                 .read_error_code = std::nullopt});
+        }
+    }
+    else if (resolution.basis == MipCountBasis::payload_complete_chain_contract)
+    {
+        if (descriptor.stored_mip_count == 0U ||
+            descriptor.stored_mip_count != descriptor.mip_count)
+        {
+            return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                                 .context = "qtx.declared_mip_count",
+                                                 .read_error_code = std::nullopt});
+        }
+        auto inferred = infer_complete_payload_mip_count_impl(descriptor, payload);
+        if (!inferred.has_value())
+        {
+            return TextureResult<bool>::failure(inferred.error());
+        }
+        if (resolution.effective_mip_count >= descriptor.mip_count ||
+            resolution.effective_mip_count != inferred.value())
+        {
+            return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                                 .context = "qtx.effective_mip_count",
+                                                 .read_error_code = std::nullopt});
+        }
+    }
+    else
+    {
+        return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                             .context = "qtx.mip_count_basis",
+                                             .read_error_code = std::nullopt});
+    }
+    return TextureResult<bool>::success(true);
+}
+
+[[nodiscard]] TextureResult<bool> validate_payload_extent(
+    const TextureDescriptor& descriptor, const std::span<const std::byte> payload,
+    const QtxMipCountResolution resolution, const PayloadExtentBasis payload_extent_basis)
+{
+    if (payload_extent_basis == PayloadExtentBasis::complete_input_payload)
+    {
+        return TextureResult<bool>::success(true);
+    }
+    if (payload_extent_basis != PayloadExtentBasis::declared_mip_payload_prefix_contract)
+    {
+        return TextureResult<bool>::failure({.code = TextureErrorCode::payload_size_mismatch,
+                                             .context = "qtx.payload_extent_basis",
+                                             .read_error_code = std::nullopt});
+    }
+    if (!is_known_format(descriptor.format))
+    {
+        return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_format,
+                                             .context = "qtx.format",
+                                             .read_error_code = std::nullopt});
+    }
+    if (resolution.basis != MipCountBasis::package_descriptor ||
+        descriptor.stored_mip_count == 0U || descriptor.stored_mip_count != descriptor.mip_count)
+    {
+        return TextureResult<bool>::failure({.code = TextureErrorCode::invalid_mip_count,
+                                             .context = "qtx.declared_mip_count",
+                                             .read_error_code = std::nullopt});
+    }
+    auto inferred = infer_complete_payload_mip_count_impl(descriptor, payload);
+    if (!inferred.has_value())
+    {
+        return TextureResult<bool>::failure(inferred.error());
+    }
+    if (inferred.value() <= descriptor.mip_count)
+    {
+        return TextureResult<bool>::failure({.code = TextureErrorCode::payload_size_mismatch,
+                                             .absolute_offset = payload.size(),
+                                             .context = "qtx.payload_prefix_extent",
+                                             .read_error_code = std::nullopt});
+    }
+    return TextureResult<bool>::success(true);
+}
+
+[[nodiscard]] bool canonical_mip_extent(const QtxTextureView& texture, std::uint64_t& extent)
+{
+    if (texture.effective_mip_count >
+        maximum_natural_mips(texture.descriptor.width, texture.descriptor.height))
+    {
+        return false;
+    }
+    std::uint32_t width = texture.descriptor.width;
+    std::uint32_t height = texture.descriptor.height;
+    std::uint64_t offset = 0U;
+    for (std::uint32_t level = 0U; level < texture.effective_mip_count; ++level)
+    {
+        const auto size = mip_size(texture.descriptor.format, width, height);
+        if (!size.has_value() || size.value() > std::numeric_limits<std::uint64_t>::max() - offset)
+        {
+            return false;
+        }
+        const auto& mip = texture.mips[level];
+        if (mip.level != level || mip.width != width || mip.height != height ||
+            mip.offset != offset || mip.size != size.value())
+        {
+            return false;
+        }
+        offset += size.value();
+        width = std::max(1U, width / 2U);
+        height = std::max(1U, height / 2U);
+    }
+    extent = offset;
+    return true;
+}
+
 } // namespace
+
+namespace detail
+{
+
+bool valid_qtx_texture_view(const QtxTextureView& texture, const std::span<const std::byte> payload)
+{
+    const auto input_bytes = static_cast<std::uint64_t>(payload.size());
+    if (!is_known_format(texture.descriptor.format) || texture.descriptor.width == 0U ||
+        texture.descriptor.height == 0U || texture.effective_mip_count == 0U ||
+        texture.payload_size != texture.input_payload_bytes ||
+        texture.input_payload_bytes != input_bytes || texture.mips.empty() ||
+        texture.mips.size() != texture.effective_mip_count ||
+        texture.consumed_payload_bytes > texture.input_payload_bytes ||
+        texture.ignored_payload_bytes !=
+            texture.input_payload_bytes - texture.consumed_payload_bytes)
+    {
+        return false;
+    }
+
+    const bool package_mips = texture.mip_count_basis == MipCountBasis::package_descriptor;
+    const bool recovered_mips =
+        texture.mip_count_basis == MipCountBasis::payload_complete_chain_contract;
+    const bool declared_mips_consistent =
+        texture.descriptor.stored_mip_count == 0U
+            ? texture.descriptor.mip_count == 1U
+            : texture.descriptor.stored_mip_count == texture.descriptor.mip_count;
+    if (!declared_mips_consistent || (!package_mips && !recovered_mips) ||
+        (package_mips && texture.effective_mip_count != texture.descriptor.mip_count) ||
+        (recovered_mips && (texture.descriptor.stored_mip_count == 0U ||
+                            texture.descriptor.stored_mip_count != texture.descriptor.mip_count ||
+                            texture.effective_mip_count >= texture.descriptor.mip_count)))
+    {
+        return false;
+    }
+
+    std::uint64_t declared_extent = 0U;
+    if (!canonical_mip_extent(texture, declared_extent) ||
+        texture.consumed_payload_bytes != declared_extent)
+    {
+        return false;
+    }
+
+    if (texture.payload_extent_basis == PayloadExtentBasis::complete_input_payload)
+    {
+        if (texture.consumed_payload_bytes != input_bytes || texture.ignored_payload_bytes != 0U)
+        {
+            return false;
+        }
+        const auto inferred = infer_complete_payload_mip_count_impl(texture.descriptor, payload);
+        return package_mips ||
+               (inferred.has_value() && inferred.value() == texture.effective_mip_count);
+    }
+    if (texture.payload_extent_basis != PayloadExtentBasis::declared_mip_payload_prefix_contract ||
+        !package_mips || texture.descriptor.stored_mip_count == 0U ||
+        texture.descriptor.stored_mip_count != texture.descriptor.mip_count ||
+        texture.consumed_payload_bytes >= input_bytes)
+    {
+        return false;
+    }
+    const auto inferred = infer_complete_payload_mip_count_impl(texture.descriptor, payload);
+    return inferred.has_value() && inferred.value() > texture.descriptor.mip_count;
+}
+
+} // namespace detail
 
 QtxReader::QtxReader(const QtxLimits limits) : limits_(limits) {}
 
@@ -201,6 +407,25 @@ QtxReader::parse_with_mip_count_resolution(TextureDescriptor descriptor,
                                            const std::span<const std::byte> payload,
                                            const QtxMipCountResolution resolution) const
 {
+    return parse_with_resolutions(std::move(descriptor), payload, resolution,
+                                  PayloadExtentBasis::complete_input_payload);
+}
+
+TextureResult<QtxTextureView>
+QtxReader::parse_with_declared_mip_payload_prefix(TextureDescriptor descriptor,
+                                                  const std::span<const std::byte> payload) const
+{
+    const auto declared_mip_count = descriptor.mip_count;
+    return parse_with_resolutions(
+        std::move(descriptor), payload,
+        {.effective_mip_count = declared_mip_count, .basis = MipCountBasis::package_descriptor},
+        PayloadExtentBasis::declared_mip_payload_prefix_contract);
+}
+
+TextureResult<QtxTextureView> QtxReader::parse_with_resolutions(
+    TextureDescriptor descriptor, const std::span<const std::byte> payload,
+    const QtxMipCountResolution resolution, const PayloadExtentBasis payload_extent_basis) const
+{
     if (payload.size() > limits_.maximum_payload_bytes)
     {
         return TextureResult<QtxTextureView>::failure(
@@ -219,59 +444,26 @@ QtxReader::parse_with_mip_count_resolution(TextureDescriptor descriptor,
              .read_error_code = std::nullopt});
     }
 
-    if (resolution.effective_mip_count == 0U)
+    auto mip_validation = validate_mip_count_resolution(descriptor, payload, resolution);
+    if (!mip_validation.has_value())
     {
-        return TextureResult<QtxTextureView>::failure({.code = TextureErrorCode::invalid_mip_count,
-                                                       .context = "qtx.effective_mip_count",
-                                                       .read_error_code = std::nullopt});
+        return TextureResult<QtxTextureView>::failure(mip_validation.error());
     }
-    if (resolution.basis == MipCountBasis::package_descriptor)
+    auto extent_validation =
+        validate_payload_extent(descriptor, payload, resolution, payload_extent_basis);
+    if (!extent_validation.has_value())
     {
-        if (resolution.effective_mip_count != descriptor.mip_count)
-        {
-            return TextureResult<QtxTextureView>::failure(
-                {.code = TextureErrorCode::invalid_mip_count,
-                 .context = "qtx.effective_mip_count",
-                 .read_error_code = std::nullopt});
-        }
-    }
-    else if (resolution.basis == MipCountBasis::payload_complete_chain_contract)
-    {
-        if (descriptor.stored_mip_count == 0U ||
-            descriptor.stored_mip_count != descriptor.mip_count)
-        {
-            return TextureResult<QtxTextureView>::failure(
-                {.code = TextureErrorCode::invalid_mip_count,
-                 .context = "qtx.declared_mip_count",
-                 .read_error_code = std::nullopt});
-        }
-        auto inferred = infer_complete_payload_mip_count_impl(descriptor, payload);
-        if (!inferred.has_value())
-        {
-            return TextureResult<QtxTextureView>::failure(inferred.error());
-        }
-        if (resolution.effective_mip_count >= descriptor.mip_count ||
-            resolution.effective_mip_count != inferred.value())
-        {
-            return TextureResult<QtxTextureView>::failure(
-                {.code = TextureErrorCode::invalid_mip_count,
-                 .context = "qtx.effective_mip_count",
-                 .read_error_code = std::nullopt});
-        }
-    }
-    else
-    {
-        return TextureResult<QtxTextureView>::failure({.code = TextureErrorCode::invalid_mip_count,
-                                                       .context = "qtx.mip_count_basis",
-                                                       .read_error_code = std::nullopt});
+        return TextureResult<QtxTextureView>::failure(extent_validation.error());
     }
 
     QtxTextureView texture;
     texture.descriptor = std::move(descriptor);
     texture.alpha_encoding = alpha_encoding(texture.descriptor.format);
     texture.payload_size = payload.size();
+    texture.input_payload_bytes = payload.size();
     texture.effective_mip_count = resolution.effective_mip_count;
     texture.mip_count_basis = resolution.basis;
+    texture.payload_extent_basis = payload_extent_basis;
     std::uint32_t width = texture.descriptor.width;
     std::uint32_t height = texture.descriptor.height;
     std::uint64_t offset = 0;
@@ -298,7 +490,9 @@ QtxReader::parse_with_mip_count_resolution(TextureDescriptor descriptor,
         width = std::max(1U, width / 2U);
         height = std::max(1U, height / 2U);
     }
-    if (offset != payload.size())
+    const bool complete_input = payload_extent_basis == PayloadExtentBasis::complete_input_payload;
+    if ((complete_input && offset != payload.size()) ||
+        (!complete_input && offset >= payload.size()))
     {
         return TextureResult<QtxTextureView>::failure(
             {.code = TextureErrorCode::payload_size_mismatch,
@@ -306,6 +500,8 @@ QtxReader::parse_with_mip_count_resolution(TextureDescriptor descriptor,
              .context = "qtx.payload_size",
              .read_error_code = std::nullopt});
     }
+    texture.consumed_payload_bytes = complete_input ? payload.size() : offset;
+    texture.ignored_payload_bytes = payload.size() - texture.consumed_payload_bytes;
     auto decoded = decode_mip_zero_rgba8(texture, payload);
     if (!decoded.has_value())
     {

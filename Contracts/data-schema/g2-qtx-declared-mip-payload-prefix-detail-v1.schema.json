@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/g2-qtx-declared-mip-payload-prefix-detail-v1.schema.json",
+  "title": "P2-20A.13 anonymous QTX declared-mip payload-prefix detail",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "asset_id", "family", "candidate_count", "candidate_set_sha256", "recovery_kind",
+    "basis", "source_strict_resolution", "a13_resolution_change", "candidate_selected",
+    "automatic_resolution", "authority_state_changed", "candidate"
+  ],
+  "properties": {
+    "asset_id": {"$ref": "#/$defs/sha256"},
+    "family": {"const": "qtx"},
+    "candidate_count": {"const": 1},
+    "candidate_set_sha256": {"$ref": "#/$defs/sha256"},
+    "recovery_kind": {"const": "qtx_declared_mip_payload_prefix"},
+    "basis": {"const": "declared_mip_payload_prefix_contract"},
+    "source_strict_resolution": {"const": "UNRESOLVED"},
+    "a13_resolution_change": {"const": false},
+    "candidate_selected": {"const": false},
+    "automatic_resolution": {"const": false},
+    "authority_state_changed": {"const": false},
+    "candidate": {"$ref": "#/$defs/candidate"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id", "package_sha256", "body_sha256", "descriptor_semantic_sha256",
+        "strict_semantic_sha256", "prefix_semantic_sha256", "input_payload_sha256",
+        "consumed_payload_sha256", "ignored_tail_sha256", "decoded_mip_zero_sha256",
+        "dds_sha256", "dds_payload_sha256", "strict_binding", "strict_error_code",
+        "strict_prefix_binding", "explicit_prefix_binding", "format", "width", "height",
+        "stored_mip_count", "declared_mip_count", "effective_mip_count",
+        "payload_boundary_mip_count", "maximum_natural_mip_count", "input_payload_bytes",
+        "consumed_payload_bytes", "ignored_payload_bytes", "decoded_mip_zero_bytes",
+        "dds_header_bytes", "dds_payload_bytes", "dds_bytes", "dds_declared_mip_count",
+        "dds_payload_prefix_only", "ignored_tail_excluded_from_dds", "payload_extent_basis",
+        "recovery_applied", "adapter_applied", "content_disposition"
+      ],
+      "properties": {
+        "candidate_id": {"$ref": "#/$defs/sha256"},
+        "package_sha256": {"$ref": "#/$defs/sha256"},
+        "body_sha256": {"$ref": "#/$defs/sha256"},
+        "descriptor_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "strict_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "prefix_semantic_sha256": {"$ref": "#/$defs/sha256"},
+        "input_payload_sha256": {"$ref": "#/$defs/sha256"},
+        "consumed_payload_sha256": {"$ref": "#/$defs/sha256"},
+        "ignored_tail_sha256": {"$ref": "#/$defs/sha256"},
+        "decoded_mip_zero_sha256": {"$ref": "#/$defs/sha256"},
+        "dds_sha256": {"$ref": "#/$defs/sha256"},
+        "dds_payload_sha256": {"$ref": "#/$defs/sha256"},
+        "strict_binding": {"const": "REJECTED"},
+        "strict_error_code": {"const": "payload_size_mismatch"},
+        "strict_prefix_binding": {"const": "PASS"},
+        "explicit_prefix_binding": {"const": "PASS"},
+        "format": {"enum": ["dxt1", "dxt5"]},
+        "width": {"type": "integer", "minimum": 1},
+        "height": {"type": "integer", "minimum": 1},
+        "stored_mip_count": {"const": 1},
+        "declared_mip_count": {"const": 1},
+        "effective_mip_count": {"const": 1},
+        "payload_boundary_mip_count": {"type": "integer", "minimum": 2},
+        "maximum_natural_mip_count": {"type": "integer", "minimum": 2},
+        "input_payload_bytes": {"type": "integer", "minimum": 1},
+        "consumed_payload_bytes": {"type": "integer", "minimum": 1},
+        "ignored_payload_bytes": {"type": "integer", "minimum": 1},
+        "decoded_mip_zero_bytes": {"type": "integer", "minimum": 4},
+        "dds_header_bytes": {"const": 128},
+        "dds_payload_bytes": {"type": "integer", "minimum": 1},
+        "dds_bytes": {"type": "integer", "minimum": 129},
+        "dds_declared_mip_count": {"const": 1},
+        "dds_payload_prefix_only": {"const": true},
+        "ignored_tail_excluded_from_dds": {"const": true},
+        "payload_extent_basis": {"const": "declared_mip_payload_prefix_contract"},
+        "recovery_applied": {"const": false},
+        "adapter_applied": {"const": false},
+        "content_disposition": {"const": "NONE"}
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "format": {"const": "dxt1"}, "width": {"const": 512}, "height": {"const": 512},
+            "payload_boundary_mip_count": {"const": 10}, "maximum_natural_mip_count": {"const": 10},
+            "input_payload_bytes": {"const": 174776}, "consumed_payload_bytes": {"const": 131072},
+            "ignored_payload_bytes": {"const": 43704}, "decoded_mip_zero_bytes": {"const": 1048576},
+            "dds_payload_bytes": {"const": 131072}, "dds_bytes": {"const": 131200}
+          }
+        },
+        {
+          "properties": {
+            "format": {"const": "dxt5"}, "width": {"const": 256}, "height": {"const": 256},
+            "payload_boundary_mip_count": {"const": 7}, "maximum_natural_mip_count": {"const": 9},
+            "input_payload_bytes": {"const": 87376}, "consumed_payload_bytes": {"const": 65536},
+            "ignored_payload_bytes": {"const": 21840}, "decoded_mip_zero_bytes": {"const": 262144},
+            "dds_payload_bytes": {"const": 65536}, "dds_bytes": {"const": 65664}
+          }
+        }
+      ]
+    }
+  }
+}

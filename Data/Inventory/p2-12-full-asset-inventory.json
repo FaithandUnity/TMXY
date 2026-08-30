@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-30T08:59:19.1029752+00:00",
+  "captured_utc": "2026-08-30T15:24:27.7129218+00:00",
   "result": "PASS",
   "task": "P2-12",
   "task_status": "COMPLETE",
@@ -132,7 +132,7 @@
   },
   "dependencies": {
     "p2-01-package-inventory.json": "5b4ff6c7921458148a986ef02a60330ee560e1051f380b53b2a0f5be43c6c59d",
-    "p1-13-qtx-texture.json": "fb2b015d558bec285c2ccaaea4354cb85f6b92608e9ff6dc41e62286181432bb",
+    "p1-13-qtx-texture.json": "1a7b57c835f6473ac849a97009dc54a1106b549da71e08ca8a4332a9a7651815",
     "p1-14-sm-static-mesh.json": "211a6fbc53be5ca1f1db2c18a88be23e617092d918e780fa167d9d74cf77335d",
     "p1-15-skem-skeletal-mesh.json": "8e3a011e24dbc473cf494f6229521c550939b99253e887f9ae935b99674ba050",
     "p1-16-anim-animation.json": "f352dbc095b74b3a5a131a23591271872719ee6d132f960534f019ea55cd4641",
@@ -141,7 +141,7 @@
   },
   "implementation": {
     "source_files": 146,
-    "source_sha256": "9daa736aa7712afce9533beee8c763955fd913dad0067c35dc2e31b4a67c714a",
+    "source_sha256": "af5f21da2775d9b18c592e263787cf4ee56302c00462af9cc8fbe5479fa713a0",
     "scanner": "Tools/TMXY.AssetInventory/apps/asset_inventory_main.cpp",
     "generator": "Tools/TMXY.AssetInventory/New-FullAssetInventory.ps1",
     "production_readers": [

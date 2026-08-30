@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.4",
-  "captured_utc": "2026-08-30T09:04:37Z",
+  "captured_utc": "2026-08-30T15:32:48Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -26,9 +26,9 @@
       "qtx": {
         "ambiguous": 171,
         "candidate_edges": 11051,
-        "resolved": 2143,
+        "resolved": 2149,
         "targets": 2324,
-        "unresolved": 10
+        "unresolved": 4
       },
       "skem": {
         "ambiguous": 8,
@@ -47,9 +47,9 @@
     "by_prior_resolution_basis": {
       "DESCRIPTOR_VALIDATION_FAILED": {
         "candidate_edges": 24,
-        "resolved": 7,
+        "resolved": 13,
         "targets": 19,
-        "unresolved": 12
+        "unresolved": 6
       },
       "DIVERGENT_DESCRIPTOR_SET": {
         "ambiguous": 183,
@@ -70,63 +70,63 @@
     },
     "by_resolution_basis_edges": {
       "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 30,
-      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 15,
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 9,
       "OPEN_REJECTED_CANDIDATE": 516,
-      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12203
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 12209
     },
     "by_resolution_basis_targets": {
       "MULTIPLE_COMPATIBLE_SEMANTIC_CLASSES": 15,
-      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 12,
+      "NO_PRODUCTION_COMPATIBLE_CANDIDATE": 6,
       "OPEN_REJECTED_CANDIDATE": 174,
-      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3450
+      "SINGLE_COMPATIBLE_SEMANTIC_CLASS": 3456
     },
     "descriptor_parsed_candidates": 12764,
     "descriptor_rejected_candidates": 0,
-    "effective_binding_pass_candidates": 12570,
-    "effective_binding_rejected_candidates": 194,
+    "effective_binding_pass_candidates": 12576,
+    "effective_binding_rejected_candidates": 188,
     "reconciled_full_workset": {
       "ambiguous_edges": 546,
       "ambiguous_targets": 189,
       "candidate_edges": 39351,
-      "resolved_edges": 38790,
-      "resolved_targets": 21293,
+      "resolved_edges": 38796,
+      "resolved_targets": 21299,
       "targets": 21494,
       "unknown_edges": 0,
       "unknown_targets": 0,
-      "unresolved_edges": 15,
-      "unresolved_targets": 12
+      "unresolved_edges": 9,
+      "unresolved_targets": 6
     },
-    "recovery_applied_candidates": 9,
-    "resolved_targets": 3450,
+    "recovery_applied_candidates": 15,
+    "resolved_targets": 3456,
     "strict_ambiguous_edges": 546,
     "strict_ambiguous_targets": 189,
     "strict_resolved_edges": 12194,
     "strict_resolved_targets": 3443,
     "strict_unresolved_edges": 24,
     "strict_unresolved_targets": 19,
-    "unresolved_targets": 12
+    "unresolved_targets": 6
   },
   "outputs": {
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
       "tracked": false,
-      "bytes": 13819743,
+      "bytes": 13820115,
       "lines": 3651,
-      "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
+      "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
     },
     "report_json": {
       "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
       "tracked": true,
-      "bytes": 5798,
+      "bytes": 5807,
       "lines": 193,
-      "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
+      "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.md",
       "tracked": true,
       "bytes": 721,
       "lines": 16,
-      "sha256": "5b2897ff123b9002a034649c737bda88481f1e50dbc5c27e83d809940a07ded2"
+      "sha256": "134854602c1c06035cf51892b30e20cb071f282ca36e5867015edd642a87f3f9"
     }
   },
   "implementation": {
@@ -134,9 +134,9 @@
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/CMakeLists.txt",
         "tracked": true,
-        "bytes": 678,
-        "lines": 25,
-        "sha256": "22c84b5842738aa6ba5dcfd7d68494e3243949a6ddbc98e522f96983c7f53f50"
+        "bytes": 704,
+        "lines": 26,
+        "sha256": "d211bdba675680dc2059836a9e74c00a113fae89b6d7b4d7768563e8025b2414"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/diagnostic_common.py",
@@ -148,16 +148,16 @@
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/diagnostic_classification.py",
         "tracked": true,
-        "bytes": 8361,
-        "lines": 141,
-        "sha256": "1a94547ea231d67a1a2f3f3face56e648a4e20e8794b47303e23b70d7e9dbdbb"
+        "bytes": 8417,
+        "lines": 142,
+        "sha256": "570456542a67cdf7179aca6904398bd6b0edf2a1b9be7fe5cc6862ba7173d8b9"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/diagnostic_self_test.py",
         "tracked": true,
-        "bytes": 5195,
-        "lines": 108,
-        "sha256": "3d210f3eb13562e32442cd3b03f3f9875a77a8a5ecfc5ca987ca11d29e77e63b"
+        "bytes": 5240,
+        "lines": 109,
+        "sha256": "e9caeff9d7a4d1912c6d9fe19550f43c6c681deeda7139f1c0454d98f3407736"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/g2_asset_descriptor_diagnostics.py",
@@ -197,9 +197,9 @@
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/asset_descriptor_probe_main.cpp",
         "tracked": true,
-        "bytes": 36385,
-        "lines": 976,
-        "sha256": "79f8bbe5bbeb0b17d67f1ebbafc71d3f87832726858d9c1ff3d716e5dfd8e8bd"
+        "bytes": 35173,
+        "lines": 955,
+        "sha256": "2ba27bbe6f2220bbdcb5ca4b50249fb35871ac53307ed052a19cec741c8683f3"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/probe_output.cpp",
@@ -223,11 +223,25 @@
         "sha256": "25cdad2b7dc863833f988b4ca7f703fb53b92f33f937a267c1b05c0e6e3a08eb"
       },
       {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/qtx_recovery.cpp",
+        "tracked": true,
+        "bytes": 5508,
+        "lines": 130,
+        "sha256": "ac5b38326811d145c949b5081760d909b6194f0d122e3a9c1eba479927e452d4"
+      },
+      {
+        "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/qtx_recovery.hpp",
+        "tracked": true,
+        "bytes": 578,
+        "lines": 20,
+        "sha256": "54cb7cf91df495be94b1b5e02436e35d92c0bb027dc950005f1da4591bb85986"
+      },
+      {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/recovery_plan.cpp",
         "tracked": true,
-        "bytes": 3748,
-        "lines": 121,
-        "sha256": "b76fcffb9e71c61e0f108a90077b549f9062be9389171e66e63f70d07b80a901"
+        "bytes": 3807,
+        "lines": 122,
+        "sha256": "a9be39942bc68f8a6a2abd5851b904db18be235215ddb23dda3cd1250693c236"
       },
       {
         "path": "Tools/TMXY.G2AssetDescriptorDiagnostics/apps/recovery_plan.hpp",
@@ -237,32 +251,88 @@
         "sha256": "ad1e764ad01c223aec71e20f1bb947585f3ec6003c4e7b356fd2516850ebaba4"
       },
       {
+        "path": "Tools/TMXY.Texture/include/tmxy/texture/legacy_texture_descriptor_reader.hpp",
+        "tracked": true,
+        "bytes": 816,
+        "lines": 33,
+        "sha256": "05742ed246e8c2508825b5f8c7bbfbe4ed4ee4bd200507bb6a80a92c7a4bde60"
+      },
+      {
         "path": "Tools/TMXY.Texture/include/tmxy/texture/qtx_reader.hpp",
         "tracked": true,
-        "bytes": 1415,
-        "lines": 49,
-        "sha256": "b7f803a0f876933ad6c9f9e0d0a32d82c50adf120c9b44b26b7ee31ca5bd0ddf"
+        "bytes": 1905,
+        "lines": 58,
+        "sha256": "8086416f0b3430d02da04f7543964471f10aaa53ee3d384cfff960535181be63"
+      },
+      {
+        "path": "Tools/TMXY.Texture/include/tmxy/texture/texture_error.hpp",
+        "tracked": true,
+        "bytes": 1122,
+        "lines": 47,
+        "sha256": "28ccdef859a353f469443e161f51e3a8b0c55e9ac250083e5f55d5d06cd7cd38"
+      },
+      {
+        "path": "Tools/TMXY.Texture/include/tmxy/texture/texture_result.hpp",
+        "tracked": true,
+        "bytes": 1392,
+        "lines": 56,
+        "sha256": "c5b10de9c777bfa3d05da050b8ef5ee18888c1c8b72bedc961052f8d8df31f35"
       },
       {
         "path": "Tools/TMXY.Texture/include/tmxy/texture/texture_types.hpp",
         "tracked": true,
-        "bytes": 2153,
-        "lines": 98,
-        "sha256": "815c6e9ae832839c8ec90ee64f2bda49c80d8ca93c8bdb99f72963914509ba2d"
+        "bytes": 2593,
+        "lines": 110,
+        "sha256": "3dbe0037964e82adec695d147e575fb2e2557dbe095d422b5f0e681b87d6b17b"
       },
       {
-        "path": "Tools/TMXY.Texture/src/qtx_reader.cpp",
+        "path": "Tools/TMXY.Texture/src/block_compression.cpp",
         "tracked": true,
-        "bytes": 11803,
-        "lines": 318,
-        "sha256": "a1bf561426fadfe7271cae163ecf4c0803f607add031dfef78a1b13206d985bc"
+        "bytes": 7670,
+        "lines": 199,
+        "sha256": "09c2991775c746c07ec3fb831c6a2cf05ae50901ac9dea6207dd810913201bac"
       },
       {
         "path": "Tools/TMXY.Texture/src/dds_writer.cpp",
         "tracked": true,
-        "bytes": 5126,
+        "bytes": 5253,
+        "lines": 148,
+        "sha256": "d34455b896c61d322e1b18335bebd0dfb3758db78689fe9a64615a932a65be24"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/legacy_texture_descriptor_reader.cpp",
+        "tracked": true,
+        "bytes": 10955,
+        "lines": 309,
+        "sha256": "e130ca94d5a7ffcb9755ddf2a066a4ec30b8d2300cd094b502ecf274aa225997"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/qtx_reader.cpp",
+        "tracked": true,
+        "bytes": 20437,
+        "lines": 514,
+        "sha256": "adc10c8c0fb55d9e43b10641ab3c9025fcbc80128632c98370e1805439419507"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/texture_decode.cpp",
+        "tracked": true,
+        "bytes": 5793,
         "lines": 146,
-        "sha256": "c65649cd6d12878e0e6789960e5f7ec8b56f21359377ac953dd58284d8214fdf"
+        "sha256": "2a98e20dec8dd888127b6db2e932e908d525b80632be8a4231927240ef225c70"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/texture_decode_internal.hpp",
+        "tracked": true,
+        "bytes": 796,
+        "lines": 25,
+        "sha256": "6a01100246884cb39ee5a249f52a274d16e6028dc9c2e9b6d286e3aac621d498"
+      },
+      {
+        "path": "Tools/TMXY.Texture/src/texture_error.cpp",
+        "tracked": true,
+        "bytes": 4101,
+        "lines": 143,
+        "sha256": "6baa4733afa1f985eb3d2b7e5b502390fc3ccd2ba1f253e06ddf4dca8029671b"
       },
       {
         "path": "Tools/TMXY.Animation/include/tmxy/animation/anim_reader.hpp",

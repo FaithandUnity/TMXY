@@ -124,7 +124,8 @@ TextureResult<std::vector<std::byte>> decode_uncompressed(const TextureFormat fo
 TextureResult<std::vector<std::byte>>
 decode_mip_zero_rgba8(const QtxTextureView& texture, const std::span<const std::byte> payload)
 {
-    if (texture.mips.empty() || texture.mips.front().size > payload.size())
+    if (!detail::valid_qtx_texture_view(texture, payload) || texture.mips.empty() ||
+        texture.mips.front().size > texture.consumed_payload_bytes)
     {
         return TextureResult<std::vector<std::byte>>::failure(
             {.code = TextureErrorCode::payload_size_mismatch,

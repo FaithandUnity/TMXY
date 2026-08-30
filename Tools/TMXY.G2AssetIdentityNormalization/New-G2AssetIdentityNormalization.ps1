@@ -206,7 +206,7 @@ try {
         disclosure = $report.disclosure
         next_scope = [pscustomobject][ordered]@{
             tasks = @('P2-20A-authoritative-binding-remediation', 'P2-20-g2-rerun')
-            detail = 'Obtain authoritative dispositions for all 15 ambiguous and 19 unresolved targets; ASCII-lower identity collision alone cannot select a candidate.'
+            detail = 'Obtain authoritative dispositions for all 189 ambiguous and 6 unresolved targets; ASCII-lower identity collision alone cannot select a candidate.'
         }
     }
     if ($Check) {

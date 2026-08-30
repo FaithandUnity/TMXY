@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.12",
-  "captured_utc": "2026-08-30T09:17:32.968557Z",
+  "captured_utc": "2026-08-30T15:39:45.959560Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -18,79 +18,79 @@
     "runtime_parity_proven": false
   },
   "input_bindings": {
-    "aggregate_sha256": "785c19ba3be20474d27b8c2c1dd960ec89d7c53c69a294d73899e79667081081",
+    "aggregate_sha256": "1e3797bca8b18c4ab02844b5ee50b815deafa10d51aca8cda1552ac94796d73d",
     "entries": [
       {
         "role": "a4_report",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
         "tracked": true,
-        "bytes": 5798,
+        "bytes": 5807,
         "lines": 193,
-        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
       },
       {
         "role": "a4_inventory",
         "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
         "tracked": true,
-        "bytes": 11011,
-        "lines": 340,
-        "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c"
+        "bytes": 13467,
+        "lines": 410,
+        "sha256": "0ae236c4ea5e8c96fc2ce3b23b8fbbc26da93859ab3c97adc0118fe2f23be671"
       },
       {
         "role": "a4_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 13819743,
+        "bytes": 13820115,
         "lines": 3651,
-        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
+        "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
       },
       {
         "role": "a7_report",
         "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
         "tracked": true,
-        "bytes": 9419,
+        "bytes": 9416,
         "lines": 302,
-        "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20"
+        "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b"
       },
       {
         "role": "a7_inventory",
         "path": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
         "tracked": true,
-        "bytes": 8942,
+        "bytes": 8940,
         "lines": 280,
-        "sha256": "a69acd632feb9f412cba5088f82daec1d9c951d1de551fe116559246659b822f"
+        "sha256": "daa0e9babecbaafa0f97599102bb9cfb52e80e7a517857a00a3ad8abeca90f5e"
       },
       {
         "role": "a7_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 21229,
+        "bytes": 21217,
         "lines": 19,
-        "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
+        "sha256": "01c9cf6bcf5b9f0a224d4e91111d3947c972e6727ae348584df87b9eb8f0dc7d"
       },
       {
         "role": "a8_report",
         "path": "Data/Reports/p2-20a-asset-binding-recovery-report.json",
         "tracked": true,
-        "bytes": 6183,
-        "lines": 191,
-        "sha256": "5ff822b4d7862420059fb9e61a7cb1413fd9a80902e536befdf9db7f76468669"
+        "bytes": 7549,
+        "lines": 224,
+        "sha256": "1e241d6c74c0a0181c792b1f0c27a5e7cdaa2d27529b95e52ee6efe0eb45d19d"
       },
       {
         "role": "a8_inventory",
         "path": "Data/Inventory/p2-20a-asset-binding-recovery.json",
         "tracked": true,
-        "bytes": 2620,
-        "lines": 88,
-        "sha256": "112afa054866d030dcbed24fc70ed3760160002df832547fd2eaced8ccadf441"
+        "bytes": 3078,
+        "lines": 97,
+        "sha256": "f3222dfda796305192a3a3919d7024b0edc8477afce7a7150c55d6ca65ec0701"
       },
       {
         "role": "a8_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl",
         "tracked": false,
-        "bytes": 15778,
+        "bytes": 17298,
         "lines": 19,
-        "sha256": "858d1a6a98a2aa727d589d99f0a9a6eda02dc867234e07167fa6cd8d5563f938"
+        "sha256": "6e29f0a84fbff340c79ebe7c1c64c027f814382fdf202e3bf8b8d6d14ce4fa02"
       },
       {
         "role": "p2_12_catalog",
@@ -104,17 +104,17 @@
         "role": "policy",
         "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-policy-v1.json",
         "tracked": true,
-        "bytes": 4072,
-        "lines": 103,
-        "sha256": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e"
+        "bytes": 3660,
+        "lines": 91,
+        "sha256": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55"
       },
       {
         "role": "schema",
         "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-v1.schema.json",
         "tracked": true,
-        "bytes": 11681,
-        "lines": 272,
-        "sha256": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e"
+        "bytes": 12152,
+        "lines": 276,
+        "sha256": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a"
       },
       {
         "role": "detail_schema",
@@ -274,8 +274,10 @@
     "identity_semantic_ambiguous_edges": 30,
     "asset_effective_ambiguous_targets": 189,
     "asset_effective_ambiguous_edges": 546,
-    "asset_effective_unresolved_targets": 12,
-    "asset_effective_unresolved_edges": 15,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,
@@ -283,8 +285,8 @@
     "g2_blocked": 2
   },
   "contracts": {
-    "policy_sha256": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e",
-    "schema_sha256": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e",
+    "policy_sha256": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55",
+    "schema_sha256": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a",
     "detail_schema_sha256": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8"
   },
   "disclosure": {

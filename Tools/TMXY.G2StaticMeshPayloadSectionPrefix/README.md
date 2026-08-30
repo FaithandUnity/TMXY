@@ -33,6 +33,9 @@ Verify byte-for-byte regeneration while preserving the captured timestamp:
 
 The wrapper requires the qualified non-root Clang 21 container. It disables networking, makes the
 container filesystem read-only, mounts the repository and legacy assets read-only, and mounts each
-resolved legacy source role as a read-only file. The result is `PASS_DIAGNOSTIC` with task status
-`BLOCKED`: A.4 remains authoritative, no adapter or recovery is applied, all 12 targets / 15 edges
-remain effectively unresolved, and G2-06 and P3 remain false.
+resolved legacy source role as a read-only file. Finalization hash-binds A.4, A.7, and A.8 and
+requires their current effective counts to reconcile before publishing the A.7 blocker object. The
+result is `PASS_DIAGNOSTIC` with task status `BLOCKED`: A.4 remains authoritative, the same one SM
+target / two edges remain unresolved, no adapter or recovery is applied, and G2-06 and P3 remain
+false. In the current post-A.13 chain the global effective remainder is 6 targets / 9 edges; those
+counts are derived from the bound upstream evidence rather than frozen in the A.12 policy.

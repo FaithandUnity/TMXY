@@ -1,6 +1,7 @@
 #include "descriptor_semantic_signature.hpp"
 #include "probe_output.hpp"
 #include "probe_types.hpp"
+#include "qtx_recovery.hpp"
 #include "recovery_plan.hpp"
 #include "semantic_hash.hpp"
 #include "sha256.hpp"
@@ -37,11 +38,13 @@
 namespace
 {
 
+using tmxy::g2_asset_descriptor_diagnostics::apply_qtx_recovery;
 using tmxy::g2_asset_descriptor_diagnostics::AssetResult;
 using tmxy::g2_asset_descriptor_diagnostics::CandidateResult;
 using tmxy::g2_asset_descriptor_diagnostics::descriptor_semantic_sha256;
 using tmxy::g2_asset_descriptor_diagnostics::emit_result;
 using tmxy::g2_asset_descriptor_diagnostics::normalized_semantic_sha256;
+using tmxy::g2_asset_descriptor_diagnostics::qtx_recovery_self_test;
 using tmxy::g2_asset_descriptor_diagnostics::RecoveryDirective;
 using tmxy::g2_asset_descriptor_diagnostics::RecoveryPlan;
 using tmxy::g2_asset_descriptor_diagnostics::semantic_sha256;
@@ -683,32 +686,8 @@ inspect_candidate(const std::string_view family, const std::span<const std::byte
                 {
                     fail("recovery_plan_strict_error_drift");
                 }
-                const auto inferred = tmxy::texture::infer_complete_payload_mip_count(
-                    descriptor.value(), asset_bytes);
-                if (inferred.has_value() && inferred.value() < descriptor.value().mip_count)
-                {
-                    const auto recovered =
-                        tmxy::texture::QtxReader{}.parse_with_mip_count_resolution(
-                            descriptor.value(), asset_bytes,
-                            {.effective_mip_count = inferred.value(),
-                             .basis =
-                                 tmxy::texture::MipCountBasis::payload_complete_chain_contract});
-                    if (!recovered.has_value())
-                    {
-                        fail("recovery_plan_qtx_inference_drift");
-                    }
-                    auto effective_descriptor = descriptor.value();
-                    effective_descriptor.mip_count = inferred.value();
-                    effective_descriptor.stored_mip_count =
-                        inferred.value() == 1U ? 0U : inferred.value();
-                    const auto effective =
-                        tmxy::asset_inventory::semantic_signature(effective_descriptor);
-                    result.effective_semantic_sha256 =
-                        semantic_sha256(candidate.object_name,
-                                        std::string_view(effective.data(), effective.size()));
-                    result.effective_binding_passed = true;
-                    result.recovery_applied = true;
-                }
+                apply_qtx_recovery(descriptor.value(), asset_bytes, candidate.object_name,
+                                   *directive, result);
             }
         }
         return result;
@@ -865,7 +844,7 @@ inspect_candidate(const std::string_view family, const std::span<const std::byte
     for (const auto index : candidate_indices)
     {
         const auto& candidate = packages.candidates[index];
-        const auto directive = recovery_plan.find(asset.id, candidate.id);
+        auto* const directive = recovery_plan.find(asset.id, candidate.id);
         auto inspected =
             inspect_candidate(asset.family, bytes, packages.packages[candidate.package_index],
                               candidate, asset.source_sha256, directive);
@@ -928,7 +907,7 @@ int main(const int argument_count, const char* const arguments[])
     try
     {
         if (!tmxy::g2_asset_descriptor_diagnostics::sha256_self_test() ||
-            !tmxy::asset_inventory::semantic_signature_self_test())
+            !tmxy::asset_inventory::semantic_signature_self_test() || !qtx_recovery_self_test())
         {
             fail("startup_self_test_failed");
         }

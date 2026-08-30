@@ -39,7 +39,16 @@ class QtxReader final
                                     std::span<const std::byte> payload,
                                     QtxMipCountResolution resolution) const;
 
+    [[nodiscard]] TextureResult<QtxTextureView>
+    parse_with_declared_mip_payload_prefix(TextureDescriptor descriptor,
+                                           std::span<const std::byte> payload) const;
+
   private:
+    [[nodiscard]] TextureResult<QtxTextureView>
+    parse_with_resolutions(TextureDescriptor descriptor, std::span<const std::byte> payload,
+                           QtxMipCountResolution mip_resolution,
+                           PayloadExtentBasis payload_extent_basis) const;
+
     QtxLimits limits_;
 };
 

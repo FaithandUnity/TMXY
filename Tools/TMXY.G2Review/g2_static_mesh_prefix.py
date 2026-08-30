@@ -16,6 +16,14 @@ POLICY_PATH = "Contracts/data-schema/g2-static-mesh-payload-section-prefix-polic
 SCHEMA_PATH = "Contracts/data-schema/g2-static-mesh-payload-section-prefix-v1.schema.json"
 DETAIL_SCHEMA_PATH = (
     "Contracts/data-schema/g2-static-mesh-payload-section-prefix-detail-v1.schema.json")
+BLOCKER_FIELDS = {
+    "identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges",
+    "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges",
+    "strict_binding_failure_targets", "strict_binding_failure_edges",
+    "asset_effective_unresolved_targets", "asset_effective_unresolved_edges",
+    "auxiliary_nonterminal_instances", "conditional_required_missing", "migration_pending",
+    "g2_satisfied", "g2_blocked",
+}
 HEADER_PATH = "Tools/TMXY.StaticMesh/include/tmxy/static_mesh/package_static_mesh_reader.hpp"
 IMPLEMENTATION_PATH = "Tools/TMXY.StaticMesh/src/package_static_mesh_reader.cpp"
 PRODUCTION_PATHS = [
@@ -88,6 +96,46 @@ def _binding_aggregate(entries: list[dict[str, Any]]) -> str:
         f"{item['bytes']}\t{item['lines']}\t{item['sha256']}\n"
         for item in entries)
     return _text_sha256(value)
+
+
+def _current_blockers(root: Path, load_json: Callable[[Path], dict[str, Any]],
+                      resolve_inside: Callable[[Path, str], Path],
+                      require: Callable[[bool, str], None]) -> dict[str, Any]:
+    paths = {role: relative for role, relative, _ in INPUT_PATHS}
+    a4 = load_json(resolve_inside(root, paths["a4_report"]))
+    a7 = load_json(resolve_inside(root, paths["a7_report"]))
+    a8 = load_json(resolve_inside(root, paths["a8_report"]))
+    require(a4.get("evidence_revision") == "P2-20A.4" and
+            a7.get("evidence_revision") == "P2-20A.7" and
+            a8.get("evidence_revision") == "P2-20A.8" and
+            a4.get("result") == a7.get("result") == a8.get("result") == "BLOCKED",
+            "P2-20A.12 upstream revision or fail-closed state drifted")
+    blockers = a7.get("preserved_blockers", {})
+    require(set(blockers) == BLOCKER_FIELDS and
+            all(isinstance(value, int) and value >= 0 for value in blockers.values()),
+            "P2-20A.12 dynamic blocker shape drifted")
+    a4_effective = a4["measured"]["reconciled_full_workset"]
+    a7_effective = a7["measured"]["effective"]
+    a8_effective = a8["measured"]["effective_resolution"]
+    require((blockers["asset_effective_ambiguous_targets"],
+             blockers["asset_effective_ambiguous_edges"],
+             blockers["asset_effective_unresolved_targets"],
+             blockers["asset_effective_unresolved_edges"]) ==
+            (a4_effective["ambiguous_targets"], a4_effective["ambiguous_edges"],
+             a4_effective["unresolved_targets"], a4_effective["unresolved_edges"]) and
+            (a7_effective["unresolved_targets"], a7_effective["unresolved_edges"]) ==
+            (a4_effective["unresolved_targets"], a4_effective["unresolved_edges"]) and
+            a8_effective["resolved"] == {
+                "targets": a7_effective["resolved_targets"],
+                "candidate_edges": a7_effective["resolved_edges"]} and
+            a8_effective["ambiguous"] == {
+                "targets": a7_effective["ambiguous_targets"],
+                "candidate_edges": a7_effective["ambiguous_edges"]} and
+            a8_effective["unresolved"] == {
+                "targets": a7_effective["unresolved_targets"],
+                "candidate_edges": a7_effective["unresolved_edges"]},
+            "P2-20A.12 current A.4/A.7/A.8 state does not reconcile")
+    return blockers
 
 
 def _validate_detail(path: Path, report: dict[str, Any],
@@ -189,8 +237,9 @@ def _validate_report(root: Path, report: dict[str, Any],
                 "delete_or_no_ref": False, "owner_approvals": 0,
                 "verified_resolutions": 0},
             "P2-20A.12 authority boundary drifted")
-    require(report.get("preserved_blockers") == policy["preserved_blockers"],
-            "P2-20A.12 preserved blockers drifted")
+    require(report.get("preserved_blockers") ==
+            _current_blockers(root, load_json, resolve_inside, require),
+            "P2-20A.12 preserved blockers differ from current A.4/A.7/A.8")
     expected_legacy = sorted(policy["legacy_source_roles"], key=lambda item: item["role"])
     legacy = report.get("legacy_source_provenance", {})
     legacy_text = "".join(f"{item['role']}\t{item['sha256']}\n"
@@ -217,7 +266,8 @@ def _validate_report(root: Path, report: dict[str, Any],
             "P2-20A.12 disclosure boundary drifted")
 
 
-def _validate_inventory(root: Path, inventory: dict[str, Any], report_path: Path,
+def _validate_inventory(root: Path, inventory: dict[str, Any], report: dict[str, Any],
+                        report_path: Path,
                         detail_path: Path, sha256: Callable[[Path], str],
                         resolve_inside: Callable[[Path, str], Path],
                         require: Callable[[bool, str], None]) -> None:
@@ -246,10 +296,7 @@ def _validate_inventory(root: Path, inventory: dict[str, Any], report_path: Path
             inventory.get("authority_boundary", {}).get("authority_state_changed") is False and
             inventory.get("authority_boundary", {}).get("adapter_applied") is False and
             inventory.get("authority_boundary", {}).get("recovery_applied") is False and
-            inventory.get("preserved_blockers", {}).get("asset_effective_ambiguous_targets") == 189 and
-            inventory.get("preserved_blockers", {}).get("asset_effective_ambiguous_edges") == 546 and
-            inventory.get("preserved_blockers", {}).get("asset_effective_unresolved_targets") == 12 and
-            inventory.get("preserved_blockers", {}).get("asset_effective_unresolved_edges") == 15,
+            inventory.get("preserved_blockers") == report.get("preserved_blockers"),
              "P2-20A.12 inventory authority or blocker state drifted")
     implementation_entries = [
         _expected_entry(root, f"implementation_{index:02d}", relative, True,
@@ -277,8 +324,11 @@ def static_mesh_prefix_safe(report: dict[str, Any]) -> bool:
             authority["authority_state_changed"] is False and
             authority["adapter_applied"] is False and
             authority["recovery_applied"] is False and
-            blockers["asset_effective_ambiguous_targets"] == 189 and
-            blockers["asset_effective_unresolved_targets"] == 12)
+            set(blockers) == BLOCKER_FIELDS and
+            all(isinstance(value, int) and value >= 0 for value in blockers.values()) and
+            blockers["asset_effective_unresolved_targets"] >= 1 and
+            blockers["asset_effective_unresolved_edges"] >= 2 and
+            blockers["g2_blocked"] >= 1)
 
 
 def static_mesh_prefix_metrics(report: dict[str, Any]) -> list[tuple[str, Any, str]]:
@@ -355,7 +405,7 @@ def bind_static_mesh_payload_section_prefix(
     report = load_json(report_path)
     inventory = load_json(inventory_path)
     _validate_report(root, report, load_json, resolve_inside, sha256, require)
-    _validate_inventory(root, inventory, report_path, detail_path, sha256,
+    _validate_inventory(root, inventory, report, report_path, detail_path, sha256,
                         resolve_inside, require)
     report_digest = sha256(report_path)
     inventory_digest = sha256(inventory_path)
@@ -388,8 +438,20 @@ def static_mesh_prefix_self_test() -> dict[str, Any]:
                      "candidate_selections": 0, "automatic_resolutions": 0},
         "authority_boundary": {"authority_state_changed": False,
                                "adapter_applied": False, "recovery_applied": False},
-        "preserved_blockers": {"asset_effective_ambiguous_targets": 189,
-                               "asset_effective_unresolved_targets": 12},
+        "preserved_blockers": {
+            "identity_semantic_ambiguous_targets": 15,
+            "identity_semantic_ambiguous_edges": 30,
+            "asset_effective_ambiguous_targets": 189,
+            "asset_effective_ambiguous_edges": 546,
+            "strict_binding_failure_targets": 19,
+            "strict_binding_failure_edges": 24,
+            "asset_effective_unresolved_targets": 6,
+            "asset_effective_unresolved_edges": 9,
+            "auxiliary_nonterminal_instances": 212,
+            "conditional_required_missing": 29,
+            "migration_pending": 1359,
+            "g2_satisfied": 7,
+            "g2_blocked": 2},
     }
     if not static_mesh_prefix_safe(current):
         raise ValueError("Static-mesh prefix source proof self-test failed")
@@ -397,5 +459,9 @@ def static_mesh_prefix_self_test() -> dict[str, Any]:
     forged["authority_boundary"]["authority_state_changed"] = True
     if static_mesh_prefix_safe(forged):
         raise ValueError("Static-mesh prefix authority promotion was accepted")
-    return {"result": "PASS", "assertions": 2,
-            "source_derived_safe": True, "authority_promotion_rejected": True}
+    forged = json.loads(json.dumps(current))
+    forged["preserved_blockers"]["asset_effective_unresolved_targets"] = 0
+    if static_mesh_prefix_safe(forged):
+        raise ValueError("Static-mesh prefix unresolved target was erased")
+    return {"result": "PASS", "assertions": 3, "source_derived_safe": True,
+            "authority_promotion_rejected": True, "blocker_erasure_rejected": True}

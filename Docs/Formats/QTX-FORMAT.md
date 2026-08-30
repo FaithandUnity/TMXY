@@ -43,6 +43,23 @@ basis. A partial mip, unexplained tail, zero count, unchanged count, or count
 outside the natural chain remains rejected. DDS flags, caps, and header count
 use the effective count; the original declared value remains visible in JSON.
 
+P2-20A.13 adds the orthogonal, explicit
+`parse_with_declared_mip_payload_prefix` contract for a longer payload. It is
+also disabled in the default binder. The contract requires a non-zero stored
+mip count equal to the canonical Package count. The input must be longer than
+the byte prefix for that declared count, and its total length must end at the
+single exact boundary of a longer complete natural mip chain. A partial tail,
+shorter chain, unchanged extent, implicit count, unknown format or bytes beyond
+the natural chain is rejected. Trailing complete mips do not increase
+`effective_mip_count`; the Package declaration remains the effective count.
+
+Every validated view records `input_payload_bytes`, `consumed_payload_bytes`,
+`ignored_payload_bytes`, and `payload_extent_basis`. Strict and A.8 views use
+`complete_input_payload`, consume the entire input, and ignore zero bytes. An
+A.13 view uses `declared_mip_payload_prefix_contract`, consumes exactly the
+declared mip prefix, and records the remaining complete mip bytes as ignored.
+The legacy `payload_size` JSON field remains an alias for input payload bytes.
+
 ## 2. Texture formats
 
 | Value | Legacy name | Payload layout | Alpha encoding | DDS mapping |
@@ -72,11 +89,16 @@ pixels from being misreported as requiring blending.
 
 The offline exporter emits the same validated texture as:
 
-- DDS, preserving the original payload and complete mip chain;
+- DDS, preserving the validated consumed payload extent and mip chain;
 - PNG, deterministic RGBA8 mip-zero preview with filter 0 and stored DEFLATE;
 - TGA, deterministic uncompressed 32-bit BGRA mip-zero preview, top-left origin;
 - JSON metadata containing descriptor values, mip spans, alpha encoding and
-  decoded alpha coverage.
+  decoded alpha coverage, plus input, consumed and ignored payload extents.
+
+For an A.13 view, DDS appends only the consumed declared-mip prefix. PNG and TGA
+decode only mip zero, so ignored trailing complete mips cannot affect either
+preview. The command-line exporter continues to call the strict parser and does
+not auto-fallback to either recovery contract.
 
 RGBA16F and R32F previews clamp finite channel values to `[0,1]`. Non-finite
 float samples are rejected instead of silently producing platform-dependent

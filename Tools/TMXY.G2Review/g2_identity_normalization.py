@@ -151,8 +151,8 @@ def bind_identity_normalization_safety(
                 "ambiguous_targets": 15, "ambiguous_edges": 30,
             } and measured["reconciled_full_workset"]["ambiguous_targets"] == 189 and
             measured["reconciled_full_workset"]["ambiguous_edges"] == 546 and
-            measured["reconciled_full_workset"]["unresolved_targets"] == 12 and
-            measured["reconciled_full_workset"]["unresolved_edges"] == 15,
+            measured["reconciled_full_workset"]["unresolved_targets"] == 6 and
+            measured["reconciled_full_workset"]["unresolved_edges"] == 9,
             "P2-20A.6 falsely reduced the A.4 blocking population")
     require(diagnostic.get("contracts") == {
                 "policy_sha256": sha256(a6_policy_path),

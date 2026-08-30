@@ -286,12 +286,12 @@
     ]
   },
   "input_bindings": {
-    "aggregate_sha256": "21530016c46152636bbdbad910328dbd2783c00e4186abe443645f06fc50709b",
+    "aggregate_sha256": "a5b83c2129045abb7ca7afb9eb44a2b11226400a6bf9f2ed8faf445cd7492439",
     "content_health": {
       "completion_criteria_satisfied": true,
       "path": "Data/Inventory/p2-18-content-health.json",
       "result": "PASS",
-      "sha256": "3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5",
+      "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1",
       "task_id": "P2-18",
       "task_status": "COMPLETE"
     },

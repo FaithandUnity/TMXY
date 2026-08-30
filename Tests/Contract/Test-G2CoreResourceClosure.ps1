@@ -523,10 +523,10 @@ Add-Assertion 'Tracked closure summary preserves the measured current blocker se
     $facts.table_ambiguous -eq 6945 -and $facts.package_unresolved -eq 407 -and
     $facts.package_ambiguous -eq 8511 -and $facts.asset_unresolved -eq 18 -and
     $facts.asset_fail -eq 0 -and $facts.start_sha256 -match '^[0-9a-f]{64}$' -and
-    $facts.binding_assets -eq 21494 -and $facts.binding_resolved -eq 21293 -and
-    $facts.binding_ambiguous -eq 189 -and $facts.binding_unresolved -eq 12 -and
-    $facts.binding_edges -eq 39351 -and $facts.binding_resolved_edges -eq 38790 -and
-    $facts.binding_ambiguous_edges -eq 546 -and $facts.binding_unresolved_edges -eq 15 -and
+    $facts.binding_assets -eq 21494 -and $facts.binding_resolved -eq 21299 -and
+    $facts.binding_ambiguous -eq 189 -and $facts.binding_unresolved -eq 6 -and
+    $facts.binding_edges -eq 39351 -and $facts.binding_resolved_edges -eq 38796 -and
+    $facts.binding_ambiguous_edges -eq 546 -and $facts.binding_unresolved_edges -eq 9 -and
     $facts.binding_workset_sha -match '^[0-9a-f]{64}$' -and
     $facts.reachable_sha256 -match '^[0-9a-f]{64}$' -and $facts.gap_sha256 -match '^[0-9a-f]{64}$')
 Add-Assertion 'P2-13 conditional-required aggregate is preserved independently of graph edges' (

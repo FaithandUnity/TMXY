@@ -64,18 +64,18 @@
         "descriptor_rejected_candidates": {"const": 0},
         "binding_pass_candidates": {"const": 12561},
         "binding_rejected_candidates": {"const": 203},
-        "effective_binding_pass_candidates": {"const": 12570},
-        "effective_binding_rejected_candidates": {"const": 194},
-        "recovery_applied_candidates": {"const": 9},
+        "effective_binding_pass_candidates": {"const": 12576},
+        "effective_binding_rejected_candidates": {"const": 188},
+        "recovery_applied_candidates": {"const": 15},
         "strict_resolved_targets": {"const": 3443},
         "strict_ambiguous_targets": {"const": 189},
         "strict_unresolved_targets": {"const": 19},
         "strict_resolved_edges": {"const": 12194},
         "strict_ambiguous_edges": {"const": 546},
         "strict_unresolved_edges": {"const": 24},
-        "resolved_targets": {"const": 3450},
+        "resolved_targets": {"const": 3456},
         "ambiguous_targets": {"const": 189},
-        "unresolved_targets": {"const": 12},
+        "unresolved_targets": {"const": 6},
         "by_resolution_basis_targets": {"$ref": "#/$defs/countMap"},
         "by_resolution_basis_edges": {"$ref": "#/$defs/countMap"},
         "by_prior_resolution_basis": {
@@ -84,7 +84,17 @@
           "required": ["DESCRIPTOR_VALIDATION_FAILED", "DIVERGENT_DESCRIPTOR_SET",
             "EQUIVALENT_VALID_DESCRIPTOR_SET", "UNIQUE_VALID_DESCRIPTOR"],
           "properties": {
-            "DESCRIPTOR_VALIDATION_FAILED": {"$ref": "#/$defs/countMap"},
+            "DESCRIPTOR_VALIDATION_FAILED": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["candidate_edges", "resolved", "targets", "unresolved"],
+              "properties": {
+                "candidate_edges": {"const": 24},
+                "resolved": {"const": 13},
+                "targets": {"const": 19},
+                "unresolved": {"const": 6}
+              }
+            },
             "DIVERGENT_DESCRIPTOR_SET": {"$ref": "#/$defs/countMap"},
             "EQUIVALENT_VALID_DESCRIPTOR_SET": {"$ref": "#/$defs/countMap"},
             "UNIQUE_VALID_DESCRIPTOR": {"$ref": "#/$defs/countMap"}
@@ -96,7 +106,18 @@
           "required": ["anim", "qtx", "skem", "sm"],
           "properties": {
             "anim": {"$ref": "#/$defs/countMap"},
-            "qtx": {"$ref": "#/$defs/countMap"},
+            "qtx": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["ambiguous", "candidate_edges", "resolved", "targets", "unresolved"],
+              "properties": {
+                "ambiguous": {"const": 171},
+                "candidate_edges": {"const": 11051},
+                "resolved": {"const": 2149},
+                "targets": {"const": 2324},
+                "unresolved": {"const": 4}
+              }
+            },
             "skem": {"$ref": "#/$defs/countMap"},
             "sm": {"$ref": "#/$defs/countMap"}
           }
@@ -110,13 +131,13 @@
           "properties": {
             "targets": {"const": 21494},
             "candidate_edges": {"const": 39351},
-            "resolved_targets": {"const": 21293},
+            "resolved_targets": {"const": 21299},
             "ambiguous_targets": {"const": 189},
-            "unresolved_targets": {"const": 12},
+            "unresolved_targets": {"const": 6},
             "unknown_targets": {"const": 0},
-            "resolved_edges": {"const": 38790},
+            "resolved_edges": {"const": 38796},
             "ambiguous_edges": {"const": 546},
-            "unresolved_edges": {"const": 15},
+            "unresolved_edges": {"const": 9},
             "unknown_edges": {"const": 0}
           }
         }
@@ -132,7 +153,7 @@
         "required_ambiguous_targets": {"const": 0},
         "required_unresolved_targets": {"const": 0},
         "observed_ambiguous_targets": {"const": 189},
-        "observed_unresolved_targets": {"const": 12},
+        "observed_unresolved_targets": {"const": 6},
         "satisfied": {"const": false},
         "g2_remains_blocked_by_other_open_criteria": {"const": true}
       }

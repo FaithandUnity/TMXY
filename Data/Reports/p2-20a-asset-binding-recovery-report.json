@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.8",
-  "captured_utc": "2026-08-30T09:15:50.452122Z",
+  "captured_utc": "2026-08-30T15:36:56.850782Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -11,31 +11,31 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "53d5858eba21620188c2db4dcacb202f817233d0a49e1e02946b3d9cd6d9c2ca",
+    "aggregate_sha256": "5cf87e846dc7c28df2b7c99ebd84bbf80be207530ce19182a2d1e6e7b765d14f",
     "entries": [
       {
         "role": "a7_report",
         "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
         "tracked": true,
-        "bytes": 9419,
+        "bytes": 9416,
         "lines": 302,
-        "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20"
+        "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b"
       },
       {
         "role": "a7_inventory",
         "path": "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json",
         "tracked": true,
-        "bytes": 8942,
+        "bytes": 8940,
         "lines": 280,
-        "sha256": "a69acd632feb9f412cba5088f82daec1d9c951d1de551fe116559246659b822f"
+        "sha256": "daa0e9babecbaafa0f97599102bb9cfb52e80e7a517857a00a3ad8abeca90f5e"
       },
       {
         "role": "a7_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 21229,
+        "bytes": 21217,
         "lines": 19,
-        "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
+        "sha256": "01c9cf6bcf5b9f0a224d4e91111d3947c972e6727ae348584df87b9eb8f0dc7d"
       },
       {
         "role": "p2_12_catalog",
@@ -46,6 +46,14 @@
         "sha256": "7d3666a130b94863323ddd16cf25edeb9a7e0be6a5b34809d9b7345ab3644a92"
       },
       {
+        "role": "base_plan_contract",
+        "path": "Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv",
+        "tracked": true,
+        "bytes": 6504,
+        "lines": 21,
+        "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
+      },
+      {
         "role": "attempt_tsv",
         "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-eligible-attempts.tsv",
         "tracked": false,
@@ -54,52 +62,68 @@
         "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
       },
       {
+        "role": "effective_plan_tsv",
+        "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+        "tracked": false,
+        "bytes": 6558,
+        "lines": 21,
+        "sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7"
+      },
+      {
+        "role": "qtx_prefix_policy",
+        "path": "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-policy-v1.json",
+        "tracked": true,
+        "bytes": 9503,
+        "lines": 172,
+        "sha256": "67e2cb3f2ebf6843177df09fb086249f1c3ab4d6f81a8fa31b5af27b456123f5"
+      },
+      {
         "role": "a4_report",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
         "tracked": true,
-        "bytes": 5798,
+        "bytes": 5807,
         "lines": 193,
-        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
       },
       {
         "role": "a4_inventory",
         "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
         "tracked": true,
-        "bytes": 11011,
-        "lines": 340,
-        "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c"
+        "bytes": 13467,
+        "lines": 410,
+        "sha256": "0ae236c4ea5e8c96fc2ce3b23b8fbbc26da93859ab3c97adc0118fe2f23be671"
       },
       {
         "role": "a4_effective_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 13819743,
+        "bytes": 13820115,
         "lines": 3651,
-        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
+        "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
       },
       {
         "role": "policy",
         "path": "Contracts/data-schema/g2-asset-binding-recovery-policy-v1.json",
         "tracked": true,
-        "bytes": 3270,
-        "lines": 97,
-        "sha256": "aeb6617ceba867f54d7eff36d7049d3e6c1a2fa95e0fae4b07c4e88f9d524539"
+        "bytes": 4485,
+        "lines": 121,
+        "sha256": "6d995d7a820defae214a0734958a1487b039b55c0dd7c2c4c8ff5db11ca829b6"
       },
       {
         "role": "schema",
         "path": "Contracts/data-schema/g2-asset-binding-recovery-v1.schema.json",
         "tracked": true,
-        "bytes": 7712,
-        "lines": 166,
-        "sha256": "1f1e251024cbf77be17509a74206d82a1440236aa1e47ed66a4fbee8aa10c567"
+        "bytes": 8088,
+        "lines": 174,
+        "sha256": "edd08aafe8334e2a428d9d20540f4e6112a7b58f3955401d8061ef2cf102cf1a"
       },
       {
         "role": "detail_schema",
         "path": "Contracts/data-schema/g2-asset-binding-recovery-detail-v1.schema.json",
         "tracked": true,
-        "bytes": 2494,
-        "lines": 55,
-        "sha256": "f60ae9c705444fc2ee53594980deed29f0a851a7e2b2f5b89ab8a903eddd12a3"
+        "bytes": 5520,
+        "lines": 142,
+        "sha256": "636cb52574f1091e129d57a7945e282e0a9cae069321554623c51ac5df92b126"
       }
     ]
   },
@@ -111,19 +135,26 @@
       "lines": 21,
       "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
     },
+    "effective_plan_tsv": {
+      "path": "Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv",
+      "tracked": false,
+      "bytes": 6558,
+      "lines": 21,
+      "sha256": "c83a391c065417f48acb558baebebcee0213044110c64a32d70cbeea10024ee7"
+    },
     "success_tsv": {
       "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery-successes.tsv",
       "tracked": false,
-      "bytes": 2796,
-      "lines": 9,
-      "sha256": "0685b7945bd259741e795e475bbfd78e16abe619fb6b32a65cd1e9cb36e8653b"
+      "bytes": 4704,
+      "lines": 15,
+      "sha256": "69e946090005ff0dba6589a258ab3366a6ce67f8a8675a4d48cbe20312d2f69e"
     },
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl",
       "tracked": false,
-      "bytes": 15778,
+      "bytes": 17298,
       "lines": 19,
-      "sha256": "858d1a6a98a2aa727d589d99f0a9a6eda02dc867234e07167fa6cd8d5563f938"
+      "sha256": "6e29f0a84fbff340c79ebe7c1c64c027f814382fdf202e3bf8b8d6d14ce4fa02"
     }
   },
   "frozen_scope": {
@@ -136,21 +167,21 @@
       "candidate_edges": 21
     },
     "successful": {
-      "targets": 7,
-      "candidate_edges": 9
+      "targets": 13,
+      "candidate_edges": 15
     },
     "effective_resolution": {
       "resolved": {
-        "targets": 7,
-        "candidate_edges": 9
+        "targets": 13,
+        "candidate_edges": 15
       },
       "ambiguous": {
         "targets": 0,
         "candidate_edges": 0
       },
       "unresolved": {
-        "targets": 12,
-        "candidate_edges": 15
+        "targets": 6,
+        "candidate_edges": 9
       }
     }
   },
@@ -166,8 +197,8 @@
     "identity_semantic_ambiguous_edges": 30,
     "asset_effective_ambiguous_targets": 189,
     "asset_effective_ambiguous_edges": 546,
-    "asset_effective_unresolved_targets": 12,
-    "asset_effective_unresolved_edges": 15,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,
@@ -175,12 +206,14 @@
     "g2_blocked": 2
   },
   "contracts": {
-    "policy_sha256": "aeb6617ceba867f54d7eff36d7049d3e6c1a2fa95e0fae4b07c4e88f9d524539",
-    "schema_sha256": "1f1e251024cbf77be17509a74206d82a1440236aa1e47ed66a4fbee8aa10c567",
-    "detail_schema_sha256": "f60ae9c705444fc2ee53594980deed29f0a851a7e2b2f5b89ab8a903eddd12a3"
+    "policy_sha256": "6d995d7a820defae214a0734958a1487b039b55c0dd7c2c4c8ff5db11ca829b6",
+    "schema_sha256": "edd08aafe8334e2a428d9d20540f4e6112a7b58f3955401d8061ef2cf102cf1a",
+    "detail_schema_sha256": "636cb52574f1091e129d57a7945e282e0a9cae069321554623c51ac5df92b126",
+    "base_plan_contract_sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99"
   },
   "disclosure": {
-    "tracked_aggregate_and_hash_only": true,
+    "tracked_aggregate_hash_and_anonymous_contract_only": true,
+    "tracked_anonymous_base_plan_contract": true,
     "anonymous_detail_only": true,
     "raw_names": false,
     "private_source_paths": false,

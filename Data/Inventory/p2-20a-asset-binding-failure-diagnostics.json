@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.7",
-  "captured_utc": "2026-08-30T09:14:47.237472Z",
+  "captured_utc": "2026-08-30T15:36:04.460217Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -61,35 +61,35 @@
       }
     ],
     "effective": {
-      "resolved_targets": 7,
-      "resolved_edges": 9,
+      "resolved_targets": 13,
+      "resolved_edges": 15,
       "ambiguous_targets": 0,
       "ambiguous_edges": 0,
-      "unresolved_targets": 12,
-      "unresolved_edges": 15
+      "unresolved_targets": 6,
+      "unresolved_edges": 9
     }
   },
   "outputs": {
     "detail_export": {
       "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
       "tracked": false,
-      "bytes": 21229,
+      "bytes": 21217,
       "lines": 19,
-      "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
+      "sha256": "01c9cf6bcf5b9f0a224d4e91111d3947c972e6727ae348584df87b9eb8f0dc7d"
     },
     "report_json": {
       "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.json",
       "tracked": true,
-      "bytes": 9419,
+      "bytes": 9416,
       "lines": 302,
-      "sha256": "c8ad95ad6de2abd91303bf55c4c0475df0c83f9e81d7ce91665fba294374ef20"
+      "sha256": "6ac5784fcca692e24508189f7062d41b23c571e8b3de74ed65af5f10d6dc411b"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-binding-failure-diagnostics-report.md",
       "tracked": true,
       "bytes": 802,
       "lines": 13,
-      "sha256": "414cace34bbd40c855d7c7b229a65c95dd121a2142c7b753504da3e463338f7c"
+      "sha256": "1f86ee20692366c09d3be0acd863c09dacc7c502d4cb0ef851e88e1d945b13c3"
     }
   },
   "implementation": {
@@ -104,16 +104,16 @@
       {
         "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/g2_asset_binding_failure_diagnostics.py",
         "tracked": true,
-        "bytes": 27562,
+        "bytes": 27560,
         "lines": 488,
-        "sha256": "e553f00aaf541a620219822be3c05f56a9dd907438e068928aa76cfdcce35eb2"
+        "sha256": "21b526cff016e26df0813a5487d0ebf2203b981c1c152ca763c3f2fa67b15c10"
       },
       {
         "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/New-G2AssetBindingFailureDiagnostics.ps1",
         "tracked": true,
         "bytes": 15597,
         "lines": 325,
-        "sha256": "560f91557e1ec64051d1b9e4cf8bd90add83e0ef118273de16c4f60ec06e2fec"
+        "sha256": "f6beaa54837533256ddb2a30a751f8aafd57c1fcf1b30b2647e48c9dd66983da"
       },
       {
         "path": "Tools/TMXY.G2AssetBindingFailureDiagnostics/README.md",
@@ -167,16 +167,16 @@
       {
         "path": "Tools/TMXY.Texture/src/qtx_reader.cpp",
         "tracked": true,
-        "bytes": 11803,
-        "lines": 318,
-        "sha256": "a1bf561426fadfe7271cae163ecf4c0803f607add031dfef78a1b13206d985bc"
+        "bytes": 20437,
+        "lines": 514,
+        "sha256": "adc10c8c0fb55d9e43b10641ab3c9025fcbc80128632c98370e1805439419507"
       },
       {
         "path": "Tools/TMXY.Texture/src/texture_error.cpp",
         "tracked": true,
-        "bytes": 3700,
-        "lines": 129,
-        "sha256": "25b4882067457d7cc9606aef0d6d6786ad75942f10877cef508566f99804bb59"
+        "bytes": 4101,
+        "lines": 143,
+        "sha256": "6baa4733afa1f985eb3d2b7e5b502390fc3ccd2ba1f253e06ddf4dca8029671b"
       },
       {
         "path": "Tools/TMXY.StaticMesh/src/package_static_mesh_reader.cpp",
@@ -221,7 +221,7 @@
         "sha256": "b3fbbb60516d62eaea6170a54698842d29f13d014e5b4a4326ae60b9542b557c"
       }
     ],
-    "aggregate_sha256": "437302610af7f02bf9a0917b2c3ff151d81c0ccd6e67cd74c1c1fb9c2a54acde",
+    "aggregate_sha256": "432f9ccc516c142bfc051dcd9d0f4a5b47f7318bc49019f9d204bb569343594c",
     "generator_self_test_assertions": 10,
     "probe_startup_self_tests": true
   },
@@ -256,8 +256,8 @@
     "asset_effective_ambiguous_edges": 546,
     "strict_binding_failure_targets": 19,
     "strict_binding_failure_edges": 24,
-    "asset_effective_unresolved_targets": 12,
-    "asset_effective_unresolved_edges": 15,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,

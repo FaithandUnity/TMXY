@@ -56,8 +56,8 @@ mismatches, 1 Animation invalid-track-count, and 2 StaticMesh material-slot
 mismatches), with no unclassified edge. This closes the diagnostic taxonomy,
 not remediation: candidate selections, automatic resolutions, and owner
 dispositions remain zero. P2-20A.8 cross-proves the separately implemented,
-explicit production recovery path: 17 targets/21 edges were attempted, 7/9
-were recovered (2/4 QTX and 5/5 Animation), and 12/15 remain unresolved. A.4
+explicit production recovery path: 17 targets/21 edges were attempted, 13/15
+were recovered (8/10 QTX and 5/5 Animation), and 6/9 remain unresolved. A.4
 is the sole effective-state authority; A.8 does not select a candidate. A
 technical adapter must be contract-proven; a content change or explicit
 no-reference disposition requires content/project authority.

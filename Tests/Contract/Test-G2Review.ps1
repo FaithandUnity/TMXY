@@ -39,6 +39,7 @@ $wrapperPath = Join-Path $root 'Tools\TMXY.G2Review\New-G2Review.ps1'
 $negativeCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-NegativeCases.ps1'
 $malformedCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-MalformedXmlCases.ps1'; . $malformedCasesHelperPath
 $staticMeshPrefixCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-StaticMeshPrefixCases.ps1'; . $staticMeshPrefixCasesHelperPath
+$qtxPrefixCasesHelperPath = Join-Path $root 'Tests\Contract\G2Review-QtxDeclaredMipPrefixCases.ps1'; . $qtxPrefixCasesHelperPath
 $assertions = [Collections.Generic.List[object]]::new()
 function Add-A([string]$Name, [bool]$Passed, [string]$Detail = '') {
     $assertions.Add([pscustomobject][ordered]@{ name = $Name; result = if ($Passed) { 'PASS' } else { 'FAIL' }; detail = $Detail })
@@ -176,7 +177,7 @@ function Test-PolicySemantics([object]$Candidate) {
         $Candidate.aux_ecf_parser_parity.path -eq
             'Data/Reports/p2-20a-aux-ecf-parser-parity-report.json' -and
         (Test-G2MalformedXmlPolicy $Candidate) -and
-        (Test-G2StaticMeshPrefixPolicy $Candidate) -and
+        (Test-G2StaticMeshPrefixPolicy $Candidate) -and (Test-G2QtxDeclaredMipPrefixPolicy $Candidate) -and
         $Candidate.identity_normalization_safety.task_id -eq 'P2-20A' -and
         $Candidate.identity_normalization_safety.criterion_id -eq 'G2-06' -and
         $Candidate.identity_normalization_safety.evidence_revision -eq 'P2-20A.6' -and
@@ -241,8 +242,8 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         }
     }
     $g206 = Get-Criterion $Candidate 'G2-06'
-    if (-not (Test-G2MalformedXmlMetrics $g206)) { return $false }
-    if (-not (Test-G2StaticMeshPrefixMetrics $g206)) { return $false }
+    if (-not (Test-G2MalformedXmlMetrics $g206) -or -not (Test-G2StaticMeshPrefixMetrics $g206 $root) -or
+        -not (Test-G2QtxDeclaredMipPrefixMetrics $g206 $root)) { return $false }
     if ((Get-Metric $g206 'supplemental_report_present') -ne $true -or
         (Get-Metric $g206 'declared_scope_hash_bound') -ne $true -or
         (Get-Metric $g206 'scope_complete') -ne $false -or
@@ -267,11 +268,11 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'auxiliary_config_closure_complete') -ne $false -or
         (Get-Metric $g206 'auxiliary_cycle_detection_complete') -ne $false -or
         (Get-Metric $g206 'descriptor_diagnostic_hash_bound') -ne $true -or
-        (Get-Metric $g206 'descriptor_diagnostic_targets') -ne 3651 -or
-        (Get-Metric $g206 'descriptor_diagnostic_candidate_edges') -ne 12764 -or
-        (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -ne 3450 -or
-        (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -ne 189 -or
-        (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -ne 12 -or
+        (Get-Metric $g206 'descriptor_diagnostic_targets') -ne $descriptorDiagnostic.scope.targets -or
+        (Get-Metric $g206 'descriptor_diagnostic_candidate_edges') -ne $descriptorDiagnostic.scope.candidate_edges -or
+        (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -ne $descriptorDiagnostic.measured.resolved_targets -or
+        (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -ne $descriptorDiagnostic.measured.ambiguous_targets -or
+        (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -ne $descriptorDiagnostic.measured.unresolved_targets -or
         (Get-Metric $g206 'identity_normalization_hash_bound') -ne $true -or
         (Get-Metric $g206 'identity_case_fold_collision_targets') -ne 13 -or
         (Get-Metric $g206 'identity_case_fold_collision_edges') -ne 26 -or
@@ -282,8 +283,8 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'identity_automatic_selected_targets') -ne 0 -or
         (Get-Metric $g206 'identity_retained_ambiguous_targets') -ne 15 -or
         (Get-Metric $g206 'identity_retained_ambiguous_edges') -ne 30 -or
-        (Get-Metric $g206 'identity_retained_unresolved_targets') -ne 12 -or
-        (Get-Metric $g206 'identity_retained_unresolved_edges') -ne 15 -or
+        (Get-Metric $g206 'identity_retained_unresolved_targets') -ne 6 -or
+        (Get-Metric $g206 'identity_retained_unresolved_edges') -ne 9 -or
         (Get-Metric $g206 'binding_failure_diagnostic_hash_bound') -ne $true -or
         (Get-Metric $g206 'binding_failure_diagnostic_scope_complete') -ne $true -or
         (Get-Metric $g206 'binding_failure_remediation_scope_complete') -ne $false -or
@@ -291,20 +292,20 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'binding_failure_diagnosed_edges') -ne 24 -or
         (Get-Metric $g206 'binding_failure_typed_error_edges') -ne 24 -or
         (Get-Metric $g206 'binding_failure_unclassified_error_edges') -ne 0 -or
-        (Get-Metric $g206 'binding_failure_effective_resolved_targets') -ne 7 -or
-        (Get-Metric $g206 'binding_failure_effective_resolved_edges') -ne 9 -or
-        (Get-Metric $g206 'binding_failure_effective_ambiguous_targets') -ne 0 -or
-        (Get-Metric $g206 'binding_failure_effective_ambiguous_edges') -ne 0 -or
-        (Get-Metric $g206 'binding_failure_effective_unresolved_targets') -ne 12 -or
-        (Get-Metric $g206 'binding_failure_effective_unresolved_edges') -ne 15 -or
+        (Get-Metric $g206 'binding_failure_effective_resolved_targets') -ne $bindingFailure.measured.effective.resolved_targets -or
+        (Get-Metric $g206 'binding_failure_effective_resolved_edges') -ne $bindingFailure.measured.effective.resolved_edges -or
+        (Get-Metric $g206 'binding_failure_effective_ambiguous_targets') -ne $bindingFailure.measured.effective.ambiguous_targets -or
+        (Get-Metric $g206 'binding_failure_effective_ambiguous_edges') -ne $bindingFailure.measured.effective.ambiguous_edges -or
+        (Get-Metric $g206 'binding_failure_effective_unresolved_targets') -ne $bindingFailure.measured.effective.unresolved_targets -or
+        (Get-Metric $g206 'binding_failure_effective_unresolved_edges') -ne $bindingFailure.measured.effective.unresolved_edges -or
         (Get-Metric $g206 'binding_failure_candidate_selections') -ne 0 -or
         (Get-Metric $g206 'binding_failure_automatic_resolutions') -ne 0 -or
         (Get-Metric $g206 'binding_failure_owner_dispositions') -ne 0 -or
         (Get-Metric $g206 'binding_recovery_cross_proof_hash_bound') -ne $true -or
-        (Get-Metric $g206 'binding_recovery_attempted_targets') -ne 17 -or
-        (Get-Metric $g206 'binding_recovery_attempted_edges') -ne 21 -or
-        (Get-Metric $g206 'binding_recovery_successful_targets') -ne 7 -or
-        (Get-Metric $g206 'binding_recovery_successful_edges') -ne 9 -or
+        (Get-Metric $g206 'binding_recovery_attempted_targets') -ne $bindingRecovery.measured.attempted.targets -or
+        (Get-Metric $g206 'binding_recovery_attempted_edges') -ne $bindingRecovery.measured.attempted.candidate_edges -or
+        (Get-Metric $g206 'binding_recovery_successful_targets') -ne $bindingRecovery.measured.successful.targets -or
+        (Get-Metric $g206 'binding_recovery_successful_edges') -ne $bindingRecovery.measured.successful.candidate_edges -or
         (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -ne $true -or
         (Get-Metric $g206 'aux_semantic_scope_complete') -ne $false -or
         (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -ne $false -or
@@ -340,9 +341,9 @@ function Test-G2Semantics([object]$Candidate, [object]$Policy) {
         (Get-Metric $g206 'aux_ecf_a3_outputs_modified') -ne $false -or
         (Get-Metric $g206 'aux_ecf_semantic_imports_claimed') -ne 0 -or
         (Get-Metric $g206 'asset_binding_resolution_explicit') -ne $true -or
-        (Get-Metric $g206 'asset_binding_resolved_targets') -ne 21293 -or
-        (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne 189 -or
-        (Get-Metric $g206 'asset_binding_unresolved_targets') -ne 12 -or
+        (Get-Metric $g206 'asset_binding_resolved_targets') -ne $supplemental.closure.asset_binding.resolved_targets -or
+        (Get-Metric $g206 'asset_binding_ambiguous_targets') -ne $supplemental.closure.asset_binding.ambiguous_targets -or
+        (Get-Metric $g206 'asset_binding_unresolved_targets') -ne $supplemental.closure.asset_binding.unresolved_targets -or
         (Get-Metric $g206 'asset_binding_unknown_targets') -ne 0 -or
         (Get-Metric $g206 'asset_binding_workset_hash_bound') -ne $true -or
         (Get-Metric $g206 'table_resource_unresolved') -ne 5161 -or
@@ -411,7 +412,7 @@ $required = @($policyPath, $schemaPath, $reportPath, $markdownPath, $evidencePat
     $auxSemanticHelperPath, $auxPackageContextHelperPath, $auxMalformedPythonPath, $identityNormalizationHelperPath,
     $bindingFailureHelperPath,
     $bindingRecoveryHelperPath, $wrapperPath, $negativeCasesHelperPath,
-    $malformedCasesHelperPath, $staticMeshPrefixCasesHelperPath)
+    $malformedCasesHelperPath, $staticMeshPrefixCasesHelperPath, $qtxPrefixCasesHelperPath)
 foreach ($path in $required) {
     Add-A "Required file $(Get-Relative $path)" (Test-Path -LiteralPath $path -PathType Leaf)
 }
@@ -703,8 +704,10 @@ $bindingsPassed = $bindingsPassed -and $bindingFailureBinding.evidence_revision 
     $bindingFailureBinding.sha256 -eq (Get-Sha256 $bindingFailurePath) -and
     $bindingFailure.diagnostic_scope_complete -and -not $bindingFailure.remediation_scope_complete -and
     $bindingFailure.measured.typed_error_edges -eq 24 -and
-    $bindingFailure.measured.effective.resolved_targets -eq 7 -and
-    $bindingFailure.measured.effective.unresolved_targets -eq 12
+    $bindingFailure.measured.effective.resolved_targets -eq
+        $descriptorDiagnostic.measured.by_prior_resolution_basis.DESCRIPTOR_VALIDATION_FAILED.resolved -and
+    $bindingFailure.measured.effective.unresolved_targets -eq
+        $descriptorDiagnostic.measured.by_prior_resolution_basis.DESCRIPTOR_VALIDATION_FAILED.unresolved
 $aggregateLines.Add("BINDING_FAILURE_DIAGNOSTICS|$($bindingFailureBinding.task_id)|$($bindingFailureBinding.criterion_id)|$($bindingFailureBinding.evidence_revision)|$($bindingFailureBinding.path)|$($bindingFailureBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and
     $bindingRecoveryBinding.evidence_revision -eq 'P2-20A.8' -and
@@ -713,11 +716,12 @@ $bindingsPassed = $bindingsPassed -and
     $bindingRecovery.review_execution_result -eq 'PASS' -and
     $bindingRecovery.authority_boundary.a4_is_authoritative -eq $true -and
     $bindingRecovery.authority_boundary.a8_may_change_counts -eq $false -and
-    $bindingRecovery.measured.successful.targets -eq 7 -and
-    $bindingRecovery.measured.successful.candidate_edges -eq 9
+    $bindingRecovery.measured.successful.targets -eq $bindingFailure.measured.effective.resolved_targets -and
+    $bindingRecovery.measured.successful.candidate_edges -eq $bindingFailure.measured.effective.resolved_edges
 $aggregateLines.Add("BINDING_RECOVERY|$($bindingRecoveryBinding.task_id)|$($bindingRecoveryBinding.criterion_id)|$($bindingRecoveryBinding.evidence_revision)|$($bindingRecoveryBinding.path)|$($bindingRecoveryBinding.sha256)")
 $bindingsPassed = $bindingsPassed -and (Test-G2StaticMeshPrefixBinding $report $policy $root)
 $aggregateLines.Add((Get-G2StaticMeshPrefixAggregateLine $report.input_bindings.static_mesh_payload_section_prefix))
+$bindingsPassed = $bindingsPassed -and (Test-G2QtxDeclaredMipPrefixBinding $report $policy $root); $aggregateLines.Add((Get-G2QtxDeclaredMipPrefixAggregateLine $report.input_bindings.qtx_declared_mip_payload_prefix))
 $bindingsPassed = $bindingsPassed -and
     $remediationBinding.task_id -eq $policy.remediation.task_id -and
     $remediationBinding.criterion_id -eq $policy.remediation.criterion_id -and
@@ -754,11 +758,11 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'auxiliary_no_ref_approved') -eq 0 -and
     (Get-Metric $g206 'auxiliary_approved_roots') -eq 0 -and
     (Get-Metric $g206 'descriptor_diagnostic_hash_bound') -eq $true -and
-    (Get-Metric $g206 'descriptor_diagnostic_targets') -eq 3651 -and
-    (Get-Metric $g206 'descriptor_diagnostic_candidate_edges') -eq 12764 -and
-    (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -eq 3450 -and
-    (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -eq 189 -and
-    (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -eq 12 -and
+    (Get-Metric $g206 'descriptor_diagnostic_targets') -eq $descriptorDiagnostic.scope.targets -and
+    (Get-Metric $g206 'descriptor_diagnostic_candidate_edges') -eq $descriptorDiagnostic.scope.candidate_edges -and
+    (Get-Metric $g206 'descriptor_diagnostic_resolved_targets') -eq $descriptorDiagnostic.measured.resolved_targets -and
+    (Get-Metric $g206 'descriptor_diagnostic_ambiguous_targets') -eq $descriptorDiagnostic.measured.ambiguous_targets -and
+    (Get-Metric $g206 'descriptor_diagnostic_unresolved_targets') -eq $descriptorDiagnostic.measured.unresolved_targets -and
     (Get-Metric $g206 'identity_normalization_hash_bound') -eq $true -and
     (Get-Metric $g206 'identity_case_fold_collision_targets') -eq 13 -and
     (Get-Metric $g206 'identity_case_fold_collision_edges') -eq 26 -and
@@ -769,13 +773,13 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'identity_automatic_selected_targets') -eq 0 -and
     (Get-Metric $g206 'identity_retained_ambiguous_targets') -eq 15 -and
     (Get-Metric $g206 'identity_retained_ambiguous_edges') -eq 30 -and
-    (Get-Metric $g206 'identity_retained_unresolved_targets') -eq 12 -and
-    (Get-Metric $g206 'identity_retained_unresolved_edges') -eq 15 -and
+    (Get-Metric $g206 'identity_retained_unresolved_targets') -eq 6 -and
+    (Get-Metric $g206 'identity_retained_unresolved_edges') -eq 9 -and
     (Get-Metric $g206 'binding_recovery_cross_proof_hash_bound') -eq $true -and
-    (Get-Metric $g206 'binding_recovery_attempted_targets') -eq 17 -and
-    (Get-Metric $g206 'binding_recovery_attempted_edges') -eq 21 -and
-    (Get-Metric $g206 'binding_recovery_successful_targets') -eq 7 -and
-    (Get-Metric $g206 'binding_recovery_successful_edges') -eq 9 -and
+    (Get-Metric $g206 'binding_recovery_attempted_targets') -eq $bindingRecovery.measured.attempted.targets -and
+    (Get-Metric $g206 'binding_recovery_attempted_edges') -eq $bindingRecovery.measured.attempted.candidate_edges -and
+    (Get-Metric $g206 'binding_recovery_successful_targets') -eq $bindingRecovery.measured.successful.targets -and
+    (Get-Metric $g206 'binding_recovery_successful_edges') -eq $bindingRecovery.measured.successful.candidate_edges -and
     (Get-Metric $g206 'aux_semantic_diagnostic_hash_bound') -eq $true -and
     (Get-Metric $g206 'aux_semantic_scope_complete') -eq $false -and
     (Get-Metric $g206 'aux_semantic_g2_06_satisfied') -eq $false -and
@@ -821,12 +825,16 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'aux_malformed_xml_tinyxml_silent_partial') -eq 1 -and
     (Get-Metric $g206 'aux_malformed_xml_client_input_termination_proven') -eq $false -and
     (Get-Metric $g206 'aux_malformed_xml_legacy_runtime_executed') -eq $false -and
-    (Test-G2StaticMeshPrefixMetrics $g206) -and
+    (Test-G2StaticMeshPrefixMetrics $g206 $root) -and
+    (Test-G2QtxDeclaredMipPrefixMetrics $g206 $root) -and
     $supplemental.closure.asset_binding_resolution_explicit -eq $true -and
     $supplemental.closure.asset_binding.resolution_explicit -eq $true -and
-    $supplemental.closure.asset_binding.resolved_targets -eq 21293 -and
-    $supplemental.closure.asset_binding.ambiguous_targets -eq 189 -and
-    $supplemental.closure.asset_binding.unresolved_targets -eq 12 -and
+    $supplemental.closure.asset_binding.resolved_targets -eq
+        $descriptorDiagnostic.measured.reconciled_full_workset.resolved_targets -and
+    $supplemental.closure.asset_binding.ambiguous_targets -eq
+        $descriptorDiagnostic.measured.reconciled_full_workset.ambiguous_targets -and
+    $supplemental.closure.asset_binding.unresolved_targets -eq
+        $descriptorDiagnostic.measured.reconciled_full_workset.unresolved_targets -and
     $supplemental.closure.asset_binding.unknown_targets -eq 0 -and
     $supplemental.closure.asset_binding.workset_count -eq 21494 -and
     [string]$supplemental.closure.asset_binding.workset_sha256 -match '^[0-9a-f]{64}$' -and
@@ -850,9 +858,9 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     (Get-Metric $g206 'conditional_member_set_count') -eq 29 -and
     (Get-Metric $g206 'conditional_member_set_hash_bound') -eq $true -and
     (Get-Metric $g206 'asset_binding_resolution_explicit') -eq $true -and
-    (Get-Metric $g206 'asset_binding_resolved_targets') -eq 21293 -and
-    (Get-Metric $g206 'asset_binding_ambiguous_targets') -eq 189 -and
-    (Get-Metric $g206 'asset_binding_unresolved_targets') -eq 12 -and
+    (Get-Metric $g206 'asset_binding_resolved_targets') -eq $supplemental.closure.asset_binding.resolved_targets -and
+    (Get-Metric $g206 'asset_binding_ambiguous_targets') -eq $supplemental.closure.asset_binding.ambiguous_targets -and
+    (Get-Metric $g206 'asset_binding_unresolved_targets') -eq $supplemental.closure.asset_binding.unresolved_targets -and
     (Get-Metric $g206 'asset_binding_unknown_targets') -eq 0 -and
     (Get-Metric $g206 'asset_binding_workset_hash_bound') -eq $true -and
     (Get-Metric $g206 'first_candidate_selection_used') -eq $false -and
@@ -863,9 +871,10 @@ Add-A 'P2-20A full-scope evidence exposes quantified nonzero G2-06 gaps without 
     $g206.interpretation -match 'hash-bound core, descriptor' -and
     $g206.interpretation -match 'A\.9 resolves 3,391 consumer occurrences' -and
     $g206.interpretation -match 'A.7 classifies all 24 strict rejected asset candidate edges' -and
-    $g206.interpretation -match 'A.8 cross-proves 7 targets / 9 edges' -and
+    $g206.interpretation -match "A.8 cross-proves $($bindingRecovery.measured.successful.targets) targets / $($bindingRecovery.measured.successful.candidate_edges) edges" -and
     $g206.interpretation -match 'A.12 proves the source-derived payload-section-prefix contract' -and
-    $g206.interpretation -match '189 targets / 546 edges ambiguous' -and
+    $g206.interpretation -match 'A.13 proves a hash-bound explicit declared-mip payload-prefix API' -and
+    $g206.interpretation -match "currently retains $($supplemental.closure.asset_binding.ambiguous_targets) ambiguous and $($supplemental.closure.asset_binding.unresolved_targets) unresolved targets" -and
     -not $g206.satisfied -and $g206.observed_status -eq 'BLOCKED')
 $g207 = Get-Criterion $report 'G2-07'
 Add-A 'P2-20B has complete coverage while all 1359 decisions and approvals remain pending' (
@@ -951,25 +960,19 @@ Add-A 'Policy and schema hashes plus tracked disclosure boundary are exact' (
     -not $report.disclosure.legacy_source_lines)
 Add-A 'Complete blocked-task evidence matches report implementation and isolation' (
     Test-EvidenceSemantics $evidence)
-$negativeCases = & $negativeCasesHelperPath `
-    -Report $report `
-    -Policy $policy `
-    -Supplemental $supplemental `
-    -AuxiliaryReport $auxiliaryReport `
-    -Evidence $evidence `
-    -Root $root `
-    -SupplementalPath $supplementalPath `
-    -DescriptorDiagnosticPath $descriptorDiagnosticPath `
-    -AuxSemanticDiagnosticPath $auxSemanticDiagnosticPath `
-    -AuxPackageContextPath $auxPackageContextPath `
-    -AuxEcfParserParityPath $auxEcfParserParityPath `
-    -AuxMalformedXmlPath $auxMalformedXmlPath `
-    -IdentityNormalizationPath $identityNormalizationPath `
+$negativeCases = & $negativeCasesHelperPath -Report $report -Policy $policy `
+    -Supplemental $supplemental -AuxiliaryReport $auxiliaryReport -Evidence $evidence `
+    -Root $root -SupplementalPath $supplementalPath `
+    -DescriptorDiagnosticPath $descriptorDiagnosticPath -AuxSemanticDiagnosticPath $auxSemanticDiagnosticPath `
+    -AuxPackageContextPath $auxPackageContextPath -AuxEcfParserParityPath $auxEcfParserParityPath `
+    -AuxMalformedXmlPath $auxMalformedXmlPath -IdentityNormalizationPath $identityNormalizationPath `
     -RemediationPath $remediationPath
 $prefixNegativeCases = Get-G2StaticMeshPrefixNegativeCases $report $policy $root
 foreach ($name in $prefixNegativeCases.Keys) { $negativeCases[$name] = $prefixNegativeCases[$name] }
+$qtxNegativeCases = Get-G2QtxDeclaredMipPrefixNegativeCases $report $policy $root
+foreach ($name in $qtxNegativeCases.Keys) { $negativeCases[$name] = $qtxNegativeCases[$name] }
 Add-A 'Policy supplemental scope FK migration approval drift and unknown-field negatives fail closed' (
-    $negativeCases.Count -eq 74 -and
+    $negativeCases.Count -eq 80 -and
     @($negativeCases.Values | Where-Object { $_ -ne $true }).Count -eq 0)
 $localCheck = $null
 if ($VerifyDerivedSources) {
@@ -984,17 +987,11 @@ if ($VerifyDerivedSources) {
 }
 $failed = @($assertions | Where-Object result -eq 'FAIL')
 [pscustomobject][ordered]@{
-    schema_version = 1
-    task_id = 'P2-20'
-    result = if ($failed.Count -eq 0) { 'PASS' } else { 'FAIL' }
-    contract_assertions_satisfied = $failed.Count -eq 0
-    completion_criteria_satisfied = $false
-    review_completion_criteria_satisfied = $false
-    gate_decision = 'BLOCKED'
-    verify_derived_sources = [bool]$VerifyDerivedSources
-    negative_cases = $negativeCases
-    review = $evidence.report
-    local_check = $localCheck
+    schema_version = 1; task_id = 'P2-20'
+    result = if ($failed.Count -eq 0) { 'PASS' } else { 'FAIL' }; contract_assertions_satisfied = $failed.Count -eq 0
+    completion_criteria_satisfied = $false; review_completion_criteria_satisfied = $false
+    gate_decision = 'BLOCKED'; verify_derived_sources = [bool]$VerifyDerivedSources
+    negative_cases = $negativeCases; review = $evidence.report; local_check = $localCheck
     assertions = $assertions
 } | ConvertTo-Json -Depth 100
 if ($failed.Count -gt 0) { exit 1 }

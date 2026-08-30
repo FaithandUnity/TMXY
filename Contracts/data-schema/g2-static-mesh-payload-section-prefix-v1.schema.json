@@ -42,6 +42,7 @@
   },
   "$defs": {
     "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nonnegative": {"type": "integer", "minimum": 0},
     "proofClassification": {
       "type": "object", "additionalProperties": false,
       "required": ["source_basis", "legacy_binary_executed", "runtime_parity_proven"],
@@ -223,22 +224,25 @@
       "required": [
         "identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges",
         "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges",
+        "strict_binding_failure_targets", "strict_binding_failure_edges",
         "asset_effective_unresolved_targets", "asset_effective_unresolved_edges",
         "auxiliary_nonterminal_instances", "conditional_required_missing",
         "migration_pending", "g2_satisfied", "g2_blocked"
       ],
       "properties": {
-        "identity_semantic_ambiguous_targets": {"const": 15},
-        "identity_semantic_ambiguous_edges": {"const": 30},
-        "asset_effective_ambiguous_targets": {"const": 189},
-        "asset_effective_ambiguous_edges": {"const": 546},
-        "asset_effective_unresolved_targets": {"const": 12},
-        "asset_effective_unresolved_edges": {"const": 15},
-        "auxiliary_nonterminal_instances": {"const": 212},
-        "conditional_required_missing": {"const": 29},
-        "migration_pending": {"const": 1359},
-        "g2_satisfied": {"const": 7},
-        "g2_blocked": {"const": 2}
+        "identity_semantic_ambiguous_targets": {"$ref": "#/$defs/nonnegative"},
+        "identity_semantic_ambiguous_edges": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_ambiguous_targets": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_ambiguous_edges": {"$ref": "#/$defs/nonnegative"},
+        "strict_binding_failure_targets": {"$ref": "#/$defs/nonnegative"},
+        "strict_binding_failure_edges": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_unresolved_targets": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_unresolved_edges": {"$ref": "#/$defs/nonnegative"},
+        "auxiliary_nonterminal_instances": {"$ref": "#/$defs/nonnegative"},
+        "conditional_required_missing": {"$ref": "#/$defs/nonnegative"},
+        "migration_pending": {"$ref": "#/$defs/nonnegative"},
+        "g2_satisfied": {"$ref": "#/$defs/nonnegative"},
+        "g2_blocked": {"$ref": "#/$defs/nonnegative"}
       }
     },
     "contracts": {

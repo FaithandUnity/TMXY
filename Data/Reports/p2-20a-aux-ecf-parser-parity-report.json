@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.10",
-  "captured_utc": "2026-08-30T09:03:50.1833793+00:00",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -14,7 +14,7 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "0d4fb1bb6317aa0f34fd549ccebbdf7d03d8eec0aa0cd2392aba481f8c7bc224",
+    "aggregate_sha256": "f878210f611c5d85b7375275f94f7cf55da8201a25428ca76dff09108e2b99f4",
     "entries": [
       {
         "role": "auxiliary_inventory",
@@ -22,11 +22,11 @@
       },
       {
         "role": "a3_report",
-        "sha256": "c90d5e5e731a406bdc82a4a8a111da9a8330c7a04f7c9940afa6b8497c44bf1e"
+        "sha256": "7486d70b346c8acd1695179dca06b66453850927d8f8cdc4773480ac636fbe45"
       },
       {
         "role": "a3_evidence",
-        "sha256": "c60907f9f36c81d737a412948cc87161f858dc3d181f9c9346ba730c3ddb7742"
+        "sha256": "b9daba01ead89b13c2607044bbcc8c44c9ba23caa4396266ab95399630bc536a"
       },
       {
         "role": "a3_parser_implementation",
@@ -34,11 +34,11 @@
       },
       {
         "role": "a5_report",
-        "sha256": "41354fd69bea8898c56da7a1fbe045026c250749c60b2987510905ba4215db5d"
+        "sha256": "bdd8802c9f6c5304bdab3183f606923005145c87daf5f4f3208edf14b4cc7cb9"
       },
       {
         "role": "a5_evidence",
-        "sha256": "4a21cb4c0fed43f2ecced94dae4ad5167bdb750a16223987318b5c9919a78f7e"
+        "sha256": "53bcd36a1090618a6d3744250247382c304bbcad93a7e3fbb1ed6a7bf58442df"
       },
       {
         "role": "a5_policy",
@@ -50,15 +50,15 @@
       },
       {
         "role": "a9_report",
-        "sha256": "1c3254b08c6fe7014e891d52ed7ee1d28b6bc7f463b4bcd855bcf2ac57d9f467"
+        "sha256": "0514d9c2f4537ebf49e3384cd19661e90d1282eaf99f4c76b2d25ccbcfef1c00"
       },
       {
         "role": "a9_evidence",
-        "sha256": "68f18088ffb92772d91730667d68d1b7109e9e62091c3fa27b3e43ad2cbc1d94"
+        "sha256": "356e997cfbc0b1cc623eda804f88dcd8b36884572b61c1e4e82c64682d5f56dd"
       },
       {
         "role": "asset_inventory",
-        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244"
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c"
       },
       {
         "role": "reference_closure",

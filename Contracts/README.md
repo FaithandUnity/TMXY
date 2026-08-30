@@ -44,3 +44,8 @@ malformed XML 不能自动排除；歧义 Package 候选必须全部保留。当
 P2-20A.11 的 malformed XML 四层诊断。P2-05/.NET 与独立严格解析器的拒绝结果、TinyXML
 2.3.4 源码派生 `LoadFile` 结果和底层 `Parse` 完整性必须分开；API 返回成功不能掩盖部分树，
 也不能证明旧二进制、Windows CRT、客户端 C 字符串终止、语义有效性或处置完成。
+
+`g2-asset-binding-recovery-base-plan-v1.tsv` 是 A.8/A.13 共用的 21 行匿名哈希契约。
+P2-03/P2-12 的忽略区导出先按各自生成器重建后，A.13 Prepare 可直接读取该契约，而不依赖
+忽略区的 A.4/A.7/A.8/Core 链产物；A.8 必须从当前 A.7 重新派生本地计划并证明逐字节相等。
+契约不含原始名称或私有路径，且不表示恢复成功、处置批准或 G2/P3 授权。

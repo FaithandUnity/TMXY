@@ -48,6 +48,7 @@ function Copy-Output([string]$Source, [string]$Target) {
 
 try {
     $moduleRoot = Join-Path $root 'Tools\TMXY.G2Review'
+    . (Join-Path $root 'Tests\Contract\G2Review-QtxDeclaredMipPrefixCases.ps1')
     $generatorPath = Join-Path $moduleRoot 'g2_review.py'
     $policyPath = Join-Path $root 'Contracts\data-schema\g2-review-policy-v1.json'
     $schemaPath = Join-Path $root 'Contracts\data-schema\g2-review-v1.schema.json'
@@ -124,6 +125,13 @@ try {
 
     $report = Get-Content -LiteralPath $trackedJson -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
+    $descriptorDiagnostic = Get-Content -LiteralPath (Join-Path $root 'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json') -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $bindingFailure = Get-Content -LiteralPath (Join-Path $root 'Data\Reports\p2-20a-asset-binding-failure-diagnostics-report.json') -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $bindingRecovery = Get-Content -LiteralPath (Join-Path $root 'Data\Reports\p2-20a-asset-binding-recovery-report.json') -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $descriptorMeasured = $descriptorDiagnostic.measured
+    $descriptorReconciled = $descriptorMeasured.reconciled_full_workset
+    $bindingFailureEffective = $bindingFailure.measured.effective
+    $bindingRecoveryMeasured = $bindingRecovery.measured
     $g206 = @($report.criteria | Where-Object id -eq 'G2-06')
     if ($g206.Count -ne 1) { throw 'P2-20 G2-06 criterion is missing or duplicated.' }
     $g206Metrics = @{}
@@ -143,14 +151,14 @@ try {
         throw 'P2-20 A.3 auxiliary evidence did not remain hash-bound and fail closed.'
     }
     if ($g206Metrics.descriptor_diagnostic_hash_bound -ne $true -or
-        [int]$g206Metrics.descriptor_diagnostic_targets -ne 3651 -or
-        [int]$g206Metrics.descriptor_diagnostic_candidate_edges -ne 12764 -or
-        [int]$g206Metrics.descriptor_diagnostic_resolved_targets -ne 3450 -or
-        [int]$g206Metrics.descriptor_diagnostic_ambiguous_targets -ne 189 -or
-        [int]$g206Metrics.descriptor_diagnostic_unresolved_targets -ne 12 -or
-        [int]$g206Metrics.asset_binding_resolved_targets -ne 21293 -or
-        [int]$g206Metrics.asset_binding_ambiguous_targets -ne 189 -or
-        [int]$g206Metrics.asset_binding_unresolved_targets -ne 12) {
+        [int]$g206Metrics.descriptor_diagnostic_targets -ne [int]$descriptorDiagnostic.scope.targets -or
+        [int]$g206Metrics.descriptor_diagnostic_candidate_edges -ne [int]$descriptorDiagnostic.scope.candidate_edges -or
+        [int]$g206Metrics.descriptor_diagnostic_resolved_targets -ne [int]$descriptorMeasured.resolved_targets -or
+        [int]$g206Metrics.descriptor_diagnostic_ambiguous_targets -ne [int]$descriptorMeasured.ambiguous_targets -or
+        [int]$g206Metrics.descriptor_diagnostic_unresolved_targets -ne [int]$descriptorMeasured.unresolved_targets -or
+        [int]$g206Metrics.asset_binding_resolved_targets -ne [int]$descriptorReconciled.resolved_targets -or
+        [int]$g206Metrics.asset_binding_ambiguous_targets -ne [int]$descriptorReconciled.ambiguous_targets -or
+        [int]$g206Metrics.asset_binding_unresolved_targets -ne [int]$descriptorReconciled.unresolved_targets) {
         throw 'P2-20 A.4 descriptor evidence did not remain hash-bound and fail closed.'
     }
     if ($g206Metrics.aux_semantic_diagnostic_hash_bound -ne $true -or
@@ -263,31 +271,31 @@ try {
         [int]$g206Metrics.identity_automatic_selected_targets -ne 0 -or
         [int]$g206Metrics.identity_retained_ambiguous_targets -ne 15 -or
         [int]$g206Metrics.identity_retained_ambiguous_edges -ne 30 -or
-        [int]$g206Metrics.identity_retained_unresolved_targets -ne 12 -or
-        [int]$g206Metrics.identity_retained_unresolved_edges -ne 15) {
+        [int]$g206Metrics.identity_retained_unresolved_targets -ne 6 -or
+        [int]$g206Metrics.identity_retained_unresolved_edges -ne 9) {
         throw 'P2-20 A.6 identity-normalization evidence did not remain hash-bound and fail closed.'
     }
     if ($g206Metrics.binding_failure_diagnostic_hash_bound -ne $true -or
         $g206Metrics.binding_failure_diagnostic_scope_complete -ne $true -or
         $g206Metrics.binding_failure_remediation_scope_complete -ne $false -or
-        [int]$g206Metrics.binding_failure_diagnosed_targets -ne 19 -or
-        [int]$g206Metrics.binding_failure_diagnosed_edges -ne 24 -or
-        [int]$g206Metrics.binding_failure_typed_error_edges -ne 24 -or
-        [int]$g206Metrics.binding_failure_unclassified_error_edges -ne 0 -or
-        [int]$g206Metrics.binding_failure_effective_resolved_targets -ne 7 -or
-        [int]$g206Metrics.binding_failure_effective_resolved_edges -ne 9 -or
-        [int]$g206Metrics.binding_failure_effective_ambiguous_targets -ne 0 -or
-        [int]$g206Metrics.binding_failure_effective_ambiguous_edges -ne 0 -or
-        [int]$g206Metrics.binding_failure_effective_unresolved_targets -ne 12 -or
-        [int]$g206Metrics.binding_failure_effective_unresolved_edges -ne 15 -or
+        [int]$g206Metrics.binding_failure_diagnosed_targets -ne [int]$bindingFailure.measured.diagnosed_targets -or
+        [int]$g206Metrics.binding_failure_diagnosed_edges -ne [int]$bindingFailure.measured.diagnosed_candidate_edges -or
+        [int]$g206Metrics.binding_failure_typed_error_edges -ne [int]$bindingFailure.measured.typed_error_edges -or
+        [int]$g206Metrics.binding_failure_unclassified_error_edges -ne [int]$bindingFailure.measured.unclassified_error_edges -or
+        [int]$g206Metrics.binding_failure_effective_resolved_targets -ne [int]$bindingFailureEffective.resolved_targets -or
+        [int]$g206Metrics.binding_failure_effective_resolved_edges -ne [int]$bindingFailureEffective.resolved_edges -or
+        [int]$g206Metrics.binding_failure_effective_ambiguous_targets -ne [int]$bindingFailureEffective.ambiguous_targets -or
+        [int]$g206Metrics.binding_failure_effective_ambiguous_edges -ne [int]$bindingFailureEffective.ambiguous_edges -or
+        [int]$g206Metrics.binding_failure_effective_unresolved_targets -ne [int]$bindingFailureEffective.unresolved_targets -or
+        [int]$g206Metrics.binding_failure_effective_unresolved_edges -ne [int]$bindingFailureEffective.unresolved_edges -or
         [int]$g206Metrics.binding_failure_candidate_selections -ne 0 -or
         [int]$g206Metrics.binding_failure_automatic_resolutions -ne 0 -or
         [int]$g206Metrics.binding_failure_owner_dispositions -ne 0 -or
         $g206Metrics.binding_recovery_cross_proof_hash_bound -ne $true -or
-        [int]$g206Metrics.binding_recovery_attempted_targets -ne 17 -or
-        [int]$g206Metrics.binding_recovery_attempted_edges -ne 21 -or
-        [int]$g206Metrics.binding_recovery_successful_targets -ne 7 -or
-        [int]$g206Metrics.binding_recovery_successful_edges -ne 9) {
+        [int]$g206Metrics.binding_recovery_attempted_targets -ne [int]$bindingRecoveryMeasured.attempted.targets -or
+        [int]$g206Metrics.binding_recovery_attempted_edges -ne [int]$bindingRecoveryMeasured.attempted.candidate_edges -or
+        [int]$g206Metrics.binding_recovery_successful_targets -ne [int]$bindingRecoveryMeasured.successful.targets -or
+        [int]$g206Metrics.binding_recovery_successful_edges -ne [int]$bindingRecoveryMeasured.successful.candidate_edges) {
         throw 'P2-20 A.7/A.8 binding diagnosis or recovery cross-proof drifted.'
     }
     $staticMeshPrefixBinding = $report.input_bindings.static_mesh_payload_section_prefix
@@ -297,6 +305,9 @@ try {
         'Data\Inventory\p2-20a-static-mesh-payload-section-prefix.json'
     $staticMeshPrefixDetail = Join-Path $root `
         'Data\Exports\P2-20\p2-20a-static-mesh-payload-section-prefix.jsonl'
+    $staticMeshPrefixDocument = Get-Content -LiteralPath $staticMeshPrefixReport `
+        -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String
+    $staticMeshBlockers = $staticMeshPrefixDocument.preserved_blockers
     if ($staticMeshPrefixBinding.task_id -ne 'P2-20A' -or
         $staticMeshPrefixBinding.criterion_id -ne 'G2-06' -or
         $staticMeshPrefixBinding.evidence_revision -ne 'P2-20A.12' -or
@@ -333,11 +344,31 @@ try {
         $g206Metrics.static_mesh_prefix_adapter_applied -ne $false -or
         $g206Metrics.static_mesh_prefix_authority_state_changed -ne $false -or
         $g206Metrics.static_mesh_prefix_recovery_applied -ne $false -or
-        [int]$g206Metrics.static_mesh_prefix_preserved_ambiguous_targets -ne 189 -or
-        [int]$g206Metrics.static_mesh_prefix_preserved_ambiguous_edges -ne 546 -or
-        [int]$g206Metrics.static_mesh_prefix_preserved_unresolved_targets -ne 12 -or
-        [int]$g206Metrics.static_mesh_prefix_preserved_unresolved_edges -ne 15) {
+        [int]$g206Metrics.static_mesh_prefix_preserved_ambiguous_targets -ne
+            [int]$staticMeshBlockers.asset_effective_ambiguous_targets -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_ambiguous_edges -ne
+            [int]$staticMeshBlockers.asset_effective_ambiguous_edges -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_unresolved_targets -ne
+            [int]$staticMeshBlockers.asset_effective_unresolved_targets -or
+        [int]$g206Metrics.static_mesh_prefix_preserved_unresolved_edges -ne
+            [int]$staticMeshBlockers.asset_effective_unresolved_edges -or
+        [int]$staticMeshBlockers.asset_effective_ambiguous_targets -ne
+            [int]$descriptorReconciled.ambiguous_targets -or
+        [int]$staticMeshBlockers.asset_effective_ambiguous_edges -ne
+            [int]$descriptorReconciled.ambiguous_edges -or
+        [int]$staticMeshBlockers.asset_effective_unresolved_targets -ne
+            [int]$descriptorReconciled.unresolved_targets -or
+        [int]$staticMeshBlockers.asset_effective_unresolved_edges -ne
+            [int]$descriptorReconciled.unresolved_edges -or
+        [int]$staticMeshBlockers.asset_effective_unresolved_targets -ne
+            [int]$bindingFailureEffective.unresolved_targets -or
+        [int]$staticMeshBlockers.asset_effective_unresolved_edges -ne
+            [int]$bindingFailureEffective.unresolved_edges) {
         throw 'P2-20 A.12 prefix proof drifted or crossed its authority boundary.'
+    }
+    if (-not (Test-G2QtxDeclaredMipPrefixBinding $report `
+                (Get-Content -LiteralPath $policyPath -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100 -DateKind String) $root)) {
+        throw 'P2-20 A.13 QTX prefix proof drifted or crossed its authority boundary.'
     }
     $sourceFiles = @(Get-ChildItem -LiteralPath $moduleRoot -Recurse -File |
         Where-Object { $_.Extension -in @('.ps1', '.py') } | Sort-Object FullName)

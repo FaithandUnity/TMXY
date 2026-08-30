@@ -43,9 +43,11 @@ references, unknown property names and values, floating-point bits, and field or
 not apply Unicode case folding, locale-sensitive mapping, path normalization, descriptor-field
 normalization, first-candidate selection, representative selection, or a coarse-equivalence proxy.
 
-The reconciled full workset therefore remains 21,494 targets / 39,351 edges: 21,460 / 39,297
-resolved, 15 / 30 ambiguous, 19 / 24 unresolved, and zero unknown. G2 remains 7 of 9 criteria
-satisfied with two blocked; P3 remains unauthorized.
+The identity-normalization slice retains all 15 / 30 targets and edges in its ambiguous diagnostic
+scope. It separately binds the current P2-20A.4 reconciled full workset rather than projecting its
+subset as the global result: 21,494 targets / 39,351 edges, with 21,299 / 38,796 resolved,
+189 / 546 ambiguous, 6 / 9 unresolved, and zero unknown. G2 remains 7 of 9 criteria satisfied with
+two blocked; P3 remains unauthorized.
 
 ## Output and disclosure contract
 

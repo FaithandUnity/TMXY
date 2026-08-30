@@ -28,7 +28,7 @@
         "body_sha256": {"$ref": "#/$defs/sha256"},
         "descriptor_semantic_sha256": {"$ref": "#/$defs/sha256"},
         "attempted": {"type": "boolean"},
-        "recovery_kind": {"type": ["string", "null"], "enum": [null, "qtx_complete_mip_chain", "anim_payload_frame_counts"]},
+        "recovery_kind": {"type": ["string", "null"], "enum": [null, "qtx_complete_mip_chain", "qtx_declared_mip_payload_prefix", "anim_payload_frame_counts"]},
         "strict_error_code": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
         "effective_binding": {"enum": ["PASS", "REJECTED"]},
         "recovery_applied": {"type": "boolean"},
@@ -39,17 +39,104 @@
             {
               "type": "object",
               "additionalProperties": false,
-              "required": ["stored_explicit", "stored_equals_declared", "effective_less_than_declared", "unique_complete_prefix"],
+              "required": ["stored_explicit", "stored_equals_declared", "effective_less_than_declared", "unique_complete_prefix", "declared_payload_prefix"],
               "properties": {
                 "stored_explicit": {"const": true},
                 "stored_equals_declared": {"const": true},
-                "effective_less_than_declared": {"const": true},
-                "unique_complete_prefix": {"const": true}
-              }
+                "effective_less_than_declared": {"type": "boolean"},
+                "unique_complete_prefix": {"const": true},
+                "declared_payload_prefix": {"type": "boolean"}
+              },
+              "oneOf": [
+                {
+                  "properties": {
+                    "effective_less_than_declared": {"const": true},
+                    "declared_payload_prefix": {"const": false}
+                  }
+                },
+                {
+                  "properties": {
+                    "effective_less_than_declared": {"const": false},
+                    "declared_payload_prefix": {"const": true}
+                  }
+                }
+              ]
             }
           ]
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"recovery_kind": {"const": "qtx_complete_mip_chain"}},
+            "required": ["recovery_kind"]
+          },
+          "then": {
+            "properties": {
+              "effective_binding": {"const": "PASS"},
+              "recovery_applied": {"const": true},
+              "effective_semantic_sha256": {"$ref": "#/$defs/sha256"},
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {
+                  "effective_less_than_declared": {"const": true},
+                  "declared_payload_prefix": {"const": false}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {"recovery_kind": {"const": "qtx_declared_mip_payload_prefix"}},
+            "required": ["recovery_kind"]
+          },
+          "then": {
+            "properties": {
+              "effective_binding": {"const": "PASS"},
+              "recovery_applied": {"const": true},
+              "effective_semantic_sha256": {"$ref": "#/$defs/sha256"},
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {
+                  "effective_less_than_declared": {"const": false},
+                  "declared_payload_prefix": {"const": true}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {"effective_less_than_declared": {"const": true}},
+                "required": ["effective_less_than_declared"]
+              }
+            },
+            "required": ["qtx_recovery_contract"]
+          },
+          "then": {
+            "properties": {"recovery_kind": {"const": "qtx_complete_mip_chain"}}
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "qtx_recovery_contract": {
+                "type": "object",
+                "properties": {"declared_payload_prefix": {"const": true}},
+                "required": ["declared_payload_prefix"]
+              }
+            },
+            "required": ["qtx_recovery_contract"]
+          },
+          "then": {
+            "properties": {"recovery_kind": {"const": "qtx_declared_mip_payload_prefix"}}
+          }
+        }
+      ]
     }
   }
 }

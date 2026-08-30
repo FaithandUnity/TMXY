@@ -75,7 +75,7 @@ def build(args: argparse.Namespace) -> dict[str, object]:
             closure["scope_complete"] is False, "Incomplete scope was incorrectly closed")
     require(closure["asset_binding"]["reachable_assets"] == 21494 and
             closure["asset_binding"]["ambiguous_targets"] == 189 and
-            closure["asset_binding"]["unresolved_targets"] == 12 and
+            closure["asset_binding"]["unresolved_targets"] == 6 and
             closure["asset_binding"]["unknown_targets"] == 0 and
             closure["asset_binding"]["first_candidate_selection_used"] is False,
             "Reachable asset binding evidence is incomplete or heuristic")

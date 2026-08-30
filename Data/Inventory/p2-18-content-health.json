@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-30T09:03:50.1833793+00:00",
+  "captured_utc": "2026-08-30T15:29:04.7099421+00:00",
   "task_id": "P2-18",
   "result": "PASS",
   "task_status": "COMPLETE",
@@ -8,7 +8,7 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "completed_tasks": 17,
-    "binding_sha256": "9b4c55a455118a734fd0453f3df47199b0008690cb1e7a0a6815a94654fefa6d",
+    "binding_sha256": "2ba21d70598c74e2c332635060fd9b5be3d8e66d45f103f6bd5546f19a9cfa81",
     "inputs": [
       {
         "path": "Data/Inventory/p2-01-package-inventory.json",
@@ -79,7 +79,7 @@
       {
         "path": "Data/Inventory/p2-12-full-asset-inventory.json",
         "result": "PASS",
-        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244",
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c",
         "task_id": "P2-12"
       },
       {
@@ -103,7 +103,7 @@
       {
         "path": "Data/Inventory/p2-16-conversion-cache.json",
         "result": "PASS",
-        "sha256": "8535cdc601cb542376807a35230b75b9e1c098a28a8b41da6e915cfac5ab97e4",
+        "sha256": "36dd4a2d78246401f2a0ebc2618c00a7555e4a1b064cdc4c28ceb9af4c7b8e6c",
         "task_id": "P2-16"
       },
       {
@@ -120,14 +120,14 @@
       "tracked": true,
       "bytes": 14205,
       "lines": 448,
-      "sha256": "8744d676327909e05b027ddd2a00a9b64c07b23d26103b09b3035d8da219d1f6"
+      "sha256": "28c4e79592527ef1f3007761539c36cb02a66f910d040e9a6fa88b5f1c90cb40"
     },
     "markdown": {
       "path": "Data/Reports/p2-18-content-health-report.md",
       "tracked": true,
       "bytes": 2419,
       "lines": 48,
-      "sha256": "1306cb77ea8132807726a8c1d509c483bb31e893ebf03f09662d01612a41b348"
+      "sha256": "acfa109b304848be72beed56cbd3fb7d24856d7f15ed3fe5c683e745bd623fc6"
     }
   },
   "summary": {

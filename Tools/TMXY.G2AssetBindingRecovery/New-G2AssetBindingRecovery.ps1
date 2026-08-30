@@ -31,6 +31,11 @@ function Copy-Output([string]$Source, [string]$Target) {
 
 try {
     $generator = Join-Path $root 'Tools\TMXY.G2AssetBindingRecovery\g2_asset_binding_recovery.py'
+    $basePlanContract = Join-Path $root `
+        'Contracts\data-schema\g2-asset-binding-recovery-base-plan-v1.tsv'
+    if (-not (Test-Path -LiteralPath $basePlanContract -PathType Leaf)) {
+        throw 'P2-20A.8 frozen base-plan contract is missing.'
+    }
     $lock = Get-Content -LiteralPath (Join-Path $root 'Data\Toolchain\toolchain.lock.json') `
         -Raw -Encoding UTF8 | ConvertFrom-Json -Depth 100
     $builder = [string]$lock.backend_toolchain.container_image_reference
@@ -42,6 +47,7 @@ try {
     }
     $targets = [ordered]@{
         attempt = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-recovery-eligible-attempts.tsv'
+        effective = Join-Path $root 'Data\Exports\P2-20\p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv'
         prepare = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-recovery-prepare.json'
         success = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-recovery-successes.tsv'
         detail = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-binding-recovery.jsonl'
@@ -64,13 +70,17 @@ try {
         $arguments = $isolation + @('python3',
             '/workspace/Tools/TMXY.G2AssetBindingRecovery/g2_asset_binding_recovery.py',
             'prepare', '--root', '/workspace', '--attempt-tsv',
-            "/output/$([IO.Path]::GetFileName($generated.attempt))", '--prepare-manifest',
+            "/output/$([IO.Path]::GetFileName($generated.attempt))", '--base-plan-contract',
+            '/workspace/Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv',
+            '--prepare-manifest',
             "/output/$([IO.Path]::GetFileName($generated.prepare))")
         $text = & $docker @arguments
         if ($LASTEXITCODE -ne 0) { throw 'P2-20A.8 preparation failed.' }
         $summary = $text | ConvertFrom-Json -Depth 20
         if ($summary.result -ne 'PASS' -or $summary.meaning -ne 'UPPER_BOUND_ATTEMPT_ONLY' -or
-            [int]$summary.targets -ne 17 -or [int]$summary.candidate_edges -ne 21) {
+            [int]$summary.targets -ne 17 -or [int]$summary.candidate_edges -ne 21 -or
+            $summary.attempt_matches_base_plan_contract -ne $true -or
+            [string]$summary.base_plan_contract_sha256 -cne (Get-Sha256 $basePlanContract)) {
             throw 'P2-20A.8 eligible-attempt upper bound drifted.'
         }
         foreach ($name in @('attempt', 'prepare')) {
@@ -86,8 +96,9 @@ try {
         return
     }
 
-    if (-not (Test-Path -LiteralPath $targets.attempt -PathType Leaf)) {
-        throw 'Run P2-20A.8 Prepare before Finalize.'
+    if (-not (Test-Path -LiteralPath $targets.attempt -PathType Leaf) -or
+        -not (Test-Path -LiteralPath $targets.effective -PathType Leaf)) {
+        throw 'Run P2-20A.8 Prepare and P2-20A.13 before Finalize.'
     }
     $a4Detail = Join-Path $root 'Data\Exports\P2-20\p2-20a-asset-descriptor-diagnostics.jsonl'
     $captured = @()
@@ -103,6 +114,8 @@ try {
         '/workspace/Tools/TMXY.G2AssetBindingRecovery/g2_asset_binding_recovery.py',
         'finalize', '--root', '/workspace',
         '--attempt-tsv', '/workspace/Data/Exports/P2-20/p2-20a-asset-binding-recovery-eligible-attempts.tsv',
+        '--base-plan-contract', '/workspace/Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv',
+        '--effective-plan-tsv', '/workspace/Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv',
         '--a4-effective-detail', '/workspace/Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl',
         '--success-tsv', "/output/$([IO.Path]::GetFileName($generated.success))",
         '--detail-output', "/output/$([IO.Path]::GetFileName($generated.detail))",
@@ -113,7 +126,11 @@ try {
     if ($LASTEXITCODE -ne 0) { throw 'P2-20A.8 finalization failed.' }
     $summary = $text | ConvertFrom-Json -Depth 100
     if ($summary.result -ne 'PASS' -or $summary.task_status -ne 'BLOCKED' -or
-        [int]$summary.attempted.candidate_edges -ne 21) {
+        [int]$summary.attempted.candidate_edges -ne 21 -or
+        [int]$summary.successful.targets -ne 13 -or
+        [int]$summary.successful.candidate_edges -ne 15 -or
+        [int]$summary.effective_resolution.unresolved.targets -ne 6 -or
+        [int]$summary.effective_resolution.unresolved.candidate_edges -ne 9) {
         throw 'P2-20A.8 cross-proof summary drifted.'
     }
     foreach ($name in @('success', 'detail', 'json', 'markdown', 'evidence')) {

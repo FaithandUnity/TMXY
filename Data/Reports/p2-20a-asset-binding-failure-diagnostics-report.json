@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.7",
-  "captured_utc": "2026-08-30T09:14:47.237472Z",
+  "captured_utc": "2026-08-30T15:36:04.460217Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "source_build": "qy-3.0.0.413",
@@ -14,39 +14,39 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "ae79050e558db5719a081dc0b4811876f53a666bbf1a501814806e6f89bb88d6",
+    "aggregate_sha256": "5a973fabd5e6fbed383466945c5e6927ee0d601eb682580d7b6c4c98b703df3f",
     "entries": [
       {
         "role": "a4_report",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
         "tracked": true,
-        "bytes": 5798,
+        "bytes": 5807,
         "lines": 193,
-        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
       },
       {
         "role": "a4_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 13819743,
+        "bytes": 13820115,
         "lines": 3651,
-        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
+        "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
       },
       {
         "role": "a4_evidence",
         "path": "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json",
         "tracked": true,
-        "bytes": 11011,
-        "lines": 340,
-        "sha256": "73480b4a26c0cfe8ed4e0684839f22d08cf0d55a98e371624565cd77c839e24c"
+        "bytes": 13467,
+        "lines": 410,
+        "sha256": "0ae236c4ea5e8c96fc2ce3b23b8fbbc26da93859ab3c97adc0118fe2f23be671"
       },
       {
         "role": "a4_policy",
         "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
         "tracked": true,
-        "bytes": 3477,
-        "lines": 86,
-        "sha256": "461d65c4cc7e7f3ce61651362814c85c92ec4e29225ed8a2aecb5a5335a6974b"
+        "bytes": 4000,
+        "lines": 98,
+        "sha256": "af3c5fb29e583c2eab1ca0bae61bfef2af19abed146a6b2bf972027ecdaf09ab"
       },
       {
         "role": "p2_03_evidence",
@@ -70,7 +70,7 @@
         "tracked": true,
         "bytes": 6306,
         "lines": 189,
-        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244"
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c"
       },
       {
         "role": "p2_12_catalog",
@@ -86,31 +86,31 @@
         "tracked": true,
         "bytes": 5442,
         "lines": 179,
-        "sha256": "41354fd69bea8898c56da7a1fbe045026c250749c60b2987510905ba4215db5d"
+        "sha256": "bdd8802c9f6c5304bdab3183f606923005145c87daf5f4f3208edf14b4cc7cb9"
       },
       {
         "role": "a6_report",
         "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
         "tracked": true,
-        "bytes": 6207,
+        "bytes": 6205,
         "lines": 191,
-        "sha256": "4742d3211763b4b02a3ceafdf92ee2c7367398e27b5048e6a6e28ed13be4ae68"
+        "sha256": "4969171ea5881e61df9c991ff91eab5c35c27bce02fad7d6e313b3dda5a57688"
       },
       {
         "role": "policy",
         "path": "Contracts/data-schema/g2-asset-binding-failure-diagnostics-policy-v1.json",
         "tracked": true,
-        "bytes": 5481,
+        "bytes": 5479,
         "lines": 123,
-        "sha256": "3af50d219939788564d988b973aeb37fa954d628594e018118feba1300bed23e"
+        "sha256": "10a11af9adcf665ea9200572e5e8aa9d7cca425caaac9d8a736c8386ae22f66c"
       },
       {
         "role": "schema",
         "path": "Contracts/data-schema/g2-asset-binding-failure-diagnostics-v1.schema.json",
         "tracked": true,
-        "bytes": 13618,
+        "bytes": 13615,
         "lines": 247,
-        "sha256": "847a033bcc90bacf2345b9af082bf16e21420661aa85f45733ebcd2770a54388"
+        "sha256": "dce93ad4926c54573cde014de334aac8dc53b2fbc140dc7ed599ce4e5155216d"
       },
       {
         "role": "detail_schema",
@@ -125,9 +125,9 @@
   "detail_export": {
     "path": "Data/Exports/P2-20/p2-20a-asset-binding-failure-diagnostics.jsonl",
     "tracked": false,
-    "bytes": 21229,
+    "bytes": 21217,
     "lines": 19,
-    "sha256": "6e6a1ac704c1344f53b82762e5a5c7d2d72541b2bace2ed514de890e9ac2fc9f"
+    "sha256": "01c9cf6bcf5b9f0a224d4e91111d3947c972e6727ae348584df87b9eb8f0dc7d"
   },
   "scope": {
     "source_revision": "P2-20A.4",
@@ -202,12 +202,12 @@
       }
     ],
     "effective": {
-      "resolved_targets": 7,
-      "resolved_edges": 9,
+      "resolved_targets": 13,
+      "resolved_edges": 15,
       "ambiguous_targets": 0,
       "ambiguous_edges": 0,
-      "unresolved_targets": 12,
-      "unresolved_edges": 15
+      "unresolved_targets": 6,
+      "unresolved_edges": 9
     }
   },
   "classification_controls": {
@@ -243,8 +243,8 @@
     "asset_effective_ambiguous_edges": 546,
     "strict_binding_failure_targets": 19,
     "strict_binding_failure_edges": 24,
-    "asset_effective_unresolved_targets": 12,
-    "asset_effective_unresolved_edges": 15,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,
@@ -254,7 +254,7 @@
   "blockers": [
     {
       "reason_code": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN",
-      "count": 12
+      "count": 6
     },
     {
       "reason_code": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN",
@@ -282,8 +282,8 @@
     "g2_decision": "BLOCKED"
   },
   "contracts": {
-    "policy_sha256": "3af50d219939788564d988b973aeb37fa954d628594e018118feba1300bed23e",
-    "schema_sha256": "847a033bcc90bacf2345b9af082bf16e21420661aa85f45733ebcd2770a54388",
+    "policy_sha256": "10a11af9adcf665ea9200572e5e8aa9d7cca425caaac9d8a736c8386ae22f66c",
+    "schema_sha256": "dce93ad4926c54573cde014de334aac8dc53b2fbc140dc7ed599ce4e5155216d",
     "detail_schema_sha256": "76e8e5a8eee05cc0e10193e3f6a17183778b1049693d1b6c2651b456ab9ebbe5"
   },
   "disclosure": {

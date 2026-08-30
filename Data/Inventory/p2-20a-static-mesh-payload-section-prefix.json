@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.12",
-  "captured_utc": "2026-08-30T09:17:32.968557Z",
+  "captured_utc": "2026-08-30T15:39:45.959560Z",
   "result": "BLOCKED",
   "review_execution_result": "PASS_DIAGNOSTIC",
   "task_status": "BLOCKED",
@@ -26,16 +26,16 @@
   "report": {
     "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.json",
     "tracked": true,
-    "bytes": 10449,
-    "lines": 300,
-    "sha256": "25759767741372f2921c1cfa5b2c2d73f5290a7aa34668a69ee5fc5273b92aaa"
+    "bytes": 10528,
+    "lines": 302,
+    "sha256": "ea9b0d47508ddd2f0c15fc788d980eb08fc6c939db320fd4479bdffec6feb482"
   },
   "report_markdown": {
     "path": "Data/Reports/p2-20a-static-mesh-payload-section-prefix-report.md",
     "tracked": true,
-    "bytes": 650,
+    "bytes": 737,
     "lines": 9,
-    "sha256": "3131ef356a9ff4c5773c3b70410cc538f26f6fa2b9705e8775489ef368864b64"
+    "sha256": "0ab9e6d9df1a62b461b87c339c4ff9ce041482d4f460a981296c317921da807d"
   },
   "outputs": {
     "detail_export": {
@@ -47,8 +47,8 @@
     }
   },
   "contracts": {
-    "policy_sha256": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e",
-    "schema_sha256": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e",
+    "policy_sha256": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55",
+    "schema_sha256": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a",
     "detail_schema_sha256": "6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8"
   },
   "implementation": {
@@ -65,9 +65,9 @@
         "role": "implementation_02",
         "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/README.md",
         "tracked": true,
-        "bytes": 2018,
-        "lines": 38,
-        "sha256": "2a47f0ba49ff94ec46958b2cb1f214c8c6e887bef2fc4f8c95ff22db3a5cbac5"
+        "bytes": 2339,
+        "lines": 41,
+        "sha256": "a86634ea92809708fdcc9e3e1a22238c12f44d9a1925eab1593bf909c04c2b0c"
       },
       {
         "role": "implementation_03",
@@ -81,17 +81,17 @@
         "role": "implementation_04",
         "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/g2_static_mesh_payload_section_prefix.py",
         "tracked": true,
-        "bytes": 21871,
-        "lines": 386,
-        "sha256": "c8177dd8ec64966df862894fc5cdca6489eb11095b0c97148f5ba9612bc883a2"
+        "bytes": 22120,
+        "lines": 391,
+        "sha256": "33ec9e36fa74975f7c22d4d00d54b13f11baac8fa89233069b948721cfc16eb1"
       },
       {
         "role": "implementation_05",
         "path": "Tools/TMXY.G2StaticMeshPayloadSectionPrefix/static_mesh_prefix_common.py",
         "tracked": true,
-        "bytes": 13973,
-        "lines": 272,
-        "sha256": "b107fee9305adbbb79280dded4382d5c1da065e02d4999fe6b003cbab91413b9"
+        "bytes": 16661,
+        "lines": 314,
+        "sha256": "9578ca8c3d95cd985ae04c47c626724659701eedd40fd6b35055bf34bac07e45"
       },
       {
         "role": "implementation_06",
@@ -105,17 +105,17 @@
         "role": "implementation_07",
         "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-policy-v1.json",
         "tracked": true,
-        "bytes": 4072,
-        "lines": 103,
-        "sha256": "4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e"
+        "bytes": 3660,
+        "lines": 91,
+        "sha256": "94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55"
       },
       {
         "role": "implementation_08",
         "path": "Contracts/data-schema/g2-static-mesh-payload-section-prefix-v1.schema.json",
         "tracked": true,
-        "bytes": 11681,
-        "lines": 272,
-        "sha256": "077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e"
+        "bytes": 12152,
+        "lines": 276,
+        "sha256": "c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a"
       },
       {
         "role": "implementation_09",
@@ -129,17 +129,17 @@
         "role": "implementation_10",
         "path": "Docs/Formats/G2-STATIC-MESH-PAYLOAD-SECTION-PREFIX.md",
         "tracked": true,
-        "bytes": 2531,
-        "lines": 50,
-        "sha256": "17e251e01217a38150a35870a70570a8192a5882441bffbf24383610ba76b812"
+        "bytes": 2810,
+        "lines": 53,
+        "sha256": "9b6c38958b2abfa1ad47a3d153d452cd30728058f60b11f40494603d91c5ff38"
       },
       {
         "role": "implementation_11",
         "path": "Tests/Contract/Test-G2StaticMeshPayloadSectionPrefix.ps1",
         "tracked": true,
-        "bytes": 22983,
-        "lines": 398,
-        "sha256": "7fee2de802cb16a583dea10600d6e3e3ec566bf883f30d1492b17bd0402f5307"
+        "bytes": 25022,
+        "lines": 432,
+        "sha256": "e7238f48a76f2ee61dcedf16b75af4ca43ff3179fd65758608b8631227b069e2"
       },
       {
         "role": "implementation_12",
@@ -206,7 +206,7 @@
         "sha256": "17b25df32d5934783db11d30409360556dd98947d1b8655cea29d9c9a5f09918"
       }
     ],
-    "aggregate_sha256": "f5be48e1f349d2d94447e52803c7e6474f8272f3411445efdabd15134556bb23",
+    "aggregate_sha256": "ae28108e336b4f3588a6445428e3b1db61ea74d9565bb86b9ffb761652e83f9d",
     "generator_self_test_assertions": 20,
     "probe_startup_self_tests": true
   },
@@ -246,8 +246,10 @@
     "identity_semantic_ambiguous_edges": 30,
     "asset_effective_ambiguous_targets": 189,
     "asset_effective_ambiguous_edges": 546,
-    "asset_effective_unresolved_targets": 12,
-    "asset_effective_unresolved_edges": 15,
+    "strict_binding_failure_targets": 19,
+    "strict_binding_failure_edges": 24,
+    "asset_effective_unresolved_targets": 6,
+    "asset_effective_unresolved_edges": 9,
     "auxiliary_nonterminal_instances": 212,
     "conditional_required_missing": 29,
     "migration_pending": 1359,

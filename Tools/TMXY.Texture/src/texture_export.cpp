@@ -90,6 +90,11 @@ std::string build_texture_json(const QtxTextureView& texture, const TextureJsonN
            << "  \"alpha_encoding\": " << json_string(to_string(texture.alpha_encoding)) << ",\n"
            << "  \"alpha_coverage\": " << json_string(to_string(texture.alpha_coverage)) << ",\n"
            << "  \"payload_size\": " << texture.payload_size << ",\n"
+           << "  \"input_payload_bytes\": " << texture.input_payload_bytes << ",\n"
+           << "  \"consumed_payload_bytes\": " << texture.consumed_payload_bytes << ",\n"
+           << "  \"ignored_payload_bytes\": " << texture.ignored_payload_bytes << ",\n"
+           << "  \"payload_extent_basis\": " << json_string(to_string(texture.payload_extent_basis))
+           << ",\n"
            << "  \"unknown_property_count\": " << texture.descriptor.unknown_properties.size()
            << ",\n"
            << "  \"mips\": [\n";

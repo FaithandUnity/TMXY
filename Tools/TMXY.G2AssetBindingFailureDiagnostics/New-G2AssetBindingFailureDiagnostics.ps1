@@ -177,12 +177,12 @@ try {
     if ($summary.result -ne 'PASS_DIAGNOSTIC' -or $summary.task_status -ne 'BLOCKED' -or
         [int]$summary.targets -ne 19 -or [int]$summary.candidate_edges -ne 24 -or
         [int]$summary.typed_error_edges -ne 24 -or [int]$summary.unclassified_error_edges -ne 0 -or
-        [int]$summary.effective_resolved_targets -ne 7 -or
-        [int]$summary.effective_resolved_edges -ne 9 -or
+        [int]$summary.effective_resolved_targets -ne 13 -or
+        [int]$summary.effective_resolved_edges -ne 15 -or
         [int]$summary.effective_ambiguous_targets -ne 0 -or
         [int]$summary.effective_ambiguous_edges -ne 0 -or
-        [int]$summary.effective_unresolved_targets -ne 12 -or
-        [int]$summary.effective_unresolved_edges -ne 15 -or
+        [int]$summary.effective_unresolved_targets -ne 6 -or
+        [int]$summary.effective_unresolved_edges -ne 9 -or
         [int]$summary.candidate_selections -ne 0 -or $summary.g2_06_satisfied -ne $false -or
         $summary.p3_authorized -ne $false -or $self.result -ne 'PASS' -or
         [int]$self.assertions -lt 10) {
@@ -299,12 +299,12 @@ try {
         candidate_edges = 24
         typed_error_edges = 24
         unclassified_error_edges = 0
-        effective_resolved_targets = 7
-        effective_resolved_edges = 9
+        effective_resolved_targets = 13
+        effective_resolved_edges = 15
         effective_ambiguous_targets = 0
         effective_ambiguous_edges = 0
-        effective_unresolved_targets = 12
-        effective_unresolved_edges = 15
+        effective_unresolved_targets = 6
+        effective_unresolved_edges = 9
         candidate_selections = 0
         automatic_resolutions = 0
         owner_dispositions = 0

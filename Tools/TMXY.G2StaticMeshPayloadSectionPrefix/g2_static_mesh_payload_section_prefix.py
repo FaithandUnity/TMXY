@@ -242,7 +242,7 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
             "recovery_applied": False, "machine_can_select_candidate": False,
             "machine_can_approve_disposition": False, "repair_or_write": False,
             "delete_or_no_ref": False, "owner_approvals": 0, "verified_resolutions": 0},
-        "preserved_blockers": policy["preserved_blockers"],
+        "preserved_blockers": context["blockers"],
         "contracts": {"policy_sha256": sha256_file(context["paths"]["policy"]),
             "schema_sha256": sha256_file(context["paths"]["schema"]),
             "detail_schema_sha256": sha256_file(context["paths"]["detail_schema"])},
@@ -257,7 +257,12 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         "- Strict production binding: 2 `material_slot_mismatch` rejections\n"
         "- Explicit prefix API: 2 passes with 2 declared slots / 1 nonempty payload section / 1 ignored trailing slot\n"
         "- Semantic variants: body 1, descriptor 1, strict 1, prefix 1\n\n"
-        "This is a hash-locked `SOURCE_DERIVED` diagnostic. No legacy binary was executed, runtime parity was not proven, and no adapter, recovery, selection, disposition, repair, or authority change occurred. A.4 remains authoritative; G2-06 and P3 remain blocked.\n")
+        "This is a hash-locked `SOURCE_DERIVED` diagnostic. No legacy binary was executed, "
+        "runtime parity was not proven, and no adapter, recovery, selection, disposition, repair, "
+        "or authority change occurred. A.4 remains authoritative; the current A.4/A.7/A.8 chain "
+        f"reconciles to {context['blockers']['asset_effective_unresolved_targets']} unresolved "
+        f"targets / {context['blockers']['asset_effective_unresolved_edges']} unresolved edges; "
+        "G2-06 and P3 remain blocked.\n")
     evidence = {
         "schema_version": 1, "evidence_revision": "P2-20A.12",
         "captured_utc": report["captured_utc"], "result": "BLOCKED",

@@ -100,6 +100,9 @@ $evidencePath = Join-Path $root 'Data\Inventory\p2-20a-asset-identity-normalizat
     $detailPath = Join-Path $root "Data\Exports\P2-20\$detailName"
     $reportText = Get-Content -LiteralPath $reportPath -Raw -Encoding UTF8
     $report = Copy-Report $reportText
+    $a4Report = Get-Content -LiteralPath (Join-Path $root `
+        'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json') -Raw -Encoding UTF8 |
+        ConvertFrom-Json -Depth 100 -DateKind String
     $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 |
         ConvertFrom-Json -Depth 100 -DateKind String
     $policy = Get-Content -LiteralPath $policyPath -Raw -Encoding UTF8 |
@@ -117,6 +120,20 @@ $evidencePath = Join-Path $root 'Data\Inventory\p2-20a-asset-identity-normalizat
                     ($report.measured | ConvertTo-Json -Depth 100 -Compress)),
                 [Text.Json.Nodes.JsonNode]::Parse(
                     ($policy.expected_measured | ConvertTo-Json -Depth 100 -Compress))))
+    Add-Assertion 'Reconciled full workset is derived from current A.4' `
+        ([Text.Json.Nodes.JsonNode]::DeepEquals(
+                [Text.Json.Nodes.JsonNode]::Parse(
+                    ($report.measured.reconciled_full_workset |
+                        ConvertTo-Json -Depth 100 -Compress)),
+                [Text.Json.Nodes.JsonNode]::Parse(
+                    ($a4Report.measured.reconciled_full_workset |
+                        ConvertTo-Json -Depth 100 -Compress))) -and
+            [int]$report.measured.reconciled_full_workset.resolved_targets -eq 21299 -and
+            [int]$report.measured.reconciled_full_workset.resolved_edges -eq 38796 -and
+            [int]$report.measured.reconciled_full_workset.ambiguous_targets -eq 189 -and
+            [int]$report.measured.reconciled_full_workset.ambiguous_edges -eq 546 -and
+            [int]$report.measured.reconciled_full_workset.unresolved_targets -eq 6 -and
+            [int]$report.measured.reconciled_full_workset.unresolved_edges -eq 9)
     Add-Assertion 'Identity classification is measured without selection' `
         ([int]$report.measured.case_fold_collision_targets -eq 13 -and
             [int]$report.measured.case_fold_collision_edges -eq 26 -and

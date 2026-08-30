@@ -43,7 +43,8 @@ namespace
 [[nodiscard]] bool valid_kind(const std::string_view family, const std::string_view kind,
                               const std::string_view error) noexcept
 {
-    return (family == "qtx" && kind == "qtx_complete_mip_chain" &&
+    return (family == "qtx" &&
+            (kind == "qtx_complete_mip_chain" || kind == "qtx_declared_mip_payload_prefix") &&
             error == "payload_size_mismatch") ||
            (family == "anim" && kind == "anim_payload_frame_counts" &&
             error == "frame_count_mismatch");

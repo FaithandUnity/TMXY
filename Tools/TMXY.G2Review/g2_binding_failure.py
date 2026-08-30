@@ -37,12 +37,6 @@ EXPECTED_AUTHORITY = {
     "content_change_or_no_ref_requires_owner": True,
     "owner_records": 0, "approved_fixes": 0, "verified_resolutions": 0,
 }
-EXPECTED_BLOCKERS = [
-    {"reason_code": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN", "count": 12},
-    {"reason_code": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN", "count": 189},
-]
-
-
 def _line_count(path: Path) -> int:
     with path.open("rb") as stream:
         return sum(1 for _ in stream)
@@ -101,12 +95,18 @@ def bind_binding_failure_diagnostics(
                 "entries": entries}, "P2-20A.7 input bindings drifted")
 
     a4_report = load_json(resolve_inside(root, INPUTS[0][1]))
+    a4_measured = a4_report["measured"]
+    a4_failure = a4_measured["by_prior_resolution_basis"]["DESCRIPTOR_VALIDATION_FAILED"]
+    a4_full = a4_measured["reconciled_full_workset"]
     a4_detail = resolve_inside(root, INPUTS[1][1])
     a4_advertised = a4_report["detail_export"]
     require(a4_report.get("evidence_revision") == "P2-20A.4" and
             a4_report.get("diagnostic_scope_complete") is True and
-            a4_report["measured"]["strict_unresolved_targets"] == 19 and
-            a4_report["measured"]["strict_unresolved_edges"] == 24 and
+            a4_measured["strict_unresolved_targets"] == 19 and
+            a4_measured["strict_unresolved_edges"] == 24 and
+            a4_failure["targets"] == 19 and a4_failure["candidate_edges"] == 24 and
+            a4_failure["resolved"] + a4_failure["unresolved"] == 19 and
+            a4_failure["unresolved"] == a4_full["unresolved_targets"] and
             a4_advertised.get("path") == INPUTS[1][1] and
             a4_advertised.get("bytes") == a4_detail.stat().st_size and
             a4_advertised.get("lines") == _line_count(a4_detail) and
@@ -128,16 +128,29 @@ def bind_binding_failure_diagnostics(
         "candidate_selections": 0, "automatic_resolutions": 0, "owner_dispositions": 0,
         "by_family": a7_policy["scope"]["by_family"],
         "by_error": a7_policy["expected_error_counts"],
-        "effective": {"resolved_targets": 7, "resolved_edges": 9,
+        "effective": {"resolved_targets": a4_failure["resolved"],
+                      "resolved_edges": a4_failure["candidate_edges"] -
+                      a4_full["unresolved_edges"],
                       "ambiguous_targets": 0, "ambiguous_edges": 0,
-                      "unresolved_targets": 12, "unresolved_edges": 15},
+                      "unresolved_targets": a4_failure["unresolved"],
+                      "unresolved_edges": a4_full["unresolved_edges"]},
     }
+    expected_blockers = [
+        {"reason_code": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN",
+         "count": a4_failure["unresolved"]},
+        {"reason_code": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN",
+         "count": a4_full["ambiguous_targets"]},
+    ]
     require(diagnostic.get("scope") == a7_policy.get("scope") and
             measured == expected_measured and
             diagnostic.get("classification_controls") == a7_policy.get("controls") and
             diagnostic.get("authority_boundary") == EXPECTED_AUTHORITY and
             diagnostic.get("preserved_blockers") == a7_policy.get("preserved_blockers") and
-            diagnostic.get("blockers") == EXPECTED_BLOCKERS and
+            diagnostic["preserved_blockers"]["asset_effective_ambiguous_targets"] ==
+            a4_full["ambiguous_targets"] and
+            diagnostic["preserved_blockers"]["asset_effective_unresolved_targets"] ==
+            a4_full["unresolved_targets"] and
+            diagnostic.get("blockers") == expected_blockers and
             diagnostic.get("negative_contracts") == a7_policy.get("negative_contracts") and
             diagnostic.get("g2_projection") == {"criteria_total": 9, "satisfied": 7,
                                                  "blocked": 2, "g2_decision": "BLOCKED"},

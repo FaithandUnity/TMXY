@@ -57,7 +57,8 @@ def validate_candidate(candidate: dict[str, Any], require: Callable[[bool, str],
     require(isinstance(candidate["recovery_applied"], bool),
             "Recovery-applied flag is invalid")
     kind = candidate["recovery_kind"]
-    require(kind in {"none", "qtx_complete_mip_chain", "anim_payload_frame_counts"},
+    require(kind in {"none", "qtx_complete_mip_chain",
+                     "qtx_declared_mip_payload_prefix", "anim_payload_frame_counts"},
             "Recovery kind is invalid")
     if candidate["recovery_applied"]:
         require(candidate["binding"] == "REJECTED" and

@@ -5,11 +5,11 @@
 - Diagnostic scope: 3,651 targets / 12,764 candidate edges
 - Production-compatible candidates: 12,561
 - Production-rejected candidates: 203
-- Effective production-compatible candidates: 12,570
-- Verified recovery transitions: 9
-- Resolved targets: 3,450
+- Effective production-compatible candidates: 12,576
+- Verified recovery transitions: 15
+- Resolved targets: 3,456
 - Ambiguous targets: 189
-- Unresolved targets: 12
+- Unresolved targets: 6
 - Former divergent targets now resolved: 0
 - Former coarse-equivalent targets now ambiguous: 6
 

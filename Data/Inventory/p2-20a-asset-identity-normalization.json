@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "evidence_revision": "P2-20A.6",
-  "captured_utc": "2026-08-30T09:04:37Z",
+  "captured_utc": "2026-08-30T15:32:48Z",
   "task_id": "P2-20A",
   "criterion_id": "G2-06",
   "result": "BLOCKED",
@@ -13,31 +13,31 @@
   "g2_06_satisfied": false,
   "p3_authorized": false,
   "input_bindings": {
-    "aggregate_sha256": "1feab6ba57b3ea608c3a5afbdb2ffc5b8a62a5bc237dc45b0e3bad041fc24645",
+    "aggregate_sha256": "e0cfb31761d5e7ca0fd8f5053970082031b4928e3c82711efc645ddac1afcc80",
     "entries": [
       {
         "role": "a4_report",
         "path": "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json",
         "tracked": true,
-        "bytes": 5798,
+        "bytes": 5807,
         "lines": 193,
-        "sha256": "26380e3c26fcfaa8656471d21c981ba90756780a06f35c2f09d939fcfa8e58a2"
+        "sha256": "c50f0f787114afbd75539d3fd258445115e0043b27e4733653a31d6eefd2741e"
       },
       {
         "role": "a4_detail",
         "path": "Data/Exports/P2-20/p2-20a-asset-descriptor-diagnostics.jsonl",
         "tracked": false,
-        "bytes": 13819743,
+        "bytes": 13820115,
         "lines": 3651,
-        "sha256": "a42a9fb55e8bd205c90bebe98f31c2394c77654f43e28f832db39c7c1d76958d"
+        "sha256": "9461b501bf2914e5b0bfff2a85e1ab5f65476ad1dade29979bebbdbcf3b5a1aa"
       },
       {
         "role": "a4_policy",
         "path": "Contracts/data-schema/g2-asset-descriptor-diagnostics-policy-v1.json",
         "tracked": true,
-        "bytes": 3477,
-        "lines": 86,
-        "sha256": "461d65c4cc7e7f3ce61651362814c85c92ec4e29225ed8a2aecb5a5335a6974b"
+        "bytes": 4000,
+        "lines": 98,
+        "sha256": "af3c5fb29e583c2eab1ca0bae61bfef2af19abed146a6b2bf972027ecdaf09ab"
       },
       {
         "role": "p2_03_evidence",
@@ -59,17 +59,17 @@
         "role": "policy",
         "path": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
         "tracked": true,
-        "bytes": 3382,
+        "bytes": 3380,
         "lines": 102,
-        "sha256": "4aa44dc55dcdc0185de1ee36038711d628b699d4c60d1c0b84b12233b40790f8"
+        "sha256": "c605a80f230417536f698488c61475166b430263051dd644b4d5d2b60c9c4120"
       },
       {
         "role": "schema",
         "path": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
         "tracked": true,
-        "bytes": 12134,
+        "bytes": 12132,
         "lines": 238,
-        "sha256": "e739b4958345140a455401b151c0618a6761cc869a617a1930adc79c171058fe"
+        "sha256": "e19eddfd15ba501368d26899f1529f1b303d27c8e3316bdba0035becd13a7a1c"
       }
     ]
   },
@@ -95,22 +95,22 @@
       "ambiguous_edges": 546,
       "ambiguous_targets": 189,
       "candidate_edges": 39351,
-      "resolved_edges": 38790,
-      "resolved_targets": 21293,
+      "resolved_edges": 38796,
+      "resolved_targets": 21299,
       "targets": 21494,
       "unknown_edges": 0,
       "unknown_targets": 0,
-      "unresolved_edges": 15,
-      "unresolved_targets": 12
+      "unresolved_edges": 9,
+      "unresolved_targets": 6
     }
   },
   "outputs": {
     "report_json": {
       "path": "Data/Reports/p2-20a-asset-identity-normalization-report.json",
       "tracked": true,
-      "bytes": 6207,
+      "bytes": 6205,
       "lines": 191,
-      "sha256": "4742d3211763b4b02a3ceafdf92ee2c7367398e27b5048e6a6e28ed13be4ae68"
+      "sha256": "4969171ea5881e61df9c991ff91eab5c35c27bce02fad7d6e313b3dda5a57688"
     },
     "report_markdown": {
       "path": "Data/Reports/p2-20a-asset-identity-normalization-report.md",
@@ -129,17 +129,17 @@
   },
   "contracts": {
     "policy": "Contracts/data-schema/g2-asset-identity-normalization-policy-v1.json",
-    "policy_sha256": "4aa44dc55dcdc0185de1ee36038711d628b699d4c60d1c0b84b12233b40790f8",
+    "policy_sha256": "c605a80f230417536f698488c61475166b430263051dd644b4d5d2b60c9c4120",
     "schema": "Contracts/data-schema/g2-asset-identity-normalization-v1.schema.json",
-    "schema_sha256": "e739b4958345140a455401b151c0618a6761cc869a617a1930adc79c171058fe"
+    "schema_sha256": "e19eddfd15ba501368d26899f1529f1b303d27c8e3316bdba0035becd13a7a1c"
   },
   "implementation": {
     "source_files": 2,
-    "source_sha256": "2cd179938fd59f7d957d9c90b49ce0e8f711de801e768348ad939941fc502f67",
+    "source_sha256": "8c137f42fb754b1c78be36f5f7a01b0d329dfc1681a7ae4b8f9bf9ed13ddcbe3",
     "generator": "Tools/TMXY.G2AssetIdentityNormalization/identity_normalization.py",
-    "generator_sha256": "4d4a1deeb0cb056cfd1d289dffe4511a4dda178b19ac13e43a23ed376b1d7aeb",
+    "generator_sha256": "7ed50128967c386b5d8e60b49784665ee691396ef21d54af4b5c24f1fadf520f",
     "wrapper": "Tools/TMXY.G2AssetIdentityNormalization/New-G2AssetIdentityNormalization.ps1",
-    "wrapper_sha256": "6f65bfecb73e36d24066a2dbfea8d80ad1bfbaefa10f924caf017076a9f85176",
+    "wrapper_sha256": "777c6c3c318ee76978bfa085510d9a875c9d98f6d3396408db86cf27adc7bbb1",
     "self_test_assertions": 10
   },
   "builder": {
@@ -168,6 +168,6 @@
       "P2-20A-authoritative-binding-remediation",
       "P2-20-g2-rerun"
     ],
-    "detail": "Obtain authoritative dispositions for all 15 ambiguous and 19 unresolved targets; ASCII-lower identity collision alone cannot select a candidate."
+    "detail": "Obtain authoritative dispositions for all 189 ambiguous and 6 unresolved targets; ASCII-lower identity collision alone cannot select a candidate."
   }
 }

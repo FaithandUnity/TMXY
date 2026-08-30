@@ -2,6 +2,7 @@ add_executable(
     tmxy_g2_asset_descriptor_probe
     apps/asset_descriptor_probe_main.cpp
     apps/probe_output.cpp
+    apps/qtx_recovery.cpp
     apps/recovery_plan.cpp
     semantic_hash.cpp
     sha256.cpp

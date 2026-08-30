@@ -15,6 +15,7 @@ from g2_identity_normalization import bind_identity_normalization_safety
 from g2_binding_failure import bind_binding_failure_diagnostics
 from g2_binding_recovery import bind_binding_recovery
 from g2_static_mesh_prefix import bind_static_mesh_payload_section_prefix
+from g2_qtx_declared_mip_prefix import bind_qtx_declared_mip_payload_prefix
 from g2_migration import evaluate_migration_registry
 def load_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8-sig") as stream:
@@ -154,6 +155,10 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         root, policy, load_json, resolve_inside, sha256, require)
     evidence["P2-20A.12"] = prefix_report
     aggregate_lines.append(prefix_aggregate)
+    qtx_binding, qtx_report, qtx_aggregate = bind_qtx_declared_mip_payload_prefix(
+        root, policy, load_json, resolve_inside, sha256, require)
+    evidence["P2-20A.13"] = qtx_report
+    aggregate_lines.append(qtx_aggregate)
     remediation_spec = policy["remediation"]
     remediation_relative = remediation_spec["path"]
     remediation_path = resolve_inside(root, remediation_relative)
@@ -223,6 +228,7 @@ def bind_inputs(root: Path, policy: dict[str, Any]) -> tuple[dict[str, Any], dic
         "binding_failure_diagnostics": failure_binding,
         "binding_recovery": recovery_binding,
         "static_mesh_payload_section_prefix": prefix_binding,
+        "qtx_declared_mip_payload_prefix": qtx_binding,
         "remediation": remediation_binding,
         "quality": {
             "path": quality_relative,

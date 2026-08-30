@@ -1,0 +1,265 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tmxy.invalid/contracts/g2-qtx-declared-mip-payload-prefix-v1.schema.json",
+  "title": "P2-20A.13 QTX declared-mip payload-prefix evidence report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "evidence_revision", "captured_utc", "task_id", "criterion_id",
+    "result", "review_execution_result", "task_status", "completion_criteria_satisfied",
+    "diagnostic_scope_complete", "remediation_scope_complete", "g2_06_satisfied",
+    "p3_authorized", "proof_classification", "input_bindings", "detail_export",
+    "effective_recovery_plan", "legacy_source_provenance", "source_facts",
+    "production_contract", "scope", "measured", "observed_relation",
+    "authority_boundary", "preserved_blockers", "contracts", "disclosure"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "evidence_revision": {"const": "P2-20A.13"},
+    "captured_utc": {"type": "string", "format": "date-time"},
+    "task_id": {"const": "P2-20A"},
+    "criterion_id": {"const": "G2-06"},
+    "result": {"const": "BLOCKED"},
+    "review_execution_result": {"const": "PASS_DIAGNOSTIC"},
+    "task_status": {"const": "BLOCKED"},
+    "completion_criteria_satisfied": {"const": false},
+    "diagnostic_scope_complete": {"const": true},
+    "remediation_scope_complete": {"const": false},
+    "g2_06_satisfied": {"const": false},
+    "p3_authorized": {"const": false},
+    "proof_classification": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_basis", "legacy_binary_executed", "runtime_parity_proven"],
+      "properties": {
+        "source_basis": {"const": "SOURCE_DERIVED"},
+        "legacy_binary_executed": {"const": false},
+        "runtime_parity_proven": {"const": false}
+      }
+    },
+    "input_bindings": {"$ref": "#/$defs/bindingSet"},
+    "detail_export": {"$ref": "#/$defs/untrackedOutput"},
+    "effective_recovery_plan": {"$ref": "#/$defs/untrackedOutput"},
+    "legacy_source_provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "roles"],
+      "properties": {
+        "aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "roles": {
+          "type": "array", "minItems": 2, "maxItems": 2,
+          "items": {
+            "type": "object", "additionalProperties": false,
+            "required": ["role", "sha256"],
+            "properties": {
+              "role": {"enum": ["legacy_d3d9_texture_upload", "legacy_qrender_mip_descriptor"]},
+              "sha256": {"$ref": "#/$defs/sha256"}
+            }
+          }
+        }
+      }
+    },
+    "source_facts": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "mip_level_is_serialized_with_zero_default", "stored_zero_is_normalized_to_one_before_upload",
+        "texture_allocation_uses_declared_mip_count", "copy_loop_is_bounded_by_declared_mip_count",
+        "copy_offset_advances_by_declared_mip_sizes", "bytes_after_declared_copy_prefix_are_not_read_by_that_loop"
+      ],
+      "properties": {
+        "mip_level_is_serialized_with_zero_default": {"const": true},
+        "stored_zero_is_normalized_to_one_before_upload": {"const": true},
+        "texture_allocation_uses_declared_mip_count": {"const": true},
+        "copy_loop_is_bounded_by_declared_mip_count": {"const": true},
+        "copy_offset_advances_by_declared_mip_sizes": {"const": true},
+        "bytes_after_declared_copy_prefix_are_not_read_by_that_loop": {"const": true}
+      }
+    },
+    "production_contract": {
+      "type": "object", "additionalProperties": false,
+      "required": ["api", "default_api_remains_strict", "implementation_bindings"],
+      "properties": {
+        "api": {"const": "tmxy::texture::QtxReader::parse_with_declared_mip_payload_prefix"},
+        "default_api_remains_strict": {"const": true},
+        "implementation_bindings": {"$ref": "#/$defs/bindingSet"}
+      }
+    },
+    "scope": {
+      "type": "object", "additionalProperties": false,
+      "required": ["source_revision", "family", "targets", "candidate_edges", "unique_candidates",
+        "candidate_ids_distinct", "candidate_set_exact", "excluded_unresolved_targets",
+        "excluded_unresolved_edges", "excluded_scope_selected", "current_upstream_effective_state"],
+      "properties": {
+        "source_revision": {"const": "P2-20A.7"}, "family": {"const": "qtx"},
+        "targets": {"const": 6}, "candidate_edges": {"const": 6},
+        "unique_candidates": {"const": 6}, "candidate_ids_distinct": {"const": true},
+        "candidate_set_exact": {"const": true}, "excluded_unresolved_targets": {"const": 4},
+        "excluded_unresolved_edges": {"const": 6}, "excluded_scope_selected": {"const": false},
+        "current_upstream_effective_state": {
+          "type": "object", "additionalProperties": false,
+          "required": ["phase", "selected_targets_resolved", "selected_edges_pass",
+            "selected_recovery_applied_edges"],
+          "properties": {
+            "phase": {"const": "POST_APPLICATION"},
+            "selected_targets_resolved": {"const": 6},
+            "selected_edges_pass": {"const": 6},
+            "selected_recovery_applied_edges": {"const": 6}
+          }
+        }
+      }
+    },
+    "measured": {"$ref": "#/$defs/measured"},
+    "observed_relation": {"$ref": "#/$defs/relation"},
+    "authority_boundary": {"$ref": "#/$defs/authority"},
+    "preserved_blockers": {"$ref": "#/$defs/blockers"},
+    "contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["policy_sha256", "schema_sha256", "detail_schema_sha256",
+        "base_plan_contract_sha256"],
+      "properties": {"policy_sha256": {"$ref": "#/$defs/sha256"},
+        "schema_sha256": {"$ref": "#/$defs/sha256"},
+        "detail_schema_sha256": {"$ref": "#/$defs/sha256"},
+        "base_plan_contract_sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "disclosure": {"$ref": "#/$defs/disclosure"}
+  },
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "nonnegative": {"type": "integer", "minimum": 0},
+    "binding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role", "path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "role": {"type": "string", "minLength": 1},
+        "path": {"type": "string", "pattern": "^(?!.*(?:^|/)\\.\\.(?:/|$))(?![A-Za-z]:)(?!/).+$"},
+        "tracked": {"type": "boolean"}, "bytes": {"type": "integer", "minimum": 1},
+        "lines": {"type": "integer", "minimum": 1}, "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "bindingSet": {
+      "type": "object", "additionalProperties": false,
+      "required": ["aggregate_sha256", "entries"],
+      "properties": {"aggregate_sha256": {"$ref": "#/$defs/sha256"},
+        "entries": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/binding"}}}
+    },
+    "untrackedOutput": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "tracked", "bytes", "lines", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1}, "tracked": {"const": false},
+        "bytes": {"type": "integer", "minimum": 1}, "lines": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "measured": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "source_assets_reverified", "candidate_packages_hashed", "candidate_bodies_reverified",
+        "strict_default_rejected_edges", "payload_size_mismatch_edges", "strict_prefix_pass_edges",
+        "explicit_prefix_pass_edges", "full_payload_boundary_edges", "decoded_mip_zero_match_edges",
+        "dds_prefix_only_edges", "ignored_tail_hashes", "dxt1_targets", "dxt5_targets",
+        "input_payload_bytes", "consumed_payload_bytes", "ignored_payload_bytes",
+        "base_recovery_plan_rows", "effective_recovery_plan_rows", "effective_plan_changed_rows",
+        "effective_plan_unchanged_rows", "candidate_selections", "automatic_resolutions",
+        "owner_dispositions", "content_dispositions"
+      ],
+      "properties": {
+        "source_assets_reverified": {"const": 6}, "candidate_packages_hashed": {"const": 6},
+        "candidate_bodies_reverified": {"const": 6}, "strict_default_rejected_edges": {"const": 6},
+        "payload_size_mismatch_edges": {"const": 6}, "strict_prefix_pass_edges": {"const": 6},
+        "explicit_prefix_pass_edges": {"const": 6}, "full_payload_boundary_edges": {"const": 6},
+        "decoded_mip_zero_match_edges": {"const": 6}, "dds_prefix_only_edges": {"const": 6},
+        "ignored_tail_hashes": {"const": 6}, "dxt1_targets": {"const": 3},
+        "dxt5_targets": {"const": 3}, "input_payload_bytes": {"const": 786456},
+        "consumed_payload_bytes": {"const": 589824}, "ignored_payload_bytes": {"const": 196632},
+        "base_recovery_plan_rows": {"const": 21}, "effective_recovery_plan_rows": {"const": 21},
+        "effective_plan_changed_rows": {"const": 6}, "effective_plan_unchanged_rows": {"const": 15},
+        "candidate_selections": {"const": 0}, "automatic_resolutions": {"const": 0},
+        "owner_dispositions": {"const": 0}, "content_dispositions": {"const": 0}
+      }
+    },
+    "relation": {
+      "type": "object", "additionalProperties": false,
+      "required": [
+        "recovery_kind", "basis", "default_strict_binding", "default_strict_error_code",
+        "explicit_api_binding", "stored_mip_count", "declared_mip_count",
+        "full_payload_boundary_exact_edges", "consumed_plus_ignored_equals_input_edges",
+        "decoded_mip_zero_matches_strict_prefix_edges", "dds_payload_prefix_only_edges",
+        "ignored_tail_excluded_from_dds_edges", "ignored_tail_sha256_edges",
+        "dxt1_512_boundary_10_max_10_targets", "dxt5_256_boundary_7_max_9_targets",
+        "base_plan_recovery_kind", "effective_plan_recovery_kind",
+        "effective_plan_row_set_preserved", "effective_plan_only_recovery_kind_changed"
+      ],
+      "properties": {
+        "recovery_kind": {"const": "qtx_declared_mip_payload_prefix"},
+        "basis": {"const": "declared_mip_payload_prefix_contract"},
+        "default_strict_binding": {"const": "REJECTED"},
+        "default_strict_error_code": {"const": "payload_size_mismatch"},
+        "explicit_api_binding": {"const": "PASS"}, "stored_mip_count": {"const": 1},
+        "declared_mip_count": {"const": 1}, "full_payload_boundary_exact_edges": {"const": 6},
+        "consumed_plus_ignored_equals_input_edges": {"const": 6},
+        "decoded_mip_zero_matches_strict_prefix_edges": {"const": 6},
+        "dds_payload_prefix_only_edges": {"const": 6},
+        "ignored_tail_excluded_from_dds_edges": {"const": 6},
+        "ignored_tail_sha256_edges": {"const": 6},
+        "dxt1_512_boundary_10_max_10_targets": {"const": 3},
+        "dxt5_256_boundary_7_max_9_targets": {"const": 3},
+        "base_plan_recovery_kind": {"const": "qtx_complete_mip_chain"},
+        "effective_plan_recovery_kind": {"const": "qtx_declared_mip_payload_prefix"},
+        "effective_plan_row_set_preserved": {"const": true},
+        "effective_plan_only_recovery_kind_changed": {"const": true}
+      }
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["a4_is_authoritative", "authority_state_changed", "adapter_applied",
+        "recovery_applied", "machine_can_select_candidate", "machine_can_approve_disposition",
+        "repair_or_write", "delete_or_no_ref", "owner_approvals", "verified_resolutions"],
+      "properties": {
+        "a4_is_authoritative": {"const": true}, "authority_state_changed": {"const": false},
+        "adapter_applied": {"const": false}, "recovery_applied": {"const": false},
+        "machine_can_select_candidate": {"const": false},
+        "machine_can_approve_disposition": {"const": false}, "repair_or_write": {"const": false},
+        "delete_or_no_ref": {"const": false}, "owner_approvals": {"const": 0},
+        "verified_resolutions": {"const": 0}
+      }
+    },
+    "blockers": {
+      "type": "object", "additionalProperties": false,
+      "required": ["identity_semantic_ambiguous_targets", "identity_semantic_ambiguous_edges",
+        "asset_effective_ambiguous_targets", "asset_effective_ambiguous_edges",
+        "strict_binding_failure_targets", "strict_binding_failure_edges",
+        "asset_effective_unresolved_targets", "asset_effective_unresolved_edges",
+        "auxiliary_nonterminal_instances", "conditional_required_missing", "migration_pending",
+        "g2_satisfied", "g2_blocked"],
+      "properties": {
+        "identity_semantic_ambiguous_targets": {"$ref": "#/$defs/nonnegative"},
+        "identity_semantic_ambiguous_edges": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_ambiguous_targets": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_ambiguous_edges": {"$ref": "#/$defs/nonnegative"},
+        "strict_binding_failure_targets": {"$ref": "#/$defs/nonnegative"},
+        "strict_binding_failure_edges": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_unresolved_targets": {"$ref": "#/$defs/nonnegative"},
+        "asset_effective_unresolved_edges": {"$ref": "#/$defs/nonnegative"},
+        "auxiliary_nonterminal_instances": {"$ref": "#/$defs/nonnegative"},
+        "conditional_required_missing": {"$ref": "#/$defs/nonnegative"},
+        "migration_pending": {"$ref": "#/$defs/nonnegative"},
+        "g2_satisfied": {"$ref": "#/$defs/nonnegative"},
+        "g2_blocked": {"$ref": "#/$defs/nonnegative"}
+      }
+    },
+    "disclosure": {
+      "type": "object", "additionalProperties": false,
+      "required": ["tracked_aggregate_hash_and_anonymous_contract_only",
+        "tracked_anonymous_base_plan_contract", "anonymous_detail_only",
+        "legacy_source_roles_and_hashes_only", "raw_names", "private_source_paths",
+        "legacy_source_lines", "exact_primary_keys", "decoded_confidential_payloads"],
+      "properties": {
+        "tracked_aggregate_hash_and_anonymous_contract_only": {"const": true},
+        "tracked_anonymous_base_plan_contract": {"const": true},
+        "anonymous_detail_only": {"const": true},
+        "legacy_source_roles_and_hashes_only": {"const": true}, "raw_names": {"const": false},
+        "private_source_paths": {"const": false}, "legacy_source_lines": {"const": false},
+        "exact_primary_keys": {"const": false}, "decoded_confidential_payloads": {"const": false}
+      }
+    }
+  }
+}

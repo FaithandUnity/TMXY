@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-30T10:07:28.9440224+00:00",
+  "captured_utc": "2026-08-30T15:29:07.3062420+00:00",
   "task_id": "P2-19",
   "result": "PASS",
   "task_status": "COMPLETE",
@@ -8,12 +8,12 @@
   "input": {
     "source_build": "qy-3.0.0.413",
     "bindings": {
-      "aggregate_sha256": "21530016c46152636bbdbad910328dbd2783c00e4186abe443645f06fc50709b",
+      "aggregate_sha256": "a5b83c2129045abb7ca7afb9eb44a2b11226400a6bf9f2ed8faf445cd7492439",
       "content_health": {
         "completion_criteria_satisfied": true,
         "path": "Data/Inventory/p2-18-content-health.json",
         "result": "PASS",
-        "sha256": "3cb838d81dbea489d13450c333e589f2cbddf5d5cec1b873b38170beef7be9a5",
+        "sha256": "898c73d894252fe96584f7269c02fe5b93dfc959e7896712081c565c329c91e1",
         "task_id": "P2-18",
         "task_status": "COMPLETE"
       },
@@ -48,14 +48,14 @@
       "tracked": true,
       "bytes": 35446,
       "lines": 1179,
-      "sha256": "af8f42d490c8244a2425b8a80029add0506597310a1481b45bbf208c440e4cab"
+      "sha256": "e81c119e56711c0dd6a4d49eb819890e8b17081839c17f55568a3253f6cdafa2"
     },
     "markdown": {
       "path": "Data/Reports/p2-19-resource-budget-report.md",
       "tracked": true,
       "bytes": 4936,
       "lines": 98,
-      "sha256": "70c2be8ce488879e0bda38fa24f44de80fd4ff287a777684933d01b06384e34d"
+      "sha256": "44b42ca90a606db85e5e1634e7cde8ab8482b9a7de29936584280ad58dfd26cb"
     }
   },
   "summary": {

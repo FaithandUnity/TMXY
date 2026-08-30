@@ -12,7 +12,7 @@ $root = [IO.Path]::GetFullPath($RebuildRoot).TrimEnd([char[]]'\/')
 $legacyRoot = [IO.Path]::GetFullPath($LegacyClientRoot).TrimEnd([char[]]'\/')
 if ([string]::IsNullOrWhiteSpace($RecoveryPlanPath)) {
     $RecoveryPlanPath = Join-Path $root `
-        'Data\Exports\P2-20\p2-20a-asset-binding-recovery-eligible-attempts.tsv'
+        'Data\Exports\P2-20\p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv'
 }
 $recoveryPlan = [IO.Path]::GetFullPath($RecoveryPlanPath)
 if (-not $recoveryPlan.StartsWith($root + [IO.Path]::DirectorySeparatorChar,
@@ -76,7 +76,7 @@ try {
         }
     }
     if (-not (Test-Path -LiteralPath $recoveryPlan -PathType Leaf)) {
-        throw 'P2-20A.4 requires the A.7-bound eligible recovery-attempt plan.'
+        throw 'P2-20A.4 requires the A.13 effective recovery plan.'
     }
     $recoveryPlanRelative = Get-Relative $recoveryPlan
     $recoveryPlanContainer = '/workspace/' + $recoveryPlanRelative
@@ -222,12 +222,22 @@ try {
         Join-Path $moduleRoot 'apps\probe_output.cpp'
         Join-Path $moduleRoot 'apps\probe_output.hpp'
         Join-Path $moduleRoot 'apps\probe_types.hpp'
+        Join-Path $moduleRoot 'apps\qtx_recovery.cpp'
+        Join-Path $moduleRoot 'apps\qtx_recovery.hpp'
         Join-Path $moduleRoot 'apps\recovery_plan.cpp'
         Join-Path $moduleRoot 'apps\recovery_plan.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\legacy_texture_descriptor_reader.hpp'
         Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\qtx_reader.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\texture_error.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\texture_result.hpp'
         Join-Path $root 'Tools\TMXY.Texture\include\tmxy\texture\texture_types.hpp'
-        Join-Path $root 'Tools\TMXY.Texture\src\qtx_reader.cpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\block_compression.cpp'
         Join-Path $root 'Tools\TMXY.Texture\src\dds_writer.cpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\legacy_texture_descriptor_reader.cpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\qtx_reader.cpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\texture_decode.cpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\texture_decode_internal.hpp'
+        Join-Path $root 'Tools\TMXY.Texture\src\texture_error.cpp'
         Join-Path $root 'Tools\TMXY.Animation\include\tmxy\animation\anim_reader.hpp'
         Join-Path $root 'Tools\TMXY.Animation\include\tmxy\animation\animation_types.hpp'
         Join-Path $root 'Tools\TMXY.Animation\include\tmxy\animation\package_animation_reader.hpp'

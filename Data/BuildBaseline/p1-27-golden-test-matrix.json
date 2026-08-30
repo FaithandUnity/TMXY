@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "captured_utc": "2026-08-30T09:52:23.6992899+00:00",
+  "captured_utc": "2026-08-30T18:04:37.2694456+00:00",
   "result": "PASS",
   "task": "P1-27",
   "completion_criteria_satisfied": true,
@@ -38,19 +38,19 @@
   },
   "ci": {
     "aggregate": "Tests/CI/Invoke-LocalQualityGates.ps1",
-    "aggregate_sha256": "028c0306e4275a570409ccb3ed38e29222c1e98f96fbc756536cf0cf25fc28be",
+    "aggregate_sha256": "b0f3fb22b80ab7c41da67ef310a62b83bb84052b5957ac9091d768ee80325736",
     "all_declared_gates_bound": true
   },
   "source_binding": {
     "file_count": 14,
-    "sha256": "da6857e64c29ebbfca84fe00bbbb13a7a33065bb5b54c82c69d5d9e79a8352df",
+    "sha256": "c56ab3def6a6b16c27ab5e3b32d75f2affbfbd3d208b60e861aab831ccddbc88",
     "files": {
       "Tools/TMXY.Package/tests/package_v1_reader_test.cpp": "013cc50b455e9069e8eb97c1a778ec3f127009a3fc4da552da0d6878207a532f",
       "Tools/TMXY.Package/tests/package_v2_reader_test.cpp": "f9bf25636b7f75062c3d57cf3df5e740cf637f9cefa86800db0c316d15cc05f1",
       "Tools/TMXY.Package/tests/package_v3_reader_test.cpp": "8d14d16e016921058b6b0bc07c3bbd5a732a6555aa5266066183f52269da317b",
       "Tools/TMXY.Package/tests/package_normalized_tree_test.cpp": "9bd50552a94ed9be13f52e7eb1eb9a1ad2cce1bcf12febe239d7c9f5bb1b35f2",
       "Tools/TMXY.Table/tests/legacy_table_reader_test.cpp": "2b94753f1c8201136dd647d9dda89c4dfab32d128acda56a6c1e1c28a38ea111",
-      "Tools/TMXY.Texture/tests/texture_parser_test.cpp": "ad3b85b8c37bb1e04db340270a1f1fc00c3a63a79c5ca97398658ee66cf17a83",
+      "Tools/TMXY.Texture/tests/texture_parser_test.cpp": "4cae51cc1ddaefab21558989cc85289a1682d8954a84252426206748b2d66098",
       "Tools/TMXY.StaticMesh/tests/static_mesh_parser_test.cpp": "d5cb61b251c2c2f78d84bfd852429b475dba532bc4b6b2f8f38e956e5faa35c7",
       "Tools/TMXY.StaticMesh/tests/sm_real_samples_test.cpp": "d6791c2fd8273b0987e4156a142b987fd390e4d98211776cf67f2b188825718a",
       "Tools/TMXY.SkeletalMesh/tests/skeletal_mesh_parser_test.cpp": "937e761b61e6860e9606681e9e7e3cb551ab7b598b564345e7858cd40e014858",
@@ -82,24 +82,24 @@
     "Tests/Contract/Test-UETerrainImport.ps1": "c19b54d1eea4e17ce78cc03bfb6e61579deab42d39ea107152975e69410782ea"
   },
   "evidence_report_sha256": {
-    "Data/BuildBaseline/p1-02-package-v1.json": "cd929fa84003abaf418da40c9c80552abf401f6b5b4d83ff75a2585ff638ec7f",
-    "Data/BuildBaseline/p1-05-package-v2.json": "f66172c3e0d892e0a79db5bbaf69869643f101ee2c5fb349253488202654a53c",
-    "Data/BuildBaseline/p1-06-package-v3.json": "d555e8e55a9cb945aa6bb792b734670ddd22fed79c1a5e7566f215bafcf59c9b",
-    "Data/BuildBaseline/p1-07-package-pipeline.json": "ac2b415d6a4026f4904f435a14729a41d8fcbbda6d0f7a26c863b55e9ffe5ff2",
-    "Data/BuildBaseline/p1-08-package-normalized-tree.json": "2dbc6abcc7e8941aea4d95afd534bff73e91be13426f87888f5179601308f386",
-    "Data/BuildBaseline/p1-03-legacy-table.json": "38735a30e075f110d35ee7552d37cbd55739e3b1269d1e1bfdf95c800dbf1ed4",
-    "Data/BuildBaseline/p1-13-qtx-texture.json": "532d9f013ccded2268f8192e7b0f6278bfb44c89db8fd91e9a17a60d001bc2d9",
-    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "e4fe61a498ada5e729cbfc13db68885149202cb580adbe2f7f93f3e72362400e",
-    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "3b647929a11b82f9c5f78bc095522e73cd42b0992b14aa0aeeed00d4f2d109e9",
+    "Data/BuildBaseline/p1-02-package-v1.json": "46eba8785213dbb561f146a5a11ce9c5d39eb26ecfaeed72ac097e722a3cffd2",
+    "Data/BuildBaseline/p1-05-package-v2.json": "41706c90583cc02b774b0f898c37608df4cd3b1e4b6057ad45d048ebfc623192",
+    "Data/BuildBaseline/p1-06-package-v3.json": "eb5b26656f474540baf5b78f9916e0a8508f26e35bf304170e086f9eb1fb3a55",
+    "Data/BuildBaseline/p1-07-package-pipeline.json": "f05b90e0c4ef8be863ec51541956242db96e63bc5b340a79d701be14823af648",
+    "Data/BuildBaseline/p1-08-package-normalized-tree.json": "17a8c52eb42c9d94492758b83121d95744be728d36007f991a4503cd5e01932d",
+    "Data/BuildBaseline/p1-03-legacy-table.json": "fe1980c1f1ee71af39746db5c03b761d43fe9ca8fc6511f5bc2fb0415d1f5f81",
+    "Data/BuildBaseline/p1-13-qtx-texture.json": "edf217645066da44180370122b466cd59e066921ed2a7fb18c23b369c06e65fe",
+    "Data/BuildBaseline/p1-14-sm-static-mesh.json": "6d37b3d2374a077777a8ee31ea88bc9035bdb2a55fc76d153ae2d871cf9f18b5",
+    "Data/BuildBaseline/p1-15-skem-skeletal-mesh.json": "14c04cd3fd4cd706699ec467a3d4cd9c4230a4ef2aeb95b32abc4352c584eae5",
     "Data/BuildBaseline/p1-16-anim-animation.json": "8a70d317a270ce9dd67baca40d8ed43a1adf1503d27355039bb25db74dfedeb6",
-    "Data/BuildBaseline/p1-17-ter-terrain.json": "dcfcc56501d66bc06ebf6a3ba542acce827ff9d6feffc60643ef9908e20743e4",
-    "Data/BuildBaseline/p1-19-asset-interchange.json": "307c1ba1206c07802ab2034ff1fe18cc9ff2e71c75dccb69042b5fc52dacf3bd",
-    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "78ccfae5197ba190f95402a6ba85d98c30c69331eaed80235d3e6ca917a87f31",
-    "Data/BuildBaseline/p1-22-ue-texture-import.json": "c7fb3ca11aeadc0ab9206ccd707fb19b9dab46fc9caef4ffe6d02aee41825d5f",
-    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "e09636d9d424eb2d1f77772b1f77258e31cef7a31e4ea8463e9d882627c5a1a1",
-    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "c3c7081f89094bb502c255fbc6a6cecdebe6b5ccf10d90a6905a496ebc8863cc",
-    "Data/BuildBaseline/p1-25-ue-animation-import.json": "24f0ff9966c8a53fab6a662c15a0c31929567b1855965f1db86a958b1e3333ba",
-    "Data/BuildBaseline/p1-26-ue-terrain-import.json": "c67ef3500f7d4288edbf30d80794b83adf7fc1494c7aa60724ea54b122ec2308"
+    "Data/BuildBaseline/p1-17-ter-terrain.json": "66037e660c5baa6ef2a6f3e4d5e8fecccaae24724815279ede7a780cec5797e2",
+    "Data/BuildBaseline/p1-19-asset-interchange.json": "70c9453bb43d8f2d17d3fff35acdf33dbb7b9d93c6d1e42a0ff0ae8a587a36c5",
+    "Data/BuildBaseline/p1-21-ue-importer-plugin.json": "80be0977d7345176851444684f305ecf28000317db39afece445741eee36abd0",
+    "Data/BuildBaseline/p1-22-ue-texture-import.json": "f55fd62748291ab0bc95456c185915c9582c49280eca9b6dfc4e34355c4c43a8",
+    "Data/BuildBaseline/p1-23-ue-static-mesh-import.json": "2378646e1a3d6a476b2b5940de5096b137fa941b981f8e4ca77fd43165b6e926",
+    "Data/BuildBaseline/p1-24-ue-skeletal-mesh-import.json": "c72bf992636258ad5e980ab3ad02dbcdfa359414b26e337224ddeb40f6eb14de",
+    "Data/BuildBaseline/p1-25-ue-animation-import.json": "1917da4c0f797c0ec0610b2295713546f7417cfea23ac1200bb58eb8d46d5405",
+    "Data/BuildBaseline/p1-26-ue-terrain-import.json": "27cac4410f40fc22a1d1d69f26929bb7ec152d814fb347ffd71dbc8ebd802802"
   },
   "suites": [
     {

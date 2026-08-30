@@ -41,6 +41,11 @@ function Copy-Json([string]$Text) {
     return $Text | ConvertFrom-Json -Depth 100 -DateKind String
 }
 
+function Test-JsonEqual([object]$Left, [object]$Right) {
+    return ($Left | ConvertTo-Json -Depth 100 -Compress) -ceq
+        ($Right | ConvertTo-Json -Depth 100 -Compress)
+}
+
 function Test-SchemaRejected([object]$Candidate, [string]$SchemaPath) {
     return -not (($Candidate | ConvertTo-Json -Depth 100 -Compress) |
         Test-Json -SchemaFile $SchemaPath -ErrorAction SilentlyContinue)
@@ -111,6 +116,12 @@ $detailPath = Join-Path $root `
     'Data\Exports\P2-20\p2-20a-static-mesh-payload-section-prefix.jsonl'
 $evidencePath = Join-Path $root `
     'Data\Inventory\p2-20a-static-mesh-payload-section-prefix.json'
+$a4ReportPath = Join-Path $root `
+    'Data\Reports\p2-20a-asset-descriptor-diagnostics-report.json'
+$a7ReportPath = Join-Path $root `
+    'Data\Reports\p2-20a-asset-binding-failure-diagnostics-report.json'
+$a8ReportPath = Join-Path $root `
+    'Data\Reports\p2-20a-asset-binding-recovery-report.json'
 
 foreach ($required in @($wrapperPath, $generatorPath, $commonPath, $probePath, $readmePath,
         $cmakePath, $policyPath, $schemaPath, $detailSchemaPath, $formatPath)) {
@@ -146,6 +157,12 @@ $reportText = Get-Content -LiteralPath $reportPath -Raw -Encoding UTF8
 $report = Copy-Json $reportText
 $evidence = Get-Content -LiteralPath $evidencePath -Raw -Encoding UTF8 |
     ConvertFrom-Json -Depth 100 -DateKind String
+$a4Report = Get-Content -LiteralPath $a4ReportPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$a7Report = Get-Content -LiteralPath $a7ReportPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
+$a8Report = Get-Content -LiteralPath $a8ReportPath -Raw -Encoding UTF8 |
+    ConvertFrom-Json -Depth 100 -DateKind String
 $detailLines = @([IO.File]::ReadLines($detailPath))
 $detail = Copy-Json $detailLines[0]
 
@@ -172,9 +189,9 @@ Add-Assertion 'Contract files are directly hash bound' `
         [string]$report.contracts.detail_schema_sha256 -ceq (Get-Sha256 $detailSchemaPath))
 Add-Assertion 'Frozen policy and schema revision bytes are exact' `
     ((Get-Sha256 $policyPath) -ceq
-        '4d32105f28c16156741cb1b5b0a586d24613a71e7aeca52a534d2a677292789e' -and
+        '94fc2dd11fa9ecc67fde0c8289a5c378fc0ffa9e799f05edaa9feef42fa31c55' -and
         (Get-Sha256 $schemaPath) -ceq
-        '077ad4f71ef4d45ae4033f93fedc049dbe50771a576b43b22376c8c6a5e7ba6e' -and
+        'c81da5e9f6e433287efe06cab998f96058a5acced85cd586e2dc7b91c7e64d9a' -and
         (Get-Sha256 $detailSchemaPath) -ceq
         '6b1f4651870eb599df86eff0d004deb9128b10e09bf2b859e7672a5065c062c8')
 Add-Assertion 'Seven legacy roles expose hashes only and match policy' `
@@ -232,13 +249,25 @@ Add-Assertion 'Authority and resolution remain unchanged' `
         [int]$report.measured.automatic_resolutions -eq 0 -and
         [int]$report.measured.owner_dispositions -eq 0 -and
         [int]$report.measured.content_dispositions -eq 0)
-Add-Assertion 'Global blockers remain exact' `
-    ([int]$report.preserved_blockers.asset_effective_ambiguous_targets -eq 189 -and
-        [int]$report.preserved_blockers.asset_effective_ambiguous_edges -eq 546 -and
-        [int]$report.preserved_blockers.asset_effective_unresolved_targets -eq 12 -and
-        [int]$report.preserved_blockers.asset_effective_unresolved_edges -eq 15 -and
-        [int]$report.preserved_blockers.g2_satisfied -eq 7 -and
-        [int]$report.preserved_blockers.g2_blocked -eq 2)
+$a4Effective = $a4Report.measured.reconciled_full_workset
+$a7Effective = $a7Report.measured.effective
+$a8Effective = $a8Report.measured.effective_resolution
+Add-Assertion 'Current A.4/A.7/A.8 blockers reconcile dynamically' `
+    ((Test-JsonEqual $report.preserved_blockers $a7Report.preserved_blockers) -and
+        [int]$report.preserved_blockers.asset_effective_ambiguous_targets -eq
+            [int]$a4Effective.ambiguous_targets -and
+        [int]$report.preserved_blockers.asset_effective_ambiguous_edges -eq
+            [int]$a4Effective.ambiguous_edges -and
+        [int]$report.preserved_blockers.asset_effective_unresolved_targets -eq
+            [int]$a4Effective.unresolved_targets -and
+        [int]$report.preserved_blockers.asset_effective_unresolved_edges -eq
+            [int]$a4Effective.unresolved_edges -and
+        [int]$a7Effective.unresolved_targets -eq [int]$a4Effective.unresolved_targets -and
+        [int]$a7Effective.unresolved_edges -eq [int]$a4Effective.unresolved_edges -and
+        [int]$a8Effective.resolved.targets -eq [int]$a7Effective.resolved_targets -and
+        [int]$a8Effective.resolved.candidate_edges -eq [int]$a7Effective.resolved_edges -and
+        [int]$a8Effective.unresolved.targets -eq [int]$a7Effective.unresolved_targets -and
+        [int]$a8Effective.unresolved.candidate_edges -eq [int]$a7Effective.unresolved_edges)
 
 $ids = @($detail.candidates.candidate_id | Sort-Object)
 Add-Assertion 'Ignored detail has two distinct exact candidates with no selection' `
@@ -321,6 +350,11 @@ Add-Assertion 'Negative: unknown report root field rejected' (Test-SchemaRejecte
 $mutated = Copy-Json $reportText
 $mutated.production_contract.implementation_bindings.entries[0] | Add-Member unknown_nested $false
 Add-Assertion 'Negative: unknown nested field rejected' (Test-SchemaRejected $mutated $schemaPath)
+$mutated = Copy-Json $reportText
+$mutated.preserved_blockers.asset_effective_unresolved_targets =
+    [int]$a7Report.preserved_blockers.asset_effective_unresolved_targets + 1
+Add-Assertion 'Negative: stale dynamic blocker differs from bound A.7' `
+    (-not (Test-JsonEqual $mutated.preserved_blockers $a7Report.preserved_blockers))
 $detailMutation = Copy-Json $detailLines[0]
 $detailMutation.candidates[0] | Add-Member unknown_nested $false
 Add-Assertion 'Negative: unknown detail candidate field rejected' `

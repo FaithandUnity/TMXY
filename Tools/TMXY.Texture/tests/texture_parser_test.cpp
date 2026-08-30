@@ -176,6 +176,12 @@ void test_rgba_outputs(TestContext& test)
                                          std::byte{60},  std::byte{128}};
     auto texture = tmxy::texture::QtxReader{}.parse(descriptor, payload);
     test.expect(texture.has_value(), "rgba payload parses");
+    test.expect(texture.has_value() && texture.value().input_payload_bytes == payload.size() &&
+                    texture.value().consumed_payload_bytes == payload.size() &&
+                    texture.value().ignored_payload_bytes == 0U &&
+                    texture.value().payload_extent_basis ==
+                        tmxy::texture::PayloadExtentBasis::complete_input_payload,
+                "strict QTX view consumes the complete input payload");
     if (!texture.has_value())
     {
         return;
@@ -208,7 +214,12 @@ void test_rgba_outputs(TestContext& test)
         texture.value(),
         {.object_name = "p.object", .dds_name = "a.dds", .png_name = "a.png", .tga_name = "a.tga"});
     test.expect(json.find(R"("alpha_coverage": "translucent")") != std::string::npos &&
-                    json.find("\"payload_size\": 8") != std::string::npos,
+                    json.find("\"payload_size\": 8") != std::string::npos &&
+                    json.find(R"("input_payload_bytes": 8)") != std::string::npos &&
+                    json.find(R"("consumed_payload_bytes": 8)") != std::string::npos &&
+                    json.find(R"("ignored_payload_bytes": 0)") != std::string::npos &&
+                    json.find(R"("payload_extent_basis": "complete_input_payload")") !=
+                        std::string::npos,
                 "json reports alpha and payload");
 
     auto short_payload = payload;
@@ -312,7 +323,12 @@ void test_complete_payload_mip_recovery(TestContext& test)
         test.expect(value.descriptor.mip_count == 3U && value.effective_mip_count == 2U &&
                         value.mips.size() == 2U &&
                         value.mip_count_basis ==
-                            tmxy::texture::MipCountBasis::payload_complete_chain_contract,
+                            tmxy::texture::MipCountBasis::payload_complete_chain_contract &&
+                        value.input_payload_bytes == two_complete_mips.size() &&
+                        value.consumed_payload_bytes == two_complete_mips.size() &&
+                        value.ignored_payload_bytes == 0U &&
+                        value.payload_extent_basis ==
+                            tmxy::texture::PayloadExtentBasis::complete_input_payload,
                     "declared and effective mip counts remain distinct");
         const auto json = tmxy::texture::build_texture_json(value, {});
         test.expect(json.find(R"("mip_count": 3)") != std::string::npos &&
@@ -391,6 +407,127 @@ void test_complete_payload_mip_recovery(TestContext& test)
                 "unknown recovery basis remains rejected");
 }
 
+void test_declared_mip_payload_prefix(TestContext& test)
+{
+    const auto body = make_descriptor(tmxy::texture::TextureFormat::dxt1, 8, 8, 2);
+    const auto descriptor = parse_descriptor(test, body, "payload-prefix descriptor parses");
+    std::vector<std::byte> declared_payload(40U, std::byte{0});
+    const auto declared = tmxy::texture::QtxReader{}.parse(descriptor, declared_payload);
+    test.expect(declared.has_value(), "declared two-mip payload remains strict-valid");
+    auto longer_payload = declared_payload;
+    longer_payload.resize(48U, std::byte{0xA5});
+    const auto strict = tmxy::texture::QtxReader{}.parse(descriptor, longer_payload);
+    test.expect(!strict.has_value() &&
+                    strict.error().code == tmxy::texture::TextureErrorCode::payload_size_mismatch,
+                "default parser does not auto-fallback to payload-prefix policy");
+    const auto prefix = tmxy::texture::QtxReader{}.parse_with_declared_mip_payload_prefix(
+        descriptor, longer_payload);
+    test.expect(prefix.has_value(), "explicit policy accepts one longer complete mip");
+    if (prefix.has_value() && declared.has_value())
+    {
+        const auto& value = prefix.value();
+        test.expect(value.effective_mip_count == 2U && value.mips.size() == 2U &&
+                        value.input_payload_bytes == 48U && value.consumed_payload_bytes == 40U &&
+                        value.ignored_payload_bytes == 8U &&
+                        value.payload_extent_basis ==
+                            tmxy::texture::PayloadExtentBasis::declared_mip_payload_prefix_contract,
+                    "view preserves declared mips and discloses byte extents");
+        const auto json = tmxy::texture::build_texture_json(value, {});
+        test.expect(
+            json.find(R"("input_payload_bytes": 48)") != std::string::npos &&
+                json.find(R"("consumed_payload_bytes": 40)") != std::string::npos &&
+                json.find(R"("ignored_payload_bytes": 8)") != std::string::npos &&
+                json.find(R"("payload_extent_basis": "declared_mip_payload_prefix_contract")") !=
+                    std::string::npos,
+            "JSON discloses payload-prefix byte provenance");
+        const auto prefix_dds = tmxy::texture::build_dds(value, longer_payload);
+        const auto strict_dds = tmxy::texture::build_dds(declared.value(), declared_payload);
+        const auto prefix_png = tmxy::texture::build_png(value, longer_payload);
+        const auto strict_png = tmxy::texture::build_png(declared.value(), declared_payload);
+        const auto prefix_tga = tmxy::texture::build_tga(value, longer_payload);
+        const auto strict_tga = tmxy::texture::build_tga(declared.value(), declared_payload);
+        test.expect(prefix_dds.has_value() && strict_dds.has_value() &&
+                        prefix_dds.value() == strict_dds.value() &&
+                        prefix_dds.value().size() == 168U,
+                    "DDS appends only the consumed declared-mip prefix");
+        test.expect(prefix_png.has_value() && strict_png.has_value() &&
+                        prefix_png.value() == strict_png.value() && prefix_tga.has_value() &&
+                        strict_tga.has_value() && prefix_tga.value() == strict_tga.value(),
+                    "PNG and TGA decode only mip zero");
+        auto unknown_extent = value;
+        unknown_extent.payload_extent_basis = tmxy::texture::PayloadExtentBasis::unknown;
+        test.expect(!tmxy::texture::build_dds(unknown_extent, longer_payload).has_value() &&
+                        !tmxy::texture::build_png(unknown_extent, longer_payload).has_value() &&
+                        !tmxy::texture::build_tga(unknown_extent, longer_payload).has_value(),
+                    "exporters reject an unknown payload extent basis");
+
+        auto partial_payload = declared_payload;
+        partial_payload.resize(41U);
+        auto partial_tail = declared.value();
+        partial_tail.payload_size = partial_payload.size();
+        partial_tail.input_payload_bytes = partial_payload.size();
+        partial_tail.ignored_payload_bytes = 1U;
+        partial_tail.payload_extent_basis =
+            tmxy::texture::PayloadExtentBasis::declared_mip_payload_prefix_contract;
+        const auto partial_decode =
+            tmxy::texture::decode_mip_zero_rgba8(partial_tail, partial_payload);
+        const auto partial_dds = tmxy::texture::build_dds(partial_tail, partial_payload);
+        test.expect(!partial_decode.has_value() &&
+                        partial_decode.error().code ==
+                            tmxy::texture::TextureErrorCode::payload_size_mismatch &&
+                        !partial_dds.has_value() &&
+                        partial_dds.error().code ==
+                            tmxy::texture::TextureErrorCode::payload_size_mismatch,
+                    "decode and DDS reject a forged partial trailing mip");
+
+        auto mismatched_extent = value;
+        mismatched_extent.consumed_payload_bytes = 39U;
+        mismatched_extent.ignored_payload_bytes = 9U;
+        mismatched_extent.mips.back().size = 7U;
+        const auto mismatched_decode =
+            tmxy::texture::decode_mip_zero_rgba8(mismatched_extent, longer_payload);
+        const auto mismatched_dds = tmxy::texture::build_dds(mismatched_extent, longer_payload);
+        test.expect(!mismatched_decode.has_value() &&
+                        mismatched_decode.error().code ==
+                            tmxy::texture::TextureErrorCode::payload_size_mismatch &&
+                        !mismatched_dds.has_value() &&
+                        mismatched_dds.error().code ==
+                            tmxy::texture::TextureErrorCode::payload_size_mismatch,
+                    "decode and DDS recompute the declared consumed extent");
+
+        auto mismatched_mip = value;
+        mismatched_mip.mips.front().offset = 1U;
+        const auto mip_decode =
+            tmxy::texture::decode_mip_zero_rgba8(mismatched_mip, longer_payload);
+        const auto mip_dds = tmxy::texture::build_dds(mismatched_mip, longer_payload);
+        test.expect(
+            !mip_decode.has_value() &&
+                mip_decode.error().code == tmxy::texture::TextureErrorCode::payload_size_mismatch &&
+                !mip_dds.has_value() &&
+                mip_dds.error().code == tmxy::texture::TextureErrorCode::payload_size_mismatch,
+            "decode and DDS reject forged canonical mip metadata");
+    }
+    const auto reject = [&](const tmxy::texture::TextureDescriptor& candidate,
+                            const std::vector<std::byte>& payload, const std::string_view message)
+    {
+        test.expect(!tmxy::texture::QtxReader{}
+                         .parse_with_declared_mip_payload_prefix(candidate, payload)
+                         .has_value(),
+                    message);
+    };
+    reject(descriptor, std::vector<std::byte>(49U), "partial trailing mip is rejected");
+    reject(descriptor, std::vector<std::byte>(57U), "bytes beyond the natural chain are rejected");
+    reject(descriptor, std::vector<std::byte>(32U), "short complete chain is rejected");
+    reject(descriptor, declared_payload, "unchanged declared extent is rejected");
+    auto mismatched = descriptor;
+    mismatched.stored_mip_count = 1U;
+    reject(mismatched, longer_payload, "stored and canonical mip counts must match");
+    auto implicit = descriptor;
+    implicit.stored_mip_count = 0U;
+    implicit.mip_count = 1U;
+    reject(implicit, declared_payload, "implicit mip count cannot authorize a prefix");
+}
+
 } // namespace
 
 int main()
@@ -401,5 +538,6 @@ int main()
     test_block_alpha(test);
     test_float_formats(test);
     test_complete_payload_mip_recovery(test);
+    test_declared_mip_payload_prefix(test);
     return test.result();
 }

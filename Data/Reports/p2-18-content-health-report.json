@@ -336,7 +336,7 @@
   "schema_version": 1,
   "scope": {
     "completed_tasks": 17,
-    "input_binding_sha256": "9b4c55a455118a734fd0453f3df47199b0008690cb1e7a0a6815a94654fefa6d",
+    "input_binding_sha256": "2ba21d70598c74e2c332635060fd9b5be3d8e66d45f103f6bd5546f19a9cfa81",
     "inputs": [
       {
         "path": "Data/Inventory/p2-01-package-inventory.json",
@@ -407,7 +407,7 @@
       {
         "path": "Data/Inventory/p2-12-full-asset-inventory.json",
         "result": "PASS",
-        "sha256": "a3de48e11ffea4e53431388c66762bcb9279bb40a3ec3df7cd849f9e91944244",
+        "sha256": "a85f564297dfc3ca8d30050df5094838d9dea49c448686453aba0eb9252a6a7c",
         "task_id": "P2-12"
       },
       {
@@ -431,7 +431,7 @@
       {
         "path": "Data/Inventory/p2-16-conversion-cache.json",
         "result": "PASS",
-        "sha256": "8535cdc601cb542376807a35230b75b9e1c098a28a8b41da6e915cfac5ab97e4",
+        "sha256": "36dd4a2d78246401f2a0ebc2618c00a7555e4a1b064cdc4c28ceb9af4c7b8e6c",
         "task_id": "P2-16"
       },
       {

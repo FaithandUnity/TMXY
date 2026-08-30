@@ -363,7 +363,9 @@ $requiredFiles = @(
     'Tests/Contract/Test-G2MigrationDecisions.ps1',
     'Tests/Contract/G2Review-MalformedXmlCases.ps1',
     'Tests/Contract/G2Review-StaticMeshPrefixCases.ps1',
+    'Tests/Contract/G2Review-QtxDeclaredMipPrefixCases.ps1',
     'Tests/Contract/Test-G2StaticMeshPayloadSectionPrefix.ps1',
+    'Tests/Contract/Test-G2QtxDeclaredMipPayloadPrefix.ps1',
     'Tests/Contract/Test-G2Review.ps1',
     'Tests/Contract/Test-FullAssetInventory.ps1',
     'Tests/Contract/Test-ReferenceClosure.ps1',
@@ -515,6 +517,20 @@ $requiredFiles = @(
     'Tools/TMXY.G2StaticMeshPayloadSectionPrefix/static_mesh_prefix_common.py',
     'Tools/TMXY.G2StaticMeshPayloadSectionPrefix/apps/prefix_probe_main.cpp',
     'Tools/TMXY.G2StaticMeshPayloadSectionPrefix/New-G2StaticMeshPayloadSectionPrefix.ps1',
+    'Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-detail-v1.schema.json',
+    'Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv',
+    'Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-policy-v1.json',
+    'Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-v1.schema.json',
+    'Data/Inventory/p2-20a-qtx-declared-mip-payload-prefix.json',
+    'Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.json',
+    'Data/Reports/p2-20a-qtx-declared-mip-payload-prefix-report.md',
+    'Docs/Formats/G2-QTX-DECLARED-MIP-PAYLOAD-PREFIX.md',
+    'Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/CMakeLists.txt',
+    'Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/README.md',
+    'Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/g2_qtx_declared_mip_payload_prefix.py',
+    'Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/qtx_declared_mip_prefix_common.py',
+    'Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/apps/qtx_declared_mip_prefix_probe_main.cpp',
+    'Tools/TMXY.G2QtxDeclaredMipPayloadPrefix/New-G2QtxDeclaredMipPayloadPrefix.ps1',
     'Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.cpp',
     'Tools/TMXY.AssetInventory/apps/descriptor_semantic_signature.hpp',
     'Tools/TMXY.G2AssetDescriptorDiagnostics/CMakeLists.txt',
@@ -561,6 +577,7 @@ $requiredFiles = @(
     'Tools/TMXY.G2Review/g2_identity_normalization.py',
     'Tools/TMXY.G2Review/g2_binding_failure.py',
     'Tools/TMXY.G2Review/g2_static_mesh_prefix.py',
+    'Tools/TMXY.G2Review/g2_qtx_declared_mip_prefix.py',
     'Tools/TMXY.G2Review/g2_review.py',
     'Tools/TMXY.G2Review/g2_self_test.py',
     'Tools/TMXY.G2Review/New-G2Review.ps1',
@@ -794,7 +811,7 @@ if ($null -ne $gitCommand -and (Test-Path -LiteralPath $repositoryMetadata)) {
         $textExtensions = @(
             '.c', '.cc', '.cmake', '.cpp', '.cs', '.editorconfig', '.gitattributes',
             '.gitignore', '.h', '.hpp', '.ini', '.json', '.jsonl', '.md', '.proto',
-            '.ps1', '.py', '.sql', '.txt', '.uplugin', '.uproject', '.yaml', '.yml'
+            '.ps1', '.py', '.sql', '.tsv', '.txt', '.uplugin', '.uproject', '.yaml', '.yml'
         )
         $strictUtf8 = [System.Text.UTF8Encoding]::new($false, $true)
         foreach ($relativePath in $candidateFiles) {

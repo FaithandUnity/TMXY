@@ -117,9 +117,9 @@
         "unknown_targets", "unknown_edges"],
       "properties": {
         "targets": {"const": 21494}, "candidate_edges": {"const": 39351},
-        "resolved_targets": {"const": 21293}, "resolved_edges": {"const": 38790},
+        "resolved_targets": {"const": 21299}, "resolved_edges": {"const": 38796},
         "ambiguous_targets": {"const": 189}, "ambiguous_edges": {"const": 546},
-        "unresolved_targets": {"const": 12}, "unresolved_edges": {"const": 15},
+        "unresolved_targets": {"const": 6}, "unresolved_edges": {"const": 9},
         "unknown_targets": {"const": 0}, "unknown_edges": {"const": 0}
       }
     },

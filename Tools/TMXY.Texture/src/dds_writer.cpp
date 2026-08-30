@@ -1,3 +1,4 @@
+#include "texture_decode_internal.hpp"
 #include "tmxy/texture/texture_export.hpp"
 
 #include <cstddef>
@@ -109,7 +110,7 @@ void write_dx10_header(std::vector<std::byte>& output, const TextureFormat forma
 TextureResult<std::vector<std::byte>> build_dds(const QtxTextureView& texture,
                                                 const std::span<const std::byte> payload)
 {
-    if (payload.size() != texture.payload_size || texture.mips.empty())
+    if (!detail::valid_qtx_texture_view(texture, payload))
     {
         return TextureResult<std::vector<std::byte>>::failure(
             {.code = TextureErrorCode::payload_size_mismatch,
@@ -139,7 +140,8 @@ TextureResult<std::vector<std::byte>> build_dds(const QtxTextureView& texture,
     }
     store_u32(output, 108U, caps);
     write_dx10_header(output, texture.descriptor.format);
-    output.insert(output.end(), payload.begin(), payload.end());
+    const auto consumed = payload.first(static_cast<std::size_t>(texture.consumed_payload_bytes));
+    output.insert(output.end(), consumed.begin(), consumed.end());
     return TextureResult<std::vector<std::byte>>::success(std::move(output));
 }
 

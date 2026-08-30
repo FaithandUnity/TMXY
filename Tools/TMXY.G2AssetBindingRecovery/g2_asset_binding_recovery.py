@@ -17,12 +17,34 @@ from recovery_common import (
 )
 
 
+BASE_PLAN_CONTRACT = (
+    "Contracts/data-schema/g2-asset-binding-recovery-base-plan-v1.tsv")
+
+
 def utc_now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def json_text(value: Any) -> str:
     return json.dumps(value, ensure_ascii=False, indent=2) + "\n"
+
+
+def read_bound_base_plan(live_path: Path, contract_path: Path) -> list[tuple[str, ...]]:
+    require(live_path.read_bytes() == contract_path.read_bytes(),
+            "Live A.7-derived attempt plan differs byte-for-byte from the frozen contract")
+    return read_plan(live_path)
+
+
+def validate_base_plan_contract_metadata(root: Path, contract_path: Path) -> None:
+    policy = load_json(
+        root / "Contracts/data-schema/g2-asset-binding-recovery-policy-v1.json")
+    require(policy["base_plan_contract"] == {
+        "path": BASE_PLAN_CONTRACT, "tracked": True, "rows": 21, "bytes": 6504,
+        "sha256": "4f256efc82fadda9528d502ed77dce890c8cf914e827f089422fc5c38d10fb99",
+        "live_attempt_must_byte_equal": True,
+    } and contract_path.stat().st_size == 6504 and
+            sha256_file(contract_path) == policy["base_plan_contract"]["sha256"],
+            "Frozen base-plan contract metadata drifted")
 
 
 def prepare(args: argparse.Namespace) -> dict[str, Any]:
@@ -37,6 +59,11 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
             "A.7 eligible-attempt error distribution drifted")
     attempt_path = Path(args.attempt_tsv)
     write_plan(attempt_path, rows)
+    contract_path = Path(args.base_plan_contract).resolve()
+    require(contract_path.is_relative_to(root), "Base-plan contract escaped repository root")
+    validate_base_plan_contract_metadata(root, contract_path)
+    require(read_bound_base_plan(attempt_path, contract_path) == rows,
+            "Frozen base-plan contract differs from deterministic A.7 regeneration")
     manifest = {
         "schema_version": 1,
         "evidence_revision": "P2-20A.8-prepare",
@@ -48,6 +75,10 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         "a7_detail_sha256": report["detail_export"]["sha256"],
         "p2_12_catalog_sha256": sha256_file(catalog_path),
         "attempt_tsv_sha256": sha256_file(attempt_path),
+        "base_plan_contract_path": BASE_PLAN_CONTRACT,
+        "base_plan_contract_sha256": sha256_file(contract_path),
+        "base_plan_contract_tracked": True,
+        "attempt_matches_base_plan_contract": True,
         "frozen": {"targets": 19, "candidate_edges": 24},
         "attempted": {"targets": 17, "candidate_edges": 21},
         "by_rule": [
@@ -66,7 +97,36 @@ def prepare(args: argparse.Namespace) -> dict[str, Any]:
         write_text(Path(args.prepare_manifest), json_text(manifest))
     return {"result": "PASS", "meaning": "UPPER_BOUND_ATTEMPT_ONLY",
             "targets": 17, "candidate_edges": 21,
-            "attempt_tsv_sha256": manifest["attempt_tsv_sha256"]}
+            "attempt_tsv_sha256": manifest["attempt_tsv_sha256"],
+            "base_plan_contract_sha256": manifest["base_plan_contract_sha256"],
+            "attempt_matches_base_plan_contract": True}
+
+
+def validate_effective_plan(base: list[tuple[str, ...]], effective: list[tuple[str, ...]],
+                            policy: dict[str, Any]) -> None:
+    require(len(base) == len(effective), "Effective recovery plan row count drifted")
+    selected = {(str(x["asset_id"]), str(x["candidate_id"])): x
+                for x in policy["selected_targets"]}
+    require(len(selected) == 6 and policy["scope"]["recovery_kind"] ==
+            "qtx_declared_mip_payload_prefix",
+            "A.13 selected recovery policy drifted")
+    changes = 0
+    for prior, current in zip(base, effective, strict=True):
+        require(prior[:5] == current[:5] and prior[6] == current[6],
+                "Effective recovery plan changed identity or strict-error fields")
+        key = (prior[0], prior[1])
+        if key in selected:
+            expected = selected[key]
+            require(prior[4:] == ("qtx", "qtx_complete_mip_chain",
+                                  "payload_size_mismatch") and
+                    current[5] == "qtx_declared_mip_payload_prefix" and
+                    prior[2] == expected["body_sha256"] and
+                    prior[3] == expected["source_sha256"],
+                    "A.13 selected recovery row identity or kind drifted")
+            changes += int(prior != current)
+        else:
+            require(prior == current, "Effective recovery plan changed an unselected row")
+    require(changes == 6, "Effective recovery plan must change exactly six recovery-kind cells")
 
 
 def cross_proof(a7_details: list[dict[str, Any]], attempts: list[tuple[str, ...]],
@@ -141,8 +201,11 @@ def cross_proof(a7_details: list[dict[str, Any]], attempts: list[tuple[str, ...]
                 "qtx_recovery_contract": ({
                     "stored_explicit": True,
                     "stored_equals_declared": True,
-                    "effective_less_than_declared": True,
+                    "effective_less_than_declared":
+                        recovery_kind == "qtx_complete_mip_chain",
                     "unique_complete_prefix": True,
+                    "declared_payload_prefix":
+                        recovery_kind == "qtx_declared_mip_payload_prefix",
                 } if applied and prior["family"] == "qtx" else None),
             })
         resolution[final_resolution] += 1
@@ -173,9 +236,20 @@ def cross_proof(a7_details: list[dict[str, Any]], attempts: list[tuple[str, ...]
 def finalize(args: argparse.Namespace) -> dict[str, Any]:
     root = Path(args.root).resolve()
     a7_report, _, a7_details, catalog_path = load_frozen_a7(root)
-    attempts = read_plan(Path(args.attempt_tsv))
-    require(attempts == build_attempt_rows(a7_details, source_hashes(a7_details, catalog_path)),
+    attempt_path = Path(args.attempt_tsv)
+    contract_path = Path(args.base_plan_contract).resolve()
+    require(contract_path.is_relative_to(root), "Base-plan contract escaped repository root")
+    validate_base_plan_contract_metadata(root, contract_path)
+    base_attempts = read_bound_base_plan(attempt_path, contract_path)
+    require(base_attempts == build_attempt_rows(
+        a7_details, source_hashes(a7_details, catalog_path)),
             "Attempt plan is not a deterministic A.7 regeneration")
+    qtx_policy_path = root / (
+        "Contracts/data-schema/g2-qtx-declared-mip-payload-prefix-policy-v1.json")
+    qtx_policy = load_json(qtx_policy_path)
+    effective_plan_path = Path(args.effective_plan_tsv)
+    attempts = read_plan(effective_plan_path)
+    validate_effective_plan(base_attempts, attempts, qtx_policy)
     a4_path = Path(args.a4_effective_detail)
     a4_report_path = root / "Data/Reports/p2-20a-asset-descriptor-diagnostics-report.json"
     a4_inventory_path = root / "Data/Inventory/p2-20a-asset-descriptor-diagnostics.json"
@@ -204,7 +278,10 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         binding(root, "a7_inventory", root / "Data/Inventory/p2-20a-asset-binding-failure-diagnostics.json", True),
         binding(root, "a7_detail", root / a7_report["detail_export"]["path"], False),
         binding(root, "p2_12_catalog", catalog_path, False),
-        binding(root, "attempt_tsv", Path(args.attempt_tsv), False),
+        binding(root, "base_plan_contract", contract_path, True),
+        binding(root, "attempt_tsv", attempt_path, False),
+        binding(root, "effective_plan_tsv", effective_plan_path, False),
+        binding(root, "qtx_prefix_policy", qtx_policy_path, True),
         binding(root, "a4_report", a4_report_path, True),
         binding(root, "a4_inventory", a4_inventory_path, True),
         binding(root, "a4_effective_detail", a4_path, False),
@@ -220,6 +297,8 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         "p3_authorized": False, "input_bindings": binding_set(entries),
         "outputs": {
             "attempt_tsv": output_binding(root, Path(args.attempt_tsv), args.attempt_advertised),
+            "effective_plan_tsv": output_binding(
+                root, effective_plan_path, args.effective_plan_advertised),
             "success_tsv": output_binding(root, success_path, args.success_advertised),
             "detail_export": output_binding(root, detail_path, args.detail_advertised),
         },
@@ -232,8 +311,10 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         "preserved_blockers": policy["preserved_blockers"],
         "contracts": {"policy_sha256": sha256_file(policy_path),
             "schema_sha256": sha256_file(schema_path),
-            "detail_schema_sha256": sha256_file(detail_schema_path)},
-        "disclosure": {"tracked_aggregate_and_hash_only": True,
+            "detail_schema_sha256": sha256_file(detail_schema_path),
+            "base_plan_contract_sha256": sha256_file(contract_path)},
+        "disclosure": {"tracked_aggregate_hash_and_anonymous_contract_only": True,
+            "tracked_anonymous_base_plan_contract": True,
             "anonymous_detail_only": True, "raw_names": False,
             "private_source_paths": False, "exact_primary_keys": False,
             "declared_or_observed_values": False, "decoded_confidential_payloads": False},
@@ -244,7 +325,9 @@ def finalize(args: argparse.Namespace) -> dict[str, Any]:
         "# P2-20A.8 Asset Binding Recovery Cross-Proof\n\n"
         f"- Result: `BLOCKED` (cross-proof execution `PASS`)\n"
         f"- Frozen A.7 scope: 19 targets / 24 candidate edges\n"
+        f"- Tracked anonymous base-plan contract: 21 rows, byte-equal to live A.7 derivation\n"
         f"- Eligible-attempt upper bound: {measured['attempted']['targets']} targets / {measured['attempted']['candidate_edges']} edges\n"
+        f"- Effective recovery plan: 21 edges with exactly six A.13 recovery-kind substitutions\n"
         f"- Production recovery successes: {measured['successful']['targets']} targets / {measured['successful']['candidate_edges']} edges\n"
         f"- A.4 effective resolved: {measured['effective_resolution']['resolved']['targets']} targets / {measured['effective_resolution']['resolved']['candidate_edges']} edges\n"
         f"- A.4 effective ambiguous: {measured['effective_resolution']['ambiguous']['targets']} targets / {measured['effective_resolution']['ambiguous']['candidate_edges']} edges\n"
@@ -289,10 +372,36 @@ def self_test() -> dict[str, Any]:
             "self-test attempt scope failed"); assertions += 2
     with tempfile.TemporaryDirectory() as temp:
         plan = Path(temp) / "plan.tsv"
+        contract = Path(temp) / "contract.tsv"
         write_plan(plan, attempts)
-        require(read_plan(plan) == attempts, "self-test plan round trip failed"); assertions += 3
+        write_plan(contract, attempts)
+        require(read_bound_base_plan(plan, contract) == attempts,
+                "self-test plan contract round trip failed"); assertions += 4
+        contract.write_bytes(contract.read_bytes().replace(b"\n", b"\r\n", 1))
+        try:
+            read_bound_base_plan(plan, contract)
+            raise AssertionError("byte-different plan contract was accepted")
+        except ValueError:
+            assertions += 1
     a4 = []
-    recoverable = set((x[0], x[1]) for x in attempts[:8])
+    effective_attempts = list(attempts)
+    selected_indexes = [index for index, row in enumerate(attempts)
+                        if row[4] == "qtx"][:6]
+    selected_policy = []
+    for index in selected_indexes:
+        row = attempts[index]
+        effective_attempts[index] = row[:5] + ("qtx_declared_mip_payload_prefix",) + row[6:]
+        selected_policy.append({"asset_id": row[0], "candidate_id": row[1],
+                                "body_sha256": row[2], "source_sha256": row[3]})
+    validate_effective_plan(attempts, effective_attempts, {
+        "scope": {"recovery_kind": "qtx_declared_mip_payload_prefix"},
+        "selected_targets": selected_policy,
+    }); assertions += 4
+    selected_keys = {(effective_attempts[index][0], effective_attempts[index][1])
+                     for index in selected_indexes}
+    additional = [(row[0], row[1]) for row in effective_attempts
+                  if (row[0], row[1]) not in selected_keys][:9]
+    recoverable = selected_keys | set(additional)
     for item in details:
         candidates = []
         for frozen in item["candidates"]:
@@ -303,18 +412,19 @@ def self_test() -> dict[str, Any]:
                 "descriptor_semantic_sha256": sha(cursor + 5000),
                 "effective_binding": "PASS" if applied else "REJECTED",
                 "recovery_applied": applied,
-                "recovery_kind": next((x[5] for x in attempts if (x[0], x[1]) == key), None),
+                "recovery_kind": next((x[5] for x in effective_attempts
+                                       if (x[0], x[1]) == key), None),
                 "effective_semantic_sha256": sha(9000) if applied else None})
             frozen["descriptor_semantic_sha256"] = sha(cursor + 5000)
         a4.append({"asset_id": item["asset_id"], "family": item["family"],
                    "resolution": "RESOLVED" if any(x["recovery_applied"] for x in candidates) else "UNRESOLVED",
                    "candidates": candidates})
-    successes, proof, measured = cross_proof(details, attempts, a4)
-    require(len(successes) == 8 and len(proof) == 19, "self-test cross proof failed"); assertions += 3
+    successes, proof, measured = cross_proof(details, effective_attempts, a4)
+    require(len(successes) == 15 and len(proof) == 19, "self-test cross proof failed"); assertions += 3
     require(measured["attempted"]["candidate_edges"] == 21 and
-            measured["successful"]["candidate_edges"] == 8,
+            measured["successful"]["candidate_edges"] == 15,
             "self-test measured counts failed"); assertions += 3
-    tampered = attempts[:-1]
+    tampered = effective_attempts[:-1]
     try:
         cross_proof(details, tampered, a4)
         raise AssertionError("tampered attempt plan was accepted")
@@ -329,10 +439,13 @@ def parser() -> argparse.ArgumentParser:
     prepare_parser = sub.add_parser("prepare")
     prepare_parser.add_argument("--root", required=True)
     prepare_parser.add_argument("--attempt-tsv", required=True)
+    prepare_parser.add_argument("--base-plan-contract", required=True)
     prepare_parser.add_argument("--prepare-manifest")
     finalize_parser = sub.add_parser("finalize")
     finalize_parser.add_argument("--root", required=True)
     finalize_parser.add_argument("--attempt-tsv", required=True)
+    finalize_parser.add_argument("--base-plan-contract", required=True)
+    finalize_parser.add_argument("--effective-plan-tsv", required=True)
     finalize_parser.add_argument("--a4-effective-detail", required=True)
     finalize_parser.add_argument("--success-tsv", required=True)
     finalize_parser.add_argument("--detail-output", required=True)
@@ -341,6 +454,7 @@ def parser() -> argparse.ArgumentParser:
     finalize_parser.add_argument("--evidence-output", required=True)
     finalize_parser.add_argument("--captured-utc")
     finalize_parser.add_argument("--attempt-advertised", default="Data/Exports/P2-20/p2-20a-asset-binding-recovery-eligible-attempts.tsv")
+    finalize_parser.add_argument("--effective-plan-advertised", default="Data/Exports/P2-20/p2-20a-qtx-declared-mip-payload-prefix-effective-recovery-plan.tsv")
     finalize_parser.add_argument("--success-advertised", default="Data/Exports/P2-20/p2-20a-asset-binding-recovery-successes.tsv")
     finalize_parser.add_argument("--detail-advertised", default="Data/Exports/P2-20/p2-20a-asset-binding-recovery.jsonl")
     finalize_parser.add_argument("--json-advertised", default="Data/Reports/p2-20a-asset-binding-recovery-report.json")

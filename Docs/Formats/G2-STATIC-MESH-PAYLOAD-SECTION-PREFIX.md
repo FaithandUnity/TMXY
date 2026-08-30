@@ -46,5 +46,8 @@ claimed.
 `PASS_DIAGNOSTIC` means only that the frozen relation was reproduced under the locked sources and
 production API. It is not an adapter application, recovery, candidate selection, content disposition,
 repair, deletion, no-reference decision, owner approval, or verified resolution. A.4 remains the
-sole authority; 189 targets / 546 edges remain ambiguous and 12 targets / 15 edges remain effectively
-unresolved. G2-06 and P3 remain blocked.
+sole authority. A.12 hash-binds and reconciles the current A.4/A.7/A.8 effective state while requiring
+the same one SM target / two candidate edges to remain unresolved. The current post-A.13 chain retains
+189 targets / 546 edges ambiguous and 6 targets / 9 edges unresolved, but these global values are
+derived from the bound upstream reports rather than duplicated as A.12 policy constants. G2-06 and P3
+remain blocked.

@@ -117,9 +117,9 @@
       "type": "object", "additionalProperties": false,
       "required": ["resolved_targets", "resolved_edges", "ambiguous_targets", "ambiguous_edges", "unresolved_targets", "unresolved_edges"],
       "properties": {
-        "resolved_targets": {"const": 7}, "resolved_edges": {"const": 9},
+        "resolved_targets": {"const": 13}, "resolved_edges": {"const": 15},
         "ambiguous_targets": {"const": 0}, "ambiguous_edges": {"const": 0},
-        "unresolved_targets": {"const": 12}, "unresolved_edges": {"const": 15}
+        "unresolved_targets": {"const": 6}, "unresolved_edges": {"const": 9}
       }
     },
     "measured": {
@@ -195,8 +195,8 @@
         "asset_effective_ambiguous_edges": {"const": 546},
         "strict_binding_failure_targets": {"const": 19},
         "strict_binding_failure_edges": {"const": 24},
-        "asset_effective_unresolved_targets": {"const": 12},
-        "asset_effective_unresolved_edges": {"const": 15},
+        "asset_effective_unresolved_targets": {"const": 6},
+        "asset_effective_unresolved_edges": {"const": 9},
         "auxiliary_nonterminal_instances": {"const": 212},
         "conditional_required_missing": {"const": 29}, "migration_pending": {"const": 1359},
         "g2_satisfied": {"const": 7}, "g2_blocked": {"const": 2}
@@ -213,7 +213,7 @@
     "blockers": {
       "type": "array", "minItems": 2, "maxItems": 2,
       "prefixItems": [
-        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN"}, "count": {"const": 12}}}]},
+        {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "PRODUCTION_BINDING_REJECTIONS_REMAIN_EFFECTIVELY_OPEN"}, "count": {"const": 6}}}]},
         {"allOf": [{"$ref": "#/$defs/blocker"}, {"properties": {"reason_code": {"const": "FULL_WORKSET_AMBIGUITY_REMAINS_OPEN"}, "count": {"const": 189}}}]}
       ],
       "items": false

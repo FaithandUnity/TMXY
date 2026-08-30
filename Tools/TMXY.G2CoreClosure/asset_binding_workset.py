@@ -169,8 +169,8 @@ def build_asset_binding_workset(policy: dict[str, Any], catalog_path: Path,
         edge_counts[item["resolution"].lower()] += item["candidate_count"]
         basis_targets[item["resolution_basis"]] += 1
         basis_edges[item["resolution_basis"]] += item["candidate_count"]
-    require(target_counts == {"resolved": 21293, "ambiguous": 189, "unresolved": 12} and
-            edge_counts == {"resolved": 38790, "ambiguous": 546, "unresolved": 15},
+    require(target_counts == {"resolved": 21299, "ambiguous": 189, "unresolved": 6} and
+            edge_counts == {"resolved": 38796, "ambiguous": 546, "unresolved": 9},
             "Asset binding classification drifted from the frozen evidence")
     return {
         "resolution_explicit": True,

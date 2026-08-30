@@ -57,7 +57,7 @@
     "core_foreign_key_substitution": "forbidden"
   },
   "asset_binding_scope": {
-    "source": "P2-12 catalog and P2-13 package-to-asset edges, with P2-20A.4 effective production-binding diagnostics for the complete specialized subset and P2-20A.7/A.8 recovery cross-proof",
+    "source": "P2-12 catalog and P2-13 package-to-asset edges, with P2-20A.4 effective production-binding diagnostics for the complete specialized subset and P2-20A.7/A.8 recovery cross-proof; the A.13 QTX plan is reflected through those acyclic authoritative inputs",
     "families": ["anim", "qtx", "skem", "sm", "ter", "wav"],
     "member_set_exported": true,
     "member_record_fields": [

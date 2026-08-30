@@ -161,8 +161,8 @@ def validate_context(root: Path, paths: dict[str, Path], policy: dict[str, Any])
             a4["measured"]["strict_unresolved_edges"] == 24 and
             a4["measured"]["ambiguous_targets"] == 189 and
             a4["measured"]["reconciled_full_workset"]["ambiguous_edges"] == 546 and
-            a4["measured"]["unresolved_targets"] == 12 and
-            a4["measured"]["reconciled_full_workset"]["unresolved_edges"] == 15 and
+            a4["measured"]["unresolved_targets"] == 6 and
+            a4["measured"]["reconciled_full_workset"]["unresolved_edges"] == 9 and
             a4["g2_06_satisfied"] is False and a4["p3_authorized"] is False,
             "A.4 unresolved state drifted")
     advertised = a4["detail_export"]

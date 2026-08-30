@@ -21,3 +21,6 @@ machine evidence is `Data/Inventory/p2-20a-asset-identity-normalization.json`.
 The verified expected result is `PASS_DIAGNOSTIC` for execution and `BLOCKED` for G2-06: 13 of 15
 ambiguous targets are ASCII-case-fold identity collisions, but zero targets are equivalent under the
 strict production descriptor and full-semantic signatures. All 15 targets therefore remain ambiguous.
+The report also hash-binds the current A.4 full-workset reconciliation (21,299 resolved, 189
+ambiguous, and 6 unresolved targets) without treating the 15-target identity subset as the global
+workset.
